@@ -1,0 +1,26 @@
+{
+  "html_sections": 13,
+  "forms": 3,
+  "dialogs": 3,
+  "svg_assets": 8,
+  "browser": {
+    "desktop4k": {
+      "console_errors": [],
+      "size": [
+        3840,
+        2160
+      ]
+    },
+    "mobile": {
+      "console_errors": [],
+      "size": [
+        430,
+        932
+      ],
+      "nav_open": true,
+      "access_modal_open": true,
+      "faq_open": true
+    }
+  },
+  "errors": []
+}
