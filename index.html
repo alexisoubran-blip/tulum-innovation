@@ -1,2537 +1,725 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#050807" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#00080B">
+  <meta name="description" content="Join founders, investors, creators and technology leaders in Tulum from December 9-12, 2026 for four days of innovation, capital, culture and meaningful connection.">
+  <meta property="og:title" content="Tulum Innovation Fest 2026 | Innovation, Capital & Culture">
+  <meta property="og:description" content="From the heart of the jungle to the future of humanity.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/hero-desktop.png">
+  <title>Tulum Innovation Fest 2026 | Innovation, Capital & Culture</title>
+  <link rel="icon" type="image/svg+xml" href="assets/signal-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (() => {
+      const urlLanguage = new URLSearchParams(window.location.search).get("lang");
+      const savedLanguage = localStorage.getItem("tif-language");
+      const browserLanguage = navigator.languages?.[0] || navigator.language || "en";
+      const language = urlLanguage === "es" || urlLanguage === "en"
+        ? urlLanguage
+        : savedLanguage || (browserLanguage.toLowerCase().startsWith("es") ? "es" : "en");
 
-  <title>Tulum Innovation Fest 2026 | December 9–12, Tulum</title>
-  <meta
-    name="description"
-    content="Tulum Innovation Fest is a global gathering where innovation, capital, culture, nature and human connection converge. December 9–12, 2026 in Tulum, Mexico."
-  />
+      document.documentElement.dataset.lang = language;
+      document.documentElement.lang = language;
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Tulum Innovation Fest 2026" />
-  <meta property="og:description" content="From the heart of the jungle to the future of humanity." />
-  <meta property="og:image" content="/assets/og-tulum-innovation-fest.jpg" />
-  <meta property="og:url" content="https://tuluminnovationfest.com/" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Tulum Innovation Fest 2026" />
-  <meta name="twitter:description" content="Ideas. Capital. Community. Real-world impact." />
-  <meta name="twitter:image" content="/assets/og-tulum-innovation-fest.jpg" />
-
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-
-  <!-- Optional: replace these with self-hosted fonts before launch -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    "name": "Tulum Innovation Fest 2026",
-    "description": "A global gathering where innovation, capital, culture, nature and human connection converge.",
-    "startDate": "2026-12-09T12:00:00-05:00",
-    "endDate": "2026-12-12T23:59:00-05:00",
-    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-    "eventStatus": "https://schema.org/EventScheduled",
-    "location": [
-      {
-        "@type": "Place",
-        "name": "Ikal Arena",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Tulum",
-          "addressRegion": "Quintana Roo",
-          "addressCountry": "MX"
-        }
-      },
-      {
-        "@type": "Place",
-        "name": "VR Club",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Tulum",
-          "addressRegion": "Quintana Roo",
-          "addressCountry": "MX"
-        }
+      if (language === "es") {
+        document.documentElement.classList.add("i18n-pending");
       }
-    ],
-    "organizer": {
-      "@type": "Organization",
-      "name": "Tulum Innovation Fest",
-      "url": "https://tuluminnovationfest.com/"
-    },
-    "image": [
-      "https://tuluminnovationfest.com/assets/og-tulum-innovation-fest.jpg"
-    ]
-  }
+    })();
   </script>
-
-  <style>
-    :root {
-      --bg: #050807;
-      --bg-soft: #09100f;
-      --panel: rgba(255, 255, 255, 0.045);
-      --panel-strong: rgba(255, 255, 255, 0.075);
-      --line: rgba(255, 255, 255, 0.12);
-      --line-bright: rgba(255, 255, 255, 0.2);
-      --text: #f5f1e8;
-      --muted: #a8aca7;
-      --muted-2: #747b76;
-      --orange: #ff5a1f;
-      --orange-2: #ff8a3d;
-      --green: #0f3b34;
-      --green-2: #082823;
-      --radius: 26px;
-      --radius-sm: 16px;
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
-      --max: 1180px;
-      --nav-h: 74px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-    }
-
-    body {
-      margin: 0;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 85% 8%, rgba(255, 90, 31, 0.08), transparent 25%),
-        radial-gradient(circle at 12% 20%, rgba(15, 59, 52, 0.26), transparent 28%),
-        var(--bg);
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.14;
-      z-index: 9999;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
-      mix-blend-mode: soft-light;
-    }
-
-    ::selection {
-      background: var(--orange);
-      color: white;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(calc(100% - 40px), var(--max));
-      margin-inline: auto;
-    }
-
-    .section {
-      position: relative;
-      padding: 118px 0;
-    }
-
-    .section-tight {
-      padding: 84px 0;
-    }
-
-    .section-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--orange-2);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .section-kicker::before {
-      content: "";
-      width: 28px;
-      height: 1px;
-      background: currentColor;
-    }
-
-    .section-title {
-      margin: 18px 0 18px;
-      max-width: 860px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.25rem, 5.7vw, 5.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.055em;
-      text-wrap: balance;
-    }
-
-    .section-title.small {
-      font-size: clamp(2rem, 4.4vw, 4.2rem);
-    }
-
-    .section-copy {
-      max-width: 690px;
-      color: var(--muted);
-      font-size: clamp(1rem, 1.6vw, 1.18rem);
-      line-height: 1.7;
-    }
-
-    .grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .card {
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022)),
-        rgba(5, 8, 7, 0.62);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-
-    .btn {
-      display: inline-flex;
-      min-height: 50px;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 0 20px;
-      border: 1px solid transparent;
-      border-radius: 10px;
-      font-weight: 700;
-      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, var(--orange), #df3c0b);
-      box-shadow: 0 14px 38px rgba(255, 90, 31, 0.24);
-    }
-
-    .btn-secondary {
-      border-color: var(--line-bright);
-      background: rgba(255, 255, 255, 0.035);
-    }
-
-    .btn-link {
-      min-height: auto;
-      padding: 0;
-      color: var(--muted);
-    }
-
-    .btn-link:hover {
-      color: var(--text);
-      transform: none;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 34px;
-      padding: 0 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(0, 0, 0, 0.2);
-      font-size: 0.84rem;
-    }
-
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--orange);
-      box-shadow: 0 0 16px rgba(255, 90, 31, 0.86);
-    }
-
-    /* NAV */
-    .site-header {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 1000;
-      padding: 14px 0;
-    }
-
-    .nav-shell {
-      display: flex;
-      min-height: var(--nav-h);
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 0 14px 0 22px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 999px;
-      background: rgba(5, 8, 7, 0.72);
-      box-shadow: 0 14px 54px rgba(0, 0, 0, 0.24);
-      backdrop-filter: blur(18px);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-    }
-
-    .brand-mark {
-      position: relative;
-      width: 34px;
-      height: 34px;
-      border: 1px solid var(--line-bright);
-      border-radius: 11px;
-      overflow: hidden;
-    }
-
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 7px;
-      border: 1px solid var(--orange);
-      border-radius: 999px 999px 5px 5px;
-    }
-
-    .brand-mark::after {
-      inset: 13px 6px 6px 13px;
-      border-color: var(--text);
-      opacity: 0.8;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .language-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 44px;
-      min-height: 44px;
-      border: 0;
-      color: var(--muted);
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .menu-button {
-      display: none;
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
-      cursor: pointer;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100svh;
-      padding: 150px 0 72px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      isolation: isolate;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -3;
-      background:
-        linear-gradient(90deg, rgba(5, 8, 7, 0.95) 0%, rgba(5, 8, 7, 0.62) 40%, rgba(5, 8, 7, 0.3) 68%, rgba(5, 8, 7, 0.8) 100%),
-        linear-gradient(180deg, rgba(5, 8, 7, 0.18), var(--bg)),
-        url("/assets/tif-hero.webp") center/cover no-repeat;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 660px;
-      height: 660px;
-      top: 5%;
-      right: 10%;
-      z-index: -2;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 88, 24, 0.18), transparent 62%);
-      filter: blur(16px);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
-      align-items: center;
-      gap: 48px;
-    }
-
-    .hero-copy {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-title {
-      margin: 24px 0 24px;
-      max-width: 760px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(3.7rem, 8.8vw, 8.4rem);
-      line-height: 0.86;
-      letter-spacing: -0.07em;
-      text-wrap: balance;
-    }
-
-    .hero-title em {
-      color: var(--orange-2);
-      font-style: normal;
-    }
-
-    .hero-subtitle {
-      max-width: 600px;
-      color: var(--muted);
-      font-size: clamp(1.08rem, 1.8vw, 1.28rem);
-      line-height: 1.65;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 34px;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 30px;
-    }
-
-    .portal-stage {
-      position: relative;
-      min-height: 650px;
-      display: grid;
-      place-items: center;
-    }
-
-    .portal {
-      position: relative;
-      width: min(78vw, 440px);
-      aspect-ratio: 0.62;
-      border: 1px solid rgba(255, 138, 61, 0.44);
-      border-bottom: 0;
-      border-radius: 220px 220px 18px 18px;
-      background:
-        linear-gradient(180deg, rgba(3, 20, 18, 0.28), rgba(5, 8, 7, 0.96)),
-        radial-gradient(circle at 50% 72%, rgba(255, 117, 42, 0.8), transparent 7%),
-        linear-gradient(180deg, #092721, #03100e 55%, #050807);
-      box-shadow:
-        inset 0 0 80px rgba(255, 90, 31, 0.12),
-        0 0 120px rgba(255, 90, 31, 0.16);
-      overflow: hidden;
-    }
-
-    .portal::before {
-      content: "";
-      position: absolute;
-      width: 140%;
-      height: 44%;
-      left: -20%;
-      bottom: -6%;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 138, 61, 0.8), transparent 33%),
-        linear-gradient(165deg, transparent 0 44%, rgba(255, 90, 31, 0.58) 45% 48%, transparent 49%),
-        linear-gradient(195deg, transparent 0 44%, rgba(255, 90, 31, 0.4) 45% 48%, transparent 49%);
-      filter: blur(2px);
-    }
-
-    .portal::after {
-      content: "";
-      position: absolute;
-      width: 28px;
-      height: 85px;
-      left: calc(50% - 14px);
-      bottom: 4%;
-      border-radius: 16px 16px 8px 8px;
-      background: #020403;
-      box-shadow: 0 -34px 42px rgba(255, 90, 31, 0.14);
-    }
-
-    .rings {
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      top: 8%;
-      right: -8%;
-      border-radius: 50%;
-      background: repeating-radial-gradient(
-        circle,
-        transparent 0 18px,
-        rgba(255, 90, 31, 0.34) 19px 20px
-      );
-      opacity: 0.85;
-      mask-image: radial-gradient(circle, black, transparent 74%);
-    }
-
-    .floating-card {
-      position: absolute;
-      min-width: 150px;
-      padding: 13px 14px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(5, 8, 7, 0.78);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-    }
-
-    .floating-card strong {
-      display: block;
-      margin-bottom: 4px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.93rem;
-    }
-
-    .floating-card span {
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .floating-card.one {
-      top: 18%;
-      left: -3%;
-    }
-
-    .floating-card.two {
-      right: -7%;
-      top: 42%;
-    }
-
-    .floating-card.three {
-      bottom: 12%;
-      left: 4%;
-    }
-
-    .hero-facts {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      display: grid;
-      gap: 10px;
-      width: 210px;
-    }
-
-    .hero-fact {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(5, 8, 7, 0.68);
-      backdrop-filter: blur(14px);
-    }
-
-    .hero-fact b {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.06rem;
-    }
-
-    .hero-fact small {
-      color: var(--muted);
-    }
-
-    /* PROOF */
-    .proof-strip {
-      padding: 22px 0;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.018);
-    }
-
-    .proof-grid {
-      display: grid;
-      grid-template-columns: 1.35fr repeat(4, 1fr);
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .proof-intro,
-    .proof-stat {
-      padding: 18px;
-    }
-
-    .proof-intro {
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    .proof-stat {
-      border-left: 1px solid var(--line);
-    }
-
-    .proof-stat strong {
-      display: block;
-      color: var(--orange-2);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.75rem;
-      line-height: 1;
-    }
-
-    .proof-stat span {
-      display: block;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    /* MANIFESTO */
-    .manifesto-grid {
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 72px;
-    }
-
-    .pillar-grid {
-      grid-template-columns: repeat(2, 1fr);
-      margin-top: 34px;
-    }
-
-    .pillar {
-      padding: 22px;
-    }
-
-    .pillar-number {
-      color: var(--orange-2);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
-    .pillar h3 {
-      margin: 36px 0 9px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.35rem;
-    }
-
-    .pillar p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    .ecosystem-visual {
-      position: relative;
-      min-height: 600px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 65% 35%, rgba(255, 90, 31, 0.22), transparent 22%),
-        linear-gradient(135deg, rgba(15, 59, 52, 0.42), rgba(5, 8, 7, 0.5)),
-        url("/assets/tif-community.webp") center/cover no-repeat;
-    }
-
-    .ecosystem-core {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 146px;
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      translate: -50% -50%;
-      border: 1px solid rgba(255, 138, 61, 0.5);
-      border-radius: 50%;
-      color: white;
-      background: rgba(5, 8, 7, 0.76);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      text-align: center;
-      box-shadow: 0 0 80px rgba(255, 90, 31, 0.22);
-    }
-
-    .ecosystem-line {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 230px;
-      height: 1px;
-      transform-origin: left;
-      background: linear-gradient(90deg, rgba(255, 90, 31, 0.7), transparent);
-    }
-
-    .ecosystem-node {
-      position: absolute;
-      min-width: 122px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(5, 8, 7, 0.76);
-      text-align: center;
-      font-size: 0.82rem;
-      backdrop-filter: blur(12px);
-    }
-
-    /* DAY NIGHT */
-    .day-night {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 34px;
-      background:
-        linear-gradient(90deg, rgba(13, 54, 46, 0.55), rgba(255, 90, 31, 0.08) 48%, rgba(0, 0, 0, 0.48)),
-        rgba(255, 255, 255, 0.018);
-    }
-
-    .timeline-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .timeline-item {
-      position: relative;
-      min-height: 300px;
-      padding: 30px;
-      border-right: 1px solid var(--line);
-    }
-
-    .timeline-item:last-child {
-      border-right: 0;
-    }
-
-    .timeline-item .time {
-      color: var(--orange-2);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-    }
-
-    .timeline-item h3 {
-      margin: 88px 0 12px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.65rem;
-    }
-
-    .timeline-item p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .timeline-item::after {
-      content: "";
-      position: absolute;
-      left: 30px;
-      bottom: 30px;
-      width: calc(100% - 60px);
-      height: 2px;
-      background: linear-gradient(90deg, var(--orange), transparent);
-    }
-
-    /* ORBIT */
-    .orbit-shell {
-      position: relative;
-      min-height: 680px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255, 90, 31, 0.1), transparent 24%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.006));
-    }
-
-    .orbit-center {
-      position: relative;
-      z-index: 4;
-      width: 188px;
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255, 90, 31, 0.42);
-      border-radius: 50%;
-      background: rgba(5, 8, 7, 0.92);
-      box-shadow: 0 0 90px rgba(255, 90, 31, 0.18);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .orbit-ring {
-      position: absolute;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-    }
-
-    .orbit-ring.r1 { width: 340px; height: 340px; }
-    .orbit-ring.r2 { width: 500px; height: 500px; }
-    .orbit-ring.r3 { width: 640px; height: 640px; }
-
-    .orbit-node {
-      position: absolute;
-      z-index: 5;
-      display: grid;
-      place-items: center;
-      width: 150px;
-      min-height: 64px;
-      padding: 10px 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(5, 8, 7, 0.82);
-      text-align: center;
-      font-size: 0.83rem;
-      transition: transform 180ms ease, color 180ms ease, border-color 180ms ease;
-      backdrop-filter: blur(14px);
-    }
-
-    .orbit-node:hover {
-      transform: scale(1.04);
-      color: var(--text);
-      border-color: rgba(255, 90, 31, 0.45);
-    }
-
-    /* WHALE */
-    .whale-wrap {
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 16% 44%, rgba(17, 73, 86, 0.38), transparent 28%),
-        radial-gradient(circle at 80% 18%, rgba(255, 90, 31, 0.14), transparent 24%),
-        rgba(255, 255, 255, 0.018);
-    }
-
-    .whale-grid {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      align-items: center;
-      gap: 34px;
-      padding: 58px;
-    }
-
-    .whale-art {
-      min-height: 430px;
-      display: grid;
-      place-items: center;
-      position: relative;
-    }
-
-    .whale-svg {
-      width: min(100%, 520px);
-      filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.42));
-    }
-
-    .whale-path {
-      fill: url(#whaleGradient);
-      stroke: rgba(255, 255, 255, 0.34);
-      stroke-width: 1.1;
-    }
-
-    .whale-copy h2 {
-      margin: 12px 0 16px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.7rem, 5vw, 5.3rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-    }
-
-    .journey {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin: 30px 0;
-    }
-
-    .journey-step {
-      min-height: 118px;
-      padding: 15px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(0, 0, 0, 0.18);
-    }
-
-    .journey-step strong {
-      display: block;
-      color: var(--orange-2);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.35rem;
-    }
-
-    .journey-step span {
-      display: block;
-      margin-top: 22px;
-      color: var(--muted);
-      font-size: 0.78rem;
-      line-height: 1.4;
-    }
-
-    .benefit-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 26px;
-    }
-
-    /* PRICING */
-    .pricing-grid {
-      grid-template-columns: repeat(3, 1fr);
-      margin-top: 46px;
-    }
-
-    .price-card {
-      position: relative;
-      padding: 28px;
-      overflow: hidden;
-    }
-
-    .price-card.featured {
-      border-color: rgba(255, 90, 31, 0.42);
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 90, 31, 0.16), transparent 40%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
-      transform: translateY(-12px);
-    }
-
-    .price-badge {
-      position: absolute;
-      right: 18px;
-      top: 18px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      color: white;
-      background: var(--orange);
-      font-size: 0.72rem;
-      font-weight: 700;
-    }
-
-    .price-label {
-      color: var(--muted);
-      font-size: 0.84rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .price {
-      margin: 26px 0 4px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.7rem, 5vw, 4.5rem);
-      line-height: 1;
-      letter-spacing: -0.06em;
-    }
-
-    .price-note {
-      color: var(--muted);
-      font-size: 0.83rem;
-    }
-
-    .price-list {
-      display: grid;
-      gap: 12px;
-      margin: 28px 0 32px;
-      padding: 0;
-      list-style: none;
-    }
-
-    .price-list li {
-      display: flex;
-      gap: 10px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .price-list li::before {
-      content: "●";
-      color: var(--orange);
-      font-size: 0.7rem;
-      margin-top: 0.25em;
-    }
-
-    /* AUDIENCE */
-    .audience-shell {
-      display: grid;
-      grid-template-columns: 0.42fr 0.58fr;
-      gap: 18px;
-      margin-top: 42px;
-    }
-
-    .audience-tabs {
-      display: grid;
-      gap: 8px;
-    }
-
-    .audience-tab {
-      width: 100%;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.025);
-      text-align: left;
-      cursor: pointer;
-      transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
-    }
-
-    .audience-tab.active {
-      color: var(--text);
-      border-color: rgba(255, 90, 31, 0.45);
-      background: rgba(255, 90, 31, 0.08);
-    }
-
-    .audience-content {
-      min-height: 420px;
-      padding: 38px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 78% 28%, rgba(255, 90, 31, 0.18), transparent 26%),
-        linear-gradient(140deg, rgba(15, 59, 52, 0.36), rgba(5, 8, 7, 0.68)),
-        url("/assets/tif-audience.webp") center/cover no-repeat;
-    }
-
-    .audience-content::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(5, 8, 7, 0.96), rgba(5, 8, 7, 0.38));
-      z-index: 0;
-    }
-
-    .audience-panel {
-      position: relative;
-      z-index: 1;
-      display: none;
-      max-width: 540px;
-    }
-
-    .audience-panel.active {
-      display: block;
-    }
-
-    .audience-panel h3 {
-      margin: 0 0 14px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      letter-spacing: -0.045em;
-    }
-
-    .audience-panel p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
-
-    /* PROGRAM */
-    .program-layout {
-      display: grid;
-      grid-template-columns: 0.4fr 0.6fr;
-      gap: 56px;
-      align-items: start;
-    }
-
-    .program-list {
-      border-top: 1px solid var(--line);
-    }
-
-    .program-item {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .program-trigger {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 94px 1fr auto;
-      gap: 20px;
-      align-items: center;
-      padding: 24px 0;
-      border: 0;
-      color: var(--text);
-      background: transparent;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .program-trigger .day {
-      color: var(--orange-2);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-    }
-
-    .program-trigger strong {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.24rem;
-    }
-
-    .program-plus {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      color: var(--muted);
-    }
-
-    .program-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 320ms ease;
-    }
-
-    .program-content-inner {
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 18px;
-      padding: 0 0 26px 114px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .program-content-inner + .program-content-inner {
-      padding-top: 0;
-    }
-
-    .program-item.open .program-content {
-      max-height: 460px;
-    }
-
-    .program-item.open .program-plus {
-      color: var(--orange);
-      border-color: rgba(255, 90, 31, 0.44);
-    }
-
-    /* VENUES */
-    .venue-grid {
-      grid-template-columns: repeat(2, 1fr);
-      margin-top: 46px;
-    }
-
-    .venue {
-      min-height: 560px;
-      padding: 32px;
-      display: flex;
-      align-items: flex-end;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .venue::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background-position: center;
-      background-size: cover;
-      transition: transform 600ms ease;
-    }
-
-    .venue:hover::before {
-      transform: scale(1.04);
-    }
-
-    .venue::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: linear-gradient(180deg, transparent 20%, rgba(5, 8, 7, 0.92));
-    }
-
-    .venue.ikal::before {
-      background-image: url("/assets/ikal-arena.webp");
-    }
-
-    .venue.vr::before {
-      background-image: url("/assets/vr-club.webp");
-    }
-
-    .venue h3 {
-      margin: 12px 0;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.2rem, 4vw, 4rem);
-      letter-spacing: -0.05em;
-    }
-
-    .venue p {
-      max-width: 450px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* PARTNERS */
-    .partner-wall {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin-top: 40px;
-    }
-
-    .partner {
-      min-height: 92px;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      color: rgba(245, 241, 232, 0.72);
-      background: rgba(255, 255, 255, 0.018);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .partner-cta {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 30px;
-      align-items: center;
-      margin-top: 18px;
-      padding: 32px;
-      background:
-        radial-gradient(circle at 82% 50%, rgba(255, 90, 31, 0.15), transparent 24%),
-        rgba(255, 255, 255, 0.026);
-    }
-
-    /* FAQ */
-    .faq-grid {
-      grid-template-columns: repeat(2, 1fr);
-      margin-top: 42px;
-    }
-
-    .faq-item {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .faq-question {
-      width: 100%;
-      min-height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 18px 20px;
-      border: 0;
-      color: var(--text);
-      background: transparent;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 280ms ease;
-    }
-
-    .faq-answer p {
-      margin: 0;
-      padding: 0 20px 20px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .faq-item.open .faq-answer {
-      max-height: 260px;
-    }
-
-    /* FINAL CTA / FORM */
-    .final-cta {
-      overflow: hidden;
-      padding: 72px;
-      text-align: center;
-      background:
-        radial-gradient(circle at 50% 82%, rgba(255, 90, 31, 0.25), transparent 24%),
-        linear-gradient(135deg, rgba(15, 59, 52, 0.45), rgba(5, 8, 7, 0.74)),
-        url("/assets/tif-final.webp") center/cover no-repeat;
-    }
-
-    .final-cta h2 {
-      margin: 0 auto 20px;
-      max-width: 930px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.7rem, 6.7vw, 6.5rem);
-      line-height: 0.92;
-      letter-spacing: -0.065em;
-    }
-
-    .final-cta p {
-      max-width: 620px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.7;
-    }
-
-    .lead-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr auto;
-      gap: 10px;
-      max-width: 980px;
-      margin: 36px auto 0;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(5, 8, 7, 0.72);
-      backdrop-filter: blur(18px);
-    }
-
-    .lead-form input,
-    .lead-form select {
-      min-width: 0;
-      min-height: 48px;
-      padding: 0 14px;
-      border: 1px solid transparent;
-      border-radius: 10px;
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.055);
-      outline: none;
-    }
-
-    .lead-form input:focus,
-    .lead-form select:focus {
-      border-color: rgba(255, 90, 31, 0.58);
-    }
-
-    .lead-form option {
-      color: #111;
-    }
-
-    .form-note {
-      margin-top: 12px;
-      color: var(--muted-2);
-      font-size: 0.76rem;
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 54px 0 28px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr 0.8fr;
-      gap: 40px;
-      padding-bottom: 42px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .footer-brand {
-      max-width: 390px;
-    }
-
-    .footer-brand p,
-    .footer-links a {
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .footer-links {
-      display: grid;
-      align-content: start;
-      gap: 10px;
-    }
-
-    .footer-links strong {
-      margin-bottom: 6px;
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      padding-top: 22px;
-      color: var(--muted-2);
-      font-size: 0.78rem;
-    }
-
-    /* REVEAL */
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 700ms ease, transform 700ms ease;
-    }
-
-    [data-reveal].visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 1060px) {
-      .nav-links {
-        display: none;
-      }
-
-      .menu-button {
-        display: inline-grid;
-        place-items: center;
-      }
-
-      .hero-grid,
-      .manifesto-grid,
-      .whale-grid,
-      .program-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .portal-stage {
-        min-height: 560px;
-      }
-
-      .proof-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .proof-intro {
-        grid-column: 1 / -1;
-      }
-
-      .proof-stat:first-of-type {
-        border-left: 0;
-      }
-
-      .pricing-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .price-card:last-child {
-        grid-column: 1 / -1;
-      }
-
-      .audience-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .audience-tabs {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .partner-wall {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .lead-form {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .lead-form .btn {
-        grid-column: 1 / -1;
-      }
-    }
-
-    @media (max-width: 780px) {
-      .container {
-        width: min(calc(100% - 24px), var(--max));
-      }
-
-      .section {
-        padding: 86px 0;
-      }
-
-      .site-header {
-        padding: 8px 0;
-      }
-
-      .nav-shell {
-        min-height: 62px;
-        padding-left: 14px;
-      }
-
-      .nav-actions .btn {
-        display: none;
-      }
-
-      .hero {
-        min-height: auto;
-        padding-top: 118px;
-      }
-
-      .hero-title {
-        font-size: clamp(3.4rem, 17vw, 5.7rem);
-      }
-
-      .portal-stage {
-        min-height: 510px;
-      }
-
-      .portal {
-        width: min(78vw, 360px);
-      }
-
-      .rings {
-        width: 300px;
-        height: 300px;
-      }
-
-      .floating-card.one {
-        left: 0;
-      }
-
-      .floating-card.two {
-        right: 0;
-      }
-
-      .hero-facts {
-        position: relative;
-        width: 100%;
-        grid-template-columns: 1fr 1fr;
-        margin-top: 16px;
-      }
-
-      .proof-grid,
-      .pillar-grid,
-      .pricing-grid,
-      .venue-grid,
-      .faq-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .proof-stat {
-        border-left: 0;
-        border-top: 1px solid var(--line);
-      }
-
-      .timeline-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item {
-        min-height: 250px;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .orbit-shell {
-        min-height: 760px;
-      }
-
-      .orbit-ring.r3 {
-        display: none;
-      }
-
-      .orbit-node {
-        width: 130px;
-        min-height: 56px;
-        font-size: 0.75rem;
-      }
-
-      .whale-grid {
-        padding: 24px;
-      }
-
-      .journey {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .journey-step:last-child {
-        grid-column: 1 / -1;
-      }
-
-      .price-card.featured {
-        transform: none;
-      }
-
-      .audience-tabs {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .audience-content {
-        min-height: 470px;
-        padding: 26px;
-      }
-
-      .program-trigger {
-        grid-template-columns: 68px 1fr auto;
-      }
-
-      .program-content-inner {
-        grid-template-columns: 1fr;
-        padding-left: 88px;
-      }
-
-      .venue {
-        min-height: 470px;
-      }
-
-      .partner-wall {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .partner-cta {
-        grid-template-columns: 1fr;
-      }
-
-      .final-cta {
-        padding: 48px 22px;
-      }
-
-      .lead-form {
-        grid-template-columns: 1fr;
-      }
-
-      .lead-form .btn {
-        grid-column: auto;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .brand span {
-        display: none;
-      }
-
-      .hero-actions .btn {
-        width: 100%;
-      }
-
-      .hero-meta {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .portal-stage {
-        min-height: 460px;
-      }
-
-      .floating-card {
-        min-width: 128px;
-        padding: 10px;
-      }
-
-      .floating-card.two {
-        top: 48%;
-      }
-
-      .hero-facts {
-        grid-template-columns: 1fr;
-      }
-
-      .audience-tabs,
-      .partner-wall {
-        grid-template-columns: 1fr;
-      }
-
-      .program-trigger {
-        grid-template-columns: 58px 1fr auto;
-        gap: 12px;
-      }
-
-      .program-trigger strong {
-        font-size: 1rem;
-      }
-
-      .program-content-inner {
-        padding-left: 70px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-
-      [data-reveal] {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
 </head>
+<body class="has-scroll-effects">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<body>
-  <header class="site-header">
-    <div class="container">
-      <nav class="nav-shell" aria-label="Primary navigation">
-        <a class="brand" href="#top" aria-label="Tulum Innovation Fest home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span>TULUM INNOVATION FEST</span>
-        </a>
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="Tulum Innovation Fest home">
+  <img
+    class="brand-logo"
+    src="assets/tulum-innovation-fest-logo.png"
+    alt="Tulum Innovation Fest"
+  >
+    </a>
 
-        <div class="nav-links">
-          <a href="#experience">Experience</a>
-          <a href="#whale-tank">Whale Tank</a>
-          <a href="#program">Program</a>
-          <a href="#venues">Venues</a>
-          <a href="#partners">Partners</a>
-        </div>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span></span><span></span><span></span><span class="sr-only">Open navigation</span>
+    </button>
 
-        <div class="nav-actions">
-          <button class="language-button" type="button" aria-label="Language selector">EN</button>
-          <a class="btn btn-primary" href="#early-access">Get early access</a>
-          <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false">
-            ☰
-          </button>
-        </div>
-      </nav>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav>
+      <a href="#experience">Experience</a>
+      <a href="#program">Program</a>
+      <a href="#tickets">Tickets</a>
+      <a href="#whale-tank">Whale Tank</a>
+      <a href="#venues">Venues</a>
+      <a href="#partners">Partners</a>
+      <a href="#faq">FAQ</a>
+      <button class="lang-toggle" type="button" data-lang-toggle aria-label="Cambiar a español">
+        <span data-lang-option="en">EN</span>
+        <span class="lang-divider" aria-hidden="true">/</span>
+        <span data-lang-option="es">ES</span>
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-small external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" target="_blank" rel="noopener noreferrer">Apply to Whale Tank</a>
+      <a class="btn btn-primary btn-small external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Get Festival Access</a>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy" data-reveal>
-          <div class="pill">
-            <span class="eyebrow-dot"></span>
-            December 9–12, 2026 · Tulum, Mexico
-          </div>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <picture class="hero-media" aria-hidden="true" data-hero-media>
+        <source media="(max-width: 720px)" srcset="assets/hero-mobile.png">
+        <img src="assets/hero-desktop.png" alt="">
+      </picture>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="signal-field" aria-hidden="true"><i></i><i></i><i></i></div>
 
-          <h1 class="hero-title">
-            From the heart of the jungle to the <em>future of humanity.</em>
-          </h1>
-
-          <p class="hero-subtitle">
-            A global gathering where innovation, capital, culture, nature and human connection converge.
-            Four days of ideas, dealflow, founder experiences and celebrations under the stars.
-          </p>
-
+      <div class="container hero-grid" data-hero-content>
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span></span>December 9-12, 2026 &middot; Tulum, Mexico</p>
+          <h1 id="hero-title">From the heart of the jungle<br><em>to the future of humanity</em></h1>
+          <p class="hero-intro">A four-day gathering where innovation, capital, culture and human connection converge.</p>
+          <p class="hero-support">Meet the founders, investors, creators and industry leaders building what comes next through ideas, immersive experiences and meaningful conversations in Tulum.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#early-access">Get early access</a>
-            <a class="btn btn-secondary" href="#whale-tank">Apply to Whale Tank</a>
-            <a class="btn btn-link" href="#partners">Become a partner →</a>
+            <a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Get Festival Access</a>
+            <a class="btn btn-ghost external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" target="_blank" rel="noopener noreferrer">Apply to Whale Tank</a>
           </div>
-
-          <div class="hero-meta">
-            <span class="pill">4th edition</span>
-            <span class="pill">4 days</span>
-            <span class="pill">2 main venues</span>
-            <span class="pill">1 living ecosystem</span>
-          </div>
+          <p class="microcopy">Limited capacity <span>&middot;</span> Curated community <span>&middot;</span> Day-to-night programming</p>
         </div>
 
-        <div class="portal-stage" aria-hidden="true" data-reveal>
-          <div class="rings"></div>
-          <div class="portal"></div>
-
-          <div class="floating-card one">
-            <strong>Whale Tank</strong>
-            <span>Founder acceleration</span>
-          </div>
-
-          <div class="floating-card two">
-            <strong>Capital</strong>
-            <span>Curated dealflow</span>
-          </div>
-
-          <div class="floating-card three">
-            <strong>Future Cities</strong>
-            <span>Ideas into adoption</span>
-          </div>
-
-          <div class="hero-facts">
-            <div class="hero-fact">
-              <span class="eyebrow-dot"></span>
-              <div>
-                <b>Ikal Arena</b>
-                <small>Main festival venue</small>
-              </div>
-            </div>
-
-            <div class="hero-fact">
-              <span class="eyebrow-dot"></span>
-              <div>
-                <b>VR Club</b>
-                <small>Founder campus</small>
-              </div>
-            </div>
-          </div>
-        </div>
+        <aside class="hero-index reveal" aria-label="Festival overview">
+          <div><span>01</span><p>Innovation</p></div>
+          <div><span>02</span><p>Capital</p></div>
+          <div><span>03</span><p>Culture</p></div>
+          <div><span>04</span><p>Connection</p></div>
+        </aside>
       </div>
+
+      <a class="scroll-cue" href="#credibility" aria-label="Scroll to festival facts"><span></span>Enter the ecosystem</a>
     </section>
 
-    <section class="proof-strip" aria-label="Festival history">
-      <div class="container proof-grid">
-        <div class="proof-intro">
-          What began as a crypto gathering has evolved into a broader platform for innovation,
-          entrepreneurship, culture and real-world implementation.
-        </div>
-        <div class="proof-stat">
-          <strong>700+</strong>
-          <span>2022 total entries</span>
-        </div>
-        <div class="proof-stat">
-          <strong>1,000+</strong>
-          <span>2023 total entries</span>
-        </div>
-        <div class="proof-stat">
-          <strong>1,200+</strong>
-          <span>2024 total entries</span>
-        </div>
-        <div class="proof-stat">
-          <strong>2026</strong>
-          <span>The next chapter</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="experience">
-      <div class="container manifesto-grid grid">
-        <div data-reveal>
-          <span class="section-kicker">The ecosystem</span>
-          <h2 class="section-title small">More than a conference. More than a festival.</h2>
-          <p class="section-copy">
-            Tulum Innovation Fest is a day-to-night ecosystem where founders, investors, creators,
-            companies and communities meet to explore what comes next—and build it together.
-          </p>
-
-          <div class="pillar-grid grid">
-            <article class="pillar card">
-              <span class="pillar-number">01</span>
-              <h3>Ideas</h3>
-              <p>Frontier conversations shaping technology, cities and culture.</p>
-            </article>
-            <article class="pillar card">
-              <span class="pillar-number">02</span>
-              <h3>Capital</h3>
-              <p>Curated access to investors, corporations and strategic partners.</p>
-            </article>
-            <article class="pillar card">
-              <span class="pillar-number">03</span>
-              <h3>Community</h3>
-              <p>High-intention connections designed to outlive the festival.</p>
-            </article>
-            <article class="pillar card">
-              <span class="pillar-number">04</span>
-              <h3>Implementation</h3>
-              <p>Pilots, prototypes and partnerships moving toward real-world adoption.</p>
-            </article>
-          </div>
-        </div>
-
-        <div class="ecosystem-visual card" data-reveal aria-label="Tulum Innovation Fest ecosystem map">
-          <div class="ecosystem-core">TULUM<br />INNOVATION<br />FEST</div>
-
-          <span class="ecosystem-line" style="transform: rotate(0deg);"></span>
-          <span class="ecosystem-line" style="transform: rotate(60deg);"></span>
-          <span class="ecosystem-line" style="transform: rotate(120deg);"></span>
-          <span class="ecosystem-line" style="transform: rotate(180deg);"></span>
-          <span class="ecosystem-line" style="transform: rotate(240deg);"></span>
-          <span class="ecosystem-line" style="transform: rotate(300deg);"></span>
-
-          <span class="ecosystem-node" style="top: 12%; left: 39%;">Founders</span>
-          <span class="ecosystem-node" style="top: 28%; right: 5%;">Investors</span>
-          <span class="ecosystem-node" style="bottom: 22%; right: 4%;">Corporates</span>
-          <span class="ecosystem-node" style="bottom: 8%; left: 38%;">Culture</span>
-          <span class="ecosystem-node" style="bottom: 22%; left: 4%;">Communities</span>
-          <span class="ecosystem-node" style="top: 28%; left: 4%;">Creators</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-tight">
+    <section class="credibility" id="credibility" aria-labelledby="credibility-title">
       <div class="container">
-        <div data-reveal>
-          <span class="section-kicker">Day to night</span>
-          <h2 class="section-title small">A festival that moves with the sun.</h2>
+        <div class="section-kicker"><span>Built in Tulum</span><span>Connected to the world</span></div>
+        <h2 class="sr-only" id="credibility-title">Festival credibility</h2>
+        <div class="metric-grid">
+          <article class="metric reveal"><strong>5</strong><h3>Previous Editions</h3><p>A growing community built across five editions since 2022.</p></article>
+          <article class="metric reveal"><strong>5,700+</strong><h3>Festival Entries</h3><p>Across five editions of the festival.</p></article>
+          <article class="metric reveal"><strong>4</strong><h3>Days of Programming</h3><p>From wellness and keynotes to dealmaking and celebration.</p></article>
+          <article class="metric reveal"><strong>1</strong><h3>Curated Ecosystem</h3><p>Founders, capital, corporations, creators and culture.</p></article>
         </div>
-
-        <div class="day-night" data-reveal>
-          <div class="timeline-grid">
-            <article class="timeline-item">
-              <span class="time">07:00</span>
-              <h3>Reset</h3>
-              <p>Wellness, founder rituals, community breakfasts and meaningful conversations.</p>
-            </article>
-            <article class="timeline-item">
-              <span class="time">12:00</span>
-              <h3>Build</h3>
-              <p>Keynotes, panels, workshops, startup sessions and emerging technologies.</p>
-            </article>
-            <article class="timeline-item">
-              <span class="time">18:00</span>
-              <h3>Connect</h3>
-              <p>Curated networking, dinners, partnerships and golden-hour dealmaking.</p>
-            </article>
-            <article class="timeline-item">
-              <span class="time">22:00</span>
-              <h3>Celebrate</h3>
-              <p>Music, culture, hospitality and community gatherings under the stars.</p>
-            </article>
-          </div>
+        <p class="data-note">Attendance figures represent total entries across all event days.</p>
+        <div class="logo-cloud" aria-label="Previous community participants">
+          <span>BINANCE</span><span>AWS</span><span>BITBASEL</span><span>IBIZA TECH FORUM</span><span>MINIMALIST</span><span>5IRE</span><span>PAPAYA PLAYA</span>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="positioning section" id="experience" aria-labelledby="positioning-title">
+      <div class="container split-heading">
+        <div>
+          <p class="eyebrow"><span></span>More than a conference. More than a festival.</p>
+          <h2 id="positioning-title">A living ecosystem for ideas, capital and real-world impact</h2>
+        </div>
+        <div class="section-copy reveal">
+          <p>Tulum Innovation Fest brings together the people shaping emerging technology, business and culture.</p>
+          <p>Discover new ideas, meet potential partners, explore investment opportunities and create relationships that continue long after the festival ends.</p>
+        </div>
+      </div>
+
+      <div class="container pillar-grid">
+        <article class="pillar-card reveal"><span>01</span><h3>Learn</h3><p>Keynotes, panels and workshops exploring the technologies, business models and cultural shifts transforming the world.</p><i aria-hidden="true"></i></article>
+        <article class="pillar-card reveal"><span>02</span><h3>Connect</h3><p>Curated networking designed for meaningful introductions, not endless business-card exchanges.</p><i aria-hidden="true"></i></article>
+        <article class="pillar-card reveal"><span>03</span><h3>Experience</h3><p>Wellness, gastronomy, music, nature and celebration integrated into the festival journey.</p><i aria-hidden="true"></i></article>
+      </div>
+      <p class="transition-line reveal">Mornings restore you. Days expand your perspective. Nights build the relationships that move ideas forward.</p>
+    </section>
+
+    <section class="topics section" aria-labelledby="topics-title">
       <div class="container">
-        <div data-reveal>
-          <span class="section-kicker">Innovation universe</span>
-          <h2 class="section-title small">Explore the frontiers shaping what comes next.</h2>
+        <div class="section-head reveal">
+          <p class="eyebrow"><span></span>The program</p>
+          <h2 id="topics-title">The conversations shaping what comes next</h2>
+          <p>A cross-disciplinary program for people building beyond traditional categories.</p>
         </div>
-
-        <div class="orbit-shell card" data-reveal>
-          <div class="orbit-ring r1"></div>
-          <div class="orbit-ring r2"></div>
-          <div class="orbit-ring r3"></div>
-          <div class="orbit-center">TULUM<br />INNOVATION<br />FEST</div>
-
-          <div class="orbit-node" style="top: 7%; left: calc(50% - 75px);">Artificial Intelligence</div>
-          <div class="orbit-node" style="top: 20%; right: 12%;">Web3 & Digital Assets</div>
-          <div class="orbit-node" style="top: 49%; right: 4%;">Fintech & Payments</div>
-          <div class="orbit-node" style="bottom: 12%; right: 17%;">Real-World Assets</div>
-          <div class="orbit-node" style="bottom: 5%; left: calc(50% - 75px);">Future Cities</div>
-          <div class="orbit-node" style="bottom: 12%; left: 17%;">Climate Tech</div>
-          <div class="orbit-node" style="top: 49%; left: 4%;">Creator Economy</div>
-          <div class="orbit-node" style="top: 20%; left: 12%;">Health & Longevity</div>
+        <div class="topic-grid">
+          <article class="topic-card reveal"><span>AI</span><h3>Artificial Intelligence</h3><p>New interfaces, infrastructure, agents, automation and the future of human productivity.</p></article>
+          <article class="topic-card reveal"><span>W3</span><h3>Web3 &amp; Digital Assets</h3><p>Blockchain, tokenization, alternative payments and the next generation of digital ownership.</p></article>
+          <article class="topic-card reveal"><span>CAP</span><h3>Capital &amp; Entrepreneurship</h3><p>Fundraising, investment readiness, scaling, strategic partnerships and market expansion.</p></article>
+          <article class="topic-card reveal"><span>CITY</span><h3>Future Cities</h3><p>Urban innovation, mobility, hospitality, infrastructure and new models for living.</p></article>
+          <article class="topic-card reveal"><span>LIFE</span><h3>Climate &amp; Longevity</h3><p>Technologies supporting environmental resilience, wellness, health and longer human lives.</p></article>
+          <article class="topic-card reveal"><span>CULT</span><h3>Culture &amp; Creator Economy</h3><p>Music, media, creativity and the communities influencing global behavior.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="whale-tank">
-      <div class="container whale-wrap card" data-reveal>
-        <div class="whale-grid">
-          <div class="whale-art" aria-hidden="true">
-            <svg class="whale-svg" viewBox="0 0 760 460" role="img" aria-label="Whale illustration">
-              <defs>
-                <linearGradient id="whaleGradient" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#163e49"/>
-                  <stop offset="52%" stop-color="#0b2024"/>
-                  <stop offset="100%" stop-color="#ff5a1f"/>
-                </linearGradient>
-              </defs>
-              <path class="whale-path" d="M96 238c53-104 172-162 316-154 113 6 189 48 246 100 28 25 43 40 67 48-18 20-49 29-82 25 18 29 28 54 31 76-32-7-61-22-87-46-39 54-116 87-204 84-118-4-229-53-287-133z"/>
-              <path class="whale-path" d="M351 143c19-55 52-92 96-112-2 48-21 89-56 122z"/>
-              <path class="whale-path" d="M268 322c-35 64-92 93-167 83 42-22 76-52 100-91z"/>
-              <circle cx="555" cy="181" r="6" fill="#f5f1e8"/>
-              <path d="M112 237c107 37 219 55 335 54" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2"/>
-              <path d="M145 209c104 29 211 43 321 42" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.4"/>
-            </svg>
-          </div>
-
-          <div class="whale-copy">
-            <span class="section-kicker">The official founder experience</span>
-            <h2>Accelerate. Connect. Raise.</h2>
-            <p class="section-copy">
-              Whale Tank is a curated founder journey combining startup acceleration, mentorship,
-              pitch training, investor readiness, strategic networking and live exposure at Tulum Innovation Fest.
-            </p>
-
-            <div class="journey">
-              <div class="journey-step"><strong>100+</strong><span>Applications</span></div>
-              <div class="journey-step"><strong>30</strong><span>Selected startups</span></div>
-              <div class="journey-step"><strong>10</strong><span>Semi-finalists</span></div>
-              <div class="journey-step"><strong>5</strong><span>Finalists</span></div>
-              <div class="journey-step"><strong>1</strong><span>Grand Final</span></div>
-            </div>
-
-            <div class="benefit-row">
-              <span class="pill">Mentorship</span>
-              <span class="pill">Pitch training</span>
-              <span class="pill">Investor readiness</span>
-              <span class="pill">Matchmaking</span>
-              <span class="pill">Live exposure</span>
-            </div>
-
-            <a class="btn btn-primary" href="#founder-pricing">Apply to Whale Tank</a>
-          </div>
+    <section class="journey section" aria-labelledby="journey-title">
+      <div class="journey-media" aria-hidden="true"><img src="assets/ecosystem.png" alt=""></div>
+      <div class="container journey-content">
+        <div class="journey-intro reveal">
+          <p class="eyebrow"><span></span>One destination. Four days. Many ways to connect.</p>
+          <h2 id="journey-title">The jungle becomes your stage</h2>
+          <p>Tulum changes the way people meet. Conversations happen over breakfast, beside the ocean, between sessions, during curated dinners and under the stars.</p>
+          <p>The environment is not a backdrop. It is part of the experience.</p>
+          <a class="text-link" href="#program">Explore the program <span>&rarr;</span></a>
+        </div>
+        <div class="daypart-list">
+          <article class="daypart reveal"><span>06:30</span><div><p>Morning</p><h3>Wellness &amp; Meaningful Conversations</h3><small>Movement, restoration, community breakfasts and founder programming.</small></div></article>
+          <article class="daypart reveal"><span>10:00</span><div><p>Day</p><h3>Ideas &amp; Opportunity</h3><small>Keynotes, workshops, panels, showcases and conversations.</small></div></article>
+          <article class="daypart reveal"><span>17:30</span><div><p>Golden Hour</p><h3>Connection &amp; Dealmaking</h3><small>Curated lunches, private tables and intentional introductions.</small></div></article>
+          <article class="daypart reveal"><span>21:00</span><div><p>Night</p><h3>Culture &amp; Celebration</h3><small>Dinners, music, creative programming and community gatherings.</small></div></article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="founder-pricing">
+    <section class="program section" id="program" aria-labelledby="program-title">
       <div class="container">
-        <div data-reveal>
-          <span class="section-kicker">Founder packages</span>
-          <h2 class="section-title small">Choose your founder experience.</h2>
-          <p class="section-copy">
-            Built for selected startup founders seeking investment readiness, mentorship,
-            pitch preparation, founder networking and live exposure.
-          </p>
+        <div class="section-head reveal">
+          <p class="eyebrow"><span></span>December 9-12, 2026</p>
+          <h2 id="program-title">Four days from connection to action</h2>
+        </div>
+        <div class="program-grid">
+          <article class="program-day reveal"><div class="program-num">01</div><div class="program-date">Wed &middot; Dec 09</div><h3>Welcome &amp; Community</h3><p>Arrive, meet the community and discover the vision behind the festival.</p><ul><li>Founder onboarding</li><li>Festival registration</li><li>Opening ceremony</li><li>Welcome cocktail</li><li>Community celebration</li></ul></article>
+          <article class="program-day reveal"><div class="program-num">02</div><div class="program-date">Thu &middot; Dec 10</div><h3>Ideas, Innovation &amp; Founders</h3><p>A full day exploring the technologies, companies and people shaping the future.</p><ul><li>Wellness breakfast</li><li>Keynotes and panels</li><li>Workshops</li><li>Founder sessions</li><li>Gala dinner</li></ul></article>
+          <article class="program-day reveal"><div class="program-num">03</div><div class="program-date">Fri &middot; Dec 11</div><h3>Capital, Growth &amp; Strategic Connections</h3><p>Founders, investors and industry leaders come together to build partnerships.</p><ul><li>Growth workshops</li><li>AI and finance conversations</li><li>Founder and investor sessions</li><li>Community networking</li><li>La Veleta night</li></ul></article>
+          <article class="program-day reveal"><div class="program-num">04</div><div class="program-date">Sat &middot; Dec 12</div><h3>Recovery, Demo Day &amp; Grand Final</h3><p>The festival concludes with wellness, startup excellence and celebration.</p><ul><li>Recovery and beach experience</li><li>Sponsor activations</li><li>Whale Tank Grand Final</li><li>Awards ceremony</li><li>Innovation Closing Party</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="ticketing section" id="tickets" aria-labelledby="tickets-title">
+      <div class="ticket-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="container">
+        <div class="section-head ticketing-head reveal">
+          <p class="eyebrow"><span></span>Festival access</p>
+          <h2 id="tickets-title">Choose how you enter the ecosystem</h2>
+          <p>From a four-day festival pass to curated executive access, every option leads into a different layer of the Tulum Innovation Fest experience.</p>
         </div>
 
-        <div class="pricing-grid grid">
-          <article class="price-card card" data-reveal>
-            <span class="price-label">Access only</span>
-            <div class="price">USD 1,500</div>
-            <span class="price-note">Per founder · accommodation not included</span>
-            <ul class="price-list">
-              <li>Founder Experience programming</li>
-              <li>Mentorship and pitch training</li>
-              <li>Selected festival access</li>
-              <li>Whale Tank Grand Final access</li>
-              <li>Welcome kit</li>
+        <div class="ticket-grid">
+          <article class="ticket-card reveal">
+            <div class="ticket-card-top">
+              <span class="ticket-type">Local community</span>
+              <span class="ticket-number">01</span>
+            </div>
+            <h3>Community Access — Tulum Resident</h3>
+            <p class="ticket-summary">A reduced four-day pass reserved for members of the local Tulum community.</p>
+            <div class="ticket-price">
+              <strong><small>MXN</small> $2,310</strong>
+              <span>≈ <b data-mxn-price="2310">US$133</b></span>
+            </div>
+            <ul>
+              <li>Four-day festival access</li>
+              <li>Talks, networking and community experience</li>
+              <li>Valid local identification required</li>
             </ul>
-            <a class="btn btn-secondary" href="#early-access">Apply</a>
+            <a class="btn btn-ghost external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Get this pass</a>
           </article>
 
-          <article class="price-card card featured" data-reveal>
-            <span class="price-badge">Recommended</span>
-            <span class="price-label">Full experience</span>
-            <div class="price">USD 2,500</div>
-            <span class="price-note">Per founder · accommodation included</span>
-            <ul class="price-list">
-              <li>Everything in Access Only</li>
-              <li>Startup acceleration programming</li>
-              <li>Investment readiness sessions</li>
-              <li>Accommodation</li>
-              <li>Breakfast</li>
+          <article class="ticket-card featured reveal">
+            <div class="ticket-ribbon">Most popular</div>
+            <div class="ticket-card-top">
+              <span class="ticket-type">Complete festival</span>
+              <span class="ticket-number">02</span>
+            </div>
+            <h3>General Access — 4 Day Pass</h3>
+            <p class="ticket-summary">The complete core festival experience for founders, builders, creators and curious minds.</p>
+            <div class="ticket-price">
+              <strong><small>MXN</small> $4,620</strong>
+              <span>≈ <b data-mxn-price="4620">US$266</b></span>
+            </div>
+            <ul>
+              <li>Four-day access to the festival</li>
+              <li>Talks, networking and community programming</li>
+              <li>Access to all festival parties</li>
             </ul>
-            <a class="btn btn-primary" href="#early-access">Apply</a>
+            <a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Get festival access</a>
           </article>
 
-          <article class="price-card card" data-reveal>
-            <span class="price-label">VIP upgrade</span>
-            <div class="price">USD 500</div>
-            <span class="price-note">Per person · charged separately</span>
-            <ul class="price-list">
-              <li>Private dinners</li>
-              <li>Curated VIP tables</li>
-              <li>Premium Executive Pass experiences</li>
-              <li>Hospitality upgrades</li>
+          <article class="ticket-card reveal">
+            <div class="ticket-card-top">
+              <span class="ticket-type">Night access</span>
+              <span class="ticket-number">03</span>
+            </div>
+            <h3>Night Program — Full Access</h3>
+            <p class="ticket-summary">The curated night layer where dinners, culture and high-value conversations converge.</p>
+            <div class="ticket-price">
+              <strong><small>MXN</small> $7,920</strong>
+              <span>≈ <b data-mxn-price="7920">US$455</b></span>
+            </div>
+            <ul>
+              <li>Opening and gala dinners</li>
+              <li>La Veleta community experience</li>
+              <li>Full Moon access with one welcome drink</li>
             </ul>
-            <a class="btn btn-secondary" href="#early-access">Request upgrade</a>
+            <a class="btn btn-ghost external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Explore night access</a>
           </article>
-        </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <div data-reveal>
-          <span class="section-kicker">Who attends</span>
-          <h2 class="section-title small">Different paths. One ecosystem.</h2>
-        </div>
-
-        <div class="audience-shell" data-reveal>
-          <div class="audience-tabs" role="tablist" aria-label="Audience segments">
-            <button class="audience-tab active" type="button" data-audience="founders">Founders</button>
-            <button class="audience-tab" type="button" data-audience="investors">Investors</button>
-            <button class="audience-tab" type="button" data-audience="corporates">Corporates</button>
-            <button class="audience-tab" type="button" data-audience="creators">Creators</button>
-            <button class="audience-tab" type="button" data-audience="cities">City builders</button>
-            <button class="audience-tab" type="button" data-audience="media">Media</button>
-          </div>
-
-          <div class="audience-content card">
-            <article class="audience-panel active" data-panel="founders">
-              <span class="section-kicker">Founders</span>
-              <h3>Turn traction into momentum.</h3>
-              <p>
-                Prepare for fundraising, sharpen your pitch, gain visibility and build meaningful
-                connections with mentors, investors and strategic allies.
-              </p>
-              <a class="btn btn-primary" href="#whale-tank">Explore Whale Tank</a>
-            </article>
-
-            <article class="audience-panel" data-panel="investors">
-              <span class="section-kicker">Investors</span>
-              <h3>Discover curated opportunities.</h3>
-              <p>
-                Meet selected founders, access emerging sectors and participate in conversations
-                shaping Latin America’s innovation economy.
-              </p>
-              <a class="btn btn-primary" href="#early-access">Request access</a>
-            </article>
-
-            <article class="audience-panel" data-panel="corporates">
-              <span class="section-kicker">Corporates</span>
-              <h3>Move from observation to participation.</h3>
-              <p>
-                Find new technologies, strategic partners and real-world pilots while building relevance
-                inside a high-value innovation ecosystem.
-              </p>
-              <a class="btn btn-primary" href="#partners">Become a partner</a>
-            </article>
-
-            <article class="audience-panel" data-panel="creators">
-              <span class="section-kicker">Creators</span>
-              <h3>Culture is part of the infrastructure.</h3>
-              <p>
-                Join a platform where creativity, music, hospitality and emerging technology converge
-                into new forms of expression and collaboration.
-              </p>
-              <a class="btn btn-primary" href="#early-access">Join the community</a>
-            </article>
-
-            <article class="audience-panel" data-panel="cities">
-              <span class="section-kicker">City builders</span>
-              <h3>Prototype the future in public.</h3>
-              <p>
-                Explore future cities, regenerative systems and emerging infrastructure with founders,
-                institutions and ecosystem leaders.
-              </p>
-              <a class="btn btn-primary" href="#early-access">Request information</a>
-            </article>
-
-            <article class="audience-panel" data-panel="media">
-              <span class="section-kicker">Media</span>
-              <h3>Cover the ideas before they become consensus.</h3>
-              <p>
-                Access founders, investors, experts and cultural leaders shaping the next generation
-                of innovation and entrepreneurship.
-              </p>
-              <a class="btn btn-primary" href="mailto:innovation@likegroup.io?subject=Media%20request%20-%20Tulum%20Innovation%20Fest">Media request</a>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="program">
-      <div class="container program-layout">
-        <div data-reveal>
-          <span class="section-kicker">Program overview</span>
-          <h2 class="section-title small">Four days. One continuous journey.</h2>
-          <p class="section-copy">
-            From founder onboarding and frontier conversations to strategic connections,
-            Demo Day and the closing celebration.
-          </p>
-        </div>
-
-        <div class="program-list" data-reveal>
-          <article class="program-item open">
-            <button class="program-trigger" type="button" aria-expanded="true">
-              <span class="day">Day 01</span>
-              <strong>Welcome & Community</strong>
-              <span class="program-plus">−</span>
-            </button>
-            <div class="program-content">
-              <div class="program-content-inner"><b>12:00–17:00</b><span>Founder Experience registration, onboarding and Whale Tank kickoff.</span></div>
-              <div class="program-content-inner"><b>16:00–20:00</b><span>Festival registration, opening ceremony, vision and community gathering.</span></div>
-              <div class="program-content-inner"><b>20:00–01:00</b><span>Welcome cocktail, networking and opening celebration.</span></div>
+          <article class="ticket-card reveal">
+            <div class="ticket-card-top">
+              <span class="ticket-type">Closing celebration</span>
+              <span class="ticket-number">04</span>
             </div>
+            <h3>Full Night — Closing Party</h3>
+            <p class="ticket-summary">A focused entry point for the official closing celebration beneath the stars.</p>
+            <div class="ticket-price">
+              <strong><small>MXN</small> $1,100</strong>
+              <span>≈ <b data-mxn-price="1100">US$63</b></span>
+            </div>
+            <ul>
+              <li>Entry to the main closing celebration</li>
+              <li>One welcome drink</li>
+              <li>Music, energy and community connection</li>
+            </ul>
+            <a class="btn btn-ghost external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Get closing access</a>
           </article>
 
-          <article class="program-item">
-            <button class="program-trigger" type="button" aria-expanded="false">
-              <span class="day">Day 02</span>
-              <strong>Ideas, Innovation & Founders</strong>
-              <span class="program-plus">+</span>
-            </button>
-            <div class="program-content">
-              <div class="program-content-inner"><b>07:00–11:30</b><span>Wellness, founder bootcamp and community breakfast.</span></div>
-              <div class="program-content-inner"><b>12:00–17:00</b><span>Keynotes, panels, workshops, founder sessions, lunch and networking.</span></div>
-              <div class="program-content-inner"><b>20:00–01:00</b><span>Gala dinner and community celebration.</span></div>
+          <article class="ticket-card reveal">
+            <div class="ticket-card-top">
+              <span class="ticket-type">Immersive add-on</span>
+              <span class="ticket-number">05</span>
             </div>
+            <h3>Invisible Layer — Ceremony Experience</h3>
+            <p class="ticket-summary">A private full-day integration journey across body, mind, relationships and systems.</p>
+            <div class="ticket-price">
+              <strong><small>MXN</small> $14,040</strong>
+              <span>≈ <b data-mxn-price="14040">US$807</b></span>
+            </div>
+            <ul>
+              <li>Breakfast, grounding and opening circle</li>
+              <li>Curated ceremony and sound experience</li>
+              <li>Reflection, integration and closing session</li>
+            </ul>
+            <a class="btn btn-ghost external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Explore the experience</a>
           </article>
 
-          <article class="program-item">
-            <button class="program-trigger" type="button" aria-expanded="false">
-              <span class="day">Day 03</span>
-              <strong>Capital, Growth & Strategic Connections</strong>
-              <span class="program-plus">+</span>
-            </button>
-            <div class="program-content">
-              <div class="program-content-inner"><b>07:00–11:30</b><span>Wellness, growth workshops and community breakfast.</span></div>
-              <div class="program-content-inner"><b>12:00–17:00</b><span>Keynotes, panels, AI, finance, founder sessions and networking.</span></div>
-              <div class="program-content-inner"><b>20:30–Late</b><span>La Veleta Community Night.</span></div>
+          <article class="ticket-card executive reveal">
+            <div class="ticket-card-top">
+              <span class="ticket-type">Executive access</span>
+              <span class="ticket-number">06</span>
             </div>
-          </article>
-
-          <article class="program-item">
-            <button class="program-trigger" type="button" aria-expanded="false">
-              <span class="day">Day 04</span>
-              <strong>Recovery, Demo Day & Grand Final</strong>
-              <span class="program-plus">+</span>
-            </button>
-            <div class="program-content">
-              <div class="program-content-inner"><b>08:00–15:00</b><span>Recovery Day, wellness, beach club and sponsor activations.</span></div>
-              <div class="program-content-inner"><b>16:00–18:00</b><span>Whale Tank Grand Final and awards ceremony.</span></div>
-              <div class="program-content-inner"><b>21:00–03:00</b><span>Innovation Closing Party.</span></div>
+            <h3>Executive Pass — Festival Access Only</h3>
+            <p class="ticket-summary">Higher-intention access for executives, investors and ecosystem leaders.</p>
+            <div class="ticket-price">
+              <strong><small>MXN</small> $28,080</strong>
+              <span>≈ <b data-mxn-price="28080">US$1,614</b></span>
             </div>
+            <ul>
+              <li>Executive-level festival access</li>
+              <li>Designed for higher-intention networking</li>
+              <li>Accommodation is not included</li>
+            </ul>
+            <a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Get executive access</a>
           </article>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="venues">
-      <div class="container">
-        <div data-reveal>
-          <span class="section-kicker">Tulum venues</span>
-          <h2 class="section-title small">Two venues. One connected experience.</h2>
-        </div>
-
-        <div class="venue-grid grid">
-          <article class="venue ikal card" data-reveal>
-            <div>
-              <span class="pill">Main festival venue</span>
-              <h3>Ikal Arena</h3>
-              <p>
-                The festival headquarters for keynotes, panels, Whale Tank showcases,
-                curated networking, community gatherings and night celebrations.
-              </p>
-              <div class="benefit-row">
-                <span class="pill">Wild landscape</span>
-                <span class="pill">Barefoot luxury</span>
-                <span class="pill">Festival stage</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="venue vr card" data-reveal>
-            <div>
-              <span class="pill">Founder campus</span>
-              <h3>VR Club</h3>
-              <p>
-                A curated founder residency for startup acceleration, mentorship,
-                investor readiness and high-intention networking.
-              </p>
-              <div class="benefit-row">
-                <span class="pill">Nature immersion</span>
-                <span class="pill">Startup residency</span>
-                <span class="pill">Whale Tank</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="partners">
-      <div class="container">
-        <div data-reveal>
-          <span class="section-kicker">Proof of ecosystem</span>
-          <h2 class="section-title small">Organizations that have helped shape the movement.</h2>
-          <p class="section-copy">
-            Technology companies, founders, investors, hospitality leaders and cultural communities
-            have participated across previous editions.
-          </p>
-        </div>
-
-        <div class="partner-wall" data-reveal aria-label="Past participating organizations">
-          <div class="partner">BINANCE</div>
-          <div class="partner">AWS</div>
-          <div class="partner">BITBASEL</div>
-          <div class="partner">IBIZA TECH FORUM</div>
-          <div class="partner">MINIMALIST</div>
-          <div class="partner">IKAL</div>
-          <div class="partner">PAPAYA PLAYA PROJECT</div>
-          <div class="partner">LABITCONF</div>
-          <div class="partner">ZAMA</div>
-          <div class="partner">RADIO TULUM</div>
-        </div>
-
-        <div class="partner-cta card" data-reveal>
+        <div class="ticket-strategy-head reveal">
           <div>
-            <h3 style="margin:0 0 8px;font-family:'Space Grotesk',sans-serif;font-size:2rem;">
-              Build your presence inside the ecosystem.
-            </h3>
-            <p style="margin:0;color:var(--muted);line-height:1.65;">
-              From Whale Tank and founder hospitality to functional integrations,
-              content and festival-wide partnerships.
-            </p>
+            <p class="eyebrow"><span></span>Positioning opportunities</p>
+            <h3>Enter the experience as a speaker or brand</h3>
           </div>
-          <a class="btn btn-primary" href="mailto:innovation@likegroup.io?subject=Partnership%20request%20-%20Tulum%20Innovation%20Fest">
-            Request partnership deck
-          </a>
+          <p>For founders, operators and organizations seeking more than attendance: stage presence, activation space and curated access.</p>
+        </div>
+
+        <div class="ticket-opportunity-grid">
+          <article class="ticket-opportunity reveal">
+            <div>
+              <span>Brand activation</span>
+              <h4>Living Room Sponsor</h4>
+              <p>A curated, integrated activation space designed for product showcase and relationship building.</p>
+            </div>
+            <div class="opportunity-price">
+              <strong>MXN $33,480</strong>
+              <span>≈ <b data-mxn-price="33480">US$1,924</b></span>
+            </div>
+            <a class="text-link external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">View opportunity</a>
+          </article>
+
+          <article class="ticket-opportunity reveal">
+            <div>
+              <span>Stage positioning</span>
+              <h4>Speaker Slot — No Stay Included</h4>
+              <p>A curated 15–20 minute stage presence with festival and selected night access.</p>
+            </div>
+            <div class="opportunity-price">
+              <strong>MXN $57,510</strong>
+              <span>≈ <b data-mxn-price="57510">US$3,306</b></span>
+            </div>
+            <a class="text-link external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">View opportunity</a>
+          </article>
+
+          <article class="ticket-opportunity reveal">
+            <div>
+              <span>Full positioning</span>
+              <h4>Executive Pass + Speaker Slot</h4>
+              <p>Executive access, a curated speaker slot, selected hospitality and stay included.</p>
+            </div>
+            <div class="opportunity-price">
+              <strong>MXN $76,680</strong>
+              <span>≈ <b data-mxn-price="76680">US$4,408</b></span>
+            </div>
+            <a class="text-link external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">View opportunity</a>
+          </article>
+        </div>
+
+        <div class="ticket-disclaimer reveal">
+          <span>Pricing reference</span>
+          <p>MXN prices include Ticket Fairy fees. USD amounts are approximate and calculated at <strong>MXN $17.3975 per USD</strong>. The final amount and availability are confirmed at checkout.</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <div data-reveal>
-          <span class="section-kicker">FAQ</span>
-          <h2 class="section-title small">What you need to know.</h2>
+    <section class="whale section" id="whale-tank" aria-labelledby="whale-title">
+      <div class="container whale-grid">
+        <div class="whale-media reveal"><img src="assets/founder-halo.png" alt="Anonymous founder silhouette framed by a concentric orange signal halo"></div>
+        <div class="whale-copy reveal">
+          <p class="eyebrow"><span></span>The official founder experience</p>
+          <h2 id="whale-title">Build your company.<br>Sharpen your story.<br><em>Meet the people who can move it forward.</em></h2>
+          <p>Whale Tank is a curated startup experience for technology-driven founders preparing for investment, partnerships and market expansion.</p>
+          <p>Selected participants receive mentorship, pitch preparation, investment-readiness support and opportunities to present during Tulum Innovation Fest.</p>
+          <div class="whale-actions">
+            <a class="btn btn-primary external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" target="_blank" rel="noopener noreferrer">Apply to Whale Tank</a>
+            <a class="btn btn-ghost" href="#packages">Explore Founder Packages</a>
+          </div>
+          <p class="microcopy">Applications are reviewed on a curated basis. Submission does not guarantee acceptance.</p>
         </div>
+      </div>
 
-        <div class="faq-grid grid">
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <strong>What is Tulum Innovation Fest?</strong><span>+</span>
-            </button>
-            <div class="faq-answer">
-              <p>A global gathering where innovation, capital, culture, nature and human connection converge through a four-day day-to-night experience.</p>
-            </div>
-          </article>
+      <div class="container program-path reveal" aria-label="Whale Tank journey">
+        <span>Founder Application</span><i></i><span>Startup Selection</span><i></i><span>Mentorship</span><i></i><span>Investor Readiness</span><i></i><span>Semifinals</span><i></i><span>Grand Final</span>
+      </div>
 
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <strong>Who should attend?</strong><span>+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Founders, investors, corporations, creators, city builders, ecosystem leaders and media interested in emerging technology and real-world implementation.</p>
-            </div>
-          </article>
+      <div class="container fit-grid">
+        <div class="fit-copy reveal"><h3>Built for founders with momentum</h3><p>Applicants should have a working product, MVP or validated solution, early traction and a scalable business model.</p></div>
+        <div class="fit-list reveal"><span>Early-stage technology</span><span>AI &amp; Web3</span><span>Fintech</span><span>Future cities</span><span>Climate &amp; health</span><span>Creator platforms</span><span>Impact ventures</span></div>
+      </div>
+    </section>
 
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <strong>What is Whale Tank?</strong><span>+</span>
-            </button>
-            <div class="faq-answer">
-              <p>The official founder experience of Tulum Innovation Fest, combining acceleration, mentorship, pitch preparation, investor readiness and live exposure.</p>
-            </div>
-          </article>
-
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <strong>Who can apply to Whale Tank?</strong><span>+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Early-stage, technology-driven startups with a working product or validated solution, early traction, a scalable business model and interest in fundraising or strategic expansion.</p>
-            </div>
-          </article>
-
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <strong>Is accommodation included?</strong><span>+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Accommodation and breakfast are included in the USD 2,500 Full Experience package. The USD 1,500 Access Only package does not include accommodation.</p>
-            </div>
-          </article>
-
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <strong>How can my organization become a partner?</strong><span>+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Use the partnership form or contact innovation@likegroup.io. Opportunities can include Whale Tank, founder hospitality, functional integrations, content and festival-wide visibility.</p>
-            </div>
-          </article>
+    <section class="packages section" id="packages" aria-labelledby="packages-title">
+      <div class="container">
+        <div class="section-head reveal"><p class="eyebrow"><span></span>Founder packages</p><h2 id="packages-title">Choose your founder experience</h2><p>Pricing follows the outcome. The complete package is designed to remove logistics and maximize readiness, access and relationship density.</p></div>
+        <div class="package-grid">
+          <article class="package-card featured reveal"><div class="package-label">Complete experience</div><h3>Full Package</h3><p class="price"><span>USD</span> 2,500 <small>per founder</small></p><p>For selected founders joining the complete Tulum journey.</p><ul><li>Whale Tank Founder Experience</li><li>Acceleration programming</li><li>Mentorship and pitch training</li><li>Investment-readiness sessions</li><li>Founder workshops and simulations</li><li>Networking and selected festival access</li><li>Grand Final access and welcome kit</li><li>Accommodation and breakfast</li></ul><a class="btn btn-primary external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" target="_blank" rel="noopener noreferrer">Apply for Full Package</a></article>
+          <article class="package-card reveal"><div class="package-label">Local participation</div><h3>Access Only</h3><p class="price"><span>USD</span> 1,500 <small>per founder</small></p><p>For local founders or participants with accommodation.</p><ul><li>Founder programming</li><li>Mentorship and pitch training</li><li>Selected festival access</li><li>Whale Tank Grand Final access</li><li>Welcome kit</li><li class="muted">Accommodation not included</li></ul><a class="btn btn-ghost external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" target="_blank" rel="noopener noreferrer">Apply for Access Only</a></article>
+          <article class="package-card upgrade reveal"><div class="package-label">Premium add-on</div><h3>VIP Upgrade</h3><p class="price"><span>USD</span> 500 <small>per person</small></p><p>Add selected premium hospitality and executive experiences.</p><ul><li>Priority hospitality access</li><li>Selected executive gatherings</li><li>Premium festival touchpoints</li><li>Concierge information</li></ul><a class="btn btn-ghost external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" target="_blank" rel="noopener noreferrer">Request VIP Information</a></article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="early-access">
+    <section class="venues section" id="venues" aria-labelledby="venues-title">
       <div class="container">
-        <div class="final-cta card" data-reveal>
-          <span class="section-kicker">December 9–12, 2026 · Tulum</span>
-          <h2>The future is not something we wait for.</h2>
-          <p>
-            It is something we build—together. Register your interest for festival access,
-            Whale Tank applications or partnership opportunities.
-          </p>
+        <div class="section-head reveal"><p class="eyebrow"><span></span>Two venues. One connected journey.</p><h2 id="venues-title">Built for immersion, conversation and community</h2></div>
+        <div class="venue-grid">
+          <article class="venue-card reveal"><div class="venue-image"><img src="assets/venue-vr.png" alt="Abstract jungle founder residency at sunset"></div><div class="venue-copy"><span>Founder Experience Venue</span><h3>VR Club</h3><p>A barefoot startup residency for founder acceleration, mentorship, investor readiness and high-intention networking.</p><ul><li>Nature Immersion</li><li>Barefoot Luxury</li><li>Startup Residency</li></ul></div></article>
+          <article class="venue-card reveal"><div class="venue-image"><img src="assets/venue-ikal.png" alt="Abstract open-air innovation festival stage in a jungle landscape"></div><div class="venue-copy"><span>Main Festival Venue</span><h3>Ikal Arena</h3><p>The headquarters for keynotes, panels, Whale Tank showcases, networking, community gatherings and night celebrations.</p><ul><li>Wild Landscape</li><li>Barefoot Luxury</li><li>Festival Stage</li></ul></div></article>
+        </div>
+      </div>
+    </section>
 
-          <!--
-            FORM INTEGRATION:
-            1. Replace action="#" with your HubSpot / Formspree endpoint, or
-            2. Connect this form to a Vercel serverless function.
-          -->
-          <form class="lead-form" id="interest-form" action="#" method="post">
-            <input type="text" name="name" placeholder="Your name" aria-label="Your name" required />
-            <input type="email" name="email" placeholder="Work email" aria-label="Work email" required />
-            <select name="interest" aria-label="Area of interest" required>
-              <option value="">I am interested in…</option>
-              <option value="attending">Attending the festival</option>
-              <option value="whale-tank">Applying to Whale Tank</option>
-              <option value="partnership">Partnership opportunities</option>
-              <option value="media">Media access</option>
-            </select>
-            <button class="btn btn-primary" type="submit">Register interest</button>
-          </form>
+    <section class="partners section" id="partners" aria-labelledby="partners-title">
+      <div class="partner-portal" aria-hidden="true">
+        <i></i><i></i><i></i>
+      </div>
 
-          <div class="form-note" id="form-note">
-            By submitting this form, you agree to receive event-related communications.
+      <div class="container sponsor-intro-grid">
+        <div class="partner-copy reveal">
+          <p class="eyebrow"><span></span>Partnerships</p>
+          <h2 id="partners-title">This is not just visibility.<br><em>It is access.</em></h2>
+          <p>Tulum Innovation Fest is a global platform connecting innovation, capital, culture, destinations and community.</p>
+          <p>Partners do not simply attend. They co-create, collaborate and build long-term relationships inside a curated global ecosystem.</p>
+          <button class="btn btn-primary" type="button" data-modal-open="partner-modal">Become a Partner</button>
+          <small>Tell us your business objective, target audience and preferred package. We qualify partnerships around the outcome, not generic logo exposure.</small>
+        </div>
+
+        <div class="sponsor-audience reveal" aria-label="Partner audience">
+          <article><span>01</span><h3>Founders, investors and industry leaders</h3><p>Decision-makers and builders from Ibero-America and beyond.</p></article>
+          <article><span>02</span><h3>Emerging technology and future cities</h3><p>AI, digital assets, infrastructure and real-world innovation.</p></article>
+          <article><span>03</span><h3>Hospitality, wellness and culture</h3><p>Leaders designing how people gather, live and connect.</p></article>
+          <article><span>04</span><h3>Dealflow and high-value networks</h3><p>Strategic partnerships built through shared experiences.</p></article>
+        </div>
+      </div>
+
+      <div class="container sponsor-package-head reveal">
+        <div>
+          <p class="eyebrow"><span></span>Strategic partnership packages</p>
+          <h3>Choose the level of ownership your brand needs</h3>
+        </div>
+        <p>Every package combines access, activation and media integration. Higher tiers own more of the festival narrative, hospitality and signature moments.</p>
+      </div>
+
+      <div class="container sponsor-tier-grid">
+        <article class="sponsor-tier sponsor-tier-main reveal">
+          <div class="sponsor-tier-top">
+            <span class="sponsor-tier-label">Narrative ownership</span>
+            <span class="sponsor-tier-number">01</span>
           </div>
+          <h4>Main Title Partner</h4>
+          <div class="sponsor-tier-price">
+            <strong>US$100,000</strong>
+            <span>≈ <b data-usd-price="100000">MXN $1,739,750</b></span>
+          </div>
+          <p class="sponsor-positioning">Top-level partner with ownership of the festival narrative.</p>
+          <ul>
+            <li>Naming as Main Title Partner</li>
+            <li>10 Executive Passes with stay included</li>
+            <li>60 General Access passes</li>
+            <li>Full branding integration across the festival</li>
+            <li>Presence throughout all festival communications</li>
+            <li>Main activation space</li>
+            <li>Ownership of the full Saturday party and main event</li>
+            <li>Interviews, stage time, photo, video and press integration</li>
+            <li>Custom media plan before, during and after the festival</li>
+          </ul>
+          <p class="sponsor-stay">Accommodation included in this package.</p>
+          <button class="btn btn-primary btn-full" type="button" data-modal-open="partner-modal" data-sponsor-package="Main Title Partner">Request Main Title Partnership</button>
+        </article>
+
+        <article class="sponsor-tier reveal">
+          <div class="sponsor-tier-top">
+            <span class="sponsor-tier-label">Core moment ownership</span>
+            <span class="sponsor-tier-number">02</span>
+          </div>
+          <h4>Alpha Partner</h4>
+          <div class="sponsor-tier-price">
+            <strong>US$40,000</strong>
+            <span>≈ <b data-usd-price="40000">MXN $695,900</b></span>
+          </div>
+          <p class="sponsor-positioning">Strategic partner integrated into the festival's core moments.</p>
+          <ul>
+            <li>6 Executive Passes with stay included</li>
+            <li>40 General Access passes</li>
+            <li>Branding across key touchpoints</li>
+            <li>Dedicated activation space</li>
+            <li>Ownership of one key moment: Gala Dinner, Tulum Experience or Opening</li>
+            <li>Interviews, stage time, photo, video and press integration</li>
+            <li>Custom media plan before, during and after the festival</li>
+          </ul>
+          <p class="sponsor-stay">Accommodation included in this package.</p>
+          <button class="btn btn-ghost btn-full" type="button" data-modal-open="partner-modal" data-sponsor-package="Alpha Partner">Request Alpha Partnership</button>
+        </article>
+
+        <article class="sponsor-tier reveal">
+          <div class="sponsor-tier-top">
+            <span class="sponsor-tier-label">Daily experience</span>
+            <span class="sponsor-tier-number">03</span>
+          </div>
+          <h4>Core Partner</h4>
+          <div class="sponsor-tier-price">
+            <strong>US$30,000</strong>
+            <span>≈ <b data-usd-price="30000">MXN $521,925</b></span>
+          </div>
+          <p class="sponsor-positioning">Active partner embedded within the daily festival experience.</p>
+          <ul>
+            <li>4 Executive Passes with stay included</li>
+            <li>30 General Access passes</li>
+            <li>Activation space</li>
+            <li>Ownership of one curated moment: Thursday Sunset, Friday Sunset or VIP Lunch</li>
+            <li>Interviews, stage time, photo, video and press integration</li>
+            <li>Custom media plan before, during and after the festival</li>
+          </ul>
+          <p class="sponsor-stay">Accommodation included in this package.</p>
+          <button class="btn btn-ghost btn-full" type="button" data-modal-open="partner-modal" data-sponsor-package="Core Partner">Request Core Partnership</button>
+        </article>
+
+        <article class="sponsor-tier reveal">
+          <div class="sponsor-tier-top">
+            <span class="sponsor-tier-label">Community layer</span>
+            <span class="sponsor-tier-number">04</span>
+          </div>
+          <h4>Community Partner</h4>
+          <div class="sponsor-tier-price">
+            <strong>US$20,000</strong>
+            <span>≈ <b data-usd-price="20000">MXN $347,950</b></span>
+          </div>
+          <p class="sponsor-positioning">Partner connected directly to the festival's community layer.</p>
+          <ul>
+            <li>2 Executive Passes with stay included</li>
+            <li>20 General Access passes</li>
+            <li>Activation presence</li>
+            <li>Ownership of one community moment: Wellness Morning, Breakfast Sessions, Workshops or Recovery Day</li>
+            <li>Interviews, stage time, photo, video and press integration</li>
+            <li>Custom media plan before, during and after the festival</li>
+          </ul>
+          <p class="sponsor-stay">Accommodation included in this package.</p>
+          <button class="btn btn-ghost btn-full" type="button" data-modal-open="partner-modal" data-sponsor-package="Community Partner">Request Community Partnership</button>
+        </article>
+
+        <article class="sponsor-tier reveal">
+          <div class="sponsor-tier-top">
+            <span class="sponsor-tier-label">High-frequency interaction</span>
+            <span class="sponsor-tier-number">05</span>
+          </div>
+          <h4>Access Partner</h4>
+          <div class="sponsor-tier-price">
+            <strong>US$15,000</strong>
+            <span>≈ <b data-usd-price="15000">MXN $260,963</b></span>
+          </div>
+          <p class="sponsor-positioning">A high-frequency interaction partner present inside the attendee journey.</p>
+          <ul>
+            <li>2 Executive Passes with stay included</li>
+            <li>15 General Access passes</li>
+            <li>Presence within the experience</li>
+            <li>Ownership of one interaction point: Coffee Break, Charging Station, WiFi, App or Registration</li>
+            <li>Interviews, stage time, photo, video and press integration</li>
+            <li>Custom media plan before, during and after the festival</li>
+          </ul>
+          <p class="sponsor-stay">Accommodation included in this package.</p>
+          <button class="btn btn-ghost btn-full" type="button" data-modal-open="partner-modal" data-sponsor-package="Access Partner">Request Access Partnership</button>
+        </article>
+
+        <article class="sponsor-tier sponsor-tier-entry reveal">
+          <div class="sponsor-tier-top">
+            <span class="sponsor-tier-label">Curated entry point</span>
+            <span class="sponsor-tier-number">06</span>
+          </div>
+          <h4>Living Room Sponsor</h4>
+          <div class="sponsor-tier-price">
+            <strong>US$1,500</strong>
+            <span>≈ <b data-usd-price="1500">MXN $26,096</b></span>
+          </div>
+          <p class="sponsor-positioning">A focused activation designed as an entry point into the festival ecosystem.</p>
+          <ul>
+            <li>Living Room activation space</li>
+            <li>2 General Access passes</li>
+            <li>Night Program access for 2 people</li>
+            <li>Curated dinners and selected night experiences</li>
+            <li>Executive Access is not included; upgrade available</li>
+          </ul>
+          <p class="sponsor-rate-note">Commercial deck reference. Ticket Fairy currently lists this product separately in MXN; confirm the final commercial rate before launch.</p>
+          <button class="btn btn-ghost btn-full" type="button" data-modal-open="partner-modal" data-sponsor-package="Living Room Sponsor">Request Living Room Sponsorship</button>
+        </article>
+      </div>
+
+      <div class="container functional-head reveal">
+        <p class="eyebrow"><span></span>Optional functional partnerships</p>
+        <h3>Own a useful touchpoint people interact with throughout the festival</h3>
+      </div>
+
+      <div class="container functional-grid">
+        <article class="functional-card reveal">
+          <span>Power</span>
+          <h4>Charging Station Partner</h4>
+          <div><strong>US$6,000</strong><small>≈ <b data-usd-price="6000">MXN $104,385</b></small></div>
+          <button type="button" data-modal-open="partner-modal" data-sponsor-package="Charging Station Partner">Request opportunity <i>↗</i></button>
+        </article>
+        <article class="functional-card reveal">
+          <span>Hospitality</span>
+          <h4>Coffee Station Partner</h4>
+          <div><strong>US$8,000</strong><small>≈ <b data-usd-price="8000">MXN $139,180</b></small></div>
+          <button type="button" data-modal-open="partner-modal" data-sponsor-package="Coffee Station Partner">Request opportunity <i>↗</i></button>
+        </article>
+        <article class="functional-card reveal">
+          <span>Connectivity</span>
+          <h4>WiFi Partner</h4>
+          <div><strong>US$10,000</strong><small>≈ <b data-usd-price="10000">MXN $173,975</b></small></div>
+          <button type="button" data-modal-open="partner-modal" data-sponsor-package="WiFi Partner">Request opportunity <i>↗</i></button>
+        </article>
+        <article class="functional-card reveal">
+          <span>Digital infrastructure</span>
+          <h4>App Partner</h4>
+          <div><strong>US$10,000</strong><small>≈ <b data-usd-price="10000">MXN $173,975</b></small></div>
+          <button type="button" data-modal-open="partner-modal" data-sponsor-package="App Partner">Request opportunity <i>↗</i></button>
+        </article>
+      </div>
+
+      <div class="container sponsorship-disclaimer reveal">
+        <span>Commercial reference</span>
+        <p>Sponsorship packages are quoted in USD. MXN amounts are approximate at <strong>MXN $17.3975 per USD</strong> and should be reconfirmed when the commercial proposal is issued.</p>
+      </div>
+    </section>
+
+    <section class="community section" aria-labelledby="community-title">
+      <div class="container">
+        <div class="community-head reveal"><p class="eyebrow"><span></span>Past community</p><h2 id="community-title">A community already in motion</h2><p>Previous editions have brought together global technology companies, startups, investors, hospitality partners and independent communities.</p></div>
+        <div class="community-wall reveal" aria-label="Community logo placeholders"><span>BINANCE</span><span>AWS</span><span>BITBASEL</span><span>5IRE</span><span>MINIMALIST</span><span>PAPAYA PLAYA</span><span>IBIZA TECH FORUM</span><span>WEB3 LATAM</span><span>STARTUP GRIND</span><span>THE SANDBOX</span><span>GOOGLE CLOUD</span><span>CHAINLINK</span></div>
+        <p class="testimonial-note">Founder, sponsor and investor testimonials should be added only after approval. No placeholder quotes are presented as social proof.</p>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <img src="assets/closing-portal.png" alt="" aria-hidden="true">
+      <div class="closing-shade" aria-hidden="true"></div>
+      <div class="container closing-copy reveal"><p class="eyebrow"><span></span>Tulum &middot; December 9-12, 2026</p><h2 id="closing-title">The future is not something we wait for.<br><em>It is something we build, together.</em></h2><p>Join a global community of founders, investors, creators and industry leaders.</p><div class="closing-actions"><a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Get Festival Access</a><a class="btn btn-ghost btn-community external-cta" href="https://chat.whatsapp.com/BhcaLxiYKFJ3BToTmXP9s4?mode=gi_t" target="_blank" rel="noopener noreferrer">Join The Community</a></div><small>Capacity is limited to protect the quality of the experience and the community.</small></div>
+    </section>
+
+    <section class="faq section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="faq-intro reveal"><p class="eyebrow"><span></span>FAQ</p><h2 id="faq-title">What you need to know</h2><p>For program, accessibility, travel or partnership questions, contact the festival team.</p><a href="mailto:innovation@likegroup.io">innovation@likegroup.io</a></div>
+        <div class="accordion" data-accordion>
+          <article class="faq-item reveal"><button type="button" aria-expanded="false"><span>What is Tulum Innovation Fest?</span><i></i></button><div><p>A four-day gathering combining innovation, entrepreneurship, capital, culture, wellness and destination experiences in Tulum.</p></div></article>
+          <article class="faq-item reveal"><button type="button" aria-expanded="false"><span>Who is the festival for?</span><i></i></button><div><p>Founders, investors, executives, creators, technology leaders, ecosystem builders and people interested in emerging innovation.</p></div></article>
+          <article class="faq-item reveal"><button type="button" aria-expanded="false"><span>Is it only focused on crypto or Web3?</span><i></i></button><div><p>No. The festival evolved from Tulum Crypto Fest into a broader platform covering AI, capital, future cities, digital assets, entrepreneurship, culture, climate and human connection.</p></div></article>
+          <article class="faq-item reveal"><button type="button" aria-expanded="false"><span>What is Whale Tank?</span><i></i></button><div><p>Whale Tank is the official curated founder experience and startup showcase of Tulum Innovation Fest.</p></div></article>
+          <article class="faq-item reveal"><button type="button" aria-expanded="false"><span>Does applying guarantee participation?</span><i></i></button><div><p>No. Applications are reviewed according to business quality, traction, scalability and fit with the program.</p></div></article>
+          <article class="faq-item reveal"><button type="button" aria-expanded="false"><span>Are accommodation and travel included?</span><i></i></button><div><p>Accommodation is included only in selected packages. Flights, local transportation and additional hospitality experiences are separate unless explicitly stated.</p></div></article>
+          <article class="faq-item reveal"><button type="button" aria-expanded="false"><span>Where will the festival take place?</span><i></i></button><div><p>The program will take place across selected venues in Tulum, including Ikal Arena and the Whale Tank founder venue.</p></div></article>
+          <article class="faq-item reveal"><button type="button" aria-expanded="false"><span>How can my company become a partner?</span><i></i></button><div><p>Submit the partnership form with your objectives, target audience and approximate investment range. The team will propose the most relevant format.</p></div></article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="#top">
-            <span class="brand-mark" aria-hidden="true"></span>
-            <span>TULUM INNOVATION FEST</span>
-          </a>
-          <p>
-            From the heart of the jungle to the future of humanity.
-            December 9–12, 2026 in Tulum, Mexico.
-          </p>
-        </div>
-
-        <div class="footer-links">
-          <strong>Explore</strong>
-          <a href="#experience">Experience</a>
-          <a href="#whale-tank">Whale Tank</a>
-          <a href="#program">Program</a>
-          <a href="#venues">Venues</a>
-        </div>
-
-        <div class="footer-links">
-          <strong>Contact</strong>
-          <a href="mailto:innovation@likegroup.io">innovation@likegroup.io</a>
-          <a href="#partners">Partnerships</a>
-          <a href="#early-access">Early access</a>
-          <a href="#">Privacy</a>
-        </div>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a class="brand" href="#top" aria-label="Tulum Innovation Fest home"><img class="brand-logo footer-logo" src="assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest"></a><p>From the heart of the jungle to the future of humanity.</p><strong>December 9-12, 2026<br>Tulum, Mexico</strong></div>
+      <div class="footer-links"><h3>Explore</h3><a href="#experience">Festival Experience</a><a href="#program">Program</a><a href="#tickets">Tickets</a><a href="#whale-tank">Whale Tank</a><a href="#packages">Founder Packages</a><a href="#partners">Partnerships</a><a href="#faq">FAQ</a></div>
+      <div class="footer-links"><h3>Connect</h3>
+        <a href="mailto:innovation@likegroup.io">Contact</a>
+        <a href="https://chat.whatsapp.com/BhcaLxiYKFJ3BToTmXP9s4?mode=gi_t" target="_blank" rel="noopener noreferrer">Join The Community</a>
+        <a href="https://www.instagram.com/tulumcryptofest/?hl=en" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.youtube.com/@tulumcryptofest" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a href="https://www.likegroup.io/" target="_blank" rel="noopener noreferrer">Like Group! Management</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
       </div>
-
-      <div class="footer-bottom">
-        <span>© 2026 Tulum Innovation Fest. All rights reserved.</span>
-        <span>Built for Vercel deployment.</span>
-      </div>
+      <div class="footer-cta"><p>Ready to enter the ecosystem?</p><a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">Get Festival Access</a></div>
+    </div>
+    <div class="container footer-bottom">
+      <span>&copy; 2026 Tulum Innovation Fest</span>
+      <span>General Producer: <a href="https://www.likegroup.io/" target="_blank" rel="noopener noreferrer">Like Group! Management</a></span>
+      <span>Designed for human connection</span>
     </div>
   </footer>
 
-  <script>
-    // Mobile navigation
-    const menuButton = document.querySelector(".menu-button");
-    const navLinks = document.querySelector(".nav-links");
 
-    if (menuButton && navLinks) {
-      menuButton.addEventListener("click", () => {
-        const open = menuButton.getAttribute("aria-expanded") === "true";
-        menuButton.setAttribute("aria-expanded", String(!open));
 
-        if (!open) {
-          navLinks.style.display = "flex";
-          navLinks.style.position = "absolute";
-          navLinks.style.left = "12px";
-          navLinks.style.right = "12px";
-          navLinks.style.top = "76px";
-          navLinks.style.flexDirection = "column";
-          navLinks.style.alignItems = "stretch";
-          navLinks.style.padding = "18px";
-          navLinks.style.border = "1px solid rgba(255,255,255,.12)";
-          navLinks.style.borderRadius = "18px";
-          navLinks.style.background = "rgba(5,8,7,.96)";
-          navLinks.style.backdropFilter = "blur(18px)";
-        } else {
-          navLinks.removeAttribute("style");
-        }
-      });
-    }
-
-    // Audience tabs
-    const audienceTabs = document.querySelectorAll(".audience-tab");
-    const audiencePanels = document.querySelectorAll(".audience-panel");
-
-    audienceTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const audience = tab.dataset.audience;
-
-        audienceTabs.forEach((item) => item.classList.remove("active"));
-        audiencePanels.forEach((panel) => panel.classList.remove("active"));
-
-        tab.classList.add("active");
-        document.querySelector(`[data-panel="${audience}"]`)?.classList.add("active");
-      });
-    });
-
-    // Program accordion
-    document.querySelectorAll(".program-trigger").forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        const item = trigger.closest(".program-item");
-        const isOpen = item.classList.contains("open");
-
-        document.querySelectorAll(".program-item").forEach((entry) => {
-          entry.classList.remove("open");
-          entry.querySelector(".program-trigger")?.setAttribute("aria-expanded", "false");
-          const plus = entry.querySelector(".program-plus");
-          if (plus) plus.textContent = "+";
-        });
-
-        if (!isOpen) {
-          item.classList.add("open");
-          trigger.setAttribute("aria-expanded", "true");
-          item.querySelector(".program-plus").textContent = "−";
-        }
-      });
-    });
-
-    // FAQ accordion
-    document.querySelectorAll(".faq-question").forEach((question) => {
-      question.addEventListener("click", () => {
-        const item = question.closest(".faq-item");
-        const isOpen = item.classList.toggle("open");
-        question.setAttribute("aria-expanded", String(isOpen));
-        question.querySelector("span").textContent = isOpen ? "−" : "+";
-      });
-    });
-
-    // Scroll reveal
-    const revealElements = document.querySelectorAll("[data-reveal]");
-
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.12 }
-      );
-
-      revealElements.forEach((element) => observer.observe(element));
-    } else {
-      revealElements.forEach((element) => element.classList.add("visible"));
-    }
-
-    // Demo form behavior. Replace with a real endpoint before launch.
-    const form = document.querySelector("#interest-form");
-    const formNote = document.querySelector("#form-note");
-
-    form?.addEventListener("submit", (event) => {
-      if (form.getAttribute("action") === "#") {
-        event.preventDefault();
-        formNote.textContent =
-          "Demo mode: connect this form to HubSpot, Formspree or a Vercel serverless function before launch.";
-        formNote.style.color = "#ff8a3d";
-      }
-    });
-  </script>
+  <dialog class="modal" id="partner-modal" aria-labelledby="partner-form-title">
+    <div class="modal-shell">
+      <button class="modal-close" type="button" data-modal-close aria-label="Close form">&times;</button>
+      <div class="modal-head"><p class="eyebrow"><span></span>Partnerships</p><h2 id="partner-form-title">Start a partnership conversation</h2><p>We qualify partnership interest by objective and investment range before proposing formats.</p></div>
+      <form class="lead-form" data-demo-form>
+        <div class="field-row"><label>Name<input name="name" autocomplete="name" required></label><label>Role<input name="role" autocomplete="organization-title" required></label></div>
+        <label>Company<input name="company" autocomplete="organization" required></label>
+        <label>Email<input type="email" name="email" autocomplete="email" required></label>
+        <label>Package of interest<select name="sponsor_package" data-sponsor-select required>
+          <option value="">Select a package</option>
+          <option value="Main Title Partner">Main Title Partner — US$100,000</option>
+          <option value="Alpha Partner">Alpha Partner — US$40,000</option>
+          <option value="Core Partner">Core Partner — US$30,000</option>
+          <option value="Community Partner">Community Partner — US$20,000</option>
+          <option value="Access Partner">Access Partner — US$15,000</option>
+          <option value="Living Room Sponsor">Living Room Sponsor — US$1,500</option>
+          <option value="Charging Station Partner">Charging Station Partner — US$6,000</option>
+          <option value="Coffee Station Partner">Coffee Station Partner — US$8,000</option>
+          <option value="WiFi Partner">WiFi Partner — US$10,000</option>
+          <option value="App Partner">App Partner — US$10,000</option>
+          <option value="Custom Partnership">Custom Partnership</option>
+        </select></label>
+        <label>Partnership objective<textarea name="objective" rows="3" placeholder="What business or audience outcome should the partnership create?" required></textarea></label>
+        <div class="field-row"><label>Investment range<select name="investment" required><option value="">Select range</option><option>Under USD 10K</option><option>USD 10K-20K</option><option>USD 20K-40K</option><option>USD 40K-100K</option><option>USD 100K+</option><option>In-kind / strategic</option></select></label><label>Area of interest<select name="area" required><option value="">Select area</option><option>Festival Partner</option><option>Whale Tank Partner</option><option>Experience Partner</option><option>Custom Partnership</option></select></label></div>
+        <label class="consent"><input type="checkbox" required><span>I agree to be contacted about partnership opportunities.</span></label>
+        <button class="btn btn-primary btn-full" type="submit">Start a Partnership Conversation</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </dialog>
 </body>
 </html>
