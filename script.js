@@ -9,6 +9,9 @@
   "Partners": "Alianzas",
   "FAQ": "Preguntas",
   "Apply to Whale Tank": "Aplicar a Whale Tank",
+  "Apply to be a Speaker": "Aplicar como speaker",
+  "Apply to Volunteer": "Aplicar como voluntario",
+  "Festival participation applications": "Aplicaciones para participar en el festival",
   "Get Festival Access": "Obtener acceso al festival",
   "December 9-12, 2026 · Tulum, Mexico": "9–12 de diciembre de 2026 · Tulum, México",
   "From the heart of the jungle": "Desde el corazón de la selva",
@@ -23,7 +26,7 @@
   "Connection": "Conexión",
   "Enter the ecosystem": "Entra al ecosistema",
   "Built in Tulum": "Creado en Tulum",
-  "Connected to the world": "Conectado con el mundo",
+  "Connected to the world": "Conectado al mundo",
   "Festival credibility": "Credibilidad del festival",
   "Previous Editions": "Ediciones anteriores",
   "A growing community built since 2022.": "Una comunidad en crecimiento desde 2022.",
@@ -459,6 +462,20 @@
   };
 
   const translatableAttributes = ["aria-label", "alt", "placeholder", "title"];
+
+  const positioningOffers = document.querySelector('.positioning-offers');
+  const positioningGrid = positioningOffers?.querySelector('.positioning-offers-grid');
+  if (positioningOffers && positioningGrid) {
+    const participationActions = document.createElement('div');
+    participationActions.className = 'whale-actions participation-actions reveal';
+    participationActions.setAttribute('aria-label', 'Festival participation applications');
+    participationActions.innerHTML = `
+      <a class="btn btn-primary external-cta" href="https://minimalistagency.typeform.com/to/NR6Ctoz4" rel="noopener noreferrer" target="_blank">Apply to be a Speaker</a>
+      <a class="btn btn-ghost external-cta" href="https://minimalistagency.typeform.com/to/pUUaOm1w?typeform-source=tulumcryptofest.io" rel="noopener noreferrer" target="_blank">Apply to Volunteer</a>
+    `;
+    positioningOffers.insertBefore(participationActions, positioningGrid);
+  }
+
   const textRecords = [];
   const attributeRecords = [];
 
