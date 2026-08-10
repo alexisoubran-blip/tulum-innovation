@@ -7,6 +7,7 @@
   "Program": "Programa",
   "Venues": "Sedes",
   "Partners": "Alianzas",
+  "Participate": "Participar",
   "FAQ": "Preguntas",
   "Apply to Whale Tank": "Aplicar a Whale Tank",
   "Apply to be a Speaker": "Aplicar como speaker",
@@ -463,9 +464,43 @@
 
   const translatableAttributes = ["aria-label", "alt", "placeholder", "title"];
 
+  const participationStyle = document.createElement('style');
+  participationStyle.textContent = `
+    #participate { scroll-margin-top: calc(var(--header) + 28px); }
+    .positioning-offers-head { margin-bottom: clamp(2.75rem, 4vw, 4.25rem); }
+    .participation-actions {
+      gap: 1rem;
+      margin: 0 0 clamp(3.25rem, 5vw, 5.5rem);
+    }
+    .participation-actions .btn {
+      min-height: 58px;
+      padding-inline: 1.8rem;
+    }
+    @media (min-width: 1221px) {
+      .site-nav { gap: clamp(.8rem, 1.15vw, 1.6rem); }
+    }
+    @media (max-width: 620px) {
+      .positioning-offers-head { margin-bottom: 2rem; }
+      .participation-actions { margin-bottom: 2.75rem; gap: .75rem; }
+      .participation-actions .btn { min-height: 54px; padding-inline: 1.25rem; }
+    }
+  `;
+  document.head.appendChild(participationStyle);
+
   const positioningOffers = document.querySelector('.positioning-offers');
   const positioningGrid = positioningOffers?.querySelector('.positioning-offers-grid');
   if (positioningOffers && positioningGrid) {
+    positioningOffers.id = 'participate';
+
+    const primaryNav = document.querySelector('[data-nav]');
+    if (primaryNav && !primaryNav.querySelector('a[href="#participate"]')) {
+      const participateLink = document.createElement('a');
+      participateLink.href = '#participate';
+      participateLink.textContent = 'Participate';
+      const partnersLink = primaryNav.querySelector('a[href="#partners"]');
+      primaryNav.insertBefore(participateLink, partnersLink || primaryNav.querySelector('[data-lang-toggle]'));
+    }
+
     const participationActions = document.createElement('div');
     participationActions.className = 'whale-actions participation-actions reveal';
     participationActions.setAttribute('aria-label', 'Festival participation applications');
