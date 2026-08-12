@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/whale-tank",
+      "destination": "/whale-tank/",
+      "permanent": true
+    }
+  ]
+}
