@@ -3,6 +3,12 @@
   const header = document.querySelector('[data-header]');
   const langToggle = document.querySelector('[data-lang-toggle]');
   const translatable = [...document.querySelectorAll('[data-en][data-es]')];
+  const heroImage = document.querySelector('.wt-hero-media img');
+
+  if (heroImage) {
+    heroImage.src = '../assets/whale-tank-hero.webp';
+    heroImage.removeAttribute('srcset');
+  }
 
   const responsiveOverrides = `
     .wt-page h1,
@@ -34,6 +40,18 @@
       color: #E97A43;
     }
 
+    .wt-hero-grid {
+      padding-top: calc(var(--header) + 2.25rem) !important;
+    }
+
+    .wt-hero-media img {
+      object-position: 52% 50% !important;
+    }
+
+    .wt-rings {
+      display: none !important;
+    }
+
     @media (max-width: 640px) {
       .wt-page .container {
         width: min(90vw, calc(100% - 2rem));
@@ -61,8 +79,12 @@
 
       .wt-hero-grid {
         gap: 2rem;
-        padding-top: 7rem;
+        padding-top: 5.25rem !important;
         padding-bottom: 4.25rem;
+      }
+
+      .wt-hero-media img {
+        object-position: 56% 50% !important;
       }
 
       .wt-hero h1 {
