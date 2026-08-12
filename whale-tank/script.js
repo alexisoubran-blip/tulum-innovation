@@ -153,6 +153,7 @@
       .wt-signal,
       .wt-program,
       .wt-room,
+      .wt-mentors,
       .wt-fit,
       .wt-selection,
       .wt-context,
@@ -164,6 +165,7 @@
       .wt-signal-head h2,
       .wt-section-head h2,
       .wt-room-copy h2,
+      .wt-mentors-head h2,
       .wt-fit-copy h2,
       .wt-selection-head h2,
       .wt-context-copy h2,
@@ -191,6 +193,7 @@
       .wt-signal-item p,
       .wt-section-head > p:last-child,
       .wt-room-copy > p:last-child,
+      .wt-mentors-head > p:last-child,
       .wt-fit-copy > p:not(.eyebrow),
       .wt-context-copy > p:not(.eyebrow),
       .wt-faq-intro > p:not(.eyebrow) {
