@@ -8,4 +8,4 @@ await cp("script.js", "dist/script.js");
 await cp("assets", "dist/assets", { recursive: true });
 await cp("whale-tank", "dist/whale-tank", { recursive: true });
 await cp("alexis-soubran-tif-cmo", "dist/alexis-soubran-tif-cmo", { recursive: true });
-
+await cp("alexis-soubran-TIF-CMO", "dist/alexis-soubran-TIF-CMO", { recursive: true });
