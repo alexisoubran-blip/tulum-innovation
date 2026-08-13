@@ -94,6 +94,7 @@
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 /* Home-aligned theme override — profile only */
+.profile-glow{right:0;width:min(60vw,100%);height:auto;aspect-ratio:1}
 .profile-page{background:var(--black);color:var(--white)}
 .profile-container{width:min(88vw,1720px)}
 .profile-page .section{padding:clamp(6rem,9vw,11rem) 0}
