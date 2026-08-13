@@ -117,7 +117,7 @@
 .role-grid article:hover{background:rgba(209,68,20,.07);transform:translateY(-4px)}
 .role-grid p{line-height:1.7}
 .profile-mandate{background:radial-gradient(circle at 82% 72%,rgba(209,68,20,.12),transparent 27%),linear-gradient(125deg,var(--jungle),var(--teal) 55%,var(--black));border-top:1px solid var(--line)}
-.profile-mandate::before{content:"";position:absolute;inset:-20% -10%;background:repeating-radial-gradient(circle at 85% 75%,transparent 0 115px,rgba(209,68,20,.055) 116px 117px)}
+.profile-mandate::before{content:"";position:absolute;inset:-20% 0;background:repeating-radial-gradient(circle at 85% 75%,transparent 0 115px,rgba(209,68,20,.055) 116px 117px)}
 .mandate-grid{position:relative}
 .mandate-copy>p{line-height:1.75}
 .profile-background{background:radial-gradient(circle at 12% 30%,rgba(5,46,36,.55),transparent 32%),linear-gradient(180deg,var(--black-soft),var(--black));color:var(--white);border-top:1px solid var(--line)}
@@ -132,7 +132,7 @@
 .profile-faq{background:linear-gradient(180deg,var(--black),var(--black-soft));border-top:1px solid var(--line)}
 .profile-faq-list summary:hover{color:var(--ember)}
 .profile-close{background:radial-gradient(circle at 76% 50%,rgba(209,68,20,.2),transparent 28%),linear-gradient(120deg,var(--teal),var(--black));border-top:1px solid var(--line)}
-.profile-close::before{content:"";position:absolute;right:-17vw;top:-22vw;width:62vw;aspect-ratio:1;border-radius:50%;border:1px solid rgba(209,68,20,.12);box-shadow:0 0 0 90px rgba(209,68,20,.025),0 0 0 180px rgba(209,68,20,.02)}
+.profile-close::before{content:"";position:absolute;right:-17vw;top:-22vw;width:min(62vw,100%);aspect-ratio:1;border-radius:50%;border:1px solid rgba(209,68,20,.12);box-shadow:0 0 0 90px rgba(209,68,20,.025),0 0 0 180px rgba(209,68,20,.02)}
 .profile-footer{background:var(--black)}
 @media(max-width:1100px){.profile-hero-grid{grid-template-columns:minmax(0,1fr) minmax(360px,.82fr)}}
 @media(max-width:720px){.profile-page .section{padding:5rem 0}.profile-hero-grid{width:100%;grid-template-columns:1fr;gap:2rem}.profile-copy h1{font-size:clamp(3.5rem,18vw,5.6rem)}.profile-copy h1 em{font-size:.76em}.profile-portrait{border:1px solid var(--line)}}
