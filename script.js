@@ -33,6 +33,41 @@
   "here.": "aquí.",
   "Four days where ideas, capital, culture and connection move beyond the stage and into the jungle.": "Cuatro días donde las ideas, el capital, la cultura y las conexiones salen del escenario y entran en la selva.",
   "Tulum Innovation Fest experience video": "Video de la experiencia Tulum Innovation Fest",
+  "Inside the experience": "Dentro de la experiencia",
+  "This is how the festival": "Así se vive el festival",
+  "feels.": "aquí.",
+  "Ideas move from the stage into shared tables, music, art, nature and the moments that stay with you.": "Las ideas salen del escenario y llegan a mesas compartidas, música, arte, naturaleza y momentos que permanecen contigo.",
+  "Festival photo gallery": "Galería de fotos del festival",
+  "Night culture": "Cultura nocturna",
+  "Place": "Lugar",
+  "Ideas": "Ideas",
+  "Art": "Arte",
+  "Shared tables": "Mesas compartidas",
+  "Live music": "Música en vivo",
+  "Nature": "Naturaleza",
+  "Wellness": "Bienestar",
+  "Open night culture photo": "Abrir foto de cultura nocturna",
+  "Open community photo": "Abrir foto de comunidad",
+  "Open venue photo": "Abrir foto del venue",
+  "Open ideas photo": "Abrir foto de ideas",
+  "Open live art photo": "Abrir foto de arte en vivo",
+  "Open shared table photo": "Abrir foto de mesa compartida",
+  "Open live music photo": "Abrir foto de música en vivo",
+  "Open nature photo": "Abrir foto de naturaleza",
+  "Open wellness photo": "Abrir foto de bienestar",
+  "DJ performing during the festival night program": "DJ durante el programa nocturno del festival",
+  "Festival attendees sharing a community moment": "Asistentes compartiendo un momento de comunidad",
+  "Jungle venue illuminated at night beside the water": "Venue en la selva iluminado de noche junto al agua",
+  "Speaker presenting on an open-air jungle stage": "Speaker presentando en un escenario abierto en la selva",
+  "Live body art performance at the festival": "Performance de arte corporal en vivo durante el festival",
+  "Festival attendee and dog gathered around a shared table": "Asistente y su perro reunidos alrededor de una mesa compartida",
+  "Violinist performing live at the festival": "Violinista presentándose en vivo durante el festival",
+  "Festival attendees swimming together in a cenote": "Asistentes nadando juntos en un cenote",
+  "Attendee participating in an ice bath wellness experience": "Asistente participando en una experiencia de baño de hielo",
+  "Festival gallery viewer": "Visor de la galería del festival",
+  "Close gallery": "Cerrar galería",
+  "Previous photo": "Foto anterior",
+  "Next photo": "Foto siguiente",
   "Built in Tulum": "Creado en Tulum",
   "Connected to the world": "Conectado al mundo",
   "Festival credibility": "Credibilidad del festival",
@@ -816,6 +851,55 @@
       button.setAttribute('aria-expanded', String(!isOpen));
     });
   });
+
+  const galleryItems = [...document.querySelectorAll('[data-gallery-index]')];
+  const galleryLightbox = document.querySelector('[data-gallery-lightbox]');
+  const galleryImage = galleryLightbox?.querySelector('[data-gallery-image]');
+  const galleryCaption = galleryLightbox?.querySelector('[data-gallery-caption]');
+  const galleryCount = galleryLightbox?.querySelector('[data-gallery-count]');
+  let galleryIndex = 0;
+  let galleryTouchStartX = 0;
+
+  const renderGalleryImage = (index) => {
+    if (!galleryLightbox || !galleryImage || !galleryItems.length) return;
+
+    galleryIndex = (index + galleryItems.length) % galleryItems.length;
+    const sourceImage = galleryItems[galleryIndex].querySelector('img');
+    const sourceCaption = galleryItems[galleryIndex].querySelector('span');
+
+    galleryImage.src = sourceImage?.currentSrc || sourceImage?.src || '';
+    galleryImage.alt = sourceImage?.alt || '';
+    if (galleryCaption) galleryCaption.textContent = sourceCaption?.textContent || '';
+    if (galleryCount) galleryCount.textContent = `${galleryIndex + 1} / ${galleryItems.length}`;
+  };
+
+  galleryItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      renderGalleryImage(Number(item.dataset.galleryIndex));
+      galleryLightbox?.showModal();
+      document.body.classList.add('modal-open');
+    });
+  });
+
+  galleryLightbox?.querySelector('[data-gallery-close]')?.addEventListener('click', () => galleryLightbox.close());
+  galleryLightbox?.querySelector('[data-gallery-prev]')?.addEventListener('click', () => renderGalleryImage(galleryIndex - 1));
+  galleryLightbox?.querySelector('[data-gallery-next]')?.addEventListener('click', () => renderGalleryImage(galleryIndex + 1));
+  galleryLightbox?.addEventListener('click', (event) => {
+    if (event.target === galleryLightbox) galleryLightbox.close();
+  });
+  galleryLightbox?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') renderGalleryImage(galleryIndex - 1);
+    if (event.key === 'ArrowRight') renderGalleryImage(galleryIndex + 1);
+  });
+  galleryLightbox?.addEventListener('touchstart', (event) => {
+    galleryTouchStartX = event.changedTouches[0]?.clientX || 0;
+  }, { passive: true });
+  galleryLightbox?.addEventListener('touchend', (event) => {
+    const distance = (event.changedTouches[0]?.clientX || 0) - galleryTouchStartX;
+    if (Math.abs(distance) < 50) return;
+    renderGalleryImage(galleryIndex + (distance < 0 ? 1 : -1));
+  }, { passive: true });
+  galleryLightbox?.addEventListener('close', () => document.body.classList.remove('modal-open'));
 
   const dialogs = [...document.querySelectorAll('dialog.modal')];
 
