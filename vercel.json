@@ -1,0 +1,15 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/alexis-soubran-TIF-CMO",
+      "destination": "/alexis-soubran-tif-cmo/index.html"
+    },
+    {
+      "source": "/alexis-soubran-tif-cmo",
+      "destination": "/alexis-soubran-tif-cmo/index.html"
+    }
+  ]
+}
+
