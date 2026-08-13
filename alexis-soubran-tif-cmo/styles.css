@@ -93,3 +93,46 @@
   .profile-footer p:nth-child(2){text-align:left}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+/* Home-aligned theme override — profile only */
+.profile-page{background:var(--black);color:var(--white)}
+.profile-container{width:min(88vw,1720px)}
+.profile-page .section{padding:clamp(6rem,9vw,11rem) 0}
+.profile-header{padding:1rem 3vw;border-color:var(--line);background:linear-gradient(180deg,rgba(0,8,11,.88),transparent)}
+.profile-header nav a{font-size:.71rem;letter-spacing:.12em;color:rgba(242,241,234,.74)}
+.profile-hero{background:radial-gradient(circle at 77% 46%,rgba(209,68,20,.13),transparent 24%),radial-gradient(circle at 28% 78%,rgba(5,46,36,.7),transparent 42%),linear-gradient(125deg,var(--black),var(--teal) 62%,var(--black))}
+.profile-hero::before{inset:-10%;background:repeating-radial-gradient(circle at 78% 46%,transparent 0 124px,rgba(209,68,20,.065) 125px 126px);opacity:.7}
+.profile-hero::after{content:"";position:absolute;inset:auto 0 0;height:25%;background:linear-gradient(180deg,transparent,var(--black));pointer-events:none}
+.profile-hero-grid{width:min(88vw,1720px);grid-template-columns:minmax(0,.93fr) minmax(420px,.77fr);gap:clamp(3rem,7vw,10rem)}
+.profile-copy h1{font-size:clamp(4rem,7.1vw,8.7rem);letter-spacing:-.06em}
+.profile-copy h1 em{display:block;font-size:.78em;font-style:normal;text-transform:none}
+.profile-lead{line-height:1.72;color:rgba(242,241,234,.7)}
+.profile-portrait{border:1px solid var(--line);background:linear-gradient(180deg,rgba(4,42,38,.4),var(--black))}
+.section-number{display:flex;align-items:center;gap:.75rem;color:var(--ember)}
+.section-number::before{content:"";width:42px;height:1px;background:var(--ember)}
+.profile-answer{background:radial-gradient(circle at 87% 26%,rgba(209,68,20,.09),transparent 28%),linear-gradient(180deg,var(--black-soft),var(--teal));color:var(--white);border-top:1px solid var(--line)}
+.answer-grid p{color:var(--muted);line-height:1.72}
+.answer-grid .answer-primary{color:var(--white)}
+.profile-role{background:linear-gradient(180deg,var(--teal),var(--black));border-top:1px solid var(--line)}
+.role-grid article{background:rgba(3,28,32,.18);transition:background .25s ease,transform .25s ease}
+.role-grid article:hover{background:rgba(209,68,20,.07);transform:translateY(-4px)}
+.role-grid p{line-height:1.7}
+.profile-mandate{background:radial-gradient(circle at 82% 72%,rgba(209,68,20,.12),transparent 27%),linear-gradient(125deg,var(--jungle),var(--teal) 55%,var(--black));border-top:1px solid var(--line)}
+.profile-mandate::before{content:"";position:absolute;inset:-20% -10%;background:repeating-radial-gradient(circle at 85% 75%,transparent 0 115px,rgba(209,68,20,.055) 116px 117px)}
+.mandate-grid{position:relative}
+.mandate-copy>p{line-height:1.75}
+.profile-background{background:radial-gradient(circle at 12% 30%,rgba(5,46,36,.55),transparent 32%),linear-gradient(180deg,var(--black-soft),var(--black));color:var(--white);border-top:1px solid var(--line)}
+.background-grid>div>p{color:var(--muted);line-height:1.72}
+.background-grid dl,.background-grid dl div{border-color:var(--line)}
+.background-grid dt{color:var(--muted)}
+.background-links{border-color:var(--line)}
+.background-links a{border-color:var(--line);background:rgba(3,28,32,.16);transition:background .25s,color .25s,transform .25s}
+.background-links a:hover{background:var(--orange);color:var(--white);transform:translateY(-4px)}
+.background-links span{color:var(--muted)}
+.background-links a:hover span{color:rgba(242,241,234,.72)}
+.profile-faq{background:linear-gradient(180deg,var(--black),var(--black-soft));border-top:1px solid var(--line)}
+.profile-faq-list summary:hover{color:var(--ember)}
+.profile-close{background:radial-gradient(circle at 76% 50%,rgba(209,68,20,.2),transparent 28%),linear-gradient(120deg,var(--teal),var(--black));border-top:1px solid var(--line)}
+.profile-close::before{content:"";position:absolute;right:-17vw;top:-22vw;width:62vw;aspect-ratio:1;border-radius:50%;border:1px solid rgba(209,68,20,.12);box-shadow:0 0 0 90px rgba(209,68,20,.025),0 0 0 180px rgba(209,68,20,.02)}
+.profile-footer{background:var(--black)}
+@media(max-width:1100px){.profile-hero-grid{grid-template-columns:minmax(0,1fr) minmax(360px,.82fr)}}
+@media(max-width:720px){.profile-page .section{padding:5rem 0}.profile-hero-grid{width:100%;grid-template-columns:1fr;gap:2rem}.profile-copy h1{font-size:clamp(3.5rem,18vw,5.6rem)}.profile-copy h1 em{font-size:.76em}.profile-portrait{border:1px solid var(--line)}}
