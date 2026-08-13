@@ -547,8 +547,8 @@
     participationActions.className = 'whale-actions participation-actions reveal';
     participationActions.setAttribute('aria-label', 'Festival participation applications');
     participationActions.innerHTML = `
-      <a class="btn btn-primary external-cta" href="https://minimalistagency.typeform.com/to/NR6Ctoz4" rel="noopener noreferrer" target="_blank">Apply to be a Speaker</a>
-      <a class="btn btn-ghost external-cta" href="https://minimalistagency.typeform.com/to/pUUaOm1w?typeform-source=tulumcryptofest.io" rel="noopener noreferrer" target="_blank">Apply to Volunteer</a>
+      <a class="btn btn-primary external-cta" href="https://form.typeform.com/to/NR6Ctoz4" rel="noopener noreferrer" target="_blank">Apply to be a Speaker</a>
+      <a class="btn btn-ghost external-cta" href="https://form.typeform.com/to/pUUaOm1w" rel="noopener noreferrer" target="_blank">Apply to Volunteer</a>
     `;
     positioningOffers.insertBefore(participationActions, positioningGrid);
   }
