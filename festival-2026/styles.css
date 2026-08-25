@@ -306,10 +306,10 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
   .announcement strong { white-space: nowrap; }
   .site-header { padding-inline: 16px; }
   .header-cta { display: none; }
-  .hero { min-height: 820px; }
+  .hero { min-height: auto; align-items: flex-start; }
   .hero-media img { object-position: 56% 50%; }
   .hero-wash { background: linear-gradient(0deg, rgba(2,8,8,.97) 0%, rgba(2,8,8,.72) 58%, rgba(2,8,8,.18) 100%); }
-  .hero-layout { padding: 100px 0 75px; }
+  .hero-layout { padding: 64px 0 104px; }
   .hero h1 { font-size: clamp(3.55rem, 17vw, 5.2rem); line-height: .88; }
   .hero-lead { margin-top: 24px; font-size: .9rem; line-height: 1.58; }
   .hero-note { font-size: .72rem; line-height: 1.5; }
