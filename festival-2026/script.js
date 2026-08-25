@@ -4,6 +4,8 @@
   const navToggle = document.querySelector('[data-nav-toggle]');
   const nav = document.querySelector('[data-nav]');
   const languageToggle = document.querySelector('[data-lang-toggle]');
+  const hero = document.querySelector('.hero');
+  const mobileBar = document.querySelector('[data-mobile-bar]');
   const translatable = [...document.querySelectorAll('[data-en][data-es]')];
 
   const languageFromUrl = new URLSearchParams(window.location.search).get('lang');
@@ -95,11 +97,18 @@
 
   const setHeaderState = () => {
     header?.classList.toggle('is-scrolled', window.scrollY > 24);
+    const mobileBarThreshold = hero
+      ? hero.offsetTop + Math.min(hero.offsetHeight * .55, 460)
+      : 360;
+    mobileBar?.classList.toggle('is-visible', window.scrollY > mobileBarThreshold);
     updateMobileNavPosition();
   };
   setHeaderState();
   window.addEventListener('scroll', setHeaderState, { passive: true });
-  window.addEventListener('resize', syncNavAccessibility, { passive: true });
+  window.addEventListener('resize', () => {
+    syncNavAccessibility();
+    setHeaderState();
+  }, { passive: true });
   mobileNavQuery.addEventListener?.('change', syncNavAccessibility);
   syncNavAccessibility();
 
