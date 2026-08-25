@@ -50,20 +50,58 @@
   const closeNav = () => {
     document.body.classList.remove('nav-open');
     navToggle?.setAttribute('aria-expanded', 'false');
+    if (mobileNavQuery.matches && nav) {
+      nav.inert = true;
+      nav.setAttribute('aria-hidden', 'true');
+    }
+  };
+
+  const mobileNavQuery = window.matchMedia('(max-width: 820px)');
+  const updateMobileNavPosition = () => {
+    if (!header || !mobileNavQuery.matches) return;
+    const headerBottom = Math.max(0, Math.round(header.getBoundingClientRect().bottom));
+    root.style.setProperty('--mobile-nav-top', `${headerBottom}px`);
+  };
+
+  const syncNavAccessibility = () => {
+    if (!nav) return;
+    if (mobileNavQuery.matches) {
+      const isOpen = document.body.classList.contains('nav-open');
+      nav.inert = !isOpen;
+      nav.setAttribute('aria-hidden', String(!isOpen));
+      updateMobileNavPosition();
+    } else {
+      document.body.classList.remove('nav-open');
+      nav.inert = false;
+      nav.removeAttribute('aria-hidden');
+      navToggle?.setAttribute('aria-expanded', 'false');
+      root.style.removeProperty('--mobile-nav-top');
+    }
   };
 
   navToggle?.addEventListener('click', () => {
     const isOpen = document.body.classList.toggle('nav-open');
     navToggle.setAttribute('aria-expanded', String(isOpen));
+    if (nav) {
+      nav.inert = !isOpen;
+      nav.setAttribute('aria-hidden', String(!isOpen));
+    }
+    updateMobileNavPosition();
   });
   nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeNav();
   });
 
-  const setHeaderState = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+  const setHeaderState = () => {
+    header?.classList.toggle('is-scrolled', window.scrollY > 24);
+    updateMobileNavPosition();
+  };
   setHeaderState();
   window.addEventListener('scroll', setHeaderState, { passive: true });
+  window.addEventListener('resize', syncNavAccessibility, { passive: true });
+  mobileNavQuery.addEventListener?.('change', syncNavAccessibility);
+  syncNavAccessibility();
 
   const countdown = document.querySelector('[data-countdown]');
   if (countdown) {

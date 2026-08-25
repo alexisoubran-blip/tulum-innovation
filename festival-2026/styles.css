@@ -271,8 +271,8 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
   .nav-open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
   .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-  .site-nav { position: fixed; z-index: 90; inset: calc(34px + var(--header)) 0 auto; min-height: calc(100svh - 102px); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; padding: 7vw; background: var(--ink); transform: translateX(100%); transition: transform .3s ease; }
-  .nav-open .site-nav { transform: translateX(0); }
+  .site-nav { position: fixed; z-index: 90; top: var(--mobile-nav-top, 102px); right: 0; bottom: 0; left: 0; min-height: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; padding: 7vw; background: var(--ink); visibility: hidden; pointer-events: none; transform: translateX(100%); transition: transform .3s ease, visibility 0s linear .3s; }
+  .nav-open .site-nav { visibility: visible; pointer-events: auto; transform: translateX(0); transition: transform .3s ease, visibility 0s; }
   .site-nav a { width: 100%; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,.18); font-family: var(--display); font-size: 2.25rem; font-weight: 400; letter-spacing: -.02em; text-transform: none; }
   .site-nav a::after { display: none; }
   .lang-toggle { margin-top: 28px; }
@@ -302,7 +302,7 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
 @media (max-width: 620px) {
   :root { --container: calc(100vw - 32px); }
   body { padding-bottom: 70px; }
-  .announcement { min-height: 32px; padding-inline: 16px; font-size: .55rem; }
+  .announcement { min-height: 32px; padding-inline: 16px; font-size: .7rem; letter-spacing: .055em; }
   .announcement strong { white-space: nowrap; }
   .site-header { padding-inline: 16px; }
   .header-cta { display: none; }
@@ -312,8 +312,10 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
   .hero-layout { padding: 100px 0 75px; }
   .hero h1 { font-size: clamp(3.55rem, 17vw, 5.2rem); line-height: .88; }
   .hero-lead { margin-top: 24px; font-size: .9rem; line-height: 1.58; }
+  .hero-note { font-size: .72rem; line-height: 1.5; }
   .hero-actions { display: grid; }
   .hero-actions .btn { width: 100%; }
+  .btn { font-size: .72rem; }
   .countdown-card { display: none; }
   .scroll-cue { display: none; }
   .proof { padding: 0; }
@@ -322,7 +324,7 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
   .proof article:nth-child(2) { border-right: 0; }
   .proof article:nth-last-child(-n+2) { border-bottom: 0; }
   .proof strong { font-size: 2.2rem; text-align: center; }
-  .proof p { text-align: center; }
+  .proof p { font-size: .7rem; line-height: 1.4; text-align: center; }
   .section { padding-block: 74px; }
   .manifesto-card { width: 100%; }
   .manifesto-visual { min-height: 540px; }
@@ -331,8 +333,8 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
   .manifesto-copy h2 { font-size: 3.25rem; }
   .manifesto-copy dl div { grid-template-columns: 55px 1fr; }
   .film h2, .section-intro h2, .program-sticky h2, .people h2, .access h2, .faq-intro h2 { font-size: clamp(3.25rem, 15vw, 4.6rem); }
-  .film-frame { width: 100%; aspect-ratio: 9 / 12; }
-  .film-frame iframe { transform: scale(1.9); }
+  .film-frame { width: 100%; aspect-ratio: 16 / 9; }
+  .film-frame iframe { transform: none; }
   .path-card { min-height: 420px; padding: 27px; }
   .path-label { margin-top: 40px; }
   .path-card h3 { font-size: 2.8rem; }
@@ -359,7 +361,7 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
   .footer-bottom { display: grid; gap: 8px; }
   .mobile-bar { position: fixed; z-index: 150; right: 0; bottom: 0; left: 0; height: 70px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 14px; padding: 10px 12px 10px 18px; border-top: 1px solid rgba(255,255,255,.17); background: rgba(7,16,15,.97); color: var(--white); backdrop-filter: blur(12px); }
   .mobile-bar div { display: grid; gap: 2px; }
-  .mobile-bar small { color: var(--cyan); font-size: .52rem; letter-spacing: .08em; text-transform: uppercase; }
+  .mobile-bar small { color: var(--cyan); font-size: .68rem; letter-spacing: .065em; text-transform: uppercase; }
   .mobile-bar strong { font-family: var(--display); font-size: 1.15rem; font-weight: 400; }
-  .mobile-bar > a { min-width: 118px; padding: 14px 16px; background: var(--coral); color: var(--ink); font-size: .58rem; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+  .mobile-bar > a { min-width: 118px; padding: 14px 16px; background: var(--coral); color: var(--ink); font-size: .7rem; font-weight: 700; letter-spacing: .065em; text-align: center; text-transform: uppercase; }
 }
