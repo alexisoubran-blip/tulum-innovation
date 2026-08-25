@@ -10,7 +10,7 @@
   --cyan: #51ded1;
   --lime: #d8ff78;
   --line: rgba(7, 16, 15, .17);
-  --display: "Bodoni Moda", Georgia, serif;
+  --display: "Bruno Ace", "Sora", system-ui, sans-serif;
   --tech: "Bruno Ace", sans-serif;
   --sans: "Sora", Arial, sans-serif;
   --header: 76px;
@@ -63,8 +63,8 @@ button { color: inherit; }
 .eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 22px; font-size: .65rem; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; }
 .eyebrow > span { width: 27px; height: 1px; background: var(--coral); }
 .eyebrow b { font-weight: 500; }
-.hero h1, .section h2, .closing h2 { margin: 0; font-family: var(--display); font-size: clamp(4.2rem, 8.2vw, 8.4rem); font-weight: 400; line-height: .82; letter-spacing: -.055em; }
-.hero h1 em, .section h2 em, .closing h2 em { color: var(--coral); font-style: italic; font-weight: 400; }
+.hero h1, .section h2, .closing h2 { margin: 0; font-family: var(--display); font-size: clamp(3.55rem, 5.45vw, 6.8rem); font-weight: 400; line-height: .94; letter-spacing: -.025em; text-transform: uppercase; }
+.hero h1 em, .section h2 em, .closing h2 em { color: var(--coral); font-style: normal; font-weight: 400; }
 .hero-lead { max-width: 680px; margin: 34px 0 0; font-size: clamp(1rem, 1.4vw, 1.22rem); font-weight: 300; line-height: 1.65; }
 .hero-actions, .closing-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
 .btn { min-height: 56px; display: inline-flex; align-items: center; justify-content: center; padding: 16px 25px; border: 1px solid transparent; font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; transition: background .2s, color .2s, border .2s, transform .2s; }
@@ -310,7 +310,7 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
   .hero-media img { object-position: 56% 50%; }
   .hero-wash { background: linear-gradient(0deg, rgba(2,8,8,.97) 0%, rgba(2,8,8,.72) 58%, rgba(2,8,8,.18) 100%); }
   .hero-layout { padding: 64px 0 104px; }
-  .hero h1 { font-size: clamp(3.55rem, 17vw, 5.2rem); line-height: .88; }
+  .hero h1 { max-width: 96%; font-size: clamp(2.45rem, 10.5vw, 3.35rem); line-height: .94; letter-spacing: -.02em; }
   .hero-lead { margin-top: 24px; font-size: .9rem; line-height: 1.58; }
   .hero-note { font-size: .72rem; line-height: 1.5; }
   .hero-actions { display: grid; }
@@ -325,36 +325,39 @@ footer { padding: 70px 0 28px; background: var(--ink); color: var(--white); }
   .proof article:nth-last-child(-n+2) { border-bottom: 0; }
   .proof strong { font-size: 2.2rem; text-align: center; }
   .proof p { font-size: .7rem; line-height: 1.4; text-align: center; }
-  .section { padding-block: 74px; }
+  .section { padding-block: 60px; }
+  .manifesto { padding-bottom: 0; }
   .manifesto-card { width: 100%; }
   .manifesto-visual { min-height: 540px; }
-  .manifesto-visual > span { right: 22px; bottom: 24px; left: 22px; font-size: 2.7rem; }
-  .manifesto-copy { min-height: 0; padding: 52px 24px; }
-  .manifesto-copy h2 { font-size: 3.25rem; }
+  .manifesto-visual > span { right: 22px; bottom: 24px; left: 22px; font-size: 2.2rem; }
+  .manifesto-copy { min-height: 0; padding: 44px 24px; }
+  .manifesto-copy h2 { font-size: clamp(2.35rem, 10vw, 3.2rem); line-height: .96; }
+  .manifesto-copy > p:not(.eyebrow) { margin: 24px 0 32px; }
   .manifesto-copy dl div { grid-template-columns: 55px 1fr; }
-  .film h2, .section-intro h2, .program-sticky h2, .people h2, .access h2, .faq-intro h2 { font-size: clamp(3.25rem, 15vw, 4.6rem); }
+  .film h2, .section-intro h2, .program-sticky h2, .people h2, .access h2, .faq-intro h2 { font-size: clamp(2.35rem, 10vw, 3.2rem); line-height: .96; }
+  .film-head { margin-bottom: 38px; }
   .film-frame { width: 100%; aspect-ratio: 16 / 9; }
   .film-frame iframe { transform: none; }
   .path-card { min-height: 420px; padding: 27px; }
   .path-label { margin-top: 40px; }
-  .path-card h3 { font-size: 2.8rem; }
+  .path-card h3 { font-size: 2.3rem; }
   .day-card { grid-template-columns: 46px 1fr; gap: 18px; padding: 30px 0; }
-  .day-card h3 { font-size: 2.25rem; }
+  .day-card h3 { font-size: 1.85rem; }
   .editorial-grid { width: 100%; }
   .editorial-block { min-height: 440px; }
   .editorial-copy { min-height: 500px; padding: 48px 24px; }
-  .editorial-copy h2 { font-size: 3rem; }
+  .editorial-copy h2 { font-size: 2.35rem; line-height: .98; }
   .people-grid { grid-template-columns: 1fr; }
   .person { min-height: 440px; }
   .wordmarks { grid-template-columns: repeat(2, 1fr); }
   .wordmarks span { min-height: 86px; font-size: .56rem; }
   .community-card { padding: 44px 22px; }
-  .community-heading h2 { font-size: 3.15rem; }
+  .community-heading h2 { font-size: 2.35rem; line-height: .98; }
   .ticket { min-height: 470px; padding: 26px; }
-  .ticket h3 { margin-top: 55px; font-size: 3rem; }
+  .ticket h3 { margin-top: 55px; font-size: 2.25rem; }
   .faq summary { font-size: 1.3rem; }
   .closing { min-height: 720px; }
-  .closing h2 { font-size: clamp(3.8rem, 17vw, 5.5rem); }
+  .closing h2 { font-size: clamp(2.45rem, 10.5vw, 3.35rem); line-height: .96; }
   .closing-actions { display: grid; }
   .footer-grid { grid-template-columns: 1fr; gap: 36px; }
   .footer-grid > div:first-child { grid-column: auto; }
