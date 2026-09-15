@@ -5,6 +5,24 @@
   const translatable = [...document.querySelectorAll('[data-en][data-es]')];
   const heroImage = document.querySelector('.wt-hero-media img');
 
+  const logoStrip = document.querySelector('[data-logo-strip]');
+  if (logoStrip) {
+    const track = logoStrip.querySelector('.wt-logo-track');
+    const group = track.querySelector('.wt-logo-group');
+    const control = logoStrip.querySelector('[data-logo-control]');
+    const duplicate = group.cloneNode(true);
+    duplicate.setAttribute('aria-hidden', 'true');
+    duplicate.querySelectorAll('img').forEach((img) => { img.alt = ''; });
+    track.appendChild(duplicate);
+    logoStrip.classList.add('is-ready');
+    control.hidden = false;
+    control.addEventListener('click', () => {
+      const paused = logoStrip.classList.toggle('is-paused');
+      logoStrip.querySelector('[data-logo-pause]').hidden = paused;
+      logoStrip.querySelector('[data-logo-resume]').hidden = !paused;
+    });
+  }
+
   if (heroImage) {
     heroImage.src = '../assets/whale-tank-hero.webp';
     heroImage.removeAttribute('srcset');

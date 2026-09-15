@@ -35,6 +35,40 @@ html[data-lang="en"] .wt-lang [data-lang-option="en"], html[data-lang="es"] .wt-
 .wt-hero-card span { font-family: var(--serif); font-size: clamp(1.9rem,2.4vw,3rem); color: #E97A43; line-height: 1; }
 .wt-hero-card p { margin: 0; color: rgba(242,241,234,.64); font-size: .76rem; letter-spacing: .04em; }
 
+.wt-logo-strip { padding: 1.2rem 0 1.6rem; background: #00080b; border-top: 1px solid var(--line); }
+.wt-logo-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; min-height: 36px; }
+.wt-logo-heading h2 { margin: 0; font-family: var(--sans); font-size: .6rem; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: rgba(242,241,234,.58); }
+.wt-logo-control { padding: .5rem .75rem; border: 1px solid var(--line); border-radius: 99px; background: transparent; color: rgba(242,241,234,.8); font: inherit; font-size: .65rem; cursor: pointer; min-height: 36px; }
+.wt-logo-control:hover { border-color: rgba(242,241,234,.5); color: #fff; }
+.wt-logo-control:focus-visible, .wt-logo-viewport:focus-visible { outline: 2px solid var(--ember); outline-offset: -2px; }
+.wt-logo-viewport { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.wt-logo-track { display: flex; width: max-content; }
+.wt-logo-group { display: flex; align-items: center; flex: 0 0 auto; gap: 48px; padding: 0 48px 0 0; margin: 0; list-style: none; }
+.wt-logo-item { display: flex; align-items: center; justify-content: center; flex: 0 0 180px; width: 180px; height: 78px; }
+.wt-logo-item img { display: block; width: auto; height: auto; max-width: 168px; max-height: 58px; object-fit: contain; opacity: .9; }
+.wt-logo-strip.is-ready .wt-logo-track { animation: wt-logo-marquee 85s linear infinite; }
+.wt-logo-strip.is-ready .wt-logo-viewport { overflow-x: hidden; mask-image: linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
+.wt-logo-strip.is-paused .wt-logo-track, .wt-logo-viewport:focus-within .wt-logo-track { animation-play-state: paused; }
+.wt-logo-strip.is-paused .wt-logo-viewport, .wt-logo-viewport:focus-within { overflow-x: auto; }
+@keyframes wt-logo-marquee { to { transform: translateX(-50%); } }
+@media (hover: hover) {
+  .wt-logo-viewport:hover .wt-logo-track { animation-play-state: paused; }
+}
+@media (max-width: 640px) {
+  .wt-logo-strip { padding: .9rem 0 1.2rem; }
+  .wt-logo-heading { margin-bottom: .55rem; }
+  .wt-logo-group { gap: 28px; padding-right: 28px; }
+  .wt-logo-item { flex-basis: 138px; width: 138px; height: 64px; }
+  .wt-logo-item img { max-width: 126px; max-height: 46px; }
+  .wt-logo-control { min-height: 44px; padding: .6rem .8rem; }
+  .wt-logo-strip.is-ready .wt-logo-track { animation-duration: 75s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wt-logo-strip.is-ready .wt-logo-track { animation: none !important; transform: none; }
+  .wt-logo-strip.is-ready .wt-logo-viewport { overflow-x: auto; mask-image: none; }
+  .wt-logo-group[aria-hidden="true"], .wt-logo-control { display: none; }
+}
+
 .wt-signal { padding: clamp(4.5rem,6vw,7rem) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(180deg,var(--black-soft),var(--black)); }
 .wt-signal-head { display: grid; grid-template-columns: .55fr 1.3fr; gap: 3rem; align-items: end; }
 .wt-signal-head h2 { max-width: 1100px; font-size: clamp(3.1rem,5.2vw,7rem); line-height: .92; text-transform: uppercase; }
