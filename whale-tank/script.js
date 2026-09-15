@@ -18,6 +18,7 @@
     control.hidden = false;
     control.addEventListener('click', () => {
       const paused = logoStrip.classList.toggle('is-paused');
+      if (!paused) logoStrip.querySelector('.wt-logo-viewport').scrollLeft = 0;
       logoStrip.querySelector('[data-logo-pause]').hidden = paused;
       logoStrip.querySelector('[data-logo-resume]').hidden = !paused;
     });

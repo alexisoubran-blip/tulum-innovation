@@ -46,7 +46,7 @@ html[data-lang="en"] .wt-lang [data-lang-option="en"], html[data-lang="es"] .wt-
 .wt-logo-group { display: flex; align-items: center; flex: 0 0 auto; gap: 48px; padding: 0 48px 0 0; margin: 0; list-style: none; }
 .wt-logo-item { display: flex; align-items: center; justify-content: center; flex: 0 0 180px; width: 180px; height: 78px; }
 .wt-logo-item img { display: block; width: auto; height: auto; max-width: 168px; max-height: 58px; object-fit: contain; opacity: .9; }
-.wt-logo-strip.is-ready .wt-logo-track { animation: wt-logo-marquee 85s linear infinite; }
+.wt-logo-strip.is-ready .wt-logo-track { animation: wt-logo-marquee 132s linear infinite; }
 .wt-logo-strip.is-ready .wt-logo-viewport { overflow-x: hidden; mask-image: linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
 .wt-logo-strip.is-paused .wt-logo-track, .wt-logo-viewport:focus-within .wt-logo-track { animation-play-state: paused; }
 .wt-logo-strip.is-paused .wt-logo-viewport, .wt-logo-viewport:focus-within { overflow-x: auto; }
@@ -61,7 +61,7 @@ html[data-lang="en"] .wt-lang [data-lang-option="en"], html[data-lang="es"] .wt-
   .wt-logo-item { flex-basis: 138px; width: 138px; height: 64px; }
   .wt-logo-item img { max-width: 126px; max-height: 46px; }
   .wt-logo-control { min-height: 44px; padding: .6rem .8rem; }
-  .wt-logo-strip.is-ready .wt-logo-track { animation-duration: 75s; }
+  .wt-logo-strip.is-ready .wt-logo-track { animation-duration: 116s; }
 }
 @media (prefers-reduced-motion: reduce) {
   .wt-logo-strip.is-ready .wt-logo-track { animation: none !important; transform: none; }
