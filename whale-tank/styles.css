@@ -2,7 +2,10 @@
 .wt-page .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .wt-page .reveal.is-visible { opacity: 1; transform: none; }
 
-.wt-header { grid-template-columns: auto 1fr auto; }
+.wt-header { grid-template-columns: auto 1fr auto; gap: clamp(.75rem,1.5vw,1.5rem); }
+.wt-header-brands { display: flex; align-items: center; gap: clamp(.65rem,1.4vw,1.5rem); min-width: 0; }
+.wt-header-partner { display: flex; align-items: center; padding-left: clamp(.65rem,1.4vw,1.5rem); border-left: 1px solid var(--line); min-height: 32px; }
+.wt-header-partner img { display: block; width: clamp(120px,12vw,170px); height: auto; }
 .wt-nav { display: flex; align-items: center; justify-content: center; gap: clamp(1rem,1.5vw,2rem); }
 .wt-nav a { position: relative; font-size: .69rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(242,241,234,.66); }
 .wt-nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.45rem; height: 1px; background: var(--ember); transform: scaleX(0); transform-origin: right; transition: transform .25s var(--ease); }
@@ -192,7 +195,7 @@ html[data-lang="en"] .wt-lang [data-lang-option="en"], html[data-lang="es"] .wt-
 
 @media (max-width: 1180px) {
   .wt-nav { display: none; }
-  .wt-header { grid-template-columns: auto 1fr auto; }
+  .wt-header { grid-template-columns: minmax(0,1fr) auto; }
   .wt-header-actions { justify-self: end; }
   .wt-hero-grid { grid-template-columns: 1fr .45fr; }
   .wt-step > div:last-child { grid-template-columns: .35fr .9fr 1.1fr; }
@@ -242,6 +245,9 @@ html[data-lang="en"] .wt-lang [data-lang-option="en"], html[data-lang="es"] .wt-
 @media (max-width: 640px) {
   .wt-header { min-height: 72px; padding: .8rem 5vw; }
   .wt-header .brand-logo { height: 32px; max-width: 170px; }
+  .wt-header .wt-header-brands .brand-logo { width: clamp(110px,32vw,148px); height: auto; max-height: 28px; }
+  .wt-header-partner { min-height: 24px; }
+  .wt-header-partner img { width: clamp(80px,22vw,110px); }
   .wt-lang { min-width: 58px; padding: .4rem; }
   .wt-hero-media img { object-position: 61% center; }
   .wt-hero-shade { background: linear-gradient(0deg,rgba(0,8,11,.98) 0%,rgba(0,8,11,.8) 50%,rgba(0,8,11,.35) 100%),linear-gradient(90deg,rgba(0,8,11,.74),rgba(0,8,11,.18)); }
