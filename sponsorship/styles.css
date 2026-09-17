@@ -131,7 +131,7 @@ img { max-width: 100%; display: block; }
 .whale-bridge-media img { width: 100%; height: 100%; object-fit: cover; object-position: 52% center; filter: saturate(.78) contrast(1.06); transition: transform .8s var(--ease); }
 .whale-bridge:hover .whale-bridge-media img { transform: scale(1.025); }
 .whale-bridge-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(3rem,6vw,7.5rem); background: radial-gradient(circle at 82% 16%,rgba(209,68,20,.2),transparent 30%),#06211f; }
-.whale-bridge-copy h2 { max-width: 820px; font-size: clamp(3rem,4.8vw,6rem); }
+.whale-bridge-copy h2 { max-width: 820px; font-size: clamp(2.7rem,3.7vw,4.6rem); }
 .whale-bridge-copy h2 em { color: var(--acid); font-style: normal; }
 .whale-bridge-copy > p:not(.eyebrow) { max-width: 680px; margin: 2rem 0; color: rgba(255,255,255,.62); font-size: .88rem; line-height: 1.75; }
 .whale-bridge-copy ul { margin: 0 0 2.4rem; padding: 0; border-top: 1px solid var(--line-light); list-style: none; }
@@ -333,6 +333,7 @@ img { max-width: 100%; display: block; }
   .hero-wash { background: linear-gradient(0deg, rgba(0,8,11,.97) 0%, rgba(0,8,11,.72) 68%, rgba(0,8,11,.32) 100%); }
   .hero-layout { padding-top: 10rem; padding-bottom: 5rem; }
   .hero h1, .section h2, .contact h2, .whale-bridge h2 { font-size: clamp(2.85rem, 12.5vw, 4.35rem); line-height: .94; }
+  .whale-bridge-copy h2 { font-size: clamp(2.45rem, 10.5vw, 3.6rem); }
   .hero-lead { font-size: .95rem; }
   .hero-actions { display: grid; }
   .hero-actions .button { width: 100%; }
