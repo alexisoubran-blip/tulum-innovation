@@ -583,6 +583,51 @@
       .v2-proof-grid article:last-child { border-bottom:0; }
     }
   
+
+    /* Historical people */
+    .v2-past-people { background:#00080B; }
+    .v2-past-people-grid {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:clamp(1.5rem,2.3vw,2.7rem) clamp(1rem,1.6vw,1.5rem);
+    }
+    .v2-past-person { min-width:0; }
+    .v2-past-person-image {
+      aspect-ratio:16/9; overflow:hidden; background:#071315;
+      border:1px solid rgba(242,241,234,.09); border-radius:6px;
+    }
+    .v2-past-person-image img {
+      display:block; width:100%; height:100%; object-fit:cover;
+      filter:saturate(.82) contrast(1.02);
+      transition:transform .45s var(--ease), filter .3s ease;
+    }
+    .v2-past-person:hover .v2-past-person-image img {
+      transform:scale(1.025); filter:saturate(1) contrast(1.02);
+    }
+    .v2-past-person h3 {
+      margin:.72rem 0 .15rem; font-family:var(--display);
+      font-size:clamp(.88rem,1vw,1.08rem); line-height:1.05;
+      font-weight:400; letter-spacing:-.02em;
+    }
+    .v2-past-person p {
+      margin:0; color:rgba(242,241,234,.5);
+      font-size:.64rem; line-height:1.45;
+    }
+    .v2-past-people-note {
+      margin:2.2rem 0 0; padding-top:1rem;
+      border-top:1px solid var(--line); color:rgba(242,241,234,.38);
+      font-size:.58rem; letter-spacing:.04em;
+    }
+    @media (max-width:900px) {
+      .v2-past-people-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:480px) {
+      .v2-past-people-grid { gap:1.25rem .7rem; }
+      .v2-past-person-image { border-radius:4px; }
+      .v2-past-person h3 { margin-top:.55rem; font-size:.8rem; }
+      .v2-past-person p { font-size:.58rem; }
+      .v2-past-people-note { margin-top:1.6rem; }
+    }
+
     /* Final mobile QA overrides */
     @media (max-width: 768px) {
       .v2-section { padding: clamp(4.25rem, 12vw, 6rem) 0; }
@@ -1099,6 +1144,69 @@
           <strong>5</strong><span><span data-en>editions</span><span data-es>ediciones</span></span>
           <strong>5,700+</strong><span><span data-en>festival entries across five editions</span><span data-es>entradas acumuladas en cinco ediciones</span></span>
         </div>
+      </div>
+    </section>
+
+    <section class="v2-past-people v2-section" aria-labelledby="past-people-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Previous editions</span><span data-es>Ediciones anteriores</span></p>
+            <h2 id="past-people-title"><span data-en>People who have</span><span data-es>Personas que han</span> <em><span data-en>joined TIF.</span><span data-es>formado parte de TIF.</span></em></h2>
+          </div>
+          <p>
+            <span data-en>Selected founders, operators, creators and industry leaders who have participated in previous editions.</span>
+            <span data-es>Selección de founders, operadores, creadores y líderes que han participado en ediciones anteriores.</span>
+          </p>
+        </div>
+
+        <div class="v2-past-people-grid">
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/pablo-gonzalez.webp" alt="Pablo González" loading="lazy" decoding="async" /></div>
+            <h3>Pablo González</h3>
+            <p><span data-en>Co-founder · Bitso</span><span data-es>Cofundador · Bitso</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/indira-kempis.webp" alt="Indira Kempis" loading="lazy" decoding="async" /></div>
+            <h3>Indira Kempis</h3>
+            <p><span data-en>Former Senator · Mexico (2018–2024)</span><span data-es>Exsenadora · México (2018–2024)</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/de-kai.webp" alt="De Kai" loading="lazy" decoding="async" /></div>
+            <h3>De Kai</h3>
+            <p><span data-en>Professor & AI researcher</span><span data-es>Profesor e investigador en Inteligencia Artificial</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/scott-page.webp" alt="Scott Page" loading="lazy" decoding="async" /></div>
+            <h3>Scott Page</h3>
+            <p><span data-en>Musician · technologist · entrepreneur</span><span data-es>Músico · tecnólogo · emprendedor</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/rodolfo-andragnes.webp" alt="Rodolfo Andragnes" loading="lazy" decoding="async" /></div>
+            <h3>Rodolfo Andragnes</h3>
+            <p><span data-en>Founder · LABITCONF</span><span data-es>Fundador · LABITCONF</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/eduardo-castillo.webp" alt="Eduardo Castillo" loading="lazy" decoding="async" /></div>
+            <h3>Eduardo Castillo</h3>
+            <p><span data-en>Founder · Habiters</span><span data-es>Fundador · Habiters</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/ron-oliver.webp" alt="Ron Oliver" loading="lazy" decoding="async" /></div>
+            <h3>Ron Oliver</h3>
+            <p><span data-en>Founder & CEO · ParqueTec México</span><span data-es>Fundador y CEO · ParqueTec México</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/diego-dreyfus.webp" alt="Diego Dreyfus" loading="lazy" decoding="async" /></div>
+            <h3>Diego Dreyfus</h3>
+            <p><span data-en>Entrepreneur & speaker</span><span data-es>Emprendedor y conferencista</span></p>
+          </article>
+        </div>
+
+        <p class="v2-past-people-note">
+          <span data-en>Historical participation shown for context. This section does not indicate 2026 confirmation.</span>
+          <span data-es>Participación histórica mostrada como contexto. Esta sección no indica confirmación para 2026.</span>
+        </p>
       </div>
     </section>
 
