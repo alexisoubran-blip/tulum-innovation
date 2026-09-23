@@ -412,6 +412,44 @@
     .v2-footer-links a { color:rgba(242,241,234,.62); font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; }
 
 
+
+    /* Past TIF people */
+    .v2-past-people { background:#071315; }
+    .v2-past-people .v2-section-head { margin-bottom:clamp(2rem,4vw,3.5rem); }
+    .v2-past-people-grid {
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+      column-gap:18px; row-gap:34px;
+    }
+    .v2-past-person { min-width:0; }
+    .v2-past-person-image {
+      aspect-ratio:16/9; overflow:hidden; background:#0b1a1d;
+      border:1px solid rgba(242,241,234,.08); border-radius:5px;
+    }
+    .v2-past-person-image img {
+      display:block; width:100%; height:100%; object-fit:cover;
+      filter:saturate(.88) contrast(1.02);
+      transition:transform .45s var(--ease), filter .3s ease;
+    }
+    .v2-past-person:hover .v2-past-person-image img { transform:scale(1.025); filter:saturate(1) contrast(1.02); }
+    .v2-past-person-meta { padding-top:.65rem; }
+    .v2-past-person-meta h3 {
+      margin:0; font-family:var(--display); font-size:clamp(.9rem,1.05vw,1.15rem);
+      font-weight:400; line-height:1.05; letter-spacing:-.025em;
+    }
+    .v2-past-person-meta p {
+      margin:.2rem 0 0; color:rgba(242,241,234,.52);
+      font-size:.66rem; line-height:1.45;
+    }
+    @media (max-width:1000px) {
+      .v2-past-people-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:560px) {
+      .v2-past-people-grid { grid-template-columns:1fr; row-gap:24px; }
+      .v2-past-person-image { aspect-ratio:16/9; }
+      .v2-past-person-meta h3 { font-size:1rem; }
+      .v2-past-person-meta p { font-size:.72rem; }
+    }
+
     /* V3: stronger human proof and archive */
     .v2-hero-video { position:absolute; inset:-10%; z-index:0; overflow:hidden; opacity:.78; pointer-events:none; }
     .v2-hero-video iframe { width:120%; height:120%; border:0; pointer-events:none; }
