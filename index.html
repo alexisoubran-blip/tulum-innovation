@@ -471,6 +471,85 @@
 
 
 
+
+    /* Speakers & Co-Founders */
+    .v2-speakers { background:#F2F1EA; color:#00080B; }
+    .v2-speakers .v2-kicker { color:rgba(0,8,11,.55); }
+    .v2-speakers-head {
+      display:grid; grid-template-columns:minmax(0,1.15fr) minmax(300px,.55fr);
+      gap:clamp(2rem,5vw,5rem); align-items:end; margin-bottom:clamp(2.7rem,5vw,4.5rem);
+    }
+    .v2-speakers-head h2 {
+      margin:.65rem 0 0; max-width:820px;
+      font-family:var(--display); font-size:clamp(3.1rem,5.3vw,6.8rem);
+      line-height:.92; font-weight:400; text-transform:uppercase; letter-spacing:-.055em;
+    }
+    .v2-speakers-head h2 em { color:var(--ember); font-style:normal; }
+    .v2-speakers-intro p { margin:0 0 1.2rem; color:rgba(0,8,11,.63); font-size:.88rem; line-height:1.68; }
+    .v2-speakers .btn-dark {
+      background:#00080B; color:#F2F1EA; border-color:#00080B;
+    }
+    .v2-speakers .btn-dark:hover { background:#E97A43; border-color:#E97A43; color:#00080B; }
+    .v2-speaker-label-row {
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      margin-bottom:.9rem; padding-top:1rem; border-top:1px solid rgba(0,8,11,.18);
+      color:#00080B; text-transform:uppercase;
+    }
+    .v2-speaker-label-row > span { font-family:var(--display); font-size:.72rem; letter-spacing:.08em; }
+    .v2-speaker-label-row small { color:rgba(0,8,11,.42); font-size:.55rem; letter-spacing:.11em; }
+    .v2-cofounder-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .v2-speaker-lineup-label { margin-top:clamp(3.5rem,6vw,6rem); }
+    .v2-speaker-grid {
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px;
+    }
+    .v2-speaker-card { min-width:0; }
+    .v2-speaker-art {
+      position:relative; aspect-ratio:4/5; overflow:hidden; background:#071315;
+      border:1px solid rgba(0,8,11,.12);
+    }
+    .v2-speaker-art img {
+      position:relative; z-index:2; display:block; width:100%; height:100%; object-fit:cover;
+      transition:transform .5s var(--ease);
+    }
+    .v2-speaker-card:hover .v2-speaker-art img { transform:scale(1.018); }
+    .v2-speaker-fallback {
+      position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end;
+      padding:1.2rem; background:
+        radial-gradient(circle at 25% 10%,rgba(233,122,67,.68),transparent 38%),
+        linear-gradient(145deg,#071315 15%,#172c30 55%,#E97A43 135%);
+      color:#F2F1EA;
+    }
+    .v2-speaker-fallback strong {
+      font-family:var(--display); font-size:clamp(1.5rem,2.2vw,2.8rem);
+      line-height:.95; font-weight:400; text-transform:uppercase;
+    }
+    .v2-speaker-fallback span {
+      margin-top:.55rem; font-size:.56rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(242,241,234,.65);
+    }
+    .v2-speaker-meta { display:flex; justify-content:space-between; gap:.7rem; align-items:baseline; padding:.7rem .05rem 0; }
+    .v2-speaker-meta h3 { margin:0; font-family:var(--display); font-size:.92rem; font-weight:400; line-height:1.05; text-transform:uppercase; }
+    .v2-speaker-meta span { color:rgba(0,8,11,.46); font-size:.52rem; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+    .v2-speaker-more-wrap { display:flex; justify-content:center; margin-top:2rem; }
+
+    @media (max-width:1000px) {
+      .v2-speakers-head { grid-template-columns:1fr; gap:1.5rem; }
+      .v2-cofounder-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .v2-speaker-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
+    @media (max-width:720px) {
+      .v2-speakers-head h2 { font-size:clamp(2.8rem,13vw,4.6rem); }
+      .v2-cofounder-grid { grid-template-columns:1fr; gap:16px; }
+      .v2-speaker-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+      .v2-speaker-card-featured .v2-speaker-art { aspect-ratio:4/5; }
+      .v2-speaker-meta { align-items:flex-start; flex-direction:column; gap:.25rem; }
+      .v2-speaker-meta h3 { font-size:.88rem; }
+      .v2-speaker-label-row { align-items:flex-end; }
+    }
+    @media (max-width:480px) {
+      .v2-speaker-grid { grid-template-columns:1fr; gap:18px; }
+      .v2-speaker-meta h3 { font-size:1rem; }
+    }
+
     /* Past TIF people */
     .v2-past-people { background:#071315; }
     .v2-past-people .v2-section-head { margin-bottom:clamp(2rem,4vw,3.5rem); }
@@ -867,7 +946,7 @@
     </button>
 
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="#people"><span data-en>People</span><span data-es>Personas</span></a>
+      <a href="#speakers"><span data-en>Speakers</span><span data-es>Speakers</span></a>
       <a href="#experience"><span data-en>Experience</span><span data-es>Experiencia</span></a>
       <a href="#program"><span data-en>Program</span><span data-es>Programa</span></a>
       <a href="/whale-tank"><span data-en>Whale Tank</span><span data-es>Whale Tank</span></a>
@@ -1010,16 +1089,95 @@
       </div>
     </section>
 
+    <section class="v2-speakers v2-section" id="speakers" aria-labelledby="speakers-title">
+      <div class="container">
+        <div class="v2-speakers-head">
+          <div>
+            <p class="v2-kicker">TIF 2026 · Speakers & Co-Founders</p>
+            <h2 id="speakers-title"><span data-en>The people shaping the</span><span data-es>Las personas que están dando forma a la</span> <em><span data-en>conversation.</span><span data-es>conversación.</span></em></h2>
+          </div>
+          <div class="v2-speakers-intro">
+            <p><span data-en>TIF brings together founders, operators, investors, thinkers and creators across technology, capital and culture. This lineup will continue growing as new voices are confirmed.</span><span data-es>TIF reúne founders, operadores, inversionistas, pensadores y creadores alrededor de tecnología, capital y cultura. Este lineup seguirá creciendo conforme se confirmen nuevas voces.</span></p>
+            <a class="btn btn-dark" href="#program"><span data-en>Explore the program</span><span data-es>Ver el programa</span></a>
+          </div>
+        </div>
+
+        <div class="v2-speaker-label-row">
+          <span><span data-en>Co-Founders</span><span data-es>Co-Founders</span></span>
+          <small><span data-en>Building TIF 2026</span><span data-es>Construyendo TIF 2026</span></small>
+        </div>
+
+        <div class="v2-cofounder-grid">
+          <article class="v2-speaker-card v2-speaker-card-featured">
+            <div class="v2-speaker-art">
+              <img src="/assets/tif-home-v2/speaker-alejandro-glatt.webp" alt="Alejandro Glatt, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
+              <div class="v2-speaker-fallback"><strong>Alejandro Glatt</strong><span>Speaker / Co-Founder</span></div>
+            </div>
+            <div class="v2-speaker-meta"><h3>Alejandro Glatt</h3><span>Speaker / Co-Founder</span></div>
+          </article>
+          <article class="v2-speaker-card v2-speaker-card-featured">
+            <div class="v2-speaker-art">
+              <img src="/assets/tif-home-v2/speaker-alexis-soubran.webp" alt="Alexis Soubran, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
+              <div class="v2-speaker-fallback"><strong>Alexis Soubran</strong><span>Speaker / Co-Founder</span></div>
+            </div>
+            <div class="v2-speaker-meta"><h3>Alexis Soubran</h3><span>Speaker / Co-Founder</span></div>
+          </article>
+          <article class="v2-speaker-card v2-speaker-card-featured">
+            <div class="v2-speaker-art">
+              <img src="/assets/tif-home-v2/speaker-gustavo-bolotin.webp" alt="Gustavo Bolotin, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
+              <div class="v2-speaker-fallback"><strong>Gustavo Bolotin</strong><span>Speaker / Co-Founder</span></div>
+            </div>
+            <div class="v2-speaker-meta"><h3>Gustavo Bolotin</h3><span>Speaker / Co-Founder</span></div>
+          </article>
+        </div>
+
+        <div class="v2-speaker-label-row v2-speaker-lineup-label">
+          <span><span data-en>Speaker lineup</span><span data-es>Speaker lineup</span></span>
+          <small><span data-en>More announcements coming</span><span data-es>Más anuncios próximamente</span></small>
+        </div>
+
+        <div class="v2-speaker-grid" data-speaker-grid>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-don-cohen.webp" alt="Don Cohen, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Don Cohen</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Don Cohen</h3><span>Speaker</span></div>
+          </article>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-elo-cadenas.webp" alt="Elo Cadenas, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Elo Cadenas</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Elo Cadenas</h3><span>Speaker</span></div>
+          </article>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-mujer-capital.webp" alt="Mujer Capital, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Mujer Capital</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Mujer Capital</h3><span>Speaker</span></div>
+          </article>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-uri-soglowek.webp" alt="Uri Soglowek, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Uri Soglowek</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Uri Soglowek</h3><span>Speaker</span></div>
+          </article>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-yehuda-berg.webp" alt="Yehuda Berg, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Yehuda Berg</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Yehuda Berg</h3><span>Speaker</span></div>
+          </article>
+        </div>
+
+        <div class="v2-speaker-more-wrap">
+          <button class="btn btn-dark" type="button" data-speaker-more hidden>
+            <span data-speaker-more-show><span data-en>Show all speakers</span><span data-es>Ver todos los speakers</span></span>
+            <span data-speaker-more-hide hidden><span data-en>Show fewer</span><span data-es>Ver menos</span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <section class="v2-people v2-section" id="people">
       <div class="container">
         <div class="v2-section-head">
           <div>
-            <p class="v2-kicker"><span data-en>People around TIF</span><span data-es>Personas alrededor de TIF</span></p>
-            <h2><span data-en>Put faces behind the</span><span data-es>Ponle rostro a las</span> <em><span data-en>conversations.</span><span data-es>conversaciones.</span></em></h2>
+            <p class="v2-kicker"><span data-en>Whale Tank network</span><span data-es>Red de Whale Tank</span></p>
+            <h2><span data-en>Investors & mentors around</span><span data-es>Inversionistas y mentores alrededor de</span> <em>Whale Tank.</em></h2>
           </div>
           <p>
-            <span data-en>Founders, investors and mentors share the same rooms, tables and experiences. The people are a central part of the product.</span>
-            <span data-es>Founders, inversionistas y mentores comparten espacios, mesas y experiencias. Las personas son una parte central del producto.</span>
+            <span data-en>A selected group of investors and mentors participating around Whale Tank 2026.</span>
+            <span data-es>Un grupo seleccionado de inversionistas y mentores que participan alrededor de Whale Tank 2026.</span>
           </p>
         </div>
 
@@ -1552,6 +1710,28 @@
             logoStrip.querySelector('[data-logo-resume]').hidden = !paused;
           });
         }
+      }
+
+      const speakerGrid = document.querySelector('[data-speaker-grid]');
+      const speakerMore = document.querySelector('[data-speaker-more]');
+      if (speakerGrid && speakerMore) {
+        const cards = [...speakerGrid.querySelectorAll('.v2-speaker-card')];
+        const visibleCount = 8;
+        let expanded = false;
+        const syncSpeakerGrid = () => {
+          cards.forEach((card, index) => { card.hidden = !expanded && index >= visibleCount; });
+          speakerMore.hidden = cards.length <= visibleCount;
+          const show = speakerMore.querySelector('[data-speaker-more-show]');
+          const hide = speakerMore.querySelector('[data-speaker-more-hide]');
+          if (show) show.hidden = expanded;
+          if (hide) hide.hidden = !expanded;
+        };
+        speakerMore.addEventListener('click', () => {
+          expanded = !expanded;
+          syncSpeakerGrid();
+          if (!expanded) speakerGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        syncSpeakerGrid();
       }
 
       const countdownRoot = document.querySelector('[data-countdown]');
