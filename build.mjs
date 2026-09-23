@@ -11,3 +11,5 @@ await cp("festival-2026", "dist/festival-2026", { recursive: true });
 await cp("sponsorship", "dist/sponsorship", { recursive: true });
 await cp("alexis-soubran-tif-cmo", "dist/alexis-soubran-tif-cmo", { recursive: true });
 await cp("alexis-soubran-TIF-CMO", "dist/alexis-soubran-TIF-CMO", { recursive: true });
+
+await cp("home-v2", "dist/home-v2", { recursive: true });
