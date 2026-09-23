@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#00080B" />
+  <title>Tulum Innovation Fest 2026 | December 9–12</title>
+  <meta name="description" content="Internal preview of the Tulum Innovation Fest 2026 website." />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <link rel="canonical" href="https://www.tuluminnovationfest.com/home-v2/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tulum Innovation Fest 2026 | December 9–12" />
+  <meta property="og:description" content="Innovation, capital and culture meet in Tulum." />
+  <meta property="og:url" content="https://www.tuluminnovationfest.com/home-v2/" />
+  <meta property="og:image" content="https://www.tuluminnovationfest.com/assets/hero-desktop.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/signal-mark.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/home-v2/styles.css?v=20260923-team-preview" />
+  <style>
+    :root {
+      --serif: "Bruno Ace", "Sora", system-ui, sans-serif;
+      --display: "Bruno Ace", "Sora", system-ui, sans-serif;
+      --sans: "Sora", system-ui, sans-serif;
+    }
+    body,
+    button,
+    input,
+    select,
+    textarea {
+      font-family: var(--sans);
+    }
+    h1, h2, h3, h4, h5, h6,
+    .v2-title,
+    .v2-section-head h2,
+    .v2-journey-card h3,
+    .v2-day h3,
+    .v2-whale-copy h2,
+    .v2-partner-card h2,
+    .v2-ticket h3,
+    .v2-closing h2 {
+      font-family: var(--display) !important;
+      font-style: normal !important;
+    }
+    h1 em, h2 em, h3 em, h4 em,
+    .v2-title em,
+    .v2-section-head h2 em,
+    .v2-whale-copy h2 em,
+    .v2-partner-card h2 em,
+    .v2-closing h2 em {
+      font-family: var(--display) !important;
+      font-style: normal !important;
+    }
+    html { scroll-padding-top: calc(var(--header) + 28px); }
+    body { background: var(--black); }
+    [data-lang="es"] [data-en],
+    [data-lang="en"] [data-es] { display: none !important; }
+
+    .v2-section { position: relative; padding: clamp(5.5rem, 8vw, 9rem) 0; }
+    .v2-rule { border-top: 1px solid var(--line); }
+    .v2-kicker {
+      display: flex; align-items: center; gap: .75rem; margin: 0 0 1.2rem;
+      color: rgba(242,241,234,.62); font-size: .64rem; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
+    }
+    .v2-kicker::before { content:""; width: 32px; height: 1px; background: var(--ember); }
+    .v2-title {
+      margin: 0; max-width: 1120px; font-family: var(--serif); font-weight: 400;
+      font-size: clamp(3rem, 5.5vw, 7.2rem); line-height: .94; letter-spacing: -.045em;
+      text-transform: uppercase; text-wrap: balance;
+    }
+    .v2-title em { color: #E97A43; font-weight: 400; }
+    .v2-lede {
+      max-width: 720px; margin: 1.6rem 0 0; color: rgba(242,241,234,.7);
+      font-size: clamp(1rem, 1.25vw, 1.25rem); line-height: 1.65;
+    }
+    .v2-section-head {
+      display: grid; grid-template-columns: minmax(0,1fr) minmax(260px,.48fr);
+      align-items: end; gap: clamp(2rem, 7vw, 8rem); margin-bottom: clamp(2.8rem, 5vw, 5rem);
+    }
+    .v2-section-head h2 {
+      margin: 0; font-family: var(--serif); font-size: clamp(2.7rem, 4.2vw, 5.3rem);
+      line-height: .98; font-weight: 400; letter-spacing: -.035em; text-transform: uppercase;
+    }
+    .v2-section-head h2 em { color: #E97A43; }
+    .v2-section-head > p {
+      margin: 0; color: rgba(242,241,234,.65); font-size: .98rem; line-height: 1.7;
+    }
+
+    /* Hero */
+    .v2-hero {
+      position: relative; min-height: 100svh; overflow: hidden; display: flex;
+      align-items: flex-end; background: var(--black);
+    }
+    .v2-hero-media { position: absolute; inset: 0; }
+    .v2-hero-media picture, .v2-hero-media img { width: 100%; height: 100%; }
+    .v2-hero-media img { object-fit: cover; object-position: 50% 52%; transform: scale(1.01); }
+    .v2-hero-media::after {
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,8,11,.95) 0%, rgba(0,8,11,.79) 35%, rgba(0,8,11,.22) 69%, rgba(0,8,11,.45) 100%),
+        linear-gradient(0deg, rgba(0,8,11,.96) 0%, transparent 34%, rgba(0,8,11,.25) 100%);
+    }
+    .v2-hero-inner {
+      position: relative; z-index: 2; width: var(--container); margin-inline:auto;
+      display:grid; grid-template-columns:minmax(0,1fr) minmax(230px,.36fr); gap:clamp(2rem,6vw,7rem);
+      align-items:end; padding-top: calc(var(--header) + 7rem); padding-bottom: clamp(5.5rem,9vh,8rem);
+    }
+    .v2-hero-copy { max-width: 1040px; }
+    .v2-hero-copy .v2-title { font-size: clamp(3.8rem, 6.4vw, 8.3rem); }
+    .v2-hero-date {
+      display:flex; align-items:center; gap:.75rem; margin:0 0 1.35rem;
+      color:rgba(242,241,234,.72); font-size:.67rem; letter-spacing:.17em; text-transform:uppercase;
+    }
+    .v2-hero-date::before { content:""; width:34px; height:1px; background:var(--ember); }
+    .v2-hero-copy .v2-lede { max-width: 670px; color: rgba(242,241,234,.82); }
+    .v2-hero-actions { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:2rem; }
+    .v2-hero-note { margin:1rem 0 0; color:rgba(242,241,234,.48); font-size:.68rem; letter-spacing:.04em; }
+    .v2-hero-countdown {
+      border-top:1px solid rgba(242,241,234,.25);
+      border-bottom:1px solid rgba(242,241,234,.15);
+      padding:.9rem 0 1rem;
+      min-width:260px;
+    }
+    .v2-countdown-kicker {
+      margin:0 0 .85rem;
+      color:rgba(242,241,234,.55);
+      font-size:.58rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .v2-countdown-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:0;
+      border-top:1px solid rgba(242,241,234,.10);
+      border-left:1px solid rgba(242,241,234,.10);
+    }
+    .v2-countdown-grid article {
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:.8rem .85rem;
+      border-right:1px solid rgba(242,241,234,.10);
+      border-bottom:1px solid rgba(242,241,234,.10);
+    }
+    .v2-countdown-grid strong {
+      font-family:var(--display);
+      color:#E97A43;
+      font-size:clamp(1.8rem,2.8vw,3.25rem);
+      font-weight:400;
+      line-height:.95;
+      letter-spacing:-.055em;
+      font-variant-numeric:tabular-nums;
+    }
+    .v2-countdown-grid span {
+      margin-top:.45rem;
+      color:rgba(242,241,234,.62);
+      font-size:.54rem;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .v2-countdown-date {
+      margin:.8rem 0 0;
+      color:rgba(242,241,234,.45);
+      font-size:.58rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .v2-watch {
+      position:absolute; z-index:3; right:3vw; bottom:1.8rem; display:inline-flex; align-items:center; gap:.7rem;
+      color:rgba(242,241,234,.58); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+    }
+    .v2-watch i { width:38px; height:1px; background:var(--ember); }
+
+
+    /* Hero countdown mobile */
+    @media (max-width: 900px) {
+      .v2-hero-countdown { min-width:0; width:100%; margin-top:.5rem; }
+      .v2-countdown-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .v2-countdown-grid article { min-height:78px; padding:.7rem .5rem; }
+      .v2-countdown-grid strong { font-size:clamp(1.45rem,6vw,2.35rem); }
+      .v2-countdown-grid span { font-size:.46rem; letter-spacing:.08em; }
+    }
+    @media (max-width: 520px) {
+      .v2-countdown-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .v2-countdown-grid article { min-height:74px; }
+      .v2-countdown-grid strong { font-size:2rem; }
+    }
+
+    /* Proof strip */
+    .v2-proof-strip { background:var(--white); color:var(--black); border-bottom:1px solid rgba(0,8,11,.12); }
+    .v2-proof-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+    .v2-proof-grid article {
+      min-height:132px; display:flex; flex-direction:column; justify-content:center; padding:1.3rem 2rem;
+      border-right:1px solid rgba(0,8,11,.13);
+    }
+    .v2-proof-grid article:last-child { border-right:0; }
+    .v2-proof-grid strong {
+      font-family:var(--display); color:var(--ember); font-size:clamp(2.2rem,3.2vw,4rem);
+      font-weight:400; line-height:1;
+    }
+    .v2-proof-grid span { margin-top:.55rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; }
+
+
+    /* Whale Tank community logo rail */
+    .wt-logo-strip { padding: 1.2rem 0 1.6rem; background: #00080b; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .wt-logo-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; min-height: 36px; }
+    .wt-logo-heading h2 { margin: 0; font-family: var(--sans) !important; font-size: .6rem; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: rgba(242,241,234,.58); }
+    .wt-logo-control { padding: .5rem .75rem; border: 1px solid var(--line); border-radius: 99px; background: transparent; color: rgba(242,241,234,.8); font-family: var(--sans); font-size: .65rem; cursor: pointer; min-height: 36px; }
+    .wt-logo-control:hover { border-color: rgba(242,241,234,.5); color: #fff; }
+    .wt-logo-control:focus-visible, .wt-logo-viewport:focus-visible { outline: 2px solid var(--ember); outline-offset: -2px; }
+    .wt-logo-viewport { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+    .wt-logo-track { display: flex; width: max-content; }
+    .wt-logo-group { display: flex; align-items: center; flex: 0 0 auto; gap: 48px; padding: 0 48px 0 0; margin: 0; list-style: none; }
+    .wt-logo-item { display: flex; align-items: center; justify-content: center; flex: 0 0 180px; width: 180px; height: 78px; }
+    .wt-logo-item img { display: block; width: auto; height: auto; max-width: 168px; max-height: 58px; object-fit: contain; opacity: .9; }
+    .wt-logo-strip.is-ready .wt-logo-track { animation: wt-logo-marquee 132s linear infinite; }
+    .wt-logo-strip.is-ready .wt-logo-viewport { overflow-x: hidden; mask-image: linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); -webkit-mask-image: linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
+    .wt-logo-strip.is-paused .wt-logo-track, .wt-logo-viewport:focus-within .wt-logo-track { animation-play-state: paused; }
+    .wt-logo-strip.is-paused .wt-logo-viewport, .wt-logo-viewport:focus-within { overflow-x: auto; }
+    @keyframes wt-logo-marquee { to { transform: translateX(-50%); } }
+    @media (hover: hover) { .wt-logo-viewport:hover .wt-logo-track { animation-play-state: paused; } }
+    @media (max-width: 640px) {
+      .wt-logo-strip { padding: .9rem 0 1.2rem; }
+      .wt-logo-heading { margin-bottom: .55rem; }
+      .wt-logo-group { gap: 28px; padding-right: 28px; }
+      .wt-logo-item { flex-basis: 138px; width: 138px; height: 64px; }
+      .wt-logo-item img { max-width: 126px; max-height: 46px; }
+      .wt-logo-control { min-height: 44px; padding: .6rem .8rem; }
+      .wt-logo-strip.is-ready .wt-logo-track { animation-duration: 116s; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wt-logo-strip.is-ready .wt-logo-track { animation: none !important; transform: none; }
+      .wt-logo-strip.is-ready .wt-logo-viewport { overflow-x: auto; mask-image: none; -webkit-mask-image: none; }
+      .wt-logo-group[aria-hidden="true"], .wt-logo-control { display: none; }
+    }
+
+    /* People */
+    .v2-people { background:linear-gradient(180deg,#00080B 0%,#031C20 100%); }
+    .v2-people-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-person { position:relative; min-width:0; overflow:hidden; background:#071315; }
+    .v2-person-image { aspect-ratio:4/5; overflow:hidden; }
+    .v2-person img {
+      width:100%; height:100%; object-fit:cover; filter:saturate(.78) contrast(1.04);
+      transition:transform .6s var(--ease), filter .35s ease;
+    }
+    .v2-person:hover img { transform:scale(1.035); filter:saturate(1) contrast(1.03); }
+    .v2-person-meta { padding:1rem 1rem 1.15rem; background:#071315; }
+    .v2-person-meta span { color:var(--ember); font-size:.56rem; letter-spacing:.13em; text-transform:uppercase; }
+    .v2-person-meta h3 { margin:.4rem 0 0; font-size:.98rem; font-weight:500; letter-spacing:-.02em; }
+
+    /* Film */
+    .v2-film { background:#F2F1EA; color:#00080B; }
+    .v2-film .v2-kicker { color:rgba(0,8,11,.62); }
+    .v2-film .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-film-frame { position:relative; aspect-ratio:16/9; overflow:hidden; background:#000; }
+    .v2-film-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .v2-film-caption {
+      display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:start;
+      padding:1.2rem 0 0; border-top:1px solid rgba(0,8,11,.16); margin-top:1.2rem;
+    }
+    .v2-film-caption p { margin:0; max-width:680px; color:rgba(0,8,11,.63); line-height:1.6; }
+    .v2-film-caption span { font-family:var(--display); color:var(--ember); font-size:.75rem; letter-spacing:.07em; }
+
+    /* Journeys */
+    .v2-journeys { background:var(--black); }
+    .v2-journey-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); }
+    .v2-journey-card {
+      position:relative; min-height:330px; padding:1.7rem; border-right:1px solid var(--line);
+      display:flex; flex-direction:column; justify-content:space-between; transition:background .25s ease;
+    }
+    .v2-journey-card:last-child { border-right:0; }
+    .v2-journey-card:hover { background:rgba(242,241,234,.045); }
+    .v2-journey-card > span { color:var(--ember); font-family:var(--display); font-size:.7rem; }
+    .v2-journey-card h3 {
+      margin:auto 0 1rem; font-family:var(--serif); font-size:clamp(2rem,2.9vw,3.8rem);
+      font-weight:400; line-height:.95; text-transform:uppercase; letter-spacing:-.035em;
+    }
+    .v2-journey-card p { margin:0; color:rgba(242,241,234,.64); font-size:.86rem; line-height:1.6; }
+    .v2-journey-card i { position:absolute; top:1.6rem; right:1.6rem; font-style:normal; color:rgba(242,241,234,.5); }
+
+
+
+    /* Responsive high-resolution photography */
+    .v2-responsive-media { display:block; width:100%; height:100%; }
+    .v2-responsive-media img { display:block; width:100%; height:100%; object-fit:cover; }
+    .v2-exec-main > .v2-responsive-media { position:absolute; inset:0; }
+    .v2-exec-moments .v2-responsive-media,
+    .v2-mosaic .v2-responsive-media { position:absolute; inset:0; }
+    .v2-program-hero {
+      position:relative; margin:0 0 10px; min-height:clamp(420px,52vw,720px);
+      overflow:hidden; background:#071315; border:1px solid var(--line);
+    }
+    .v2-program-hero > .v2-responsive-media { position:absolute; inset:0; }
+    .v2-program-hero::after {
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(0deg,rgba(0,8,11,.82),rgba(0,8,11,.04) 58%);
+      pointer-events:none;
+    }
+    .v2-program-hero figcaption {
+      position:absolute; z-index:2; left:1.35rem; right:1.35rem; bottom:1.25rem;
+      display:flex; align-items:end; justify-content:space-between; gap:1rem;
+      border-top:1px solid rgba(242,241,234,.42); padding-top:.85rem; color:#F2F1EA;
+    }
+    .v2-program-hero figcaption span {
+      color:rgba(242,241,234,.66); font-size:.56rem; letter-spacing:.12em; text-transform:uppercase;
+    }
+    .v2-program-hero figcaption strong {
+      font-family:var(--display); font-size:1.05rem; font-weight:400; text-transform:uppercase;
+    }
+    @media (max-width:768px) {
+      .v2-program-hero { min-height:520px; }
+      .v2-program-hero figcaption { align-items:flex-start; flex-direction:column; }
+      .v2-exec-main { min-height:560px; }
+      .v2-exec-moments figure { aspect-ratio:3/4; }
+      .v2-mosaic { grid-template-rows:repeat(5,360px); }
+      .v2-mosaic figure:first-child { min-height:460px; }
+    }
+    @media (max-width:480px) {
+      .v2-program-hero { min-height:480px; }
+      .v2-exec-main { min-height:500px; }
+      .v2-mosaic { grid-template-rows:repeat(5,320px); }
+    }
+
+    /* Executive experience V4 */
+    .v2-executive { background:#F2F1EA; color:#00080B; }
+    .v2-executive .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-executive .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-exec-layout { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(380px,.92fr); gap:10px; align-items:stretch; }
+    .v2-exec-main { position:relative; margin:0; min-height:650px; overflow:hidden; background:#111; }
+    .v2-exec-main img { width:100%; height:100%; object-fit:cover; }
+    .v2-exec-main::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,8,11,.8),rgba(0,8,11,.03) 55%); }
+    .v2-exec-main figcaption { position:absolute; z-index:2; left:1.4rem; right:1.4rem; bottom:1.4rem; display:flex; align-items:end; justify-content:space-between; gap:1rem; color:#F2F1EA; border-top:1px solid rgba(242,241,234,.45); padding-top:.9rem; }
+    .v2-exec-main figcaption span { font-size:.56rem; letter-spacing:.13em; text-transform:uppercase; color:rgba(242,241,234,.66); }
+    .v2-exec-main figcaption strong { font-family:var(--display); font-size:1.1rem; font-weight:400; text-transform:uppercase; }
+    .v2-exec-reasons { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(0,8,11,.14); border:1px solid rgba(0,8,11,.14); }
+    .v2-exec-reasons article { min-height:320px; padding:1.4rem; background:#fff; display:flex; flex-direction:column; }
+    .v2-exec-reasons article > span { color:var(--ember); font-family:var(--display); font-size:.65rem; }
+    .v2-exec-reasons h3 { margin:auto 0 .65rem; font-family:var(--display); font-size:1.2rem; font-weight:400; text-transform:uppercase; line-height:1.05; }
+    .v2-exec-reasons p { margin:0; color:rgba(0,8,11,.62); font-size:.78rem; line-height:1.6; }
+    .v2-exec-moments { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px; }
+    .v2-exec-moments figure { position:relative; margin:0; aspect-ratio:16/10; overflow:hidden; background:#111; }
+    .v2-exec-moments img { width:100%; height:100%; object-fit:cover; transition:transform .55s var(--ease); }
+    .v2-exec-moments figure:hover img { transform:scale(1.025); }
+    .v2-exec-moments figure::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,8,11,.82),rgba(0,8,11,.05) 65%); }
+    .v2-exec-moments figcaption { position:absolute; z-index:2; left:1rem; bottom:1rem; color:#F2F1EA; }
+    .v2-exec-moments small { display:block; margin-bottom:.35rem; color:rgba(242,241,234,.65); font-size:.52rem; letter-spacing:.11em; text-transform:uppercase; }
+    .v2-exec-moments strong { display:block; font-family:var(--display); font-size:.95rem; font-weight:400; text-transform:uppercase; }
+    .v2-exec-actions { display:flex; gap:.7rem; justify-content:flex-end; flex-wrap:wrap; margin-top:1.4rem; }
+    .v2-executive .v2-exec-ghost { color:#00080B; border-color:rgba(0,8,11,.28); }
+    .v2-executive .v2-exec-ghost:hover { border-color:#00080B; background:rgba(0,8,11,.05); }
+    @media (max-width:1000px) {
+      .v2-exec-layout { grid-template-columns:1fr; }
+      .v2-exec-main { min-height:540px; }
+      .v2-exec-reasons article { min-height:260px; }
+    }
+    @media (max-width:720px) {
+      .v2-exec-main { min-height:460px; }
+      .v2-exec-main figcaption { align-items:flex-start; flex-direction:column; }
+      .v2-exec-reasons { grid-template-columns:1fr; }
+      .v2-exec-reasons article { min-height:210px; }
+      .v2-exec-moments { grid-template-columns:1fr; }
+      .v2-exec-moments figure { aspect-ratio:16/9; }
+      .v2-exec-actions { justify-content:flex-start; }
+    }
+
+    /* Program */
+    .v2-program { background:#020D0F; }
+    .v2-program-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-day { min-height:490px; padding:1.5rem; background:#020D0F; display:flex; flex-direction:column; }
+    .v2-day-num { font-family:var(--display); color:var(--ember); font-size:1rem; }
+    .v2-day-date { margin:.55rem 0 2rem; color:rgba(242,241,234,.46); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; }
+    .v2-day h3 { margin:0 0 1rem; font-size:1.45rem; line-height:1.13; font-weight:500; letter-spacing:-.035em; }
+    .v2-day p { margin:0 0 1.4rem; color:rgba(242,241,234,.63); font-size:.86rem; line-height:1.6; }
+    .v2-day ul { margin:auto 0 0; padding:1.2rem 0 0; list-style:none; border-top:1px solid var(--line); }
+    .v2-day li { padding:.36rem 0; color:rgba(242,241,234,.72); font-size:.76rem; }
+
+    /* Whale */
+    .v2-whale { overflow:hidden; background:linear-gradient(135deg,#031C20 0%,#00080B 62%); }
+    .v2-whale-grid { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(2rem,7vw,8rem); align-items:center; }
+    .v2-whale-media { position:relative; min-height:680px; overflow:hidden; border:1px solid var(--line); }
+    .v2-whale-media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .v2-whale-copy h2 {
+      margin:0; font-family:var(--serif); font-size:clamp(3rem,4.5vw,5.6rem);
+      font-weight:400; line-height:.94; letter-spacing:-.04em; text-transform:uppercase;
+    }
+    .v2-whale-copy h2 em { color:#E97A43; }
+    .v2-whale-copy > p:not(.v2-kicker) { max-width:680px; color:rgba(242,241,234,.67); line-height:1.7; }
+    .v2-whale-stats { display:grid; grid-template-columns:repeat(2,1fr); margin:2rem 0; border:1px solid var(--line); }
+    .v2-whale-stats div { padding:1.2rem; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .v2-whale-stats div:nth-child(2n) { border-right:0; }
+    .v2-whale-stats div:nth-child(n+3) { border-bottom:0; }
+    .v2-whale-stats strong { display:block; font-family:var(--display); color:#E97A43; font-size:2rem; font-weight:400; }
+    .v2-whale-stats span { display:block; margin-top:.3rem; color:rgba(242,241,234,.58); font-size:.66rem; line-height:1.45; }
+
+    /* Experience montage */
+    .v2-experience { background:#F2F1EA; color:#00080B; }
+    .v2-experience .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-experience .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-mosaic { display:grid; grid-template-columns:1.4fr .8fr .8fr; grid-template-rows:repeat(2,minmax(260px,36vw)); gap:10px; }
+    .v2-mosaic figure { position:relative; margin:0; overflow:hidden; background:#111; }
+    .v2-mosaic figure:first-child { grid-row:1 / span 2; }
+    .v2-mosaic img { width:100%; height:100%; object-fit:cover; transition:transform .65s var(--ease); }
+    .v2-mosaic figure:hover img { transform:scale(1.025); }
+    .v2-mosaic figcaption {
+      position:absolute; left:1rem; bottom:1rem; padding:.5rem .72rem;
+      background:rgba(0,8,11,.74); color:#F2F1EA; font-size:.58rem; letter-spacing:.1em; text-transform:uppercase;
+      backdrop-filter:blur(10px);
+    }
+
+    /* Partners */
+    .v2-partners { background:#00080B; }
+    .v2-partner-card {
+      display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,.42fr); gap:clamp(2rem,7vw,8rem);
+      padding:clamp(2rem,5vw,5rem); border:1px solid var(--line);
+      background:radial-gradient(circle at 85% 20%,rgba(209,68,20,.13),transparent 36%),#020D0F;
+    }
+    .v2-partner-card h2 {
+      margin:0; font-family:var(--serif); font-size:clamp(3rem,5vw,6rem); font-weight:400;
+      line-height:.94; letter-spacing:-.04em; text-transform:uppercase;
+    }
+    .v2-partner-card h2 em { color:#E97A43; }
+    .v2-partner-copy p { max-width:700px; color:rgba(242,241,234,.67); line-height:1.7; }
+    .v2-partner-outcomes { display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-partner-outcomes article { padding:1.2rem; background:#071315; }
+    .v2-partner-outcomes span { color:var(--ember); font-family:var(--display); font-size:.63rem; }
+    .v2-partner-outcomes h3 { margin:.45rem 0 .35rem; font-size:1rem; font-weight:500; }
+    .v2-partner-outcomes p { margin:0; color:rgba(242,241,234,.57); font-size:.75rem; line-height:1.55; }
+
+    /* Tickets */
+    .v2-tickets { background:#031C20; }
+    .v2-ticket-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-ticket { min-height:460px; padding:1.7rem; background:#031C20; display:flex; flex-direction:column; }
+    .v2-ticket.featured { background:#071d1c; }
+    .v2-ticket-type { color:var(--ember); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; }
+    .v2-ticket h3 { margin:2.4rem 0 .8rem; font-size:1.45rem; font-weight:500; letter-spacing:-.035em; }
+    .v2-ticket p { color:rgba(242,241,234,.62); line-height:1.6; font-size:.86rem; }
+    .v2-ticket-price { margin:1.4rem 0; }
+    .v2-ticket-price strong { display:block; font-family:var(--display); color:#E97A43; font-size:2.65rem; font-weight:400; letter-spacing:-.04em; }
+    .v2-ticket-price span { color:rgba(242,241,234,.48); font-size:.65rem; }
+    .v2-ticket .btn { margin-top:auto; }
+
+    /* Closing */
+    .v2-closing {
+      position:relative; min-height:76svh; display:flex; align-items:center; overflow:hidden;
+      background:url('/assets/closing-portal.png') center/cover no-repeat;
+    }
+    .v2-closing::after {
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg,rgba(0,8,11,.94),rgba(0,8,11,.72) 48%,rgba(0,8,11,.25));
+    }
+    .v2-closing-inner { position:relative; z-index:2; width:var(--container); margin-inline:auto; }
+    .v2-closing h2 {
+      max-width:900px; margin:0; font-family:var(--serif); font-size:clamp(3.2rem,5.9vw,7.5rem);
+      font-weight:400; line-height:.92; letter-spacing:-.045em; text-transform:uppercase;
+    }
+    .v2-closing h2 em { color:#E97A43; }
+
+    .v2-footer {
+      padding:3rem 0 7rem; border-top:1px solid var(--line); background:#00080B;
+    }
+    .v2-footer-grid {
+      display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:end;
+    }
+    .v2-footer img { width:auto; height:44px; }
+    .v2-footer p { max-width:560px; color:rgba(242,241,234,.5); font-size:.75rem; line-height:1.6; }
+    .v2-footer-links { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:1rem; }
+    .v2-footer-links a { color:rgba(242,241,234,.62); font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; }
+
+
+
+
+    /* Speakers & Co-Founders */
+    .v2-speakers { background:#F2F1EA; color:#00080B; }
+    .v2-speakers .v2-kicker { color:rgba(0,8,11,.55); }
+    .v2-speakers-head {
+      display:grid; grid-template-columns:minmax(0,1.15fr) minmax(300px,.55fr);
+      gap:clamp(2rem,5vw,5rem); align-items:end; margin-bottom:clamp(2.7rem,5vw,4.5rem);
+    }
+    .v2-speakers-head h2 {
+      margin:.65rem 0 0; max-width:820px;
+      font-family:var(--display); font-size:clamp(3.1rem,5.3vw,6.8rem);
+      line-height:.92; font-weight:400; text-transform:uppercase; letter-spacing:-.055em;
+    }
+    .v2-speakers-head h2 em { color:var(--ember); font-style:normal; }
+    .v2-speakers-intro p { margin:0 0 1.2rem; color:rgba(0,8,11,.63); font-size:.88rem; line-height:1.68; }
+    .v2-speakers .btn-dark {
+      background:#00080B; color:#F2F1EA; border-color:#00080B;
+    }
+    .v2-speakers .btn-dark:hover { background:#E97A43; border-color:#E97A43; color:#00080B; }
+    .v2-speaker-label-row {
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      margin-bottom:.9rem; padding-top:1rem; border-top:1px solid rgba(0,8,11,.18);
+      color:#00080B; text-transform:uppercase;
+    }
+    .v2-speaker-label-row > span { font-family:var(--display); font-size:.72rem; letter-spacing:.08em; }
+    .v2-speaker-label-row small { color:rgba(0,8,11,.42); font-size:.55rem; letter-spacing:.11em; }
+    .v2-cofounder-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .v2-speaker-lineup-label { margin-top:clamp(3.5rem,6vw,6rem); }
+    .v2-speaker-grid {
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px;
+    }
+    .v2-speaker-card { min-width:0; }
+    .v2-speaker-art {
+      position:relative; aspect-ratio:4/5; overflow:hidden; background:#071315;
+      border:1px solid rgba(0,8,11,.12);
+    }
+    .v2-speaker-art img {
+      position:relative; z-index:2; display:block; width:100%; height:100%; object-fit:cover;
+      transition:transform .5s var(--ease);
+    }
+    .v2-speaker-card:hover .v2-speaker-art img { transform:scale(1.018); }
+    .v2-speaker-fallback {
+      position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end;
+      padding:1.2rem; background:
+        radial-gradient(circle at 25% 10%,rgba(233,122,67,.68),transparent 38%),
+        linear-gradient(145deg,#071315 15%,#172c30 55%,#E97A43 135%);
+      color:#F2F1EA;
+    }
+    .v2-speaker-fallback strong {
+      font-family:var(--display); font-size:clamp(1.5rem,2.2vw,2.8rem);
+      line-height:.95; font-weight:400; text-transform:uppercase;
+    }
+    .v2-speaker-fallback span {
+      margin-top:.55rem; font-size:.56rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(242,241,234,.65);
+    }
+    .v2-speaker-meta { display:flex; justify-content:space-between; gap:.7rem; align-items:baseline; padding:.7rem .05rem 0; }
+    .v2-speaker-meta h3 { margin:0; font-family:var(--display); font-size:.92rem; font-weight:400; line-height:1.05; text-transform:uppercase; }
+    .v2-speaker-meta span { color:rgba(0,8,11,.46); font-size:.52rem; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+    .v2-speaker-more-wrap { display:flex; justify-content:center; margin-top:2rem; }
+
+    @media (max-width:1000px) {
+      .v2-speakers-head { grid-template-columns:1fr; gap:1.5rem; }
+      .v2-cofounder-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .v2-speaker-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
+    @media (max-width:720px) {
+      .v2-speakers-head h2 { font-size:clamp(2.8rem,13vw,4.6rem); }
+      .v2-cofounder-grid { grid-template-columns:1fr; gap:16px; }
+      .v2-speaker-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+      .v2-speaker-card-featured .v2-speaker-art { aspect-ratio:4/5; }
+      .v2-speaker-meta { align-items:flex-start; flex-direction:column; gap:.25rem; }
+      .v2-speaker-meta h3 { font-size:.88rem; }
+      .v2-speaker-label-row { align-items:flex-end; }
+    }
+    @media (max-width:480px) {
+      .v2-speaker-grid { grid-template-columns:1fr; gap:18px; }
+      .v2-speaker-meta h3 { font-size:1rem; }
+    }
+
+    /* Past TIF people */
+    .v2-past-people { background:#071315; }
+    .v2-past-people .v2-section-head { margin-bottom:clamp(2rem,4vw,3.5rem); }
+    .v2-past-people-grid {
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+      column-gap:18px; row-gap:34px;
+    }
+    .v2-past-person { min-width:0; }
+    .v2-past-person-image {
+      aspect-ratio:16/9; overflow:hidden; background:#0b1a1d;
+      border:1px solid rgba(242,241,234,.08); border-radius:5px;
+    }
+    .v2-past-person-image img {
+      display:block; width:100%; height:100%; object-fit:cover;
+      filter:saturate(.88) contrast(1.02);
+      transition:transform .45s var(--ease), filter .3s ease;
+    }
+    .v2-past-person:hover .v2-past-person-image img { transform:scale(1.025); filter:saturate(1) contrast(1.02); }
+    .v2-past-person-meta { padding-top:.65rem; }
+    .v2-past-person-meta h3 {
+      margin:0; font-family:var(--display); font-size:clamp(.9rem,1.05vw,1.15rem);
+      font-weight:400; line-height:1.05; letter-spacing:-.025em;
+    }
+    .v2-past-person-meta p {
+      margin:.2rem 0 0; color:rgba(242,241,234,.52);
+      font-size:.66rem; line-height:1.45;
+    }
+    @media (max-width:1000px) {
+      .v2-past-people-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:560px) {
+      .v2-past-people-grid { grid-template-columns:1fr; row-gap:24px; }
+      .v2-past-person-image { aspect-ratio:16/9; }
+      .v2-past-person-meta h3 { font-size:1rem; }
+      .v2-past-person-meta p { font-size:.72rem; }
+    }
+
+    /* V3: stronger human proof and archive */
+    .v2-hero-video { position:absolute; inset:-10%; z-index:0; overflow:hidden; opacity:.78; pointer-events:none; }
+    .v2-hero-video iframe { width:120%; height:120%; border:0; pointer-events:none; }
+    .v2-hero-fallback { position:absolute; inset:0; z-index:-1; }
+    .v2-hero-media::after { z-index:1; }
+    @media (max-width: 900px) { .v2-hero-video { display:none; } .v2-hero-fallback { z-index:0; } }
+    @media (prefers-reduced-motion: reduce) { .v2-hero-video { display:none; } .v2-hero-fallback { z-index:0; } }
+
+    .v2-people-grid { grid-template-columns:repeat(4,1fr); }
+    .v2-person-meta { min-height:118px; display:flex; flex-direction:column; align-items:flex-start; }
+    .v2-person-meta small { margin-top:auto; color:rgba(242,241,234,.42); font-family:var(--sans); font-size:.58rem; letter-spacing:.08em; text-transform:uppercase; }
+    .v2-people-cta { margin-top:2rem; display:flex; justify-content:flex-end; }
+
+    .v2-voices { background:#F2F1EA; color:#00080B; }
+    .v2-voices .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-voices .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-voice-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .v2-voice-card { position:relative; min-height:560px; overflow:hidden; background:#00080B; color:#F2F1EA; }
+    .v2-voice-card > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.78) contrast(1.03); }
+    .v2-voice-card::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,8,11,.96),rgba(0,8,11,.16) 70%); }
+    .v2-voice-card > div { position:absolute; z-index:2; inset:auto 1.4rem 1.4rem; }
+    .v2-voice-card span { color:#E97A43; font-size:.58rem; letter-spacing:.13em; text-transform:uppercase; }
+    .v2-voice-card blockquote { margin:.8rem 0 1rem; font-family:var(--display); font-size:clamp(1.75rem,2.2vw,3rem); line-height:1.02; }
+    .v2-voice-card p { margin:0; color:rgba(242,241,234,.7); font-size:.8rem; line-height:1.5; }
+    .v2-voice-memory blockquote { font-size:clamp(2rem,2.5vw,3.4rem); color:#E97A43; }
+
+    .v2-film-moments { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:2rem; }
+    .v2-film-moments figure { position:relative; margin:0; aspect-ratio:4/3; overflow:hidden; background:#000; }
+    .v2-film-moments img { width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease); }
+    .v2-film-moments figure:hover img { transform:scale(1.025); }
+    .v2-film-moments figcaption { position:absolute; left:.8rem; bottom:.8rem; padding:.4rem .55rem; background:rgba(0,8,11,.75); color:#F2F1EA; font-size:.55rem; letter-spacing:.1em; text-transform:uppercase; }
+
+    .v2-program-people { display:grid; grid-template-columns:minmax(280px,.45fr) 1fr; gap:2rem; margin-top:2rem; padding:1.2rem; border:1px solid var(--line); }
+    .v2-program-people-copy span { color:var(--ember); font-family:var(--display); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; }
+    .v2-program-people-copy h3 { margin:.5rem 0 .65rem; font-family:var(--display); font-size:1.35rem; font-weight:400; }
+    .v2-program-people-copy p { margin:0; color:rgba(242,241,234,.58); font-size:.78rem; line-height:1.5; }
+    .v2-program-faces { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; align-items:center; }
+    .v2-program-faces img { width:100%; aspect-ratio:1; object-fit:cover; object-position:center top; border-radius:50%; filter:saturate(.82); }
+
+    .v2-archive { background:#F2F1EA; color:#00080B; }
+    .v2-archive .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-archive .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-archive-grid { display:grid; grid-template-columns:1.25fr repeat(4,.72fr); gap:10px; }
+    .v2-archive-grid figure { position:relative; margin:0; min-height:440px; overflow:hidden; background:#111; }
+    .v2-archive-grid figure:first-child { min-height:560px; }
+    .v2-archive-grid img { width:100%; height:100%; object-fit:cover; filter:saturate(.88); }
+    .v2-archive-grid figcaption { position:absolute; inset:auto 1rem 1rem; padding-top:.8rem; border-top:1px solid rgba(255,255,255,.42); color:#fff; text-shadow:0 1px 12px rgba(0,0,0,.6); }
+    .v2-archive-grid figcaption span { display:block; font-size:.54rem; letter-spacing:.14em; text-transform:uppercase; }
+    .v2-archive-grid figcaption strong { display:block; margin-top:.35rem; font-family:var(--display); font-size:1.1rem; font-weight:400; }
+    .v2-archive-stats { display:grid; grid-template-columns:auto 1fr auto 1fr; gap:1rem 2rem; align-items:center; margin-top:2rem; padding:1.5rem 0; border-top:1px solid rgba(0,8,11,.18); border-bottom:1px solid rgba(0,8,11,.18); }
+    .v2-archive-stats strong { font-family:var(--display); color:var(--ember); font-size:clamp(2.2rem,3vw,4rem); font-weight:400; }
+    .v2-archive-stats span { color:rgba(0,8,11,.62); font-size:.74rem; }
+
+    .v2-history-wall { background:#fff; color:#00080B; }
+    .v2-history-wall .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-history-wall .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-history-group { padding:1.5rem 0 2rem; border-top:1px solid rgba(0,8,11,.14); }
+    .v2-history-group > span { display:block; margin-bottom:1.2rem; color:rgba(0,8,11,.52); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; }
+    .v2-name-wall { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(0,8,11,.12); border-left:1px solid rgba(0,8,11,.12); }
+    .v2-name-wall b { min-height:110px; display:flex; align-items:center; justify-content:center; padding:1rem; border-right:1px solid rgba(0,8,11,.12); border-bottom:1px solid rgba(0,8,11,.12); font-family:var(--sans); font-size:clamp(.8rem,1.05vw,1.15rem); font-weight:700; text-align:center; letter-spacing:-.02em; }
+    .v2-history-group.represented { margin-top:1rem; }
+
+    .v2-media { background:#00080B; }
+    .v2-media-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.5fr); gap:3rem; align-items:end; margin-bottom:2.5rem; }
+    .v2-media-head h2 { margin:0; font-family:var(--display); font-size:clamp(2.6rem,4vw,5.2rem); line-height:.98; font-weight:400; text-transform:uppercase; }
+    .v2-media-head h2 em { color:#E97A43; font-style:normal; }
+    .v2-media-head > p { margin:0; color:rgba(242,241,234,.62); }
+    .v2-media-names { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-media-names span { min-height:130px; display:flex; align-items:center; justify-content:center; padding:1.5rem; background:#071315; color:rgba(242,241,234,.88); font-family:var(--sans); font-size:clamp(.82rem,1.05vw,1.05rem); font-weight:600; text-align:center; letter-spacing:-.02em; }
+    .v2-exec-main img, .v2-exec-moments img, .v2-archive-grid img, .v2-mosaic img, .v2-film-moments img, .v2-voice-card > img { background:#071315; }
+
+    @media (max-width:1120px) {
+      .v2-people-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-archive-grid { grid-template-columns:repeat(3,1fr); }
+      .v2-archive-grid figure:first-child { grid-column:span 2; }
+      .v2-media-names { grid-template-columns:repeat(3,1fr); }
+    }
+    @media (max-width:900px) {
+      .v2-voice-grid { grid-template-columns:1fr; }
+      .v2-voice-card { min-height:440px; }
+      .v2-film-moments { grid-template-columns:repeat(2,1fr); }
+      .v2-program-people { grid-template-columns:1fr; }
+      .v2-program-faces { grid-template-columns:repeat(6,1fr); }
+      .v2-archive-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-archive-grid figure:first-child { grid-column:1/-1; }
+      .v2-name-wall { grid-template-columns:repeat(3,1fr); }
+      .v2-media-head { grid-template-columns:1fr; }
+    }
+    @media (max-width:640px) {
+      .v2-people-grid { grid-template-columns:1fr 1fr; }
+      .v2-person-meta { min-height:105px; }
+      .v2-person-meta span { font-size:.48rem; }
+      .v2-person-meta h3 { font-size:.8rem; }
+      .v2-film-moments { grid-template-columns:1fr 1fr; }
+      .v2-program-faces { grid-template-columns:repeat(3,1fr); }
+      .v2-archive-grid { grid-template-columns:1fr; }
+      .v2-archive-grid figure:first-child { grid-column:auto; min-height:430px; }
+      .v2-archive-grid figure { min-height:360px; }
+      .v2-archive-stats { grid-template-columns:auto 1fr; }
+      .v2-name-wall { grid-template-columns:repeat(2,1fr); }
+      .v2-name-wall b { min-height:92px; }
+      .v2-media-names { grid-template-columns:repeat(2,1fr); }
+      .v2-media-names span { min-height:100px; padding:1rem; }
+    }
+    @media (max-width: 1120px) {
+      .v2-people-grid { grid-template-columns:repeat(4,1fr); }
+      .v2-journey-grid, .v2-program-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-journey-card:nth-child(2) { border-right:0; }
+      .v2-journey-card:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+      .v2-program-grid .v2-day { min-height:420px; }
+    }
+    @media (max-width: 900px) {
+      .v2-hero-inner, .v2-section-head, .v2-whale-grid, .v2-partner-card { grid-template-columns:1fr; }
+      .v2-hero-proof { display:grid; grid-template-columns:repeat(3,1fr); margin-top:2.5rem; }
+      .v2-hero-proof article { display:block; padding:1rem; border-right:1px solid rgba(242,241,234,.15); }
+      .v2-hero-proof article:last-child { border-right:0; }
+      .v2-people-grid { grid-template-columns:repeat(3,1fr); }
+      .v2-proof-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-proof-grid article:nth-child(2) { border-right:0; }
+      .v2-proof-grid article:nth-child(-n+2) { border-bottom:1px solid rgba(0,8,11,.13); }
+      .v2-ticket-grid { grid-template-columns:1fr; }
+      .v2-ticket { min-height:0; }
+      .v2-whale-media { min-height:520px; }
+      .v2-mosaic { grid-template-columns:1fr 1fr; grid-template-rows:420px 300px 300px; }
+      .v2-mosaic figure:first-child { grid-column:1 / -1; grid-row:auto; }
+    }
+    @media (max-width: 720px) {
+      body { padding-bottom:0; }
+      .site-header { grid-template-columns:1fr auto; padding:1rem 5vw; }
+      .brand-logo { height:38px; }
+      .header-actions { display:none; }
+      .nav-toggle { display:flex; justify-self:end; }
+      .site-nav {
+        position:fixed; inset:0; z-index:120; display:flex; flex-direction:column; justify-content:center;
+        gap:1.5rem; padding:6rem 2rem; background:rgba(0,8,11,.98); opacity:0; pointer-events:none;
+        transform:translateY(-12px); transition:.25s ease;
+      }
+      body.v2-nav-open .site-nav { opacity:1; pointer-events:auto; transform:none; }
+      .site-nav a { font-size:1rem; }
+      body.v2-nav-open .nav-toggle { position:fixed; top:20px; right:20px; z-index:140; }
+      .v2-hero-inner { padding-top:calc(var(--header) + 6rem); }
+      .v2-hero-copy .v2-title { font-size:clamp(2.75rem,12vw,4.6rem); line-height:.96; }
+      .v2-hero-proof { grid-template-columns:1fr; }
+      .v2-hero-proof article { display:grid; grid-template-columns:90px 1fr; border-right:0; }
+      .v2-watch { display:none; }
+      .v2-people-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-person-meta h3 { font-size:.86rem; }
+      .v2-journey-grid, .v2-program-grid { grid-template-columns:1fr; }
+      .v2-journey-card { min-height:260px; border-right:0; border-bottom:1px solid var(--line); }
+      .v2-journey-card:last-child { border-bottom:0; }
+      .v2-day { min-height:0; }
+      .v2-mosaic { grid-template-columns:1fr; grid-template-rows:repeat(5,300px); }
+      .v2-mosaic figure:first-child { grid-column:auto; }
+      .v2-whale-media { min-height:430px; }
+      .v2-whale-stats { grid-template-columns:1fr; }
+      .v2-whale-stats div, .v2-whale-stats div:nth-child(2n), .v2-whale-stats div:nth-child(n+3) {
+        border-right:0; border-bottom:1px solid var(--line);
+      }
+      .v2-whale-stats div:last-child { border-bottom:0; }
+      .v2-partner-card { padding:1.5rem; }
+      .v2-footer-grid { grid-template-columns:1fr; }
+      .v2-footer-links { justify-content:flex-start; }
+      .v2-film-caption { grid-template-columns:1fr; }
+    }
+    @media (max-width: 480px) {
+      .v2-people-grid { grid-template-columns:1fr 1fr; }
+      .v2-proof-grid { grid-template-columns:1fr; }
+      .v2-proof-grid article { border-right:0 !important; border-bottom:1px solid rgba(0,8,11,.13); }
+      .v2-proof-grid article:last-child { border-bottom:0; }
+    }
+  
+
+    /* Historical people */
+    .v2-past-people { background:#00080B; }
+    .v2-past-people-grid {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:clamp(1.5rem,2.3vw,2.7rem) clamp(1rem,1.6vw,1.5rem);
+    }
+    .v2-past-person { min-width:0; }
+    .v2-past-person-image {
+      aspect-ratio:16/9; overflow:hidden; background:#071315;
+      border:1px solid rgba(242,241,234,.09); border-radius:6px;
+    }
+    .v2-past-person-image img {
+      display:block; width:100%; height:100%; object-fit:cover;
+      filter:saturate(.82) contrast(1.02);
+      transition:transform .45s var(--ease), filter .3s ease;
+    }
+    .v2-past-person:hover .v2-past-person-image img {
+      transform:scale(1.025); filter:saturate(1) contrast(1.02);
+    }
+    .v2-past-person h3 {
+      margin:.72rem 0 .15rem; font-family:var(--display);
+      font-size:clamp(.88rem,1vw,1.08rem); line-height:1.05;
+      font-weight:400; letter-spacing:-.02em;
+    }
+    .v2-past-person p {
+      margin:0; color:rgba(242,241,234,.5);
+      font-size:.64rem; line-height:1.45;
+    }
+    .v2-past-people-note {
+      margin:2.2rem 0 0; padding-top:1rem;
+      border-top:1px solid var(--line); color:rgba(242,241,234,.38);
+      font-size:.58rem; letter-spacing:.04em;
+    }
+    @media (max-width:900px) {
+      .v2-past-people-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:480px) {
+      .v2-past-people-grid { gap:1.25rem .7rem; }
+      .v2-past-person-image { border-radius:4px; }
+      .v2-past-person h3 { margin-top:.55rem; font-size:.8rem; }
+      .v2-past-person p { font-size:.58rem; }
+      .v2-past-people-note { margin-top:1.6rem; }
+    }
+
+
+    /* Mobile interaction polish */
+    @media (max-width: 720px) {
+      body.v2-nav-open {
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+      .site-nav a,
+      .site-nav .lang-toggle {
+        min-height: 44px;
+      }
+      .site-nav a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: .55rem 0;
+      }
+      .site-nav .lang-toggle {
+        margin-top: .6rem;
+        padding-inline: 1rem;
+      }
+      .v2-person-meta span,
+      .v2-person-meta small {
+        font-size: .55rem;
+        line-height: 1.35;
+      }
+      .v2-person-meta h3 {
+        font-size: .9rem;
+        line-height: 1.15;
+      }
+      .v2-past-person-meta p {
+        font-size: .66rem;
+      }
+    }
+    @media (max-width: 520px) {
+      .v2-hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .v2-hero-actions .btn {
+        width: 100%;
+      }
+      .v2-countdown-grid span {
+        font-size: .56rem;
+        line-height: 1.2;
+      }
+      .v2-countdown-date {
+        font-size: .62rem;
+      }
+    }
+
+    /* Final mobile QA overrides */
+    @media (max-width: 768px) {
+      .v2-section { padding: clamp(4.25rem, 12vw, 6rem) 0; }
+      .v2-section-head { gap: 1.3rem; margin-bottom: 2.2rem; }
+      .v2-section-head h2 { font-size: clamp(2.15rem, 9.6vw, 3.7rem); line-height: .98; }
+      .v2-section-head > p { font-size: .9rem; line-height: 1.62; }
+
+      .v2-exec-main { min-height: 520px; }
+      .v2-exec-main figcaption { left: 1rem; right: 1rem; bottom: 1rem; }
+      .v2-exec-moments { grid-template-columns: 1fr; }
+      .v2-exec-moments figure { aspect-ratio: 4 / 5; min-height: 0; }
+
+      .v2-program-hero { min-height: 520px; margin-bottom: 12px; }
+      .v2-program-grid { grid-template-columns: 1fr; }
+      .v2-day { min-height: 0; }
+      .v2-program-faces { grid-template-columns: repeat(3, 1fr); }
+
+      .v2-mosaic {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 10px;
+      }
+      .v2-mosaic figure,
+      .v2-mosaic figure:first-child {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 340px;
+      }
+      .v2-mosaic figure:first-child { min-height: 500px; }
+
+      .v2-archive-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .v2-archive-grid figure,
+      .v2-archive-grid figure:first-child {
+        grid-column: auto;
+        min-height: 250px;
+      }
+      .v2-archive-grid figure:first-child { grid-column: 1 / -1; min-height: 320px; }
+      .v2-archive-grid figcaption { left: .75rem; right: .75rem; bottom: .75rem; }
+
+      .v2-name-wall { grid-template-columns: repeat(2, 1fr); }
+      .v2-media-names { grid-template-columns: 1fr 1fr; }
+      .v2-media-names span { min-height: 92px; padding: .9rem; }
+
+      .v2-ticket-grid { grid-template-columns: 1fr; }
+      .v2-ticket { min-height: 0; }
+    }
+    @media (max-width: 480px) {
+      .v2-exec-main { min-height: 470px; }
+      .v2-program-hero { min-height: 470px; }
+      .v2-mosaic figure,
+      .v2-mosaic figure:first-child { min-height: 300px; }
+      .v2-mosaic figure:first-child { min-height: 440px; }
+      .v2-archive-grid { grid-template-columns: 1fr; }
+      .v2-archive-grid figure,
+      .v2-archive-grid figure:first-child { grid-column: auto; min-height: 300px; }
+    }
+
+</style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Event",
+    "name":"Tulum Innovation Fest 2026",
+    "startDate":"2026-12-09",
+    "endDate":"2026-12-12",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "description":"A four-day gathering connecting innovation, capital, culture and human connection in Tulum, Mexico.",
+    "image":"https://www.tuluminnovationfest.com/assets/hero-desktop.png",
+    "url":"https://www.tuluminnovationfest.com/",
+    "location":{"@type":"Place","name":"Tulum, Mexico","address":{"@type":"PostalAddress","addressLocality":"Tulum","addressRegion":"Quintana Roo","addressCountry":"MX"}},
+    "organizer":{"@type":"Organization","name":"Tulum Innovation Fest","url":"https://www.tuluminnovationfest.com/"}
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="Tulum Innovation Fest home">
+      <img class="brand-logo" src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" />
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-v2-nav>
+      <span></span><span></span><span></span><span class="sr-only">Menu</span>
+    </button>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#speakers"><span data-en>Speakers</span><span data-es>Speakers</span></a>
+      <a href="#experience"><span data-en>Experience</span><span data-es>Experiencia</span></a>
+      <a href="#program"><span data-en>Program</span><span data-es>Programa</span></a>
+      <a href="/whale-tank"><span data-en>Whale Tank</span><span data-es>Whale Tank</span></a>
+      <a href="/sponsorship"><span data-en>Partners</span><span data-es>Partners</span></a>
+      <a href="#tickets"><span data-en>Tickets</span><span data-es>Boletos</span></a>
+      <button class="lang-toggle" type="button" data-v2-lang aria-label="Cambiar idioma">
+        <span>EN</span><span aria-hidden="true">/</span><span>ES</span>
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-small" href="/sponsorship"><span data-en>Partner with TIF</span><span data-es>Ser partner</span></a>
+      <a class="btn btn-primary btn-small" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Get tickets</span><span data-es>Comprar boletos</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="v2-hero" id="top">
+      <div class="v2-hero-media" aria-hidden="true">
+        <picture class="v2-hero-fallback">
+          <source media="(max-width: 720px)" srcset="/assets/hero-mobile.png" />
+          <img src="/assets/hero-desktop.png" alt="" />
+        </picture>
+        <div class="v2-hero-video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/dpGSCLE_m98?autoplay=1&mute=1&controls=0&loop=1&playlist=dpGSCLE_m98&modestbranding=1&playsinline=1&rel=0&start=72"
+            title=""
+            tabindex="-1"
+            allow="autoplay; encrypted-media; picture-in-picture"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="v2-hero-inner">
+        <div class="v2-hero-copy">
+          <p class="v2-hero-date">
+            <span data-en>December 9–12, 2026 · Tulum, Mexico</span>
+            <span data-es>9–12 de diciembre, 2026 · Tulum, México</span>
+          </p>
+
+          <h1 class="v2-title">
+            <span data-en>Innovation, capital & culture</span>
+            <span data-es>Innovación, capital y cultura</span><br />
+            <em><span data-en>meet in Tulum.</span><span data-es>se encuentran en Tulum.</span></em>
+          </h1>
+
+          <p class="v2-lede">
+            <span data-en>Four days with founders, investors, operators and creators building relationships around ideas, capital and shared experience.</span>
+            <span data-es>Cuatro días con founders, inversionistas, operadores y creadores construyendo relaciones alrededor de ideas, capital y experiencias compartidas.</span>
+          </p>
+
+          <div class="v2-hero-actions">
+            <a class="btn btn-primary" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">
+              <span data-en>Get festival access</span><span data-es>Comprar acceso</span>
+            </a>
+            <a class="btn btn-ghost" href="/whale-tank">
+              <span data-en>Explore Whale Tank</span><span data-es>Explorar Whale Tank</span>
+            </a>
+          </div>
+
+          <p class="v2-hero-note">
+            <span data-en>Limited capacity · Four-day programming · Day-to-night experience</span>
+            <span data-es>Cupo limitado · Cuatro días de programa · Experiencia de día y noche</span>
+          </p>
+        </div>
+
+        <aside class="v2-hero-countdown" aria-label="Countdown to TIF 2026" data-countdown>
+          <p class="v2-countdown-kicker">
+            <span data-en>Until TIF 2026</span><span data-es>Para TIF 2026</span>
+          </p>
+          <div class="v2-countdown-grid" aria-live="off">
+            <article><strong data-countdown-days>00</strong><span data-en>Days</span><span data-es>Días</span></article>
+            <article><strong data-countdown-hours>00</strong><span data-en>Hours</span><span data-es>Horas</span></article>
+            <article><strong data-countdown-minutes>00</strong><span data-en>Minutes</span><span data-es>Minutos</span></article>
+            <article><strong data-countdown-seconds>00</strong><span data-en>Seconds</span><span data-es>Segundos</span></article>
+          </div>
+          <p class="v2-countdown-date">
+            <span data-en>December 9 · Tulum</span><span data-es>9 de diciembre · Tulum</span>
+          </p>
+        </aside>
+      </div>
+
+      <a class="v2-watch" href="#film"><i></i><span data-en>Watch the experience</span><span data-es>Ver la experiencia</span></a>
+    </section>
+
+    <section class="v2-proof-strip" aria-label="TIF proof">
+      <div class="container v2-proof-grid">
+        <article><strong>5</strong><span data-en>Editions since 2022</span><span data-es>Ediciones desde 2022</span></article>
+        <article><strong>5,700+</strong><span data-en>Festival entries</span><span data-es>Entradas al festival</span></article>
+        <article><strong>4</strong><span data-en>Days of programming</span><span data-es>Días de programación</span></article>
+        <article><strong>1</strong><span data-en>Curated community</span><span data-es>Comunidad curada</span></article>
+      </div>
+    </section>
+
+
+    <section class="wt-logo-strip" aria-labelledby="wt-logo-title" data-logo-strip>
+      <div class="container wt-logo-heading">
+        <h2 id="wt-logo-title"><span data-en>Whale Tank community</span><span data-es>Comunidad Whale Tank</span></h2>
+        <button class="wt-logo-control" type="button" aria-controls="wt-logo-track" data-logo-control hidden>
+          <span data-logo-pause><span data-en>Pause</span><span data-es>Pausar</span></span>
+          <span data-logo-resume hidden><span data-en>Resume</span><span data-es>Continuar</span></span>
+        </button>
+      </div>
+      <div class="wt-logo-viewport" tabindex="0" role="region" aria-labelledby="wt-logo-title">
+        <div class="wt-logo-track" id="wt-logo-track">
+          <ul class="wt-logo-group">
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/contxto-blanco.webp" alt="Contxto" width="1200" height="495" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/anahuac-blanco.webp" alt="Anáhuac" width="1138" height="1200" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/tecnologico-de-monterrey-blanco.webp" alt="Tecnológico de Monterrey" width="1200" height="358" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/pro-network-blanco.webp" alt="PRO Network" width="1200" height="369" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/mundo-ejecutivo-blanco.webp" alt="Mundo Ejecutivo" width="1200" height="404" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/soy-emprendedor-blanco.webp" alt="Soy Emprendedor" width="1200" height="237" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/geektime-blanco.webp" alt="Geektime" width="1200" height="316" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/techla-blanco.webp" alt="Techla" width="1200" height="220" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/prenseable-blanco.webp" alt="Prenseable" width="1200" height="292" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/startups-latam-blanco.webp" alt="Startups Latam" width="1200" height="578" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/abe-blanco.webp" alt="abe." width="1200" height="441" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/qroom-blanco.webp" alt="QROOM.BIZ" width="1200" height="798" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/aws-blanco.webp" alt="AWS" width="1200" height="741" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/chris-roe-blanco.webp" alt="Chris Roe" width="1200" height="640" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/startuplinks-blanco.webp" alt="Startuplinks" width="1200" height="247" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/gust-blanco.webp" alt="Gust" width="1200" height="1077" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/impacta-vc-blanco.webp" alt="Impacta.vc" width="1200" height="369" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/dalus-capital-blanco.webp" alt="Dalus Capital" width="1200" height="348" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/arkangeles-blanco.webp" alt="Arkangeles" width="1200" height="178" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/angelhub-blanco.webp" alt="AngelHub" width="1200" height="254" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/401-accelerator-blanco.webp" alt="401 Accelerator" width="1200" height="467" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/catalizalab-blanco.webp" alt="CatalizaLab" width="1200" height="242" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/andres-najera-blanco.webp" alt="Andrés Nájera" width="1200" height="189" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/m75-blanco.webp" alt="M75" width="1200" height="523" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/startups-asociacion-internacional-blanco.webp" alt="Startups Asociación Internacional" width="1200" height="559" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/red-business-market-blanco.webp" alt="Red Business Market" width="1200" height="540" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/tiendanube-blanco.webp" alt="Tiendanube" width="1200" height="251" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/parquetec-mexico-blanco.webp" alt="ParqueTec México" width="1200" height="451" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/family-office-network-blanco.webp" alt="Family Office Network (FON)" width="1200" height="268" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/soglowek-capital-blanco.webp" alt="Soglowek Capital" width="1200" height="992" decoding="async" /></li>
+            <li class="wt-logo-item"><img src="/assets/whale-tank-logos/notion-blanco.webp" alt="Notion" width="1147" height="1200" decoding="async" /></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-speakers v2-section" id="speakers" aria-labelledby="speakers-title">
+      <div class="container">
+        <div class="v2-speakers-head">
+          <div>
+            <p class="v2-kicker">TIF 2026 · Speakers & Co-Founders</p>
+            <h2 id="speakers-title"><span data-en>The people shaping the</span><span data-es>Las personas que están dando forma a la</span> <em><span data-en>conversation.</span><span data-es>conversación.</span></em></h2>
+          </div>
+          <div class="v2-speakers-intro">
+            <p><span data-en>TIF brings together founders, operators, investors, thinkers and creators across technology, capital and culture. This lineup will continue growing as new voices are confirmed.</span><span data-es>TIF reúne founders, operadores, inversionistas, pensadores y creadores alrededor de tecnología, capital y cultura. Este lineup seguirá creciendo conforme se confirmen nuevas voces.</span></p>
+            <a class="btn btn-dark" href="#program"><span data-en>Explore the program</span><span data-es>Ver el programa</span></a>
+          </div>
+        </div>
+
+        <div class="v2-speaker-label-row">
+          <span><span data-en>Co-Founders</span><span data-es>Co-Founders</span></span>
+          <small><span data-en>Building TIF 2026</span><span data-es>Construyendo TIF 2026</span></small>
+        </div>
+
+        <div class="v2-cofounder-grid">
+          <article class="v2-speaker-card v2-speaker-card-featured">
+            <div class="v2-speaker-art">
+              <img src="/assets/tif-home-v2/speaker-alejandro-glatt.webp" alt="Alejandro Glatt, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
+              <div class="v2-speaker-fallback"><strong>Alejandro Glatt</strong><span>Speaker / Co-Founder</span></div>
+            </div>
+            <div class="v2-speaker-meta"><h3>Alejandro Glatt</h3><span>Speaker / Co-Founder</span></div>
+          </article>
+          <article class="v2-speaker-card v2-speaker-card-featured">
+            <div class="v2-speaker-art">
+              <img src="/assets/tif-home-v2/speaker-alexis-soubran.webp" alt="Alexis Soubran, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
+              <div class="v2-speaker-fallback"><strong>Alexis Soubran</strong><span>Speaker / Co-Founder</span></div>
+            </div>
+            <div class="v2-speaker-meta"><h3>Alexis Soubran</h3><span>Speaker / Co-Founder</span></div>
+          </article>
+          <article class="v2-speaker-card v2-speaker-card-featured">
+            <div class="v2-speaker-art">
+              <img src="/assets/tif-home-v2/speaker-gustavo-bolotin.webp" alt="Gustavo Bolotin, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
+              <div class="v2-speaker-fallback"><strong>Gustavo Bolotin</strong><span>Speaker / Co-Founder</span></div>
+            </div>
+            <div class="v2-speaker-meta"><h3>Gustavo Bolotin</h3><span>Speaker / Co-Founder</span></div>
+          </article>
+        </div>
+
+        <div class="v2-speaker-label-row v2-speaker-lineup-label">
+          <span><span data-en>Speaker lineup</span><span data-es>Speaker lineup</span></span>
+          <small><span data-en>More announcements coming</span><span data-es>Más anuncios próximamente</span></small>
+        </div>
+
+        <div class="v2-speaker-grid" data-speaker-grid>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-don-cohen.webp" alt="Don Cohen, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Don Cohen</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Don Cohen</h3><span>Speaker</span></div>
+          </article>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-elo-cadenas.webp" alt="Elo Cadenas, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Elo Cadenas</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Elo Cadenas</h3><span>Speaker</span></div>
+          </article>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-mujer-capital.webp" alt="Mujer Capital, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Mujer Capital</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Mujer Capital</h3><span>Speaker</span></div>
+          </article>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-uri-soglowek.webp" alt="Uri Soglowek, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Uri Soglowek</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Uri Soglowek</h3><span>Speaker</span></div>
+          </article>
+          <article class="v2-speaker-card">
+            <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-yehuda-berg.webp" alt="Yehuda Berg, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Yehuda Berg</strong><span>Speaker</span></div></div>
+            <div class="v2-speaker-meta"><h3>Yehuda Berg</h3><span>Speaker</span></div>
+          </article>
+        </div>
+
+        <div class="v2-speaker-more-wrap">
+          <button class="btn btn-dark" type="button" data-speaker-more hidden>
+            <span data-speaker-more-show><span data-en>Show all speakers</span><span data-es>Ver todos los speakers</span></span>
+            <span data-speaker-more-hide hidden><span data-en>Show fewer</span><span data-es>Ver menos</span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-people v2-section" id="people">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Whale Tank network</span><span data-es>Red de Whale Tank</span></p>
+            <h2><span data-en>Investors & mentors around</span><span data-es>Inversionistas y mentores alrededor de</span> <em>Whale Tank.</em></h2>
+          </div>
+          <p>
+            <span data-en>A selected group of investors and mentors participating around Whale Tank 2026.</span>
+            <span data-es>Un grupo seleccionado de inversionistas y mentores que participan alrededor de Whale Tank 2026.</span>
+          </p>
+        </div>
+
+        <div class="v2-people-grid">
+          <a class="v2-person" href="https://www.linkedin.com/in/josu-gomez-barrutia-4bb43a63/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/josu-gomez.webp" alt="Josu Gomez" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Josu Gomez</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/pamela-jramoy-6b15905/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/pamela-jramoy.webp" alt="Pamela Jramoy" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Pamela Jramoy</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/matibarbero/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/mati-barbero.webp" alt="Mati Barbero" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Mati Barbero</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/diegoserebrisky/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/diego-serebrisky.webp" alt="Diego Serebrisky" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Diego Serebrisky</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/santiagotamayodaza-01/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/santiago-tamayo.webp" alt="Santiago Tamayo" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Santiago Tamayo</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/chrisroecoach/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/chris-roe.webp" alt="Chris Roe" loading="lazy" /></div><div class="v2-person-meta"><span>Host & Mentor · Whale Tank 2026</span><h3>Chris Roe</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/alexsantanag/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/alex-santana.webp" alt="Alex Santana" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor · Whale Tank 2026</span><h3>Alex Santana</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/abe-ramos-p/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/abraham-abe-ramos.webp" alt="Abraham Abe Ramos" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor · Whale Tank 2026</span><h3>Abraham (Abe) Ramos</h3><small>↗ LinkedIn</small></div></a>
+        </div>
+        <div class="v2-people-cta"><a class="btn btn-ghost" href="/whale-tank#investors"><span data-en>Meet more investors & mentors</span><span data-es>Conoce más inversionistas y mentores</span></a></div>
+      </div>
+    </section>
+
+    <section class="v2-voices v2-section" aria-labelledby="voices-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Voices & moments</span><span data-es>Voces y momentos</span></p>
+            <h2 id="voices-title"><span data-en>What people remember</span><span data-es>Lo que la gente recuerda</span> <em><span data-en>after Tulum.</span><span data-es>después de Tulum.</span></em></h2>
+          </div>
+          <p><span data-en>Social proof should feel human: short quotes, real archive imagery and recognizable names from previous editions.</span><span data-es>El social proof debe sentirse humano: citas cortas, archivo real y nombres reconocibles de ediciones anteriores.</span></p>
+        </div>
+        <div class="v2-voice-grid">
+          <article class="v2-voice-card">
+            <img src="/assets/sponsorship/community-2023.webp" alt="Community at a previous TIF edition" loading="lazy" />
+            <div><span>Previous edition</span><blockquote>“The Burning Man of crypto conferences.”</blockquote><p>Immanuel Cape</p></div>
+          </article>
+          <article class="v2-voice-card">
+            <img src="/assets/sponsorship/founder-conversation.webp" alt="Founder conversation at TIF" loading="lazy" />
+            <div><span>Previous edition</span><blockquote><span data-en>“A platform built to turn ideas into something real.”</span><span data-es>“La plataforma perfecta para materializar.”</span></blockquote><p>Peiman</p></div>
+          </article>
+          <article class="v2-voice-card v2-voice-memory">
+            <img src="/assets/sponsorship/live-performance.webp" alt="Live performance at a previous TIF edition" loading="lazy" />
+            <div><span>Live at TIF</span><blockquote>Scott Page</blockquote><p><span data-en>Music and culture are part of the festival experience.</span><span data-es>La música y la cultura forman parte de la experiencia del festival.</span></p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-film v2-section" id="film">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>The experience</span><span data-es>La experiencia</span></p>
+            <h2><span data-en>See what four days in</span><span data-es>Mira cómo se viven cuatro días en</span> <em>Tulum.</em></h2>
+          </div>
+          <p>
+            <span data-en>The stage is only one part of the festival. Conversations continue through shared tables, nature, music, founder sessions and the night program.</span>
+            <span data-es>El escenario es solo una parte del festival. Las conversaciones continúan en mesas compartidas, naturaleza, música, sesiones de founders y el programa nocturno.</span>
+          </p>
+        </div>
+
+        <div class="v2-film-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/dpGSCLE_m98?rel=0&modestbranding=1" title="Tulum Innovation Fest experience film" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="v2-film-caption">
+          <p><span data-en>Real moments from previous editions: talks, founders, music, community and Tulum.</span><span data-es>Momentos reales de ediciones anteriores: charlas, founders, música, comunidad y Tulum.</span></p>
+          <span>TIF FILM / 01</span>
+        </div>
+        <div class="v2-film-moments" aria-label="Previous edition moments">
+          <figure><img src="/assets/sponsorship/founder-stage.webp" alt="Founder on stage at TIF" loading="lazy" /><figcaption>Founders</figcaption></figure>
+          <figure><img src="/assets/sponsorship/networking.webp" alt="Networking at TIF" loading="lazy" /><figcaption>Connections</figcaption></figure>
+          <figure><img src="/assets/sponsorship/night-program.webp" alt="Night program at TIF" loading="lazy" /><figcaption>Night program</figcaption></figure>
+          <figure><img src="/assets/sponsorship/hospitality-activation.webp" alt="Hospitality activation at TIF" loading="lazy" /><figcaption>Hospitality</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-journeys v2-section" id="experience">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Choose your TIF</span><span data-es>Elige tu TIF</span></p>
+            <h2><span data-en>Four clear ways to</span><span data-es>Cuatro formas claras de</span> <em><span data-en>participate.</span><span data-es>participar.</span></em></h2>
+          </div>
+          <p>
+            <span data-en>Each audience gets a distinct journey, so tickets, founder programs, investor access and partnerships do not compete for attention on the same page.</span>
+            <span data-es>Cada audiencia tiene un journey distinto, para que boletos, founders, inversionistas y partners tengan una ruta clara.</span>
+          </p>
+        </div>
+
+        <div class="v2-journey-grid">
+          <a class="v2-journey-card" href="#tickets"><span>01 / ATTEND</span><i>↘</i><h3><span data-en>Come for the festival</span><span data-es>Ven al festival</span></h3><p><span data-en>Four days of talks, community, culture and shared experiences.</span><span data-es>Cuatro días de charlas, comunidad, cultura y experiencias compartidas.</span></p></a>
+          <a class="v2-journey-card" href="/whale-tank"><span>02 / BUILD</span><i>↗</i><h3><span data-en>Build with Whale Tank</span><span data-es>Construye con Whale Tank</span></h3><p><span data-en>Founder preparation, mentorship, investor readiness and the Grand Final.</span><span data-es>Preparación, mentoría, investor readiness y Grand Final.</span></p></a>
+          <a class="v2-journey-card" href="/whale-tank#investors"><span>03 / INVEST</span><i>↗</i><h3><span data-en>Meet curated founders</span><span data-es>Conoce founders curados</span></h3><p><span data-en>Get closer to founders through structured meetings and shared programming.</span><span data-es>Acércate a founders mediante reuniones estructuradas y programación compartida.</span></p></a>
+          <a class="v2-journey-card" href="/sponsorship"><span>04 / PARTNER</span><i>↗</i><h3><span data-en>Build a brand presence</span><span data-es>Construye presencia de marca</span></h3><p><span data-en>Access, hospitality, content, activations and corporate innovation opportunities.</span><span data-es>Acceso, hospitality, contenido, activaciones y oportunidades de innovación corporativa.</span></p></a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="v2-executive v2-section" id="executive" aria-labelledby="executive-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Executive experience</span><span data-es>Experiencia ejecutiva</span></p>
+            <h2 id="executive-title"><span data-en>Why executives come to</span><span data-es>Por qué los ejecutivos vienen a</span> <em>Tulum.</em></h2>
+          </div>
+          <p>
+            <span data-en>The value comes from having enough time and context to meet the right people. TIF combines structured content, founder access, smaller conversations and hospitality across four days.</span>
+            <span data-es>El valor viene de tener tiempo y contexto para conocer a las personas correctas. TIF combina contenido, acceso a founders, conversaciones en grupos más pequeños y hospitality durante cuatro días.</span>
+          </p>
+        </div>
+
+        <div class="v2-exec-layout">
+          <figure class="v2-exec-main">
+            <picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/executive-experience-mobile.webp" />
+              <img src="/assets/tif-home-v2/executive-experience-desktop.webp" alt="Two attendees networking over drinks during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span><strong><span data-en>High-context networking</span><span data-es>Networking con contexto</span></strong></figcaption>
+          </figure>
+
+          <div class="v2-exec-reasons">
+            <article><span>01</span><h3>Curated access</h3><p><span data-en>Founders, investors and operators in a limited-capacity environment designed for repeated interaction.</span><span data-es>Founders, inversionistas y operadores en un entorno de capacidad limitada que permite interacciones recurrentes.</span></p></article>
+            <article><span>02</span><h3>Capital & dealflow</h3><p><span data-en>Whale Tank, investor conversations and founder discovery give capital a defined place in the week.</span><span data-es>Whale Tank, conversaciones con inversionistas y descubrimiento de founders dan al capital un espacio definido durante la semana.</span></p></article>
+            <article><span>03</span><h3>Corporate innovation</h3><p><span data-en>Brands can meet startups, explore use cases and develop partnerships around real business priorities.</span><span data-es>Las marcas pueden conocer startups, explorar casos de uso y desarrollar partnerships alrededor de prioridades reales de negocio.</span></p></article>
+            <article><span>04</span><h3>Hospitality & culture</h3><p><span data-en>Shared tables, nature and evening programming create more time for relationships beyond formal sessions.</span><span data-es>Mesas compartidas, naturaleza y programación nocturna generan más tiempo para relaciones fuera de las sesiones formales.</span></p></article>
+          </div>
+        </div>
+
+        <div class="v2-exec-moments">
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/panel-discussion-mobile.webp" />
+              <img src="/assets/tif-home-v2/panel-discussion-desktop.webp" alt="Panel discussion during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong><span data-en>Talks & panels</span><span data-es>Charlas y paneles</span></strong></figcaption></figure>
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/workshop-community-mobile.webp" />
+              <img src="/assets/tif-home-v2/workshop-community-desktop.webp" alt="Attendee taking notes during a workshop at a previous TIF edition" loading="lazy" decoding="async" />
+            </picture><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong><span data-en>Workshops & community</span><span data-es>Workshops y comunidad</span></strong></figcaption></figure>
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/night-experience-mobile.webp" />
+              <img src="/assets/tif-home-v2/night-experience-desktop.webp" alt="Night DJ and crowd during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong><span data-en>Night program</span><span data-es>Programa nocturno</span></strong></figcaption></figure>
+        </div>
+
+        <div class="v2-exec-actions">
+          <a class="btn btn-primary" href="#tickets"><span data-en>Explore executive access</span><span data-es>Explorar acceso ejecutivo</span></a>
+          <a class="btn btn-ghost v2-exec-ghost" href="/sponsorship"><span data-en>Partner with TIF</span><span data-es>Ser partner de TIF</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-program v2-section" id="program">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker">December 9–12, 2026</p>
+            <h2><span data-en>Four days with a</span><span data-es>Cuatro días con una</span> <em><span data-en>clear rhythm.</span><span data-es>secuencia clara.</span></em></h2>
+          </div>
+          <p>
+            <span data-en>The home shows the shape of the week. The complete agenda lives on the program page as sessions and speakers are confirmed.</span>
+            <span data-es>El home muestra la forma de la semana. La agenda completa vive en el programa conforme se confirman sesiones y speakers.</span>
+          </p>
+        </div>
+
+        <figure class="v2-program-hero">
+          <picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/program-hero-mobile.webp" />
+              <img src="/assets/tif-home-v2/program-hero-desktop.webp" alt="Speaker presentation with audience during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture>
+          <figcaption>
+            <span><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></span>
+            <strong><span data-en>Ideas in the room</span><span data-es>Ideas en la sala</span></strong>
+          </figcaption>
+        </figure>
+
+        <div class="v2-program-grid">
+          <article class="v2-day"><span class="v2-day-num">01</span><span class="v2-day-date">Wed · Dec 09</span><h3><span data-en>Welcome & Community</span><span data-es>Bienvenida y comunidad</span></h3><p><span data-en>Arrive, meet the community and enter the week together.</span><span data-es>Llega, conoce a la comunidad y entra a la semana en conjunto.</span></p><ul><li>Founder onboarding</li><li>Festival registration</li><li>Opening ceremony</li><li>Welcome cocktail</li><li>Community celebration</li></ul></article>
+          <article class="v2-day"><span class="v2-day-num">02</span><span class="v2-day-date">Thu · Dec 10</span><h3><span data-en>Ideas, Innovation & Founders</span><span data-es>Ideas, innovación y founders</span></h3><p><span data-en>Technology, companies and people shaping what comes next.</span><span data-es>Tecnología, empresas y personas construyendo lo que sigue.</span></p><ul><li>Wellness breakfast</li><li>Keynotes and panels</li><li>Workshops</li><li>Founder sessions</li><li>Gala dinner</li></ul></article>
+          <article class="v2-day"><span class="v2-day-num">03</span><span class="v2-day-date">Fri · Dec 11</span><h3><span data-en>Capital, Growth & Connections</span><span data-es>Capital, crecimiento y conexiones</span></h3><p><span data-en>Founders, investors and operators move from conversation to opportunity.</span><span data-es>Founders, inversionistas y operadores convierten conversaciones en oportunidades.</span></p><ul><li>Growth workshops</li><li>AI and finance conversations</li><li>Founder and investor sessions</li><li>Community networking</li><li>La Veleta night</li></ul></article>
+          <article class="v2-day"><span class="v2-day-num">04</span><span class="v2-day-date">Sat · Dec 12</span><h3><span data-en>Demo Day & Celebration</span><span data-es>Demo Day y celebración</span></h3><p><span data-en>The week closes with recovery, startup excellence and the Grand Final.</span><span data-es>La semana cierra con recovery, startups y la Grand Final.</span></p><ul><li>Recovery and beach experience</li><li>Sponsor activations</li><li>Whale Tank Grand Final</li><li>Awards ceremony</li><li>Innovation Closing Party</li></ul></article>
+        </div>
+
+        <div class="v2-program-people">
+          <div class="v2-program-people-copy">
+            <span>Whale Tank 2026</span>
+            <h3><span data-en>People around the program</span><span data-es>Personas alrededor del programa</span></h3>
+            <p><span data-en>Investor and mentor participation adds faces to the schedule without overloading the agenda.</span><span data-es>La participación de inversionistas y mentores agrega rostros al programa sin saturar la agenda.</span></p>
+          </div>
+          <div class="v2-program-faces" aria-label="Additional people around Whale Tank">
+            <img src="/assets/investors/mario-garcia.webp" alt="Mario García" loading="lazy" />
+            <img src="/assets/investors/ale-bustos.webp" alt="Ale Bustos" loading="lazy" />
+            <img src="/assets/investors/david-alvo.webp" alt="David Alvo" loading="lazy" />
+            <img src="/assets/investors/gregorio-londono.webp" alt="Gregorio Londoño" loading="lazy" />
+            <img src="/assets/mentors/paulina-de-la-garza.webp" alt="Paulina de la Garza" loading="lazy" />
+            <img src="/assets/mentors/andres-najera.webp" alt="Andrés Nájera" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-whale v2-section" id="whale-tank">
+      <div class="container v2-whale-grid">
+        <div class="v2-whale-media">
+          <img src="/assets/founder-halo.png" alt="Founder framed by the Whale Tank signal" loading="lazy" />
+        </div>
+        <div class="v2-whale-copy">
+          <p class="v2-kicker">Whale Tank 2026</p>
+          <h2><span data-en>Prepare for capital.</span><span data-es>Prepárate para capital.</span><br /><em><span data-en>Meet the right room.</span><span data-es>Llega a la sala correcta.</span></em></h2>
+          <p><span data-en>Whale Tank is TIF's startup investment-readiness program for technology-driven founders preparing for fundraising, partnerships and market expansion.</span><span data-es>Whale Tank es el programa de investment readiness de TIF para founders de tecnología que se preparan para fundraising, partnerships y expansión.</span></p>
+
+          <div class="v2-whale-stats">
+            <div><strong>30</strong><span data-en>startups selected</span><span data-es>startups seleccionadas</span></div>
+            <div><strong>5</strong><span data-en>finalists on the main stage</span><span data-es>finalistas en el escenario principal</span></div>
+            <div><strong>8+</strong><span data-en>countries represented by mentors + investors</span><span data-es>países representados por mentores + inversionistas</span></div>
+            <div><strong>$150K–3M</strong><span data-en>target fundraising range</span><span data-es>rango objetivo de fundraising</span></div>
+          </div>
+
+          <div class="v2-hero-actions">
+            <a class="btn btn-primary" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" target="_blank" rel="noopener noreferrer"><span data-en>Apply as a founder</span><span data-es>Aplicar como founder</span></a>
+            <a class="btn btn-ghost" href="/whale-tank"><span data-en>Explore the full program</span><span data-es>Ver programa completo</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-experience v2-section">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Beyond the stage</span><span data-es>Más allá del escenario</span></p>
+            <h2><span data-en>The festival lives in the</span><span data-es>El festival vive en los</span> <em><span data-en>moments between.</span><span data-es>momentos intermedios.</span></em></h2>
+          </div>
+          <p><span data-en>Real photography should carry the brand. People, conversations, culture, nature and shared experiences make TIF legible before anyone reads a paragraph.</span><span data-es>La fotografía real debe cargar la marca. Personas, conversaciones, cultura, naturaleza y experiencias hacen que TIF se entienda antes de leer un párrafo.</span></p>
+        </div>
+
+        <div class="v2-mosaic">
+          <figure>
+            <picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/venue-cenote-stage-mobile.webp" />
+              <img src="/assets/tif-home-v2/venue-cenote-stage-desktop.webp" alt="Wide view of the cenote stage and tropical venue" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption><span data-en>Venue</span><span data-es>Venue</span></figcaption>
+          </figure>
+          <figure>
+            <picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/audience-social-proof-mobile.webp" />
+              <img src="/assets/tif-home-v2/audience-social-proof-desktop.webp" alt="Audience seated during a talk at a previous TIF edition" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption><span data-en>Community</span><span data-es>Comunidad</span></figcaption>
+          </figure>
+          <figure>
+            <picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/cenote-experience-mobile.webp" />
+              <img src="/assets/tif-home-v2/cenote-experience-desktop.webp" alt="Attendees relaxing in the cenote during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption><span data-en>Nature</span><span data-es>Naturaleza</span></figcaption>
+          </figure>
+          <figure><img src="/assets/gallery/community.webp" alt="TIF community" loading="lazy" decoding="async" /><figcaption>Community</figcaption></figure>
+          <figure><img src="/assets/gallery/live-music.webp" alt="Live music at a previous TIF edition" loading="lazy" decoding="async" /><figcaption><span data-en>Culture</span><span data-es>Cultura</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-archive v2-section" aria-labelledby="archive-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Previous editions</span><span data-es>Ediciones anteriores</span></p>
+            <h2 id="archive-title"><span data-en>Five editions built an</span><span data-es>Cinco ediciones construyeron un</span> <em><span data-en>archive worth showing.</span><span data-es>archivo que vale la pena mostrar.</span></em></h2>
+          </div>
+          <p><span data-en>Instead of describing history, the site should show it. These are real moments from previous editions in Tulum.</span><span data-es>En lugar de describir la historia, el sitio debe mostrarla. Estos son momentos reales de ediciones anteriores en Tulum.</span></p>
+        </div>
+
+        <div class="v2-archive-grid">
+          <figure><img src="/assets/gallery/wellness.webp" alt="Wellness moment at a previous TIF edition" loading="lazy" /><figcaption><span>Archive 01</span><strong>Wellness</strong></figcaption></figure>
+          <figure><img src="/assets/sponsorship/hero-audience.webp" alt="Audience at a previous TIF edition" loading="lazy" /><figcaption><span>Archive 02</span><strong>Audience</strong></figcaption></figure>
+          <figure><img src="/assets/gallery/live-art.webp" alt="Live art at a previous TIF edition" loading="lazy" /><figcaption><span>Archive 03</span><strong>Art</strong></figcaption></figure>
+          <figure><img src="/assets/gallery/community-table.webp" alt="Community table at a previous TIF edition" loading="lazy" decoding="async" /><figcaption><span>Archive 04</span><strong>Community</strong></figcaption></figure>
+          <figure><img src="/assets/gallery/jungle-venue-night.webp" alt="TIF venue at night" loading="lazy" /><figcaption><span>Archive 05</span><strong>Venue</strong></figcaption></figure>
+        </div>
+
+        <div class="v2-archive-stats">
+          <strong>5</strong><span><span data-en>editions</span><span data-es>ediciones</span></span>
+          <strong>5,700+</strong><span><span data-en>festival entries across five editions</span><span data-es>entradas acumuladas en cinco ediciones</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-past-people v2-section" aria-labelledby="past-people-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Previous editions</span><span data-es>Ediciones anteriores</span></p>
+            <h2 id="past-people-title"><span data-en>People who have</span><span data-es>Personas que han</span> <em><span data-en>joined TIF.</span><span data-es>formado parte de TIF.</span></em></h2>
+          </div>
+          <p>
+            <span data-en>Selected founders, operators, creators and industry leaders who have participated in previous editions.</span>
+            <span data-es>Selección de founders, operadores, creadores y líderes que han participado en ediciones anteriores.</span>
+          </p>
+        </div>
+
+        <div class="v2-past-people-grid">
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/pablo-gonzalez.webp" alt="Pablo González" loading="lazy" decoding="async" /></div>
+            <h3>Pablo González</h3>
+            <p><span data-en>Co-founder · Bitso</span><span data-es>Cofundador · Bitso</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/indira-kempis.webp" alt="Indira Kempis" loading="lazy" decoding="async" /></div>
+            <h3>Indira Kempis</h3>
+            <p><span data-en>Former Senator · Mexico (2018–2024)</span><span data-es>Exsenadora · México (2018–2024)</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/de-kai.webp" alt="De Kai" loading="lazy" decoding="async" /></div>
+            <h3>De Kai</h3>
+            <p><span data-en>Professor & AI researcher</span><span data-es>Profesor e investigador en Inteligencia Artificial</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/scott-page.webp" alt="Scott Page" loading="lazy" decoding="async" /></div>
+            <h3>Scott Page</h3>
+            <p><span data-en>Musician · technologist · entrepreneur</span><span data-es>Músico · tecnólogo · emprendedor</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/rodolfo-andragnes.webp" alt="Rodolfo Andragnes" loading="lazy" decoding="async" /></div>
+            <h3>Rodolfo Andragnes</h3>
+            <p><span data-en>Founder · LABITCONF</span><span data-es>Fundador · LABITCONF</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/eduardo-castillo.webp" alt="Eduardo Castillo" loading="lazy" decoding="async" /></div>
+            <h3>Eduardo Castillo</h3>
+            <p><span data-en>Founder · Habiters</span><span data-es>Fundador · Habiters</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/ron-oliver.webp" alt="Ron Oliver" loading="lazy" decoding="async" /></div>
+            <h3>Ron Oliver</h3>
+            <p><span data-en>Founder & CEO · ParqueTec México</span><span data-es>Fundador y CEO · ParqueTec México</span></p>
+          </article>
+          <article class="v2-past-person">
+            <div class="v2-past-person-image"><img src="/assets/tif-home-v2/diego-dreyfus.webp" alt="Diego Dreyfus" loading="lazy" decoding="async" /></div>
+            <h3>Diego Dreyfus</h3>
+            <p><span data-en>Entrepreneur & speaker</span><span data-es>Emprendedor y conferencista</span></p>
+          </article>
+        </div>
+
+        <p class="v2-past-people-note">
+          <span data-en>Historical participation shown for context. This section does not indicate 2026 confirmation.</span>
+          <span data-es>Participación histórica mostrada como contexto. Esta sección no indica confirmación para 2026.</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="v2-history-wall v2-section" aria-labelledby="history-wall-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Historical proof</span><span data-es>Prueba histórica</span></p>
+            <h2 id="history-wall-title"><span data-en>Companies and communities that have</span><span data-es>Empresas y comunidades que han</span> <em><span data-en>crossed paths with TIF.</span><span data-es>pasado por TIF.</span></em></h2>
+          </div>
+          <p><span data-en>Historical participation is labeled carefully. It does not imply a current 2026 sponsorship relationship.</span><span data-es>La participación histórica está etiquetada con claridad. No implica una relación de sponsorship vigente en 2026.</span></p>
+        </div>
+
+        <div class="v2-history-group">
+          <span><span data-en>Selected past sponsors and partners</span><span data-es>Sponsors y partners históricos seleccionados</span></span>
+          <div class="v2-name-wall">
+            <b>BINANCE</b><b>5IRE</b><b>MINIMALIST</b><b>PAPAYA PLAYA</b><b>IKAL</b><b>TALENT LAND</b><b>CLIMATETRADE</b><b>DIGITAL ORO</b><b>MONEY GIVER</b><b>GEOSHIP</b><b>PARQUETEC</b><b>TICKET FAIRY</b>
+          </div>
+        </div>
+
+        <div class="v2-history-group represented">
+          <span><span data-en>Companies and communities represented across previous editions</span><span data-es>Empresas y comunidades representadas en ediciones anteriores</span></span>
+          <div class="v2-name-wall">
+            <b>AWS</b><b>GOOGLE CLOUD</b><b>CHAINLINK</b><b>THE SANDBOX</b><b>STARTUP GRIND</b><b>WEB3 LATAM</b><b>BITBASEL</b><b>IBIZA TECH FORUM</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-media v2-section" aria-labelledby="media-title">
+      <div class="container">
+        <div class="v2-media-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Media & community</span><span data-es>Medios y comunidad</span></p>
+            <h2 id="media-title"><span data-en>More signals of</span><span data-es>Más señales de</span> <em><span data-en>credibility.</span><span data-es>credibilidad.</span></em></h2>
+          </div>
+          <p><span data-en>Selected media and community relationships around TIF and Whale Tank.</span><span data-es>Relaciones seleccionadas de medios y comunidad alrededor de TIF y Whale Tank.</span></p>
+        </div>
+        <div class="v2-media-names" aria-label="Media and community relationships">
+          <span>Mundo Ejecutivo</span>
+          <span>Prenseable</span>
+          <span>Soy Emprendedor</span>
+          <span>Geektime</span>
+          <span>Startups Latam</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-partners v2-section" id="partners">
+      <div class="container">
+        <div class="v2-partner-card">
+          <div class="v2-partner-copy">
+            <p class="v2-kicker"><span data-en>Partner with TIF</span><span data-es>Partner con TIF</span></p>
+            <h2><span data-en>Put your brand inside the</span><span data-es>Pon tu marca dentro de las</span> <em><span data-en>right conversations.</span><span data-es>conversaciones correctas.</span></em></h2>
+            <p><span data-en>Partnerships are designed around business objectives: executive access, brand experience, content, hospitality, founder dealflow and corporate innovation.</span><span data-es>Los partnerships se diseñan alrededor de objetivos de negocio: acceso ejecutivo, brand experience, contenido, hospitality, dealflow de founders e innovación corporativa.</span></p>
+            <div class="v2-hero-actions">
+              <a class="btn btn-primary" href="/sponsorship"><span data-en>Explore partnerships</span><span data-es>Explorar partnerships</span></a>
+            </div>
+          </div>
+
+          <div class="v2-partner-outcomes">
+            <article><span>01</span><h3>Executive access</h3><p>Curated proximity to founders, investors and operators.</p></article>
+            <article><span>02</span><h3>Brand experience</h3><p>Hospitality, activations and contextual visibility.</p></article>
+            <article><span>03</span><h3>Content & distribution</h3><p>Stories and assets that extend beyond the event.</p></article>
+            <article><span>04</span><h3>Corporate innovation</h3><p>Structured founder discovery around real business challenges.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-tickets v2-section" id="tickets">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Festival access</span><span data-es>Acceso al festival</span></p>
+            <h2><span data-en>Start with the access that</span><span data-es>Empieza con el acceso que</span> <em><span data-en>fits your week.</span><span data-es>encaja con tu semana.</span></em></h2>
+          </div>
+          <p><span data-en>The home keeps the choice simple. All specialty access, add-ons and final pricing are confirmed at checkout.</span><span data-es>El home mantiene la decisión simple. Accesos especiales, add-ons y precio final se confirman en checkout.</span></p>
+        </div>
+
+        <div class="v2-ticket-grid">
+          <article class="v2-ticket featured">
+            <span class="v2-ticket-type">Complete festival</span>
+            <h3>General Access · 4 Day Pass</h3>
+            <p><span data-en>The core TIF experience for founders, builders, creators and curious minds.</span><span data-es>La experiencia central de TIF para founders, builders, creadores y mentes curiosas.</span></p>
+            <div class="v2-ticket-price"><strong>$266</strong><span>USD approx. · MXN $4,620 reference</span></div>
+            <a class="btn btn-primary" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Get festival access</span><span data-es>Comprar acceso</span></a>
+          </article>
+
+          <article class="v2-ticket">
+            <span class="v2-ticket-type">Executive access</span>
+            <h3>Executive Pass · Festival Access</h3>
+            <p><span data-en>Higher-intention access for executives, investors and ecosystem leaders. Accommodation is not included.</span><span data-es>Acceso de mayor intención para ejecutivos, inversionistas y líderes. Hospedaje no incluido.</span></p>
+            <div class="v2-ticket-price"><strong>$1,614</strong><span>USD approx. · MXN $28,080 reference</span></div>
+            <a class="btn btn-ghost" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Explore executive access</span><span data-es>Ver Executive Pass</span></a>
+          </article>
+
+          <article class="v2-ticket">
+            <span class="v2-ticket-type">Closing celebration</span>
+            <h3>Full Night · Closing Party</h3>
+            <p><span data-en>A focused entry point for the official closing celebration beneath the stars.</span><span data-es>Un acceso enfocado a la celebración oficial de cierre.</span></p>
+            <div class="v2-ticket-price"><strong>$63</strong><span>USD approx. · MXN $1,100 reference</span></div>
+            <a class="btn btn-ghost" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Get closing access</span><span data-es>Comprar acceso</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-closing">
+      <div class="v2-closing-inner">
+        <p class="v2-kicker">Tulum · December 9–12, 2026</p>
+        <h2><span data-en>Come for the ideas.</span><span data-es>Ven por las ideas.</span><br /><em><span data-en>Stay for the people.</span><span data-es>Quédate por las personas.</span></em></h2>
+        <div class="v2-hero-actions">
+          <a class="btn btn-primary" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Get tickets</span><span data-es>Comprar boletos</span></a>
+          <a class="btn btn-ghost" href="/sponsorship"><span data-en>Partner with TIF</span><span data-es>Ser partner</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="v2-footer">
+    <div class="container v2-footer-grid">
+      <div>
+        <img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" />
+        <p><span data-en>Tulum Innovation Fest brings innovation, capital, culture and human connection together in Tulum, Mexico.</span><span data-es>Tulum Innovation Fest reúne innovación, capital, cultura y conexión humana en Tulum, México.</span></p>
+      </div>
+      <nav class="v2-footer-links" aria-label="Footer navigation">
+        <a href="/whale-tank">Whale Tank</a>
+        <a href="/sponsorship">Partners</a>
+        <a href="#program">Program</a>
+        <a href="#tickets">Tickets</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const body = document.body;
+      const header = document.querySelector('[data-header]');
+      const navButton = document.querySelector('[data-v2-nav]');
+      const langButton = document.querySelector('[data-v2-lang]');
+
+      const saved = localStorage.getItem('tif-language');
+      const browser = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
+      const initial = saved === 'es' || saved === 'en' ? saved : (browser.startsWith('es') ? 'es' : 'en');
+      root.dataset.lang = initial;
+      root.lang = initial;
+
+      const closeNav = () => {
+        body.classList.remove('v2-nav-open');
+        navButton?.setAttribute('aria-expanded', 'false');
+      };
+
+      navButton?.addEventListener('click', () => {
+        const open = body.classList.toggle('v2-nav-open');
+        navButton.setAttribute('aria-expanded', String(open));
+      });
+
+      document.querySelectorAll('.site-nav a').forEach(a => a.addEventListener('click', closeNav));
+
+      langButton?.addEventListener('click', () => {
+        const next = root.dataset.lang === 'en' ? 'es' : 'en';
+        root.dataset.lang = next;
+        root.lang = next;
+        localStorage.setItem('tif-language', next);
+      });
+
+
+      const logoStrip = document.querySelector('[data-logo-strip]');
+      if (logoStrip) {
+        const track = logoStrip.querySelector('.wt-logo-track');
+        const group = track?.querySelector('.wt-logo-group');
+        const control = logoStrip.querySelector('[data-logo-control]');
+        if (track && group && control) {
+          const duplicate = group.cloneNode(true);
+          duplicate.setAttribute('aria-hidden', 'true');
+          duplicate.querySelectorAll('img').forEach(img => { img.alt = ''; });
+          track.appendChild(duplicate);
+          logoStrip.classList.add('is-ready');
+          control.hidden = false;
+          control.addEventListener('click', () => {
+            const paused = logoStrip.classList.toggle('is-paused');
+            if (!paused) logoStrip.querySelector('.wt-logo-viewport').scrollLeft = 0;
+            logoStrip.querySelector('[data-logo-pause]').hidden = paused;
+            logoStrip.querySelector('[data-logo-resume]').hidden = !paused;
+          });
+        }
+      }
+
+      const speakerGrid = document.querySelector('[data-speaker-grid]');
+      const speakerMore = document.querySelector('[data-speaker-more]');
+      if (speakerGrid && speakerMore) {
+        const cards = [...speakerGrid.querySelectorAll('.v2-speaker-card')];
+        const visibleCount = 8;
+        let expanded = false;
+        const syncSpeakerGrid = () => {
+          cards.forEach((card, index) => { card.hidden = !expanded && index >= visibleCount; });
+          speakerMore.hidden = cards.length <= visibleCount;
+          const show = speakerMore.querySelector('[data-speaker-more-show]');
+          const hide = speakerMore.querySelector('[data-speaker-more-hide]');
+          if (show) show.hidden = expanded;
+          if (hide) hide.hidden = !expanded;
+        };
+        speakerMore.addEventListener('click', () => {
+          expanded = !expanded;
+          syncSpeakerGrid();
+          if (!expanded) speakerGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        syncSpeakerGrid();
+      }
+
+      const countdownRoot = document.querySelector('[data-countdown]');
+      if (countdownRoot) {
+        const target = new Date('2026-12-09T00:00:00-05:00').getTime();
+        const fields = {
+          days: countdownRoot.querySelector('[data-countdown-days]'),
+          hours: countdownRoot.querySelector('[data-countdown-hours]'),
+          minutes: countdownRoot.querySelector('[data-countdown-minutes]'),
+          seconds: countdownRoot.querySelector('[data-countdown-seconds]')
+        };
+        const pad = value => String(Math.max(0, value)).padStart(2, '0');
+        const updateCountdown = () => {
+          const diff = Math.max(0, target - Date.now());
+          const totalSeconds = Math.floor(diff / 1000);
+          const days = Math.floor(totalSeconds / 86400);
+          const hours = Math.floor((totalSeconds % 86400) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+          if (fields.days) fields.days.textContent = String(days);
+          if (fields.hours) fields.hours.textContent = pad(hours);
+          if (fields.minutes) fields.minutes.textContent = pad(minutes);
+          if (fields.seconds) fields.seconds.textContent = pad(seconds);
+        };
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+
+      const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 32);
+      onScroll();
+      addEventListener('scroll', onScroll, { passive:true });
+
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const target = document.querySelector(a.getAttribute('href'));
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior:'smooth', block:'start' });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
