@@ -1074,6 +1074,88 @@
       .v2-hero-fallback { z-index:0 !important; }
     }
 
+
+    /* Company metadata + delayed mobile CTA */
+    .v2-speaker-company {
+      display:block;
+      margin-top:.2rem;
+      color:rgba(0,8,11,.72);
+      font-family:var(--sans);
+      font-size:.58rem;
+      font-weight:600;
+      line-height:1.3;
+      letter-spacing:.01em;
+      text-transform:none;
+      overflow-wrap:anywhere;
+    }
+    .v2-person-company {
+      display:block;
+      margin:.38rem 0 .55rem;
+      color:rgba(242,241,234,.72);
+      font-family:var(--sans);
+      font-size:.62rem;
+      font-weight:600;
+      line-height:1.35;
+      letter-spacing:.01em;
+      text-transform:none;
+      overflow-wrap:anywhere;
+    }
+
+    @media (max-width: 900px) {
+      .v2-mobile-ticket-cta {
+        opacity:0;
+        pointer-events:none;
+        transform:translate(-50%,18px);
+        transition:opacity .24s ease, transform .24s ease;
+      }
+      .v2-mobile-ticket-cta.is-visible {
+        opacity:1;
+        pointer-events:auto;
+        transform:translate(-50%,0);
+      }
+      body.v2-nav-open .v2-mobile-ticket-cta.is-visible {
+        opacity:0;
+        pointer-events:none;
+        transform:translate(-50%,18px);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .v2-speakers-head {
+        width:100%;
+        max-width:100%;
+        overflow:hidden;
+      }
+      .v2-speakers-head > div {
+        min-width:0;
+        max-width:100%;
+      }
+      .v2-speakers-head h2 {
+        width:100%;
+        max-width:100%;
+        font-size:clamp(2.15rem,9.8vw,3.5rem) !important;
+        line-height:.96;
+        letter-spacing:-.045em;
+        overflow-wrap:anywhere;
+        word-break:normal;
+      }
+      .v2-speaker-company {
+        font-size:.52rem;
+      }
+      .v2-person-company {
+        font-size:.55rem;
+        margin:.3rem 0 .45rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .v2-speakers-head h2 {
+        font-size:clamp(2rem,9.2vw,3rem) !important;
+      }
+      .v2-speaker-company { font-size:.49rem; }
+      .v2-person-company { font-size:.52rem; }
+    }
+
 </style>
   <script type="application/ld+json">
   {
@@ -1272,21 +1354,21 @@
               <img src="/assets/tif-home-v2/speaker-alejandro-glatt.webp" alt="Alejandro Glatt, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
               <div class="v2-speaker-fallback"><strong>Alejandro Glatt</strong><span>Speaker / Co-Founder</span></div>
             </div>
-            <div class="v2-speaker-meta"><h3>Alejandro Glatt</h3><span>Speaker / Co-Founder</span></div>
+            <div class="v2-speaker-meta"><h3>Alejandro Glatt</h3><span>Speaker / Co-Founder</span><small class="v2-speaker-company">FEEL THE FRUIT</small></div>
           </article>
           <article class="v2-speaker-card v2-speaker-card-featured">
             <div class="v2-speaker-art">
               <img src="/assets/tif-home-v2/speaker-alexis-soubran.webp" alt="Alexis Soubran, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
               <div class="v2-speaker-fallback"><strong>Alexis Soubran</strong><span>Speaker / Co-Founder</span></div>
             </div>
-            <div class="v2-speaker-meta"><h3>Alexis Soubran</h3><span>Speaker / Co-Founder</span></div>
+            <div class="v2-speaker-meta"><h3>Alexis Soubran</h3><span>Speaker / Co-Founder</span><small class="v2-speaker-company">Minimalist Agency</small></div>
           </article>
           <article class="v2-speaker-card v2-speaker-card-featured">
             <div class="v2-speaker-art">
               <img src="/assets/tif-home-v2/speaker-gustavo-bolotin.webp" alt="Gustavo Bolotin, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
               <div class="v2-speaker-fallback"><strong>Gustavo Bolotin</strong><span>Speaker / Co-Founder</span></div>
             </div>
-            <div class="v2-speaker-meta"><h3>Gustavo Bolotin</h3><span>Speaker / Co-Founder</span></div>
+            <div class="v2-speaker-meta"><h3>Gustavo Bolotin</h3><span>Speaker / Co-Founder</span><small class="v2-speaker-company">LIKE GROUP MANAGEMENT</small></div>
           </article>
         </div>
 
@@ -1298,23 +1380,23 @@
         <div class="v2-speaker-grid" data-speaker-grid>
           <article class="v2-speaker-card">
             <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-don-cohen.webp" alt="Don Cohen, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Don Cohen</strong><span>Speaker</span></div></div>
-            <div class="v2-speaker-meta"><h3>Don Cohen</h3><span>Speaker</span></div>
+            <div class="v2-speaker-meta"><h3>Don Cohen</h3><span>Speaker</span><small class="v2-speaker-company">Independent</small></div>
           </article>
           <article class="v2-speaker-card">
             <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-elo-cadenas.webp" alt="Elo Cadenas, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Elo Cadenas</strong><span>Speaker</span></div></div>
-            <div class="v2-speaker-meta"><h3>Elo Cadenas</h3><span>Speaker</span></div>
+            <div class="v2-speaker-meta"><h3>Elo Cadenas</h3><span>Speaker</span><small class="v2-speaker-company">Arkangeles</small></div>
           </article>
           <article class="v2-speaker-card">
             <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-mujer-capital.webp" alt="Mujer Capital, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Mujer Capital</strong><span>Speaker</span></div></div>
-            <div class="v2-speaker-meta"><h3>Mujer Capital</h3><span>Speaker</span></div>
+            <div class="v2-speaker-meta"><h3>Mujer Capital</h3><span>Community / Investment</span><small class="v2-speaker-company">Mujer Capital</small></div>
           </article>
           <article class="v2-speaker-card">
             <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-uri-soglowek.webp" alt="Uri Soglowek, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Uri Soglowek</strong><span>Speaker</span></div></div>
-            <div class="v2-speaker-meta"><h3>Uri Soglowek</h3><span>Speaker</span></div>
+            <div class="v2-speaker-meta"><h3>Uri Soglowek</h3><span>Speaker</span><small class="v2-speaker-company">Soglowek Ventures</small></div>
           </article>
           <article class="v2-speaker-card">
             <div class="v2-speaker-art"><img src="/assets/tif-home-v2/speaker-yehuda-berg.webp" alt="Yehuda Berg, Speaker at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" /><div class="v2-speaker-fallback"><strong>Yehuda Berg</strong><span>Speaker</span></div></div>
-            <div class="v2-speaker-meta"><h3>Yehuda Berg</h3><span>Speaker</span></div>
+            <div class="v2-speaker-meta"><h3>Yehuda Berg</h3><span>Speaker</span><small class="v2-speaker-company">Independent Author & Speaker</small></div>
           </article>
         </div>
 
@@ -1341,14 +1423,14 @@
         </div>
 
         <div class="v2-people-grid">
-          <a class="v2-person" href="https://www.linkedin.com/in/josu-gomez-barrutia-4bb43a63/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/josu-gomez.webp" alt="Josu Gomez" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Josu Gomez</h3><small>↗ LinkedIn</small></div></a>
-          <a class="v2-person" href="https://www.linkedin.com/in/pamela-jramoy-6b15905/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/pamela-jramoy.webp" alt="Pamela Jramoy" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Pamela Jramoy</h3><small>↗ LinkedIn</small></div></a>
-          <a class="v2-person" href="https://www.linkedin.com/in/matibarbero/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/mati-barbero.webp" alt="Mati Barbero" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Mati Barbero</h3><small>↗ LinkedIn</small></div></a>
-          <a class="v2-person" href="https://www.linkedin.com/in/diegoserebrisky/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/diego-serebrisky.webp" alt="Diego Serebrisky" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Diego Serebrisky</h3><small>↗ LinkedIn</small></div></a>
-          <a class="v2-person" href="https://www.linkedin.com/in/santiagotamayodaza-01/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/santiago-tamayo.webp" alt="Santiago Tamayo" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Santiago Tamayo</h3><small>↗ LinkedIn</small></div></a>
-          <a class="v2-person" href="https://www.linkedin.com/in/chrisroecoach/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/chris-roe.webp" alt="Chris Roe" loading="lazy" /></div><div class="v2-person-meta"><span>Host & Mentor · Whale Tank 2026</span><h3>Chris Roe</h3><small>↗ LinkedIn</small></div></a>
-          <a class="v2-person" href="https://www.linkedin.com/in/alexsantanag/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/alex-santana.webp" alt="Alex Santana" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor · Whale Tank 2026</span><h3>Alex Santana</h3><small>↗ LinkedIn</small></div></a>
-          <a class="v2-person" href="https://www.linkedin.com/in/abe-ramos-p/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/abraham-abe-ramos.webp" alt="Abraham Abe Ramos" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor · Whale Tank 2026</span><h3>Abraham (Abe) Ramos</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/josu-gomez-barrutia-4bb43a63/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/josu-gomez.webp" alt="Josu Gomez" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Josu Gomez</h3><b class="v2-person-company">Red Business Market</b><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/pamela-jramoy-6b15905/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/pamela-jramoy.webp" alt="Pamela Jramoy" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Pamela Jramoy</h3><b class="v2-person-company">LATAM-Israel Ventures</b><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/matibarbero/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/mati-barbero.webp" alt="Mati Barbero" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Mati Barbero</h3><b class="v2-person-company">401 · Impacta VC</b><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/diegoserebrisky/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/diego-serebrisky.webp" alt="Diego Serebrisky" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Diego Serebrisky</h3><b class="v2-person-company">Dalus Capital</b><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/santiagotamayodaza-01/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/santiago-tamayo.webp" alt="Santiago Tamayo" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Santiago Tamayo</h3><b class="v2-person-company">Bogotá Ventures</b><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/chrisroecoach/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/chris-roe.webp" alt="Chris Roe" loading="lazy" /></div><div class="v2-person-meta"><span>Host & Mentor · Whale Tank 2026</span><h3>Chris Roe</h3><b class="v2-person-company">Chris Roe Coaching</b><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/alexsantanag/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/alex-santana.webp" alt="Alex Santana" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor · Whale Tank 2026</span><h3>Alex Santana</h3><b class="v2-person-company">Amazon Web Services (AWS)</b><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/abe-ramos-p/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/abraham-abe-ramos.webp" alt="Abraham Abe Ramos" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor · Whale Tank 2026</span><h3>Abraham (Abe) Ramos</h3><b class="v2-person-company">Independent Mentor</b><small>↗ LinkedIn</small></div></a>
         </div>
         <div class="v2-people-cta"><a class="btn btn-ghost" href="/whale-tank#investors"><span data-en>Meet more investors & mentors</span><span data-es>Conoce más inversionistas y mentores</span></a></div>
       </div>
@@ -1366,7 +1448,7 @@
         <div class="v2-voice-grid">
           <article class="v2-voice-card">
             <img src="/assets/sponsorship/community-2023.webp" alt="Community at a previous TIF edition" loading="lazy" />
-            <div><span>Previous edition</span><blockquote>“The Burning Man of crypto conferences.”</blockquote><p>Immanuel Cape</p></div>
+            <div><span>Previous edition</span><blockquote><span data-en>The Burning Man of innovation gatherings.</span><span data-es>El Burning Man de los encuentros de innovación.</span></blockquote><p>TIF Community</p></div>
           </article>
           <article class="v2-voice-card">
             <img src="/assets/sponsorship/founder-conversation.webp" alt="Founder conversation at TIF" loading="lazy" />
@@ -1704,7 +1786,7 @@
         <div class="v2-history-group represented">
           <span><span data-en>Companies and communities represented across previous editions</span><span data-es>Empresas y comunidades representadas en ediciones anteriores</span></span>
           <div class="v2-name-wall">
-            <b>AWS</b><b>GOOGLE CLOUD</b><b>CHAINLINK</b><b>THE SANDBOX</b><b>STARTUP GRIND</b><b>WEB3 LATAM</b><b>BITBASEL</b><b>IBIZA TECH FORUM</b>
+            <b>AWS</b><b>GOOGLE CLOUD</b><b>CHAINLINK</b><b>THE SANDBOX</b><b>STARTUP GRIND</b><b>BITBASEL</b><b>IBIZA TECH FORUM</b>
           </div>
         </div>
       </div>
@@ -1921,6 +2003,26 @@
         };
         updateCountdown();
         setInterval(updateCountdown, 1000);
+      }
+
+      const mobileTicketCta = document.querySelector('.v2-mobile-ticket-cta');
+      if (mobileTicketCta) {
+        let ticketTicking = false;
+        const syncMobileTicketCta = () => {
+          const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+          const progress = window.scrollY / scrollable;
+          mobileTicketCta.classList.toggle('is-visible', progress >= 0.10);
+          ticketTicking = false;
+        };
+        const requestTicketSync = () => {
+          if (!ticketTicking) {
+            ticketTicking = true;
+            requestAnimationFrame(syncMobileTicketCta);
+          }
+        };
+        syncMobileTicketCta();
+        window.addEventListener('scroll', requestTicketSync, { passive:true });
+        window.addEventListener('resize', requestTicketSync);
       }
 
       const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 32);
