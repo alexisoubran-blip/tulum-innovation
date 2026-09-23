@@ -14,7 +14,7 @@
   --muted: #A7B1AA;
   --line: rgba(242, 241, 234, 0.14);
   --line-strong: rgba(242, 241, 234, 0.26);
-  --serif: "Bodoni Moda", Georgia, serif;
+  --serif: "Bruno Ace", "Sora", system-ui, sans-serif;
   --display: "Bruno Ace", "Sora", system-ui, sans-serif;
   --sans: "Sora", system-ui, sans-serif;
   --container: min(88vw, 1720px);
