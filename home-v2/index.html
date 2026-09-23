@@ -1156,6 +1156,29 @@
       .v2-person-company { font-size:.52rem; }
     }
 
+
+    /* Mobile hero top-edge fix */
+    @media (max-width: 900px) {
+      .v2-hero-media {
+        inset:-2px 0 0;
+      }
+      .v2-hero-video {
+        inset:-8vh -8vw -5vh;
+        overflow:hidden;
+      }
+      .v2-hero-video iframe {
+        top:46%;
+        width:max(100vw,190vh);
+        height:max(56.25vw,106.875vh);
+        min-width:0;
+        min-height:0;
+        transform:translate(-50%,-50%);
+      }
+      .site-header:not(.is-scrolled) {
+        background:linear-gradient(180deg,rgba(0,8,11,.34) 0%,rgba(0,8,11,.10) 58%,transparent 100%);
+      }
+    }
+
 </style>
   <script type="application/ld+json">
   {
@@ -1351,6 +1374,13 @@
         <div class="v2-cofounder-grid">
           <article class="v2-speaker-card v2-speaker-card-featured">
             <div class="v2-speaker-art">
+              <img src="/assets/tif-home-v2/speaker-gustavo-bolotin.webp" alt="Gustavo Bolotin, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
+              <div class="v2-speaker-fallback"><strong>Gustavo Bolotin</strong><span>Speaker / Co-Founder</span></div>
+            </div>
+            <div class="v2-speaker-meta"><h3>Gustavo Bolotin</h3><span>Speaker / Co-Founder</span><small class="v2-speaker-company">LIKE GROUP MANAGEMENT</small></div>
+          </article>
+          <article class="v2-speaker-card v2-speaker-card-featured">
+            <div class="v2-speaker-art">
               <img src="/assets/tif-home-v2/speaker-alejandro-glatt.webp" alt="Alejandro Glatt, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
               <div class="v2-speaker-fallback"><strong>Alejandro Glatt</strong><span>Speaker / Co-Founder</span></div>
             </div>
@@ -1362,13 +1392,6 @@
               <div class="v2-speaker-fallback"><strong>Alexis Soubran</strong><span>Speaker / Co-Founder</span></div>
             </div>
             <div class="v2-speaker-meta"><h3>Alexis Soubran</h3><span>Speaker / Co-Founder</span><small class="v2-speaker-company">Minimalist Agency</small></div>
-          </article>
-          <article class="v2-speaker-card v2-speaker-card-featured">
-            <div class="v2-speaker-art">
-              <img src="/assets/tif-home-v2/speaker-gustavo-bolotin.webp" alt="Gustavo Bolotin, Speaker and Co-Founder at TIF 2026" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')" />
-              <div class="v2-speaker-fallback"><strong>Gustavo Bolotin</strong><span>Speaker / Co-Founder</span></div>
-            </div>
-            <div class="v2-speaker-meta"><h3>Gustavo Bolotin</h3><span>Speaker / Co-Founder</span><small class="v2-speaker-company">LIKE GROUP MANAGEMENT</small></div>
           </article>
         </div>
 
