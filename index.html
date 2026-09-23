@@ -15,9 +15,42 @@
   <link rel="icon" type="image/svg+xml" href="/assets/signal-mark.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css?v=20260922-home-v2" />
   <style>
+    :root {
+      --serif: "Bruno Ace", "Sora", system-ui, sans-serif;
+      --display: "Bruno Ace", "Sora", system-ui, sans-serif;
+      --sans: "Sora", system-ui, sans-serif;
+    }
+    body,
+    button,
+    input,
+    select,
+    textarea {
+      font-family: var(--sans);
+    }
+    h1, h2, h3, h4, h5, h6,
+    .v2-title,
+    .v2-section-head h2,
+    .v2-journey-card h3,
+    .v2-day h3,
+    .v2-whale-copy h2,
+    .v2-partner-card h2,
+    .v2-ticket h3,
+    .v2-closing h2 {
+      font-family: var(--display) !important;
+      font-style: normal !important;
+    }
+    h1 em, h2 em, h3 em, h4 em,
+    .v2-title em,
+    .v2-section-head h2 em,
+    .v2-whale-copy h2 em,
+    .v2-partner-card h2 em,
+    .v2-closing h2 em {
+      font-family: var(--display) !important;
+      font-style: normal !important;
+    }
     html { scroll-padding-top: calc(var(--header) + 28px); }
     body { background: var(--black); }
     [data-lang="es"] [data-en],
