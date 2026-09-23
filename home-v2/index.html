@@ -1179,6 +1179,147 @@
       }
     }
 
+
+    /* Beyond the stage photo bridge */
+    .v2-beyond-strip {
+      padding:clamp(3rem,5vw,5.5rem) 0;
+      background:#00080B;
+      border-bottom:1px solid var(--line);
+    }
+    .v2-beyond-head {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(260px,.42fr);
+      gap:clamp(2rem,6vw,7rem);
+      align-items:end;
+      margin-bottom:1.4rem;
+    }
+    .v2-beyond-head .v2-kicker { margin-bottom:.8rem; }
+    .v2-beyond-head h2 {
+      margin:0;
+      max-width:760px;
+      font-family:var(--display);
+      font-size:clamp(2rem,3.2vw,4.25rem);
+      line-height:.96;
+      font-weight:400;
+      letter-spacing:-.04em;
+      text-transform:uppercase;
+    }
+    .v2-beyond-head > p {
+      margin:0;
+      color:rgba(242,241,234,.58);
+      font-size:.8rem;
+      line-height:1.65;
+    }
+    .v2-beyond-collage {
+      display:grid;
+      grid-template-columns:repeat(12,minmax(0,1fr));
+      grid-template-rows:repeat(2,minmax(210px,16vw));
+      gap:8px;
+    }
+    .v2-beyond-collage figure {
+      position:relative;
+      margin:0;
+      min-width:0;
+      overflow:hidden;
+      background:#071315;
+    }
+    .v2-beyond-a { grid-column:1 / 6; grid-row:1 / 3; }
+    .v2-beyond-b { grid-column:6 / 9; grid-row:1; }
+    .v2-beyond-c { grid-column:9 / 13; grid-row:1; }
+    .v2-beyond-d { grid-column:6 / 10; grid-row:2; }
+    .v2-beyond-e { grid-column:10 / 13; grid-row:2; }
+    .v2-beyond-collage img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .55s var(--ease), filter .3s ease;
+      filter:saturate(.9) contrast(1.02);
+    }
+    .v2-beyond-collage figure:hover img {
+      transform:scale(1.025);
+      filter:saturate(1) contrast(1.02);
+    }
+    .v2-beyond-collage figure::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(0deg,rgba(0,8,11,.62),transparent 46%);
+      pointer-events:none;
+    }
+    .v2-beyond-collage figcaption {
+      position:absolute;
+      z-index:2;
+      left:.8rem;
+      bottom:.7rem;
+      color:#F2F1EA;
+      font-size:.52rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    /* Partner mobile overflow fix */
+    @media (max-width:900px) {
+      .v2-beyond-head { grid-template-columns:1fr; gap:1rem; }
+      .v2-partner-card,
+      .v2-partner-copy,
+      .v2-partner-outcomes { min-width:0; max-width:100%; }
+      .v2-partner-card { overflow:hidden; }
+      .v2-partner-card h2 {
+        max-width:100%;
+        overflow-wrap:anywhere;
+        word-break:normal;
+      }
+    }
+
+    @media (max-width:720px) {
+      .v2-beyond-strip { padding:3.5rem 0; }
+      .v2-beyond-head h2 {
+        font-size:clamp(2rem,9.5vw,3.25rem);
+        line-height:.98;
+        overflow-wrap:break-word;
+      }
+      .v2-beyond-collage {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-rows:auto;
+        gap:6px;
+      }
+      .v2-beyond-collage figure {
+        grid-column:auto !important;
+        grid-row:auto !important;
+        aspect-ratio:4/5;
+      }
+      .v2-beyond-collage .v2-beyond-a {
+        grid-column:1 / -1 !important;
+        aspect-ratio:16/10;
+      }
+
+      .v2-partner-card {
+        padding:1.25rem !important;
+        gap:1.5rem !important;
+      }
+      .v2-partner-card h2 {
+        width:100%;
+        max-width:100%;
+        font-size:clamp(2rem,9vw,3rem) !important;
+        line-height:.98;
+        letter-spacing:-.045em;
+        overflow-wrap:anywhere;
+      }
+      .v2-partner-copy p {
+        max-width:100%;
+        overflow-wrap:break-word;
+      }
+      .v2-partner-outcomes {
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:420px) {
+      .v2-partner-card h2 {
+        font-size:clamp(1.8rem,8.6vw,2.55rem) !important;
+      }
+    }
+
 </style>
   <script type="application/ld+json">
   {
@@ -1349,6 +1490,41 @@
             <li class="wt-logo-item"><img src="/assets/whale-tank-logos/soglowek-capital-blanco.webp" alt="Soglowek Capital" width="1200" height="992" decoding="async" /></li>
             <li class="wt-logo-item"><img src="/assets/whale-tank-logos/notion-blanco.webp" alt="Notion" width="1147" height="1200" decoding="async" /></li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-beyond-strip" aria-labelledby="beyond-strip-title">
+      <div class="container">
+        <div class="v2-beyond-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Beyond the stage</span><span data-es>Más allá del escenario</span></p>
+            <h2 id="beyond-strip-title"><span data-en>The conversations keep going.</span><span data-es>Las conversaciones continúan.</span></h2>
+          </div>
+          <p><span data-en>Shared tables, nature, culture and smaller moments are where a lot of TIF actually happens.</span><span data-es>Mesas compartidas, naturaleza, cultura y momentos más pequeños son parte importante de cómo se vive TIF.</span></p>
+        </div>
+
+        <div class="v2-beyond-collage" aria-label="Moments from previous TIF editions">
+          <figure class="v2-beyond-a">
+            <img src="/assets/gallery/community-table.webp" alt="Community gathering around a shared table at a previous TIF edition" loading="lazy" decoding="async" />
+            <figcaption><span data-en>Shared tables</span><span data-es>Mesas compartidas</span></figcaption>
+          </figure>
+          <figure class="v2-beyond-b">
+            <img src="/assets/gallery/live-art.webp" alt="Live art at a previous TIF edition" loading="lazy" decoding="async" />
+            <figcaption><span data-en>Culture</span><span data-es>Cultura</span></figcaption>
+          </figure>
+          <figure class="v2-beyond-c">
+            <img src="/assets/gallery/jungle-venue-night.webp" alt="TIF venue at night during a previous edition" loading="lazy" decoding="async" />
+            <figcaption><span data-en>Night</span><span data-es>Noche</span></figcaption>
+          </figure>
+          <figure class="v2-beyond-d">
+            <img src="/assets/gallery/wellness.webp" alt="Wellness moment at a previous TIF edition" loading="lazy" decoding="async" />
+            <figcaption><span data-en>Wellness</span><span data-es>Wellness</span></figcaption>
+          </figure>
+          <figure class="v2-beyond-e">
+            <img src="/assets/tif-home-v2/executive-experience-desktop.webp" alt="Attendees networking during a previous TIF edition" loading="lazy" decoding="async" />
+            <figcaption><span data-en>Connection</span><span data-es>Conexión</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
