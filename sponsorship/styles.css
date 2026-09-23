@@ -11,7 +11,7 @@
   --line-dark: rgba(0, 8, 11, .17);
   --line-light: rgba(242, 241, 234, .17);
   --display: "Bruno Ace", sans-serif;
-  --editorial: "Bodoni Moda", Georgia, serif;
+  --editorial: "Bruno Ace", "Sora", system-ui, sans-serif;
   --tech: "Bruno Ace", sans-serif;
   --sans: "Sora", Arial, sans-serif;
   --container: min(92vw, 1380px);
