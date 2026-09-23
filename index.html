@@ -326,6 +326,110 @@
     .v2-footer-links { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:1rem; }
     .v2-footer-links a { color:rgba(242,241,234,.62); font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; }
 
+
+    /* V3: stronger human proof and archive */
+    .v2-hero-video { position:absolute; inset:-10%; z-index:0; overflow:hidden; opacity:.78; pointer-events:none; }
+    .v2-hero-video iframe { width:120%; height:120%; border:0; pointer-events:none; }
+    .v2-hero-fallback { position:absolute; inset:0; z-index:-1; }
+    .v2-hero-media::after { z-index:1; }
+    @media (max-width: 900px) { .v2-hero-video { display:none; } .v2-hero-fallback { z-index:0; } }
+    @media (prefers-reduced-motion: reduce) { .v2-hero-video { display:none; } .v2-hero-fallback { z-index:0; } }
+
+    .v2-people-grid { grid-template-columns:repeat(4,1fr); }
+    .v2-person-meta { min-height:118px; display:flex; flex-direction:column; align-items:flex-start; }
+    .v2-person-meta small { margin-top:auto; color:rgba(242,241,234,.42); font-family:var(--sans); font-size:.58rem; letter-spacing:.08em; text-transform:uppercase; }
+    .v2-people-cta { margin-top:2rem; display:flex; justify-content:flex-end; }
+
+    .v2-voices { background:#F2F1EA; color:#00080B; }
+    .v2-voices .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-voices .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-voice-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .v2-voice-card { position:relative; min-height:560px; overflow:hidden; background:#00080B; color:#F2F1EA; }
+    .v2-voice-card > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.78) contrast(1.03); }
+    .v2-voice-card::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,8,11,.96),rgba(0,8,11,.16) 70%); }
+    .v2-voice-card > div { position:absolute; z-index:2; inset:auto 1.4rem 1.4rem; }
+    .v2-voice-card span { color:#E97A43; font-size:.58rem; letter-spacing:.13em; text-transform:uppercase; }
+    .v2-voice-card blockquote { margin:.8rem 0 1rem; font-family:var(--display); font-size:clamp(1.75rem,2.2vw,3rem); line-height:1.02; }
+    .v2-voice-card p { margin:0; color:rgba(242,241,234,.7); font-size:.8rem; line-height:1.5; }
+    .v2-voice-memory blockquote { font-size:clamp(2rem,2.5vw,3.4rem); color:#E97A43; }
+
+    .v2-film-moments { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:2rem; }
+    .v2-film-moments figure { position:relative; margin:0; aspect-ratio:4/3; overflow:hidden; background:#000; }
+    .v2-film-moments img { width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease); }
+    .v2-film-moments figure:hover img { transform:scale(1.025); }
+    .v2-film-moments figcaption { position:absolute; left:.8rem; bottom:.8rem; padding:.4rem .55rem; background:rgba(0,8,11,.75); color:#F2F1EA; font-size:.55rem; letter-spacing:.1em; text-transform:uppercase; }
+
+    .v2-program-people { display:grid; grid-template-columns:minmax(280px,.45fr) 1fr; gap:2rem; margin-top:2rem; padding:1.2rem; border:1px solid var(--line); }
+    .v2-program-people-copy span { color:var(--ember); font-family:var(--display); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; }
+    .v2-program-people-copy h3 { margin:.5rem 0 .65rem; font-family:var(--display); font-size:1.35rem; font-weight:400; }
+    .v2-program-people-copy p { margin:0; color:rgba(242,241,234,.58); font-size:.78rem; line-height:1.5; }
+    .v2-program-faces { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; align-items:center; }
+    .v2-program-faces img { width:100%; aspect-ratio:1; object-fit:cover; object-position:center top; border-radius:50%; filter:saturate(.82); }
+
+    .v2-archive { background:#F2F1EA; color:#00080B; }
+    .v2-archive .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-archive .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-archive-grid { display:grid; grid-template-columns:1.25fr repeat(4,.72fr); gap:10px; }
+    .v2-archive-grid figure { position:relative; margin:0; min-height:440px; overflow:hidden; background:#111; }
+    .v2-archive-grid figure:first-child { min-height:560px; }
+    .v2-archive-grid img { width:100%; height:100%; object-fit:cover; filter:saturate(.88); }
+    .v2-archive-grid figcaption { position:absolute; inset:auto 1rem 1rem; padding-top:.8rem; border-top:1px solid rgba(255,255,255,.42); color:#fff; text-shadow:0 1px 12px rgba(0,0,0,.6); }
+    .v2-archive-grid figcaption span { display:block; font-size:.54rem; letter-spacing:.14em; text-transform:uppercase; }
+    .v2-archive-grid figcaption strong { display:block; margin-top:.35rem; font-family:var(--display); font-size:1.1rem; font-weight:400; }
+    .v2-archive-stats { display:grid; grid-template-columns:auto 1fr auto 1fr; gap:1rem 2rem; align-items:center; margin-top:2rem; padding:1.5rem 0; border-top:1px solid rgba(0,8,11,.18); border-bottom:1px solid rgba(0,8,11,.18); }
+    .v2-archive-stats strong { font-family:var(--display); color:var(--ember); font-size:clamp(2.2rem,3vw,4rem); font-weight:400; }
+    .v2-archive-stats span { color:rgba(0,8,11,.62); font-size:.74rem; }
+
+    .v2-history-wall { background:#fff; color:#00080B; }
+    .v2-history-wall .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-history-wall .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-history-group { padding:1.5rem 0 2rem; border-top:1px solid rgba(0,8,11,.14); }
+    .v2-history-group > span { display:block; margin-bottom:1.2rem; color:rgba(0,8,11,.52); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; }
+    .v2-name-wall { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(0,8,11,.12); border-left:1px solid rgba(0,8,11,.12); }
+    .v2-name-wall b { min-height:110px; display:flex; align-items:center; justify-content:center; padding:1rem; border-right:1px solid rgba(0,8,11,.12); border-bottom:1px solid rgba(0,8,11,.12); font-family:var(--sans); font-size:clamp(.8rem,1.05vw,1.15rem); font-weight:700; text-align:center; letter-spacing:-.02em; }
+    .v2-history-group.represented { margin-top:1rem; }
+
+    .v2-media { background:#00080B; }
+    .v2-media-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.5fr); gap:3rem; align-items:end; margin-bottom:2.5rem; }
+    .v2-media-head h2 { margin:0; font-family:var(--display); font-size:clamp(2.6rem,4vw,5.2rem); line-height:.98; font-weight:400; text-transform:uppercase; }
+    .v2-media-head h2 em { color:#E97A43; font-style:normal; }
+    .v2-media-head > p { margin:0; color:rgba(242,241,234,.62); }
+    .v2-media-logos { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-media-logos img { width:100%; height:150px; padding:2rem; object-fit:contain; background:#071315; filter:grayscale(1); opacity:.9; }
+
+    @media (max-width:1120px) {
+      .v2-people-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-archive-grid { grid-template-columns:repeat(3,1fr); }
+      .v2-archive-grid figure:first-child { grid-column:span 2; }
+      .v2-media-logos { grid-template-columns:repeat(3,1fr); }
+    }
+    @media (max-width:900px) {
+      .v2-voice-grid { grid-template-columns:1fr; }
+      .v2-voice-card { min-height:440px; }
+      .v2-film-moments { grid-template-columns:repeat(2,1fr); }
+      .v2-program-people { grid-template-columns:1fr; }
+      .v2-program-faces { grid-template-columns:repeat(6,1fr); }
+      .v2-archive-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-archive-grid figure:first-child { grid-column:1/-1; }
+      .v2-name-wall { grid-template-columns:repeat(3,1fr); }
+      .v2-media-head { grid-template-columns:1fr; }
+    }
+    @media (max-width:640px) {
+      .v2-people-grid { grid-template-columns:1fr 1fr; }
+      .v2-person-meta { min-height:105px; }
+      .v2-person-meta span { font-size:.48rem; }
+      .v2-person-meta h3 { font-size:.8rem; }
+      .v2-film-moments { grid-template-columns:1fr 1fr; }
+      .v2-program-faces { grid-template-columns:repeat(3,1fr); }
+      .v2-archive-grid { grid-template-columns:1fr; }
+      .v2-archive-grid figure:first-child { grid-column:auto; min-height:430px; }
+      .v2-archive-grid figure { min-height:360px; }
+      .v2-archive-stats { grid-template-columns:auto 1fr; }
+      .v2-name-wall { grid-template-columns:repeat(2,1fr); }
+      .v2-name-wall b { min-height:92px; }
+      .v2-media-logos { grid-template-columns:repeat(2,1fr); }
+      .v2-media-logos img { height:120px; padding:1.4rem; }
+    }
     @media (max-width: 1120px) {
       .v2-people-grid { grid-template-columns:repeat(4,1fr); }
       .v2-journey-grid, .v2-program-grid { grid-template-columns:repeat(2,1fr); }
@@ -443,10 +547,18 @@
   <main id="main">
     <section class="v2-hero" id="top">
       <div class="v2-hero-media" aria-hidden="true">
-        <picture>
+        <picture class="v2-hero-fallback">
           <source media="(max-width: 720px)" srcset="/assets/hero-mobile.png" />
           <img src="/assets/hero-desktop.png" alt="" />
         </picture>
+        <div class="v2-hero-video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/dpGSCLE_m98?autoplay=1&mute=1&controls=0&loop=1&playlist=dpGSCLE_m98&modestbranding=1&playsinline=1&rel=0"
+            title=""
+            tabindex="-1"
+            allow="autoplay; encrypted-media; picture-in-picture"
+          ></iframe>
+        </div>
       </div>
 
       <div class="v2-hero-inner">
@@ -554,25 +666,50 @@
         <div class="v2-section-head">
           <div>
             <p class="v2-kicker"><span data-en>People around TIF</span><span data-es>Personas alrededor de TIF</span></p>
-            <h2><span data-en>Meet the people behind the</span><span data-es>Conoce a las personas detrás de las</span> <em><span data-en>conversations.</span><span data-es>conversaciones.</span></em></h2>
+            <h2><span data-en>Put faces behind the</span><span data-es>Ponle rostro a las</span> <em><span data-en>conversations.</span><span data-es>conversaciones.</span></em></h2>
           </div>
           <p>
-            <span data-en>TIF is built around proximity. Founders, investors and mentors share the same rooms, tables and experiences throughout the week.</span>
-            <span data-es>TIF se construye alrededor de la proximidad. Founders, inversionistas y mentores comparten espacios, mesas y experiencias durante la semana.</span>
+            <span data-en>Founders, investors and mentors share the same rooms, tables and experiences. The people are a central part of the product.</span>
+            <span data-es>Founders, inversionistas y mentores comparten espacios, mesas y experiencias. Las personas son una parte central del producto.</span>
           </p>
         </div>
 
         <div class="v2-people-grid">
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/josu-gomez.webp" alt="Josu Gomez" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Josu Gomez</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/pamela-jramoy.webp" alt="Pamela Jramoy" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Pamela Jramoy</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/mati-barbero.webp" alt="Mati Barbero" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Mati Barbero</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/diego-serebrisky.webp" alt="Diego Serebrisky" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Diego Serebrisky</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/santiago-tamayo.webp" alt="Santiago Tamayo" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Santiago Tamayo</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/mentors/chris-roe.webp" alt="Chris Roe" loading="lazy" /></div><div class="v2-person-meta"><span>Host & Mentor</span><h3>Chris Roe</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/mentors/alex-santana.webp" alt="Alex Santana" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor</span><h3>Alex Santana</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/mentors/abraham-abe-ramos.webp" alt="Abraham Abe Ramos" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor</span><h3>Abraham (Abe) Ramos</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/mario-garcia.webp" alt="Mario García" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Mario García</h3></div></article>
-          <article class="v2-person"><div class="v2-person-image"><img src="/assets/mentors/paulina-de-la-garza.webp" alt="Paulina de la Garza" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor</span><h3>Paulina de la Garza</h3></div></article>
+          <a class="v2-person" href="https://www.linkedin.com/in/josu-gomez-barrutia-4bb43a63/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/josu-gomez.webp" alt="Josu Gomez" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Josu Gomez</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/pamela-jramoy-6b15905/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/pamela-jramoy.webp" alt="Pamela Jramoy" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Pamela Jramoy</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/matibarbero/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/mati-barbero.webp" alt="Mati Barbero" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Mati Barbero</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/diegoserebrisky/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/diego-serebrisky.webp" alt="Diego Serebrisky" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Diego Serebrisky</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/santiagotamayodaza-01/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/investors/santiago-tamayo.webp" alt="Santiago Tamayo" loading="lazy" /></div><div class="v2-person-meta"><span>Investor · Whale Tank 2026</span><h3>Santiago Tamayo</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/chrisroecoach/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/chris-roe.webp" alt="Chris Roe" loading="lazy" /></div><div class="v2-person-meta"><span>Host & Mentor · Whale Tank 2026</span><h3>Chris Roe</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/alexsantanag/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/alex-santana.webp" alt="Alex Santana" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor · Whale Tank 2026</span><h3>Alex Santana</h3><small>↗ LinkedIn</small></div></a>
+          <a class="v2-person" href="https://www.linkedin.com/in/abe-ramos-p/" target="_blank" rel="noopener noreferrer"><div class="v2-person-image"><img src="/assets/mentors/abraham-abe-ramos.webp" alt="Abraham Abe Ramos" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor · Whale Tank 2026</span><h3>Abraham (Abe) Ramos</h3><small>↗ LinkedIn</small></div></a>
+        </div>
+        <div class="v2-people-cta"><a class="btn btn-ghost" href="/whale-tank#investors"><span data-en>Meet more investors & mentors</span><span data-es>Conoce más inversionistas y mentores</span></a></div>
+      </div>
+    </section>
+
+    <section class="v2-voices v2-section" aria-labelledby="voices-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Voices & moments</span><span data-es>Voces y momentos</span></p>
+            <h2 id="voices-title"><span data-en>What people remember</span><span data-es>Lo que la gente recuerda</span> <em><span data-en>after Tulum.</span><span data-es>después de Tulum.</span></em></h2>
+          </div>
+          <p><span data-en>Social proof should feel human: short quotes, real archive imagery and recognizable names from previous editions.</span><span data-es>El social proof debe sentirse humano: citas cortas, archivo real y nombres reconocibles de ediciones anteriores.</span></p>
+        </div>
+        <div class="v2-voice-grid">
+          <article class="v2-voice-card">
+            <img src="/assets/sponsorship/community-2023.webp" alt="Community at a previous TIF edition" loading="lazy" />
+            <div><span>Previous edition</span><blockquote>“The Burning Man of crypto conferences.”</blockquote><p>Immanuel Cape</p></div>
+          </article>
+          <article class="v2-voice-card">
+            <img src="/assets/sponsorship/founder-conversation.webp" alt="Founder conversation at TIF" loading="lazy" />
+            <div><span>Previous edition</span><blockquote><span data-en>“A platform built to turn ideas into something real.”</span><span data-es>“La plataforma perfecta para materializar.”</span></blockquote><p>Peiman</p></div>
+          </article>
+          <article class="v2-voice-card v2-voice-memory">
+            <img src="/assets/sponsorship/live-performance.webp" alt="Live performance at a previous TIF edition" loading="lazy" />
+            <div><span>Live at TIF</span><blockquote>Scott Page</blockquote><p><span data-en>Music and culture are part of the festival experience.</span><span data-es>La música y la cultura forman parte de la experiencia del festival.</span></p></div>
+          </article>
         </div>
       </div>
     </section>
@@ -596,6 +733,12 @@
         <div class="v2-film-caption">
           <p><span data-en>Real moments from previous editions: talks, founders, music, community and Tulum.</span><span data-es>Momentos reales de ediciones anteriores: charlas, founders, música, comunidad y Tulum.</span></p>
           <span>TIF FILM / 01</span>
+        </div>
+        <div class="v2-film-moments" aria-label="Previous edition moments">
+          <figure><img src="/assets/sponsorship/founder-stage.webp" alt="Founder on stage at TIF" loading="lazy" /><figcaption>Founders</figcaption></figure>
+          <figure><img src="/assets/sponsorship/networking.webp" alt="Networking at TIF" loading="lazy" /><figcaption>Connections</figcaption></figure>
+          <figure><img src="/assets/sponsorship/night-program.webp" alt="Night program at TIF" loading="lazy" /><figcaption>Night program</figcaption></figure>
+          <figure><img src="/assets/sponsorship/hospitality-activation.webp" alt="Hospitality activation at TIF" loading="lazy" /><figcaption>Hospitality</figcaption></figure>
         </div>
       </div>
     </section>
@@ -641,6 +784,22 @@
           <article class="v2-day"><span class="v2-day-num">03</span><span class="v2-day-date">Fri · Dec 11</span><h3><span data-en>Capital, Growth & Connections</span><span data-es>Capital, crecimiento y conexiones</span></h3><p><span data-en>Founders, investors and operators move from conversation to opportunity.</span><span data-es>Founders, inversionistas y operadores convierten conversaciones en oportunidades.</span></p><ul><li>Growth workshops</li><li>AI and finance conversations</li><li>Founder and investor sessions</li><li>Community networking</li><li>La Veleta night</li></ul></article>
           <article class="v2-day"><span class="v2-day-num">04</span><span class="v2-day-date">Sat · Dec 12</span><h3><span data-en>Demo Day & Celebration</span><span data-es>Demo Day y celebración</span></h3><p><span data-en>The week closes with recovery, startup excellence and the Grand Final.</span><span data-es>La semana cierra con recovery, startups y la Grand Final.</span></p><ul><li>Recovery and beach experience</li><li>Sponsor activations</li><li>Whale Tank Grand Final</li><li>Awards ceremony</li><li>Innovation Closing Party</li></ul></article>
         </div>
+
+        <div class="v2-program-people">
+          <div class="v2-program-people-copy">
+            <span>Whale Tank 2026</span>
+            <h3><span data-en>People around the program</span><span data-es>Personas alrededor del programa</span></h3>
+            <p><span data-en>Investor and mentor participation adds faces to the schedule without overloading the agenda.</span><span data-es>La participación de inversionistas y mentores agrega rostros al programa sin saturar la agenda.</span></p>
+          </div>
+          <div class="v2-program-faces" aria-label="Whale Tank investors and mentors">
+            <img src="/assets/investors/mati-barbero.webp" alt="Mati Barbero" loading="lazy" />
+            <img src="/assets/investors/diego-serebrisky.webp" alt="Diego Serebrisky" loading="lazy" />
+            <img src="/assets/investors/santiago-tamayo.webp" alt="Santiago Tamayo" loading="lazy" />
+            <img src="/assets/mentors/chris-roe.webp" alt="Chris Roe" loading="lazy" />
+            <img src="/assets/mentors/alex-santana.webp" alt="Alex Santana" loading="lazy" />
+            <img src="/assets/mentors/abraham-abe-ramos.webp" alt="Abraham Abe Ramos" loading="lazy" />
+          </div>
+        </div>
       </div>
     </section>
 
@@ -685,6 +844,76 @@
           <figure><img src="/assets/gallery/live-music.webp" alt="Live music at TIF" loading="lazy" /><figcaption>Culture</figcaption></figure>
           <figure><img src="/assets/gallery/cenote.webp" alt="TIF cenote experience" loading="lazy" /><figcaption>Nature</figcaption></figure>
           <figure><img src="/assets/gallery/night-dj.webp" alt="TIF night program" loading="lazy" /><figcaption>Night</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-archive v2-section" aria-labelledby="archive-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Previous editions</span><span data-es>Ediciones anteriores</span></p>
+            <h2 id="archive-title"><span data-en>Five editions built an</span><span data-es>Cinco ediciones construyeron un</span> <em><span data-en>archive worth showing.</span><span data-es>archivo que vale la pena mostrar.</span></em></h2>
+          </div>
+          <p><span data-en>Instead of describing history, the site should show it. These are real moments from previous editions in Tulum.</span><span data-es>En lugar de describir la historia, el sitio debe mostrarla. Estos son momentos reales de ediciones anteriores en Tulum.</span></p>
+        </div>
+
+        <div class="v2-archive-grid">
+          <figure><img src="/assets/gallery/community-table.webp" alt="Community table at TIF" loading="lazy" /><figcaption><span>Archive 01</span><strong>Community</strong></figcaption></figure>
+          <figure><img src="/assets/gallery/jungle-stage.webp" alt="Jungle stage at TIF" loading="lazy" /><figcaption><span>Archive 02</span><strong>Ideas</strong></figcaption></figure>
+          <figure><img src="/assets/gallery/cenote.webp" alt="Cenote experience at TIF" loading="lazy" /><figcaption><span>Archive 03</span><strong>Tulum</strong></figcaption></figure>
+          <figure><img src="/assets/gallery/live-music.webp" alt="Live music at TIF" loading="lazy" /><figcaption><span>Archive 04</span><strong>Culture</strong></figcaption></figure>
+          <figure><img src="/assets/gallery/night-dj.webp" alt="Night program at TIF" loading="lazy" /><figcaption><span>Archive 05</span><strong>Night</strong></figcaption></figure>
+        </div>
+
+        <div class="v2-archive-stats">
+          <strong>5</strong><span><span data-en>editions</span><span data-es>ediciones</span></span>
+          <strong>5,700+</strong><span><span data-en>festival entries across five editions</span><span data-es>entradas acumuladas en cinco ediciones</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-history-wall v2-section" aria-labelledby="history-wall-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Historical proof</span><span data-es>Prueba histórica</span></p>
+            <h2 id="history-wall-title"><span data-en>Companies and communities that have</span><span data-es>Empresas y comunidades que han</span> <em><span data-en>crossed paths with TIF.</span><span data-es>pasado por TIF.</span></em></h2>
+          </div>
+          <p><span data-en>Historical participation is labeled carefully. It does not imply a current 2026 sponsorship relationship.</span><span data-es>La participación histórica está etiquetada con claridad. No implica una relación de sponsorship vigente en 2026.</span></p>
+        </div>
+
+        <div class="v2-history-group">
+          <span><span data-en>Selected past sponsors and partners</span><span data-es>Sponsors y partners históricos seleccionados</span></span>
+          <div class="v2-name-wall">
+            <b>BINANCE</b><b>5IRE</b><b>MINIMALIST</b><b>PAPAYA PLAYA</b><b>IKAL</b><b>TALENT LAND</b><b>CLIMATETRADE</b><b>DIGITAL ORO</b><b>MONEY GIVER</b><b>GEOSHIP</b><b>PARQUETEC</b><b>TICKET FAIRY</b>
+          </div>
+        </div>
+
+        <div class="v2-history-group represented">
+          <span><span data-en>Companies and communities represented across previous editions</span><span data-es>Empresas y comunidades representadas en ediciones anteriores</span></span>
+          <div class="v2-name-wall">
+            <b>AWS</b><b>GOOGLE CLOUD</b><b>CHAINLINK</b><b>THE SANDBOX</b><b>STARTUP GRIND</b><b>WEB3 LATAM</b><b>BITBASEL</b><b>IBIZA TECH FORUM</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-media v2-section" aria-labelledby="media-title">
+      <div class="container">
+        <div class="v2-media-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Media & community</span><span data-es>Medios y comunidad</span></p>
+            <h2 id="media-title"><span data-en>More signals of</span><span data-es>Más señales de</span> <em><span data-en>credibility.</span><span data-es>credibilidad.</span></em></h2>
+          </div>
+          <p><span data-en>Selected media and community relationships around TIF and Whale Tank.</span><span data-es>Relaciones seleccionadas de medios y comunidad alrededor de TIF y Whale Tank.</span></p>
+        </div>
+        <div class="v2-media-logos">
+          <img src="/assets/whale-tank-logos/mundo-ejecutivo-blanco.webp" alt="Mundo Ejecutivo" loading="lazy" />
+          <img src="/assets/whale-tank-logos/prenseable-blanco.webp" alt="Prenseable" loading="lazy" />
+          <img src="/assets/whale-tank-logos/soy-emprendedor-blanco.webp" alt="Soy Emprendedor" loading="lazy" />
+          <img src="/assets/whale-tank-logos/geektime-blanco.webp" alt="Geektime" loading="lazy" />
+          <img src="/assets/whale-tank-logos/startups-latam-blanco.webp" alt="Startups Latam" loading="lazy" />
         </div>
       </div>
     </section>
