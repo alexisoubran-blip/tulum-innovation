@@ -915,6 +915,164 @@
       .v2-archive-grid figure:first-child { grid-column: auto; min-height: 300px; }
     }
 
+
+    /* Mobile V2 final polish: video, speakers, sticky tickets */
+    .v2-mobile-ticket-cta { display:none; }
+
+    .v2-hero-video {
+      inset:0;
+    }
+    .v2-hero-video iframe {
+      position:absolute;
+      top:50%;
+      left:50%;
+      width:177.77777778vh;
+      height:56.25vw;
+      min-width:100%;
+      min-height:100%;
+      transform:translate(-50%,-50%);
+    }
+
+    @media (max-width: 900px) {
+      .v2-hero-video {
+        display:block;
+        opacity:.72;
+      }
+      .v2-hero-fallback { z-index:-1; }
+
+      .v2-mobile-ticket-cta {
+        position:fixed;
+        z-index:110;
+        left:50%;
+        bottom:max(14px, env(safe-area-inset-bottom));
+        transform:translateX(-50%);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width:min(calc(100% - 28px), 420px);
+        min-height:52px;
+        padding:.85rem 1.25rem;
+        border:1px solid rgba(0,8,11,.22);
+        border-radius:999px;
+        background:#E97A43;
+        color:#00080B;
+        box-shadow:0 12px 36px rgba(0,8,11,.34);
+        font-family:var(--sans);
+        font-size:.74rem;
+        font-weight:700;
+        letter-spacing:.08em;
+        text-transform:uppercase;
+        text-align:center;
+      }
+      body.v2-nav-open .v2-mobile-ticket-cta {
+        opacity:0;
+        pointer-events:none;
+      }
+      body { padding-bottom:78px; }
+
+      /* Match Speakers / Co-Founders to the mentor-card density on mobile. */
+      .v2-cofounder-grid,
+      .v2-speaker-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:1px !important;
+        background:rgba(0,8,11,.14);
+        border:1px solid rgba(0,8,11,.14);
+      }
+      .v2-speaker-card {
+        background:#F2F1EA;
+        min-width:0;
+        overflow:hidden;
+      }
+      .v2-speaker-art,
+      .v2-speaker-card-featured .v2-speaker-art {
+        aspect-ratio:4/5 !important;
+        border:0;
+      }
+      .v2-speaker-meta {
+        min-height:94px;
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        justify-content:flex-start;
+        gap:.3rem;
+        padding:.75rem .72rem .85rem;
+      }
+      .v2-speaker-meta h3 {
+        max-width:100%;
+        margin:0;
+        font-size:.78rem !important;
+        line-height:1.12;
+        overflow-wrap:break-word;
+      }
+      .v2-speaker-meta span {
+        max-width:100%;
+        white-space:normal;
+        font-size:.48rem;
+        line-height:1.3;
+        overflow-wrap:break-word;
+      }
+      .v2-speaker-label-row {
+        align-items:flex-start;
+      }
+      .v2-speaker-label-row small {
+        max-width:52%;
+        text-align:right;
+        line-height:1.35;
+        overflow-wrap:break-word;
+      }
+
+      /* Guardrails for long mobile copy. */
+      .v2-title,
+      .v2-section-head h2,
+      .v2-speakers-head h2,
+      .v2-whale-copy h2,
+      .v2-partner-card h2,
+      .v2-closing h2,
+      .v2-ticket h3,
+      .v2-journey-card h3,
+      .v2-person-meta h3,
+      .v2-past-person-meta h3 {
+        max-width:100%;
+        overflow-wrap:break-word;
+      }
+      .v2-section-head > p,
+      .v2-speakers-intro p,
+      .v2-ticket p,
+      .v2-journey-card p,
+      .v2-hero-note,
+      .v2-kicker {
+        max-width:100%;
+        overflow-wrap:break-word;
+      }
+      .btn {
+        max-width:100%;
+        white-space:normal;
+        text-align:center;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .v2-speaker-meta {
+        min-height:88px;
+        padding:.68rem .62rem .78rem;
+      }
+      .v2-speaker-meta h3 { font-size:.72rem !important; }
+      .v2-speaker-meta span { font-size:.44rem; }
+      .v2-speaker-label-row {
+        flex-direction:column;
+        gap:.35rem;
+      }
+      .v2-speaker-label-row small {
+        max-width:100%;
+        text-align:left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .v2-hero-video { display:none !important; }
+      .v2-hero-fallback { z-index:0 !important; }
+    }
+
 </style>
   <script type="application/ld+json">
   {
@@ -1641,6 +1799,10 @@
       </div>
     </section>
   </main>
+
+  <a class="v2-mobile-ticket-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer" aria-label="Buy tickets for Tulum Innovation Fest 2026">
+    <span data-en>Buy tickets</span><span data-es>Comprar boletos</span>
+  </a>
 
   <footer class="v2-footer">
     <div class="container v2-footer-grid">
