@@ -224,6 +224,48 @@
     .v2-journey-card i { position:absolute; top:1.6rem; right:1.6rem; font-style:normal; color:rgba(242,241,234,.5); }
 
 
+
+    /* Responsive high-resolution photography */
+    .v2-responsive-media { display:block; width:100%; height:100%; }
+    .v2-responsive-media img { display:block; width:100%; height:100%; object-fit:cover; }
+    .v2-exec-main > .v2-responsive-media { position:absolute; inset:0; }
+    .v2-exec-moments .v2-responsive-media,
+    .v2-mosaic .v2-responsive-media { position:absolute; inset:0; }
+    .v2-program-hero {
+      position:relative; margin:0 0 10px; min-height:clamp(420px,52vw,720px);
+      overflow:hidden; background:#071315; border:1px solid var(--line);
+    }
+    .v2-program-hero > .v2-responsive-media { position:absolute; inset:0; }
+    .v2-program-hero::after {
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(0deg,rgba(0,8,11,.82),rgba(0,8,11,.04) 58%);
+      pointer-events:none;
+    }
+    .v2-program-hero figcaption {
+      position:absolute; z-index:2; left:1.35rem; right:1.35rem; bottom:1.25rem;
+      display:flex; align-items:end; justify-content:space-between; gap:1rem;
+      border-top:1px solid rgba(242,241,234,.42); padding-top:.85rem; color:#F2F1EA;
+    }
+    .v2-program-hero figcaption span {
+      color:rgba(242,241,234,.66); font-size:.56rem; letter-spacing:.12em; text-transform:uppercase;
+    }
+    .v2-program-hero figcaption strong {
+      font-family:var(--display); font-size:1.05rem; font-weight:400; text-transform:uppercase;
+    }
+    @media (max-width:768px) {
+      .v2-program-hero { min-height:520px; }
+      .v2-program-hero figcaption { align-items:flex-start; flex-direction:column; }
+      .v2-exec-main { min-height:560px; }
+      .v2-exec-moments figure { aspect-ratio:3/4; }
+      .v2-mosaic { grid-template-rows:repeat(5,360px); }
+      .v2-mosaic figure:first-child { min-height:460px; }
+    }
+    @media (max-width:480px) {
+      .v2-program-hero { min-height:480px; }
+      .v2-exec-main { min-height:500px; }
+      .v2-mosaic { grid-template-rows:repeat(5,320px); }
+    }
+
     /* Executive experience V4 */
     .v2-executive { background:#F2F1EA; color:#00080B; }
     .v2-executive .v2-kicker { color:rgba(0,8,11,.58); }
@@ -825,7 +867,10 @@
 
         <div class="v2-exec-layout">
           <figure class="v2-exec-main">
-            <img src="/assets/archive/executive-networking.webp" alt="Conversation during a previous TIF edition" />
+            <picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/executive-experience-mobile.webp" />
+              <img src="/assets/tif-home-v2/executive-experience-desktop.webp" alt="Two attendees networking over drinks during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture>
             <figcaption><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span><strong><span data-en>High-context networking</span><span data-es>Networking con contexto</span></strong></figcaption>
           </figure>
 
@@ -838,9 +883,18 @@
         </div>
 
         <div class="v2-exec-moments">
-          <figure><img src="/assets/archive/executive-stage.webp" alt="Talk during a previous TIF edition" loading="lazy" /><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong><span data-en>Talks & panels</span><span data-es>Charlas y paneles</span></strong></figcaption></figure>
-          <figure><img src="/assets/archive/executive-hospitality.webp" alt="Hospitality at a previous TIF edition" loading="lazy" /><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong>Hospitality</strong></figcaption></figure>
-          <figure><img src="/assets/archive/executive-night.webp" alt="Night program at a previous TIF edition" loading="lazy" /><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong><span data-en>Night program</span><span data-es>Programa nocturno</span></strong></figcaption></figure>
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/panel-discussion-mobile.webp" />
+              <img src="/assets/tif-home-v2/panel-discussion-desktop.webp" alt="Panel discussion during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong><span data-en>Talks & panels</span><span data-es>Charlas y paneles</span></strong></figcaption></figure>
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/workshop-community-mobile.webp" />
+              <img src="/assets/tif-home-v2/workshop-community-desktop.webp" alt="Attendee taking notes during a workshop at a previous TIF edition" loading="lazy" decoding="async" />
+            </picture><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong><span data-en>Workshops & community</span><span data-es>Workshops y comunidad</span></strong></figcaption></figure>
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/night-experience-mobile.webp" />
+              <img src="/assets/tif-home-v2/night-experience-desktop.webp" alt="Night DJ and crowd during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture><figcaption><small><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></small><strong><span data-en>Night program</span><span data-es>Programa nocturno</span></strong></figcaption></figure>
         </div>
 
         <div class="v2-exec-actions">
@@ -862,6 +916,17 @@
             <span data-es>El home muestra la forma de la semana. La agenda completa vive en el programa conforme se confirman sesiones y speakers.</span>
           </p>
         </div>
+
+        <figure class="v2-program-hero">
+          <picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/program-hero-mobile.webp" />
+              <img src="/assets/tif-home-v2/program-hero-desktop.webp" alt="Speaker presentation with audience during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture>
+          <figcaption>
+            <span><span data-en>Archive · Previous edition</span><span data-es>Archivo · Edición anterior</span></span>
+            <strong><span data-en>Ideas in the room</span><span data-es>Ideas en la sala</span></strong>
+          </figcaption>
+        </figure>
 
         <div class="v2-program-grid">
           <article class="v2-day"><span class="v2-day-num">01</span><span class="v2-day-date">Wed · Dec 09</span><h3><span data-en>Welcome & Community</span><span data-es>Bienvenida y comunidad</span></h3><p><span data-en>Arrive, meet the community and enter the week together.</span><span data-es>Llega, conoce a la comunidad y entra a la semana en conjunto.</span></p><ul><li>Founder onboarding</li><li>Festival registration</li><li>Opening ceremony</li><li>Welcome cocktail</li><li>Community celebration</li></ul></article>
@@ -925,9 +990,18 @@
 
         <div class="v2-mosaic">
           <figure><img src="/assets/gallery/community.webp" alt="TIF community" loading="lazy" /><figcaption>Community</figcaption></figure>
-          <figure><img src="/assets/gallery/jungle-stage.webp" alt="TIF jungle stage" loading="lazy" /><figcaption>Ideas</figcaption></figure>
-          <figure><img src="/assets/sponsorship/panel-2023.webp" alt="Panel at a previous TIF edition" loading="lazy" /><figcaption>Culture</figcaption></figure>
-          <figure><img src="/assets/gallery/cenote.webp" alt="TIF cenote experience" loading="lazy" /><figcaption>Nature</figcaption></figure>
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/venue-cenote-stage-mobile.webp" />
+              <img src="/assets/tif-home-v2/venue-cenote-stage-desktop.webp" alt="Wide view of the cenote stage and tropical venue" loading="lazy" decoding="async" />
+            </picture><figcaption><span data-en>Venue</span><span data-es>Venue</span></figcaption></figure>
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/audience-social-proof-mobile.webp" />
+              <img src="/assets/tif-home-v2/audience-social-proof-desktop.webp" alt="Audience seated during a talk at a previous TIF edition" loading="lazy" decoding="async" />
+            </picture><figcaption><span data-en>Community</span><span data-es>Comunidad</span></figcaption></figure>
+          <figure><picture class="v2-responsive-media">
+              <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/cenote-experience-mobile.webp" />
+              <img src="/assets/tif-home-v2/cenote-experience-desktop.webp" alt="Attendees relaxing in the cenote during a previous TIF edition" loading="lazy" decoding="async" />
+            </picture><figcaption><span data-en>Nature</span><span data-es>Naturaleza</span></figcaption></figure>
           <figure><img src="/assets/gallery/night-dj.webp" alt="TIF night program" loading="lazy" /><figcaption>Night</figcaption></figure>
         </div>
       </div>
@@ -947,7 +1021,7 @@
           <figure><img src="/assets/gallery/wellness.webp" alt="Wellness moment at a previous TIF edition" loading="lazy" /><figcaption><span>Archive 01</span><strong>Wellness</strong></figcaption></figure>
           <figure><img src="/assets/sponsorship/hero-audience.webp" alt="Audience at a previous TIF edition" loading="lazy" /><figcaption><span>Archive 02</span><strong>Audience</strong></figcaption></figure>
           <figure><img src="/assets/gallery/live-art.webp" alt="Live art at a previous TIF edition" loading="lazy" /><figcaption><span>Archive 03</span><strong>Art</strong></figcaption></figure>
-          <figure><img src="/assets/gallery/live-music.webp" alt="Live music at TIF" loading="lazy" /><figcaption><span>Archive 04</span><strong>Panels</strong></figcaption></figure>
+          <figure><img src="/assets/gallery/community-table.webp" alt="Community table at a previous TIF edition" loading="lazy" decoding="async" /><figcaption><span>Archive 04</span><strong>Community</strong></figcaption></figure>
           <figure><img src="/assets/gallery/jungle-venue-night.webp" alt="TIF venue at night" loading="lazy" /><figcaption><span>Archive 05</span><strong>Venue</strong></figcaption></figure>
         </div>
 
