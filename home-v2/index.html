@@ -1196,6 +1196,7 @@
     .v2-beyond-head .v2-kicker { margin-bottom:.8rem; }
     .v2-beyond-head h2 {
       margin:0;
+      width:100%;
       max-width:760px;
       font-family:var(--display);
       font-size:clamp(2rem,3.2vw,4.25rem);
@@ -1203,6 +1204,8 @@
       font-weight:400;
       letter-spacing:-.04em;
       text-transform:uppercase;
+      text-wrap:balance;
+      overflow-wrap:break-word;
     }
     .v2-beyond-head > p {
       margin:0;
@@ -1274,9 +1277,14 @@
     @media (max-width:720px) {
       .v2-beyond-strip { padding:3.5rem 0; }
       .v2-beyond-head h2 {
-        font-size:clamp(2rem,9.5vw,3.25rem);
-        line-height:.98;
-        overflow-wrap:break-word;
+        width:100%;
+        max-width:100%;
+        font-size:clamp(1.65rem,7.8vw,2.45rem);
+        line-height:1.02;
+        letter-spacing:-.03em;
+        overflow-wrap:anywhere;
+        word-break:normal;
+        text-wrap:balance;
       }
       .v2-beyond-collage {
         grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1499,23 +1507,26 @@
         <div class="v2-beyond-head">
           <div>
             <p class="v2-kicker"><span data-en>Beyond the stage</span><span data-es>Más allá del escenario</span></p>
-            <h2 id="beyond-strip-title"><span data-en>The conversations keep going.</span><span data-es>Las conversaciones continúan.</span></h2>
+            <h2 id="beyond-strip-title"><span data-en>Where the best conversations continue.</span><span data-es>Donde continúan las mejores conversaciones.</span></h2>
           </div>
-          <p><span data-en>Shared tables, nature, culture and smaller moments are where a lot of TIF actually happens.</span><span data-es>Mesas compartidas, naturaleza, cultura y momentos más pequeños son parte importante de cómo se vive TIF.</span></p>
+          <p>
+            <span data-en>Shared tables, beachside conversations, wellness moments and unexpected encounters are all part of how TIF creates real connection.</span>
+            <span data-es>Mesas compartidas, conversaciones junto al mar, momentos de bienestar y encuentros inesperados forman parte de cómo TIF genera conexión real.</span>
+          </p>
         </div>
 
         <div class="v2-beyond-collage" aria-label="Moments from previous TIF editions">
           <figure class="v2-beyond-a">
-            <img src="/assets/gallery/community-table.webp" alt="Community gathering around a shared table at a previous TIF edition" loading="lazy" decoding="async" />
-            <figcaption><span data-en>Shared tables</span><span data-es>Mesas compartidas</span></figcaption>
+            <img src="/assets/gallery/conference-at-the-beach.webp" alt="Conversation by the beach during a previous TIF edition" loading="lazy" decoding="async" />
+            <figcaption><span data-en>Conference at the Beach</span><span data-es>Conferencias frente al mar</span></figcaption>
           </figure>
           <figure class="v2-beyond-b">
-            <img src="/assets/gallery/live-art.webp" alt="Live art at a previous TIF edition" loading="lazy" decoding="async" />
-            <figcaption><span data-en>Culture</span><span data-es>Cultura</span></figcaption>
+            <img src="/assets/gallery/nearby-conversations.webp" alt="Intimate conversation during a previous TIF edition" loading="lazy" decoding="async" />
+            <figcaption><span data-en>Nearby Conversations</span><span data-es>Conversaciones cercanas</span></figcaption>
           </figure>
           <figure class="v2-beyond-c">
-            <img src="/assets/gallery/jungle-venue-night.webp" alt="TIF venue at night during a previous edition" loading="lazy" decoding="async" />
-            <figcaption><span data-en>Night</span><span data-es>Noche</span></figcaption>
+            <img src="/assets/gallery/live-art.webp" alt="Live art at a previous TIF edition" loading="lazy" decoding="async" />
+            <figcaption><span data-en>Culture</span><span data-es>Cultura</span></figcaption>
           </figure>
           <figure class="v2-beyond-d">
             <img src="/assets/gallery/wellness.webp" alt="Wellness moment at a previous TIF edition" loading="lazy" decoding="async" />
