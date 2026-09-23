@@ -1,620 +1,712 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="#00080B" name="theme-color"/>
-<meta content="Join founders, investors, creators and technology leaders in Tulum from December 9-12, 2026 for four days of innovation, capital, culture and meaningful connection." name="description"/>
-<meta content="Tulum Innovation Fest 2026 | Innovation, Capital &amp; Culture" property="og:title"/>
-<meta content="From the heart of the jungle to the future of humanity." property="og:description"/>
-<meta content="website" property="og:type"/>
-<meta content="assets/hero-desktop.png" property="og:image"/>
-<title>Tulum Innovation Fest 2026 | Innovation, Capital &amp; Culture</title>
-<link href="assets/signal-mark.svg" rel="icon" type="image/svg+xml"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&amp;family=Bruno+Ace&amp;family=Sora:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<script>
-    (() => {
-      const urlLanguage = new URLSearchParams(window.location.search).get("lang");
-      const savedLanguage = localStorage.getItem("tif-language");
-      const browserLanguage = navigator.languages?.[0] || navigator.language || "en";
-      const language = urlLanguage === "es" || urlLanguage === "en"
-        ? urlLanguage
-        : savedLanguage || (browserLanguage.toLowerCase().startsWith("es") ? "es" : "en");
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#00080B" />
+  <title>Tulum Innovation Fest 2026 | December 9–12</title>
+  <meta name="description" content="Tulum Innovation Fest brings founders, investors, operators and creators together in Tulum for four days of innovation, capital, culture and meaningful connection." />
+  <link rel="canonical" href="https://www.tuluminnovationfest.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tulum Innovation Fest 2026 | December 9–12" />
+  <meta property="og:description" content="Innovation, capital and culture meet in Tulum." />
+  <meta property="og:url" content="https://www.tuluminnovationfest.com/" />
+  <meta property="og:image" content="https://www.tuluminnovationfest.com/assets/hero-desktop.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/signal-mark.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=20260922-home-v2" />
+  <style>
+    html { scroll-padding-top: calc(var(--header) + 28px); }
+    body { background: var(--black); }
+    [data-lang="es"] [data-en],
+    [data-lang="en"] [data-es] { display: none !important; }
 
-      document.documentElement.dataset.lang = language;
-      document.documentElement.lang = language;
+    .v2-section { position: relative; padding: clamp(5.5rem, 8vw, 9rem) 0; }
+    .v2-rule { border-top: 1px solid var(--line); }
+    .v2-kicker {
+      display: flex; align-items: center; gap: .75rem; margin: 0 0 1.2rem;
+      color: rgba(242,241,234,.62); font-size: .64rem; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
+    }
+    .v2-kicker::before { content:""; width: 32px; height: 1px; background: var(--ember); }
+    .v2-title {
+      margin: 0; max-width: 1120px; font-family: var(--serif); font-weight: 400;
+      font-size: clamp(3rem, 5.5vw, 7.2rem); line-height: .94; letter-spacing: -.045em;
+      text-transform: uppercase; text-wrap: balance;
+    }
+    .v2-title em { color: #E97A43; font-weight: 400; }
+    .v2-lede {
+      max-width: 720px; margin: 1.6rem 0 0; color: rgba(242,241,234,.7);
+      font-size: clamp(1rem, 1.25vw, 1.25rem); line-height: 1.65;
+    }
+    .v2-section-head {
+      display: grid; grid-template-columns: minmax(0,1fr) minmax(260px,.48fr);
+      align-items: end; gap: clamp(2rem, 7vw, 8rem); margin-bottom: clamp(2.8rem, 5vw, 5rem);
+    }
+    .v2-section-head h2 {
+      margin: 0; font-family: var(--serif); font-size: clamp(2.7rem, 4.2vw, 5.3rem);
+      line-height: .98; font-weight: 400; letter-spacing: -.035em; text-transform: uppercase;
+    }
+    .v2-section-head h2 em { color: #E97A43; }
+    .v2-section-head > p {
+      margin: 0; color: rgba(242,241,234,.65); font-size: .98rem; line-height: 1.7;
+    }
 
-      if (language === "es") {
-        document.documentElement.classList.add("i18n-pending");
+    /* Hero */
+    .v2-hero {
+      position: relative; min-height: 100svh; overflow: hidden; display: flex;
+      align-items: flex-end; background: var(--black);
+    }
+    .v2-hero-media { position: absolute; inset: 0; }
+    .v2-hero-media picture, .v2-hero-media img { width: 100%; height: 100%; }
+    .v2-hero-media img { object-fit: cover; object-position: 50% 52%; transform: scale(1.01); }
+    .v2-hero-media::after {
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,8,11,.95) 0%, rgba(0,8,11,.79) 35%, rgba(0,8,11,.22) 69%, rgba(0,8,11,.45) 100%),
+        linear-gradient(0deg, rgba(0,8,11,.96) 0%, transparent 34%, rgba(0,8,11,.25) 100%);
+    }
+    .v2-hero-inner {
+      position: relative; z-index: 2; width: var(--container); margin-inline:auto;
+      display:grid; grid-template-columns:minmax(0,1fr) minmax(230px,.36fr); gap:clamp(2rem,6vw,7rem);
+      align-items:end; padding-top: calc(var(--header) + 7rem); padding-bottom: clamp(5.5rem,9vh,8rem);
+    }
+    .v2-hero-copy { max-width: 1040px; }
+    .v2-hero-copy .v2-title { font-size: clamp(3.8rem, 6.4vw, 8.3rem); }
+    .v2-hero-date {
+      display:flex; align-items:center; gap:.75rem; margin:0 0 1.35rem;
+      color:rgba(242,241,234,.72); font-size:.67rem; letter-spacing:.17em; text-transform:uppercase;
+    }
+    .v2-hero-date::before { content:""; width:34px; height:1px; background:var(--ember); }
+    .v2-hero-copy .v2-lede { max-width: 670px; color: rgba(242,241,234,.82); }
+    .v2-hero-actions { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:2rem; }
+    .v2-hero-note { margin:1rem 0 0; color:rgba(242,241,234,.48); font-size:.68rem; letter-spacing:.04em; }
+    .v2-hero-proof { border-top:1px solid rgba(242,241,234,.25); }
+    .v2-hero-proof article {
+      display:grid; grid-template-columns:72px 1fr; gap:1rem; align-items:center;
+      padding:1rem 0; border-bottom:1px solid rgba(242,241,234,.15);
+    }
+    .v2-hero-proof strong {
+      font-family:var(--display); color:#E97A43; font-size:1.5rem; font-weight:400; letter-spacing:-.04em;
+    }
+    .v2-hero-proof span { color:rgba(242,241,234,.74); font-size:.72rem; line-height:1.45; }
+    .v2-watch {
+      position:absolute; z-index:3; right:3vw; bottom:1.8rem; display:inline-flex; align-items:center; gap:.7rem;
+      color:rgba(242,241,234,.58); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+    }
+    .v2-watch i { width:38px; height:1px; background:var(--ember); }
+
+    /* Proof strip */
+    .v2-proof-strip { background:var(--white); color:var(--black); border-bottom:1px solid rgba(0,8,11,.12); }
+    .v2-proof-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+    .v2-proof-grid article {
+      min-height:132px; display:flex; flex-direction:column; justify-content:center; padding:1.3rem 2rem;
+      border-right:1px solid rgba(0,8,11,.13);
+    }
+    .v2-proof-grid article:last-child { border-right:0; }
+    .v2-proof-grid strong {
+      font-family:var(--display); color:var(--ember); font-size:clamp(2.2rem,3.2vw,4rem);
+      font-weight:400; line-height:1;
+    }
+    .v2-proof-grid span { margin-top:.55rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; }
+
+    /* People */
+    .v2-people { background:linear-gradient(180deg,#00080B 0%,#031C20 100%); }
+    .v2-people-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-person { position:relative; min-width:0; overflow:hidden; background:#071315; }
+    .v2-person-image { aspect-ratio:4/5; overflow:hidden; }
+    .v2-person img {
+      width:100%; height:100%; object-fit:cover; filter:saturate(.78) contrast(1.04);
+      transition:transform .6s var(--ease), filter .35s ease;
+    }
+    .v2-person:hover img { transform:scale(1.035); filter:saturate(1) contrast(1.03); }
+    .v2-person-meta { padding:1rem 1rem 1.15rem; background:#071315; }
+    .v2-person-meta span { color:var(--ember); font-size:.56rem; letter-spacing:.13em; text-transform:uppercase; }
+    .v2-person-meta h3 { margin:.4rem 0 0; font-size:.98rem; font-weight:500; letter-spacing:-.02em; }
+
+    /* Film */
+    .v2-film { background:#F2F1EA; color:#00080B; }
+    .v2-film .v2-kicker { color:rgba(0,8,11,.62); }
+    .v2-film .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-film-frame { position:relative; aspect-ratio:16/9; overflow:hidden; background:#000; }
+    .v2-film-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .v2-film-caption {
+      display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:start;
+      padding:1.2rem 0 0; border-top:1px solid rgba(0,8,11,.16); margin-top:1.2rem;
+    }
+    .v2-film-caption p { margin:0; max-width:680px; color:rgba(0,8,11,.63); line-height:1.6; }
+    .v2-film-caption span { font-family:var(--display); color:var(--ember); font-size:.75rem; letter-spacing:.07em; }
+
+    /* Journeys */
+    .v2-journeys { background:var(--black); }
+    .v2-journey-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); }
+    .v2-journey-card {
+      position:relative; min-height:330px; padding:1.7rem; border-right:1px solid var(--line);
+      display:flex; flex-direction:column; justify-content:space-between; transition:background .25s ease;
+    }
+    .v2-journey-card:last-child { border-right:0; }
+    .v2-journey-card:hover { background:rgba(242,241,234,.045); }
+    .v2-journey-card > span { color:var(--ember); font-family:var(--display); font-size:.7rem; }
+    .v2-journey-card h3 {
+      margin:auto 0 1rem; font-family:var(--serif); font-size:clamp(2rem,2.9vw,3.8rem);
+      font-weight:400; line-height:.95; text-transform:uppercase; letter-spacing:-.035em;
+    }
+    .v2-journey-card p { margin:0; color:rgba(242,241,234,.64); font-size:.86rem; line-height:1.6; }
+    .v2-journey-card i { position:absolute; top:1.6rem; right:1.6rem; font-style:normal; color:rgba(242,241,234,.5); }
+
+    /* Program */
+    .v2-program { background:#020D0F; }
+    .v2-program-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-day { min-height:490px; padding:1.5rem; background:#020D0F; display:flex; flex-direction:column; }
+    .v2-day-num { font-family:var(--display); color:var(--ember); font-size:1rem; }
+    .v2-day-date { margin:.55rem 0 2rem; color:rgba(242,241,234,.46); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; }
+    .v2-day h3 { margin:0 0 1rem; font-size:1.45rem; line-height:1.13; font-weight:500; letter-spacing:-.035em; }
+    .v2-day p { margin:0 0 1.4rem; color:rgba(242,241,234,.63); font-size:.86rem; line-height:1.6; }
+    .v2-day ul { margin:auto 0 0; padding:1.2rem 0 0; list-style:none; border-top:1px solid var(--line); }
+    .v2-day li { padding:.36rem 0; color:rgba(242,241,234,.72); font-size:.76rem; }
+
+    /* Whale */
+    .v2-whale { overflow:hidden; background:linear-gradient(135deg,#031C20 0%,#00080B 62%); }
+    .v2-whale-grid { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(2rem,7vw,8rem); align-items:center; }
+    .v2-whale-media { position:relative; min-height:680px; overflow:hidden; border:1px solid var(--line); }
+    .v2-whale-media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .v2-whale-copy h2 {
+      margin:0; font-family:var(--serif); font-size:clamp(3rem,4.5vw,5.6rem);
+      font-weight:400; line-height:.94; letter-spacing:-.04em; text-transform:uppercase;
+    }
+    .v2-whale-copy h2 em { color:#E97A43; }
+    .v2-whale-copy > p:not(.v2-kicker) { max-width:680px; color:rgba(242,241,234,.67); line-height:1.7; }
+    .v2-whale-stats { display:grid; grid-template-columns:repeat(2,1fr); margin:2rem 0; border:1px solid var(--line); }
+    .v2-whale-stats div { padding:1.2rem; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .v2-whale-stats div:nth-child(2n) { border-right:0; }
+    .v2-whale-stats div:nth-child(n+3) { border-bottom:0; }
+    .v2-whale-stats strong { display:block; font-family:var(--display); color:#E97A43; font-size:2rem; font-weight:400; }
+    .v2-whale-stats span { display:block; margin-top:.3rem; color:rgba(242,241,234,.58); font-size:.66rem; line-height:1.45; }
+
+    /* Experience montage */
+    .v2-experience { background:#F2F1EA; color:#00080B; }
+    .v2-experience .v2-kicker { color:rgba(0,8,11,.58); }
+    .v2-experience .v2-section-head > p { color:rgba(0,8,11,.62); }
+    .v2-mosaic { display:grid; grid-template-columns:1.4fr .8fr .8fr; grid-template-rows:repeat(2,minmax(260px,36vw)); gap:10px; }
+    .v2-mosaic figure { position:relative; margin:0; overflow:hidden; background:#111; }
+    .v2-mosaic figure:first-child { grid-row:1 / span 2; }
+    .v2-mosaic img { width:100%; height:100%; object-fit:cover; transition:transform .65s var(--ease); }
+    .v2-mosaic figure:hover img { transform:scale(1.025); }
+    .v2-mosaic figcaption {
+      position:absolute; left:1rem; bottom:1rem; padding:.5rem .72rem;
+      background:rgba(0,8,11,.74); color:#F2F1EA; font-size:.58rem; letter-spacing:.1em; text-transform:uppercase;
+      backdrop-filter:blur(10px);
+    }
+
+    /* Partners */
+    .v2-partners { background:#00080B; }
+    .v2-partner-card {
+      display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,.42fr); gap:clamp(2rem,7vw,8rem);
+      padding:clamp(2rem,5vw,5rem); border:1px solid var(--line);
+      background:radial-gradient(circle at 85% 20%,rgba(209,68,20,.13),transparent 36%),#020D0F;
+    }
+    .v2-partner-card h2 {
+      margin:0; font-family:var(--serif); font-size:clamp(3rem,5vw,6rem); font-weight:400;
+      line-height:.94; letter-spacing:-.04em; text-transform:uppercase;
+    }
+    .v2-partner-card h2 em { color:#E97A43; }
+    .v2-partner-copy p { max-width:700px; color:rgba(242,241,234,.67); line-height:1.7; }
+    .v2-partner-outcomes { display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-partner-outcomes article { padding:1.2rem; background:#071315; }
+    .v2-partner-outcomes span { color:var(--ember); font-family:var(--display); font-size:.63rem; }
+    .v2-partner-outcomes h3 { margin:.45rem 0 .35rem; font-size:1rem; font-weight:500; }
+    .v2-partner-outcomes p { margin:0; color:rgba(242,241,234,.57); font-size:.75rem; line-height:1.55; }
+
+    /* Tickets */
+    .v2-tickets { background:#031C20; }
+    .v2-ticket-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .v2-ticket { min-height:460px; padding:1.7rem; background:#031C20; display:flex; flex-direction:column; }
+    .v2-ticket.featured { background:#071d1c; }
+    .v2-ticket-type { color:var(--ember); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; }
+    .v2-ticket h3 { margin:2.4rem 0 .8rem; font-size:1.45rem; font-weight:500; letter-spacing:-.035em; }
+    .v2-ticket p { color:rgba(242,241,234,.62); line-height:1.6; font-size:.86rem; }
+    .v2-ticket-price { margin:1.4rem 0; }
+    .v2-ticket-price strong { display:block; font-family:var(--display); color:#E97A43; font-size:2.65rem; font-weight:400; letter-spacing:-.04em; }
+    .v2-ticket-price span { color:rgba(242,241,234,.48); font-size:.65rem; }
+    .v2-ticket .btn { margin-top:auto; }
+
+    /* Closing */
+    .v2-closing {
+      position:relative; min-height:76svh; display:flex; align-items:center; overflow:hidden;
+      background:url('/assets/closing-portal.png') center/cover no-repeat;
+    }
+    .v2-closing::after {
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg,rgba(0,8,11,.94),rgba(0,8,11,.72) 48%,rgba(0,8,11,.25));
+    }
+    .v2-closing-inner { position:relative; z-index:2; width:var(--container); margin-inline:auto; }
+    .v2-closing h2 {
+      max-width:900px; margin:0; font-family:var(--serif); font-size:clamp(3.2rem,5.9vw,7.5rem);
+      font-weight:400; line-height:.92; letter-spacing:-.045em; text-transform:uppercase;
+    }
+    .v2-closing h2 em { color:#E97A43; }
+
+    .v2-footer {
+      padding:3rem 0 7rem; border-top:1px solid var(--line); background:#00080B;
+    }
+    .v2-footer-grid {
+      display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:end;
+    }
+    .v2-footer img { width:auto; height:44px; }
+    .v2-footer p { max-width:560px; color:rgba(242,241,234,.5); font-size:.75rem; line-height:1.6; }
+    .v2-footer-links { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:1rem; }
+    .v2-footer-links a { color:rgba(242,241,234,.62); font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; }
+
+    @media (max-width: 1120px) {
+      .v2-people-grid { grid-template-columns:repeat(4,1fr); }
+      .v2-journey-grid, .v2-program-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-journey-card:nth-child(2) { border-right:0; }
+      .v2-journey-card:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+      .v2-program-grid .v2-day { min-height:420px; }
+    }
+    @media (max-width: 900px) {
+      .v2-hero-inner, .v2-section-head, .v2-whale-grid, .v2-partner-card { grid-template-columns:1fr; }
+      .v2-hero-proof { display:grid; grid-template-columns:repeat(3,1fr); margin-top:2.5rem; }
+      .v2-hero-proof article { display:block; padding:1rem; border-right:1px solid rgba(242,241,234,.15); }
+      .v2-hero-proof article:last-child { border-right:0; }
+      .v2-people-grid { grid-template-columns:repeat(3,1fr); }
+      .v2-proof-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-proof-grid article:nth-child(2) { border-right:0; }
+      .v2-proof-grid article:nth-child(-n+2) { border-bottom:1px solid rgba(0,8,11,.13); }
+      .v2-ticket-grid { grid-template-columns:1fr; }
+      .v2-ticket { min-height:0; }
+      .v2-whale-media { min-height:520px; }
+      .v2-mosaic { grid-template-columns:1fr 1fr; grid-template-rows:420px 300px 300px; }
+      .v2-mosaic figure:first-child { grid-column:1 / -1; grid-row:auto; }
+    }
+    @media (max-width: 720px) {
+      body { padding-bottom:0; }
+      .site-header { grid-template-columns:1fr auto; padding:1rem 5vw; }
+      .brand-logo { height:38px; }
+      .header-actions { display:none; }
+      .nav-toggle { display:flex; justify-self:end; }
+      .site-nav {
+        position:fixed; inset:0; z-index:120; display:flex; flex-direction:column; justify-content:center;
+        gap:1.5rem; padding:6rem 2rem; background:rgba(0,8,11,.98); opacity:0; pointer-events:none;
+        transform:translateY(-12px); transition:.25s ease;
       }
+      body.v2-nav-open .site-nav { opacity:1; pointer-events:auto; transform:none; }
+      .site-nav a { font-size:1rem; }
+      body.v2-nav-open .nav-toggle { position:fixed; top:20px; right:20px; z-index:140; }
+      .v2-hero-inner { padding-top:calc(var(--header) + 6rem); }
+      .v2-hero-copy .v2-title { font-size:clamp(2.75rem,12vw,4.6rem); line-height:.96; }
+      .v2-hero-proof { grid-template-columns:1fr; }
+      .v2-hero-proof article { display:grid; grid-template-columns:90px 1fr; border-right:0; }
+      .v2-watch { display:none; }
+      .v2-people-grid { grid-template-columns:repeat(2,1fr); }
+      .v2-person-meta h3 { font-size:.86rem; }
+      .v2-journey-grid, .v2-program-grid { grid-template-columns:1fr; }
+      .v2-journey-card { min-height:260px; border-right:0; border-bottom:1px solid var(--line); }
+      .v2-journey-card:last-child { border-bottom:0; }
+      .v2-day { min-height:0; }
+      .v2-mosaic { grid-template-columns:1fr; grid-template-rows:repeat(5,300px); }
+      .v2-mosaic figure:first-child { grid-column:auto; }
+      .v2-whale-media { min-height:430px; }
+      .v2-whale-stats { grid-template-columns:1fr; }
+      .v2-whale-stats div, .v2-whale-stats div:nth-child(2n), .v2-whale-stats div:nth-child(n+3) {
+        border-right:0; border-bottom:1px solid var(--line);
+      }
+      .v2-whale-stats div:last-child { border-bottom:0; }
+      .v2-partner-card { padding:1.5rem; }
+      .v2-footer-grid { grid-template-columns:1fr; }
+      .v2-footer-links { justify-content:flex-start; }
+      .v2-film-caption { grid-template-columns:1fr; }
+    }
+    @media (max-width: 480px) {
+      .v2-people-grid { grid-template-columns:1fr 1fr; }
+      .v2-proof-grid { grid-template-columns:1fr; }
+      .v2-proof-grid article { border-right:0 !important; border-bottom:1px solid rgba(0,8,11,.13); }
+      .v2-proof-grid article:last-child { border-bottom:0; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Event",
+    "name":"Tulum Innovation Fest 2026",
+    "startDate":"2026-12-09",
+    "endDate":"2026-12-12",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "description":"A four-day gathering connecting innovation, capital, culture and human connection in Tulum, Mexico.",
+    "image":"https://www.tuluminnovationfest.com/assets/hero-desktop.png",
+    "url":"https://www.tuluminnovationfest.com/",
+    "location":{"@type":"Place","name":"Tulum, Mexico","address":{"@type":"PostalAddress","addressLocality":"Tulum","addressRegion":"Quintana Roo","addressCountry":"MX"}},
+    "organizer":{"@type":"Organization","name":"Tulum Innovation Fest","url":"https://www.tuluminnovationfest.com/"}
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="Tulum Innovation Fest home">
+      <img class="brand-logo" src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" />
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-v2-nav>
+      <span></span><span></span><span></span><span class="sr-only">Menu</span>
+    </button>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#people"><span data-en>People</span><span data-es>Personas</span></a>
+      <a href="#experience"><span data-en>Experience</span><span data-es>Experiencia</span></a>
+      <a href="#program"><span data-en>Program</span><span data-es>Programa</span></a>
+      <a href="/whale-tank"><span data-en>Whale Tank</span><span data-es>Whale Tank</span></a>
+      <a href="/sponsorship"><span data-en>Partners</span><span data-es>Partners</span></a>
+      <a href="#tickets"><span data-en>Tickets</span><span data-es>Boletos</span></a>
+      <button class="lang-toggle" type="button" data-v2-lang aria-label="Cambiar idioma">
+        <span>EN</span><span aria-hidden="true">/</span><span>ES</span>
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-small" href="/sponsorship"><span data-en>Partner with TIF</span><span data-es>Ser partner</span></a>
+      <a class="btn btn-primary btn-small" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Get tickets</span><span data-es>Comprar boletos</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="v2-hero" id="top">
+      <div class="v2-hero-media" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 720px)" srcset="/assets/hero-mobile.png" />
+          <img src="/assets/hero-desktop.png" alt="" />
+        </picture>
+      </div>
+
+      <div class="v2-hero-inner">
+        <div class="v2-hero-copy">
+          <p class="v2-hero-date">
+            <span data-en>December 9–12, 2026 · Tulum, Mexico</span>
+            <span data-es>9–12 de diciembre, 2026 · Tulum, México</span>
+          </p>
+
+          <h1 class="v2-title">
+            <span data-en>Innovation, capital & culture</span>
+            <span data-es>Innovación, capital y cultura</span><br />
+            <em><span data-en>meet in Tulum.</span><span data-es>se encuentran en Tulum.</span></em>
+          </h1>
+
+          <p class="v2-lede">
+            <span data-en>Four days with founders, investors, operators and creators building relationships around ideas, capital and shared experience.</span>
+            <span data-es>Cuatro días con founders, inversionistas, operadores y creadores construyendo relaciones alrededor de ideas, capital y experiencias compartidas.</span>
+          </p>
+
+          <div class="v2-hero-actions">
+            <a class="btn btn-primary" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer">
+              <span data-en>Get festival access</span><span data-es>Comprar acceso</span>
+            </a>
+            <a class="btn btn-ghost" href="/whale-tank">
+              <span data-en>Explore Whale Tank</span><span data-es>Explorar Whale Tank</span>
+            </a>
+          </div>
+
+          <p class="v2-hero-note">
+            <span data-en>Limited capacity · Four-day programming · Day-to-night experience</span>
+            <span data-es>Cupo limitado · Cuatro días de programa · Experiencia de día y noche</span>
+          </p>
+        </div>
+
+        <aside class="v2-hero-proof" aria-label="Festival proof">
+          <article><strong>5</strong><span data-en>previous editions</span><span data-es>ediciones anteriores</span></article>
+          <article><strong>5,700+</strong><span data-en>festival entries across five editions</span><span data-es>entradas acumuladas en cinco ediciones</span></article>
+          <article><strong>4</strong><span data-en>days in Tulum</span><span data-es>días en Tulum</span></article>
+        </aside>
+      </div>
+
+      <a class="v2-watch" href="#film"><i></i><span data-en>Watch the experience</span><span data-es>Ver la experiencia</span></a>
+    </section>
+
+    <section class="v2-proof-strip" aria-label="TIF proof">
+      <div class="container v2-proof-grid">
+        <article><strong>5</strong><span data-en>Editions since 2022</span><span data-es>Ediciones desde 2022</span></article>
+        <article><strong>5,700+</strong><span data-en>Festival entries</span><span data-es>Entradas al festival</span></article>
+        <article><strong>4</strong><span data-en>Days of programming</span><span data-es>Días de programación</span></article>
+        <article><strong>1</strong><span data-en>Curated community</span><span data-es>Comunidad curada</span></article>
+      </div>
+    </section>
+
+    <section class="v2-people v2-section" id="people">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>People around TIF</span><span data-es>Personas alrededor de TIF</span></p>
+            <h2><span data-en>Meet the people behind the</span><span data-es>Conoce a las personas detrás de las</span> <em><span data-en>conversations.</span><span data-es>conversaciones.</span></em></h2>
+          </div>
+          <p>
+            <span data-en>TIF is built around proximity. Founders, investors and mentors share the same rooms, tables and experiences throughout the week.</span>
+            <span data-es>TIF se construye alrededor de la proximidad. Founders, inversionistas y mentores comparten espacios, mesas y experiencias durante la semana.</span>
+          </p>
+        </div>
+
+        <div class="v2-people-grid">
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/josu-gomez.webp" alt="Josu Gomez" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Josu Gomez</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/pamela-jramoy.webp" alt="Pamela Jramoy" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Pamela Jramoy</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/mati-barbero.webp" alt="Mati Barbero" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Mati Barbero</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/diego-serebrisky.webp" alt="Diego Serebrisky" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Diego Serebrisky</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/santiago-tamayo.webp" alt="Santiago Tamayo" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Santiago Tamayo</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/mentors/chris-roe.webp" alt="Chris Roe" loading="lazy" /></div><div class="v2-person-meta"><span>Host & Mentor</span><h3>Chris Roe</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/mentors/alex-santana.webp" alt="Alex Santana" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor</span><h3>Alex Santana</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/mentors/abraham-abe-ramos.webp" alt="Abraham Abe Ramos" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor</span><h3>Abraham (Abe) Ramos</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/investors/mario-garcia.webp" alt="Mario García" loading="lazy" /></div><div class="v2-person-meta"><span>Investor</span><h3>Mario García</h3></div></article>
+          <article class="v2-person"><div class="v2-person-image"><img src="/assets/mentors/paulina-de-la-garza.webp" alt="Paulina de la Garza" loading="lazy" /></div><div class="v2-person-meta"><span>Mentor</span><h3>Paulina de la Garza</h3></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-film v2-section" id="film">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>The experience</span><span data-es>La experiencia</span></p>
+            <h2><span data-en>See what four days in</span><span data-es>Mira cómo se viven cuatro días en</span> <em>Tulum.</em></h2>
+          </div>
+          <p>
+            <span data-en>The stage is only one part of the festival. Conversations continue through shared tables, nature, music, founder sessions and the night program.</span>
+            <span data-es>El escenario es solo una parte del festival. Las conversaciones continúan en mesas compartidas, naturaleza, música, sesiones de founders y el programa nocturno.</span>
+          </p>
+        </div>
+
+        <div class="v2-film-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/dpGSCLE_m98?rel=0&modestbranding=1" title="Tulum Innovation Fest experience film" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="v2-film-caption">
+          <p><span data-en>Real moments from previous editions: talks, founders, music, community and Tulum.</span><span data-es>Momentos reales de ediciones anteriores: charlas, founders, música, comunidad y Tulum.</span></p>
+          <span>TIF FILM / 01</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-journeys v2-section" id="experience">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Choose your TIF</span><span data-es>Elige tu TIF</span></p>
+            <h2><span data-en>Four clear ways to</span><span data-es>Cuatro formas claras de</span> <em><span data-en>participate.</span><span data-es>participar.</span></em></h2>
+          </div>
+          <p>
+            <span data-en>Each audience gets a distinct journey, so tickets, founder programs, investor access and partnerships do not compete for attention on the same page.</span>
+            <span data-es>Cada audiencia tiene un journey distinto, para que boletos, founders, inversionistas y partners tengan una ruta clara.</span>
+          </p>
+        </div>
+
+        <div class="v2-journey-grid">
+          <a class="v2-journey-card" href="#tickets"><span>01 / ATTEND</span><i>↘</i><h3><span data-en>Come for the festival</span><span data-es>Ven al festival</span></h3><p><span data-en>Four days of talks, community, culture and shared experiences.</span><span data-es>Cuatro días de charlas, comunidad, cultura y experiencias compartidas.</span></p></a>
+          <a class="v2-journey-card" href="/whale-tank"><span>02 / BUILD</span><i>↗</i><h3><span data-en>Build with Whale Tank</span><span data-es>Construye con Whale Tank</span></h3><p><span data-en>Founder preparation, mentorship, investor readiness and the Grand Final.</span><span data-es>Preparación, mentoría, investor readiness y Grand Final.</span></p></a>
+          <a class="v2-journey-card" href="/whale-tank#investors"><span>03 / INVEST</span><i>↗</i><h3><span data-en>Meet curated founders</span><span data-es>Conoce founders curados</span></h3><p><span data-en>Get closer to founders through structured meetings and shared programming.</span><span data-es>Acércate a founders mediante reuniones estructuradas y programación compartida.</span></p></a>
+          <a class="v2-journey-card" href="/sponsorship"><span>04 / PARTNER</span><i>↗</i><h3><span data-en>Build a brand presence</span><span data-es>Construye presencia de marca</span></h3><p><span data-en>Access, hospitality, content, activations and corporate innovation opportunities.</span><span data-es>Acceso, hospitality, contenido, activaciones y oportunidades de innovación corporativa.</span></p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-program v2-section" id="program">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker">December 9–12, 2026</p>
+            <h2><span data-en>Four days with a</span><span data-es>Cuatro días con una</span> <em><span data-en>clear rhythm.</span><span data-es>secuencia clara.</span></em></h2>
+          </div>
+          <p>
+            <span data-en>The home shows the shape of the week. The complete agenda lives on the program page as sessions and speakers are confirmed.</span>
+            <span data-es>El home muestra la forma de la semana. La agenda completa vive en el programa conforme se confirman sesiones y speakers.</span>
+          </p>
+        </div>
+
+        <div class="v2-program-grid">
+          <article class="v2-day"><span class="v2-day-num">01</span><span class="v2-day-date">Wed · Dec 09</span><h3><span data-en>Welcome & Community</span><span data-es>Bienvenida y comunidad</span></h3><p><span data-en>Arrive, meet the community and enter the week together.</span><span data-es>Llega, conoce a la comunidad y entra a la semana en conjunto.</span></p><ul><li>Founder onboarding</li><li>Festival registration</li><li>Opening ceremony</li><li>Welcome cocktail</li><li>Community celebration</li></ul></article>
+          <article class="v2-day"><span class="v2-day-num">02</span><span class="v2-day-date">Thu · Dec 10</span><h3><span data-en>Ideas, Innovation & Founders</span><span data-es>Ideas, innovación y founders</span></h3><p><span data-en>Technology, companies and people shaping what comes next.</span><span data-es>Tecnología, empresas y personas construyendo lo que sigue.</span></p><ul><li>Wellness breakfast</li><li>Keynotes and panels</li><li>Workshops</li><li>Founder sessions</li><li>Gala dinner</li></ul></article>
+          <article class="v2-day"><span class="v2-day-num">03</span><span class="v2-day-date">Fri · Dec 11</span><h3><span data-en>Capital, Growth & Connections</span><span data-es>Capital, crecimiento y conexiones</span></h3><p><span data-en>Founders, investors and operators move from conversation to opportunity.</span><span data-es>Founders, inversionistas y operadores convierten conversaciones en oportunidades.</span></p><ul><li>Growth workshops</li><li>AI and finance conversations</li><li>Founder and investor sessions</li><li>Community networking</li><li>La Veleta night</li></ul></article>
+          <article class="v2-day"><span class="v2-day-num">04</span><span class="v2-day-date">Sat · Dec 12</span><h3><span data-en>Demo Day & Celebration</span><span data-es>Demo Day y celebración</span></h3><p><span data-en>The week closes with recovery, startup excellence and the Grand Final.</span><span data-es>La semana cierra con recovery, startups y la Grand Final.</span></p><ul><li>Recovery and beach experience</li><li>Sponsor activations</li><li>Whale Tank Grand Final</li><li>Awards ceremony</li><li>Innovation Closing Party</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-whale v2-section" id="whale-tank">
+      <div class="container v2-whale-grid">
+        <div class="v2-whale-media">
+          <img src="/assets/founder-halo.png" alt="Founder framed by the Whale Tank signal" loading="lazy" />
+        </div>
+        <div class="v2-whale-copy">
+          <p class="v2-kicker">Whale Tank 2026</p>
+          <h2><span data-en>Prepare for capital.</span><span data-es>Prepárate para capital.</span><br /><em><span data-en>Meet the right room.</span><span data-es>Llega a la sala correcta.</span></em></h2>
+          <p><span data-en>Whale Tank is TIF's startup investment-readiness program for technology-driven founders preparing for fundraising, partnerships and market expansion.</span><span data-es>Whale Tank es el programa de investment readiness de TIF para founders de tecnología que se preparan para fundraising, partnerships y expansión.</span></p>
+
+          <div class="v2-whale-stats">
+            <div><strong>30</strong><span data-en>startups selected</span><span data-es>startups seleccionadas</span></div>
+            <div><strong>5</strong><span data-en>finalists on the main stage</span><span data-es>finalistas en el escenario principal</span></div>
+            <div><strong>8+</strong><span data-en>countries represented by mentors + investors</span><span data-es>países representados por mentores + inversionistas</span></div>
+            <div><strong>$150K–3M</strong><span data-en>target fundraising range</span><span data-es>rango objetivo de fundraising</span></div>
+          </div>
+
+          <div class="v2-hero-actions">
+            <a class="btn btn-primary" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" target="_blank" rel="noopener noreferrer"><span data-en>Apply as a founder</span><span data-es>Aplicar como founder</span></a>
+            <a class="btn btn-ghost" href="/whale-tank"><span data-en>Explore the full program</span><span data-es>Ver programa completo</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-experience v2-section">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Beyond the stage</span><span data-es>Más allá del escenario</span></p>
+            <h2><span data-en>The festival lives in the</span><span data-es>El festival vive en los</span> <em><span data-en>moments between.</span><span data-es>momentos intermedios.</span></em></h2>
+          </div>
+          <p><span data-en>Real photography should carry the brand. People, conversations, culture, nature and shared experiences make TIF legible before anyone reads a paragraph.</span><span data-es>La fotografía real debe cargar la marca. Personas, conversaciones, cultura, naturaleza y experiencias hacen que TIF se entienda antes de leer un párrafo.</span></p>
+        </div>
+
+        <div class="v2-mosaic">
+          <figure><img src="/assets/gallery/community.webp" alt="TIF community" loading="lazy" /><figcaption>Community</figcaption></figure>
+          <figure><img src="/assets/gallery/jungle-stage.webp" alt="TIF jungle stage" loading="lazy" /><figcaption>Ideas</figcaption></figure>
+          <figure><img src="/assets/gallery/live-music.webp" alt="Live music at TIF" loading="lazy" /><figcaption>Culture</figcaption></figure>
+          <figure><img src="/assets/gallery/cenote.webp" alt="TIF cenote experience" loading="lazy" /><figcaption>Nature</figcaption></figure>
+          <figure><img src="/assets/gallery/night-dj.webp" alt="TIF night program" loading="lazy" /><figcaption>Night</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-partners v2-section" id="partners">
+      <div class="container">
+        <div class="v2-partner-card">
+          <div class="v2-partner-copy">
+            <p class="v2-kicker"><span data-en>Partner with TIF</span><span data-es>Partner con TIF</span></p>
+            <h2><span data-en>Put your brand inside the</span><span data-es>Pon tu marca dentro de las</span> <em><span data-en>right conversations.</span><span data-es>conversaciones correctas.</span></em></h2>
+            <p><span data-en>Partnerships are designed around business objectives: executive access, brand experience, content, hospitality, founder dealflow and corporate innovation.</span><span data-es>Los partnerships se diseñan alrededor de objetivos de negocio: acceso ejecutivo, brand experience, contenido, hospitality, dealflow de founders e innovación corporativa.</span></p>
+            <div class="v2-hero-actions">
+              <a class="btn btn-primary" href="/sponsorship"><span data-en>Explore partnerships</span><span data-es>Explorar partnerships</span></a>
+            </div>
+          </div>
+
+          <div class="v2-partner-outcomes">
+            <article><span>01</span><h3>Executive access</h3><p>Curated proximity to founders, investors and operators.</p></article>
+            <article><span>02</span><h3>Brand experience</h3><p>Hospitality, activations and contextual visibility.</p></article>
+            <article><span>03</span><h3>Content & distribution</h3><p>Stories and assets that extend beyond the event.</p></article>
+            <article><span>04</span><h3>Corporate innovation</h3><p>Structured founder discovery around real business challenges.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-tickets v2-section" id="tickets">
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Festival access</span><span data-es>Acceso al festival</span></p>
+            <h2><span data-en>Start with the access that</span><span data-es>Empieza con el acceso que</span> <em><span data-en>fits your week.</span><span data-es>encaja con tu semana.</span></em></h2>
+          </div>
+          <p><span data-en>The home keeps the choice simple. All specialty access, add-ons and final pricing are confirmed at checkout.</span><span data-es>El home mantiene la decisión simple. Accesos especiales, add-ons y precio final se confirman en checkout.</span></p>
+        </div>
+
+        <div class="v2-ticket-grid">
+          <article class="v2-ticket featured">
+            <span class="v2-ticket-type">Complete festival</span>
+            <h3>General Access · 4 Day Pass</h3>
+            <p><span data-en>The core TIF experience for founders, builders, creators and curious minds.</span><span data-es>La experiencia central de TIF para founders, builders, creadores y mentes curiosas.</span></p>
+            <div class="v2-ticket-price"><strong>$266</strong><span>USD approx. · MXN $4,620 reference</span></div>
+            <a class="btn btn-primary" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Get festival access</span><span data-es>Comprar acceso</span></a>
+          </article>
+
+          <article class="v2-ticket">
+            <span class="v2-ticket-type">Executive access</span>
+            <h3>Executive Pass · Festival Access</h3>
+            <p><span data-en>Higher-intention access for executives, investors and ecosystem leaders. Accommodation is not included.</span><span data-es>Acceso de mayor intención para ejecutivos, inversionistas y líderes. Hospedaje no incluido.</span></p>
+            <div class="v2-ticket-price"><strong>$1,614</strong><span>USD approx. · MXN $28,080 reference</span></div>
+            <a class="btn btn-ghost" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Explore executive access</span><span data-es>Ver Executive Pass</span></a>
+          </article>
+
+          <article class="v2-ticket">
+            <span class="v2-ticket-type">Closing celebration</span>
+            <h3>Full Night · Closing Party</h3>
+            <p><span data-en>A focused entry point for the official closing celebration beneath the stars.</span><span data-es>Un acceso enfocado a la celebración oficial de cierre.</span></p>
+            <div class="v2-ticket-price"><strong>$63</strong><span>USD approx. · MXN $1,100 reference</span></div>
+            <a class="btn btn-ghost" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Get closing access</span><span data-es>Comprar acceso</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-closing">
+      <div class="v2-closing-inner">
+        <p class="v2-kicker">Tulum · December 9–12, 2026</p>
+        <h2><span data-en>Come for the ideas.</span><span data-es>Ven por las ideas.</span><br /><em><span data-en>Stay for the people.</span><span data-es>Quédate por las personas.</span></em></h2>
+        <div class="v2-hero-actions">
+          <a class="btn btn-primary" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" target="_blank" rel="noopener noreferrer"><span data-en>Get tickets</span><span data-es>Comprar boletos</span></a>
+          <a class="btn btn-ghost" href="/sponsorship"><span data-en>Partner with TIF</span><span data-es>Ser partner</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="v2-footer">
+    <div class="container v2-footer-grid">
+      <div>
+        <img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" />
+        <p><span data-en>Tulum Innovation Fest brings innovation, capital, culture and human connection together in Tulum, Mexico.</span><span data-es>Tulum Innovation Fest reúne innovación, capital, cultura y conexión humana en Tulum, México.</span></p>
+      </div>
+      <nav class="v2-footer-links" aria-label="Footer navigation">
+        <a href="/whale-tank">Whale Tank</a>
+        <a href="/sponsorship">Partners</a>
+        <a href="#program">Program</a>
+        <a href="#tickets">Tickets</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const body = document.body;
+      const header = document.querySelector('[data-header]');
+      const navButton = document.querySelector('[data-v2-nav]');
+      const langButton = document.querySelector('[data-v2-lang]');
+
+      const saved = localStorage.getItem('tif-language');
+      const browser = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
+      const initial = saved === 'es' || saved === 'en' ? saved : (browser.startsWith('es') ? 'es' : 'en');
+      root.dataset.lang = initial;
+      root.lang = initial;
+
+      const closeNav = () => {
+        body.classList.remove('v2-nav-open');
+        navButton?.setAttribute('aria-expanded', 'false');
+      };
+
+      navButton?.addEventListener('click', () => {
+        const open = body.classList.toggle('v2-nav-open');
+        navButton.setAttribute('aria-expanded', String(open));
+      });
+
+      document.querySelectorAll('.site-nav a').forEach(a => a.addEventListener('click', closeNav));
+
+      langButton?.addEventListener('click', () => {
+        const next = root.dataset.lang === 'en' ? 'es' : 'en';
+        root.dataset.lang = next;
+        root.lang = next;
+        localStorage.setItem('tif-language', next);
+      });
+
+      const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 32);
+      onScroll();
+      addEventListener('scroll', onScroll, { passive:true });
+
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const target = document.querySelector(a.getAttribute('href'));
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior:'smooth', block:'start' });
+        });
+      });
     })();
   </script>
-<link href="styles.css?v=20260813-program-gallery" rel="stylesheet">
-<script defer="" src="script.js?v=20260813-program-gallery"></script>
-</link></head>
-<body class="has-scroll-effects">
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header" data-header="">
-<a aria-label="Tulum Innovation Fest home" class="brand" href="#top">
-<img alt="Tulum Innovation Fest" class="brand-logo" src="assets/tulum-innovation-fest-logo.png"/>
-</a>
-<button aria-controls="site-nav" aria-expanded="false" class="nav-toggle" data-nav-toggle="" type="button">
-<span></span><span></span><span></span><span class="sr-only">Open navigation</span>
-</button>
-<nav aria-label="Main navigation" class="site-nav" data-nav="" id="site-nav">
-<a href="#experience">Experience</a><a href="#program">Program</a><a href="#tickets">Tickets</a><a href="#venues">Venues</a><a href="#whale-tank">Whale Tank</a><a href="/sponsorship">Partners</a><a href="#faq">FAQ</a><button aria-label="Cambiar a español" class="lang-toggle" data-lang-toggle="" type="button">
-<span data-lang-option="en">EN</span>
-<span aria-hidden="true" class="lang-divider">/</span>
-<span data-lang-option="es">ES</span>
-</button></nav>
-<div class="header-actions">
-<a class="btn btn-ghost btn-small external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" rel="noopener noreferrer" target="_blank">Apply to Whale Tank</a>
-<a class="btn btn-primary btn-small external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get Festival Access</a>
-</div>
-</header>
-<main id="main">
-<section aria-labelledby="hero-title" class="hero" id="top">
-<picture aria-hidden="true" class="hero-media" data-hero-media="">
-<source media="(max-width: 720px)" srcset="assets/hero-mobile.png"/>
-<img alt="" src="assets/hero-desktop.png"/>
-</picture>
-<div aria-hidden="true" class="hero-shade"></div>
-<div aria-hidden="true" class="signal-field"><i></i><i></i><i></i></div>
-<div class="container hero-grid" data-hero-content="">
-<div class="hero-copy reveal">
-<p class="eyebrow"><span></span>December 9-12, 2026 · Tulum, Mexico</p>
-<h1 id="hero-title">From the heart of the jungle<br/><em>to the future of humanity</em></h1>
-<p class="hero-intro">A four-day gathering where innovation, capital, culture and human connection converge.</p>
-<p class="hero-support">Meet the founders, investors, creators and industry leaders building what comes next through ideas, immersive experiences and meaningful conversations in Tulum.</p>
-<div class="hero-actions">
-<a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get Festival Access</a>
-<a class="btn btn-ghost external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" rel="noopener noreferrer" target="_blank">Apply to Whale Tank</a>
-</div>
-<p class="microcopy">Limited capacity <span>·</span> Curated community <span>·</span> Day-to-night programming</p><div aria-label="Festival proof" class="hero-proof">
-<span><strong>5</strong> Editions</span>
-<span><strong>5,700+</strong> Festival entries</span>
-<span><strong>Global</strong> Community</span>
-</div>
-</div>
-<aside aria-label="Festival overview" class="hero-index reveal">
-<div><span>01</span><p>Innovation</p></div>
-<div><span>02</span><p>Capital</p></div>
-<div><span>03</span><p>Culture</p></div>
-<div><span>04</span><p>Connection</p></div>
-</aside>
-</div>
-<a aria-label="Scroll to festival film" class="scroll-cue" href="#festival-film"><span></span>See the experience</a>
-</section>
-<section aria-labelledby="festival-film-title" class="festival-film section" id="festival-film">
-<div aria-hidden="true" class="festival-film-glow"></div>
-<div class="container festival-film-head reveal">
-<p class="eyebrow"><span></span>This is Tulum Innovation Fest</p>
-<h2 id="festival-film-title">Picture yourself <em>here.</em></h2>
-<p class="festival-film-copy">Four days where ideas, capital, culture and connection move beyond the stage and into the jungle.</p>
-</div>
-<div class="container festival-film-frame reveal">
-<div class="festival-film-player">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/dpGSCLE_m98?rel=0&amp;modestbranding=1" title="Tulum Innovation Fest experience video"></iframe>
-</div>
-</div>
-</section>
-<section aria-labelledby="credibility-title" class="credibility" id="credibility">
-<div class="container">
-<div class="section-kicker"><span>Built in Tulum</span><span>Connected to the world</span></div>
-<h2 class="sr-only" id="credibility-title">Festival credibility</h2>
-<div class="metric-grid">
-<article class="metric reveal"><strong>5</strong><h3>Previous Editions</h3><p>A growing community built across five editions since 2022.</p></article>
-<article class="metric reveal"><strong>5,700+</strong><h3>Festival Entries</h3><p>Across five editions of the festival.</p></article>
-<article class="metric reveal"><strong>4</strong><h3>Days of Programming</h3><p>From wellness and keynotes to dealmaking and celebration.</p></article>
-<article class="metric reveal"><strong>1</strong><h3>Curated Ecosystem</h3><p>Founders, capital, corporations, creators and culture.</p></article>
-</div>
-<p class="data-note">Attendance figures represent total entries across all event days.</p>
-<div aria-label="Previous community participants" class="logo-cloud">
-<span>BINANCE</span><span>AWS</span><span>BITBASEL</span><span>IBIZA TECH FORUM</span><span>MINIMALIST</span><span>5IRE</span><span>PAPAYA PLAYA</span>
-</div>
-</div>
-</section><section aria-labelledby="path-switcher-title" class="path-switcher-wrap">
-<div class="container">
-<p class="sr-only" id="path-switcher-title">Choose your path</p>
-<nav aria-label="Choose your path" class="path-switcher">
-<a href="#tickets"><span>01</span><strong>Attend</strong><small>Tickets and program</small><i aria-hidden="true">↘</i></a>
-<a href="#whale-tank"><span>02</span><strong>Build</strong><small>Whale Tank and founder packages</small><i aria-hidden="true">↘</i></a>
-<a href="/sponsorship"><span>03</span><strong>Partner</strong><small>Sponsorship and brand activation</small><i aria-hidden="true">↗</i></a>
-</nav>
-</div>
-</section>
-<section aria-labelledby="positioning-title" class="positioning section" id="experience">
-<div class="container split-heading">
-<div>
-<p class="eyebrow"><span></span>More than a conference. More than a festival.</p>
-<h2 id="positioning-title">A living ecosystem for ideas, capital and real-world impact</h2>
-</div>
-<div class="section-copy reveal">
-<p>Tulum Innovation Fest brings together the people shaping emerging technology, business and culture.</p>
-<p>Discover new ideas, meet potential partners, explore investment opportunities and create relationships that continue long after the festival ends.</p>
-</div>
-</div>
-<div class="container pillar-grid">
-<article class="pillar-card reveal"><span>01</span><h3>Learn</h3><p>Keynotes, panels and workshops exploring the technologies, business models and cultural shifts transforming the world.</p><i aria-hidden="true"></i></article>
-<article class="pillar-card reveal"><span>02</span><h3>Connect</h3><p>Curated networking designed for meaningful introductions, not endless business-card exchanges.</p><i aria-hidden="true"></i></article>
-<article class="pillar-card reveal"><span>03</span><h3>Experience</h3><p>Wellness, gastronomy, music, nature and celebration integrated into the festival journey.</p><i aria-hidden="true"></i></article>
-</div>
-<p class="transition-line reveal">Mornings restore you. Days expand your perspective. Nights build the relationships that move ideas forward.</p>
-</section>
-<section aria-labelledby="topics-title" class="topics section">
-<div class="container">
-<div class="section-head reveal">
-<p class="eyebrow"><span></span>The program</p>
-<h2 id="topics-title">The conversations shaping what comes next</h2>
-<p>A cross-disciplinary program for people building beyond traditional categories.</p>
-</div>
-<div class="topic-grid">
-<article class="topic-card reveal"><span>AI</span><h3>Artificial Intelligence</h3><p>New interfaces, infrastructure, agents, automation and the future of human productivity.</p></article>
-<article class="topic-card reveal"><span>W3</span><h3>Web3 &amp; Digital Assets</h3><p>Blockchain, tokenization, alternative payments and the next generation of digital ownership.</p></article>
-<article class="topic-card reveal"><span>CAP</span><h3>Capital &amp; Entrepreneurship</h3><p>Fundraising, investment readiness, scaling, strategic partnerships and market expansion.</p></article>
-<article class="topic-card reveal"><span>CITY</span><h3>Future Cities</h3><p>Urban innovation, mobility, hospitality, infrastructure and new models for living.</p></article>
-<article class="topic-card reveal"><span>LIFE</span><h3>Climate &amp; Longevity</h3><p>Technologies supporting environmental resilience, wellness, health and longer human lives.</p></article>
-<article class="topic-card reveal"><span>CULT</span><h3>Culture &amp; Creator Economy</h3><p>Music, media, creativity and the communities influencing global behavior.</p></article>
-</div>
-</div>
-</section>
-<section aria-labelledby="journey-title" class="journey section">
-<div aria-hidden="true" class="journey-media"><img alt="" src="assets/ecosystem.png"/></div>
-<div class="container journey-content">
-<div class="journey-intro reveal">
-<p class="eyebrow"><span></span>One destination. Four days. Many ways to connect.</p>
-<h2 id="journey-title">The jungle becomes your stage</h2>
-<p>Tulum changes the way people meet. Conversations happen over breakfast, beside the ocean, between sessions, during curated dinners and under the stars.</p>
-<p>The environment is not a backdrop. It is part of the experience.</p>
-<a class="text-link" href="#program">Explore the program <span>→</span></a>
-</div>
-<div class="daypart-list">
-<article class="daypart reveal"><span>06:30</span><div><p>Morning</p><h3>Wellness &amp; Meaningful Conversations</h3><small>Movement, restoration, community breakfasts and founder programming.</small></div></article>
-<article class="daypart reveal"><span>10:00</span><div><p>Day</p><h3>Ideas &amp; Opportunity</h3><small>Keynotes, workshops, panels, showcases and conversations.</small></div></article>
-<article class="daypart reveal"><span>17:30</span><div><p>Golden Hour</p><h3>Connection &amp; Dealmaking</h3><small>Curated lunches, private tables and intentional introductions.</small></div></article>
-<article class="daypart reveal"><span>21:00</span><div><p>Night</p><h3>Culture &amp; Celebration</h3><small>Dinners, music, creative programming and community gatherings.</small></div></article>
-</div>
-</div>
-</section>
-<section aria-labelledby="program-title" class="program section" id="program">
-<div class="container">
-<div class="section-head reveal">
-<p class="eyebrow"><span></span>December 9-12, 2026</p>
-<h2 id="program-title">Four days from connection to action</h2>
-</div>
-<div class="program-grid">
-<article class="program-day reveal"><div class="program-num">01</div><div class="program-date">Wed · Dec 09</div><h3>Welcome &amp; Community</h3><p>Arrive, meet the community and discover the vision behind the festival.</p><ul><li>Founder onboarding</li><li>Festival registration</li><li>Opening ceremony</li><li>Welcome cocktail</li><li>Community celebration</li></ul></article>
-<article class="program-day reveal"><div class="program-num">02</div><div class="program-date">Thu · Dec 10</div><h3>Ideas, Innovation &amp; Founders</h3><p>A full day exploring the technologies, companies and people shaping the future.</p><ul><li>Wellness breakfast</li><li>Keynotes and panels</li><li>Workshops</li><li>Founder sessions</li><li>Gala dinner</li></ul></article>
-<article class="program-day reveal"><div class="program-num">03</div><div class="program-date">Fri · Dec 11</div><h3>Capital, Growth &amp; Strategic Connections</h3><p>Founders, investors and industry leaders come together to build partnerships.</p><ul><li>Growth workshops</li><li>AI and finance conversations</li><li>Founder and investor sessions</li><li>Community networking</li><li>La Veleta night</li></ul></article>
-<article class="program-day reveal"><div class="program-num">04</div><div class="program-date">Sat · Dec 12</div><h3>Recovery, Demo Day &amp; Grand Final</h3><p>The festival concludes with wellness, startup excellence and celebration.</p><ul><li>Recovery and beach experience</li><li>Sponsor activations</li><li>Whale Tank Grand Final</li><li>Awards ceremony</li><li>Innovation Closing Party</li></ul></article>
-</div>
-</div>
-</section>
-<section aria-labelledby="gallery-title" class="festival-gallery section" id="gallery">
-<div class="container gallery-head reveal">
-<div>
-<p class="eyebrow"><span></span>Inside the experience</p>
-<h2 id="gallery-title">This is how the festival <em>feels.</em></h2>
-</div>
-<p>Ideas move from the stage into shared tables, music, art, nature and the moments that stay with you.</p>
-</div>
-<div aria-label="Festival photo gallery" class="container gallery-grid">
-<button aria-label="Open night culture photo" class="gallery-item gallery-item-featured reveal" data-gallery-index="0" type="button"><img alt="DJ performing during the festival night program" decoding="async" loading="lazy" src="assets/gallery/night-dj.webp"/><span>Night culture</span></button>
-<button aria-label="Open community photo" class="gallery-item reveal" data-gallery-index="1" type="button"><img alt="Festival attendees sharing a community moment" decoding="async" loading="lazy" src="assets/gallery/community.webp"/><span>Community</span></button>
-<button aria-label="Open venue photo" class="gallery-item reveal" data-gallery-index="2" type="button"><img alt="Jungle venue illuminated at night beside the water" decoding="async" loading="lazy" src="assets/gallery/jungle-venue-night.webp"/><span>Place</span></button>
-<button aria-label="Open ideas photo" class="gallery-item reveal" data-gallery-index="3" type="button"><img alt="Speaker presenting on an open-air jungle stage" decoding="async" loading="lazy" src="assets/gallery/jungle-stage.webp"/><span>Ideas</span></button>
-<button aria-label="Open live art photo" class="gallery-item reveal" data-gallery-index="4" type="button"><img alt="Live body art performance at the festival" decoding="async" loading="lazy" src="assets/gallery/live-art.webp"/><span>Art</span></button>
-<button aria-label="Open shared table photo" class="gallery-item reveal" data-gallery-index="5" type="button"><img alt="Festival attendee and dog gathered around a shared table" decoding="async" loading="lazy" src="assets/gallery/community-table.webp"/><span>Shared tables</span></button>
-<button aria-label="Open live music photo" class="gallery-item reveal" data-gallery-index="6" type="button"><img alt="Violinist performing live at the festival" decoding="async" loading="lazy" src="assets/gallery/live-music.webp"/><span>Live music</span></button>
-<button aria-label="Open nature photo" class="gallery-item reveal" data-gallery-index="7" type="button"><img alt="Festival attendees swimming together in a cenote" decoding="async" loading="lazy" src="assets/gallery/cenote.webp"/><span>Nature</span></button>
-<button aria-label="Open wellness photo" class="gallery-item reveal" data-gallery-index="8" type="button"><img alt="Attendee participating in an ice bath wellness experience" decoding="async" loading="lazy" src="assets/gallery/wellness.webp"/><span>Wellness</span></button>
-</div>
-</section>
-<dialog aria-label="Festival gallery viewer" class="gallery-lightbox" data-gallery-lightbox="">
-<button aria-label="Close gallery" class="gallery-lightbox-close" data-gallery-close="" type="button">×</button>
-<button aria-label="Previous photo" class="gallery-lightbox-nav gallery-lightbox-prev" data-gallery-prev="" type="button">←</button>
-<figure>
-<img alt="" data-gallery-image="" src=""/>
-<figcaption aria-live="polite"><span data-gallery-caption=""></span><small data-gallery-count=""></small></figcaption>
-</figure>
-<button aria-label="Next photo" class="gallery-lightbox-nav gallery-lightbox-next" data-gallery-next="" type="button">→</button>
-</dialog>
-<section aria-labelledby="tickets-title" class="ticketing section" id="tickets">
-<div aria-hidden="true" class="ticket-orbit"><i></i><i></i><i></i></div>
-<div class="container">
-<div class="section-head ticketing-head reveal">
-<p class="eyebrow"><span></span>Festival access</p>
-<h2 id="tickets-title">Choose how you enter the ecosystem</h2>
-<p>From a four-day festival pass to curated executive access, every option leads into a different layer of the Tulum Innovation Fest experience.</p>
-</div>
-<div class="ticket-grid">
-<article class="ticket-card reveal">
-<div class="ticket-card-top">
-<span class="ticket-type">Local community</span>
-<span class="ticket-number">01</span>
-</div>
-<h3>Community Access — Tulum Resident</h3>
-<p class="ticket-summary">A reduced four-day pass reserved for members of the local Tulum community.</p>
-<div class="ticket-price"><strong><small>USD approx.</small><b data-mxn-price="2310">$133</b></strong><span>MXN <b>$2,310</b></span></div>
-<ul>
-<li>Four-day festival access</li>
-<li>Talks, networking and community experience</li>
-<li>Valid local identification required</li>
-</ul>
-<a class="btn btn-ghost external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get this pass</a>
-</article>
-<article class="ticket-card featured reveal">
-<div class="ticket-ribbon">Most popular</div>
-<div class="ticket-card-top">
-<span class="ticket-type">Complete festival</span>
-<span class="ticket-number">02</span>
-</div>
-<h3>General Access — 4 Day Pass</h3>
-<p class="ticket-summary">The complete core festival experience for founders, builders, creators and curious minds.</p>
-<div class="ticket-price"><strong><small>USD approx.</small><b data-mxn-price="4620">$266</b></strong><span>MXN <b>$4,620</b></span></div>
-<ul>
-<li>Four-day access to the festival</li>
-<li>Talks, networking and community programming</li>
-<li>Access to all festival parties</li>
-</ul>
-<a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get festival access</a>
-</article>
-<article class="ticket-card reveal">
-<div class="ticket-card-top">
-<span class="ticket-type">Night access</span>
-<span class="ticket-number">03</span>
-</div>
-<h3>Night Program — Full Access</h3>
-<p class="ticket-summary">The curated night layer where dinners, culture and high-value conversations converge.</p>
-<div class="ticket-price"><strong><small>USD approx.</small><b data-mxn-price="7920">$455</b></strong><span>MXN <b>$7,920</b></span></div>
-<ul>
-<li>Opening and gala dinners</li>
-<li>La Veleta community experience</li>
-<li>Full Moon access with one welcome drink</li>
-</ul>
-<a class="btn btn-ghost external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Explore night access</a>
-</article>
-<article class="ticket-card reveal">
-<div class="ticket-card-top">
-<span class="ticket-type">Closing celebration</span>
-<span class="ticket-number">04</span>
-</div>
-<h3>Full Night — Closing Party</h3>
-<p class="ticket-summary">A focused entry point for the official closing celebration beneath the stars.</p>
-<div class="ticket-price"><strong><small>USD approx.</small><b data-mxn-price="1100">$63</b></strong><span>MXN <b>$1,100</b></span></div>
-<ul>
-<li>Entry to the main closing celebration</li>
-<li>One welcome drink</li>
-<li>Music, energy and community connection</li>
-</ul>
-<a class="btn btn-ghost external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get closing access</a>
-</article>
-<article class="ticket-card reveal">
-<div class="ticket-card-top">
-<span class="ticket-type">Immersive add-on</span>
-<span class="ticket-number">05</span>
-</div>
-<h3>Invisible Layer — Ceremony Experience</h3>
-<p class="ticket-summary">A private full-day integration journey across body, mind, relationships and systems.</p>
-<div class="ticket-price"><strong><small>USD approx.</small><b data-mxn-price="14040">$807</b></strong><span>MXN <b>$14,040</b></span></div>
-<ul>
-<li>Breakfast, grounding and opening circle</li>
-<li>Curated ceremony and sound experience</li>
-<li>Reflection, integration and closing session</li>
-</ul>
-<a class="btn btn-ghost external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Explore the experience</a>
-</article>
-<article class="ticket-card executive reveal">
-<div class="ticket-card-top">
-<span class="ticket-type">Executive access</span>
-<span class="ticket-number">06</span>
-</div>
-<h3>Executive Pass — Festival Access Only</h3>
-<p class="ticket-summary">Higher-intention access for executives, investors and ecosystem leaders.</p>
-<div class="ticket-price"><strong><small>USD approx.</small><b data-mxn-price="28080">$1,614</b></strong><span>MXN <b>$28,080</b></span></div>
-<ul>
-<li>Executive-level festival access</li>
-<li>Designed for higher-intention networking</li>
-<li>Accommodation is not included</li>
-</ul>
-<a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get executive access</a>
-</article>
-</div>
-<div class="ticket-disclaimer reveal">
-<span>Pricing reference</span>
-<p>MXN prices include Ticket Fairy fees. USD amounts are approximate and calculated at <strong>MXN $17.3975 per USD</strong>. The final amount and availability are confirmed at checkout.</p>
-</div>
-</div>
-</section>
-<section aria-labelledby="venues-title" class="venues section" id="venues">
-<div class="container">
-<div class="section-head reveal"><p class="eyebrow"><span></span>Two venues. One connected journey.</p><h2 id="venues-title">Built for immersion, conversation and community</h2></div>
-<div class="venue-grid">
-<article class="venue-card reveal"><div class="venue-image"><img alt="Abstract jungle founder residency at sunset" src="assets/venue-vr.png"/></div><div class="venue-copy"><span>Founder Experience Venue</span><h3>VR Club</h3><p>A barefoot startup residency for founder acceleration, mentorship, investor readiness and high-intention networking.</p><ul><li>Nature Immersion</li><li>Barefoot Luxury</li><li>Startup Residency</li></ul></div></article>
-<article class="venue-card reveal"><div class="venue-image"><img alt="Abstract open-air innovation festival stage in a jungle landscape" src="assets/venue-ikal.png"/></div><div class="venue-copy"><span>Main Festival Venue</span><h3>Ikal Arena</h3><p>The headquarters for keynotes, panels, Whale Tank showcases, networking, community gatherings and night celebrations.</p><ul><li>Wild Landscape</li><li>Barefoot Luxury</li><li>Festival Stage</li></ul></div></article>
-</div>
-</div>
-</section><section aria-labelledby="whale-title" class="whale section" id="whale-tank">
-<div class="container whale-grid">
-<div class="whale-media reveal"><img alt="Anonymous founder silhouette framed by a concentric orange signal halo" src="assets/founder-halo.png"/></div>
-<div class="whale-copy reveal">
-<p class="eyebrow"><span></span>The official founder experience</p>
-<h2 id="whale-title">Build your company.<br/>Sharpen your story.<br/><em>Meet the people who can move it forward.</em></h2>
-<p>Whale Tank is a curated startup experience for technology-driven founders preparing for investment, partnerships and market expansion.</p>
-<p>Selected participants receive mentorship, pitch preparation, investment-readiness support and opportunities to present during Tulum Innovation Fest.</p>
-<div class="whale-actions">
-<a class="btn btn-primary external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" rel="noopener noreferrer" target="_blank">Apply to Whale Tank</a>
-<a class="btn btn-ghost" href="#packages">Explore Founder Packages</a>
-</div>
-<p class="microcopy">Applications are reviewed on a curated basis. Submission does not guarantee acceptance.</p>
-</div>
-</div>
-<div aria-label="Whale Tank journey" class="container program-path reveal">
-<span>Founder Application</span><i></i><span>Startup Selection</span><i></i><span>Mentorship</span><i></i><span>Investor Readiness</span><i></i><span>Semifinals</span><i></i><span>Grand Final</span>
-</div>
-<div class="container fit-grid">
-<div class="fit-copy reveal"><h3>Built for founders with momentum</h3><p>Applicants should have a working product, MVP or validated solution, early traction and a scalable business model.</p></div>
-<div class="fit-list reveal"><span>Early-stage technology</span><span>AI &amp; Web3</span><span>Fintech</span><span>Future cities</span><span>Climate &amp; health</span><span>Creator platforms</span><span>Impact ventures</span></div>
-</div>
-</section>
-<section aria-labelledby="packages-title" class="packages section" id="packages">
-<div class="container">
-<div class="section-head reveal"><p class="eyebrow"><span></span>Founder packages</p><h2 id="packages-title">Choose your founder experience</h2><p>Pricing follows the outcome. The complete package is designed to remove logistics and maximize readiness, access and relationship density.</p></div>
-<div class="package-grid">
-<article class="package-card featured reveal"><div class="package-label">Complete experience</div><h3>Full Package</h3><p class="price"><span>USD</span> $2,500 <small>per founder</small></p><p class="price-conversion">≈ <b data-usd-price="2500">MXN $43,494</b></p><p>For selected founders joining the complete Tulum journey.</p><ul><li>Whale Tank Founder Experience</li><li>Acceleration programming</li><li>Mentorship and pitch training</li><li>Investment-readiness sessions</li><li>Founder workshops and simulations</li><li>Networking and selected festival access</li><li>Grand Final access and welcome kit</li><li>Accommodation and breakfast</li></ul><a class="btn btn-primary external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" rel="noopener noreferrer" target="_blank">Apply for Full Package</a></article>
-<article class="package-card reveal"><div class="package-label">Local participation</div><h3>Access Only</h3><p class="price"><span>USD</span> $1,500 <small>per founder</small></p><p class="price-conversion">≈ <b data-usd-price="1500">MXN $26,096</b></p><p>For local founders or participants with accommodation.</p><ul><li>Founder programming</li><li>Mentorship and pitch training</li><li>Selected festival access</li><li>Whale Tank Grand Final access</li><li>Welcome kit</li><li class="muted">Accommodation not included</li></ul><a class="btn btn-ghost external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" rel="noopener noreferrer" target="_blank">Apply for Access Only</a></article>
-<article class="package-card upgrade reveal"><div class="package-label">Premium add-on</div><h3>VIP Upgrade</h3><p class="price"><span>USD</span> $500 <small>per person</small></p><p class="price-conversion">≈ <b data-usd-price="500">MXN $8,699</b></p><p>Add selected premium hospitality and executive experiences.</p><ul><li>Priority hospitality access</li><li>Selected executive gatherings</li><li>Premium festival touchpoints</li><li>Concierge information</li></ul><a class="btn btn-ghost external-cta" href="https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new" rel="noopener noreferrer" target="_blank">Request VIP Information</a></article>
-</div>
-</div>
-</section>
-<section aria-labelledby="partners-title" class="partners section" id="partners">
-<div aria-hidden="true" class="partner-portal">
-<i></i><i></i><i></i>
-</div>
-<div class="container sponsor-intro-grid">
-<div class="partner-copy reveal">
-<p class="eyebrow"><span></span>Partnerships</p>
-<h2 id="partners-title">This is not just visibility.<br/><em>It is access.</em></h2>
-<p>Tulum Innovation Fest is a global platform connecting innovation, capital, culture, destinations and community.</p>
-<p>Partners do not simply attend. They co-create, collaborate and build long-term relationships inside a curated global ecosystem.</p>
-<button class="btn btn-primary" data-modal-open="partner-modal" type="button">Become a Partner</button>
-<small>Tell us your business objective, target audience and preferred package. We qualify partnerships around the outcome, not generic logo exposure.</small>
-</div>
-<div aria-label="Partner audience" class="sponsor-audience reveal">
-<article><span>01</span><h3>Founders, investors and industry leaders</h3><p>Decision-makers and builders from Ibero-America and beyond.</p></article>
-<article><span>02</span><h3>Emerging technology and future cities</h3><p>AI, digital assets, infrastructure and real-world innovation.</p></article>
-<article><span>03</span><h3>Hospitality, wellness and culture</h3><p>Leaders designing how people gather, live and connect.</p></article>
-<article><span>04</span><h3>Dealflow and high-value networks</h3><p>Strategic partnerships built through shared experiences.</p></article>
-</div>
-</div><div class="container positioning-offers reveal">
-<div class="positioning-offers-head">
-<div><p class="eyebrow"><span></span>Individual positioning</p><h3>Enter as a speaker or activation partner</h3></div>
-<p>For founders, operators and brands seeking stage presence or a focused activation without a full strategic sponsorship package.</p>
-</div>
-<div class="positioning-offers-grid">
-<article><span>Brand activation</span><h4>Living Room Sponsor</h4><strong class="positioning-price-primary"><small>USD approx.</small><b data-mxn-price="33480">$1,924</b></strong><small class="positioning-price-secondary">MXN <b>$33,480</b></small><a class="text-link external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Buy on Ticket Fairy</a></article>
-<article><span>Stage positioning</span><h4>Speaker Slot — No Stay</h4><strong class="positioning-price-primary"><small>USD approx.</small><b data-mxn-price="57510">$3,306</b></strong><small class="positioning-price-secondary">MXN <b>$57,510</b></small><a class="text-link external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Buy on Ticket Fairy</a></article>
-<article><span>Full positioning</span><h4>Executive Pass + Speaker Slot</h4><strong class="positioning-price-primary"><small>USD approx.</small><b data-mxn-price="76680">$4,408</b></strong><small class="positioning-price-secondary">MXN <b>$76,680</b></small><a class="text-link external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Buy on Ticket Fairy</a></article>
-</div>
-</div>
-<div class="container sponsor-package-head reveal">
-<div>
-<p class="eyebrow"><span></span>Strategic partnership packages</p>
-<h3>Choose the level of ownership your brand needs</h3>
-</div>
-<p>Every package combines access, activation and media integration. Higher tiers own more of the festival narrative, hospitality and signature moments.</p>
-</div>
-<div class="container sponsor-tier-grid">
-<article class="sponsor-tier sponsor-tier-main reveal">
-<div class="sponsor-tier-top">
-<span class="sponsor-tier-label">Narrative ownership</span>
-<span class="sponsor-tier-number">01</span>
-</div>
-<h4>Main Title Partner</h4>
-<div class="sponsor-tier-price">
-<strong>US$100,000</strong>
-<span>≈ <b data-usd-price="100000">MXN $1,739,750</b></span>
-</div>
-<p class="sponsor-positioning">Top-level partner with ownership of the festival narrative.</p>
-<ul class="sponsor-highlights"><li>Naming as Main Title Partner</li><li>10 Executive Passes with stay included</li><li>60 General Access passes</li><li>Full branding integration across the festival</li></ul><details class="sponsor-details"><summary>View full package details</summary><ul><li>Presence throughout all festival communications</li><li>Main activation space</li><li>Ownership of the full Saturday party and main event</li><li>Interviews, stage time, photo, video and press integration</li><li>Custom media plan before, during and after the festival</li></ul></details>
-<p class="sponsor-stay">Accommodation included in this package.</p>
-<button class="btn btn-primary btn-full" data-modal-open="partner-modal" data-sponsor-package="Main Title Partner" type="button">Request Main Title Partnership</button>
-</article>
-<article class="sponsor-tier reveal">
-<div class="sponsor-tier-top">
-<span class="sponsor-tier-label">Core moment ownership</span>
-<span class="sponsor-tier-number">02</span>
-</div>
-<h4>Alpha Partner</h4>
-<div class="sponsor-tier-price">
-<strong>US$40,000</strong>
-<span>≈ <b data-usd-price="40000">MXN $695,900</b></span>
-</div>
-<p class="sponsor-positioning">Strategic partner integrated into the festival's core moments.</p>
-<ul class="sponsor-highlights"><li>6 Executive Passes with stay included</li><li>40 General Access passes</li><li>Branding across key touchpoints</li><li>Dedicated activation space</li></ul><details class="sponsor-details"><summary>View full package details</summary><ul><li>Ownership of one key moment: Gala Dinner, Tulum Experience or Opening</li><li>Interviews, stage time, photo, video and press integration</li><li>Custom media plan before, during and after the festival</li></ul></details>
-<p class="sponsor-stay">Accommodation included in this package.</p>
-<button class="btn btn-ghost btn-full" data-modal-open="partner-modal" data-sponsor-package="Alpha Partner" type="button">Request Alpha Partnership</button>
-</article>
-<article class="sponsor-tier reveal">
-<div class="sponsor-tier-top">
-<span class="sponsor-tier-label">Daily experience</span>
-<span class="sponsor-tier-number">03</span>
-</div>
-<h4>Core Partner</h4>
-<div class="sponsor-tier-price">
-<strong>US$30,000</strong>
-<span>≈ <b data-usd-price="30000">MXN $521,925</b></span>
-</div>
-<p class="sponsor-positioning">Active partner embedded within the daily festival experience.</p>
-<ul class="sponsor-highlights"><li>4 Executive Passes with stay included</li><li>30 General Access passes</li><li>Activation space</li><li>Ownership of one curated moment: Thursday Sunset, Friday Sunset or VIP Lunch</li></ul><details class="sponsor-details"><summary>View full package details</summary><ul><li>Interviews, stage time, photo, video and press integration</li><li>Custom media plan before, during and after the festival</li></ul></details>
-<p class="sponsor-stay">Accommodation included in this package.</p>
-<button class="btn btn-ghost btn-full" data-modal-open="partner-modal" data-sponsor-package="Core Partner" type="button">Request Core Partnership</button>
-</article>
-<article class="sponsor-tier reveal">
-<div class="sponsor-tier-top">
-<span class="sponsor-tier-label">Community layer</span>
-<span class="sponsor-tier-number">04</span>
-</div>
-<h4>Community Partner</h4>
-<div class="sponsor-tier-price">
-<strong>US$20,000</strong>
-<span>≈ <b data-usd-price="20000">MXN $347,950</b></span>
-</div>
-<p class="sponsor-positioning">Partner connected directly to the festival's community layer.</p>
-<ul class="sponsor-highlights"><li>2 Executive Passes with stay included</li><li>20 General Access passes</li><li>Activation presence</li><li>Ownership of one community moment: Wellness Morning, Breakfast Sessions, Workshops or Recovery Day</li></ul><details class="sponsor-details"><summary>View full package details</summary><ul><li>Interviews, stage time, photo, video and press integration</li><li>Custom media plan before, during and after the festival</li></ul></details>
-<p class="sponsor-stay">Accommodation included in this package.</p>
-<button class="btn btn-ghost btn-full" data-modal-open="partner-modal" data-sponsor-package="Community Partner" type="button">Request Community Partnership</button>
-</article>
-<article class="sponsor-tier reveal">
-<div class="sponsor-tier-top">
-<span class="sponsor-tier-label">High-frequency interaction</span>
-<span class="sponsor-tier-number">05</span>
-</div>
-<h4>Access Partner</h4>
-<div class="sponsor-tier-price">
-<strong>US$15,000</strong>
-<span>≈ <b data-usd-price="15000">MXN $260,963</b></span>
-</div>
-<p class="sponsor-positioning">A high-frequency interaction partner present inside the attendee journey.</p>
-<ul class="sponsor-highlights"><li>2 Executive Passes with stay included</li><li>15 General Access passes</li><li>Presence within the experience</li><li>Ownership of one interaction point: Coffee Break, Charging Station, WiFi, App or Registration</li></ul><details class="sponsor-details"><summary>View full package details</summary><ul><li>Interviews, stage time, photo, video and press integration</li><li>Custom media plan before, during and after the festival</li></ul></details>
-<p class="sponsor-stay">Accommodation included in this package.</p>
-<button class="btn btn-ghost btn-full" data-modal-open="partner-modal" data-sponsor-package="Access Partner" type="button">Request Access Partnership</button>
-</article>
-<article class="sponsor-tier sponsor-tier-entry reveal">
-<div class="sponsor-tier-top">
-<span class="sponsor-tier-label">Curated entry point</span>
-<span class="sponsor-tier-number">06</span>
-</div>
-<h4>Living Room Sponsor</h4>
-<div class="sponsor-tier-price">
-<strong>US$1,500</strong>
-<span>≈ <b data-usd-price="1500">MXN $26,096</b></span>
-</div>
-<p class="sponsor-positioning">A focused activation designed as an entry point into the festival ecosystem.</p>
-<ul class="sponsor-highlights"><li>Living Room activation space</li><li>2 General Access passes</li><li>Night Program access for 2 people</li><li>Curated dinners and selected night experiences</li></ul><details class="sponsor-details"><summary>View full package details</summary><ul><li>Executive Access is not included; upgrade available</li></ul></details>
-<p class="sponsor-rate-note">Commercial deck reference. Ticket Fairy currently lists this product separately in MXN; confirm the final commercial rate before launch.</p>
-<button class="btn btn-ghost btn-full" data-modal-open="partner-modal" data-sponsor-package="Living Room Sponsor" type="button">Request Living Room Sponsorship</button>
-</article>
-</div>
-<div class="container functional-head reveal">
-<p class="eyebrow"><span></span>Optional functional partnerships</p>
-<h3>Own a useful touchpoint people interact with throughout the festival</h3>
-</div>
-<div class="container functional-grid">
-<article class="functional-card reveal">
-<span>Power</span>
-<h4>Charging Station Partner</h4>
-<div><strong>US$6,000</strong><small>≈ <b data-usd-price="6000">MXN $104,385</b></small></div>
-<button data-modal-open="partner-modal" data-sponsor-package="Charging Station Partner" type="button">Request opportunity <i>↗</i></button>
-</article>
-<article class="functional-card reveal">
-<span>Hospitality</span>
-<h4>Coffee Station Partner</h4>
-<div><strong>US$8,000</strong><small>≈ <b data-usd-price="8000">MXN $139,180</b></small></div>
-<button data-modal-open="partner-modal" data-sponsor-package="Coffee Station Partner" type="button">Request opportunity <i>↗</i></button>
-</article>
-<article class="functional-card reveal">
-<span>Connectivity</span>
-<h4>WiFi Partner</h4>
-<div><strong>US$10,000</strong><small>≈ <b data-usd-price="10000">MXN $173,975</b></small></div>
-<button data-modal-open="partner-modal" data-sponsor-package="WiFi Partner" type="button">Request opportunity <i>↗</i></button>
-</article>
-<article class="functional-card reveal">
-<span>Digital infrastructure</span>
-<h4>App Partner</h4>
-<div><strong>US$10,000</strong><small>≈ <b data-usd-price="10000">MXN $173,975</b></small></div>
-<button data-modal-open="partner-modal" data-sponsor-package="App Partner" type="button">Request opportunity <i>↗</i></button>
-</article>
-</div>
-<div class="container sponsorship-disclaimer reveal">
-<span>Commercial reference</span>
-<p>Sponsorship packages are quoted in USD. MXN amounts are approximate at <strong>MXN $17.3975 per USD</strong> and should be reconfirmed when the commercial proposal is issued.</p>
-</div>
-</section>
-<section aria-labelledby="community-title" class="community section">
-<div class="container">
-<div class="community-head reveal"><p class="eyebrow"><span></span>Past community</p><h2 id="community-title">A community already in motion</h2><p>Previous editions have brought together global technology companies, startups, investors, hospitality partners and independent communities.</p></div>
-<div aria-label="Community logo placeholders" class="community-wall reveal"><span>BINANCE</span><span>AWS</span><span>BITBASEL</span><span>5IRE</span><span>MINIMALIST</span><span>PAPAYA PLAYA</span><span>IBIZA TECH FORUM</span><span>WEB3 LATAM</span><span>STARTUP GRIND</span><span>THE SANDBOX</span><span>GOOGLE CLOUD</span><span>CHAINLINK</span></div>
-<p class="testimonial-note">Founder, sponsor and investor testimonials should be added only after approval. No placeholder quotes are presented as social proof.</p>
-</div>
-</section>
-<section aria-labelledby="closing-title" class="closing">
-<img alt="" aria-hidden="true" src="assets/closing-portal.png"/>
-<div aria-hidden="true" class="closing-shade"></div>
-<div class="container closing-copy reveal"><p class="eyebrow"><span></span>Tulum · December 9-12, 2026</p><h2 id="closing-title">The future is not something we wait for.<br/><em>It is something we build, together.</em></h2><p>Join a global community of founders, investors, creators and industry leaders.</p><div class="closing-actions"><a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get Festival Access</a><a class="btn btn-ghost btn-community external-cta" href="https://chat.whatsapp.com/BhcaLxiYKFJ3BToTmXP9s4?mode=gi_t" rel="noopener noreferrer" target="_blank">Join The Community</a></div><small>Capacity is limited to protect the quality of the experience and the community.</small></div>
-</section>
-<section aria-labelledby="faq-title" class="faq section" id="faq">
-<div class="container faq-grid">
-<div class="faq-intro reveal"><p class="eyebrow"><span></span>FAQ</p><h2 id="faq-title">What you need to know</h2><p>For program, accessibility, travel or partnership questions, contact the festival team.</p><a href="mailto:innovation@likegroup.io">innovation@likegroup.io</a></div>
-<div class="accordion" data-accordion="">
-<article class="faq-item reveal"><button aria-expanded="false" type="button"><span>What is Tulum Innovation Fest?</span><i></i></button><div><p>A four-day gathering combining innovation, entrepreneurship, capital, culture, wellness and destination experiences in Tulum.</p></div></article>
-<article class="faq-item reveal"><button aria-expanded="false" type="button"><span>Who is the festival for?</span><i></i></button><div><p>Founders, investors, executives, creators, technology leaders, ecosystem builders and people interested in emerging innovation.</p></div></article>
-<article class="faq-item reveal"><button aria-expanded="false" type="button"><span>Is it only focused on crypto or Web3?</span><i></i></button><div><p>No. The festival evolved from Tulum Crypto Fest into a broader platform covering AI, capital, future cities, digital assets, entrepreneurship, culture, climate and human connection.</p></div></article>
-<article class="faq-item reveal"><button aria-expanded="false" type="button"><span>What is Whale Tank?</span><i></i></button><div><p>Whale Tank is the official curated founder experience and startup showcase of Tulum Innovation Fest.</p></div></article>
-<article class="faq-item reveal"><button aria-expanded="false" type="button"><span>Does applying guarantee participation?</span><i></i></button><div><p>No. Applications are reviewed according to business quality, traction, scalability and fit with the program.</p></div></article>
-<article class="faq-item reveal"><button aria-expanded="false" type="button"><span>Are accommodation and travel included?</span><i></i></button><div><p>Accommodation is included only in selected packages. Flights, local transportation and additional hospitality experiences are separate unless explicitly stated.</p></div></article>
-<article class="faq-item reveal"><button aria-expanded="false" type="button"><span>Where will the festival take place?</span><i></i></button><div><p>The program will take place across selected venues in Tulum, including Ikal Arena and the Whale Tank founder venue.</p></div></article>
-<article class="faq-item reveal"><button aria-expanded="false" type="button"><span>How can my company become a partner?</span><i></i></button><div><p>Submit the partnership form with your objectives, target audience and approximate investment range. The team will propose the most relevant format.</p></div></article>
-</div>
-</div>
-</section>
-</main>
-<footer class="site-footer">
-<div class="container footer-grid">
-<div class="footer-brand"><a aria-label="Tulum Innovation Fest home" class="brand" href="#top"><img alt="Tulum Innovation Fest" class="brand-logo footer-logo" src="assets/tulum-innovation-fest-logo.png"/></a><p>From the heart of the jungle to the future of humanity.</p><strong>December 9-12, 2026<br/>Tulum, Mexico</strong></div>
-<div class="footer-links"><h3>Explore</h3><a href="#experience">Festival Experience</a><a href="#program">Program</a><a href="#tickets">Tickets</a><a href="#whale-tank">Whale Tank</a><a href="#packages">Founder Packages</a><a href="/sponsorship">Partnerships</a><a href="#faq">FAQ</a></div>
-<div class="footer-links"><h3>Connect</h3>
-<a href="mailto:innovation@likegroup.io">Contact</a>
-<a href="https://chat.whatsapp.com/BhcaLxiYKFJ3BToTmXP9s4?mode=gi_t" rel="noopener noreferrer" target="_blank">Join The Community</a>
-<a href="https://www.instagram.com/tulumcryptofest/?hl=en" rel="noopener noreferrer" target="_blank">Instagram</a>
-<a href="https://www.youtube.com/@tulumcryptofest" rel="noopener noreferrer" target="_blank">YouTube</a>
-<a href="https://www.likegroup.io/" rel="noopener noreferrer" target="_blank">Like Group! Management</a>
-<a href="#">Privacy Policy</a>
-<a href="#">Terms</a>
-</div>
-<div class="footer-cta"><p>Ready to enter the ecosystem?</p><a class="btn btn-primary external-cta" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get Festival Access</a></div>
-</div>
-<div class="container footer-bottom">
-<span>© 2026 Tulum Innovation Fest</span>
-<span>General Producer: <a href="https://www.likegroup.io/" rel="noopener noreferrer" target="_blank">Like Group! Management</a></span>
-<span>Designed for human connection</span>
-</div>
-</footer>
-<dialog aria-labelledby="partner-form-title" class="modal" id="partner-modal">
-<div class="modal-shell">
-<button aria-label="Close form" class="modal-close" data-modal-close="" type="button">×</button>
-<div class="modal-head"><p class="eyebrow"><span></span>Partnerships</p><h2 id="partner-form-title">Start a partnership conversation</h2><p>We qualify partnership interest by objective and investment range before proposing formats.</p></div>
-<form class="lead-form" data-demo-form="">
-<div class="field-row"><label>Name<input autocomplete="name" name="name" required=""/></label><label>Role<input autocomplete="organization-title" name="role" required=""/></label></div>
-<label>Company<input autocomplete="organization" name="company" required=""/></label>
-<label>Email<input autocomplete="email" name="email" required="" type="email"/></label>
-<label>Package of interest<select data-sponsor-select="" name="sponsor_package" required="">
-<option value="">Select a package</option>
-<option value="Main Title Partner">Main Title Partner — US$100,000</option>
-<option value="Alpha Partner">Alpha Partner — US$40,000</option>
-<option value="Core Partner">Core Partner — US$30,000</option>
-<option value="Community Partner">Community Partner — US$20,000</option>
-<option value="Access Partner">Access Partner — US$15,000</option>
-<option value="Living Room Sponsor">Living Room Sponsor — US$1,500</option>
-<option value="Charging Station Partner">Charging Station Partner — US$6,000</option>
-<option value="Coffee Station Partner">Coffee Station Partner — US$8,000</option>
-<option value="WiFi Partner">WiFi Partner — US$10,000</option>
-<option value="App Partner">App Partner — US$10,000</option>
-<option value="Custom Partnership">Custom Partnership</option>
-</select></label>
-<label>Partnership objective<textarea name="objective" placeholder="What business or audience outcome should the partnership create?" required="" rows="3"></textarea></label>
-<div class="field-row"><label>Investment range<select name="investment" required=""><option value="">Select range</option><option>Under USD 10K</option><option>USD 10K-20K</option><option>USD 20K-40K</option><option>USD 40K-100K</option><option>USD 100K+</option><option>In-kind / strategic</option></select></label><label>Area of interest<select name="area" required=""><option value="">Select area</option><option>Festival Partner</option><option>Whale Tank Partner</option><option>Experience Partner</option><option>Custom Partnership</option></select></label></div>
-<label class="consent"><input required="" type="checkbox"/><span>I agree to be contacted about partnership opportunities.</span></label>
-<button class="btn btn-primary btn-full" type="submit">Start a Partnership Conversation</button>
-<p aria-live="polite" class="form-status" role="status"></p>
-</form>
-</div>
-</dialog>
-<div class="mobile-conversion-bar" data-mobile-bar="" data-mode="ticket">
-<a class="mobile-primary" data-mobile-primary="" href="https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748" rel="noopener noreferrer" target="_blank">Get Tickets</a>
-<button class="mobile-menu-button" data-mobile-menu="" type="button">Menu</button>
-</div></body>
+</body>
 </html>
