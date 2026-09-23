@@ -724,6 +724,58 @@
       .v2-past-people-note { margin-top:1.6rem; }
     }
 
+
+    /* Mobile interaction polish */
+    @media (max-width: 720px) {
+      body.v2-nav-open {
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+      .site-nav a,
+      .site-nav .lang-toggle {
+        min-height: 44px;
+      }
+      .site-nav a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: .55rem 0;
+      }
+      .site-nav .lang-toggle {
+        margin-top: .6rem;
+        padding-inline: 1rem;
+      }
+      .v2-person-meta span,
+      .v2-person-meta small {
+        font-size: .55rem;
+        line-height: 1.35;
+      }
+      .v2-person-meta h3 {
+        font-size: .9rem;
+        line-height: 1.15;
+      }
+      .v2-past-person-meta p {
+        font-size: .66rem;
+      }
+    }
+    @media (max-width: 520px) {
+      .v2-hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .v2-hero-actions .btn {
+        width: 100%;
+      }
+      .v2-countdown-grid span {
+        font-size: .56rem;
+        line-height: 1.2;
+      }
+      .v2-countdown-date {
+        font-size: .62rem;
+      }
+    }
+
     /* Final mobile QA overrides */
     @media (max-width: 768px) {
       .v2-section { padding: clamp(4.25rem, 12vw, 6rem) 0; }
