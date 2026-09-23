@@ -116,20 +116,78 @@
     .v2-hero-copy .v2-lede { max-width: 670px; color: rgba(242,241,234,.82); }
     .v2-hero-actions { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:2rem; }
     .v2-hero-note { margin:1rem 0 0; color:rgba(242,241,234,.48); font-size:.68rem; letter-spacing:.04em; }
-    .v2-hero-proof { border-top:1px solid rgba(242,241,234,.25); }
-    .v2-hero-proof article {
-      display:grid; grid-template-columns:72px 1fr; gap:1rem; align-items:center;
-      padding:1rem 0; border-bottom:1px solid rgba(242,241,234,.15);
+    .v2-hero-countdown {
+      border-top:1px solid rgba(242,241,234,.25);
+      border-bottom:1px solid rgba(242,241,234,.15);
+      padding:.9rem 0 1rem;
+      min-width:260px;
     }
-    .v2-hero-proof strong {
-      font-family:var(--display); color:#E97A43; font-size:1.5rem; font-weight:400; letter-spacing:-.04em;
+    .v2-countdown-kicker {
+      margin:0 0 .85rem;
+      color:rgba(242,241,234,.55);
+      font-size:.58rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
     }
-    .v2-hero-proof span { color:rgba(242,241,234,.74); font-size:.72rem; line-height:1.45; }
+    .v2-countdown-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:0;
+      border-top:1px solid rgba(242,241,234,.10);
+      border-left:1px solid rgba(242,241,234,.10);
+    }
+    .v2-countdown-grid article {
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:.8rem .85rem;
+      border-right:1px solid rgba(242,241,234,.10);
+      border-bottom:1px solid rgba(242,241,234,.10);
+    }
+    .v2-countdown-grid strong {
+      font-family:var(--display);
+      color:#E97A43;
+      font-size:clamp(1.8rem,2.8vw,3.25rem);
+      font-weight:400;
+      line-height:.95;
+      letter-spacing:-.055em;
+      font-variant-numeric:tabular-nums;
+    }
+    .v2-countdown-grid span {
+      margin-top:.45rem;
+      color:rgba(242,241,234,.62);
+      font-size:.54rem;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .v2-countdown-date {
+      margin:.8rem 0 0;
+      color:rgba(242,241,234,.45);
+      font-size:.58rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
     .v2-watch {
       position:absolute; z-index:3; right:3vw; bottom:1.8rem; display:inline-flex; align-items:center; gap:.7rem;
       color:rgba(242,241,234,.58); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
     }
     .v2-watch i { width:38px; height:1px; background:var(--ember); }
+
+
+    /* Hero countdown mobile */
+    @media (max-width: 900px) {
+      .v2-hero-countdown { min-width:0; width:100%; margin-top:.5rem; }
+      .v2-countdown-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .v2-countdown-grid article { min-height:78px; padding:.7rem .5rem; }
+      .v2-countdown-grid strong { font-size:clamp(1.45rem,6vw,2.35rem); }
+      .v2-countdown-grid span { font-size:.46rem; letter-spacing:.08em; }
+    }
+    @media (max-width: 520px) {
+      .v2-countdown-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .v2-countdown-grid article { min-height:74px; }
+      .v2-countdown-grid strong { font-size:2rem; }
+    }
 
     /* Proof strip */
     .v2-proof-strip { background:var(--white); color:var(--black); border-bottom:1px solid rgba(0,8,11,.12); }
@@ -824,10 +882,19 @@
           </p>
         </div>
 
-        <aside class="v2-hero-proof" aria-label="Festival proof">
-          <article><strong>5</strong><span data-en>previous editions</span><span data-es>ediciones anteriores</span></article>
-          <article><strong>5,700+</strong><span data-en>festival entries across five editions</span><span data-es>entradas acumuladas en cinco ediciones</span></article>
-          <article><strong>4</strong><span data-en>days in Tulum</span><span data-es>días en Tulum</span></article>
+        <aside class="v2-hero-countdown" aria-label="Countdown to TIF 2026" data-countdown>
+          <p class="v2-countdown-kicker">
+            <span data-en>Until TIF 2026</span><span data-es>Para TIF 2026</span>
+          </p>
+          <div class="v2-countdown-grid" aria-live="off">
+            <article><strong data-countdown-days>00</strong><span data-en>Days</span><span data-es>Días</span></article>
+            <article><strong data-countdown-hours>00</strong><span data-en>Hours</span><span data-es>Horas</span></article>
+            <article><strong data-countdown-minutes>00</strong><span data-en>Minutes</span><span data-es>Minutos</span></article>
+            <article><strong data-countdown-seconds>00</strong><span data-en>Seconds</span><span data-es>Segundos</span></article>
+          </div>
+          <p class="v2-countdown-date">
+            <span data-en>December 9 · Tulum</span><span data-es>9 de diciembre · Tulum</span>
+          </p>
         </aside>
       </div>
 
@@ -1433,6 +1500,32 @@
             logoStrip.querySelector('[data-logo-resume]').hidden = !paused;
           });
         }
+      }
+
+      const countdownRoot = document.querySelector('[data-countdown]');
+      if (countdownRoot) {
+        const target = new Date('2026-12-09T00:00:00-05:00').getTime();
+        const fields = {
+          days: countdownRoot.querySelector('[data-countdown-days]'),
+          hours: countdownRoot.querySelector('[data-countdown-hours]'),
+          minutes: countdownRoot.querySelector('[data-countdown-minutes]'),
+          seconds: countdownRoot.querySelector('[data-countdown-seconds]')
+        };
+        const pad = value => String(Math.max(0, value)).padStart(2, '0');
+        const updateCountdown = () => {
+          const diff = Math.max(0, target - Date.now());
+          const totalSeconds = Math.floor(diff / 1000);
+          const days = Math.floor(totalSeconds / 86400);
+          const hours = Math.floor((totalSeconds % 86400) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+          if (fields.days) fields.days.textContent = String(days);
+          if (fields.hours) fields.hours.textContent = pad(hours);
+          if (fields.minutes) fields.minutes.textContent = pad(minutes);
+          if (fields.seconds) fields.seconds.textContent = pad(seconds);
+        };
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
       }
 
       const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 32);
