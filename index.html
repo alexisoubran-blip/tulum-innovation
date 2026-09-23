@@ -582,7 +582,68 @@
       .v2-proof-grid article { border-right:0 !important; border-bottom:1px solid rgba(0,8,11,.13); }
       .v2-proof-grid article:last-child { border-bottom:0; }
     }
-  </style>
+  
+    /* Final mobile QA overrides */
+    @media (max-width: 768px) {
+      .v2-section { padding: clamp(4.25rem, 12vw, 6rem) 0; }
+      .v2-section-head { gap: 1.3rem; margin-bottom: 2.2rem; }
+      .v2-section-head h2 { font-size: clamp(2.15rem, 9.6vw, 3.7rem); line-height: .98; }
+      .v2-section-head > p { font-size: .9rem; line-height: 1.62; }
+
+      .v2-exec-main { min-height: 520px; }
+      .v2-exec-main figcaption { left: 1rem; right: 1rem; bottom: 1rem; }
+      .v2-exec-moments { grid-template-columns: 1fr; }
+      .v2-exec-moments figure { aspect-ratio: 4 / 5; min-height: 0; }
+
+      .v2-program-hero { min-height: 520px; margin-bottom: 12px; }
+      .v2-program-grid { grid-template-columns: 1fr; }
+      .v2-day { min-height: 0; }
+      .v2-program-faces { grid-template-columns: repeat(3, 1fr); }
+
+      .v2-mosaic {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 10px;
+      }
+      .v2-mosaic figure,
+      .v2-mosaic figure:first-child {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 340px;
+      }
+      .v2-mosaic figure:first-child { min-height: 500px; }
+
+      .v2-archive-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .v2-archive-grid figure,
+      .v2-archive-grid figure:first-child {
+        grid-column: auto;
+        min-height: 250px;
+      }
+      .v2-archive-grid figure:first-child { grid-column: 1 / -1; min-height: 320px; }
+      .v2-archive-grid figcaption { left: .75rem; right: .75rem; bottom: .75rem; }
+
+      .v2-name-wall { grid-template-columns: repeat(2, 1fr); }
+      .v2-media-names { grid-template-columns: 1fr 1fr; }
+      .v2-media-names span { min-height: 92px; padding: .9rem; }
+
+      .v2-ticket-grid { grid-template-columns: 1fr; }
+      .v2-ticket { min-height: 0; }
+    }
+    @media (max-width: 480px) {
+      .v2-exec-main { min-height: 470px; }
+      .v2-program-hero { min-height: 470px; }
+      .v2-mosaic figure,
+      .v2-mosaic figure:first-child { min-height: 300px; }
+      .v2-mosaic figure:first-child { min-height: 440px; }
+      .v2-archive-grid { grid-template-columns: 1fr; }
+      .v2-archive-grid figure,
+      .v2-archive-grid figure:first-child { grid-column: auto; min-height: 300px; }
+    }
+
+</style>
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -989,20 +1050,29 @@
         </div>
 
         <div class="v2-mosaic">
-          <figure><img src="/assets/gallery/community.webp" alt="TIF community" loading="lazy" /><figcaption>Community</figcaption></figure>
-          <figure><picture class="v2-responsive-media">
+          <figure>
+            <picture class="v2-responsive-media">
               <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/venue-cenote-stage-mobile.webp" />
               <img src="/assets/tif-home-v2/venue-cenote-stage-desktop.webp" alt="Wide view of the cenote stage and tropical venue" loading="lazy" decoding="async" />
-            </picture><figcaption><span data-en>Venue</span><span data-es>Venue</span></figcaption></figure>
-          <figure><picture class="v2-responsive-media">
+            </picture>
+            <figcaption><span data-en>Venue</span><span data-es>Venue</span></figcaption>
+          </figure>
+          <figure>
+            <picture class="v2-responsive-media">
               <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/audience-social-proof-mobile.webp" />
               <img src="/assets/tif-home-v2/audience-social-proof-desktop.webp" alt="Audience seated during a talk at a previous TIF edition" loading="lazy" decoding="async" />
-            </picture><figcaption><span data-en>Community</span><span data-es>Comunidad</span></figcaption></figure>
-          <figure><picture class="v2-responsive-media">
+            </picture>
+            <figcaption><span data-en>Community</span><span data-es>Comunidad</span></figcaption>
+          </figure>
+          <figure>
+            <picture class="v2-responsive-media">
               <source media="(max-width: 768px)" srcset="/assets/tif-home-v2/cenote-experience-mobile.webp" />
               <img src="/assets/tif-home-v2/cenote-experience-desktop.webp" alt="Attendees relaxing in the cenote during a previous TIF edition" loading="lazy" decoding="async" />
-            </picture><figcaption><span data-en>Nature</span><span data-es>Naturaleza</span></figcaption></figure>
-          <figure><img src="/assets/gallery/night-dj.webp" alt="TIF night program" loading="lazy" /><figcaption>Night</figcaption></figure>
+            </picture>
+            <figcaption><span data-en>Nature</span><span data-es>Naturaleza</span></figcaption>
+          </figure>
+          <figure><img src="/assets/gallery/community.webp" alt="TIF community" loading="lazy" decoding="async" /><figcaption>Community</figcaption></figure>
+          <figure><img src="/assets/gallery/live-music.webp" alt="Live music at a previous TIF edition" loading="lazy" decoding="async" /><figcaption><span data-en>Culture</span><span data-es>Cultura</span></figcaption></figure>
         </div>
       </div>
     </section>
