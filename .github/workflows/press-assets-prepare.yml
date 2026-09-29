@@ -1,0 +1,28 @@
+name: Prepare press assets for review
+on:
+  push:
+    branches: [work/press-assets-20260929]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Collect source and publisher assets
+        run: |
+          mkdir -p qa-prep
+          git archive --format=tar HEAD | gzip > qa-prep/source.tar.gz
+          curl --fail --location --max-time 30 https://cdn.worldvectorlogo.com/logos/forbes-2.svg -o qa-prep/forbes.svg
+          curl --fail --location --max-time 30 https://cdn.worldvectorlogo.com/logos/entrepreneur-2.svg -o qa-prep/entrepreneur.svg
+          curl --fail --location --max-time 30 https://forbes.com.mx/ -o qa-prep/forbes-source.html || true
+          curl --fail --location --max-time 30 https://www.entrepreneur.com/ -o qa-prep/entrepreneur-source.html || true
+          curl --fail --location --max-time 30 https://soyemprendedor.co/ -o qa-prep/soyemprendedor-source.html || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: press-source-review
+          path: qa-prep
+          retention-days: 1
