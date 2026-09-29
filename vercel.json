@@ -2,6 +2,11 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/home-v2", "destination": "/", "permanent": true },
+    { "source": "/home-v2/index", "destination": "/", "permanent": true },
+    { "source": "/home-v2/index.html", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/alexis-soubran-TIF-CMO",
