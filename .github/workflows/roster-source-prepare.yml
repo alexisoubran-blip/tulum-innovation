@@ -1,0 +1,49 @@
+name: Prepare roster source
+on:
+  push:
+    branches: [work/press-assets-20260929]
+    paths: [.github/workflows/roster-source-prepare.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 5eb77977a717b05b601811ec7d12f3de71c77e8e
+          persist-credentials: false
+      - name: Export current source
+        run: |
+          mkdir -p qa-roster
+          git archive --format=tar HEAD | gzip > qa-roster/source.tar.gz
+      - name: Validate supplied artwork
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os,json,base64,hashlib,urllib.request,pathlib
+          api='https://api.github.com/repos/alexisoubran-blip/tulum-innovation/git/blobs'
+          headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'}
+          req=urllib.request.Request(api+'/54288bd331c721192292ad4aca69f0ec7ebefd98',headers=headers)
+          blob=json.load(urllib.request.urlopen(req,timeout=30))
+          raw=base64.b64decode(blob['content'])
+          pathlib.Path('qa-roster/received-sandra.webp').write_bytes(raw)
+          fixed=raw[:14800]+base64.b64decode('QexVWvfFgsZet9Y6LnZYlisdkmp/P76NDge5bdx/JHsIH4Ue4Nh/ej6i3X1fsxRcIAAAAA==')
+          sha=hashlib.sha1(('blob '+str(len(fixed))+'\0').encode()+fixed).hexdigest()
+          if sha=='6aa1db2bceb80d93dd625518871830e4c17919e2':
+              data=json.dumps({'content':base64.b64encode(fixed).decode(),'encoding':'base64'}).encode()
+              req=urllib.request.Request(api,headers=headers,data=data,method='POST')
+              result=json.load(urllib.request.urlopen(req,timeout=30))
+              assert result['sha']==sha
+              pathlib.Path('qa-roster/sandra-verified.json').write_text(json.dumps({'sha':sha,'bytes':len(fixed)}))
+              print('Verified artwork blob:',sha)
+          else:
+              print('Artwork requires re-transfer; received bytes:',len(raw),'candidate SHA:',sha)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roster-source-review
+          path: qa-roster
+          retention-days: 1
