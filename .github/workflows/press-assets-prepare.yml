@@ -9,20 +9,27 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: Collect source and publisher assets
+      - name: Collect official publisher assets
         run: |
-          mkdir -p qa-prep
-          git archive --format=tar HEAD | gzip > qa-prep/source.tar.gz
-          curl --fail --location --max-time 30 https://cdn.worldvectorlogo.com/logos/forbes-2.svg -o qa-prep/forbes.svg
-          curl --fail --location --max-time 30 https://cdn.worldvectorlogo.com/logos/entrepreneur-2.svg -o qa-prep/entrepreneur.svg
-          curl --fail --location --max-time 30 https://forbes.com.mx/ -o qa-prep/forbes-source.html || true
-          curl --fail --location --max-time 30 https://www.entrepreneur.com/ -o qa-prep/entrepreneur-source.html || true
-          curl --fail --location --max-time 30 https://soyemprendedor.co/ -o qa-prep/soyemprendedor-source.html || true
+          mkdir -p qa-prep/fonts
+          curl --fail --location --max-time 30 https://forbes.com.mx/wp-content/themes/forbesv49/resources/img/forbes-mexico-logo.svg -o qa-prep/forbes.svg
+          curl --fail --location --max-time 30 https://soyemprendedor.co/wp-content/uploads/2026/07/logo-Soy-Emprendedor.svg -o qa-prep/soy-emprendedor.svg
+          python3 - <<'PY'
+          import re, json, pathlib, urllib.request
+          root = pathlib.Path('qa-prep/fonts')
+          url = 'https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap'
+          req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 Chrome/131.0.0.0 Safari/537.36'})
+          css = urllib.request.urlopen(req, timeout=30).read().decode()
+          manifest = {}
+          for i, source in enumerate(dict.fromkeys(re.findall(r'url\((https://[^)]+)\)', css))):
+              path = root / ('font-' + str(i) + '.woff2')
+              path.write_bytes(urllib.request.urlopen(source, timeout=30).read())
+              manifest[source] = path.name
+          (root / 'fonts.css').write_text(css)
+          (root / 'manifest.json').write_text(json.dumps(manifest))
+          PY
       - uses: actions/upload-artifact@v4
         with:
-          name: press-source-review
+          name: official-press-assets
           path: qa-prep
           retention-days: 1
