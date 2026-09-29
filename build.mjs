@@ -40,3 +40,7 @@ assert.equal(home.slice(home.indexOf("</head>")), source.slice(source.indexOf("<
 
 await writeFile("dist/index.html", home);
 console.log("Homepage: approved home-v2 published at /; public SEO metadata verified; content, scripts and asset URLs preserved.");
+
+// Sourced press coverage is generated after the homepage preservation checks.
+const { buildPress } = await import('./press/build.mjs');
+await buildPress();

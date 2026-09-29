@@ -1,0 +1,78 @@
+/* TIF pressroom. All component styles are namespaced; shared page content is unchanged. */
+.press-strip, .press-page { --pr-bg:#00080b; --pr-ink:#f2f1ea; --pr-muted:#abb2ae; --pr-accent:#e97a43; --pr-line:rgba(242,241,234,.16); --pr-sans:'Sora',system-ui,sans-serif; --pr-display:'Bruno Ace','Sora',system-ui,sans-serif; }
+.press-strip *, .press-page * { box-sizing:border-box; }
+.press-strip { padding:2.2rem 0 1.7rem; color:var(--pr-ink); background:var(--pr-bg); border-bottom:1px solid var(--pr-line); }
+.press-wrap { width:min(88vw,1480px); margin-inline:auto; }
+.press-strip-head { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.press-eyebrow { margin:0; font:500 .64rem/1.5 var(--pr-sans); text-transform:uppercase; letter-spacing:.18em; color:var(--pr-muted); }
+.press-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; margin:0 .7rem .2rem 0; background:var(--pr-accent); }
+.press-text-link { display:inline-flex; align-items:center; gap:.65rem; min-height:44px; color:inherit; font:500 .68rem/1.4 var(--pr-sans); text-decoration:none; }
+.press-text-link:hover { color:var(--pr-accent); }
+.press-text-link:focus-visible, .press-logo-link:focus-visible, .press-page a:focus-visible, .press-page button:focus-visible, .press-page select:focus-visible { outline:2px solid var(--pr-accent); outline-offset:5px; }
+.press-logo-grid { display:grid; grid-template-columns:1fr 1.3fr 1fr 1fr 1.1fr; align-items:stretch; gap:1.4rem; padding:1.65rem 0 1.25rem; margin:0; list-style:none; }
+.press-logo-grid li { min-width:0; }
+.press-logo-link { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:95px; padding:.6rem; gap:1rem; text-decoration:none; color:var(--pr-ink); }
+.press-logo-link img { display:block; width:100%; max-width:175px; height:42px; object-fit:contain; filter:brightness(0) invert(1); opacity:.84; transition:opacity .2s ease; }
+.press-logo-link:hover img { opacity:1; }
+.press-logo-link[data-outlet='forbes'] img { max-width:144px; height:48px; }
+.press-logo-link[data-outlet='entrepreneur'] img { max-width:198px; }
+.press-logo-link[data-outlet='pro-network'] img { max-width:150px; }
+.press-logo-link span { font:400 .54rem/1.4 var(--pr-sans); letter-spacing:.11em; text-transform:uppercase; color:var(--pr-muted); }
+.press-strip-note { margin:0; padding-top:1rem; border-top:1px solid var(--pr-line); color:var(--pr-muted); font:400 .66rem/1.7 var(--pr-sans); }
+.press-page { margin:0; background:var(--pr-bg); color:var(--pr-ink); font:400 16px/1.6 var(--pr-sans); }
+.press-page [hidden] { display:none !important; }
+.press-page[data-lang='en'] [data-es], .press-page[data-lang='es'] [data-en], html[data-lang='en'] .press-page [data-es], html[data-lang='es'] .press-page [data-en] { display:none !important; }
+.press-page a { color:inherit; }
+.press-skip { position:absolute; top:8px; left:8px; padding:.8rem 1rem; background:var(--pr-ink); color:var(--pr-bg) !important; transform:translateY(-160%); z-index:999; }
+.press-skip:focus { transform:none; }
+.press-header { display:flex; justify-content:space-between; align-items:center; gap:1.5rem; min-height:88px; border-bottom:1px solid var(--pr-line); }
+.press-brand img { display:block; width:auto; max-width:200px; height:40px; }
+.press-nav { display:flex; align-items:center; flex-wrap:wrap; gap:1.5rem; }
+.press-nav a { display:inline-flex; align-items:center; min-height:44px; font-size:.65rem; text-transform:uppercase; letter-spacing:.08em; text-decoration:none; }
+.press-lang { min-width:78px; min-height:44px; border:1px solid var(--pr-line); border-radius:999px; background:transparent; color:var(--pr-ink); font:500 .64rem var(--pr-sans); cursor:pointer; }
+.press-intro { padding:clamp(4.5rem,8vw,8rem) 0 3rem; }
+.press-page h1 { margin:1.4rem 0 1.6rem; max-width:1000px; font:400 clamp(2.5rem,6.7vw,6.8rem)/1.03 var(--pr-display); letter-spacing:-.045em; }
+.press-intro h1 em { font-style:normal; color:var(--pr-accent); }
+.press-intro-copy { max-width:760px; color:var(--pr-muted); font-size:clamp(.92rem,1.2vw,1.08rem); line-height:1.8; }
+.press-intro-meta { display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; margin-top:2.1rem; padding-top:1.25rem; border-top:1px solid var(--pr-line); color:var(--pr-muted); font-size:.65rem; letter-spacing:.06em; }
+.press-page .press-strip { padding-top:0; padding-bottom:2.5rem; border-bottom:0; }
+.press-archive { padding:clamp(3rem,6vw,6rem) 0; background:var(--pr-ink); color:var(--pr-bg); }
+.press-archive-heading { display:flex; align-items:end; justify-content:space-between; gap:1rem; padding-bottom:1.7rem; border-bottom:1px solid rgba(0,8,11,.18); }
+.press-page h2 { font:400 clamp(1.6rem,3vw,2.8rem)/1.14 var(--pr-display); letter-spacing:-.035em; margin:0; }
+.press-archive-heading p { margin:0; color:#596360; font-size:.7rem; }
+.press-filters { display:flex; align-items:end; flex-wrap:wrap; gap:1rem; padding:1.5rem 0 2rem; }
+.press-filters label { display:grid; gap:.45rem; font-size:.65rem; color:#4e5956; }
+.press-filters select { min-height:46px; min-width:160px; max-width:100%; border:1px solid #bcc3bd; border-radius:2px; padding:.65rem 2rem .65rem .65rem; background:transparent; color:#00080b; font:400 .75rem var(--pr-sans); }
+.press-filter-status { margin:0 0 .65rem auto; color:#596360; font-size:.68rem; }
+.press-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.press-card { display:flex; flex-direction:column; min-width:0; min-height:335px; padding:clamp(1.4rem,2.1vw,2rem); border:1px solid #d8dcd5; background:#fbfbf7; }
+.press-card-top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:start; gap:.7rem; margin-bottom:1.4rem; }
+.press-outlet { margin:0; font-weight:600; font-size:.9rem; letter-spacing:-.035em; }
+.press-card time { font-size:.6rem; white-space:nowrap; color:#626b67; }
+.press-kind { display:inline-block; align-self:flex-start; color:#58635c; font-size:.58rem; text-transform:uppercase; letter-spacing:.06em; }
+.press-card h3 { margin:.85rem 0 1rem; font:500 clamp(1rem,1.3vw,1.22rem)/1.5 var(--pr-sans); letter-spacing:-.035em; overflow-wrap:break-word; }
+.press-card p.press-card-summary { color:#56625d; font-size:.76rem; line-height:1.7; margin:0 0 1.5rem; }
+.press-card a { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:44px; margin-top:auto; padding-top:.9rem; border-top:1px solid #d8dcd5; font-size:.66rem; font-weight:500; text-decoration:none; }
+.press-card a:hover { color:#ab330b; }
+.press-empty { padding:2.5rem 0; color:#596360; }
+.press-disclosure { margin-top:2.2rem; max-width:1000px; padding-top:1.4rem; border-top:1px solid #d8dcd5; color:#596360; font-size:.66rem; line-height:1.8; }
+.press-footer { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.4rem; padding:3rem 0; }
+.press-footer p { max-width:640px; color:var(--pr-muted); font-size:.7rem; }
+.press-button { display:inline-flex; justify-content:center; align-items:center; min-height:48px; border:1px solid var(--pr-line); border-radius:999px; padding:.8rem 1.3rem; font-size:.7rem; text-decoration:none; }
+.press-button:hover { border-color:var(--pr-accent); }
+@media(max-width:960px) { .press-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } .press-logo-grid { gap:.75rem; } .press-logo-link img { max-width:135px; height:32px; } .press-logo-link[data-outlet='forbes'] img { max-width:115px; height:40px; } }
+@media(max-width:620px) { .press-wrap { width:90%; } .press-strip { padding-top:1.5rem; } .press-logo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.4rem 1rem; padding:1rem 0; } .press-logo-grid li:last-child { grid-column:1/-1; } .press-logo-link { min-height:88px; gap:.75rem; } .press-logo-link img { max-width:152px; height:32px; } .press-logo-link[data-outlet='forbes'] img { max-width:122px; height:43px; } .press-strip-note { font-size:.6rem; } .press-header { flex-wrap:wrap; padding:1.1rem 0; gap:.8rem; } .press-brand img { height:32px; max-width:180px; } .press-nav { width:100%; justify-content:space-between; gap:.5rem; } .press-nav a { font-size:.57rem; } .press-lang { min-width:65px; } .press-intro { padding-top:3.3rem; } .press-page h1 { font-size:clamp(2.2rem,10vw,3.7rem); } .press-cards { grid-template-columns:1fr; } .press-card { min-height:295px; } .press-archive-heading { align-items:start; flex-direction:column; } .press-filters { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; } .press-filters select { width:100%; min-width:0; font-size:.65rem; padding-left:.5rem; } .press-filter-status { grid-column:1/-1; margin:.4rem 0 0; } }
+@media(prefers-reduced-motion:reduce) { .press-strip *, .press-page * { transition:none !important; scroll-behavior:auto !important; } }
+
+/* Keep the press kicker compact despite shared homepage heading rules. */
+.press-strip h2.press-eyebrow { font:500 .64rem/1.5 var(--pr-sans) !important; letter-spacing:.18em; }
+/* The existing v2 script toggles body.v2-nav-open; legacy CSS expected is-open. */
+.tif-has-press .site-header { animation-fill-mode:backwards; }
+@media(max-width:1220px) {
+  .tif-has-press.v2-nav-open { overflow:hidden; overscroll-behavior:none; }
+  .tif-has-press.v2-nav-open .site-header { -webkit-backdrop-filter:none; backdrop-filter:none; }
+  .tif-has-press .site-nav { position:fixed; inset:0; width:100%; height:100dvh; min-height:100vh; overflow-y:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.75rem; padding:6rem 1.5rem; background:rgba(0,8,11,.98); visibility:hidden; opacity:0; pointer-events:none; transform:translateY(-12px); }
+  .tif-has-press .site-nav a { text-align:center; min-height:44px; }
+  .tif-has-press.v2-nav-open .site-nav { visibility:visible; opacity:1; pointer-events:auto; transform:none; }
+  .tif-has-press.v2-nav-open .nav-toggle { position:fixed; top:20px; right:20px; z-index:140; }
+}
