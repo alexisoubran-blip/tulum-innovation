@@ -1,0 +1,61 @@
+/* Public TIF roster. Scoped rules leave the hero, press and tickets intact. */
+.roster-section { --roster-line:rgba(0,8,11,.16); --roster-muted:rgba(0,8,11,.66); }
+.roster-section .roster-section-head { display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,.5fr);gap:2rem 6vw;align-items:end;margin-bottom:2.4rem; }
+.roster-section .roster-section-head h2 { margin:0;font-family:var(--display);font-size:clamp(2.2rem,4.1vw,5rem);font-weight:400;line-height:1.05;letter-spacing:-.035em;text-transform:uppercase;overflow-wrap:break-word; }
+.roster-section .roster-section-head>p { margin:0;color:var(--roster-muted);font-size:.94rem;line-height:1.7;max-width:520px; }
+.roster-jump-links { display:flex;flex-wrap:wrap;gap:.55rem;margin:0 0 2.5rem; }
+.roster-jump-links a { min-height:44px;display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--roster-line);border-radius:999px;padding:.65rem 1rem;font-family:var(--sans);font-size:.78rem;font-weight:500; }
+.roster-jump-links a>span:last-child { color:var(--ember);font-variant-numeric:tabular-nums; }
+.roster-jump-links a:hover { background:rgba(0,8,11,.055);border-color:var(--ember); }
+.roster-section .roster-group { min-width:0;scroll-margin-top:calc(var(--header) + 28px); }
+.roster-section .roster-group+.roster-group { margin-top:4.5rem; }
+.roster-section .roster-group-head { display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-top:1px solid var(--roster-line);padding:1.1rem 0 1.25rem; }
+.roster-section .roster-group-head h3 { margin:0;font-family:var(--sans)!important;font-weight:600;font-size:1.18rem;line-height:1.35; }
+.roster-section .roster-group-head p { margin:0;color:var(--roster-muted);font-size:.76rem;line-height:1.4; }
+.roster-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px; }
+.roster-grid-speakers { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.roster-grid-network { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.roster-card { min-width:0;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--roster-line);background:#f9f8f3; }
+.roster-art { aspect-ratio:4/5;overflow:hidden;background:#071315; }
+.roster-art img { display:block;width:100%;height:100%;object-fit:cover; }
+.roster-poster { aspect-ratio:440/513;background:#eeeee7; }
+.roster-poster img { object-fit:contain; }
+.roster-meta { display:flex;flex-direction:column;align-items:flex-start;gap:.45rem;padding:1rem;flex:1; }
+.roster-section .roster-role { margin:0;color:#a03213;font-size:.64rem;font-weight:500;line-height:1.4;letter-spacing:.025em; }
+.roster-section .roster-card h3 { width:100%;margin:0;font-family:var(--sans)!important;font-size:1rem;font-weight:600;line-height:1.3;letter-spacing:-.02em;text-transform:none;overflow-wrap:anywhere; }
+.roster-section .roster-company { margin:0;font-family:var(--sans);color:var(--roster-muted);font-size:.77rem;font-weight:500;line-height:1.55;overflow-wrap:anywhere; }
+.roster-section .roster-profile-link { margin-top:auto;padding-top:.6rem;min-height:36px;display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;text-decoration:underline;text-underline-offset:3px; }
+.roster-directory { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:1.5rem; }
+.roster-text-card { border-top:2px solid rgba(209,68,20,.5);min-height:172px; }
+.roster-text-card .roster-meta { padding:1.2rem; }
+.roster-section .roster-text-card h3 { font-size:1.05rem; }
+.roster-network { --roster-line:rgba(242,241,234,.18);--roster-muted:rgba(242,241,234,.72); }
+.roster-network .roster-card { background:#071315; }
+.roster-network .roster-role { color:#f09a70; }
+.roster-network-actions { display:flex;justify-content:flex-end;margin-top:2rem; }
+.roster-section a:focus-visible { outline:2px solid var(--ember);outline-offset:3px; }
+@media(max-width:1150px){
+ .roster-grid-speakers,.roster-grid-network { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ .roster-grid-cofounders { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media(max-width:900px){
+ .roster-section .roster-section-head { grid-template-columns:1fr;gap:1.2rem; }
+ .roster-section .roster-section-head h2 { font-size:clamp(2.1rem,7vw,3.9rem); }
+ .roster-directory { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:620px){
+ .roster-grid,.roster-grid-speakers,.roster-grid-network,.roster-grid-cofounders { grid-template-columns:repeat(2,minmax(0,1fr));gap:9px; }
+ .roster-section .roster-section-head h2 { font-size:clamp(1.9rem,7.8vw,2.8rem); }
+ .roster-meta { gap:.35rem;padding:.8rem .7rem; }
+ .roster-section .roster-card h3 { font-size:.88rem;line-height:1.32; }
+ .roster-section .roster-role { font-size:.59rem; }
+ .roster-section .roster-company { font-size:.7rem;line-height:1.5; }
+ .roster-section .roster-profile-link { font-size:.66rem;min-height:44px;padding-top:.4rem; }
+ .roster-section .roster-group-head { align-items:flex-start;flex-direction:column;gap:.35rem; }
+ .roster-section .roster-group+.roster-group { margin-top:3.2rem; }
+ .roster-text-card { min-height:178px; }
+ .roster-text-card .roster-meta { padding:1rem .8rem; }
+ .roster-jump-links { gap:.4rem;margin-bottom:2rem; }
+ .roster-jump-links a { font-size:.72rem;padding:.6rem .8rem; }
+}
+@media(max-width:380px){ .roster-directory { grid-template-columns:1fr; } .roster-text-card { min-height:144px; } }

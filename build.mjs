@@ -44,3 +44,7 @@ console.log("Homepage: approved home-v2 published at /; public SEO metadata veri
 // Sourced press coverage is generated after the homepage preservation checks.
 const { buildPress } = await import('./press/build.mjs');
 await buildPress();
+
+// Public lineup groups are generated after press without changing the hero.
+const { buildRoster } = await import('./roster/build.mjs');
+await buildRoster();
