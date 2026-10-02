@@ -11,7 +11,7 @@
   --line-dark: rgba(0, 8, 11, .17);
   --line-light: rgba(242, 241, 234, .17);
   --display: "Bruno Ace", sans-serif;
-  --editorial: "Bodoni Moda", Georgia, serif;
+  --editorial: "Sora", Arial, sans-serif;
   --tech: "Bruno Ace", sans-serif;
   --sans: "Sora", Arial, sans-serif;
   --container: min(92vw, 1380px);
@@ -380,3 +380,4 @@ img { max-width: 100%; display: block; }
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
