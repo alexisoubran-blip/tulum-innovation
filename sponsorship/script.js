@@ -1,4 +1,15 @@
 const es = {
+  compare_packages: "Comparar paquetes",
+  smaller_title: "Activaciones específicas",
+  smaller_intro: "Elige un momento del festival o una interacción recurrente con tu marca.",
+  functional_copy: "Estación de carga, estación de café, WiFi o app del festival.",
+  comparison_title: "Compara los beneficios",
+  comparison_intro: "Los entregables finales se confirman en la propuesta comercial.",
+  comparison_feature: "Beneficio",
+  comparison_executive: "Pases Executive con hospedaje",
+  comparison_general: "Pases General Access",
+  comparison_activation: "Activación y programa",
+  comparison_media: "Contenido y medios",
   skip: "Ir al contenido",
   menu_open: "Abrir navegación",
   nav_value: "Valor de negocio",
@@ -9,7 +20,7 @@ const es = {
   nav_proof: "Trayectoria",
   request_brief: "Solicitar brief comercial",
   hero_date: "9–12 de diciembre de 2026 · Tulum, México",
-  hero_title: "Posiciona tu marca donde convergen founders, capital y <em>decisiones.</em>",
+  hero_title: "Elige tu <em>patrocinio.</em>",
   hero_lead: "Participa en cuatro días de programación para founders, acceso ejecutivo, interacción con producto, medios y hospitalidad en Tulum.",
   request_proposal: "Solicitar propuesta de partnership",
   explore_inventory: "Explorar inventario comercial",
@@ -128,7 +139,7 @@ const es = {
   represented_label: "Empresas y comunidades representadas en ediciones anteriores",
   representation_note: "La participación o representación histórica no implica una relación de patrocinio vigente.",
   packages_kicker: "Niveles de partnership estratégico",
-  packages_title: "Elige el nivel de apropiación que <em>requiere tu objetivo.</em>",
+  packages_title: "Encuentra el patrocinio adecuado <em>para tu marca.</em>",
   packages_intro: "Cada nivel puede ajustarse en exclusividad de categoría, audiencia, contenido, hospitalidad y medición. Los precios son puntos de partida comerciales cotizados en USD.",
   narrative_ownership: "Apropiación de narrativa",
   main_copy: "Partnership de máximo nivel con apropiación de narrativa, acceso y activación en todo el festival.",
@@ -346,3 +357,4 @@ form?.addEventListener("submit", (event) => {
   }
   window.location.href = `mailto:innovation@likegroup.io?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
+

@@ -14,9 +14,10 @@
   <link rel="icon" type="image/svg+xml" href="../assets/signal-mark.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/sponsorship/styles.css?v=20260917c">
-  <script defer src="/sponsorship/script.js?v=20260917c"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/sponsorship/styles.css?v=20261002-pricing">
+  <link rel="stylesheet" href="/sponsorship/pricing.css?v=20261002-pricing">
+  <script defer src="/sponsorship/script.js?v=20261002-pricing"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
@@ -29,10 +30,10 @@
       <span></span><span></span><span></span><span class="sr-only" data-i18n="menu_open">Open navigation</span>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Sponsorship navigation" data-nav>
-      <a href="#value" data-i18n="nav_value">Business value</a>
-      <a href="/whale-tank/" data-i18n="nav_whale">Whale Tank</a>
-      <a href="#inventory" data-i18n="nav_inventory">Inventory</a>
       <a href="#packages" data-i18n="nav_packages">Packages</a>
+      <a href="#value" data-i18n="nav_value">Business value</a>
+      <a href="#inventory" data-i18n="nav_inventory">Inventory</a>
+      <a href="/whale-tank/" data-i18n="nav_whale">Whale Tank</a>
       <a href="#proof" data-i18n="nav_proof">Proof</a>
       <button class="lang-toggle" type="button" data-lang-toggle aria-label="Cambiar a español"><span>EN</span><i>/</i><span>ES</span></button>
     </nav>
@@ -49,25 +50,71 @@
       <div class="container hero-layout">
         <div class="hero-copy reveal">
           <p class="eyebrow"><span></span><b data-i18n="hero_date">December 9–12, 2026 · Tulum, Mexico</b></p>
-          <h1 data-i18n-html="hero_title">Put your brand where founders, capital and <em>decisions meet.</em></h1>
+          <h1 data-i18n-html="hero_title">Choose your <em>partnership.</em></h1>
           <p class="hero-lead" data-i18n="hero_lead">Partner with four days of founder programming, executive access, product interaction, media and hospitality in Tulum.</p>
           <div class="hero-actions">
             <button class="button button-primary" type="button" data-open-form data-i18n="request_proposal">Request a partnership proposal</button>
-            <a class="button button-ghost" href="#inventory" data-i18n="explore_inventory">Explore partnership inventory</a>
+            <a class="button button-ghost" href="#packages" data-i18n="compare_packages">Compare packages</a>
           </div>
           <p class="hero-note" data-i18n="hero_note">Every proposal is scoped around a business objective, audience and measurement plan.</p>
         </div>
-        <aside class="hero-brief reveal" aria-label="Enterprise partnership outcomes">
-          <p data-i18n="outcomes_label">Enterprise partnership outcomes</p>
-          <ol>
-            <li><span>01</span><strong data-i18n="outcome_access">Strategic access</strong></li>
-            <li><span>02</span><strong data-i18n="outcome_authority">Category authority</strong></li>
-            <li><span>03</span><strong data-i18n="outcome_product">Product engagement</strong></li>
-            <li><span>04</span><strong data-i18n="outcome_content">Content and media value</strong></li>
-          </ol>
-        </aside>
       </div>
-      <a class="scroll-cue" href="#credibility"><span></span><b data-i18n="review_opportunity">Review the opportunity</b></a>
+    </section>
+
+    <section class="section packages" id="packages" aria-labelledby="packages-title">
+      <div class="container package-head reveal">
+        <div><p class="eyebrow"><span></span><b data-i18n="packages_kicker">Strategic partnership levels</b></p><h2 id="packages-title" data-i18n-html="packages_title">Find the right partnership <em>for your brand.</em></h2></div>
+        <p data-i18n="packages_intro">Every tier can be refined around category exclusivity, audience, content, hospitality and measurement. Prices are commercial starting points quoted in USD.</p>
+      </div>
+      <div class="container package-grid">
+        <article class="package-card reveal">
+          <div class="package-top"><span data-i18n="program_ownership">Program ownership</span><b>01</b></div>
+          <h3>Core Partner</h3><p class="price">US$30,000</p>
+          <p data-i18n="core_copy">Active partnership embedded into the daily festival experience.</p>
+          <ul><li data-i18n="core_1">4 Executive Passes with stay</li><li data-i18n="core_2">30 General Access passes</li><li data-i18n="core_3">Activation space</li><li data-i18n="core_4">Ownership of one curated moment</li><li data-i18n="core_5">Content, press and media integration</li></ul>
+          <button class="button button-outline" type="button" data-package="Core Partner" data-open-form data-i18n="request_core">Request Core proposal</button>
+        </article>
+        <article class="package-card reveal">
+          <div class="package-top"><span data-i18n="signature_ownership">Signature moment ownership</span><b>02</b></div>
+          <h3>Alpha Partner</h3><p class="price">US$40,000</p>
+          <p data-i18n="alpha_copy">Strategic integration across a key festival moment and supporting media.</p>
+          <ul><li data-i18n="alpha_1">6 Executive Passes with stay</li><li data-i18n="alpha_2">40 General Access passes</li><li data-i18n="alpha_3">Dedicated activation space</li><li data-i18n="alpha_4">Ownership of Gala, Opening or Tulum Experience</li><li data-i18n="alpha_5">Stage, interviews and media integration</li></ul>
+          <button class="button button-outline" type="button" data-package="Alpha Partner" data-open-form data-i18n="request_alpha">Request Alpha proposal</button>
+        </article>
+        <article class="package-card flagship reveal">
+          <div class="package-top"><span data-i18n="narrative_ownership">Narrative ownership</span><b>03</b></div>
+          <h3>Main Title Partner</h3><p class="price">US$100,000</p>
+          <p data-i18n="main_copy">Top-level partnership with festival-wide narrative, access and activation ownership.</p>
+          <ul><li data-i18n="main_1">Naming and full-brand integration</li><li data-i18n="main_2">10 Executive Passes with stay</li><li data-i18n="main_3">60 General Access passes</li><li data-i18n="main_4">Main activation and Saturday ownership</li><li data-i18n="main_5">Custom media plan and reporting</li></ul>
+          <button class="button button-primary" type="button" data-package="Main Title Partner" data-open-form data-i18n="request_main">Request title partnership</button>
+        </article>
+      </div>
+      <div class="container smaller-packages"><h3 data-i18n="smaller_title">Focused activations</h3><p data-i18n="smaller_intro">Choose a specific festival moment or a recurring brand interaction.</p></div>
+      <div class="container package-grid secondary-grid">
+        <article class="package-card compact reveal"><div class="package-top"><span data-i18n="interaction_layer">High-frequency interaction</span><b>05</b></div><h3>Access Partner</h3><p class="price">US$15,000</p><p data-i18n="access_copy">Own a recurring touchpoint such as WiFi, registration, coffee or charging.</p><button class="button button-outline" type="button" data-package="Access Partner" data-open-form><span data-i18n="request_details">Request details</span></button></article>
+        <article class="package-card compact reveal"><div class="package-top"><span data-i18n="community_layer">Community layer</span><b>04</b></div><h3>Community Partner</h3><p class="price">US$20,000</p><p data-i18n="community_copy">Own a wellness, breakfast, workshop or recovery moment.</p><button class="button button-outline" type="button" data-package="Community Partner" data-open-form><span data-i18n="request_details">Request details</span></button></article>
+        <article class="package-card compact reveal">
+          <div class="package-top"><span data-i18n="functional_formats">Functional formats</span><b>06</b></div>
+          <h3 data-i18n="functional_formats">Functional formats</h3><p class="price">US$6,000–10,000</p>
+          <p data-i18n="functional_copy">Charging station, coffee station, WiFi or festival app.</p>
+          <button class="button button-outline" type="button" data-package="Functional Partnership" data-open-form data-i18n="design_activation">Design a functional activation</button>
+        </article>
+      </div>
+      <div class="container comparison">
+        <h3 data-i18n="comparison_title">Compare the benefits</h3>
+        <p data-i18n="comparison_intro">Final deliverables are confirmed in the commercial proposal.</p>
+        <div class="comparison-scroll" tabindex="0" role="region" aria-labelledby="comparison-caption">
+          <table><caption id="comparison-caption" class="sr-only" data-i18n="comparison_title">Compare the benefits</caption>
+            <thead><tr><th scope="col" data-i18n="comparison_feature">Benefit</th><th scope="col">Core Partner</th><th scope="col">Alpha Partner</th><th scope="col">Main Title Partner</th></tr></thead>
+            <tbody><tr><th scope="row" data-i18n="comparison_executive">Executive Passes with stay</th><td>4</td><td>6</td><td>10</td></tr>
+<tr><th scope="row" data-i18n="comparison_general">General Access passes</th><td>30</td><td>40</td><td>60</td></tr>
+<tr><th scope="row" data-i18n="comparison_activation">Activation and program</th><td data-i18n="core_4">Ownership of one curated moment</td><td data-i18n="alpha_4">Ownership of Gala, Opening or Tulum Experience</td><td data-i18n="main_4">Main activation and Saturday ownership</td></tr>
+<tr><th scope="row" data-i18n="comparison_media">Content and media</th><td data-i18n="core_5">Content, press and media integration</td><td data-i18n="alpha_5">Stage, interviews and media integration</td><td data-i18n="main_5">Custom media plan and reporting</td></tr>
+</tbody>
+          </table>
+        </div>
+      </div>
+      <p class="container commercial-note" data-i18n="commercial_note">Travel, production requirements and third-party costs are confirmed during scoping. Category exclusivity is subject to availability.</p>
     </section>
 
     <section class="credibility" id="credibility" aria-labelledby="credibility-title">
@@ -225,43 +272,6 @@
       </div>
     </section>
 
-    <section class="section packages" id="packages" aria-labelledby="packages-title">
-      <div class="container package-head reveal">
-        <div><p class="eyebrow"><span></span><b data-i18n="packages_kicker">Strategic partnership levels</b></p><h2 id="packages-title" data-i18n-html="packages_title">Choose the level of ownership <em>your objective requires.</em></h2></div>
-        <p data-i18n="packages_intro">Every tier can be refined around category exclusivity, audience, content, hospitality and measurement. Prices are commercial starting points quoted in USD.</p>
-      </div>
-      <div class="container package-grid">
-        <article class="package-card flagship reveal">
-          <div class="package-top"><span data-i18n="narrative_ownership">Narrative ownership</span><b>01</b></div>
-          <h3>Main Title Partner</h3><p class="price">US$100,000</p>
-          <p data-i18n="main_copy">Top-level partnership with festival-wide narrative, access and activation ownership.</p>
-          <ul><li data-i18n="main_1">Naming and full-brand integration</li><li data-i18n="main_2">10 Executive Passes with stay</li><li data-i18n="main_3">60 General Access passes</li><li data-i18n="main_4">Main activation and Saturday ownership</li><li data-i18n="main_5">Custom media plan and reporting</li></ul>
-          <button class="button button-primary" type="button" data-package="Main Title Partner" data-open-form data-i18n="request_main">Request title partnership</button>
-        </article>
-        <article class="package-card reveal">
-          <div class="package-top"><span data-i18n="signature_ownership">Signature moment ownership</span><b>02</b></div>
-          <h3>Alpha Partner</h3><p class="price">US$40,000</p>
-          <p data-i18n="alpha_copy">Strategic integration across a key festival moment and supporting media.</p>
-          <ul><li data-i18n="alpha_1">6 Executive Passes with stay</li><li data-i18n="alpha_2">40 General Access passes</li><li data-i18n="alpha_3">Dedicated activation space</li><li data-i18n="alpha_4">Ownership of Gala, Opening or Tulum Experience</li><li data-i18n="alpha_5">Stage, interviews and media integration</li></ul>
-          <button class="button button-outline" type="button" data-package="Alpha Partner" data-open-form data-i18n="request_alpha">Request Alpha proposal</button>
-        </article>
-        <article class="package-card reveal">
-          <div class="package-top"><span data-i18n="program_ownership">Program ownership</span><b>03</b></div>
-          <h3>Core Partner</h3><p class="price">US$30,000</p>
-          <p data-i18n="core_copy">Active partnership embedded into the daily festival experience.</p>
-          <ul><li data-i18n="core_1">4 Executive Passes with stay</li><li data-i18n="core_2">30 General Access passes</li><li data-i18n="core_3">Activation space</li><li data-i18n="core_4">Ownership of one curated moment</li><li data-i18n="core_5">Content, press and media integration</li></ul>
-          <button class="button button-outline" type="button" data-package="Core Partner" data-open-form data-i18n="request_core">Request Core proposal</button>
-        </article>
-        <article class="package-card compact reveal"><div class="package-top"><span data-i18n="community_layer">Community layer</span><b>04</b></div><h3>Community Partner</h3><p class="price">US$20,000</p><p data-i18n="community_copy">Own a wellness, breakfast, workshop or recovery moment.</p><button class="text-button" type="button" data-package="Community Partner" data-open-form><span data-i18n="request_details">Request details</span> ↗</button></article>
-        <article class="package-card compact reveal"><div class="package-top"><span data-i18n="interaction_layer">High-frequency interaction</span><b>05</b></div><h3>Access Partner</h3><p class="price">US$15,000</p><p data-i18n="access_copy">Own a recurring touchpoint such as WiFi, registration, coffee or charging.</p><button class="text-button" type="button" data-package="Access Partner" data-open-form><span data-i18n="request_details">Request details</span> ↗</button></article>
-      </div>
-      <div class="container functional-strip reveal">
-        <p><span data-i18n="functional_formats">Functional formats</span><strong data-i18n="functional_price">US$6,000–10,000</strong></p>
-        <div><span data-i18n="charging">Charging station</span><span data-i18n="coffee">Coffee station</span><span>WiFi</span><span data-i18n="app_partner">Festival app</span></div>
-        <button class="text-button" type="button" data-package="Functional Partnership" data-open-form><span data-i18n="design_activation">Design a functional activation</span> ↗</button>
-      </div>
-      <p class="container commercial-note" data-i18n="commercial_note">Travel, production requirements and third-party costs are confirmed during scoping. Category exclusivity is subject to availability.</p>
-    </section>
 
     <section class="section process" aria-labelledby="process-title">
       <div class="container process-head reveal"><p class="eyebrow dark"><span></span><b data-i18n="process_kicker">Commercial process</b></p><h2 id="process-title" data-i18n-html="process_title">From objective to activation <em>in four decisions.</em></h2></div>
@@ -270,6 +280,20 @@
         <article><span>02</span><h3 data-i18n="process_2_title">Choose the ownership</h3><p data-i18n="process_2_copy">Match the objective to a platform, program moment or recurring interaction.</p></article>
         <article><span>03</span><h3 data-i18n="process_3_title">Approve scope and KPIs</h3><p data-i18n="process_3_copy">Confirm deliverables, exclusivity, production, data capture and reporting.</p></article>
         <article><span>04</span><h3 data-i18n="process_4_title">Activate and report</h3><p data-i18n="process_4_copy">Execute before, during and after the festival, followed by a partner report.</p></article>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <div class="faq-intro reveal"><p class="eyebrow dark"><span></span><b>FAQ</b></p><h2 id="faq-title" data-i18n-html="faq_title">Commercial questions, <em>answered directly.</em></h2></div>
+        <div class="faq-list">
+          <details class="reveal"><summary data-i18n="faq_custom_q">Can packages be customized for an enterprise objective?</summary><p data-i18n="faq_custom_a">Yes. The published tiers establish the level of ownership. Final inventory, content, hospitality, data capture and reporting are scoped around the partner objective.</p></details>
+          <details class="reveal"><summary data-i18n="faq_exclusive_q">Is category exclusivity available?</summary><p data-i18n="faq_exclusive_a">It can be included in selected strategic packages when the category remains available and the commercial scope supports it.</p></details>
+          <details class="reveal"><summary data-i18n="faq_measure_q">How will partnership performance be measured?</summary><p data-i18n="faq_measure_a">The measurement plan is approved before activation and can cover registrations, attendance, meetings, opt-in leads, demos, engagement, content performance and reporting.</p></details>
+          <details class="reveal"><summary data-i18n="faq_lead_q">Does the festival guarantee leads or sales?</summary><p data-i18n="faq_lead_a">The team can design data capture and curated introductions, but commercial outcomes depend on the offer, activation, audience fit and partner follow-up.</p></details>
+          <details class="reveal"><summary data-i18n="faq_timing_q">When should a partner confirm?</summary><p data-i18n="faq_timing_a">Strategic partners should confirm early enough to secure category availability, content planning and production. Lead times vary by package.</p></details>
+          <details class="reveal"><summary data-i18n="faq_crypto_q">Is the festival focused only on crypto?</summary><p data-i18n="faq_crypto_a">The festival evolved from Tulum Crypto Fest into a broader platform covering AI, capital, future cities, digital assets, entrepreneurship, culture, climate and human connection.</p></details>
+        </div>
       </div>
     </section>
 
@@ -294,19 +318,6 @@
       </div>
     </section>
 
-    <section class="section faq" id="faq" aria-labelledby="faq-title">
-      <div class="container faq-layout">
-        <div class="faq-intro reveal"><p class="eyebrow dark"><span></span><b>FAQ</b></p><h2 id="faq-title" data-i18n-html="faq_title">Commercial questions, <em>answered directly.</em></h2></div>
-        <div class="faq-list">
-          <details class="reveal"><summary data-i18n="faq_custom_q">Can packages be customized for an enterprise objective?</summary><p data-i18n="faq_custom_a">Yes. The published tiers establish the level of ownership. Final inventory, content, hospitality, data capture and reporting are scoped around the partner objective.</p></details>
-          <details class="reveal"><summary data-i18n="faq_exclusive_q">Is category exclusivity available?</summary><p data-i18n="faq_exclusive_a">It can be included in selected strategic packages when the category remains available and the commercial scope supports it.</p></details>
-          <details class="reveal"><summary data-i18n="faq_measure_q">How will partnership performance be measured?</summary><p data-i18n="faq_measure_a">The measurement plan is approved before activation and can cover registrations, attendance, meetings, opt-in leads, demos, engagement, content performance and reporting.</p></details>
-          <details class="reveal"><summary data-i18n="faq_lead_q">Does the festival guarantee leads or sales?</summary><p data-i18n="faq_lead_a">The team can design data capture and curated introductions, but commercial outcomes depend on the offer, activation, audience fit and partner follow-up.</p></details>
-          <details class="reveal"><summary data-i18n="faq_timing_q">When should a partner confirm?</summary><p data-i18n="faq_timing_a">Strategic partners should confirm early enough to secure category availability, content planning and production. Lead times vary by package.</p></details>
-          <details class="reveal"><summary data-i18n="faq_crypto_q">Is the festival focused only on crypto?</summary><p data-i18n="faq_crypto_a">The festival evolved from Tulum Crypto Fest into a broader platform covering AI, capital, future cities, digital assets, entrepreneurship, culture, climate and human connection.</p></details>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -321,3 +332,4 @@
   <button class="mobile-cta" type="button" data-open-form data-i18n="request_brief">Request partner brief</button>
 </body>
 </html>
+
