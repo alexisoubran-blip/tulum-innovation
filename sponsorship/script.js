@@ -190,6 +190,10 @@ const es = {
   contact_kicker: "Tulum · 9–12 de diciembre de 2026",
   contact_title: "Comienza por el objetivo. <em>Diseñaremos el formato.</em>",
   contact_intro: "Comparte tus prioridades, audiencia y rango de inversión. El equipo de partnerships responderá con la ruta más relevante.",
+  form_external_kicker: "Solicitud de partnership",
+  form_external_title: "Cuéntanos qué quiere lograr tu marca.",
+  form_external_copy: "Completa el brief de sponsorship en Typeform. Toma unos minutos y ayuda al equipo de partnerships a recomendar el formato más adecuado.",
+  form_external_cta: "Abrir formulario de sponsorship",
   direct_contact: "Contacto directo",
   field_name: "Nombre",
   field_role: "Cargo",
@@ -303,17 +307,6 @@ const updateHeader = () => header?.classList.toggle("is-scrolled", window.scroll
 updateHeader();
 window.addEventListener("scroll", updateHeader, { passive: true });
 
-const packageSelect = document.querySelector("[data-package-select]");
-document.querySelectorAll("[data-open-form]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const selectedPackage = button.dataset.package;
-    if (selectedPackage && packageSelect) packageSelect.value = selectedPackage;
-    closeNavigation();
-    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.setTimeout(() => document.querySelector('[name="name"]')?.focus({ preventScroll: true }), 650);
-  });
-});
-
 const revealElements = document.querySelectorAll(".reveal");
 if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const observer = new IntersectionObserver((entries) => {
@@ -329,32 +322,4 @@ if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-mot
   revealElements.forEach((element) => element.classList.add("is-visible"));
 }
 
-const form = document.querySelector("[data-partner-form]");
-const formStatus = document.querySelector("[data-form-status]");
-form?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (!form.reportValidity()) return;
-
-  const data = new FormData(form);
-  const subject = `[TIF 2026 Partnership] ${data.get("company")} — ${data.get("package")}`;
-  const body = [
-    `Name: ${data.get("name")}`,
-    `Role: ${data.get("role")}`,
-    `Company: ${data.get("company")}`,
-    `Email: ${data.get("email")}`,
-    `Partnership interest: ${data.get("package")}`,
-    `Investment range: ${data.get("budget")}`,
-    `Business objective: ${data.get("objective")}`,
-    "",
-    "Context and desired outcome:",
-    data.get("notes")
-  ].join("\n");
-
-  if (formStatus) {
-    formStatus.textContent = language === "es"
-      ? "Abriendo tu aplicación de correo con el brief preparado…"
-      : "Opening your email app with the prepared brief…";
-  }
-  window.location.href = `mailto:innovation@likegroup.io?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-});
 
