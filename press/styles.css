@@ -9,7 +9,7 @@
 .press-text-link { display:inline-flex; align-items:center; gap:.65rem; min-height:44px; color:inherit; font:500 .68rem/1.4 var(--pr-sans); text-decoration:none; }
 .press-text-link:hover { color:var(--pr-accent); }
 .press-text-link:focus-visible, .press-logo-link:focus-visible, .press-page a:focus-visible, .press-page button:focus-visible, .press-page select:focus-visible { outline:2px solid var(--pr-accent); outline-offset:5px; }
-.press-logo-grid { display:grid; grid-template-columns:1fr 1.3fr 1fr 1fr 1.1fr; align-items:stretch; gap:1.4rem; padding:1.65rem 0 1.25rem; margin:0; list-style:none; }
+.press-logo-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); align-items:stretch; gap:1rem; padding:1.65rem 0 1.25rem; margin:0; list-style:none; }
 .press-logo-grid li { min-width:0; }
 .press-logo-link { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:95px; padding:.6rem; gap:1rem; text-decoration:none; color:var(--pr-ink); }
 .press-logo-link img { display:block; width:100%; max-width:175px; height:42px; object-fit:contain; filter:brightness(0) invert(1); opacity:.84; transition:opacity .2s ease; }
@@ -60,7 +60,8 @@
 .press-footer p { max-width:640px; color:var(--pr-muted); font-size:.7rem; }
 .press-button { display:inline-flex; justify-content:center; align-items:center; min-height:48px; border:1px solid var(--pr-line); border-radius:999px; padding:.8rem 1.3rem; font-size:.7rem; text-decoration:none; }
 .press-button:hover { border-color:var(--pr-accent); }
-@media(max-width:960px) { .press-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } .press-logo-grid { gap:.75rem; } .press-logo-link img { max-width:135px; height:32px; } .press-logo-link[data-outlet='forbes'] img { max-width:115px; height:40px; } }
+@media(max-width:1200px) { .press-logo-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:.75rem; } }
+@media(max-width:960px) { .press-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } .press-logo-link img { max-width:135px; height:32px; } .press-logo-link[data-outlet='forbes'] img { max-width:115px; height:40px; } }
 @media(max-width:620px) { .press-wrap { width:90%; } .press-strip { padding-top:1.5rem; } .press-logo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.4rem 1rem; padding:1rem 0; } .press-logo-grid li:last-child { grid-column:1/-1; } .press-logo-link { min-height:88px; gap:.75rem; } .press-logo-link img { max-width:152px; height:32px; } .press-logo-link[data-outlet='forbes'] img { max-width:122px; height:43px; } .press-strip-note { font-size:.6rem; } .press-header { flex-wrap:wrap; padding:1.1rem 0; gap:.8rem; } .press-brand img { height:32px; max-width:180px; } .press-nav { width:100%; justify-content:space-between; gap:.5rem; } .press-nav a { font-size:.57rem; } .press-lang { min-width:65px; } .press-intro { padding-top:3.3rem; } .press-page h1 { font-size:clamp(2.2rem,10vw,3.7rem); } .press-cards { grid-template-columns:1fr; } .press-card { min-height:295px; } .press-archive-heading { align-items:start; flex-direction:column; } .press-filters { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; } .press-filters select { width:100%; min-width:0; font-size:.65rem; padding-left:.5rem; } .press-filter-status { grid-column:1/-1; margin:.4rem 0 0; } }
 @media(prefers-reduced-motion:reduce) { .press-strip *, .press-page * { transition:none !important; scroll-behavior:auto !important; } }
 
