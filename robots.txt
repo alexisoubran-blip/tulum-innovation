@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /health
+Disallow: /home-v2
+
+Sitemap: https://www.tuluminnovationfest.com/sitemap.xml
