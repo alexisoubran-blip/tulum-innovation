@@ -16,6 +16,8 @@ await cp("program", "dist/program", { recursive: true });
 await cp("speakers", "dist/speakers", { recursive: true });
 await cp("festival-shell.css", "dist/festival-shell.css");
 await cp("health", "dist/health", { recursive: true });
+await cp("sitemap.xml", "dist/sitemap.xml");
+await cp("robots.txt", "dist/robots.txt");
 
 // The approved home-v2 is the homepage source of truth. Keep its assets at
 // their existing absolute URLs so subpages and the approved design stay intact.
