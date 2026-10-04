@@ -241,6 +241,10 @@ img { max-width: 100%; display: block; }
 .contact-direct span { color: var(--acid); font-size: .56rem; letter-spacing: .12em; text-transform: uppercase; }
 .contact-direct a { width: fit-content; padding-bottom: .25rem; border-bottom: 1px solid var(--line-light); font-size: .82rem; }
 .partner-form { padding: clamp(2rem,4vw,4rem); border: 1px solid var(--line-light); background: rgba(0,8,11,.32); }
+.typeform-panel { display:flex; flex-direction:column; justify-content:center; min-height:420px; }
+.typeform-panel h3 { margin:.4rem 0 1rem; font-family:var(--editorial); font-size:clamp(2rem,3vw,3.3rem); font-weight:500; line-height:1.02; }
+.typeform-panel > p:not(.eyebrow) { max-width:620px; margin:0 0 2rem; color:rgba(255,255,255,.62); font-size:.86rem; line-height:1.7; }
+.typeform-panel .button { width:fit-content; min-width:240px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .partner-form label { display: grid; gap: .55rem; margin-bottom: 1rem; color: rgba(255,255,255,.62); font-size: .6rem; letter-spacing: .07em; text-transform: uppercase; }
 .partner-form input, .partner-form select, .partner-form textarea { width: 100%; min-height: 50px; padding: .85rem .9rem; border: 1px solid var(--line-light); border-radius: 0; outline: none; background: rgba(0,8,11,.55); color: var(--white); font-size: .78rem; line-height: 1.5; letter-spacing: 0; text-transform: none; transition: border-color .2s, background .2s; }
