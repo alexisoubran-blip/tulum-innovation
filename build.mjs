@@ -12,6 +12,9 @@ await cp("sponsorship", "dist/sponsorship", { recursive: true });
 await cp("alexis-soubran-tif-cmo", "dist/alexis-soubran-tif-cmo", { recursive: true });
 await cp("alexis-soubran-TIF-CMO", "dist/alexis-soubran-TIF-CMO", { recursive: true });
 await cp("home-v2", "dist/home-v2", { recursive: true });
+await cp("program", "dist/program", { recursive: true });
+await cp("speakers", "dist/speakers", { recursive: true });
+await cp("festival-shell.css", "dist/festival-shell.css");
 
 // The approved home-v2 is the homepage source of truth. Keep its assets at
 // their existing absolute URLs so subpages and the approved design stay intact.
