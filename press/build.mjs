@@ -20,7 +20,7 @@ export async function buildPress() {
     if (record.date) assert.equal(record.date.slice(0,4), String(record.year));
   }
   const featured = records.filter(r => r.featuredOrder).sort((a,b) => a.featuredOrder-b.featuredOrder);
-  assert.equal(featured.length, 5, 'Expected five featured publishers');
+  assert.equal(featured.length, 7, 'Expected seven featured publishers');
   for (const record of featured) {
     assert.equal(record.kind, 'article', 'Partner and sponsored publications are labeled in the archive, not the featured rail');
     assert.ok(record.logo.startsWith('/assets/'));
