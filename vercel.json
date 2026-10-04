@@ -3,9 +3,21 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/home-v2", "destination": "/", "permanent": true },
-    { "source": "/home-v2/index", "destination": "/", "permanent": true },
-    { "source": "/home-v2/index.html", "destination": "/", "permanent": true }
+    {
+      "source": "/home-v2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home-v2/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home-v2/index.html",
+      "destination": "/",
+      "permanent": true
+    }
   ],
   "rewrites": [
     {
@@ -15,6 +27,34 @@
     {
       "source": "/alexis-soubran-tif-cmo",
       "destination": "/alexis-soubran-tif-cmo/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/health",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/health/index.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
     }
   ]
 }
