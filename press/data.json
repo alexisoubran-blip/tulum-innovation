@@ -205,7 +205,7 @@
         "en": "A look at the second Tulum Crypto Fest, its program and the introduction of Whale Tank.",
         "es": "Un recorrido por la segunda edición de Tulum Crypto Fest, su programa y la presentación de Whale Tank."
       },
-      "featuredOrder": null,
+      "featuredOrder": 6,
       "logo": "/assets/press/forbes.svg"
     },
     {
@@ -228,7 +228,7 @@
         "en": "An overview of the 2023 festival and the founders, investors and jury participating in the first Whale Tank.",
         "es": "Una mirada al festival de 2023 y a los founders, inversionistas y jurado que participaron en el primer Whale Tank."
       },
-      "featuredOrder": null,
+      "featuredOrder": 7,
       "logo": "/assets/press/entrepreneur.svg"
     },
     {
