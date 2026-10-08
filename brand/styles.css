@@ -3,7 +3,7 @@
 :root{--tif-ink:#00080b;--tif-paper:#f2f1ea;--tif-orange:#d14414;--tif-accent:#e97a43;--tif-line:rgba(242,241,234,.18);--tif-display:'Bruno Ace','Sora',system-ui,sans-serif;--tif-body:'Sora',system-ui,sans-serif}
 body.tif-page{--display:var(--tif-display);--serif:var(--tif-display);--sans:var(--tif-body);--body:var(--tif-body);--editorial:var(--tif-body);--ember:var(--tif-orange);--acid:var(--tif-accent);--header:88px;margin:0;min-width:320px;font-family:var(--tif-body);text-rendering:optimizeLegibility}
 body.tif-page h1,body.tif-page h2,body.tif-page h3,body.tif-page h4,body.tif-page h1 em,body.tif-page h2 em,body.tif-page h3 em{font-family:var(--tif-display)!important;font-style:normal!important;font-weight:400;text-wrap:balance}
-body.tif-page h1 em,body.tif-page h2 em{color:var(--tif-accent)}
+body.tif-page h1 em,body.tif-page h2 em{color:var(--tif-accent);text-transform:uppercase}
 body.tif-page h1,body.tif-page h2{text-transform:uppercase;letter-spacing:-.04em;line-height:1.05;overflow-wrap:anywhere}
 .tif-page main :is(section,article,div,figure){min-width:0}
 .tif-page .editorial-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -11,7 +11,8 @@ body.tif-page h1,body.tif-page h2{text-transform:uppercase;letter-spacing:-.04em
 body.tif-page .wt-hero h1{font-size:clamp(3rem,5.5vw,6.75rem);line-height:1.04}
 .tif-page :is(a,button,input,select,textarea):focus-visible{outline:2px solid var(--tif-accent);outline-offset:5px}
 .tif-page [hidden]{display:none!important}
-html:has(.tif-page){scroll-padding-top:116px}
+html:has(.tif-page){scroll-padding-top:116px;overflow-x:clip}
+body.tif-page{overflow-x:clip}
 .tif-page :is(.btn,.button,.header-cta,.press-button,.tif-ticket-button){display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:54px;padding:.9rem 1.4rem;border:1px solid transparent;border-radius:999px;font:600 .72rem/1.4 var(--tif-body);letter-spacing:.105em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s}
 .tif-page :is(.btn-primary,.button-primary,.header-cta,.tif-ticket-button){background:var(--tif-orange);color:var(--tif-paper);box-shadow:0 14px 45px rgba(150,31,7,.2)}
 .tif-page :is(.btn-primary,.button-primary,.header-cta,.tif-ticket-button):hover{background:#e15320;color:var(--tif-paper);box-shadow:0 18px 52px rgba(209,68,20,.3)}
