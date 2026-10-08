@@ -54,3 +54,7 @@ await buildPress();
 // Public lineup groups are generated after press without changing the hero.
 const { buildRoster } = await import('./roster/build.mjs');
 await buildRoster();
+
+// Apply the homepage design system after all generated content is complete.
+const { buildBrand } = await import('./brand/build.mjs');
+await buildBrand();
