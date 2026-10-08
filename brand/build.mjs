@@ -26,7 +26,9 @@ export async function buildBrand(){
       <a class="tif-ticket-button" href="/#tickets">${bi('Get tickets','Boletos')}</a>
     </header>${sections}`;
     html=html.replace(oldHeader,header);
-    const footer=`<footer class="tif-site-footer"><div class="tif-footer-inner"><div><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46" loading="lazy"></a><p>${bi('Innovation, capital and culture meet in Tulum.','Innovación, capital y cultura se encuentran en Tulum.')}<br>December 9–12, 2026 · Tulum, Mexico</p></div><nav aria-label="Footer navigation">${nav(route)}<a href="/#experience">${bi('Experience','Experiencia')}</a><a href="/#tickets">${bi('Tickets','Boletos')}</a></nav></div></footer>`;
+    const oldFooter=html.match(/<footer\b[\s\S]*?<\/footer>/)?.[0]||'';
+    const contact=[...oldFooter.matchAll(/<a\b[^>]*href="mailto:[^"]+"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]).join('');
+    const footer=`<footer class="tif-site-footer"><div class="tif-footer-inner"><div><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46" loading="lazy"></a><p>${bi('Innovation, capital and culture meet in Tulum.','Innovación, capital y cultura se encuentran en Tulum.')}<br>December 9–12, 2026 · Tulum, Mexico</p>${contact}</div><nav aria-label="Footer navigation">${nav(route)}<a href="/#experience">${bi('Experience','Experiencia')}</a><a href="/#tickets">${bi('Tickets','Boletos')}</a></nav></div></footer>`;
     assert.ok(/<footer\b[\s\S]*?<\/footer>/.test(html),`Missing footer: ${file}`);
     html=html.replace(/<footer\b[\s\S]*?<\/footer>/,footer);
     const simple=['/speakers','/program'].includes(route);
