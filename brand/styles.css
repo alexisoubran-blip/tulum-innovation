@@ -4,6 +4,11 @@
 body.tif-page{--display:var(--tif-display);--serif:var(--tif-display);--sans:var(--tif-body);--body:var(--tif-body);--editorial:var(--tif-body);--ember:var(--tif-orange);--acid:var(--tif-accent);--header:88px;margin:0;min-width:320px;font-family:var(--tif-body);text-rendering:optimizeLegibility}
 body.tif-page h1,body.tif-page h2,body.tif-page h3,body.tif-page h4,body.tif-page h1 em,body.tif-page h2 em,body.tif-page h3 em{font-family:var(--tif-display)!important;font-style:normal!important;font-weight:400;text-wrap:balance}
 body.tif-page h1 em,body.tif-page h2 em{color:var(--tif-accent)}
+body.tif-page h1,body.tif-page h2{text-transform:uppercase;letter-spacing:-.04em;line-height:1.05;overflow-wrap:anywhere}
+.tif-page main :is(section,article,div,figure){min-width:0}
+.tif-page .editorial-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tif-page .editorial-copy h2{font-size:clamp(1.9rem,3vw,3.5rem)}
+body.tif-page .wt-hero h1{font-size:clamp(3rem,5.5vw,6.75rem);line-height:1.04}
 .tif-page :is(a,button,input,select,textarea):focus-visible{outline:2px solid var(--tif-accent);outline-offset:5px}
 .tif-page [hidden]{display:none!important}
 html:has(.tif-page){scroll-padding-top:116px}
@@ -86,6 +91,8 @@ html:not([data-lang=es]) [data-tif-es],html[data-lang=es] [data-tif-en]{display:
   .tif-directory .people-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .tif-directory .person-copy h3{font-size:.85rem}
   .tif-page .day-grid{grid-template-columns:1fr}
+  .tif-page .editorial-grid{grid-template-columns:1fr}
+  body.tif-page .wt-hero h1{font-size:clamp(2.2rem,8.5vw,3.5rem)}
   .tif-page .day-card{padding:24px}
   .tif-page .session-list li{flex-direction:column;gap:6px}
   .tif-page .session-list span:last-child{text-align:left}
