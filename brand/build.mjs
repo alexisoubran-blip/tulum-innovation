@@ -17,7 +17,7 @@ export async function buildBrand(){
     assert.ok(oldHeader,`Missing header: ${file}`);
     const toggle=oldHeader.match(/<button\b[^>]*(?:data-v2-lang|data-lang-toggle|data-press-lang)[\s\S]*?<\/button>/)?.[0];
     const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):'';
-    const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0].replace(/\sdata-i18n(?:-html)?="[^"]*"/g,''));
+    const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]);
     const sections=localLinks.length?`<nav class="tif-section-nav" aria-label="Page sections">${localLinks.join('')}</nav>`:'';
     const header=`<header class="tif-site-header" data-header>
       <a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46"></a>
