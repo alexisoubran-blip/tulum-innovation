@@ -1336,6 +1336,14 @@
       }
     }
 
+
+    #participate { scroll-margin-top: 110px; }
+    .v2-participation-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .v2-participation-card { display: flex; flex-direction: column; gap: 1.25rem; padding: 1.75rem; border: 1px solid rgba(242,241,234,.18); border-radius: 18px; background: rgba(242,241,234,.03); }
+    .v2-participation-card h3 { margin: 0; font-family: 'Sora', sans-serif; font-size: 1.1rem; }
+    .v2-participation-card .btn { margin-top: auto; align-self: flex-start; }
+    @media (max-width: 900px) { .v2-participation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .v2-participation-grid { grid-template-columns: 1fr; } }
 </style>
   <script type="application/ld+json">
   {
@@ -1376,6 +1384,7 @@
       <a href="/program"><span data-en>Program</span><span data-es>Programa</span></a>
       <a href="/whale-tank"><span data-en>Whale Tank</span><span data-es>Whale Tank</span></a>
       <a href="/sponsorship"><span data-en>Partners</span><span data-es>Partners</span></a>
+      <a href="#participate"><span data-en>Participate</span><span data-es>Participar</span></a>
       <a href="#tickets"><span data-en>Tickets</span><span data-es>Boletos</span></a>
       <button class="lang-toggle" type="button" data-v2-lang aria-label="Cambiar idioma">
         <span>EN</span><span aria-hidden="true">/</span><span>ES</span>
@@ -2029,6 +2038,22 @@
       </div>
     </section>
 
+    <section class="v2-participation v2-section" id="participate" aria-labelledby="participate-title">
+      <div class="container">
+        <div class="v2-section-head">
+          <div><p class="v2-kicker">TIF 2026</p><h2 id="participate-title"><span data-en>Participate in TIF</span><span data-es>Participa en TIF</span></h2></div>
+          <p><span data-en>Apply to participate as a DJ or musician, ambassador, volunteer, wellness facilitator or speaker. Choose your role to open its application form.</span><span data-es>Aplica para participar como DJ o músico, embajador, voluntario, facilitador de wellness o speaker. Elige tu rol para abrir el formulario correspondiente.</span></p>
+        </div>
+        <div class="v2-participation-grid">
+          <article class="v2-participation-card"><h3><span data-en>DJs / Musicians</span><span data-es>DJs / Músicos</span></h3><a class="btn btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSdJzFVf4GCjEBbDZk2oEIerJOys-fwoKrE-5YFHQJP3nfQtjA/viewform?usp=header" target="_blank" rel="noopener noreferrer" aria-label="Apply: DJs / Musicians"><span data-en>Apply now</span><span data-es>Aplicar ahora</span> <span aria-hidden="true">↗</span></a></article>
+          <article class="v2-participation-card"><h3><span data-en>Ambassador</span><span data-es>Embajador/a</span></h3><a class="btn btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSdZhETNr40juK4KEuQT-p09mJrEHHRFprgAt0xWE8xCX1YCoA/viewform?usp=header" target="_blank" rel="noopener noreferrer" aria-label="Apply: Ambassador"><span data-en>Apply now</span><span data-es>Aplicar ahora</span> <span aria-hidden="true">↗</span></a></article>
+          <article class="v2-participation-card"><h3><span data-en>Volunteer</span><span data-es>Voluntario/a</span></h3><a class="btn btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSdBaI0ozLgczYx7ip5TmtSVVbfIgZ0A8tnnVUYe1grjPAs3xg/viewform?usp=header" target="_blank" rel="noopener noreferrer" aria-label="Apply: Volunteer"><span data-en>Apply now</span><span data-es>Aplicar ahora</span> <span aria-hidden="true">↗</span></a></article>
+          <article class="v2-participation-card"><h3><span data-en>Wellness</span><span data-es>Wellness</span></h3><a class="btn btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSc_9nkkM9ZcRK5hvzJV4kKX-76boW5wKEXPQn0FyUKhT53CAg/viewform?usp=header" target="_blank" rel="noopener noreferrer" aria-label="Apply: Wellness"><span data-en>Apply now</span><span data-es>Aplicar ahora</span> <span aria-hidden="true">↗</span></a></article>
+          <article class="v2-participation-card"><h3><span data-en>Speaker</span><span data-es>Speaker</span></h3><a class="btn btn-ghost" href="https://form.typeform.com/to/NR6Ctoz4" target="_blank" rel="noopener noreferrer" aria-label="Apply: Speaker"><span data-en>Apply now</span><span data-es>Aplicar ahora</span> <span aria-hidden="true">↗</span></a></article>
+        </div>
+      </div>
+    </section>
+
     <section class="v2-partners v2-section" id="partners">
       <div class="container">
         <div class="v2-partner-card">
@@ -2115,6 +2140,7 @@
         <a href="/whale-tank">Whale Tank</a>
         <a href="/sponsorship">Partners</a>
         <a href="#program">Program</a>
+        <a href="#participate"><span data-en>Participate</span><span data-es>Participar</span></a>
         <a href="#tickets">Tickets</a>
       </nav>
     </div>
