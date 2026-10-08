@@ -12,6 +12,9 @@
   "Apply to Whale Tank": "Aplicar a Whale Tank",
   "Apply to be a Speaker": "Aplicar como speaker",
   "Apply to Volunteer": "Aplicar como voluntario",
+  "Apply as a DJ / Musician": "Aplicar como DJ / músico",
+  "Apply as an Ambassador": "Aplicar como embajador",
+  "Apply for Wellness": "Aplicar para wellness",
   "Festival participation applications": "Aplicaciones para participar en el festival",
   "Get Festival Access": "Obtener acceso al festival",
   "December 9-12, 2026 · Tulum, Mexico": "9–12 de diciembre de 2026 · Tulum, México",
@@ -548,7 +551,10 @@
     participationActions.setAttribute('aria-label', 'Festival participation applications');
     participationActions.innerHTML = `
       <a class="btn btn-primary external-cta" href="https://form.typeform.com/to/NR6Ctoz4" rel="noopener noreferrer" target="_blank">Apply to be a Speaker</a>
-      <a class="btn btn-ghost external-cta" href="https://form.typeform.com/to/pUUaOm1w" rel="noopener noreferrer" target="_blank">Apply to Volunteer</a>
+      <a class="btn btn-ghost external-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdBaI0ozLgczYx7ip5TmtSVVbfIgZ0A8tnnVUYe1grjPAs3xg/viewform?usp=header" rel="noopener noreferrer" target="_blank">Apply to Volunteer</a>
+      <a class="btn btn-ghost external-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdJzFVf4GCjEBbDZk2oEIerJOys-fwoKrE-5YFHQJP3nfQtjA/viewform?usp=header" rel="noopener noreferrer" target="_blank">Apply as a DJ / Musician</a>
+      <a class="btn btn-ghost external-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdZhETNr40juK4KEuQT-p09mJrEHHRFprgAt0xWE8xCX1YCoA/viewform?usp=header" rel="noopener noreferrer" target="_blank">Apply as an Ambassador</a>
+      <a class="btn btn-ghost external-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSc_9nkkM9ZcRK5hvzJV4kKX-76boW5wKEXPQn0FyUKhT53CAg/viewform?usp=header" rel="noopener noreferrer" target="_blank">Apply for Wellness</a>
     `;
     positioningOffers.insertBefore(participationActions, positioningGrid);
   }
