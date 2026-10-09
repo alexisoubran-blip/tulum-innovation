@@ -3,7 +3,7 @@
   const button=header?.querySelector('.tif-menu-toggle');
   const nav=header?.querySelector('.tif-navigation');
   if(!header||!button||!nav)return;
-  const media=matchMedia('(max-width: 1100px)');
+  const media=matchMedia('(max-width: 1280px)');
   const close=()=>{document.body.classList.remove('tif-menu-open');button.setAttribute('aria-expanded','false');nav.inert=media.matches;};
   const sync=()=>{close();};
   button.addEventListener('click',()=>{

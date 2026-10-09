@@ -55,9 +55,13 @@ await buildPress();
 const { buildRoster } = await import('./roster/build.mjs');
 await buildRoster();
 
+const { buildEditorial, buildAEO } = await import('./aeo/build.mjs');
+await buildEditorial();
+
 // Apply the homepage design system after all generated content is complete.
 const { buildBrand } = await import('./brand/build.mjs');
 await buildBrand();
+await buildAEO();
 
 // Use the same absolute favicon URL on every published HTML page.
 async function applyFavicon(directory) {

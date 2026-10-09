@@ -55,6 +55,118 @@
           "value": "noindex, nofollow, noarchive"
         }
       ]
+    },
+    {
+      "source": "/markdown/:path*",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/index.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/program",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/program.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/speakers",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/speakers.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/whale-tank",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/whale-tank.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/sponsorship",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/sponsorship.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/press",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/press.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/festival-2026",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/festival-2026.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/alexis-soubran-tif-cmo",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/alexis-soubran-tif-cmo.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/blog",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/blog.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/blog/tif-whale-tank-sin-filtros-mvs",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</markdown/blog-tif-whale-tank-sin-filtros-mvs.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
     }
   ]
 }

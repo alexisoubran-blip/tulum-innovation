@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+# Search indexing and AI answer grounding are permitted.
+Content-Signal: search=yes, ai-input=yes
 Disallow: /health
 Disallow: /home-v2
 

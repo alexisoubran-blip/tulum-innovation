@@ -1,11 +1,11 @@
 import {readFile,writeFile,cp,mkdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
-const version='20261008-consistent';
+const version='20261009-aeo';
 const bi=(en,es)=>`<span data-tif-en>${en}</span><span data-tif-es>${es}</span>`;
-const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa']];
+const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa'],['/blog','Blog','Blog']];
 const nav=(route)=>items.map(([url,en,es])=>`<a href="${url}"${url===route?' aria-current="page"':''}>${bi(en,es)}</a>`).join('');
-const routes=[['index.html','/'],['home-v2/index.html','/'],['speakers/index.html','/speakers'],['program/index.html','/program'],['whale-tank/index.html','/whale-tank'],['sponsorship/index.html','/sponsorship'],['press/index.html','/press'],['festival-2026/index.html','/festival-2026'],['alexis-soubran-tif-cmo/index.html','/alexis-soubran-tif-cmo'],['alexis-soubran-TIF-CMO/index.html','/alexis-soubran-tif-cmo']];
+const routes=[['blog/index.html','/blog'],['blog/tif-whale-tank-sin-filtros-mvs/index.html','/blog/tif-whale-tank-sin-filtros-mvs'],['index.html','/'],['home-v2/index.html','/'],['speakers/index.html','/speakers'],['program/index.html','/program'],['whale-tank/index.html','/whale-tank'],['sponsorship/index.html','/sponsorship'],['press/index.html','/press'],['festival-2026/index.html','/festival-2026'],['alexis-soubran-tif-cmo/index.html','/alexis-soubran-tif-cmo'],['alexis-soubran-TIF-CMO/index.html','/alexis-soubran-tif-cmo']];
 
 export async function buildBrand(){
   await mkdir('dist/brand',{recursive:true});
