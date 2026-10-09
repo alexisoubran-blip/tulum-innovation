@@ -4,28 +4,89 @@
       "name": "Elo Cadenas",
       "company": "PXO Token | Arkangeles",
       "role": "Keynote Speaker",
-      "image": "/assets/tif-home-v2/speaker-elo-cadenas.webp",
-      "url": "https://www.linkedin.com/in/elocadenas/"
+      "image": "/assets/speakers-2026/elo-cadenas.webp",
+      "url": "https://www.linkedin.com/in/elocadenas/",
+      "title": "Founder",
+      "titleEs": "Fundadora"
     },
     {
       "name": "Alexandra Patiño",
       "company": "Mujer Capital",
       "role": "Speaker",
-      "image": "/assets/tif-home-v2/speaker-mujer-capital.webp"
+      "image": "/assets/speakers-2026/alexandra-patino.webp",
+      "title": "Founder & Financial Educator",
+      "titleEs": "Fundadora y educadora financiera"
     },
     {
       "name": "Uri Soglowek",
       "company": "Soglowek Capital",
       "role": "Keynote Speaker",
-      "image": "/assets/tif-home-v2/speaker-uri-soglowek.webp",
-      "url": "https://www.linkedin.com/in/uri-soglowek-713b5b16/"
+      "image": "/assets/speakers-2026/uri-soglowek.webp",
+      "url": "https://www.linkedin.com/in/uri-soglowek-713b5b16/",
+      "title": "Founder & CEO",
+      "titleEs": "Fundador y CEO"
     },
     {
       "name": "Yehuda Berg",
       "company": "Secret Light LLC",
       "role": "Speaker",
-      "image": "/assets/tif-home-v2/speaker-yehuda-berg.webp",
-      "url": "https://www.linkedin.com/in/yehudaberg/"
+      "image": "/assets/speakers-2026/yehuda-berg.webp",
+      "url": "https://www.linkedin.com/in/yehudaberg/",
+      "title": "Author & Speaker",
+      "titleEs": "Autor y conferencista"
+    },
+    {
+      "name": "Dor Cohen",
+      "role": "Speaker",
+      "company": "Muan Technologies",
+      "title": "Founder & CEO",
+      "titleEs": "Fundador y CEO",
+      "image": "/assets/speakers-2026/dor-cohen.webp",
+      "url": "https://www.linkedin.com/in/dorcohen10/"
+    },
+    {
+      "name": "Andrea Dekovic",
+      "role": "Speaker",
+      "company": "Las Flores",
+      "title": "Founder",
+      "titleEs": "Fundadora",
+      "image": "/assets/speakers-2026/andrea-dekovic.webp",
+      "url": "https://www.linkedin.com/in/andreadekovic/"
+    },
+    {
+      "name": "Franz Tuñez",
+      "role": "Speaker",
+      "company": "NetX State",
+      "title": "Co-Founder",
+      "titleEs": "Cofundador",
+      "image": "/assets/speakers-2026/franz-tunez.webp",
+      "url": "https://www.netxgen.world/"
+    },
+    {
+      "name": "Anders Francis",
+      "role": "Speaker",
+      "company": "Modern Art Theory | Invite Only Miami",
+      "title": "Founder",
+      "titleEs": "Fundador",
+      "image": "/assets/speakers-2026/anders-francis.webp"
+    },
+    {
+      "name": "Brandon Menard",
+      "role": "Speaker",
+      "company": "RougeChain Technologies LLC",
+      "title": "Founder & Developer",
+      "titleEs": "Fundador y desarrollador",
+      "image": "/assets/speakers-2026/brandon-menard.webp",
+      "url": "https://brandonmenard.dev/lab"
+    },
+    {
+      "name": "Will Blakey",
+      "role": "Speaker",
+      "company": "Club DAO | Starseed | LATAM Impact",
+      "title": "Founder",
+      "titleEs": "Fundador",
+      "image": "/assets/speakers-2026/will-blakey.webp",
+      "url": "https://www.linkedin.com/in/willblakey"
     }
   ],
   "cofounders": [
@@ -33,43 +94,86 @@
       "name": "Teresa Castagnino",
       "company": "LIKE GROUP MANAGEMENT",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/roster/teresa-castagnino.webp"
+      "image": "/assets/roster/teresa-castagnino.webp",
+      "title": "Co-Founder",
+      "titleEs": "Cofundadora"
     },
     {
       "name": "Gustavo Bolotin",
       "company": "LIKE GROUP MANAGEMENT",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/tif-home-v2/speaker-gustavo-bolotin.webp"
+      "image": "/assets/speakers-2026/gustavo-bolotin.webp",
+      "title": "Co-Founder",
+      "titleEs": "Cofundador"
     },
     {
       "name": "Alejandro Glatt",
       "company": "FEEL THE FRUIT",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/tif-home-v2/speaker-alejandro-glatt.webp"
+      "image": "/assets/speakers-2026/alejandro-glatt.webp",
+      "title": "Founder & Multidisciplinary Artist",
+      "titleEs": "Fundador y artista multidisciplinario",
+      "url": "https://www.linkedin.com/in/alejandroglatt/"
     },
     {
       "name": "Alexis Soubran",
-      "company": "Minimalist Agency",
+      "company": "Minimalist Agency | Tulum Innovation Fest",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/tif-home-v2/speaker-alexis-soubran.webp"
+      "image": "/assets/speakers-2026/alexis-soubran.webp",
+      "title": "CEO, Minimalist Agency · CMO, TIF",
+      "titleEs": "CEO, Minimalist Agency · CMO, TIF",
+      "url": "https://www.linkedin.com/in/alexis-soubran/"
     },
     {
       "name": "Sandra Ponce de León",
       "company": "ReFi Tulum | Guardians of Nature",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/roster/sandra-ponce-de-leon.webp"
+      "image": "/assets/roster/sandra-ponce-de-leon.webp",
+      "title": "Entrepreneur & Regenerative Community Builder",
+      "titleEs": "Emprendedora y creadora de comunidades regenerativas"
     },
     {
       "name": "Immanuel Cape",
       "company": "Tulum Crypto Club",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/roster/immanuel-cape.webp"
+      "image": "/assets/speakers-2026/immanuel-cape.webp",
+      "title": "Founder & Creative Director",
+      "titleEs": "Fundador y director creativo"
     },
     {
       "name": "Frances I. Pimentel",
       "company": "CoreHavens Network",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/roster/frances-pimentel.webp"
+      "image": "/assets/speakers-2026/frances-pimentel.webp",
+      "title": "Regenerative Real Estate Strategist",
+      "titleEs": "Estratega de desarrollo inmobiliario regenerativo",
+      "url": "https://www.linkedin.com/in/francesipimentel"
+    },
+    {
+      "name": "Patricia de la Torre",
+      "role": "Speaker / Co-Founder",
+      "company": "Consejo Coordinador Empresarial de Tulum",
+      "title": "Founding President",
+      "titleEs": "Presidenta fundadora",
+      "image": "/assets/speakers-2026/patricia-de-la-torre.webp"
+    },
+    {
+      "name": "Steph Ferrera",
+      "role": "Speaker / Co-Founder",
+      "company": "FlowBond",
+      "title": "Founder",
+      "titleEs": "Fundadora",
+      "image": "/assets/speakers-2026/steph-ferrera.webp",
+      "url": "https://www.linkedin.com/in/steph-ferrera-b36416176/"
+    },
+    {
+      "name": "Peiman Fazli",
+      "role": "Speaker / Co-Founder",
+      "company": "CoWorking Tulum",
+      "title": "Co-Founder",
+      "titleEs": "Cofundador",
+      "image": "/assets/speakers-2026/peiman-fazli.webp",
+      "url": "https://www.linkedin.com/in/peimanfazli"
     }
   ],
   "investors": [

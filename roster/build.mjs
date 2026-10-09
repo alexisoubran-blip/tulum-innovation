@@ -4,13 +4,13 @@ import assert from 'node:assert/strict';
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi = (en, es) => `<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor'};
-const version = '20260929-approved-speakers';
+const version = '20261009-speaker-lineup';
 
 function card(p, poster = false) {
   const photo = p.image ? `<div class="roster-art${poster ? ' roster-poster' : ''}"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="440" height="540" loading="lazy" decoding="async" /></div>` : '';
   const link = p.url ? `<a class="roster-profile-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)}: ${/linkedin\.com/.test(p.url) ? 'LinkedIn' : 'website'}">${bi('View profile','Ver perfil')} <span aria-hidden="true">&#8599;</span></a>` : '';
   return `<article class="roster-card${p.image ? '' : ' roster-text-card'}" data-roster-card>
-    ${photo}<div class="roster-meta"><p class="roster-role">${bi(p.role, roles[p.role])}</p><h3>${esc(p.name)}</h3>${p.company ? `<p class="roster-company">${esc(p.company)}</p>` : ''}${link}</div>
+    ${photo}<div class="roster-meta"><p class="roster-role">${bi(p.role, roles[p.role])}</p><h3>${esc(p.name)}</h3>${p.title ? `<p class="roster-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}${p.company ? `<p class="roster-company">${esc(p.company)}</p>` : ''}${link}</div>
   </article>`;
 }
 
@@ -20,14 +20,15 @@ export async function buildRoster() {
   const data = JSON.parse(await readFile(new URL('./data.json', import.meta.url), 'utf8'));
   const groups = ['speakers','cofounders','investors','mentors'];
   assert.deepEqual(Object.keys(data).sort(), [...groups].sort(), 'Unexpected roster groups');
-  const allowed = new Set(['name','company','image','role','url']);
+  const allowed = new Set(['name','company','image','role','url','title','titleEs']);
   for (const [group, people] of Object.entries(data)) {
     assert.ok(Array.isArray(people) && people.length > 0, `Empty or invalid ${group}`);
     assert.equal(new Set(people.map(p => p.name.toLowerCase())).size, people.length, `Duplicate ${group}`);
     for (const p of people) {
       assert.ok(Object.keys(p).every(key => allowed.has(key)), 'Roster contains a non-public field');
       assert.ok(p.name && Object.hasOwn(roles, p.role));
-      assert.ok(!/@|\d{8,}|typeform\.com|drive\.google\.com/.test(JSON.stringify(p)), 'Private field or registration link in roster');
+      assert.ok(!/@|\d{8,}|typeform\.com|drive\.google\.com/.test(JSON.stringify({...p,url:undefined})), 'Private field or registration link in roster');
+      if (p.url) assert.ok(!/typeform\.com|drive\.google\.com/.test(p.url), 'Registration link in public roster');
       assert.ok(p.company || p.name === 'Abraham (Abe) Ramos', 'Missing company');
       if (p.url) assert.equal(new URL(p.url).protocol, 'https:');
       if (group === 'speakers') {
@@ -78,5 +79,18 @@ export async function buildRoster() {
   await mkdir('dist/roster',{recursive:true});
   await cp('roster/styles.css','dist/roster/styles.css');
   await writeFile('dist/index.html',home);
+  // Build the directory from the same public data as the homepage.
+  const lineup = [...data.speakers, ...data.cofounders];
+  assert.equal(new Set(lineup.map(p => p.name.toLowerCase())).size, lineup.length, 'Duplicate public speaker');
+  const directoryCards = lineup.map(p => `<article class="person" data-person="${esc([p.name,p.role,p.title,p.company].filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())}"><div class="person-art"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="640" height="800" loading="lazy" decoding="async"></div><div class="person-copy"><h3>${esc(p.name)}</h3>${p.title ? `<p class="person-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}<p>${esc(p.company)}</p><span class="role">${bi(p.role,roles[p.role])}</span>${p.url ? `<a class="person-profile-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${bi('View profile','Ver perfil')} ↗</a>` : ''}</div></article>`).join('\n');
+  let directory = await readFile('dist/speakers/index.html','utf8');
+  const gridPattern = /<div class="people-grid" id="peopleGrid">[\s\S]*?<\/div>(?=<div class="notice")/;
+  assert.ok(gridPattern.test(directory),'Missing speakers directory grid');
+  directory = directory.replace(gridPattern,`<div class="people-grid" id="peopleGrid">${directoryCards}</div>`);
+  directory = directory.replace('const q=input.value.toLowerCase()',"const q=input.value.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim()");
+  directory = directory.replace('</head>',`<link rel="stylesheet" href="/roster/styles.css?v=${version}" /></head>`);
+  assert.equal((directory.match(/data-person=/g)||[]).length,lineup.length);
+  for(const p of lineup) assert.ok(home.includes(esc(p.name)) && directory.includes(esc(p.name)), `Missing speaker ${p.name}`);
+  await writeFile('dist/speakers/index.html',directory);
   console.log(`Roster: ${data.speakers.length} speakers with photos, ${data.cofounders.length} co-founders, ${data.investors.length} investors, ${data.mentors.length} mentors. Pending speakers are excluded from public HTML.`);
 }
