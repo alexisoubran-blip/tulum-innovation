@@ -1,4 +1,4 @@
-import { cp, mkdir, rm, readFile, writeFile } from "node:fs/promises";
+import { cp, mkdir, rm, readFile, writeFile, readdir } from "node:fs/promises";
 import assert from "node:assert/strict";
 
 await rm("dist", { recursive: true, force: true });
@@ -58,3 +58,23 @@ await buildRoster();
 // Apply the homepage design system after all generated content is complete.
 const { buildBrand } = await import('./brand/build.mjs');
 await buildBrand();
+
+// Use the same absolute favicon URL on every published HTML page.
+async function applyFavicon(directory) {
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = `${directory}/${entry.name}`;
+    if (entry.isDirectory()) {
+      await applyFavicon(path);
+    } else if (entry.name.endsWith('.html')) {
+      const html = await readFile(path, 'utf8');
+      assert.ok(/<\/head>/i.test(html), `Missing head in ${path}`);
+      const updated = html
+        .replace(/<link\b[^>]*\brel=["'](?:shortcut\s+)?icon["'][^>]*>\s*/gi, '')
+        .replace(/<\/head>/i, '  <link rel="icon" type="image/svg+xml" href="/assets/signal-mark.svg" />\n</head>');
+      await writeFile(path, updated);
+    }
+  }
+}
+await applyFavicon('dist');
+await readFile('dist/assets/signal-mark.svg');
+console.log('Favicon: shared icon applied to every published HTML page.');
