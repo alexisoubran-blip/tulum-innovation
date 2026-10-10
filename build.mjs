@@ -55,6 +55,9 @@ await buildPress();
 const { buildRoster } = await import('./roster/build.mjs');
 await buildRoster();
 
+const { buildPartnerships } = await import('./partnerships/build.mjs');
+await buildPartnerships();
+
 const { buildEditorial, buildAEO } = await import('./aeo/build.mjs');
 await buildEditorial();
 

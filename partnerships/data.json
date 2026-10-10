@@ -1,0 +1,419 @@
+{
+  "rows": [
+    {
+      "id": 0,
+      "label": {
+        "en": "General Admission passes",
+        "es": "Pases General Admission"
+      }
+    },
+    {
+      "id": 1,
+      "label": {
+        "en": "VIP / Executive passes",
+        "es": "Pases VIP / Executive"
+      }
+    },
+    {
+      "id": 2,
+      "label": {
+        "en": "Website & digital visibility",
+        "es": "Visibilidad web y digital"
+      }
+    },
+    {
+      "id": 3,
+      "label": {
+        "en": "On-site branding",
+        "es": "Branding en sitio"
+      }
+    },
+    {
+      "id": 4,
+      "label": {
+        "en": "Brand activation",
+        "es": "Activación de marca"
+      }
+    },
+    {
+      "id": 5,
+      "label": {
+        "en": "Program association",
+        "es": "Asociación con el programa"
+      }
+    },
+    {
+      "id": 6,
+      "label": {
+        "en": "Networking & hospitality",
+        "es": "Networking y hospitalidad"
+      }
+    },
+    {
+      "id": 7,
+      "label": {
+        "en": "Communications & media",
+        "es": "Comunicación y medios"
+      }
+    },
+    {
+      "id": 8,
+      "label": {
+        "en": "Post-event reporting",
+        "es": "Reporte posterior al evento"
+      }
+    },
+    {
+      "id": 9,
+      "label": {
+        "en": "Hotel package",
+        "es": "Paquete de hotel"
+      }
+    },
+    {
+      "id": 10,
+      "label": {
+        "en": "Naming / category exclusivity",
+        "es": "Naming / exclusividad de categoría"
+      }
+    }
+  ],
+  "tiers": [
+    {
+      "id": "event-supporter",
+      "name": "Event Supporter",
+      "price": 2500,
+      "accent": "#ff6b2c",
+      "summary": {
+        "en": "Support the festival community",
+        "es": "Apoya a la comunidad del festival"
+      },
+      "benefits": [
+        {
+          "en": "2",
+          "es": "2"
+        },
+        {
+          "en": "0",
+          "es": "0"
+        },
+        {
+          "en": "Partner logo, directory and selected materials",
+          "es": "Logo de partner, directorio y materiales seleccionados"
+        },
+        {
+          "en": "No dedicated activation area",
+          "es": "Sin área dedicada de activación"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        },
+        {
+          "en": "General Admission open networking",
+          "es": "Networking abierto de General Admission"
+        },
+        {
+          "en": "Selected recognition in official channels",
+          "es": "Reconocimiento seleccionado en canales oficiales"
+        },
+        {
+          "en": "Basic visibility and participation report",
+          "es": "Reporte básico de visibilidad y participación"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        }
+      ]
+    },
+    {
+      "id": "touchpoint-partner",
+      "name": "Touchpoint Partner",
+      "price": 5000,
+      "accent": "#79ff47",
+      "summary": {
+        "en": "One useful brand touchpoint",
+        "es": "Un punto de contacto útil para tu marca"
+      },
+      "benefits": [
+        {
+          "en": "4",
+          "es": "4"
+        },
+        {
+          "en": "0",
+          "es": "0"
+        },
+        {
+          "en": "Event Supporter visibility benefits",
+          "es": "Beneficios de visibilidad de Event Supporter"
+        },
+        {
+          "en": "One selected brand touchpoint",
+          "es": "Un punto de contacto de marca seleccionado"
+        },
+        {
+          "en": "One small activation subject to feasibility",
+          "es": "Una activación pequeña sujeta a viabilidad"
+        },
+        {
+          "en": "Welcome, hydration, charging or similar",
+          "es": "Bienvenida, hidratación, carga o similar"
+        },
+        {
+          "en": "General Admission open networking",
+          "es": "Networking abierto de General Admission"
+        },
+        {
+          "en": "1 social acknowledgment and basic photography",
+          "es": "1 reconocimiento en redes y fotografía básica"
+        },
+        {
+          "en": "Basic activation and visibility report",
+          "es": "Reporte básico de activación y visibilidad"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        }
+      ]
+    },
+    {
+      "id": "ecosystem-partner",
+      "name": "Ecosystem Partner",
+      "price": 10000,
+      "accent": "#cf53fa",
+      "summary": {
+        "en": "Integrate into the festival program",
+        "es": "Intégrate al programa del festival"
+      },
+      "benefits": [
+        {
+          "en": "4",
+          "es": "4"
+        },
+        {
+          "en": "0",
+          "es": "0"
+        },
+        {
+          "en": "Website, program and partner communications",
+          "es": "Sitio web, programa y comunicaciones de partners"
+        },
+        {
+          "en": "Agreed festival locations",
+          "es": "Ubicaciones del festival acordadas"
+        },
+        {
+          "en": "Possible integration in an existing activity",
+          "es": "Posible integración en una actividad existente"
+        },
+        {
+          "en": "Existing activity subject to approval",
+          "es": "Actividad existente sujeta a aprobación"
+        },
+        {
+          "en": "Open networking and agreed connections",
+          "es": "Networking abierto y conexiones acordadas"
+        },
+        {
+          "en": "Agreed communications and media plan",
+          "es": "Comunicaciones y plan de medios acordados"
+        },
+        {
+          "en": "Brand presence and participation report",
+          "es": "Reporte de presencia de marca y participación"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        }
+      ]
+    },
+    {
+      "id": "experience-partner",
+      "name": "Experience Partner",
+      "price": 15000,
+      "accent": "#1fc6ff",
+      "summary": {
+        "en": "Activate one selected experience",
+        "es": "Activa una experiencia seleccionada"
+      },
+      "benefits": [
+        {
+          "en": "6",
+          "es": "6"
+        },
+        {
+          "en": "1",
+          "es": "1"
+        },
+        {
+          "en": "Ecosystem benefits plus experience materials",
+          "es": "Beneficios de Ecosystem más materiales de la experiencia"
+        },
+        {
+          "en": "Branding for one selected experience",
+          "es": "Branding de una experiencia seleccionada"
+        },
+        {
+          "en": "One dedicated experience activation",
+          "es": "Una activación dedicada de experiencia"
+        },
+        {
+          "en": "One selected experience or activity",
+          "es": "Una experiencia o actividad seleccionada"
+        },
+        {
+          "en": "1 Executive guest: program, Pre-Gala and hospitality",
+          "es": "1 invitado Executive: programa, Pre-Gala y hospitalidad"
+        },
+        {
+          "en": "Experience communications and media plan",
+          "es": "Comunicaciones de la experiencia y plan de medios"
+        },
+        {
+          "en": "Activation and available participation metrics",
+          "es": "Métricas disponibles de activación y participación"
+        },
+        {
+          "en": "Optional add-on for VIP / Executive",
+          "es": "Complemento opcional para VIP / Executive"
+        },
+        {
+          "en": "Not included",
+          "es": "No incluido"
+        }
+      ]
+    },
+    {
+      "id": "strategic-partner",
+      "name": "Strategic Partner",
+      "price": 30000,
+      "accent": "#ff426f",
+      "summary": {
+        "en": "Build an agreed strategic presence",
+        "es": "Define una presencia estratégica"
+      },
+      "benefits": [
+        {
+          "en": "10",
+          "es": "10"
+        },
+        {
+          "en": "2",
+          "es": "2"
+        },
+        {
+          "en": "Priority placement in agreed materials",
+          "es": "Ubicación prioritaria en materiales acordados"
+        },
+        {
+          "en": "Priority branding at selected locations",
+          "es": "Branding prioritario en ubicaciones seleccionadas"
+        },
+        {
+          "en": "Strategic activation with agreed scope",
+          "es": "Activación estratégica con alcance acordado"
+        },
+        {
+          "en": "Potential theme or industry vertical",
+          "es": "Posible tema o vertical de industria"
+        },
+        {
+          "en": "2 Executive guests and requested introductions",
+          "es": "2 invitados Executive y presentaciones solicitadas"
+        },
+        {
+          "en": "Featured communications and media plan",
+          "es": "Comunicaciones destacadas y plan de medios"
+        },
+        {
+          "en": "Custom deliverables and activation report",
+          "es": "Reporte de entregables y activación a medida"
+        },
+        {
+          "en": "Optional add-on negotiated separately",
+          "es": "Complemento opcional negociado por separado"
+        },
+        {
+          "en": "Only if separately agreed",
+          "es": "Solo si se acuerda por separado"
+        }
+      ]
+    },
+    {
+      "id": "title-presenting",
+      "name": "Title / Presenting",
+      "price": null,
+      "accent": "#ffd34e",
+      "summary": {
+        "en": "Create a presenting partnership",
+        "es": "Diseña un partnership de presentación"
+      },
+      "benefits": [
+        {
+          "en": "Custom",
+          "es": "A medida"
+        },
+        {
+          "en": "Custom",
+          "es": "A medida"
+        },
+        {
+          "en": "Principal placement in agreed channels",
+          "es": "Ubicación principal en canales acordados"
+        },
+        {
+          "en": "Premium branding at contracted locations",
+          "es": "Branding premium en ubicaciones contratadas"
+        },
+        {
+          "en": "Custom major activation or experiences",
+          "es": "Activación principal o experiencias a medida"
+        },
+        {
+          "en": "Naming / presenting rights by agreement",
+          "es": "Derechos de naming / presenting por acuerdo"
+        },
+        {
+          "en": "Custom Executive access and hospitality",
+          "es": "Acceso Executive y hospitalidad a medida"
+        },
+        {
+          "en": "Custom content, communications and media",
+          "es": "Contenido, comunicaciones y medios a medida"
+        },
+        {
+          "en": "Custom report on contracted deliverables",
+          "es": "Reporte a medida de entregables contratados"
+        },
+        {
+          "en": "Separately negotiated",
+          "es": "Negociado por separado"
+        },
+        {
+          "en": "Negotiated rights defined in agreement",
+          "es": "Derechos negociados definidos en el acuerdo"
+        }
+      ]
+    }
+  ]
+}

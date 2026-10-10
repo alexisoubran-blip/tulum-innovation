@@ -74,10 +74,11 @@
     {
       "name": "Andersen Francis",
       "role": "Speaker",
-      "company": "Modern Art Theory | Invite Only Miami",
+      "company": "Modern Art Theory | Dropt.events | Fractal Beach | Invite Only Miami",
       "title": "Founder",
       "titleEs": "Fundador",
-      "image": "/assets/speakers-2026/anders-francis-v2.webp"
+      "image": "/assets/speakers-2026/anders-francis-v2.webp",
+      "url": "https://www.linkedin.com/in/andersscherberger"
     },
     {
       "name": "Brandon Menard",
