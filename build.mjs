@@ -13,6 +13,7 @@ await cp("alexis-soubran-tif-cmo", "dist/alexis-soubran-tif-cmo", { recursive: t
 await cp("alexis-soubran-TIF-CMO", "dist/alexis-soubran-TIF-CMO", { recursive: true });
 await cp("home-v2", "dist/home-v2", { recursive: true });
 await cp("program", "dist/program", { recursive: true });
+await cp("tickets", "dist/tickets", { recursive: true });
 await cp("speakers", "dist/speakers", { recursive: true });
 await cp("festival-shell.css", "dist/festival-shell.css");
 await cp("health", "dist/health", { recursive: true });

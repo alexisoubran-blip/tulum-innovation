@@ -5,7 +5,7 @@ const version='20261010-type-system';
 const bi=(en,es)=>`<span data-tif-en>${en}</span><span data-tif-es>${es}</span>`;
 const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa'],['/blog','Blog','Blog']];
 const nav=(route)=>items.map(([url,en,es])=>`<a href="${url}"${url===route?' aria-current="page"':''}>${bi(en,es)}</a>`).join('');
-const routes=[['blog/index.html','/blog'],['blog/tif-whale-tank-sin-filtros-mvs/index.html','/blog/tif-whale-tank-sin-filtros-mvs'],['index.html','/'],['home-v2/index.html','/'],['speakers/index.html','/speakers'],['program/index.html','/program'],['whale-tank/index.html','/whale-tank'],['sponsorship/index.html','/sponsorship'],['press/index.html','/press'],['festival-2026/index.html','/festival-2026'],['alexis-soubran-tif-cmo/index.html','/alexis-soubran-tif-cmo'],['alexis-soubran-TIF-CMO/index.html','/alexis-soubran-tif-cmo']];
+const routes=[['blog/index.html','/blog'],['blog/tif-whale-tank-sin-filtros-mvs/index.html','/blog/tif-whale-tank-sin-filtros-mvs'],['index.html','/'],['home-v2/index.html','/'],['speakers/index.html','/speakers'],['program/index.html','/program'],['tickets/index.html','/tickets'],['whale-tank/index.html','/whale-tank'],['sponsorship/index.html','/sponsorship'],['press/index.html','/press'],['festival-2026/index.html','/festival-2026'],['alexis-soubran-tif-cmo/index.html','/alexis-soubran-tif-cmo'],['alexis-soubran-TIF-CMO/index.html','/alexis-soubran-tif-cmo']];
 
 export async function buildBrand(){
   await mkdir('dist/brand',{recursive:true});
@@ -16,7 +16,7 @@ export async function buildBrand(){
     const oldHeader=html.match(/<header\b[\s\S]*?<\/header>/)?.[0];
     assert.ok(oldHeader,`Missing header: ${file}`);
     const toggle=oldHeader.match(/<button\b[^>]*(?:data-v2-lang|data-lang-toggle|data-press-lang)[\s\S]*?<\/button>/)?.[0];
-    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):route==='/speakers'?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
+    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):['/speakers','/tickets'].includes(route)?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
     const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]);
     const sections=localLinks.length?`<nav class="tif-section-nav" aria-label="Page sections">${localLinks.join('')}</nav>`:'';
     const whale=route==='/whale-tank';
@@ -25,12 +25,12 @@ export async function buildBrand(){
       <div class="wt-brand-lockup"><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46"></a>${whalePartner}</div>
       <button class="tif-menu-toggle" type="button" aria-controls="tif-navigation" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
       <nav class="tif-navigation" id="tif-navigation" aria-label="Main navigation">${nav(route)}${language}</nav>
-      <a class="tif-ticket-button" href="/#tickets">${bi('Get tickets','Boletos')}</a>
+      <a class="tif-ticket-button" href="/tickets">${bi('Get tickets','Boletos')}</a>
     </header>${sections}`;
     html=html.replace(oldHeader,header);
     const oldFooter=html.match(/<footer\b[\s\S]*?<\/footer>/)?.[0]||'';
     const contact=[...oldFooter.matchAll(/<a\b[^>]*href="mailto:[^"]+"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]).join('');
-    const footer=`<footer class="tif-site-footer"><div class="tif-footer-inner"><div><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46" loading="lazy"></a><p>${bi('Innovation, capital and culture meet in Tulum.','Innovación, capital y cultura se encuentran en Tulum.')}<br>${bi('December 9–12, 2026 · Tulum, Mexico','9–12 de diciembre de 2026 · Tulum, México')}</p>${contact}</div><nav aria-label="Footer navigation">${nav(route)}<a href="/#experience">${bi('Experience','Experiencia')}</a><a href="/#tickets">${bi('Tickets','Boletos')}</a></nav></div></footer>`;
+    const footer=`<footer class="tif-site-footer"><div class="tif-footer-inner"><div><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46" loading="lazy"></a><p>${bi('Innovation, capital and culture meet in Tulum.','Innovación, capital y cultura se encuentran en Tulum.')}<br>${bi('December 9–12, 2026 · Tulum, Mexico','9–12 de diciembre de 2026 · Tulum, México')}</p>${contact}</div><nav aria-label="Footer navigation">${nav(route)}<a href="/#experience">${bi('Experience','Experiencia')}</a><a href="/tickets">${bi('Tickets','Boletos')}</a></nav></div></footer>`;
     assert.ok(/<footer\b[\s\S]*?<\/footer>/.test(html),`Missing footer: ${file}`);
     html=html.replace(/<footer\b[\s\S]*?<\/footer>/,footer);
     const simple=['/speakers','/program'].includes(route);
