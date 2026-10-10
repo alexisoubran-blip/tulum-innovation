@@ -54,6 +54,8 @@ body.tif-page{overflow-x:clip}
 .tif-footer-inner nav a{color:rgba(242,241,234,.7);font:500 .65rem/1.5 var(--tif-body);text-transform:uppercase;letter-spacing:.08em;text-decoration:none;min-height:32px;display:inline-flex;align-items:center}
 .tif-footer-inner nav a:hover{color:var(--tif-accent)}
 html:not([data-lang=es]) [data-tif-es],html[data-lang=es] [data-tif-en]{display:none!important}
+/* Paired text spans use empty attributes; valued attributes belong to page translators. */
+html:not([data-lang=es]) .tif-page [data-es=""],html[data-lang=es] .tif-page [data-en=""]{display:none!important}
 .tif-directory{background:var(--tif-ink);color:var(--tif-paper)}
 .tif-directory .hero{position:relative;min-height:620px;padding:180px 0 90px;display:flex;align-items:flex-end;overflow:hidden;background:var(--tif-ink)}
 .tif-directory-hero-media{position:absolute;inset:0;z-index:-1}

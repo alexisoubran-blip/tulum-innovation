@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi = (en, es) => `<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor'};
-const version = '20261009-speaker-lineup';
+const version = '20261010-speaker-languages';
 
 function card(p, poster = false) {
   const photo = p.image ? `<div class="roster-art${poster ? ' roster-poster' : ''}"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="440" height="540" loading="lazy" decoding="async" /></div>` : '';
@@ -87,13 +87,20 @@ export async function buildRoster() {
   assert.ok(gridPattern.test(directory),'Missing speakers directory grid');
   directory = directory.replace(gridPattern,`<div class="people-grid" id="peopleGrid">${directoryCards}</div>`);
   directory = directory
-    .replace('<title>Speakers | Tulum Innovation Fest 2026</title>', '<title>Speakers, Investors &amp; Mentors | Tulum Innovation Fest 2026</title>')
-    .replace('Meet the people publicly featured for Tulum Innovation Fest 2026.', 'Meet the speakers, investors and mentors joining Tulum Innovation Fest 2026.')
-    .replace('Meet the founders, investors and voices joining Tulum Innovation Fest.', 'Meet the speakers, founders, investors and mentors joining Tulum Innovation Fest.')
-    .replace('Search by name or organization', 'Search by name, organization or role')
-    .replace('aria-label="Search speakers"', 'aria-label="Search speakers, investors and mentors"')
-    .replace('<h2>Featured speakers</h2>', '<h2>Speakers, investors &amp; mentors</h2>')
-    .replace('Discover the speakers joining the conversation at TIF 2026, from entrepreneurship and investment to ideas that shape how we live and work.', 'Explore the speakers, co-founders, investors and mentors participating in TIF 2026 and Whale Tank.');
+    .replace('<title>Speakers | Tulum Innovation Fest 2026</title>', '<title data-tif-title-en="Speakers, Investors &amp; Mentors | Tulum Innovation Fest 2026" data-tif-title-es="Speakers, inversionistas y mentores | Tulum Innovation Fest 2026">Speakers, Investors &amp; Mentors | Tulum Innovation Fest 2026</title>')
+    .replace('content="Meet the people publicly featured for Tulum Innovation Fest 2026."', 'content="Meet the speakers, investors and mentors joining Tulum Innovation Fest 2026." data-tif-content-en="Meet the speakers, investors and mentors joining Tulum Innovation Fest 2026." data-tif-content-es="Conoce a los speakers, inversionistas y mentores que participan en Tulum Innovation Fest 2026."')
+    .replace('<h1>People shaping the conversation</h1>', `<h1>${bi('People shaping the conversation','Las personas que participan en TIF 2026')}</h1>`)
+    .replace('Meet the founders, investors and voices joining Tulum Innovation Fest. Explore the people bringing their perspectives on technology, business and culture to Tulum this December.', bi('Meet the speakers, founders, investors and mentors joining Tulum Innovation Fest. Explore the people bringing their perspectives on technology, business and culture to Tulum this December.', 'Conoce a los speakers, founders, inversionistas y mentores que participan en Tulum Innovation Fest. Descubre sus perspectivas sobre tecnología, negocios y cultura este diciembre en Tulum.'))
+    .replaceAll('Apply to be a speaker ↗', `${bi('Apply to be a speaker','Postúlate como speaker')} ↗`)
+    .replace('placeholder="Search by name or organization"', 'placeholder="Search by name, organization or role" data-tif-placeholder-en="Search by name, organization or role" data-tif-placeholder-es="Buscar por nombre, organización o rol"')
+    .replace('aria-label="Search speakers"', 'aria-label="Search speakers, investors and mentors" data-tif-label-en="Search speakers, investors and mentors" data-tif-label-es="Buscar speakers, inversionistas y mentores"')
+    .replace('<h2>Featured speakers</h2>', `<h2>${bi('Speakers, investors & mentors','Speakers, inversionistas y mentores')}</h2>`)
+    .replace('Discover the speakers joining the conversation at TIF 2026, from entrepreneurship and investment to ideas that shape how we live and work.', bi('Explore the speakers, co-founders, investors and mentors participating in TIF 2026 and Whale Tank.', 'Conoce a los speakers, cofundadores, inversionistas y mentores que participan en TIF 2026 y Whale Tank.'))
+    .replace('Speak at TIF 2026</h2>', `${bi('Speak at TIF 2026','Participa como speaker en TIF 2026')}</h2>`)
+    .replace('Share your expertise on technology, business or culture. Submit your proposal through the speaker application form.', bi('Share your expertise on technology, business or culture. Submit your proposal through the speaker application form.', 'Comparte tu experiencia en tecnología, negocios o cultura. Envía tu propuesta a través del formulario para speakers.'))
+    .replace('Continue exploring TIF: ', `${bi('Continue exploring TIF:','Sigue explorando TIF:')} `)
+    .replace('discover the four-day program</a>', `${bi('discover the four-day program','consulta el programa de cuatro días')}</a>`)
+    .replace(' or <a href="/#tickets">choose your festival pass</a>.', ` ${bi('or','o')} <a href="/#tickets">${bi('choose your festival pass','elige tu acceso al festival')}</a>.`);
   directory = directory.replace('const q=input.value.toLowerCase()',"const q=input.value.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim()");
   directory = directory.replace('</head>',`<link rel="stylesheet" href="/roster/styles.css?v=${version}" /></head>`);
   assert.equal((directory.match(/data-person=/g)||[]).length,lineup.length);
