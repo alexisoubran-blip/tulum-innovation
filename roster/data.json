@@ -1,6 +1,15 @@
 {
   "speakers": [
     {
+      "name": "Scott Page",
+      "role": "Speaker",
+      "company": "Think:EXP",
+      "title": "Musician & Entrepreneur",
+      "titleEs": "Músico y emprendedor",
+      "image": "/assets/speakers-2026/scott-page.webp",
+      "url": "https://www.thinkxofficial.com/meet-the-band"
+    },
+    {
       "name": "Elo Cadenas",
       "company": "PXO Token | Arkangeles",
       "role": "Keynote Speaker",
