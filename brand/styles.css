@@ -133,3 +133,77 @@ html:not([data-lang=es]) [data-tif-es],html[data-lang=es] [data-tif-en]{display:
   .wt-page .wt-brand-header .tif-arkangeles{width:62px}
   .wt-page .wt-brand-header .tif-ticket-button{padding:.5rem .5rem;font-size:.49rem}
 }
+
+/* Whale Tank: stable mobile partner lockup + accessible section navigation. */
+.wt-page .wt-brand-header .tif-arkangeles{
+  display:block !important;
+  width:clamp(105px,10vw,155px) !important;
+  height:auto !important;
+  max-height:27px !important;
+  max-width:155px !important;
+  flex:0 0 auto !important;
+  object-fit:contain !important;
+  aspect-ratio:1200 / 178;
+}
+.wt-page .wt-brand-header .wt-brand-lockup{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  flex-wrap:nowrap !important;
+  min-width:0;
+}
+.wt-page .tif-section-nav{
+  position:sticky;
+  top:88px;
+  z-index:190;
+  flex-wrap:nowrap;
+  justify-content:center;
+  white-space:nowrap;
+  background:rgba(0,8,11,.97);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+}
+.wt-page .tif-section-nav a{
+  flex:0 0 auto;
+  padding:5px 0;
+}
+.wt-page .tif-section-nav a:focus-visible{color:var(--tif-paper);outline-offset:3px}
+html:has(.wt-page){scroll-padding-top:158px}
+.wt-page :is(#program,#fit,#selection,#faq){scroll-margin-top:158px}
+@media(max-width:1280px){
+  .wt-page .wt-brand-header{height:76px;min-height:76px;max-height:76px}
+  .wt-page .tif-section-nav{
+    top:76px;
+    justify-content:flex-start;
+    gap:22px;
+    width:100%;
+    min-height:46px;
+    padding:9px 5vw;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    scroll-snap-type:x proximity;
+  }
+  .wt-page .tif-section-nav::-webkit-scrollbar{display:none}
+  .wt-page .tif-section-nav a{scroll-snap-align:start}
+  html:has(.wt-page){scroll-padding-top:138px}
+  .wt-page :is(#program,#fit,#selection,#faq){scroll-margin-top:138px}
+}
+@media(max-width:640px){
+  .wt-page .wt-brand-header{height:76px !important;min-height:76px !important;max-height:76px !important}
+  .wt-page .wt-brand-header .wt-brand-lockup{gap:clamp(5px,1.6vw,10px) !important}
+  .wt-page .wt-brand-header .tif-arkangeles{
+    width:clamp(64px,21vw,94px) !important;
+    max-width:94px !important;
+    max-height:16px !important;
+  }
+  .wt-page .tif-section-nav{min-height:44px;padding-block:8px;gap:22px}
+  .wt-page .tif-section-nav a{font-size:.6rem}
+}
+@media(max-width:390px){
+  .wt-page .wt-brand-header .tif-arkangeles{width:74px !important;max-width:74px !important;max-height:12px !important}
+}
+@media(max-width:350px){
+  .wt-page .wt-brand-header .tif-arkangeles{width:62px !important;max-width:62px !important;max-height:11px !important}
+}
