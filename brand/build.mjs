@@ -1,4 +1,4 @@
-import {readFile,writeFile,cp,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,cp,mkdir,readdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const version='20261010-type-system';
@@ -9,6 +9,8 @@ const routes=[['blog/index.html','/blog'],['blog/tif-whale-tank-sin-filtros-mvs/
 
 export async function buildBrand(){
   await mkdir('dist/brand',{recursive:true});
+  // Every blog post gets the shared header and footer, not only the first article.
+  for(const e of await readdir('dist/blog',{withFileTypes:true}))if(e.isDirectory()&&!routes.some(([f])=>f===`blog/${e.name}/index.html`))routes.push([`blog/${e.name}/index.html`,`/blog/${e.name}`]);
   for(const file of ['styles.css','script.js'])await cp(`brand/${file}`,`dist/brand/${file}`);
   for(const [file,route] of routes){
     let html=await readFile(`dist/${file}`,'utf8');

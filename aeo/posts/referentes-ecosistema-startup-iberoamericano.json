@@ -1,0 +1,78 @@
+{
+  "slug": "inversionistas-whale-tank-100-referentes-ecosistema-startup-iberoamericano",
+  "title": "Tres inversionistas de Whale Tank, entre los 100 referentes del ecosistema startup iberoamericano",
+  "description": "Ron Oliver, Pamela Jramoy y Diego Serebrisky, inversionistas de Whale Tank 2026, aparecen en la selección editorial de GlobalStartups sobre el ecosistema startup iberoamericano.",
+  "published": "2026-10-10",
+  "publishedLabel": "10 de octubre de 2026",
+  "category": "Whale Tank",
+  "teaser": {
+    "en": "Ron Oliver, Pamela Jramoy and Diego Serebrisky, investors in Whale Tank 2026, are featured in GlobalStartups' editorial selection. Article in Spanish.",
+    "es": "Ron Oliver, Pamela Jramoy y Diego Serebrisky, inversionistas de Whale Tank 2026, aparecen en la selección editorial de GlobalStartups.",
+    "titleEn": "Three Whale Tank investors among 100 Ibero-American startup references",
+    "titleEs": "Tres inversionistas de Whale Tank, entre los 100 referentes"
+  },
+  "hero": {
+    "src": "/assets/editorial/referentes-whale-tank-hero.webp",
+    "og": "/assets/editorial/referentes-whale-tank-og.jpg",
+    "alt": "Ron Oliver, Pamela Jramoy y Diego Serebrisky, inversionistas de Whale Tank 2026",
+    "width": 1600,
+    "height": 1000,
+    "inArticle": false,
+    "caption": "Ron Oliver, Pamela Jramoy y Diego Serebrisky forman parte de la red de inversionistas de Whale Tank 2026."
+  },
+  "intro": [
+    "GlobalStartups publicó el 10 de octubre de 2026 el especial [100 referentes del ecosistema startup iberoamericano](https://global-startups.com/special/100-referentes-ecosistema-startup-iberoamericano?lang=es), una selección editorial de founders, inversionistas y constructores de comunidad que han ayudado a conectar el emprendimiento entre la península ibérica y Latinoamérica.",
+    "En la lista aparecen tres inversionistas que forman parte de [Whale Tank 2026](/whale-tank), el programa de investment readiness de Tulum Innovation Fest: Ron Oliver, Pamela Jramoy y Diego Serebrisky."
+  ],
+  "people": [
+    {
+      "name": "Ron Oliver",
+      "photo": "/assets/investors/ron-oliver.webp",
+      "listing": "#18 · ARKANGELES · México",
+      "tif": "Inversionista de Whale Tank · fundador y CEO de ParqueTec México",
+      "linkedin": "https://www.linkedin.com/in/ronoliveroliver/"
+    },
+    {
+      "name": "Pamela Jramoy",
+      "photo": "/assets/investors/pamela-jramoy.webp",
+      "listing": "#39 · Jramoy Business and Investment Consultancy Firm / Croptimize / 33N Ventures · Israel",
+      "tif": "Inversionista de Whale Tank · LATAM-Israel Ventures",
+      "linkedin": "https://www.linkedin.com/in/pamela-jramoy-6b15905/"
+    },
+    {
+      "name": "Diego Serebrisky",
+      "photo": "/assets/investors/diego-serebrisky.webp",
+      "listing": "#61 · Dalus Capital · México",
+      "tif": "Inversionista de Whale Tank · Dalus Capital",
+      "linkedin": "https://www.linkedin.com/in/diegoserebrisky/"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "¿Qué es el especial de GlobalStartups?",
+      "paragraphs": [
+        "La selección toma como base las listas oficiales de speakers y participantes de los congresos internacionales de la Asociación Internacional de Startups y de los foros de Red Business Market, y se complementa con emprendedores, business angels y líderes de asociaciones cuya trayectoria aparece en fuentes públicas.",
+        "El propio especial aclara que no es un premio ni un ranking, ni un registro exhaustivo: es una referencia editorial para ubicar a personas que conectan talento, capital y comunidad entre países."
+      ]
+    },
+    {
+      "heading": "Qué significa para los founders de Whale Tank",
+      "paragraphs": [
+        "Whale Tank selecciona 30 startups para un proceso de preparación que incluye mentoría, fundraising strategy, práctica de pitch y encuentros con inversionistas. Cinco finalistas presentan en el escenario principal de Tulum Innovation Fest.",
+        "La red de mentores e inversionistas reúne perfiles de más de ocho países. Que varios de ellos aparezcan en una selección iberoamericana refleja el tipo de conversaciones que los founders pueden tener durante el programa: capital regional, puentes entre Latinoamérica e Israel y redes de inversión ángel.",
+        "Participar en Whale Tank no garantiza recibir inversión. Lo que sí ofrece es preparación y acceso a una sala con personas que conocen el ecosistema desde distintos países."
+      ]
+    },
+    {
+      "heading": "Cómo participar",
+      "paragraphs": [
+        "La convocatoria de Whale Tank 2026 está abierta hasta el 15 de octubre de 2026 y aplicar es gratis. Está pensada para startups con producto o MVP, tracción demostrable y un objetivo de levantamiento entre USD $150K y USD $3M. Consulta los requisitos en la [página de Whale Tank](/whale-tank).",
+        "Tulum Innovation Fest 2026 se realiza del 9 al 12 de diciembre en IKAL Arena, Tulum. Los pases están disponibles en la [página de boletos](/tickets)."
+      ]
+    }
+  ],
+  "source": {
+    "label": "GlobalStartups, “100 referentes del ecosistema startup iberoamericano”, 10 de octubre de 2026",
+    "url": "https://global-startups.com/special/100-referentes-ecosistema-startup-iberoamericano?lang=es"
+  }
+}
