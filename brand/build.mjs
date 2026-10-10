@@ -1,7 +1,7 @@
 import {readFile,writeFile,cp,mkdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
-const version='20261009-aeo';
+const version='20261010-whale-header';
 const bi=(en,es)=>`<span data-tif-en>${en}</span><span data-tif-es>${es}</span>`;
 const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa'],['/blog','Blog','Blog']];
 const nav=(route)=>items.map(([url,en,es])=>`<a href="${url}"${url===route?' aria-current="page"':''}>${bi(en,es)}</a>`).join('');
@@ -19,8 +19,10 @@ export async function buildBrand(){
     const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):'';
     const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]);
     const sections=localLinks.length?`<nav class="tif-section-nav" aria-label="Page sections">${localLinks.join('')}</nav>`:'';
-    const header=`<header class="tif-site-header" data-header>
-      <a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46"></a>
+    const whale=route==='/whale-tank';
+    const whalePartner=whale?'<img class="tif-arkangeles" src="/assets/whale-tank-logos/arkangeles-blanco.webp" alt="Arkangeles" width="1200" height="178">':'';
+    const header=`<header class="tif-site-header${whale?' wt-brand-header':''}" data-header>
+      <div class="wt-brand-lockup"><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46"></a>${whalePartner}</div>
       <button class="tif-menu-toggle" type="button" aria-controls="tif-navigation" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
       <nav class="tif-navigation" id="tif-navigation" aria-label="Main navigation">${nav(route)}${language}</nav>
       <a class="tif-ticket-button" href="/#tickets">${bi('Get tickets','Boletos')}</a>
@@ -38,7 +40,6 @@ export async function buildBrand(){
       const image=route==='/program'?'program-hero-desktop.webp':'panel-discussion-desktop.webp';
       html=html.replace(/(<section class="hero">)/,`$1<div class="tif-directory-hero-media" aria-hidden="true"><img src="/assets/tif-home-v2/${image}" alt="" fetchpriority="high"></div>`);
     }
-    if(route==='/whale-tank')html=html.replace('<main id="main">','<main id="main"><div class="tif-program-credit"><span>Whale Tank ·</span><img src="/assets/whale-tank-logos/arkangeles-blanco.webp" alt="Arkangeles" width="120" height="18"></div>');
     const scriptSources=s=>[...s.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(m=>m[1]).filter(x=>!x.startsWith('/brand/'));
     assert.deepEqual(scriptSources(html),scriptSources(original),`Preserve page behavior: ${file}`);
     assert.ok(html.includes('id="tif-navigation"')&&html.includes('/#participate'),`Missing shared navigation: ${file}`);
