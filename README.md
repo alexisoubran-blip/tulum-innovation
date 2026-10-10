@@ -60,7 +60,7 @@ The complete ticket section includes the current MXN prices provided for:
 
 Every ticket CTA opens Ticket Fairy:
 
-https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748
+https://www.ticketfairy.com/event/httpswwwtuluminnovationfestcom
 
 ### Currency conversion
 

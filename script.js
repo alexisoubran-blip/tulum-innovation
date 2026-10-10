@@ -717,7 +717,7 @@
   let mobileMode = 'ticket';
 
   const mobileRoutes = {
-    ticket: { href: 'https://www.ticketfairy.com/event/tulumcryptofest2026-20260503023150748', en: 'Get Tickets', es: 'Comprar boletos' },
+    ticket: { href: 'https://www.ticketfairy.com/event/httpswwwtuluminnovationfestcom', en: 'Get Tickets', es: 'Comprar boletos' },
     founder: { href: 'https://gust.com/programs/whale-tank-2026-powered-by-parquetec/accounts/new', en: 'Apply Now', es: 'Aplicar ahora' },
     partner: { href: '#partners', en: 'Request Partnership', es: 'Solicitar alianza' }
   };
