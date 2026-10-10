@@ -78,18 +78,26 @@ export async function buildRoster() {
   await mkdir('dist/roster',{recursive:true});
   await cp('roster/styles.css','dist/roster/styles.css');
   await writeFile('dist/index.html',home);
-  // Build the directory from the same public data as the homepage.
-  const lineup = [...data.speakers, ...data.cofounders];
-  assert.equal(new Set(lineup.map(p => p.name.toLowerCase())).size, lineup.length, 'Duplicate public speaker');
-  const directoryCards = lineup.map(p => `<article class="person" data-person="${esc([p.name,p.role,p.title,p.company].filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())}"><div class="person-art"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="640" height="800" loading="lazy" decoding="async"></div><div class="person-copy"><h3>${esc(p.name)}</h3>${p.title ? `<p class="person-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}<p>${esc(p.company)}</p><span class="role">${bi(p.role,roles[p.role])}</span>${p.url ? `<a class="person-profile-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${bi('View profile','Ver perfil')} ↗</a>` : ''}</div></article>`).join('\n');
+  // Keep every public group in one continuous, searchable directory.
+  const lineup = groups.flatMap(group => data[group]);
+  assert.equal(new Set(lineup.map(p => p.name.toLowerCase())).size, lineup.length, 'Duplicate public participant');
+  const directoryCards = lineup.map(p => `<article class="person" data-person="${esc([p.name,p.role,roles[p.role],p.title,p.company].filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())}"><div class="person-art"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="640" height="800" loading="lazy" decoding="async"></div><div class="person-copy"><h3>${esc(p.name)}</h3>${p.title ? `<p class="person-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}${p.company ? `<p>${esc(p.company)}</p>` : ''}<span class="role">${bi(p.role,roles[p.role])}</span>${p.url ? `<a class="person-profile-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${bi('View profile','Ver perfil')} ↗</a>` : ''}</div></article>`).join('\n');
   let directory = await readFile('dist/speakers/index.html','utf8');
   const gridPattern = /<div class="people-grid" id="peopleGrid">[\s\S]*?<\/div>(?=<div class="notice")/;
   assert.ok(gridPattern.test(directory),'Missing speakers directory grid');
   directory = directory.replace(gridPattern,`<div class="people-grid" id="peopleGrid">${directoryCards}</div>`);
+  directory = directory
+    .replace('<title>Speakers | Tulum Innovation Fest 2026</title>', '<title>Speakers, Investors &amp; Mentors | Tulum Innovation Fest 2026</title>')
+    .replace('Meet the people publicly featured for Tulum Innovation Fest 2026.', 'Meet the speakers, investors and mentors joining Tulum Innovation Fest 2026.')
+    .replace('Meet the founders, investors and voices joining Tulum Innovation Fest.', 'Meet the speakers, founders, investors and mentors joining Tulum Innovation Fest.')
+    .replace('Search by name or organization', 'Search by name, organization or role')
+    .replace('aria-label="Search speakers"', 'aria-label="Search speakers, investors and mentors"')
+    .replace('<h2>Featured speakers</h2>', '<h2>Speakers, investors &amp; mentors</h2>')
+    .replace('Discover the speakers joining the conversation at TIF 2026, from entrepreneurship and investment to ideas that shape how we live and work.', 'Explore the speakers, co-founders, investors and mentors participating in TIF 2026 and Whale Tank.');
   directory = directory.replace('const q=input.value.toLowerCase()',"const q=input.value.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim()");
   directory = directory.replace('</head>',`<link rel="stylesheet" href="/roster/styles.css?v=${version}" /></head>`);
   assert.equal((directory.match(/data-person=/g)||[]).length,lineup.length);
-  for(const p of lineup) assert.ok(home.includes(esc(p.name)) && directory.includes(esc(p.name)), `Missing speaker ${p.name}`);
+  for(const p of lineup) assert.ok(home.includes(esc(p.name)) && directory.includes(esc(p.name)), `Missing participant ${p.name}`);
   await writeFile('dist/speakers/index.html',directory);
   console.log(`Roster: ${data.speakers.length} speakers with photos, ${data.cofounders.length} co-founders, ${data.investors.length} investors, ${data.mentors.length} mentors. Pending speakers are excluded from public HTML.`);
 }
