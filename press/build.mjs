@@ -5,7 +5,7 @@ const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<'
 const bilingual = (en, es) => `<span data-en>${escape(en)}</span><span data-es>${escape(es)}</span>`;
 const pair = value => bilingual(value.en, value.es);
 const canonical = 'https://www.tuluminnovationfest.com/press';
-const version = '20260929-press';
+const version = '20261010-type-floor';
 
 export async function buildPress() {
   const { records } = JSON.parse(await readFile(new URL('./data.json', import.meta.url), 'utf8'));

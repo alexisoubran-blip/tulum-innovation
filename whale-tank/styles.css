@@ -120,7 +120,7 @@ html[data-lang="en"] .wt-lang [data-lang-option="en"], html[data-lang="es"] .wt-
 .wt-person-image { aspect-ratio: 4/5; overflow: hidden; background: #050708; }
 .wt-person-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: saturate(.82) contrast(1.04); transition: transform .65s var(--ease), filter .35s ease; }
 .wt-person-meta { position: relative; min-height: 132px; padding: 1.15rem 2.6rem 1.2rem 1.15rem; }
-.wt-person-meta span { display: block; margin-bottom: .75rem; color: var(--ember); font-family: var(--display); font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; }
+.wt-person-meta span { display: block; margin-bottom: .75rem; color: var(--ember); font-family: var(--sans); font-weight: 600; font-size: .625rem; letter-spacing: .15em; text-transform: uppercase; }
 .wt-person-meta h3 { margin: 0; font-family: var(--serif); font-size: clamp(1.25rem,1.55vw,1.85rem); font-weight: 400; line-height: 1.05; }
 .wt-person-meta i { position: absolute; right: 1.15rem; top: 1.05rem; color: rgba(242,241,234,.42); font-style: normal; transition: color .25s ease, transform .25s ease; }
 .wt-investor-card:hover .wt-person-image img, .wt-mentor-card:hover .wt-person-image img { transform: scale(1.035); filter: saturate(1) contrast(1.06); }
@@ -279,3 +279,10 @@ html[data-lang="en"] .wt-lang [data-lang-option="en"], html[data-lang="es"] .wt-
 @media (prefers-reduced-motion: reduce) {
   .wt-page *, .wt-page *::before, .wt-page *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Type system guardrails (Oct 2026): Bruno Ace stays display-only; small labels use Sora with a 10px floor. */
+body.tif-page .wt-logo-heading h2 { font-family: var(--sans) !important; font-size: .625rem; }
+.wt-step-num { font-family: var(--sans); font-weight: 600; }
+.wt-overline { font-family: var(--sans); font-weight: 600; }
+@media (max-width: 768px) { body.wt-page .eyebrow, body.wt-page .eyebrow b { font-size: .625rem; } }
+@media (max-width: 768px) { body.wt-page .wt-step-num, body.wt-page .wt-step span { font-size: .625rem; } }

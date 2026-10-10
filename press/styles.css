@@ -17,7 +17,7 @@
 .press-logo-link[data-outlet='forbes'] img { max-width:144px; height:48px; }
 .press-logo-link[data-outlet='entrepreneur'] img { max-width:198px; }
 .press-logo-link[data-outlet='pro-network'] img { max-width:150px; }
-.press-logo-link span { font:400 .54rem/1.4 var(--pr-sans); letter-spacing:.11em; text-transform:uppercase; color:var(--pr-muted); }
+.press-logo-link span { font:400 .625rem/1.4 var(--pr-sans); letter-spacing:.11em; text-transform:uppercase; color:var(--pr-muted); }
 .press-strip-note { margin:0; padding-top:1rem; border-top:1px solid var(--pr-line); color:var(--pr-muted); font:400 .66rem/1.7 var(--pr-sans); }
 .press-page { margin:0; background:var(--pr-bg); color:var(--pr-ink); font:400 16px/1.6 var(--pr-sans); }
 .press-page [hidden] { display:none !important; }
@@ -49,7 +49,7 @@
 .press-card-top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:start; gap:.7rem; margin-bottom:1.4rem; }
 .press-outlet { margin:0; font-weight:600; font-size:.9rem; letter-spacing:-.035em; }
 .press-card time { font-size:.6rem; white-space:nowrap; color:#626b67; }
-.press-kind { display:inline-block; align-self:flex-start; color:#58635c; font-size:.58rem; text-transform:uppercase; letter-spacing:.06em; }
+.press-kind { display:inline-block; align-self:flex-start; color:#58635c; font-size:.625rem; text-transform:uppercase; letter-spacing:.06em; }
 .press-card h3 { margin:.85rem 0 1rem; font:500 clamp(1rem,1.3vw,1.22rem)/1.5 var(--pr-sans); letter-spacing:-.035em; overflow-wrap:break-word; }
 .press-card p.press-card-summary { color:#56625d; font-size:.76rem; line-height:1.7; margin:0 0 1.5rem; }
 .press-card a { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:44px; margin-top:auto; padding-top:.9rem; border-top:1px solid #d8dcd5; font-size:.66rem; font-weight:500; text-decoration:none; }
@@ -62,7 +62,7 @@
 .press-button:hover { border-color:var(--pr-accent); }
 @media(max-width:1200px) { .press-logo-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:.75rem; } }
 @media(max-width:960px) { .press-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } .press-logo-link img { max-width:135px; height:32px; } .press-logo-link[data-outlet='forbes'] img { max-width:115px; height:40px; } }
-@media(max-width:620px) { .press-wrap { width:90%; } .press-strip { padding-top:1.5rem; } .press-logo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.4rem 1rem; padding:1rem 0; } .press-logo-grid li:last-child { grid-column:1/-1; } .press-logo-link { min-height:88px; gap:.75rem; } .press-logo-link img { max-width:152px; height:32px; } .press-logo-link[data-outlet='forbes'] img { max-width:122px; height:43px; } .press-strip-note { font-size:.6rem; } .press-header { flex-wrap:wrap; padding:1.1rem 0; gap:.8rem; } .press-brand img { height:32px; max-width:180px; } .press-nav { width:100%; justify-content:space-between; gap:.5rem; } .press-nav a { font-size:.57rem; } .press-lang { min-width:65px; } .press-intro { padding-top:3.3rem; } .press-page h1 { font-size:clamp(2.2rem,10vw,3.7rem); } .press-cards { grid-template-columns:1fr; } .press-card { min-height:295px; } .press-archive-heading { align-items:start; flex-direction:column; } .press-filters { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; } .press-filters select { width:100%; min-width:0; font-size:.65rem; padding-left:.5rem; } .press-filter-status { grid-column:1/-1; margin:.4rem 0 0; } }
+@media(max-width:620px) { .press-wrap { width:90%; } .press-strip { padding-top:1.5rem; } .press-logo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.4rem 1rem; padding:1rem 0; } .press-logo-grid li:last-child { grid-column:1/-1; } .press-logo-link { min-height:88px; gap:.75rem; } .press-logo-link img { max-width:152px; height:32px; } .press-logo-link[data-outlet='forbes'] img { max-width:122px; height:43px; } .press-strip-note { font-size:.6rem; } .press-header { flex-wrap:wrap; padding:1.1rem 0; gap:.8rem; } .press-brand img { height:32px; max-width:180px; } .press-nav { width:100%; justify-content:space-between; gap:.5rem; } .press-nav a { font-size:.625rem; } .press-lang { min-width:65px; } .press-intro { padding-top:3.3rem; } .press-page h1 { font-size:clamp(2.2rem,10vw,3.7rem); } .press-cards { grid-template-columns:1fr; } .press-card { min-height:295px; } .press-archive-heading { align-items:start; flex-direction:column; } .press-filters { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; } .press-filters select { width:100%; min-width:0; font-size:.65rem; padding-left:.5rem; } .press-filter-status { grid-column:1/-1; margin:.4rem 0 0; } }
 @media(prefers-reduced-motion:reduce) { .press-strip *, .press-page * { transition:none !important; scroll-behavior:auto !important; } }
 
 /* Keep the press kicker compact despite shared homepage heading rules. */

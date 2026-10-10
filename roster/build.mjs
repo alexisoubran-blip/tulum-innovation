@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi = (en, es) => `<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor'};
-const version = '20261010-speaker-languages';
+const version = '20261010-type-floor';
 
 function card(p, poster = false) {
   const photo = p.image ? `<div class="roster-art${poster ? ' roster-poster' : ''}"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="440" height="540" loading="lazy" decoding="async" /></div>` : '';

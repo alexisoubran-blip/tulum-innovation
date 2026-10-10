@@ -1,7 +1,7 @@
 import {readFile,writeFile,cp,mkdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
-const version='20261010-language-visibility';
+const version='20261010-type-system';
 const bi=(en,es)=>`<span data-tif-en>${en}</span><span data-tif-es>${es}</span>`;
 const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa'],['/blog','Blog','Blog']];
 const nav=(route)=>items.map(([url,en,es])=>`<a href="${url}"${url===route?' aria-current="page"':''}>${bi(en,es)}</a>`).join('');

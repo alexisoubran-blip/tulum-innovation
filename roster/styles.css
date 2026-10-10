@@ -48,7 +48,7 @@
  .roster-section .roster-section-head h2 { font-size:clamp(1.9rem,7.8vw,2.8rem); }
  .roster-meta { gap:.35rem;padding:.8rem .7rem; }
  .roster-section .roster-card h3 { font-size:.88rem;line-height:1.32; }
- .roster-section .roster-role { font-size:.59rem; }
+ .roster-section .roster-role { font-size:.625rem; }
  .roster-section .roster-company { font-size:.7rem;line-height:1.5; }
  .roster-section .roster-profile-link { font-size:.66rem;min-height:44px;padding-top:.4rem; }
  .roster-section .roster-group-head { align-items:flex-start;flex-direction:column;gap:.35rem; }

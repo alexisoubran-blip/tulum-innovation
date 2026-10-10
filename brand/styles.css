@@ -209,3 +209,9 @@ html:has(.wt-page){scroll-padding-top:158px}
 @media(max-width:350px){
   .wt-page .wt-brand-header .tif-arkangeles{width:62px !important;max-width:62px !important;max-height:11px !important}
 }
+
+/* Legibility floor for the header ticket button on small screens (Oct 2026). */
+@media(max-width:640px){.tif-page .tif-site-header .tif-ticket-button{font-size:.625rem}}
+/* Ghost buttons on light (paper) sections need dark ink to stay legible (Oct 2026). */
+.tif-page .v2-executive .btn-ghost{background:transparent;color:var(--tif-ink);border-color:rgba(0,8,11,.32)}
+.tif-page .v2-executive .btn-ghost:hover{background:rgba(0,8,11,.05);border-color:var(--tif-ink);color:var(--tif-ink)}

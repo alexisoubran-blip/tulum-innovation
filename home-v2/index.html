@@ -270,7 +270,7 @@
       padding:1.2rem 0 0; border-top:1px solid rgba(0,8,11,.16); margin-top:1.2rem;
     }
     .v2-film-caption p { margin:0; max-width:680px; color:rgba(0,8,11,.63); line-height:1.6; }
-    .v2-film-caption span { font-family:var(--display); color:var(--ember); font-size:.75rem; letter-spacing:.07em; }
+    .v2-film-caption > span { font-family:var(--display); color:var(--ember); font-size:.75rem; letter-spacing:.07em; }
 
     /* Journeys */
     .v2-journeys { background:var(--black); }
@@ -312,7 +312,7 @@
       display:flex; align-items:end; justify-content:space-between; gap:1rem;
       border-top:1px solid rgba(242,241,234,.42); padding-top:.85rem; color:#F2F1EA;
     }
-    .v2-program-hero figcaption span {
+    .v2-program-hero figcaption > span {
       color:rgba(242,241,234,.66); font-size:.56rem; letter-spacing:.12em; text-transform:uppercase;
     }
     .v2-program-hero figcaption strong {
@@ -341,7 +341,7 @@
     .v2-exec-main img { width:100%; height:100%; object-fit:cover; }
     .v2-exec-main::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,8,11,.8),rgba(0,8,11,.03) 55%); }
     .v2-exec-main figcaption { position:absolute; z-index:2; left:1.4rem; right:1.4rem; bottom:1.4rem; display:flex; align-items:end; justify-content:space-between; gap:1rem; color:#F2F1EA; border-top:1px solid rgba(242,241,234,.45); padding-top:.9rem; }
-    .v2-exec-main figcaption span { font-size:.56rem; letter-spacing:.13em; text-transform:uppercase; color:rgba(242,241,234,.66); }
+    .v2-exec-main figcaption > span { font-size:.56rem; letter-spacing:.13em; text-transform:uppercase; color:rgba(242,241,234,.66); }
     .v2-exec-main figcaption strong { font-family:var(--display); font-size:1.1rem; font-weight:400; text-transform:uppercase; }
     .v2-exec-reasons { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(0,8,11,.14); border:1px solid rgba(0,8,11,.14); }
     .v2-exec-reasons article { min-height:320px; padding:1.4rem; background:#fff; display:flex; flex-direction:column; }
@@ -616,10 +616,10 @@
     .v2-voice-card > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.78) contrast(1.03); }
     .v2-voice-card::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,8,11,.96),rgba(0,8,11,.16) 70%); }
     .v2-voice-card > div { position:absolute; z-index:2; inset:auto 1.4rem 1.4rem; }
-    .v2-voice-card span { color:#E97A43; font-size:.58rem; letter-spacing:.13em; text-transform:uppercase; }
+    .v2-voice-card > div > span { color:#E97A43; font-size:.58rem; letter-spacing:.13em; text-transform:uppercase; }
     .v2-voice-card blockquote { margin:.8rem 0 1rem; font-family:var(--display); font-size:clamp(1.75rem,2.2vw,3rem); line-height:1.02; }
     .v2-voice-card p { margin:0; color:rgba(242,241,234,.7); font-size:.8rem; line-height:1.5; }
-    .v2-voice-memory blockquote { font-size:clamp(2rem,2.5vw,3.4rem); color:#E97A43; }
+    .v2-voice-memory .v2-voice-name { font-size:clamp(2rem,2.5vw,3.4rem); color:#E97A43; }
 
     .v2-film-moments { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:2rem; }
     .v2-film-moments figure { position:relative; margin:0; aspect-ratio:4/3; overflow:hidden; background:#000; }
@@ -628,7 +628,7 @@
     .v2-film-moments figcaption { position:absolute; left:.8rem; bottom:.8rem; padding:.4rem .55rem; background:rgba(0,8,11,.75); color:#F2F1EA; font-size:.55rem; letter-spacing:.1em; text-transform:uppercase; }
 
     .v2-program-people { display:grid; grid-template-columns:minmax(280px,.45fr) 1fr; gap:2rem; margin-top:2rem; padding:1.2rem; border:1px solid var(--line); }
-    .v2-program-people-copy span { color:var(--ember); font-family:var(--display); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; }
+    .v2-program-people-copy > span { color:var(--ember); font-family:var(--display); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; }
     .v2-program-people-copy h3 { margin:.5rem 0 .65rem; font-family:var(--display); font-size:1.35rem; font-weight:400; }
     .v2-program-people-copy p { margin:0; color:rgba(242,241,234,.58); font-size:.78rem; line-height:1.5; }
     .v2-program-faces { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; align-items:center; }
@@ -1344,6 +1344,34 @@
     .v2-participation-card .btn { margin-top: auto; align-self: flex-start; }
     @media (max-width: 900px) { .v2-participation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 600px) { .v2-participation-grid { grid-template-columns: 1fr; } }
+
+/* Type system guardrails (Oct 2026)
+   Bruno Ace = display only (headlines, numbers, names). Labels, captions
+   and meta use Sora 500–600 with a 10px floor so they stay legible. */
+.v2-voice-card .v2-voice-name { margin:.8rem 0 1rem; font-family:var(--display); line-height:1.02; }
+.v2-voice-card > div > span,
+.v2-film-moments figcaption,
+.v2-mosaic figcaption,
+.v2-beyond-collage figcaption,
+.v2-exec-main figcaption > span,
+.v2-program-hero figcaption > span,
+.v2-archive-grid figcaption span,
+.v2-countdown-grid span,
+.press-logo-link > span { font-size:.625rem; }
+.v2-program-people-copy > span { font-family:var(--sans); font-weight:600; font-size:.625rem; }
+body.tif-page .wt-logo-heading h2 { font-family:var(--sans) !important; font-size:.625rem; }
+.v2-film-caption > span { font-family:var(--sans); font-weight:600; font-size:.66rem; letter-spacing:.14em; }
+.v2-day h3 { text-transform:uppercase; font-weight:400; letter-spacing:-.02em; }
+.v2-countdown-kicker, .v2-countdown-date, .v2-exec-moments small,
+.v2-ticket-type, .v2-past-people-note { font-size:.625rem; }
+body .press-logo-link > span { font-size:.625rem; }
+.v2-journey-card > span, .v2-exec-reasons article > span { font-family:var(--sans); font-weight:600; font-size:.66rem; letter-spacing:.14em; }
+@media (max-width:768px) {
+  .v2-countdown-grid span { font-size:.625rem; letter-spacing:.06em; }
+  .v2-person-meta span { font-size:.625rem; }
+  .v2-past-people-grid .v2-past-person h3 { font-size:.9rem; }
+  .v2-past-people-grid .v2-past-person p { font-size:.66rem; }
+}
 </style>
   <script type="application/ld+json">
   {
@@ -1670,20 +1698,20 @@
             <p class="v2-kicker"><span data-en>Voices & moments</span><span data-es>Voces y momentos</span></p>
             <h2 id="voices-title"><span data-en>What people remember</span><span data-es>Lo que la gente recuerda</span> <em><span data-en>after Tulum.</span><span data-es>después de Tulum.</span></em></h2>
           </div>
-          <p><span data-en>Social proof should feel human: short quotes, real archive imagery and recognizable names from previous editions.</span><span data-es>El social proof debe sentirse humano: citas cortas, archivo real y nombres reconocibles de ediciones anteriores.</span></p>
+          <p><span data-en>Short quotes, real moments and familiar names from five editions in Tulum.</span><span data-es>Citas breves, momentos reales y nombres conocidos de cinco ediciones en Tulum.</span></p>
         </div>
         <div class="v2-voice-grid">
           <article class="v2-voice-card">
             <img src="/assets/sponsorship/community-2023.webp" alt="Community at a previous TIF edition" loading="lazy" />
-            <div><span>Previous edition</span><blockquote><span data-en>The Burning Man of innovation gatherings.</span><span data-es>El Burning Man de los encuentros de innovación.</span></blockquote><p>TIF Community</p></div>
+            <div><span><span data-en>Previous edition</span><span data-es>Edición anterior</span></span><blockquote><span data-en>The Burning Man of innovation gatherings.</span><span data-es>El Burning Man de los encuentros de innovación.</span></blockquote><p>TIF Community</p></div>
           </article>
           <article class="v2-voice-card">
             <img src="/assets/sponsorship/founder-conversation.webp" alt="Founder conversation at TIF" loading="lazy" />
-            <div><span>Previous edition</span><blockquote><span data-en>“A platform built to turn ideas into something real.”</span><span data-es>“La plataforma perfecta para materializar.”</span></blockquote><p>Peiman</p></div>
+            <div><span><span data-en>Previous edition</span><span data-es>Edición anterior</span></span><blockquote><span data-en>“A platform built to turn ideas into something real.”</span><span data-es>“La plataforma perfecta para materializar.”</span></blockquote><p>Peiman</p></div>
           </article>
           <article class="v2-voice-card v2-voice-memory">
             <img src="/assets/sponsorship/live-performance.webp" alt="Live performance at a previous TIF edition" loading="lazy" />
-            <div><span>Live at TIF</span><blockquote>Scott Page</blockquote><p><span data-en>Music and culture are part of the festival experience.</span><span data-es>La música y la cultura forman parte de la experiencia del festival.</span></p></div>
+            <div><span><span data-en>Live at TIF</span><span data-es>En vivo en TIF</span></span><p class="v2-voice-name">Scott Page</p><p><span data-en>Music and culture are part of the festival experience.</span><span data-es>La música y la cultura forman parte de la experiencia del festival.</span></p></div>
           </article>
         </div>
       </div>
@@ -1711,8 +1739,8 @@
         </div>
         <div class="v2-film-moments" aria-label="Previous edition moments">
           <figure><img src="/assets/sponsorship/founder-stage.webp" alt="Founder on stage at TIF" loading="lazy" /><figcaption>Founders</figcaption></figure>
-          <figure><img src="/assets/sponsorship/networking.webp" alt="Networking at TIF" loading="lazy" /><figcaption>Connections</figcaption></figure>
-          <figure><img src="/assets/sponsorship/night-program.webp" alt="Night program at TIF" loading="lazy" /><figcaption>Night program</figcaption></figure>
+          <figure><img src="/assets/sponsorship/networking.webp" alt="Networking at TIF" loading="lazy" /><figcaption><span data-en>Connections</span><span data-es>Conexiones</span></figcaption></figure>
+          <figure><img src="/assets/sponsorship/night-program.webp" alt="Night program at TIF" loading="lazy" /><figcaption><span data-en>Night program</span><span data-es>Programa nocturno</span></figcaption></figure>
           <figure><img src="/assets/sponsorship/hospitality-activation.webp" alt="Hospitality activation at TIF" loading="lazy" /><figcaption>Hospitality</figcaption></figure>
         </div>
       </div>
@@ -1764,10 +1792,10 @@
           </figure>
 
           <div class="v2-exec-reasons">
-            <article><span>01</span><h3>Curated access</h3><p><span data-en>Founders, investors and operators in a limited-capacity environment designed for repeated interaction.</span><span data-es>Founders, inversionistas y operadores en un entorno de capacidad limitada que permite interacciones recurrentes.</span></p></article>
-            <article><span>02</span><h3>Capital & dealflow</h3><p><span data-en>Whale Tank, investor conversations and founder discovery give capital a defined place in the week.</span><span data-es>Whale Tank, conversaciones con inversionistas y descubrimiento de founders dan al capital un espacio definido durante la semana.</span></p></article>
-            <article><span>03</span><h3>Corporate innovation</h3><p><span data-en>Brands can meet startups, explore use cases and develop partnerships around real business priorities.</span><span data-es>Las marcas pueden conocer startups, explorar casos de uso y desarrollar partnerships alrededor de prioridades reales de negocio.</span></p></article>
-            <article><span>04</span><h3>Hospitality & culture</h3><p><span data-en>Shared tables, nature and evening programming create more time for relationships beyond formal sessions.</span><span data-es>Mesas compartidas, naturaleza y programación nocturna generan más tiempo para relaciones fuera de las sesiones formales.</span></p></article>
+            <article><span>01</span><h3><span data-en>Curated access</span><span data-es>Acceso curado</span></h3><p><span data-en>Founders, investors and operators in a limited-capacity environment designed for repeated interaction.</span><span data-es>Founders, inversionistas y operadores en un entorno de capacidad limitada que permite interacciones recurrentes.</span></p></article>
+            <article><span>02</span><h3><span data-en>Capital & dealflow</span><span data-es>Capital y dealflow</span></h3><p><span data-en>Whale Tank, investor conversations and founder discovery give capital a defined place in the week.</span><span data-es>Whale Tank, conversaciones con inversionistas y descubrimiento de founders dan al capital un espacio definido durante la semana.</span></p></article>
+            <article><span>03</span><h3><span data-en>Corporate innovation</span><span data-es>Innovación corporativa</span></h3><p><span data-en>Brands can meet startups, explore use cases and develop partnerships around real business priorities.</span><span data-es>Las marcas pueden conocer startups, explorar casos de uso y desarrollar partnerships alrededor de prioridades reales de negocio.</span></p></article>
+            <article><span>04</span><h3><span data-en>Hospitality & culture</span><span data-es>Hospitality y cultura</span></h3><p><span data-en>Shared tables, nature and evening programming create more time for relationships beyond formal sessions.</span><span data-es>Mesas compartidas, naturaleza y programación nocturna generan más tiempo para relaciones fuera de las sesiones formales.</span></p></article>
           </div>
         </div>
 
@@ -1874,7 +1902,7 @@
             <p class="v2-kicker"><span data-en>Beyond the stage</span><span data-es>Más allá del escenario</span></p>
             <h2><span data-en>The festival lives in the</span><span data-es>El festival vive en los</span> <em><span data-en>moments between.</span><span data-es>momentos intermedios.</span></em></h2>
           </div>
-          <p><span data-en>Real photography should carry the brand. People, conversations, culture, nature and shared experiences make TIF legible before anyone reads a paragraph.</span><span data-es>La fotografía real debe cargar la marca. Personas, conversaciones, cultura, naturaleza y experiencias hacen que TIF se entienda antes de leer un párrafo.</span></p>
+          <p><span data-en>People, conversations, culture, nature and shared experiences. This is how TIF is lived, on and off the main stage.</span><span data-es>Personas, conversaciones, cultura, naturaleza y experiencias compartidas. Así se vive TIF, dentro y fuera del escenario principal.</span></p>
         </div>
 
         <div class="v2-mosaic">
@@ -1912,7 +1940,7 @@
             <p class="v2-kicker"><span data-en>Previous editions</span><span data-es>Ediciones anteriores</span></p>
             <h2 id="archive-title"><span data-en>Five editions built an</span><span data-es>Cinco ediciones construyeron un</span> <em><span data-en>archive worth showing.</span><span data-es>archivo que vale la pena mostrar.</span></em></h2>
           </div>
-          <p><span data-en>Instead of describing history, the site should show it. These are real moments from previous editions in Tulum.</span><span data-es>En lugar de describir la historia, el sitio debe mostrarla. Estos son momentos reales de ediciones anteriores en Tulum.</span></p>
+          <p><span data-en>Real moments from five previous editions in Tulum.</span><span data-es>Momentos reales de cinco ediciones anteriores en Tulum.</span></p>
         </div>
 
         <div class="v2-archive-grid">
@@ -2067,10 +2095,10 @@
           </div>
 
           <div class="v2-partner-outcomes">
-            <article><span>01</span><h3>Executive access</h3><p>Curated proximity to founders, investors and operators.</p></article>
-            <article><span>02</span><h3>Brand experience</h3><p>Hospitality, activations and contextual visibility.</p></article>
-            <article><span>03</span><h3>Content & distribution</h3><p>Stories and assets that extend beyond the event.</p></article>
-            <article><span>04</span><h3>Corporate innovation</h3><p>Structured founder discovery around real business challenges.</p></article>
+            <article><span>01</span><h3><span data-en>Executive access</span><span data-es>Acceso ejecutivo</span></h3><p><span data-en>Curated proximity to founders, investors and operators.</span><span data-es>Cercanía curada con founders, inversionistas y operadores.</span></p></article>
+            <article><span>02</span><h3><span data-en>Brand experience</span><span data-es>Experiencia de marca</span></h3><p><span data-en>Hospitality, activations and contextual visibility.</span><span data-es>Hospitality, activaciones y visibilidad en contexto.</span></p></article>
+            <article><span>03</span><h3><span data-en>Content & distribution</span><span data-es>Contenido y distribución</span></h3><p><span data-en>Stories and assets that extend beyond the event.</span><span data-es>Historias y contenidos que trascienden el evento.</span></p></article>
+            <article><span>04</span><h3><span data-en>Corporate innovation</span><span data-es>Innovación corporativa</span></h3><p><span data-en>Structured founder discovery around real business challenges.</span><span data-es>Descubrimiento estructurado de founders alrededor de retos reales de negocio.</span></p></article>
           </div>
         </div>
       </div>
