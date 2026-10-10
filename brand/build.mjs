@@ -1,7 +1,7 @@
 import {readFile,writeFile,cp,mkdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
-const version='20261010-whale-header';
+const version='20261010-whale-sticky-nav-v2';
 const bi=(en,es)=>`<span data-tif-en>${en}</span><span data-tif-es>${es}</span>`;
 const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa'],['/blog','Blog','Blog']];
 const nav=(route)=>items.map(([url,en,es])=>`<a href="${url}"${url===route?' aria-current="page"':''}>${bi(en,es)}</a>`).join('');
@@ -20,7 +20,7 @@ export async function buildBrand(){
     const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]);
     const sections=localLinks.length?`<nav class="tif-section-nav" aria-label="Page sections">${localLinks.join('')}</nav>`:'';
     const whale=route==='/whale-tank';
-    const whalePartner=whale?'<img class="tif-arkangeles" src="/assets/whale-tank-logos/arkangeles-blanco.webp" alt="Arkangeles" width="1200" height="178">':'';
+    const whalePartner=whale?'<img class="tif-arkangeles" src="/assets/whale-tank-logos/arkangeles-blanco.webp" alt="Arkangeles" width="94" height="14" decoding="async">':'';
     const header=`<header class="tif-site-header${whale?' wt-brand-header':''}" data-header>
       <div class="wt-brand-lockup"><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46"></a>${whalePartner}</div>
       <button class="tif-menu-toggle" type="button" aria-controls="tif-navigation" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
