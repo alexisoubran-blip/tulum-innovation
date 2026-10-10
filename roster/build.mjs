@@ -42,7 +42,6 @@ export async function buildRoster() {
   const speakers = `<section class="v2-speakers v2-section roster-section" id="speakers" aria-labelledby="speakers-title">
   <div class="container">
     <div class="roster-section-head"><div><p class="v2-kicker">TIF 2026</p><h2 id="speakers-title">${bi('Meet the speakers','Conoce a los speakers')}</h2></div><p>${bi('Founders, investors and specialists sharing perspectives on technology, capital and culture.','Founders, inversionistas y especialistas que comparten perspectivas sobre tecnolog\u00eda, capital y cultura.')}</p></div>
-    <div class="roster-jump-links"><a href="#speaker-lineup">Speakers <span>${data.speakers.length}</span></a><a href="#cofounders">Co-Founders <span>${data.cofounders.length}</span></a><a href="#investors">${bi('Investors','Inversionistas')} <span>${data.investors.length}</span></a><a href="#mentors">${bi('Mentors','Mentores')} <span>${data.mentors.length}</span></a></div>
     <div class="roster-group" id="speaker-lineup" data-roster-group="speakers">
       <div class="roster-group-head"><h3>Speakers</h3><p>${bi('Keynotes, panels & workshops','Keynotes, paneles y workshops')}</p></div>
       <div class="roster-grid roster-grid-speakers">${data.speakers.map(p => card(p,true)).join('\n')}</div>
