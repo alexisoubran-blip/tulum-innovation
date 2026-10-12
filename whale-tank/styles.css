@@ -286,3 +286,77 @@ body.tif-page .wt-logo-heading h2 { font-family: var(--sans) !important; font-si
 .wt-overline { font-family: var(--sans); font-weight: 600; }
 @media (max-width: 768px) { body.wt-page .eyebrow, body.wt-page .eyebrow b { font-size: .625rem; } }
 @media (max-width: 768px) { body.wt-page .wt-step-num, body.wt-page .wt-step span { font-size: .625rem; } }
+
+/* Application deadline countdown (Oct 2026) */
+.wt-countdown { margin-top: 2rem; max-width: 560px; }
+.wt-countdown-label { margin: 0 0 .7rem; color: #E97A43; font: 600 .66rem/1.4 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.wt-countdown-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line-strong); background: rgba(0,8,11,.42); backdrop-filter: blur(10px); }
+.wt-countdown-grid > div { display: flex; flex-direction: column; gap: .35rem; padding: .9rem 1rem; border-left: 1px solid var(--line); }
+.wt-countdown-grid > div:first-child { border-left: 0; }
+.wt-countdown-grid strong { font-family: var(--display); font-size: clamp(1.8rem, 2.6vw, 2.6rem); font-weight: 400; line-height: 1; color: var(--white); font-variant-numeric: tabular-nums; }
+.wt-countdown-grid span { color: rgba(242,241,234,.6); font-size: .625rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.wt-countdown-note { margin: .75rem 0 0; color: rgba(242,241,234,.55); font-size: .72rem; letter-spacing: .03em; }
+.wt-countdown.is-compact { margin: 1.6rem auto 0; }
+.wt-countdown.is-compact .wt-countdown-grid strong { font-size: clamp(1.4rem, 2vw, 1.9rem); }
+.wt-countdown.is-closed .wt-countdown-grid { display: none; }
+.wt-countdown.is-closed .wt-countdown-label { font-size: .8rem; color: var(--white); }
+.wt-closing-copy .wt-countdown { text-align: left; }
+
+/* Funnel fee disclosure */
+.wt-funnel-note { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .6rem 1.5rem; margin-top: 1.4rem; padding: 1rem 0; border-top: 1px solid var(--line); color: rgba(242,241,234,.7); font-size: .9rem; }
+.wt-funnel-note p { margin: 0; }
+.wt-funnel-note .text-link { color: #E97A43; }
+
+/* Founder experience, fees and terms */
+.wt-terms { border-top: 1px solid var(--line); background: radial-gradient(circle at 85% 0%, rgba(209,68,20,.12), transparent 32%), linear-gradient(180deg, var(--black), var(--black-soft)); }
+.wt-terms-head h2 { max-width: 1100px; margin: 0; font-family: var(--serif); font-size: clamp(2.4rem, 4.6vw, 5.4rem); font-weight: 400; line-height: .98; letter-spacing: -.04em; text-transform: uppercase; }
+.wt-terms-head h2 em { display: block; color: #E97A43; font-style: normal; }
+.wt-terms-lede { max-width: 760px; margin: 1.6rem 0 0; color: rgba(242,241,234,.7); font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.65; }
+.wt-packages { display: grid; grid-template-columns: repeat(2, minmax(0, .9fr)) minmax(0, 1.1fr); gap: 1px; margin-top: clamp(2.5rem, 5vw, 4.5rem); background: var(--line); border: 1px solid var(--line); }
+.wt-package, .wt-included { display: flex; flex-direction: column; padding: clamp(1.4rem, 2.4vw, 2.4rem); background: var(--black-soft); }
+.wt-package.is-featured { background: linear-gradient(180deg, rgba(209,68,20,.14), var(--black-soft) 55%); }
+.wt-package-label, .wt-card-kicker { margin: 0; color: #E97A43; font: 600 .66rem/1.4 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.wt-package-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .6rem; margin: 1.3rem 0 .4rem; }
+.wt-package-price small { color: rgba(242,241,234,.6); font-size: .72rem; font-weight: 600; letter-spacing: .14em; }
+.wt-package-price strong { font-family: var(--display); font-size: clamp(2.8rem, 4.4vw, 4.6rem); font-weight: 400; line-height: 1; letter-spacing: -.03em; }
+.wt-package-price span { width: 100%; color: rgba(242,241,234,.6); font-size: .8rem; }
+.wt-package-extra { margin: 0 0 1.2rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--line); color: var(--white); font-size: .92rem; font-weight: 500; }
+.wt-package ul, .wt-included ul { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.wt-package li, .wt-included li { position: relative; padding-left: 1.4rem; color: rgba(242,241,234,.82); font-size: .92rem; line-height: 1.5; }
+.wt-package li::before, .wt-included li::before { content: ""; position: absolute; left: 0; top: .55em; width: .55rem; height: .55rem; border: 1px solid #E97A43; transform: rotate(45deg); }
+.wt-package-note { margin: auto 0 0; padding-top: 1.2rem; color: rgba(242,241,234,.52); font-size: .8rem; line-height: 1.55; }
+body.tif-page .wt-included h3 { margin: 0 0 1.2rem; font-family: var(--sans) !important; font-size: .66rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #E97A43; }
+.wt-scholarships, .wt-capital { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 1px; background: var(--line); border: 1px solid var(--line); border-top: 0; }
+.wt-scholarships article, .wt-capital article { padding: clamp(1.4rem, 2.4vw, 2.4rem); background: var(--black-soft); }
+.wt-scholarships h3 { margin: .9rem 0 .8rem; font-family: var(--serif); font-size: clamp(1.5rem, 2.2vw, 2.3rem); font-weight: 400; line-height: 1.05; text-transform: uppercase; }
+.wt-scholarships article > p:last-child, .wt-capital article > p:last-child { margin: 0; color: rgba(242,241,234,.68); line-height: 1.65; font-size: .92rem; }
+.wt-fineprint { grid-column: 1 / -1; margin: 0; padding: .9rem clamp(1.4rem, 2.4vw, 2.4rem); background: var(--black); color: rgba(242,241,234,.5); font-size: .78rem; }
+.wt-capital { margin-top: clamp(1.5rem, 3vw, 2.5rem); border-top: 1px solid var(--line); }
+.wt-capital-figure { display: block; margin: .9rem 0 .8rem; color: #E97A43; font-family: var(--display); font-size: clamp(3rem, 5vw, 5.4rem); font-weight: 400; line-height: 1; letter-spacing: -.03em; }
+.wt-terms-list { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
+.wt-terms-list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line-strong); }
+.wt-terms-list-head h3 { margin: 0; font-family: var(--serif); font-size: clamp(1.6rem, 2.6vw, 2.6rem); font-weight: 400; text-transform: uppercase; }
+.wt-terms-list-head p { margin: 0; color: rgba(242,241,234,.55); font-size: .8rem; }
+.wt-terms-items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(1.5rem, 4vw, 4rem); }
+.wt-term { border-bottom: 1px solid var(--line); }
+.wt-term summary { display: flex; align-items: center; gap: 1rem; min-height: 64px; padding: .8rem 0; cursor: pointer; list-style: none; font-size: 1rem; font-weight: 500; }
+.wt-term summary::-webkit-details-marker { display: none; }
+.wt-term summary b { flex: none; color: #E97A43; font-size: .66rem; font-weight: 600; letter-spacing: .14em; }
+.wt-term summary::after { content: "+"; margin-left: auto; color: rgba(242,241,234,.6); font-size: 1.3rem; line-height: 1; transition: transform .25s var(--ease); }
+.wt-term[open] summary::after { transform: rotate(45deg); color: #E97A43; }
+.wt-term summary:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+.wt-term p { margin: 0 0 1.2rem; padding-left: 2.1rem; color: rgba(242,241,234,.66); font-size: .9rem; line-height: 1.65; }
+.wt-terms-links { display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; margin-top: 1.4rem; }
+.wt-terms-links a { color: #E97A43; font-size: .85rem; text-underline-offset: 4px; }
+
+@media (max-width: 1080px) {
+  .wt-packages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wt-included { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .wt-countdown-grid > div { padding: .7rem .6rem; }
+  .wt-countdown-grid strong { font-size: 1.6rem; }
+  .wt-packages, .wt-scholarships, .wt-capital, .wt-terms-items { grid-template-columns: 1fr; }
+  .wt-terms-head h2 { font-size: clamp(1.45rem, 6.6vw, 2.1rem) !important; overflow-wrap: normal !important; word-break: normal !important; hyphens: none; }
+  .wt-term p { padding-left: 0; }
+}
