@@ -131,3 +131,13 @@ test('order token for successUrl: round-trip, tamper-proof, expires', () => {
   assert.equal(openOrderToken(token, secret, { now: NOW + 61_000 }), null);
   assert.throws(() => sealOrderToken('o', 'short'), /32 characters/);
 });
+
+test('canonical string matches the official Blokko playground byte for byte (2026-10-15 sandbox, 200 OK)', () => {
+  // Raw String to Sign shown by playground-sandbox.blokko.ai for a payment intent. The playground's
+  // signature for it matched computeSignature(secretAsText, canonical, 'hex'); the secret is not stored here.
+  const body = '{"merchantTransactionId":"a36cdb4f-a3f3-4763-bbc7-87a7ff75545d","merchantReference":"dcdfc193-9c8a-4ff5-ad96-ecf605488112","terminalUuid":"TSDX611748604","amount":"0.01","paymentMethodId":"BCLN"}';
+  assert.equal(
+    canonicalString({ method: 'POST', path: '/v2/payment-intent', query: '', body, timestamp: 1792040270, nonce: '6fb77b7c-4863-4223-99cf-606da6a512c2' }),
+    `POST\n/v2/payment-intent\n\n${body}\n1792040270\n6fb77b7c-4863-4223-99cf-606da6a512c2`,
+  );
+});

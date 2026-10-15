@@ -9,7 +9,7 @@ Blokko ofrece dos caminos:
 | Camino | Endpoint | Para qué lo usamos |
 |---|---|---|
 | **Invoice (link de pago)** | `POST /v2/invoice` | Venta online en `/tickets`. Blokko devuelve `invoiceUrl`, una página alojada donde el comprador elige stablecoin, RTP o cripto y ve el QR. Al pagar, Blokko lo redirige a nuestro `successUrl`. |
-| **Payment Intent (terminal)** | `POST /v2/payment/intent` | Venta presencial en el venue o en comercios de Innovation City. Requiere `terminalUuid`. Devuelve `qrUrl` / `qrContent`. |
+| **Payment Intent (terminal)** | `POST /v2/payment-intent` | Venta presencial en el venue o en comercios de Innovation City. Requiere `terminalUuid`. Devuelve `qrUrl` / `qrContent`. |
 
 Otros endpoints:
 
@@ -75,8 +75,8 @@ Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `mer
 | `BLOKKO_SECRET` | Secret key de Blokko |
 | `BLOKKO_MERCHANT_UUID` | `merchantUuid` para invoices |
 | `BLOKKO_MERCHANT_ID` | `merchantId` para el webhook (si es distinto del UUID) |
-| `BLOKKO_SIGNATURE_ENCODING` | `hex` o `base64` (confirmar con el script) |
-| `BLOKKO_TIMESTAMP_UNIT` | `s` o `ms` |
+| `BLOKKO_SIGNATURE_ENCODING` | `hex` (confirmado contra el playground; es el default) |
+| `BLOKKO_TIMESTAMP_UNIT` | `s` (confirmado; es el default) |
 | `ORDER_TOKEN_SECRET` | 32+ caracteres aleatorios |
 | `TICKETING_ADMIN_TOKEN` | Token para `/api/blokko/sandbox-test` |
 | `SUPABASE_URL` | `https://tervlcriapisdpvsyhto.supabase.co` |
@@ -92,7 +92,7 @@ Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `mer
 ## Preguntas para Blokko
 
 1. **Credenciales de sandbox**: API key, secret, `merchantUuid` y `merchantId`.
-2. **Firma**: ¿hex o base64? ¿timestamp en segundos o milisegundos? ¿Cuál es la ventana de tiempo válida?
+2. ~~**Firma**: hex o base64, segundos o ms~~ → **Confirmado (15 oct)** contra el playground: HMAC-SHA256 con el secret como texto, salida hex, timestamp en segundos, cadena canónica idéntica a la nuestra. Pendiente: ¿cuál es la ventana de tiempo válida? ¿La ruta correcta es `/v2/payment-intent` (la que responde 200 en sandbox) o `/v2/payment/intent` (la de la referencia)?
 3. **Webhooks**: ¿se firman con el mismo esquema `blokko-signature` y nuestras llaves? ¿Qué `path` usan en el canónico?
 4. **Correlación de invoices**: el invoice no acepta `merchantReference`. En un pago por invoice, ¿qué campo del webhook trae el `invoiceNumber` (o cómo ligamos el pago a nuestra orden)? ¿Hay endpoint para consultar el estado por `invoiceNumber` o `hash`?
 5. **Moneda**: la moneda se define en el onboarding. ¿Podemos cobrar en **USD**? Si es MXN, ¿qué tipo de cambio usamos?
@@ -100,4 +100,5 @@ Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `mer
 7. **Reembolsos**: ¿hay API o se hacen desde el dashboard?
 8. **Header del link de pago**: imagen de 1200 × 200 px con la marca TIF (la pide en el onboarding).
 9. **Producción**: URL base definitiva y proceso para pasar de sandbox a producción.
-10. **Zona horaria**: `createdAt` y `completedAt` del webhook no traen zona horaria. ¿Son UTC u hora de México?
+10. **Zona horaria**: la API responde en ISO UTC (`2026-10-15T04:57:55.809Z`), pero el ejemplo del webhook trae `2026-10-14 11:59:00` sin zona. ¿El webhook también es UTC?
+11. **Expiración del payment intent**: en sandbox expiró a los ~3 minutos. ¿Es configurable?
