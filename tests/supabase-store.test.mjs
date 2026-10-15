@@ -99,11 +99,14 @@ test('errors never include the service key', async () => {
 test('healthCheck reports pass counts and table status without returning rows', async () => {
   const { fetchImpl, calls } = mockFetch([
     { status: 200, body: [{ id: 'a', on_sale: true }, { id: 'b', on_sale: false }] },
-    ...Array.from({ length: 6 }, () => ({ status: 200, body: [] })),
+    ...Array.from({ length: 8 }, () => ({ status: 200, body: [] })),
+    { status: 200, body: 18.5 },
   ]);
   const result = await createSupabaseStore(env, { fetchImpl }).healthCheck();
   assert.equal(result.passes, 2);
   assert.equal(result.passesOnSale, 1);
-  assert.equal(Object.keys(result.tables).length, 6);
-  assert.ok(calls.slice(1).every((c) => c.url.endsWith('limit=0')));
+  assert.equal(Object.keys(result.tables).length, 8);
+  assert.equal(result.usdMxnRateSet, true);
+  assert.ok(calls.slice(1, 9).every((c) => c.url.endsWith('limit=0')));
+  assert.equal(calls[9].url, 'https://example.supabase.co/rest/v1/rpc/current_usd_mxn');
 });
