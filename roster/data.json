@@ -97,6 +97,37 @@
       "titleEs": "Fundador",
       "image": "/assets/speakers-2026/will-blakey.webp",
       "url": "https://www.linkedin.com/in/willblakey"
+    },
+    {
+      "name": "Álvaro Zúñiga",
+      "role": "Speaker",
+      "company": "FuXion",
+      "title": "Founder & CEO · Entrepreneur & Community Builder",
+      "titleEs": "Fundador y CEO · Emprendedor y creador de comunidad",
+      "image": "/assets/speakers-2026/alvaro-zuniga.webp"
+    },
+    {
+      "name": "David Graziano",
+      "role": "Speaker",
+      "company": "Ahau Collection | Art With Me",
+      "title": "Tulum OG · Founder",
+      "titleEs": "Tulum OG · Fundador",
+      "image": "/assets/speakers-2026/david-graziano.webp"
+    },
+    {
+      "name": "Rodolfo Rosas",
+      "role": "Speaker",
+      "company": "Grupo R4 | Zamá Desarrollos",
+      "title": "Tulum OG · Founder & Urban Development Visionary",
+      "titleEs": "Tulum OG · Fundador y visionario del desarrollo urbano",
+      "image": "/assets/speakers-2026/rodolfo-rosas.webp"
+    },
+    {
+      "name": "Maja Lucatelli",
+      "role": "Speaker",
+      "title": "PR, Partnerships & Community Relations",
+      "titleEs": "PR, alianzas y relaciones con la comunidad",
+      "image": "/assets/speakers-2026/maja-lucatelli.webp"
     }
   ],
   "cofounders": [
@@ -184,6 +215,86 @@
       "titleEs": "Cofundador",
       "image": "/assets/speakers-2026/peiman-fazli.webp",
       "url": "https://www.linkedin.com/in/peimanfazli"
+    },
+    {
+      "name": "Golden Yogi",
+      "role": "Speaker / Co-Founder",
+      "title": "Pioneer of Tulum's Innovation Ecosystem",
+      "titleEs": "Pionero del ecosistema de innovación de Tulum",
+      "image": "/assets/speakers-2026/golden-yogi.webp"
+    }
+  ],
+  "ambassadors": [
+    {
+      "name": "Andres Florez",
+      "role": "Ambassador",
+      "title": "Economist & Entrepreneur",
+      "titleEs": "Economista y emprendedor",
+      "image": "/assets/ambassadors/andres-florez.webp"
+    },
+    {
+      "name": "Andrés Nájera",
+      "role": "Ambassador",
+      "title": "Entrepreneur & Ecosystem Builder",
+      "titleEs": "Emprendedor y constructor de ecosistemas",
+      "image": "/assets/ambassadors/andres-najera.webp",
+      "url": "https://www.linkedin.com/in/andresnajerap/"
+    },
+    {
+      "name": "Felipe Arboleda Giraldo",
+      "role": "Ambassador",
+      "title": "Technology Entrepreneur & Builder",
+      "titleEs": "Emprendedor tecnológico",
+      "image": "/assets/ambassadors/felipe-arboleda-giraldo.webp"
+    },
+    {
+      "name": "Fran del Marmol",
+      "role": "Ambassador",
+      "title": "Entrepreneur & Ecosystem Builder",
+      "titleEs": "Emprendedor y constructor de ecosistemas",
+      "image": "/assets/ambassadors/fran-del-marmol.webp"
+    },
+    {
+      "name": "Gisela Tlacuatl",
+      "role": "Ambassador",
+      "title": "Actuary & Data Scientist",
+      "titleEs": "Actuaria y científica de datos",
+      "image": "/assets/ambassadors/gisela-tlacuatl.webp"
+    },
+    {
+      "name": "Karen Nieves",
+      "role": "Ambassador",
+      "title": "Business Strategist · Fintech, Web3 & Digital Assets",
+      "titleEs": "Estratega de negocios · Fintech, Web3 y activos digitales",
+      "image": "/assets/ambassadors/karen-nieves.webp"
+    },
+    {
+      "name": "Nohelia Sánchez",
+      "role": "Ambassador",
+      "title": "Entrepreneur & Mentor",
+      "titleEs": "Emprendedora y mentora",
+      "image": "/assets/ambassadors/nohelia-sanchez.webp"
+    },
+    {
+      "name": "Pachi Rodriguez",
+      "role": "Ambassador",
+      "title": "Entrepreneur & Technologist · Blockchain, Cybersecurity & Web3",
+      "titleEs": "Emprendedor y tecnólogo · Blockchain, ciberseguridad y Web3",
+      "image": "/assets/ambassadors/pachi-rodriguez.webp"
+    },
+    {
+      "name": "Pao Torres",
+      "role": "Ambassador",
+      "title": "Communications Professional & Storyteller",
+      "titleEs": "Comunicadora y storyteller",
+      "image": "/assets/ambassadors/pao-torres.webp"
+    },
+    {
+      "name": "Yassir Doutroi",
+      "role": "Ambassador",
+      "title": "Tech Entrepreneur",
+      "titleEs": "Emprendedor tecnológico",
+      "image": "/assets/ambassadors/yassir-doutroi.webp"
     }
   ],
   "investors": [
