@@ -1,0 +1,129 @@
+[
+  {
+    "name": "Amazon Web Services",
+    "logo": "/assets/whale-tank-logos/aws-blanco.webp",
+    "width": 1200,
+    "height": 741,
+    "people": [
+      "Alex Santana"
+    ]
+  },
+  {
+    "name": "Tiendanube",
+    "logo": "/assets/whale-tank-logos/tiendanube-blanco.webp",
+    "width": 1200,
+    "height": 251,
+    "people": [
+      "Paulina de la Garza"
+    ]
+  },
+  {
+    "name": "Impacta VC",
+    "logo": "/assets/whale-tank-logos/impacta-vc-blanco.webp",
+    "width": 1200,
+    "height": 369,
+    "people": [
+      "Mati Barbero",
+      "David Alvo"
+    ]
+  },
+  {
+    "name": "401 Accelerator",
+    "logo": "/assets/whale-tank-logos/401-accelerator-blanco.webp",
+    "width": 1200,
+    "height": 467,
+    "people": [
+      "Mati Barbero"
+    ]
+  },
+  {
+    "name": "AngelHub Ventures",
+    "logo": "/assets/whale-tank-logos/angelhub-blanco.webp",
+    "width": 1200,
+    "height": 254,
+    "people": [
+      "Mario García Dávila"
+    ]
+  },
+  {
+    "name": "Dalus Capital",
+    "logo": "/assets/whale-tank-logos/dalus-capital-blanco.webp",
+    "width": 1200,
+    "height": 348,
+    "people": [
+      "Diego Serebrisky"
+    ]
+  },
+  {
+    "name": "Meridian75",
+    "logo": "/assets/whale-tank-logos/m75-blanco.webp",
+    "width": 1200,
+    "height": 523,
+    "people": [
+      "Gregorio Londoño"
+    ]
+  },
+  {
+    "name": "ParqueTec México",
+    "logo": "/assets/whale-tank-logos/parquetec-mexico-blanco.webp",
+    "width": 1200,
+    "height": 451,
+    "people": [
+      "Ron Oliver"
+    ]
+  },
+  {
+    "name": "QROOM Holding",
+    "logo": "/assets/whale-tank-logos/qroom-blanco.webp",
+    "width": 1200,
+    "height": 798,
+    "people": [
+      "Ale Bustos"
+    ]
+  },
+  {
+    "name": "Arkangeles",
+    "logo": "/assets/whale-tank-logos/arkangeles-blanco.webp",
+    "width": 1200,
+    "height": 178,
+    "people": [
+      "Elo Cadenas"
+    ]
+  },
+  {
+    "name": "Soglowek Capital",
+    "logo": "/assets/whale-tank-logos/soglowek-capital-blanco.webp",
+    "width": 1200,
+    "height": 992,
+    "people": [
+      "Uri Soglowek"
+    ]
+  },
+  {
+    "name": "Red Business Market",
+    "logo": "/assets/whale-tank-logos/red-business-market-blanco.webp",
+    "width": 1200,
+    "height": 540,
+    "people": [
+      "Josu Gómez Barrutia"
+    ]
+  },
+  {
+    "name": "Minimalist Agency",
+    "logo": "/assets/roster/logos/minimalist-blanco.webp",
+    "width": 1444,
+    "height": 175,
+    "people": [
+      "Alexis Soubran"
+    ]
+  },
+  {
+    "name": "Chris Roe Coaching",
+    "logo": "/assets/whale-tank-logos/chris-roe-blanco.webp",
+    "width": 1200,
+    "height": 640,
+    "people": [
+      "Chris Roe"
+    ]
+  }
+]

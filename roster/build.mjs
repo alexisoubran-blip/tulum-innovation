@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi = (en, es) => `<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor','Ambassador':'Embajador/a'};
-const version = '20261015-ambassadors';
+const version = '20261015-logos';
 
 function card(p, poster = false) {
   const photo = p.image ? `<div class="roster-art${poster ? ' roster-poster' : ''}"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="440" height="540" loading="lazy" decoding="async" /></div>` : '';
@@ -111,6 +111,24 @@ export async function buildRoster() {
     .replace('Continue exploring TIF: ', `${bi('Continue exploring TIF:','Sigue explorando TIF:')} `)
     .replace('discover the four-day program</a>', `${bi('discover the four-day program','consulta el programa de cuatro días')}</a>`)
     .replace(' or <a href="/#tickets">choose your festival pass</a>.', ` ${bi('or','o')} <a href="/#tickets">${bi('choose your festival pass','elige tu acceso al festival')}</a>.`);
+  // Logos of the organizations participants lead or represent. Each logo must belong to someone
+  // in the public roster; logos identify affiliations and are not sponsors.
+  const logos = JSON.parse(await readFile(new URL('./logos.json', import.meta.url), 'utf8'));
+  const rosterNames = new Set(groups.flatMap(group => data[group]).map(p => p.name));
+  for (const l of logos) {
+    assert.ok(l.name && l.logo.startsWith('/assets/') && l.width > 0 && l.height > 0, `Invalid logo ${l.name}`);
+    await access(`dist${l.logo}`);
+    assert.ok(l.people.length && l.people.every(n => rosterNames.has(n)), `Logo ${l.name} must match a public participant`);
+  }
+  // Equal visual weight: every logo gets roughly the same area, capped in height.
+  const logoItems = logos.map(l => {
+    const ratio = l.width / l.height;
+    const h = Math.min(46, Math.max(18, Math.sqrt(2400 / ratio))).toFixed(1);
+    return `<li style="--logo-h:${h}px"><img src="${esc(l.logo)}" alt="${esc(l.name)}" title="${esc(`${l.name} · ${l.people.join(', ')}`)}" width="${l.width}" height="${l.height}" loading="lazy" decoding="async"></li>`;
+  }).join('');
+  const logoBand = `<section class="roster-logos" aria-labelledby="roster-logos-title"><div class="container"><div class="roster-logos-head"><p class="roster-logos-kicker" id="roster-logos-title">${bi('Where our speakers, investors & mentors build','Dónde construyen nuestros speakers, inversionistas y mentores')}</p><p class="roster-logos-note">${bi('Organizations led or represented by TIF 2026 participants.','Organizaciones que lideran o representan los participantes de TIF 2026.')}</p></div><ul class="roster-logos-list">${logoItems}</ul></div></section>`;
+  assert.ok(directory.includes('<div class="tools">'), 'Missing speakers search bar');
+  directory = directory.replace('<div class="tools">', `${logoBand}<div class="tools">`);
   directory = directory.replace('const q=input.value.toLowerCase()',"const q=input.value.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim()");
   directory = directory.replace('</head>',`<link rel="stylesheet" href="/roster/styles.css?v=${version}" /></head>`);
   assert.equal((directory.match(/data-person=/g)||[]).length,lineup.length);

@@ -66,3 +66,18 @@
 .tif-directory .person-profile-link { display:block;margin-top:.75rem;font-size:.75rem;text-decoration:underline;text-underline-offset:3px; }
 .tif-directory .person[hidden] { display:none; }
 @media(max-width:620px) { .roster-section .roster-job-title { font-size:.7rem; } }
+/* /speakers: organizations represented by participants (affiliations, not sponsors). */
+.roster-logos { border-top:1px solid rgba(242,241,234,.12);padding:3rem 0 3.4rem; }
+.roster-logos-head { display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.6rem 2rem;margin-bottom:2.2rem; }
+.roster-logos-kicker { margin:0;color:#f09a70;font-family:var(--sans);font-size:.74rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase; }
+.roster-logos-note { margin:0;color:rgba(242,241,234,.62);font-size:.8rem;line-height:1.5; }
+.roster-logos-list { list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2.1rem 3.2rem; }
+.roster-logos-list li { display:flex;align-items:center;height:48px; }
+.roster-logos-list img { display:block;height:var(--logo-h);width:auto;max-width:170px;object-fit:contain;opacity:.82;transition:opacity .2s; }
+.roster-logos-list li:hover img { opacity:1; }
+@media(max-width:620px){
+ .roster-logos { padding:2.2rem 0 2.6rem; }
+ .roster-logos-list { gap:1.5rem 1.9rem; }
+ .roster-logos-list li { height:40px; }
+ .roster-logos-list img { height:calc(var(--logo-h) * .8);max-width:124px; }
+}
