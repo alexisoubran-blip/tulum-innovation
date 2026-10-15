@@ -62,7 +62,9 @@ Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `mer
 | `api/webhooks/blokko.mjs` | Endpoint de Vercel. Responde 503 mientras no haya base de datos |
 | `api/blokko/sandbox-test.mjs` | Prueba con login de admin: crea un invoice de 1.00 en sandbox para validar llaves y firma desde Vercel |
 | `scripts/blokko-signature-check.mjs` | Confirma la codificación de la firma contra el playground |
-| `tests/blokko.test.mjs` | 13 pruebas (`npm test`) |
+| `lib/ticketing/supabase-store.mjs` | Guarda nonces, eventos de pago y marca órdenes pagadas en Supabase (sin dependencias, vía API REST) |
+| `supabase/migrations/20261015000000_ticketing_core.sql` | Tablas: pases, órdenes, boletos, eventos de pago, nonces, revendedores, staff. RLS activo; solo el servidor lee y escribe |
+| `tests/*.test.mjs` | 20 pruebas (`npm test`) |
 
 ## Variables de entorno (Vercel)
 
@@ -77,7 +79,15 @@ Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `mer
 | `BLOKKO_TIMESTAMP_UNIT` | `s` o `ms` |
 | `ORDER_TOKEN_SECRET` | 32+ caracteres aleatorios |
 | `TICKETING_ADMIN_TOKEN` | Token para `/api/blokko/sandbox-test` |
-| `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | Base de datos (siguiente paso) |
+| `SUPABASE_URL` | `https://tervlcriapisdpvsyhto.supabase.co` |
+| `SUPABASE_SERVICE_ROLE_KEY` | Llave `service_role` (o `sb_secret_…`) de Supabase → Project Settings → API Keys. Pegarla directo en Vercel, nunca en chat ni en el repo |
+
+## Base de datos (Supabase)
+
+- Proyecto `tervlcriapisdpvsyhto`, conectado al repo. La migración se aplica sola cuando la rama se fusiona a `main`.
+- Todas las tablas tienen RLS y ningún permiso para `anon`/`authenticated`: la llave pública no puede leer compradores.
+- `mark_order_paid` marca una orden una sola vez: los reintentos del webhook nunca emiten boletos dobles.
+- Los precios de `passes` replican los precios públicos en USD; revisarlos antes de vender directo.
 
 ## Preguntas para Blokko
 
@@ -90,3 +100,4 @@ Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `mer
 7. **Reembolsos**: ¿hay API o se hacen desde el dashboard?
 8. **Header del link de pago**: imagen de 1200 × 200 px con la marca TIF (la pide en el onboarding).
 9. **Producción**: URL base definitiva y proceso para pasar de sandbox a producción.
+10. **Zona horaria**: `createdAt` y `completedAt` del webhook no traen zona horaria. ¿Son UTC u hora de México?
