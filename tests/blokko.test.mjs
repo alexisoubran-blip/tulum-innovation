@@ -141,3 +141,54 @@ test('canonical string matches the official Blokko playground byte for byte (202
     `POST\n/v2/payment-intent\n\n${body}\n1792040270\n6fb77b7c-4863-4223-99cf-606da6a512c2`,
   );
 });
+
+test('unsigned pending notices are acknowledged without touching the store; unsigned paid events are rejected', async () => {
+  const store = createMemoryStore({ orders: [{ id: 'order-1' }] });
+  const deps = { config, store, now: NOW };
+  const rawBody = (b) => JSON.stringify(b);
+
+  const pending = await handleBlokkoWebhook({ method: 'POST', path: '/api/webhooks/blokko', rawBody: rawBody(paidEvent({ transactionStatus: 'P' })), headers: {} }, deps);
+  assert.equal(pending.status, 200);
+  assert.equal(pending.body.verified, false);
+  assert.equal(store.state.events.length, 0);
+
+  const forgedPaid = await handleBlokkoWebhook({ method: 'POST', path: '/api/webhooks/blokko', rawBody: rawBody(paidEvent()), headers: {} }, deps);
+  assert.equal(forgedPaid.status, 401);
+  assert.equal(store.state.orders.get('order-1').status, 'pending');
+});
+
+test('a failed attempt releases the nonce so Blokko\'s retry (same nonce) is processed', async () => {
+  const store = createMemoryStore({ orders: [{ id: 'order-1' }] });
+  const realMark = store.markOrderPaid;
+  let failNext = true;
+  store.markOrderPaid = async (...args) => {
+    if (failNext) { failNext = false; throw new Error('db down'); }
+    return realMark(...args);
+  };
+  const deps = { config, store, now: NOW };
+  const first = await handleBlokkoWebhook(signedWebhook(paidEvent(), { nonce: 'retry-1' }), deps);
+  assert.equal(first.status, 500);
+  const retry = await handleBlokkoWebhook(signedWebhook(paidEvent(), { nonce: 'retry-1' }), deps);
+  assert.equal(retry.status, 200);
+  assert.equal(store.state.orders.get('order-1').status, 'paid');
+});
+
+test('webhook dates without a zone are read as UTC', () => {
+  const { event } = parseWebhookPayload(JSON.stringify(paidEvent({ completedAt: '2026-10-14 12:00:00' })));
+  assert.equal(event.completedAt, '2026-10-14T12:00:00.000Z');
+  assert.equal(parseWebhookPayload(JSON.stringify(paidEvent({ completedAt: '2026-10-15T04:57:55.809Z' }))).event.completedAt, '2026-10-15T04:57:55.809Z');
+});
+
+test('payment intent uses /v2/payment/intent with the configured terminal; methods and status endpoints', async () => {
+  const calls = [];
+  const fetchImpl = async (url, init) => { calls.push({ url, method: init.method, body: init.body }); return new Response('{}', { status: 200 }); };
+  const client = createClient({ ...config, terminalUuid: 'TERM-1' }, { fetchImpl });
+  await client.createPaymentIntent({ merchantTransactionId: 'mtx-1', merchantReference: 'order-1', amount: 3900 });
+  await client.getPaymentMethods();
+  await client.getPaymentByTransactionId('tx-1');
+  assert.equal(calls[0].url, 'https://sandbox.blokko.dev/v2/payment/intent');
+  assert.deepEqual(JSON.parse(calls[0].body), { merchantTransactionId: 'mtx-1', terminalUuid: 'TERM-1', amount: '3900', merchantReference: 'order-1' });
+  assert.equal(calls[1].url, 'https://sandbox.blokko.dev/v2/merchants/m-id/payment-methods');
+  assert.equal(calls[2].url, 'https://sandbox.blokko.dev/v2/payment/tx-1');
+  await assert.rejects(createClient(config, { fetchImpl }).createPaymentIntent({ merchantTransactionId: 'x', amount: 1 }), /terminalUuid/);
+});

@@ -2,55 +2,43 @@
 
 Rama: `ticketing`. Documentación oficial: https://docs.blokko.us (API v2).
 
-## Cómo funciona Blokko
+## Decisión de integración (15 oct)
 
-Blokko ofrece dos caminos:
+Usamos la **integración completa (payment intent)**, no el link de pago (invoice). Motivo: Blokko confirmó que un pago de invoice **no trae** `invoiceNumber` ni `hash` en el webhook y que el estado solo se consulta por `merchantTransactionId` o `transactionId`. Con el invoice no habría forma confiable de ligar un pago a su orden. Con el payment intent mandamos nuestros propios identificadores y vuelven en el webhook.
 
-| Camino | Endpoint | Para qué lo usamos |
-|---|---|---|
-| **Invoice (link de pago)** | `POST /v2/invoice` | Venta online en `/tickets`. Blokko devuelve `invoiceUrl`, una página alojada donde el comprador elige stablecoin, RTP o cripto y ve el QR. Al pagar, Blokko lo redirige a nuestro `successUrl`. |
-| **Payment Intent (terminal)** | `POST /v2/payment-intent` | Venta presencial en el venue o en comercios de Innovation City. Requiere `terminalUuid`. Devuelve `qrUrl` / `qrContent`. |
+| Endpoint | Uso |
+|---|---|
+| `GET /v2/merchants/{merchantId}/payment-methods` | Métodos disponibles (RTP, stablecoins, cripto) para mostrar en nuestro checkout |
+| `POST /v2/payment/intent` | QR para el método elegido. `merchantTransactionId` = un UUID nuevo por intento; `merchantReference` = ID de la orden; `terminalUuid` = terminal virtual (tipo `E`); `amount` en **MXN** como texto |
+| `GET /v2/payment/byMerchantTransactionId/{id}` · `GET /v2/payment/{transactionId}` | Consultar estado (`P` pendiente, `E` pagado) mientras el comprador ve el QR |
+| `POST /v2/pos/initialization` | Inicializar la terminal (`serial`, `type: "E"` virtual) si Blokko lo requiere |
+| `PUT /v2/merchants/{merchantId}/webhook` | Registrar `https://www.tuluminnovationfest.com/api/webhooks/blokko` (solo HTTPS) |
 
-Otros endpoints:
-
-- `GET /v2/payment/byMerchantTransactionId/{id}` y `GET` por `transactionId`: consultar estado (`P` pendiente, `E` pagado).
-- `PUT /v2/merchants/{merchantId}/webhook` con `{ "callbackUrl": "https://..." }`: registrar el webhook (solo HTTPS).
-- `GET` métodos de pago disponibles (`paymentMethodId`, p. ej. `BCLN`).
-- Sandbox: `https://sandbox.blokko.dev`. Producción: `api.blokko.io` (variable `baseUrl` en su OpenAPI).
+Sandbox: `https://sandbox.blokko.dev`. Producción: la URL que venga con las credenciales de producción.
 
 ### Firma (`blokko-signature`)
 
-Cada request lleva un solo header:
-
 ```
 blokko-signature: Api-Key={apiKey}, Timestamp={timestamp}, Nonce={nonce}, Signature={signature}
+signature = hex(HMAC-SHA256(secret como texto, "{METHOD}\n{path}\n{query}\n{rawBody}\n{timestamp}\n{nonce}"))
 ```
 
-`signature = HMAC-SHA256(secret, canónico)` y el canónico es:
-
-```
-{METHOD}\n{path}\n{queryString}\n{rawBody}\n{timestamp}\n{nonce}
-```
-
-Reglas: usar el body crudo, normalizar método y query, solo `\n`, nunca firmas parciales, nunca loguear secretos, firmas ni payloads completos.
-
-La documentación **no dice** si la firma va en hex o base64, ni si el timestamp va en segundos o milisegundos. Ambos son configurables (`BLOKKO_SIGNATURE_ENCODING`, `BLOKKO_TIMESTAMP_UNIT`). Para confirmarlo:
-
-1. Abrir https://playground-sandbox.blokko.ai/ con las llaves de sandbox.
-2. Generar una firma con valores conocidos.
-3. Correr `node scripts/blokko-signature-check.mjs --secret ... --method POST --path /v2/invoice --body '...' --timestamp ... --nonce ... --expected FIRMA` y usar la codificación que diga `MATCH`.
+Confirmado contra el playground oficial el 15 oct: nuestra cadena y firma coinciden byte por byte. Timestamp en segundos Unix UTC; Blokko acepta la llamada hasta **3 minutos** después del timestamp firmado (si no, 400). Nunca loguear secretos, firmas ni payloads completos.
 
 ### Webhook
 
-Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `merchantReference`, `transactionStatus` (`P` / `E`), `createdAt`, `completedAt`. Hay que responder **200**; si no, reintenta a los 0, 30, 60 y 90 segundos.
+- Solo el webhook de **pagado (`E`)** viene firmado, con nuestra Api-Key y secret. Canónico: `POST`, `/api/webhooks/blokko`, query vacío, body JSON compacto, timestamp, nonce.
+- Los avisos de **pendiente (`P`)** llegan sin firma: respondemos 200 y no guardamos nada. Un `E` sin firma se rechaza (401).
+- Hay que responder 200; si no, reintenta a los 0, 30, 60 y 90 s con el mismo nonce. Si nuestro proceso falla, liberamos el nonce para que el reintento sí se procese.
+- Fechas en UTC aunque no traigan zona.
 
 ## Flujo en TIF
 
-1. El comprador elige pase en `/tickets` → creamos la orden `PENDIENTE` (precio calculado en el servidor).
-2. `POST /v2/invoice` con el monto y `successUrl = /tickets/gracias?t={token}`. El token es el ID de la orden **cifrado con AES-256-GCM** (`lib/ticketing/order-token.mjs`), como pide Blokko: nunca un ID visible en la URL.
-3. Abrimos `invoiceUrl` en un modal (recomendación de Blokko).
-4. Blokko llama a `/api/webhooks/blokko` → verificamos firma, ventana de tiempo y nonce → si `E`, la orden pasa a `PAGADA` una sola vez y se emiten los boletos.
-5. La página de gracias descifra el token y muestra el estado, pero **el boleto solo se emite por webhook**.
+1. El comprador elige pase en `/tickets` → creamos la orden `PENDIENTE` (precio en el servidor, convertido a MXN).
+2. Mostramos los métodos de pago de Blokko en nuestra interfaz con la marca TIF.
+3. Al elegir método: `POST /v2/payment/intent` → mostramos el QR (`qrUrl` / `qrContent`). El QR expira en ~3 min (lo fija el exchange, no es configurable) → botón para generar uno nuevo (nuevo `merchantTransactionId`, misma orden).
+4. Mientras tanto consultamos el estado cada pocos segundos; el webhook firmado es la fuente de verdad: la orden pasa a `PAGADA` una sola vez y se emiten los boletos.
+5. Reembolsos: no hay API; se piden a Blokko y se marcan a mano en el admin.
 
 ## Lo que ya está en la rama
 
@@ -74,7 +62,8 @@ Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `mer
 | `BLOKKO_API_KEY` | API key de Blokko |
 | `BLOKKO_SECRET` | Secret key de Blokko |
 | `BLOKKO_MERCHANT_UUID` | `merchantUuid` para invoices |
-| `BLOKKO_MERCHANT_ID` | `merchantId` para el webhook (si es distinto del UUID) |
+| `BLOKKO_MERCHANT_ID` | `merchantId` (métodos de pago y webhook) |
+| `BLOKKO_TERMINAL_UUID` | Terminal virtual para los payment intents |
 | `BLOKKO_SIGNATURE_ENCODING` | `hex` (confirmado contra el playground; es el default) |
 | `BLOKKO_TIMESTAMP_UNIT` | `s` (confirmado; es el default) |
 | `ORDER_TOKEN_SECRET` | 32+ caracteres aleatorios |
@@ -89,16 +78,17 @@ Blokko hace `POST` con: `authorizationId`, `transactionUuid`, `merchantId`, `mer
 - `mark_order_paid` marca una orden una sola vez: los reintentos del webhook nunca emiten boletos dobles.
 - Los precios de `passes` replican los precios públicos en USD; revisarlos antes de vender directo.
 
-## Preguntas para Blokko
+## Respuestas de Blokko (15 oct)
 
-1. **Credenciales de sandbox**: API key, secret, `merchantUuid` y `merchantId`.
-2. ~~**Firma**: hex o base64, segundos o ms~~ → **Confirmado (15 oct)** contra el playground: HMAC-SHA256 con el secret como texto, salida hex, timestamp en segundos, cadena canónica idéntica a la nuestra. Pendiente: ¿cuál es la ventana de tiempo válida? ¿La ruta correcta es `/v2/payment-intent` (la que responde 200 en sandbox) o `/v2/payment/intent` (la de la referencia)?
-3. **Webhooks**: ¿se firman con el mismo esquema `blokko-signature` y nuestras llaves? ¿Qué `path` usan en el canónico?
-4. **Correlación de invoices**: el invoice no acepta `merchantReference`. En un pago por invoice, ¿qué campo del webhook trae el `invoiceNumber` (o cómo ligamos el pago a nuestra orden)? ¿Hay endpoint para consultar el estado por `invoiceNumber` o `hash`?
-5. **Moneda**: la moneda se define en el onboarding. ¿Podemos cobrar en **USD**? Si es MXN, ¿qué tipo de cambio usamos?
-6. **Expiración**: `expiresAt` es solo fecha (`YYYY-MM-DD`). ¿Se puede expirar por hora o minutos?
-7. **Reembolsos**: ¿hay API o se hacen desde el dashboard?
-8. **Header del link de pago**: imagen de 1200 × 200 px con la marca TIF (la pide en el onboarding).
-9. **Producción**: URL base definitiva y proceso para pasar de sandbox a producción.
-10. **Zona horaria**: la API responde en ISO UTC (`2026-10-15T04:57:55.809Z`), pero el ejemplo del webhook trae `2026-10-14 11:59:00` sin zona. ¿El webhook también es UTC?
-11. **Expiración del payment intent**: en sandbox expiró a los ~3 minutos. ¿Es configurable?
+1. **Credenciales**: TIF ya tiene registro en sandbox y en producción; usar las credenciales que entregaron.
+2. **Moneda**: el registro está en **MXN**.
+3. **Invoice ↔ webhook**: no hay forma de ligarlo; el estado solo se consulta por `merchantTransactionId` o `transactionId` → usamos payment intent.
+4. **Webhooks**: firmados con el mismo header y nuestras llaves; solo el de estado `E`.
+5. **Ruta**: `/v2/payment/intent`.
+6. **Ventana**: 3 minutos después del timestamp; reloj con NTP.
+7. **Zona horaria**: UTC.
+8. **Expiración**: invoice solo por fecha; QR del payment intent no configurable (depende del exchange).
+9. **Reembolsos**: sin API; los gestiona Blokko.
+10. **Producción**: usar las credenciales de producción entregadas.
+
+Pendiente de nuestro lado: localizar las credenciales (sandbox y producción, incluido el serial/UUID de la terminal virtual) y definir cómo convertimos USD → MXN.
