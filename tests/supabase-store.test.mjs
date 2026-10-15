@@ -95,3 +95,15 @@ test('errors never include the service key', async () => {
   assert.ok(error instanceof SupabaseStoreError);
   assert.ok(!error.message.includes('eyJ.test.key'));
 });
+
+test('healthCheck reports pass counts and table status without returning rows', async () => {
+  const { fetchImpl, calls } = mockFetch([
+    { status: 200, body: [{ id: 'a', on_sale: true }, { id: 'b', on_sale: false }] },
+    ...Array.from({ length: 6 }, () => ({ status: 200, body: [] })),
+  ]);
+  const result = await createSupabaseStore(env, { fetchImpl }).healthCheck();
+  assert.equal(result.passes, 2);
+  assert.equal(result.passesOnSale, 1);
+  assert.equal(Object.keys(result.tables).length, 6);
+  assert.ok(calls.slice(1).every((c) => c.url.endsWith('limit=0')));
+});
