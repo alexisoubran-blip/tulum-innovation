@@ -70,6 +70,9 @@ Confirmado contra el playground oficial el 15 oct: nuestra cadena y firma coinci
 | `BLOKKO_TIMESTAMP_UNIT` | `s` (confirmado; es el default) |
 | `ORDER_TOKEN_SECRET` | 32+ caracteres aleatorios |
 | `TICKETING_ADMIN_TOKEN` | Token para `/admin/blokko` (registrar webhook y pagos de prueba) |
+| `BLOKKO_ALLOWED_METHODS` | Métodos que ofrece el checkout, en orden. Default `WALL,CRPT,CASH,BCLN,BTSO,CODI` |
+| `BREVO_API_KEY` | Llave de Brevo para enviar los boletos por correo |
+| `BREVO_SENDER_EMAIL` | Remitente verificado en Brevo (default `innovation@likegroup.io`) |
 | `SUPABASE_URL` | `https://tervlcriapisdpvsyhto.supabase.co` |
 | `SUPABASE_SERVICE_ROLE_KEY` | Llave `service_role` (o `sb_secret_…`) de Supabase → Project Settings → API Keys. Pegarla directo en Vercel, nunca en chat ni en el repo |
 
@@ -94,3 +97,14 @@ Confirmado contra el playground oficial el 15 oct: nuestra cadena y firma coinci
 10. **Producción**: usar las credenciales de producción entregadas.
 
 Pendiente de nuestro lado: localizar las credenciales (sandbox y producción, incluido el serial/UUID de la terminal virtual) y definir cómo convertimos USD → MXN.
+
+## Checkout propio (`/checkout`, oculto hasta el lanzamiento)
+
+1. `/checkout?pass=general-access` — pase, cantidad y datos. El precio lo calcula el servidor desde `passes` y lo convierte a MXN con `exchange_rates` (redondeo hacia arriba al peso).
+2. `POST /api/checkout/order` crea la orden `pending` (30 min) y devuelve un token cifrado (AES-256-GCM) que se usa en la URL.
+3. `POST /api/checkout/pay` crea un `payment_attempt` y un payment intent: `merchantTransactionId` = id del intento, `merchantReference` = id de la orden. El QR vence en ~3 min; el comprador puede generar otro (máx. 8 por orden).
+4. `GET /api/checkout/status` cada 4 s: si Blokko reporta `E`, marca pagada (una sola vez) y emite boletos. El webhook firmado hace lo mismo; ambos caminos son idempotentes.
+5. Boletos: uno por unidad (`tickets.order_id + seq` único). El QR es `id + HMAC` con `ORDER_TOKEN_SECRET`; la base solo guarda su hash. Correo vía Brevo con enlace a `/boleto?t=…`.
+6. Medición: `begin_checkout`, `add_payment_info` y `purchase` en `dataLayer` (GTM-5XJG96K).
+
+Los botones de `/tickets` siguen apuntando a Ticket Fairy hasta que se decida el cambio.

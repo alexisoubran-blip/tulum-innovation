@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es" data-lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5XJG96K');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Checkout | Tulum Innovation Fest 2026</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#00080B" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/checkout/checkout.css?v=20261017" />
+</head>
+<body class="co-page">
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header class="co-header">
+    <a class="co-brand" href="/" aria-label="Tulum Innovation Fest"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="150" height="40" /></a>
+    <div class="co-header-right">
+      <span class="co-secure"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Z"/></svg><span data-en>Secure payment · Blokko</span><span data-es>Pago seguro · Blokko</span></span>
+      <button class="co-lang" type="button" id="langToggle" aria-label="Cambiar idioma / Change language"><span data-es>EN</span><span data-en>ES</span></button>
+    </div>
+  </header>
+
+  <main class="co-main">
+    <div class="co-steps" aria-label="Checkout">
+      <ol class="co-progress" id="progress">
+        <li data-step="1"><span>01</span><span data-en>Pass</span><span data-es>Pase</span></li>
+        <li data-step="2"><span>02</span><span data-en>Details</span><span data-es>Datos</span></li>
+        <li data-step="3"><span>03</span><span data-en>Payment</span><span data-es>Pago</span></li>
+        <li data-step="4"><span>04</span><span data-en>Tickets</span><span data-es>Boletos</span></li>
+      </ol>
+
+      <div class="co-alert" id="alert" role="alert" hidden></div>
+
+      <!-- Step 1 + 2: pass and buyer -->
+      <form class="co-panel" id="orderForm" novalidate>
+        <section aria-labelledby="passTitle">
+          <h1 id="passTitle"><span data-en>Choose your pass</span><span data-es>Elige tu pase</span></h1>
+          <p class="co-sub"><span data-en>Tulum Innovation Fest · December 9–12, 2026 · IKAL Arena, Tulum</span><span data-es>Tulum Innovation Fest · 9 al 12 de diciembre de 2026 · IKAL Arena, Tulum</span></p>
+          <div class="co-passes" id="passes" role="radiogroup" aria-labelledby="passTitle"><p class="co-loading"><span data-en>Loading passes…</span><span data-es>Cargando pases…</span></p></div>
+          <p class="co-note" id="passNote" hidden></p>
+          <div class="co-qty">
+            <label for="qty"><span data-en>Quantity</span><span data-es>Cantidad</span></label>
+            <div class="co-stepper">
+              <button type="button" id="qtyDown" aria-label="−1">−</button>
+              <input id="qty" name="quantity" type="number" inputmode="numeric" min="1" max="10" value="1" />
+              <button type="button" id="qtyUp" aria-label="+1">+</button>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="buyerTitle" class="co-buyer">
+          <h2 id="buyerTitle"><span data-en>Your details</span><span data-es>Tus datos</span></h2>
+          <p class="co-sub"><span data-en>We’ll email your tickets here.</span><span data-es>Aquí te enviamos tus boletos.</span></p>
+          <div class="co-fields">
+            <div class="co-field co-span">
+              <label for="name"><span data-en>Full name</span><span data-es>Nombre completo</span></label>
+              <input id="name" name="name" autocomplete="name" required maxlength="120" />
+            </div>
+            <div class="co-field co-span">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="160" />
+            </div>
+            <div class="co-field">
+              <label for="phone"><span data-en>Phone (optional)</span><span data-es>Teléfono (opcional)</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+            </div>
+            <div class="co-field">
+              <label for="country"><span data-en>Country (optional)</span><span data-es>País (opcional)</span></label>
+              <input id="country" name="country" autocomplete="country-name" maxlength="60" />
+            </div>
+            <div class="co-hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+          </div>
+          <label class="co-check">
+            <input type="checkbox" id="terms" required />
+            <span><span data-en>I accept the purchase terms. The charge is made in Mexican pesos (MXN) at the rate shown, through Blokko.</span><span data-es>Acepto los términos de compra. El cargo se hace en pesos mexicanos (MXN) al tipo de cambio indicado, a través de Blokko.</span></span>
+          </label>
+        </section>
+
+        <button class="co-cta" type="submit" id="toPayment"><span data-en>Continue to payment</span><span data-es>Continuar al pago</span><i aria-hidden="true">→</i></button>
+      </form>
+
+      <!-- Step 3: payment -->
+      <section class="co-panel" id="payPanel" hidden aria-labelledby="payTitle">
+        <div>
+          <h2 id="payTitle"><span data-en>How do you want to pay?</span><span data-es>¿Cómo quieres pagar?</span></h2>
+          <p class="co-sub"><span data-en>Pick a method and scan the QR from your wallet or app.</span><span data-es>Elige un método y escanea el QR desde tu wallet o app.</span></p>
+        </div>
+        <div class="co-methods" id="methods" role="list"></div>
+
+        <div class="co-qr" id="qrBox" hidden>
+          <div class="co-qr-art">
+            <img id="qrImg" alt="QR" width="260" height="260" />
+            <div class="co-qr-expired" id="qrExpired" hidden><span data-en>QR expired</span><span data-es>QR vencido</span></div>
+          </div>
+          <div class="co-qr-info">
+            <p class="co-qr-amount" id="qrAmount"></p>
+            <p class="co-qr-method" id="qrMethod"></p>
+            <p class="co-timer" id="qrTimer" aria-live="polite"></p>
+            <div class="co-qr-actions">
+              <button type="button" class="co-ghost" id="copyCode"><span data-en>Copy payment code</span><span data-es>Copiar código de pago</span></button>
+              <button type="button" class="co-ghost" id="newQr" hidden><span data-en>Generate new QR</span><span data-es>Generar nuevo QR</span></button>
+              <button type="button" class="co-link" id="changeMethod"><span data-en>Change method</span><span data-es>Cambiar método</span></button>
+            </div>
+            <p class="co-waiting"><span class="co-dot" aria-hidden="true"></span><span data-en>Waiting for your payment. This page updates on its own.</span><span data-es>Esperando tu pago. Esta página se actualiza sola.</span></p>
+          </div>
+        </div>
+        <button type="button" class="co-link co-back" id="editOrder"><span data-en>← Edit pass or details</span><span data-es>← Editar pase o datos</span></button>
+      </section>
+
+      <!-- Step 4: done -->
+      <section class="co-panel co-done" id="donePanel" hidden aria-labelledby="doneTitle">
+        <div class="co-done-mark" aria-hidden="true">✓</div>
+        <h2 id="doneTitle"><span data-en>You’re in!</span><span data-es>¡Listo, ya tienes tus boletos!</span></h2>
+        <p class="co-sub" id="doneText"></p>
+        <a class="co-cta" id="ticketsLink" href="/boleto"><span data-en>View my tickets</span><span data-es>Ver mis boletos</span><i aria-hidden="true">→</i></a>
+        <p class="co-fine"><span data-en>Keep the email link: it is personal and opens your tickets anytime.</span><span data-es>Guarda el enlace del correo: es personal y abre tus boletos cuando quieras.</span></p>
+      </section>
+
+      <section class="co-panel" id="expiredPanel" hidden>
+        <div>
+          <h2><span data-en>This order expired</span><span data-es>Esta orden venció</span></h2>
+          <p class="co-sub"><span data-en>Orders are held for 30 minutes. Start again to get a fresh one; nothing was charged.</span><span data-es>Las órdenes se apartan 30 minutos. Empieza de nuevo para generar otra; no se hizo ningún cargo.</span></p>
+        </div>
+        <a class="co-cta" href="/checkout"><span data-en>Start again</span><span data-es>Empezar de nuevo</span><i aria-hidden="true">→</i></a>
+      </section>
+    </div>
+
+    <aside class="co-summary" aria-label="Order summary">
+      <div class="co-summary-card" id="summary">
+        <div class="co-summary-art" id="sumArt"></div>
+        <p class="co-summary-kicker"><span data-en>Your order</span><span data-es>Tu orden</span></p>
+        <h3 id="sumPass">—</h3>
+        <dl>
+          <div><dt><span data-en>Quantity</span><span data-es>Cantidad</span></dt><dd id="sumQty">1</dd></div>
+          <div><dt><span data-en>Price (USD)</span><span data-es>Precio (USD)</span></dt><dd id="sumUsd">—</dd></div>
+          <div class="co-total"><dt><span data-en>You pay (MXN)</span><span data-es>Pagas (MXN)</span></dt><dd id="sumMxn">—</dd></div>
+        </dl>
+        <p class="co-rate" id="sumRate"></p>
+      </div>
+      <p class="co-help"><span data-en>Prefer card? <a href="/tickets">Buy with Ticket Fairy</a>.</span><span data-es>¿Prefieres tarjeta? <a href="/tickets">Compra con Ticket Fairy</a>.</span></p>
+    </aside>
+  </main>
+
+  <script src="/checkout/checkout.js?v=20261017" defer></script>
+</body>
+</html>

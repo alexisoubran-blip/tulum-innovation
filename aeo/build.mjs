@@ -63,6 +63,8 @@ export async function buildAEO(){
  for(const file of pages){
   if(file.includes('/health/'))continue;
   let html=await readFile(file,'utf8');
+  // Private pages (admin, checkout, tickets) are noindex: never list them in llms.txt or Markdown.
+  if(/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(html))continue;
   const route=file==='dist/index.html'?'/':'/'+file.slice(5).replace(/\/index\.html$/,'');
   const canonical=html.match(/<link\b[^>]*rel="canonical"[^>]*href="([^"]+)"/)?.[1]||origin+route;
   const title=html.match(/<title>([^]*?)<\/title>/)?.[1]||'Tulum Innovation Fest';

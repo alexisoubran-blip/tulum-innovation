@@ -1,9 +1,10 @@
 // POST /api/webhooks/blokko — payment notifications from Blokko.
 // Register this URL with PUT /v2/merchants/{merchantId}/webhook once the database is live.
 
-import { configFromEnv } from '../../lib/ticketing/blokko.mjs';
+import { configFromEnv, createClient } from '../../lib/ticketing/blokko.mjs';
 import { handleBlokkoWebhook } from '../../lib/ticketing/blokko-webhook.mjs';
 import { getStore, StoreNotConfiguredError } from '../../lib/ticketing/store.mjs';
+import { createCheckout } from '../../lib/ticketing/checkout.mjs';
 
 const json = (status, body) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
 
@@ -30,8 +31,14 @@ export async function POST(request) {
     {
       config: configFromEnv(),
       store,
-      // Ticket issuance and Brevo delivery plug in here (next step).
-      onPaid: async () => {},
+      // Issue the tickets and email them (idempotent; the status check repeats it if this fails).
+      onPaid: async (order) => {
+        try {
+          await createCheckout({ store, blokko: createClient(configFromEnv()) }).fulfill(order);
+        } catch (error) {
+          console.warn('[blokko] fulfillment deferred', error?.message);
+        }
+      },
       // Never log secrets, signatures or full payloads (Blokko guideline); only metadata.
       alert: async (info) => console.warn('[blokko]', JSON.stringify(info)),
     },

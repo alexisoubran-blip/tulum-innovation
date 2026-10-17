@@ -18,6 +18,8 @@ await cp("speakers", "dist/speakers", { recursive: true });
 await cp("festival-shell.css", "dist/festival-shell.css");
 await cp("health", "dist/health", { recursive: true });
 await cp("admin", "dist/admin", { recursive: true });
+await cp("checkout", "dist/checkout", { recursive: true });
+await cp("boleto", "dist/boleto", { recursive: true });
 await cp("sitemap.xml", "dist/sitemap.xml");
 await cp("robots.txt", "dist/robots.txt");
 

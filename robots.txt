@@ -4,6 +4,8 @@ Allow: /
 Content-Signal: search=yes, ai-input=yes
 Disallow: /health
 Disallow: /admin
+Disallow: /checkout
+Disallow: /boleto
 Disallow: /home-v2
 
 Sitemap: https://www.tuluminnovationfest.com/sitemap.xml

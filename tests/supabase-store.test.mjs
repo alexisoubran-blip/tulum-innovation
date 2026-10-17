@@ -110,3 +110,22 @@ test('healthCheck reports pass counts and table status without returning rows', 
   assert.ok(calls.slice(1, 9).every((c) => c.url.endsWith('limit=0')));
   assert.equal(calls[9].url, 'https://example.supabase.co/rest/v1/rpc/current_usd_mxn');
 });
+
+test('checkout queries: idempotent ticket insert, single email claim, on-sale passes', async () => {
+  const { fetchImpl, calls } = mockFetch([
+    { status: 201 },
+    { status: 200, body: [{ id: ORDER_ID }] },
+    { status: 200, body: [] },
+    { status: 200, body: [] },
+  ]);
+  const store = createSupabaseStore(env, { fetchImpl });
+  await store.insertTickets([{ order_id: ORDER_ID, seq: 1 }]);
+  assert.equal(calls[0].url, 'https://example.supabase.co/rest/v1/tickets?on_conflict=order_id,seq');
+  assert.equal(calls[0].headers.Prefer, 'resolution=ignore-duplicates,return=minimal');
+  assert.equal(await store.claimTicketEmail(ORDER_ID), true);
+  assert.match(calls[1].url, /orders\?id=eq\.[0-9a-f-]+&tickets_emailed_at=is\.null$/);
+  assert.equal(await store.claimTicketEmail(ORDER_ID), false);
+  await store.listPasses();
+  assert.match(calls[3].url, /passes\?select=.*&on_sale=is\.true&order=sort_order\.asc$/);
+  assert.equal(await store.getOrder('not-a-uuid'), null);
+});
