@@ -63,8 +63,9 @@ Confirmado contra el playground oficial el 15 oct: nuestra cadena y firma coinci
 | `BLOKKO_API_KEY` | API key de Blokko |
 | `BLOKKO_SECRET` | Secret key de Blokko |
 | `BLOKKO_MERCHANT_UUID` | `merchantUuid` para invoices |
-| `BLOKKO_MERCHANT_ID` | `merchantId` (métodos de pago y webhook) |
-| `BLOKKO_TERMINAL_UUID` | Terminal virtual para los payment intents |
+| `BLOKKO_MERCHANT_ID` | `merchantId` (métodos de pago y webhook). Si Blokko no lo entrega, se usa `BLOKKO_MERCHANT_UUID` |
+| `BLOKKO_TERMINAL_SERIAL` | Serial de la terminal que entregó Blokko (se usa como `terminalUuid`) |
+| `BLOKKO_TERMINAL_UUID` | Solo si al inicializar la terminal Blokko devuelve un UUID distinto |
 | `BLOKKO_SIGNATURE_ENCODING` | `hex` (confirmado contra el playground; es el default) |
 | `BLOKKO_TIMESTAMP_UNIT` | `s` (confirmado; es el default) |
 | `ORDER_TOKEN_SECRET` | 32+ caracteres aleatorios |

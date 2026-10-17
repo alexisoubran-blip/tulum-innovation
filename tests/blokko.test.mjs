@@ -192,3 +192,11 @@ test('payment intent uses /v2/payment/intent with the configured terminal; metho
   assert.equal(calls[2].url, 'https://sandbox.blokko.dev/v2/payment/tx-1');
   await assert.rejects(createClient(config, { fetchImpl }).createPaymentIntent({ merchantTransactionId: 'x', amount: 1 }), /terminalUuid/);
 });
+
+test('terminal serial is used as terminalUuid; merchantId falls back to merchantUuid', async () => {
+  const { configFromEnv } = await import('../lib/ticketing/blokko.mjs');
+  const c = configFromEnv({ BLOKKO_MERCHANT_UUID: 'mu-1', BLOKKO_TERMINAL_SERIAL: 'TSDX1' });
+  assert.equal(c.merchantId, 'mu-1');
+  assert.equal(c.terminalUuid, 'TSDX1');
+  assert.equal(configFromEnv({ BLOKKO_TERMINAL_SERIAL: 'TSDX1', BLOKKO_TERMINAL_UUID: 'uuid-9' }).terminalUuid, 'uuid-9');
+});

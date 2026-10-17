@@ -16,8 +16,8 @@ export async function GET() {
     apiKey: Boolean(config.apiKey),
     secret: Boolean(config.secret),
     merchantUuid: Boolean(config.merchantUuid),
-    merchantId: Boolean(process.env.BLOKKO_MERCHANT_ID),
-    terminalUuid: Boolean(config.terminalUuid),
+    merchantId: process.env.BLOKKO_MERCHANT_ID ? true : (config.merchantId ? 'using_merchant_uuid' : false),
+    terminal: process.env.BLOKKO_TERMINAL_UUID ? 'uuid' : (config.terminalSerial ? 'serial' : false),
   };
   const environment = config.baseUrl === SANDBOX_URL ? 'sandbox' : 'production';
   if (!configured.apiKey || !configured.secret || !config.merchantId) {

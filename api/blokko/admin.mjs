@@ -2,6 +2,7 @@
 // Requires Authorization: Bearer {TICKETING_ADMIN_TOKEN}.
 //   { action: "methods" }                                 → payment methods for our merchant
 //   { action: "register-webhook" }                        → points Blokko at our production webhook
+//   { action: "init-terminal" }                           → POST /v2/pos/initialization with our serial (virtual, type E)
 //   { action: "test-intent", amount?, paymentMethodId? }  → sandbox only: a test QR in MXN
 //   { action: "status", merchantTransactionId }           → payment status of a test
 
@@ -36,6 +37,9 @@ export async function POST(request) {
     switch (body.action) {
       case 'methods':
         return json(200, { ok: true, environment: sandbox ? 'sandbox' : 'production', paymentMethods: await client.getPaymentMethods() });
+      case 'init-terminal':
+        if (!config.terminalSerial) return json(400, { ok: false, error: 'missing_BLOKKO_TERMINAL_SERIAL' });
+        return json(200, { ok: true, response: await client.initTerminal({ serial: config.terminalSerial, type: 'E' }) });
       case 'register-webhook':
         return json(200, { ok: true, callbackUrl: WEBHOOK_URL, response: await client.setWebhook(WEBHOOK_URL) });
       case 'test-intent': {

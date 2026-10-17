@@ -48,14 +48,21 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
   </section>
 
   <section>
-    <h2>3. Registrar webhook</h2>
+    <h2>3. Inicializar terminal</h2>
+    <p class="help">Registra la terminal virtual (serial de Blokko) para cobrar en línea. Si responde con un UUID, cárgalo en Vercel como <code>BLOKKO_TERMINAL_UUID</code>.</p>
+    <button id="btnTerminal">Inicializar terminal</button>
+    <pre id="outTerminal" hidden></pre>
+  </section>
+
+  <section>
+    <h2>4. Registrar webhook</h2>
     <p class="help">Le dice a Blokko que avise los pagos a <code>https://www.tuluminnovationfest.com/api/webhooks/blokko</code>. Se puede repetir sin problema.</p>
     <button id="btnWebhook">Registrar webhook</button>
     <pre id="outWebhook" hidden></pre>
   </section>
 
   <section>
-    <h2>4. Pago de prueba (solo sandbox)</h2>
+    <h2>5. Pago de prueba (solo sandbox)</h2>
     <p class="help">Genera un QR de prueba en MXN. No se liga a ninguna orden real.</p>
     <div class="row">
       <div><label for="amount">Monto (MXN)</label><input id="amount" type="number" min="1" max="1000" step="1" value="10"></div>
@@ -93,6 +100,7 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
     show('outStatus', data, data.ok);
     if (data.ok) fillMethods(data.paymentMethods);
   });
+  $('btnTerminal').onclick = () => busy($('btnTerminal'), async () => { const d = await admin({ action: 'init-terminal' }); show('outTerminal', d, d.ok); });
   $('btnWebhook').onclick = () => busy($('btnWebhook'), async () => { const d = await admin({ action: 'register-webhook' }); show('outWebhook', d, d.ok); });
   $('btnIntent').onclick = () => busy($('btnIntent'), async () => {
     const d = await admin({ action: 'test-intent', amount: Number($('amount').value), paymentMethodId: $('method').value || undefined });
