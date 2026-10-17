@@ -340,7 +340,7 @@
 
   // ---------------------------------------------------------------- boot
   (async () => {
-    const options = await api('/api/checkout/options');
+    const options = await api(`/api/checkout/options${params.get('pass') ? `?pass=${encodeURIComponent(params.get('pass'))}` : ''}`);
     if (!options.ok) { $('passes').textContent = ''; return showError(options.error); }
     state.options = options;
     const wanted = params.get('pass');

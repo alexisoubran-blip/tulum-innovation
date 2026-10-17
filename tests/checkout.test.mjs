@@ -170,3 +170,13 @@ test('the signed webhook pays the order and fulfillment runs once even if status
   assert.equal((await store.listTickets(orderId)).length, 2);
   assert.equal(emails.length, 1);
 });
+
+test('hidden test pass: not listed, but offered and purchasable through its direct link', async () => {
+  const store = createMemoryStore({ rate: 18.5, passes: [...passes, { id: 'tif-test', name: 'TIF Test', price_usd: '1.00', hidden: true }] });
+  const checkout = createCheckout({ store, blokko: fakeBlokko(), env, sendEmail: async () => ({ sent: true }) });
+  assert.ok(!(await checkout.options()).passes.some((p) => p.id === 'tif-test'));
+  const withTest = await checkout.options({ includePass: 'tif-test' });
+  assert.deepEqual(withTest.passes.find((p) => p.id === 'tif-test'), { id: 'tif-test', name: 'TIF Test', priceUsd: 1, priceMxn: 19 });
+  const { order } = await checkout.createOrder({ ...buyer, passId: 'tif-test', quantity: 1 });
+  assert.equal(order.amountMxn, 19);
+});

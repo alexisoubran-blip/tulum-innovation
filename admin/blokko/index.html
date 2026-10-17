@@ -63,8 +63,8 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
   </section>
 
   <section>
-    <h2>5. Pago de prueba (solo sandbox)</h2>
-    <p class="help">Genera un QR de prueba en MXN con el método elegido. No se liga a ninguna orden real.</p>
+    <h2>5. Pago de prueba</h2>
+    <p class="help">Genera un QR de prueba en MXN con el método elegido. No se liga a ninguna orden. En producción el máximo es 50 MXN. Para probar la compra completa (boletos y correo) usa <a href="/checkout?pass=tif-test">/checkout?pass=tif-test</a> (1 USD).</p>
     <div class="row">
       <div><label for="amount">Monto (MXN)</label><input id="amount" type="number" min="1" max="1000" step="1" value="10"></div>
       <div><label for="method">Método de pago</label><select id="method"><option value="">Primero presiona “Revisar estado”</option></select></div>

@@ -3,7 +3,7 @@
 //   { action: "methods" }                                 → payment methods for our merchant
 //   { action: "register-webhook" }                        → points Blokko at our production webhook
 //   { action: "init-terminal" }                           → POST /v2/pos/initialization with our serial (virtual, type E)
-//   { action: "test-intent", amount?, paymentMethodId? }  → sandbox only: a test QR in MXN
+//   { action: "test-intent", amount?, paymentMethodId? }  → a test QR in MXN (production capped at 50 MXN)
 //   { action: "status", merchantTransactionId }           → payment status of a test
 
 import { randomUUID, timingSafeEqual } from 'node:crypto';
@@ -46,14 +46,14 @@ export async function POST(request) {
       case 'register-webhook':
         return json(200, { ok: true, callbackUrl: WEBHOOK_URL, response: await client.setWebhook(WEBHOOK_URL) });
       case 'test-intent': {
-        if (!sandbox) return json(400, { ok: false, error: 'sandbox_only' });
         if (!body.paymentMethodId) return json(400, { ok: false, error: 'choose_a_payment_method' });
         const amount = Number(body.amount ?? 10);
-        if (!(amount > 0 && amount <= 1000)) return json(400, { ok: false, error: 'amount_out_of_range' });
+        // Blokko tests in production with real funds in their test wallets: keep those tiny.
+        if (!(amount > 0 && amount <= (sandbox ? 1000 : 50))) return json(400, { ok: false, error: 'amount_out_of_range', max: sandbox ? 1000 : 50 });
         const merchantTransactionId = randomUUID();
         const response = await client.createPaymentIntent({
           merchantTransactionId,
-          merchantReference: 'tif-sandbox-test',
+          merchantReference: sandbox ? 'tif-sandbox-test' : 'tif-production-test',
           amount: amount.toFixed(2),
           paymentMethodId: String(body.paymentMethodId),
         });
