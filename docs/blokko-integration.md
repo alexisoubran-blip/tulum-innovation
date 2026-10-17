@@ -9,7 +9,7 @@ Usamos la **integración completa (payment intent)**, no el link de pago (invoic
 | Endpoint | Uso |
 |---|---|
 | `GET /v2/merchants/{merchantId}/payment-methods` | Métodos disponibles (RTP, stablecoins, cripto) para mostrar en nuestro checkout |
-| `POST /v2/payment/intent` | QR para el método elegido. `merchantTransactionId` = un UUID nuevo por intento; `merchantReference` = ID de la orden; `terminalUuid` = terminal virtual (tipo `E`); `amount` en **MXN** como texto |
+| `POST /v2/payment/intent` | QR para el método elegido. `merchantTransactionId` = un UUID nuevo por intento; `merchantReference` = ID de la orden; `terminalUuid` = terminal virtual (tipo `E`); `amount` en **MXN** como texto; `paymentMethodId` **obligatorio** (la referencia dice opcional, el sandbox responde 422 sin él) |
 | `GET /v2/payment/byMerchantTransactionId/{id}` · `GET /v2/payment/{transactionId}` | Consultar estado (`P` pendiente, `E` pagado) mientras el comprador ve el QR |
 | `POST /v2/pos/initialization` | Inicializar la terminal (`serial`, `type: "E"` virtual) si Blokko lo requiere |
 | `PUT /v2/merchants/{merchantId}/webhook` | Registrar `https://www.tuluminnovationfest.com/api/webhooks/blokko` (solo HTTPS) |

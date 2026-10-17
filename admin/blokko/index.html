@@ -64,10 +64,10 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
 
   <section>
     <h2>5. Pago de prueba (solo sandbox)</h2>
-    <p class="help">Genera un QR de prueba en MXN. No se liga a ninguna orden real.</p>
+    <p class="help">Genera un QR de prueba en MXN con el método elegido. No se liga a ninguna orden real.</p>
     <div class="row">
       <div><label for="amount">Monto (MXN)</label><input id="amount" type="number" min="1" max="1000" step="1" value="10"></div>
-      <div><label for="method">Método (opcional)</label><select id="method"><option value="">Que elija Blokko</option></select></div>
+      <div><label for="method">Método de pago</label><select id="method"><option value="">Primero presiona “Revisar estado”</option></select></div>
       <div style="flex:0 0 auto"><button id="btnIntent">Generar QR</button></div>
     </div>
     <div class="qr" id="qr" hidden><img id="qrImg" alt="QR de pago de prueba"><div><p class="help" style="margin:0 0 8px">Referencia: <code id="mtx"></code></p><button class="ghost" id="btnCheck">Consultar estado</button></div></div>
@@ -90,8 +90,8 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
   const fillMethods = (methods) => {
     const list = Array.isArray(methods) ? methods : (methods && (methods.paymentMethods || methods.data || methods.items)) || [];
     if (!Array.isArray(list) || !list.length) return;
-    const sel = $('method'); sel.length = 1;
-    list.forEach((m) => { const id = m.id || m.paymentMethodId || m.code; if (!id) return; const o = document.createElement('option'); o.value = id; o.textContent = [m.name || id, m.category].filter(Boolean).join(' · '); sel.appendChild(o); });
+    const sel = $('method'); sel.length = 0;
+    list.forEach((m) => { const id = m.id || m.paymentMethodId || m.code; if (!id) return; const o = document.createElement('option'); o.value = id; o.textContent = [id, m.name && m.name !== id ? m.name : '', m.category].filter(Boolean).join(' · '); sel.appendChild(o); });
   };
 
   $('btnStatus').onclick = () => busy($('btnStatus'), async () => {
@@ -110,6 +110,7 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
     if (d.ok && r.qrUrl) { $('qr').hidden = false; $('qrImg').src = r.qrUrl; $('mtx').textContent = d.merchantTransactionId; }
   });
   $('btnCheck').onclick = () => busy($('btnCheck'), async () => { const d = await admin({ action: 'status', merchantTransactionId: $('mtx').textContent }); show('outIntent', d, d.ok); });
+  $('btnStatus').click(); // load status and payment methods on open
 })();
 </script>
 </body>

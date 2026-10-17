@@ -47,6 +47,7 @@ export async function POST(request) {
         return json(200, { ok: true, callbackUrl: WEBHOOK_URL, response: await client.setWebhook(WEBHOOK_URL) });
       case 'test-intent': {
         if (!sandbox) return json(400, { ok: false, error: 'sandbox_only' });
+        if (!body.paymentMethodId) return json(400, { ok: false, error: 'choose_a_payment_method' });
         const amount = Number(body.amount ?? 10);
         if (!(amount > 0 && amount <= 1000)) return json(400, { ok: false, error: 'amount_out_of_range' });
         const merchantTransactionId = randomUUID();
@@ -54,7 +55,7 @@ export async function POST(request) {
           merchantTransactionId,
           merchantReference: 'tif-sandbox-test',
           amount: amount.toFixed(2),
-          paymentMethodId: body.paymentMethodId || undefined,
+          paymentMethodId: String(body.paymentMethodId),
         });
         return json(200, { ok: true, merchantTransactionId, response });
       }

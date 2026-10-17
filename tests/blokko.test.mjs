@@ -183,14 +183,15 @@ test('payment intent uses /v2/payment/intent with the configured terminal; metho
   const calls = [];
   const fetchImpl = async (url, init) => { calls.push({ url, method: init.method, body: init.body }); return new Response('{}', { status: 200 }); };
   const client = createClient({ ...config, terminalUuid: 'TERM-1' }, { fetchImpl });
-  await client.createPaymentIntent({ merchantTransactionId: 'mtx-1', merchantReference: 'order-1', amount: 3900 });
+  await client.createPaymentIntent({ merchantTransactionId: 'mtx-1', merchantReference: 'order-1', amount: 3900, paymentMethodId: 'USDC_SOL' });
   await client.getPaymentMethods();
   await client.getPaymentByTransactionId('tx-1');
   assert.equal(calls[0].url, 'https://sandbox.blokko.dev/v2/payment/intent');
-  assert.deepEqual(JSON.parse(calls[0].body), { merchantTransactionId: 'mtx-1', terminalUuid: 'TERM-1', amount: '3900', merchantReference: 'order-1' });
+  assert.deepEqual(JSON.parse(calls[0].body), { merchantTransactionId: 'mtx-1', terminalUuid: 'TERM-1', amount: '3900', paymentMethodId: 'USDC_SOL', merchantReference: 'order-1' });
   assert.equal(calls[1].url, 'https://sandbox.blokko.dev/v2/merchants/m-id/payment-methods');
   assert.equal(calls[2].url, 'https://sandbox.blokko.dev/v2/payment/tx-1');
-  await assert.rejects(createClient(config, { fetchImpl }).createPaymentIntent({ merchantTransactionId: 'x', amount: 1 }), /terminalUuid/);
+  await assert.rejects(createClient(config, { fetchImpl }).createPaymentIntent({ merchantTransactionId: 'x', amount: 1, paymentMethodId: 'X' }), /terminalUuid/);
+  await assert.rejects(client.createPaymentIntent({ merchantTransactionId: 'x', amount: 1 }), /paymentMethodId/);
 });
 
 test('terminal serial is used as terminalUuid; merchantId falls back to merchantUuid', async () => {
