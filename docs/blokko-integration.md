@@ -48,7 +48,8 @@ Confirmado contra el playground oficial el 15 oct: nuestra cadena y firma coinci
 | `lib/ticketing/blokko-webhook.mjs` | Lógica del webhook: rechaza firmas inválidas, ignora pendientes, idempotente, alerta pagos sin orden |
 | `lib/ticketing/order-token.mjs` | Token cifrado para el `successUrl` |
 | `api/webhooks/blokko.mjs` | Endpoint de Vercel. Responde 503 mientras no haya base de datos |
-| `api/blokko/sandbox-test.mjs` | Prueba con login de admin: crea un invoice de 1.00 en sandbox para validar llaves y firma desde Vercel |
+| `api/blokko/status.mjs` | Público y de solo lectura: qué credenciales hay (sin valores) y los métodos de pago que Blokko ofrece |
+| `api/blokko/admin.mjs` + `/admin/blokko` | Con token: registrar el webhook, QR de prueba en sandbox y consultar su estado |
 | `scripts/blokko-signature-check.mjs` | Confirma la codificación de la firma contra el playground |
 | `lib/ticketing/supabase-store.mjs` | Guarda nonces, eventos de pago y marca órdenes pagadas en Supabase (sin dependencias, vía API REST) |
 | `supabase/migrations/20261015000000_ticketing_core.sql` | Tablas: pases, órdenes, boletos, eventos de pago, nonces, revendedores, staff. RLS activo; solo el servidor lee y escribe |
@@ -67,7 +68,7 @@ Confirmado contra el playground oficial el 15 oct: nuestra cadena y firma coinci
 | `BLOKKO_SIGNATURE_ENCODING` | `hex` (confirmado contra el playground; es el default) |
 | `BLOKKO_TIMESTAMP_UNIT` | `s` (confirmado; es el default) |
 | `ORDER_TOKEN_SECRET` | 32+ caracteres aleatorios |
-| `TICKETING_ADMIN_TOKEN` | Token para `/api/blokko/sandbox-test` |
+| `TICKETING_ADMIN_TOKEN` | Token para `/admin/blokko` (registrar webhook y pagos de prueba) |
 | `SUPABASE_URL` | `https://tervlcriapisdpvsyhto.supabase.co` |
 | `SUPABASE_SERVICE_ROLE_KEY` | Llave `service_role` (o `sb_secret_…`) de Supabase → Project Settings → API Keys. Pegarla directo en Vercel, nunca en chat ni en el repo |
 

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Blokko · Admin TIF</title>
+<style>
+:root{--bg:#00080B;--panel:#0a1518;--line:rgba(242,241,234,.14);--text:#f2f1ea;--muted:rgba(242,241,234,.64);--ember:#E97A43;--deep:#D14414;--ok:#5fd39a;--bad:#ff8a7a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 80px}
+h1{font-size:1.6rem;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 28px}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+h2{font-size:1rem;margin:0 0 6px}
+p.help{color:var(--muted);margin:0 0 14px;font-size:.88rem}
+label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:6px}
+input,select{width:100%;background:#00080B;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 12px;font:inherit}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.row>div{flex:1 1 180px}
+button{background:var(--deep);color:#fff;border:0;border-radius:999px;padding:11px 18px;font:600 .86rem/1 inherit;cursor:pointer;min-height:42px}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+button:disabled{opacity:.5;cursor:wait}
+pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:12px;overflow:auto;max-height:340px;font-size:.78rem;white-space:pre-wrap;word-break:break-word;margin:12px 0 0}
+.badge{display:inline-block;font-size:.72rem;padding:3px 9px;border-radius:999px;border:1px solid var(--line);margin-left:6px}
+.ok{color:var(--ok)} .bad{color:var(--bad)}
+.qr{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;margin-top:12px}
+.qr img{width:220px;height:220px;background:#fff;border-radius:10px;padding:8px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Blokko · Admin</h1>
+  <p class="sub">Pruebas de la integración de pagos de Tulum Innovation Fest. Página privada.</p>
+
+  <section>
+    <h2>1. Estado <span id="env" class="badge">…</span></h2>
+    <p class="help">Revisa qué credenciales están cargadas en Vercel y si Blokko las acepta. No requiere token.</p>
+    <button class="ghost" id="btnStatus">Revisar estado</button>
+    <pre id="outStatus" hidden></pre>
+  </section>
+
+  <section>
+    <h2>2. Token de administrador</h2>
+    <p class="help">El valor de <code>TICKETING_ADMIN_TOKEN</code>. Se guarda solo en esta pestaña.</p>
+    <input id="token" type="password" autocomplete="off" placeholder="Pega el token">
+  </section>
+
+  <section>
+    <h2>3. Registrar webhook</h2>
+    <p class="help">Le dice a Blokko que avise los pagos a <code>https://www.tuluminnovationfest.com/api/webhooks/blokko</code>. Se puede repetir sin problema.</p>
+    <button id="btnWebhook">Registrar webhook</button>
+    <pre id="outWebhook" hidden></pre>
+  </section>
+
+  <section>
+    <h2>4. Pago de prueba (solo sandbox)</h2>
+    <p class="help">Genera un QR de prueba en MXN. No se liga a ninguna orden real.</p>
+    <div class="row">
+      <div><label for="amount">Monto (MXN)</label><input id="amount" type="number" min="1" max="1000" step="1" value="10"></div>
+      <div><label for="method">Método (opcional)</label><select id="method"><option value="">Que elija Blokko</option></select></div>
+      <div style="flex:0 0 auto"><button id="btnIntent">Generar QR</button></div>
+    </div>
+    <div class="qr" id="qr" hidden><img id="qrImg" alt="QR de pago de prueba"><div><p class="help" style="margin:0 0 8px">Referencia: <code id="mtx"></code></p><button class="ghost" id="btnCheck">Consultar estado</button></div></div>
+    <pre id="outIntent" hidden></pre>
+  </section>
+</main>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const store = { get(){ try { return sessionStorage.getItem('tifAdminToken') || ''; } catch { return ''; } }, set(v){ try { sessionStorage.setItem('tifAdminToken', v); } catch {} } };
+  $('token').value = store.get();
+  $('token').addEventListener('input', (e) => store.set(e.target.value.trim()));
+  const show = (id, data, ok) => { const el = $(id); el.hidden = false; el.className = ok ? 'ok' : 'bad'; el.textContent = JSON.stringify(data, null, 2); };
+  const busy = async (btn, fn) => { btn.disabled = true; try { await fn(); } finally { btn.disabled = false; } };
+  const admin = async (payload) => {
+    const res = await fetch('/api/blokko/admin', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + $('token').value.trim() }, body: JSON.stringify(payload) });
+    let data; try { data = await res.json(); } catch { data = { ok: false, error: 'HTTP ' + res.status }; }
+    return data;
+  };
+  const fillMethods = (methods) => {
+    const list = Array.isArray(methods) ? methods : (methods && (methods.paymentMethods || methods.data || methods.items)) || [];
+    if (!Array.isArray(list) || !list.length) return;
+    const sel = $('method'); sel.length = 1;
+    list.forEach((m) => { const id = m.id || m.paymentMethodId || m.code; if (!id) return; const o = document.createElement('option'); o.value = id; o.textContent = [m.name || id, m.category].filter(Boolean).join(' · '); sel.appendChild(o); });
+  };
+
+  $('btnStatus').onclick = () => busy($('btnStatus'), async () => {
+    const res = await fetch('/api/blokko/status', { cache: 'no-store' });
+    const data = await res.json();
+    $('env').textContent = data.environment || '?';
+    show('outStatus', data, data.ok);
+    if (data.ok) fillMethods(data.paymentMethods);
+  });
+  $('btnWebhook').onclick = () => busy($('btnWebhook'), async () => { const d = await admin({ action: 'register-webhook' }); show('outWebhook', d, d.ok); });
+  $('btnIntent').onclick = () => busy($('btnIntent'), async () => {
+    const d = await admin({ action: 'test-intent', amount: Number($('amount').value), paymentMethodId: $('method').value || undefined });
+    show('outIntent', d, d.ok);
+    const r = d.response || {};
+    if (d.ok && r.qrUrl) { $('qr').hidden = false; $('qrImg').src = r.qrUrl; $('mtx').textContent = d.merchantTransactionId; }
+  });
+  $('btnCheck').onclick = () => busy($('btnCheck'), async () => { const d = await admin({ action: 'status', merchantTransactionId: $('mtx').textContent }); show('outIntent', d, d.ok); });
+})();
+</script>
+</body>
+</html>

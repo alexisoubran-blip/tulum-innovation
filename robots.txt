@@ -3,6 +3,8 @@ Allow: /
 # Search indexing and AI answer grounding are permitted.
 Content-Signal: search=yes, ai-input=yes
 Disallow: /health
+Disallow: /admin
+Disallow: /api
 Disallow: /home-v2
 
 Sitemap: https://www.tuluminnovationfest.com/sitemap.xml
