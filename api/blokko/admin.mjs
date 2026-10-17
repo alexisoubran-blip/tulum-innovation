@@ -16,17 +16,20 @@ const json = (status, body) => new Response(JSON.stringify(body, null, 2), {
   headers: { 'content-type': 'application/json', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' },
 });
 
-function authorized(request) {
-  const token = process.env.TICKETING_ADMIN_TOKEN || '';
-  const given = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
-  if (token.length < 16 || !given) return false;
+// Returns null when authorized, otherwise the reason (never the token itself).
+function authError(request) {
+  const token = (process.env.TICKETING_ADMIN_TOKEN || '').trim();
+  const given = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '').trim();
+  if (token.length < 16) return 'admin_token_not_configured_on_server';
+  if (!given) return 'missing_token';
   const a = Buffer.from(token);
   const b = Buffer.from(given);
-  return a.length === b.length && timingSafeEqual(a, b);
+  return a.length === b.length && timingSafeEqual(a, b) ? null : 'wrong_token';
 }
 
 export async function POST(request) {
-  if (!authorized(request)) return json(401, { ok: false, error: 'unauthorized' });
+  const denied = authError(request);
+  if (denied) return json(401, { ok: false, error: 'unauthorized', reason: denied });
   let body = {};
   try { body = await request.json(); } catch { return json(400, { ok: false, error: 'invalid_json' }); }
 
