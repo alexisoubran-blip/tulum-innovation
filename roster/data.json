@@ -45,15 +45,6 @@
       "titleEs": "Autor y conferencista"
     },
     {
-      "name": "Dor Cohen",
-      "role": "Speaker",
-      "company": "Muan Technologies",
-      "title": "Founder & CEO",
-      "titleEs": "Fundador y CEO",
-      "image": "/assets/speakers-2026/dor-cohen.webp",
-      "url": "https://www.linkedin.com/in/dorcohen10/"
-    },
-    {
       "name": "Andrea Dekovic",
       "role": "Speaker",
       "company": "Las Flores",
@@ -61,15 +52,6 @@
       "titleEs": "Fundadora",
       "image": "/assets/speakers-2026/andrea-dekovic.webp",
       "url": "https://www.linkedin.com/in/andreadekovic/"
-    },
-    {
-      "name": "Franz Tuñez",
-      "role": "Speaker",
-      "company": "NetX State",
-      "title": "Co-Founder",
-      "titleEs": "Cofundador",
-      "image": "/assets/speakers-2026/franz-tunez.webp",
-      "url": "https://www.netxgen.world/"
     },
     {
       "name": "Andersen Francis",

@@ -8,7 +8,7 @@ Only public names, companies, roles, public profile URLs and image paths belong 
 
 The four new co-founder posters were supplied by the organizer on 2026-09-29 and optimized to WebP. Existing speaker and Whale Tank portraits are reused. Poster artwork uses object-fit:contain to preserve names and labels; normal portraits use cover.
 
-Company sources checked 2026-09-29 include the organizer's submitted form (Dor Cohen/Muan Technologies, Elo Cadenas/PXO Token + Arkangeles, Uri Soglowek/Soglowek Capital, and other completed applicants), existing festival announcements and the following public organization/profile sources:
+Company sources checked 2026-09-29 include the organizer's submitted form (Elo Cadenas/PXO Token + Arkangeles, Uri Soglowek/Soglowek Capital, and other completed applicants), existing festival announcements and the following public organization/profile sources:
 - https://guardiansofnature.earth/about
 - https://www.linkedin.com/in/francesipimentel
 - https://tulumcryptofest.io/home-dubai
@@ -24,3 +24,5 @@ Company sources checked 2026-09-29 include the organizer's submitted form (Dor C
 Abraham (Abe) Ramos has no verified company available in the supplied materials or research. His company is intentionally null until the organizer confirms it.
 
 Run node build.mjs to build. Count assertions must be adjusted when adding approved profiles. The build checks duplicate names, local image existence, HTML escaping, public fields, group ordering and preservation of hero, press, tickets, past-participant sections and scripts.
+
+2026-10-18: Dor Cohen and Franz Tuñez removed at the organizer's request until their participation is confirmed. Their photos stay in assets/speakers-2026 so they can be re-added quickly.
