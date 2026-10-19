@@ -126,6 +126,6 @@ test('checkout queries: idempotent ticket insert, single email claim, on-sale pa
   assert.match(calls[1].url, /orders\?id=eq\.[0-9a-f-]+&tickets_emailed_at=is\.null$/);
   assert.equal(await store.claimTicketEmail(ORDER_ID), false);
   await store.listPasses();
-  assert.match(calls[3].url, /passes\?select=.*&on_sale=is\.true&hidden=is\.false&order=sort_order\.asc$/);
+  assert.match(calls[3].url, /passes\?select=\*&on_sale=is\.true&hidden=is\.false&order=sort_order\.asc$/);
   assert.equal(await store.getOrder('not-a-uuid'), null);
 });
