@@ -116,3 +116,19 @@ Los botones de `/tickets` siguen apuntando a Ticket Fairy hasta que se decida el
 - Métodos agrupados: Tarjeta (TacPay, "muy pronto" hasta integrar su API), Pesos (SPEI, CoDi, Bitso) y Cripto (WalletConnect, Lightning, Crypto.com, Cash App).
 - SPEI: requiere `BANK_TRANSFER_BENEFICIARY`, `BANK_TRANSFER_BANK`, `BANK_TRANSFER_CLABE`. La orden se aparta 72 h con una referencia `TIF…`; se confirma en `/admin/blokko` (sección 6) y ahí se emiten boletos y correo.
 - Cada intento fallido guarda el error de Blokko; se ve en `/admin/blokko` (sección 7). El comprador puede cambiar de método sin reiniciar; un QR anterior que sí se pague también cuenta.
+
+## Tarjetas · TacPay (API BlissCore v2.1)
+
+- Endpoint único: `POST {BLISSCORE_BASE_URL}/payments/affiliate/payment` con `affiliate_code` en el cuerpo. Sandbox `https://sandbox.blisscorepay.cloud`, producción `https://api.blisscorepay.cloud`.
+- Solo Visa y Mastercard **emitidas en México**, solo MXN, mínimo 1.00 MXN. Sin webhook, sin consulta de estado y sin reembolsos por API (se hacen en el panel de BlissCore).
+- Código: `lib/ticketing/blisscore.mjs` (cliente y validación), `payByCard` en `lib/ticketing/checkout.mjs`, formulario en `/checkout`.
+- Cada intento usa su propio `order_id` (= id del intento). Aprobado → orden pagada al momento, boletos y correo. Declinado → mensaje claro y puede reintentar u otro método. Timeout o respuesta ilegible → intento `unconfirmed`: la orden queda bloqueada para cualquier otro pago (evita doble cobro) hasta que un admin lo resuelve en `/admin/blokko` (sección 8) revisando el panel de BlissCore.
+- Antifraude básico: máximo 5 intentos de tarjeta por orden y freno global si hay 25 rechazos en 15 minutos.
+- La tarjeta pasa por nuestro servidor solo en memoria: nunca se guarda ni se registra; guardamos marca y últimos 4 dígitos.
+- Variables en Vercel: `BLISSCORE_AFFILIATE_CODE` (activa el botón de tarjeta) y `BLISSCORE_BASE_URL` (omitir = sandbox). Prueba sandbox con tarjetas de prueba en `/admin/blokko` sección 6.
+
+## Catálogo "01 | Checkout Festival + Business Pass + Hotel" (LGM, 19 oct 2026)
+
+- Executive Pass USD 1,500, Hotel Upgrade USD 1,500, huésped adicional USD 720 (sin cargos de Ticket Fairy).
+- General Access y Community Access: "Precio por confirmar" (`passes.price_pending`), visibles pero no se pueden comprar hasta fijar el precio: `update passes set price_usd = …, price_pending = false where id = …`.
+- Business Pass · Digital Merchant: MXN 3,990 fijos (`passes.price_mxn`), pide nombre comercial, ubicación y teléfono (se guardan en `orders.metadata.business`), emite un boleto General Access.

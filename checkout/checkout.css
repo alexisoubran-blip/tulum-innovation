@@ -228,3 +228,12 @@ button, input { font: inherit; color: inherit; }
 .co-copy { flex: none; min-height: 34px; padding: .3rem .8rem; border: 1px solid var(--line); border-radius: 999px; background: transparent; font-size: .74rem; cursor: pointer; }
 .co-copy:hover { border-color: var(--ember); }
 @media (max-width: 560px) { .co-bank > div { grid-template-columns: 1fr; gap: .25rem; } }
+
+/* Card (TacPay · BlissCore) */
+.co-card { display: grid; gap: .9rem; padding: 1.4rem; border: 1px solid var(--line); border-radius: 18px; background: rgba(7,19,21,.85); }
+.co-card h3 { margin: 0; font-size: 1.05rem; font-weight: 600; }
+.co-card .co-fields { margin-top: .2rem; }
+.co-card .co-cta[disabled] { opacity: .55; cursor: progress; }
+.co-card input { letter-spacing: .02em; }
+.co-pending { color: var(--muted); font-style: normal; font-weight: 500; }
+.co-cta[disabled] { opacity: .5; cursor: not-allowed; }

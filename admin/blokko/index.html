@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>Blokko · Admin TIF</title>
+<title>Pagos · Admin TIF</title>
 <style>
 :root{--bg:#00080B;--panel:#0a1518;--line:rgba(242,241,234,.14);--text:#f2f1ea;--muted:rgba(242,241,234,.64);--ember:#E97A43;--deep:#D14414;--ok:#5fd39a;--bad:#ff8a7a}
 *{box-sizing:border-box}
@@ -33,8 +33,8 @@ table.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}.
 </head>
 <body>
 <main>
-  <h1>Blokko · Admin</h1>
-  <p class="sub">Pruebas de la integración de pagos de Tulum Innovation Fest. Página privada.</p>
+  <h1>Pagos · Admin</h1>
+  <p class="sub">Blokko (cripto y pesos), TacPay (tarjetas) y SPEI de Tulum Innovation Fest. Página privada.</p>
 
   <section>
     <h2>1. Estado <span id="env" class="badge">…</span></h2>
@@ -75,15 +75,31 @@ table.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}.
     <pre id="outIntent" hidden></pre>
   </section>
   <section>
-    <h2>6. Transferencias SPEI</h2>
+    <h2>6. Tarjetas · TacPay <span id="cardsEnv" class="badge">…</span></h2>
+    <p class="help">Visa y Mastercard mexicanas vía API BlissCore. Se activa en el checkout al cargar <code>BLISSCORE_AFFILIATE_CODE</code> en Vercel (y <code>BLISSCORE_BASE_URL=https://api.blisscorepay.cloud</code> para producción). Las pruebas con tarjetas de prueba solo corren en sandbox (10 MXN, sin orden).</p>
+    <div class="row">
+      <div><label for="cardScenario">Escenario</label><select id="cardScenario">
+        <option value="approved">Visa aprobada (4111…1111)</option>
+        <option value="mastercard">Mastercard aprobada (5555…4444)</option>
+        <option value="insufficient">Fondos insuficientes (4111…1112)</option>
+        <option value="declined">Declinada (4111…1113)</option>
+        <option value="processor">Error del procesador (5555…4445)</option>
+      </select></div>
+      <div style="flex:0 0 auto"><button id="btnCardTest">Probar cobro</button></div>
+    </div>
+    <pre id="outCard" hidden></pre>
+  </section>
+
+  <section>
+    <h2>7. Transferencias SPEI</h2>
     <p class="help">Órdenes pagadas por transferencia. Cuando veas el depósito en el banco con la referencia, confírmala: se emiten los boletos y se envía el correo.</p>
     <button class="ghost" id="btnOverview">Actualizar</button>
     <div id="transfers"></div>
   </section>
 
   <section>
-    <h2>7. Últimos intentos de pago</h2>
-    <p class="help">Los 25 intentos más recientes del checkout, con el error de Blokko cuando falló.</p>
+    <h2>8. Últimos intentos de pago</h2>
+    <p class="help">Los 25 intentos más recientes del checkout, con el error del proveedor cuando falló. Un pago con tarjeta <strong>unconfirmed</strong> (el banco no respondió a tiempo) bloquea la orden: búscalo en el panel de BlissCore por la referencia y márcalo como cobrado o no cobrado.</p>
     <div id="attempts"></div>
   </section>
 </main>
@@ -111,6 +127,7 @@ table.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}.
     const res = await fetch('/api/blokko/status', { cache: 'no-store' });
     const data = await res.json();
     $('env').textContent = data.environment || '?';
+    if (data.cards) $('cardsEnv').textContent = data.cards.configured ? data.cards.environment : 'sin configurar';
     show('outStatus', data, data.ok);
     if (data.ok) fillMethods(data.paymentMethods);
   });
@@ -129,7 +146,15 @@ table.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}.
     const d = await admin({ action: 'overview' });
     if (!d.ok) { $('transfers').innerHTML = `<pre class="bad">${esc(JSON.stringify(d, null, 2))}</pre>`; return; }
     $('transfers').innerHTML = d.transfers.length ? `<table class="tbl"><tr><th>Referencia</th><th>Monto</th><th>Comprador</th><th>Producto</th><th>Estado</th><th></th></tr>${d.transfers.map((t) => `<tr><td><code>${esc(t.reference)}</code></td><td>${money(t.amountMxn)}</td><td>${esc(t.buyerName)}<br><small>${esc(t.buyerEmail)}</small></td><td>${esc(t.passId)} × ${t.quantity}</td><td>${esc(t.status)}</td><td>${t.status === 'paid' ? '' : `<button data-ref="${esc(t.reference)}">Confirmar pago</button>`}</td></tr>`).join('')}</table>` : '<p class="help">No hay transferencias.</p>';
-    $('attempts').innerHTML = d.attempts.length ? `<table class="tbl"><tr><th>Fecha</th><th>Método</th><th>Monto</th><th>Estado</th><th>Error</th></tr>${d.attempts.map((a) => `<tr><td>${esc(new Date(a.createdAt).toLocaleString('es-MX'))}</td><td>${esc(a.method)}</td><td>${money(a.amountMxn)}</td><td>${esc(a.status)}</td><td><small>${esc(a.error || '')}</small></td></tr>`).join('')}</table>` : '<p class="help">Sin intentos todavía.</p>';
+    $('attempts').innerHTML = d.attempts.length ? `<table class="tbl"><tr><th>Fecha</th><th>Método</th><th>Monto</th><th>Estado</th><th>Error / referencia</th></tr>${d.attempts.map((a) => `<tr><td>${esc(new Date(a.createdAt).toLocaleString('es-MX'))}</td><td>${esc(a.method)}${a.card ? `<br><small>${esc(a.card)}</small>` : ''}</td><td>${money(a.amountMxn)}</td><td>${esc(a.status)}</td><td><small>${esc(a.error || '')}${a.reference ? `<br>Ref. ${esc(a.reference)}` : ''}${a.status === 'unconfirmed' ? `<br>order_id BlissCore: <code>${esc(a.id)}</code>` : ''}</small>${a.status === 'unconfirmed' ? `<div class="row" style="margin-top:8px"><button data-charged="1" data-id="${esc(a.id)}">Sí se cobró</button><button class="ghost" data-charged="0" data-id="${esc(a.id)}">No se cobró</button></div>` : ''}</td></tr>`).join('')}</table>` : '<p class="help">Sin intentos todavía.</p>';
+    $('attempts').querySelectorAll('button[data-id]').forEach((b) => b.onclick = () => busy(b, async () => {
+      const charged = b.dataset.charged === '1';
+      let reference;
+      if (charged) { reference = prompt('transaction_id de BlissCore (opcional):') || undefined; if (!confirm('¿Confirmas que el cargo aparece aprobado en BlissCore? Se emitirán los boletos.')) return; }
+      else if (!confirm('¿Confirmas que el cargo NO existe en BlissCore? El comprador podrá volver a pagar.')) return;
+      const r = await admin({ action: 'resolve-card', attemptId: b.dataset.id, charged, reference });
+      if (!r.ok) alert(JSON.stringify(r)); await overview();
+    }));
     $('transfers').querySelectorAll('button[data-ref]').forEach((b) => b.onclick = () => busy(b, async () => {
       if (!confirm(`¿Confirmas que recibiste la transferencia ${b.dataset.ref}? Se emitirán los boletos.`)) return;
       const r = await admin({ action: 'confirm-transfer', reference: b.dataset.ref });
@@ -137,6 +162,7 @@ table.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}.
     }));
   }
   $('btnOverview').onclick = () => busy($('btnOverview'), overview);
+  $('btnCardTest').onclick = () => busy($('btnCardTest'), async () => { const d = await admin({ action: 'card-test', scenario: $('cardScenario').value }); show('outCard', d, d.ok && d.result && d.result.outcome === 'approved'); });
   $('btnStatus').click(); // load status and payment methods on open
 })();
 </script>

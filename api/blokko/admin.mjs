@@ -7,11 +7,23 @@
 //   { action: "status", merchantTransactionId }           → payment status of a test
 //   { action: "overview" }                                → SPEI transfers and recent payment attempts (with errors)
 //   { action: "confirm-transfer", reference }             → marks a SPEI order paid and issues its tickets
+//   { action: "card-test", scenario }                     → sandbox-only BlissCore charge with a test card
+//   { action: "resolve-card", attemptId, charged, reference? } → settles an 'unconfirmed' card attempt
 
 import { randomUUID, timingSafeEqual } from 'node:crypto';
 import { configFromEnv, createClient, SANDBOX_URL, BlokkoError } from '../../lib/ticketing/blokko.mjs';
 import { getCheckout } from '../../lib/ticketing/runtime.mjs';
 import { CheckoutError } from '../../lib/ticketing/checkout.mjs';
+import { configFromEnv as cardsConfig, createClient as createCardsClient } from '../../lib/ticketing/blisscore.mjs';
+
+// BlissCore sandbox test cards (guide, page 5). Never used against production.
+const TEST_CARDS = {
+  approved: '4111111111111111',
+  mastercard: '5555555555554444',
+  insufficient: '4111111111111112',
+  declined: '4111111111111113',
+  processor: '5555555555554445',
+};
 
 const WEBHOOK_URL = 'https://www.tuluminnovationfest.com/api/webhooks/blokko';
 
@@ -68,6 +80,23 @@ export async function POST(request) {
         return json(200, { ok: true, response: await client.getPaymentByMerchantTransactionId(String(body.merchantTransactionId)) });
       case 'overview':
         return json(200, { ok: true, ...(await (await getCheckout()).adminOverview()) });
+      case 'card-test': {
+        const cfg = cardsConfig();
+        if (!cfg.configured) return json(400, { ok: false, error: 'missing_BLISSCORE_AFFILIATE_CODE' });
+        if (!cfg.sandbox) return json(400, { ok: false, error: 'card_test_only_in_sandbox' });
+        const number = TEST_CARDS[body.scenario] || TEST_CARDS.approved;
+        const result = await createCardsClient(cfg).charge({
+          orderId: `TIF-TEST-${randomUUID().slice(0, 18)}`,
+          amount: 10,
+          description: 'TIF sandbox test',
+          card: { number, exp_month: '12', exp_year: String(new Date().getUTCFullYear() + 2), cvv: '123', holder_name: 'TIF PRUEBA' },
+          customer: { name: 'TIF Prueba', email: 'innovation@likegroup.io' },
+          billing: { street: 'Av. Tulum 1', city: 'Tulum', state: 'Quintana Roo', country: 'MX', postal_code: '77760' },
+        });
+        return json(200, { ok: true, environment: 'sandbox', scenario: body.scenario || 'approved', result });
+      }
+      case 'resolve-card':
+        return json(200, { ok: true, ...(await (await getCheckout()).resolveCard({ attemptId: body.attemptId, charged: body.charged === true, reference: body.reference })) });
       case 'confirm-transfer':
         return json(200, { ok: true, ...(await (await getCheckout()).confirmTransfer({ reference: body.reference })) });
       default:

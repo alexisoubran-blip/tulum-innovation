@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/checkout/checkout.css?v=20261019" />
+  <link rel="stylesheet" href="/checkout/checkout.css?v=20261019b" />
 </head>
 <body class="co-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -71,8 +71,16 @@
               <label for="email">Email</label>
               <input id="email" name="email" type="email" autocomplete="email" required maxlength="160" />
             </div>
+            <div class="co-field co-span co-business" id="businessFields" hidden>
+              <label for="businessName"><span data-en>Business name</span><span data-es>Nombre comercial</span></label>
+              <input id="businessName" name="businessName" autocomplete="organization" maxlength="120" />
+            </div>
+            <div class="co-field co-span co-business" hidden>
+              <label for="businessAddress"><span data-en>Business location (address)</span><span data-es>Ubicación del comercio (dirección)</span></label>
+              <input id="businessAddress" name="businessAddress" autocomplete="street-address" maxlength="200" />
+            </div>
             <div class="co-field">
-              <label for="phone"><span data-en>Phone (optional)</span><span data-es>Teléfono (opcional)</span></label>
+              <label for="phone"><span id="phoneLabel"><span data-en>Phone (optional)</span><span data-es>Teléfono (opcional)</span></span></label>
               <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
             </div>
             <div class="co-field">
@@ -105,6 +113,55 @@
           <p class="co-fine" id="transferDeadline"></p>
           <p class="co-waiting"><span class="co-dot" aria-hidden="true"></span><span data-en>Keep this page: it updates when we confirm your transfer. You can also close it; we’ll email you.</span><span data-es>Puedes dejar esta página abierta: se actualiza al confirmar tu transferencia. También puedes cerrarla; te avisamos por correo.</span></p>
           <button type="button" class="co-link" id="transferBack"><span data-en>Choose another method</span><span data-es>Elegir otro método</span></button>
+        </div>
+
+        <form class="co-card" id="cardBox" hidden novalidate autocomplete="on">
+          <h3><span data-en>Pay with card</span><span data-es>Pagar con tarjeta</span></h3>
+          <p class="co-sub"><span data-en>Visa or Mastercard issued in Mexico, credit or debit. Foreign cards are not accepted yet: use crypto or a bank transfer.</span><span data-es>Visa o Mastercard emitida en México, de crédito o débito. Por ahora no se aceptan tarjetas extranjeras: usa cripto o transferencia.</span></p>
+          <div class="co-fields">
+            <div class="co-field co-span">
+              <label for="ccNumber"><span data-en>Card number</span><span data-es>Número de tarjeta</span></label>
+              <input id="ccNumber" name="cc-number" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="0000 0000 0000 0000" />
+            </div>
+            <div class="co-field">
+              <label for="ccExp"><span data-en>Expiry (MM/YY)</span><span data-es>Vencimiento (MM/AA)</span></label>
+              <input id="ccExp" name="cc-exp" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/AA" />
+            </div>
+            <div class="co-field">
+              <label for="ccCvv">CVV</label>
+              <input id="ccCvv" name="cc-csc" inputmode="numeric" autocomplete="cc-csc" maxlength="3" placeholder="123" />
+            </div>
+            <div class="co-field co-span">
+              <label for="ccName"><span data-en>Name on the card</span><span data-es>Nombre como aparece en la tarjeta</span></label>
+              <input id="ccName" name="cc-name" autocomplete="cc-name" maxlength="80" />
+            </div>
+            <div class="co-field co-span">
+              <label for="billStreet"><span data-en>Billing address (street and number)</span><span data-es>Domicilio de la tarjeta (calle y número)</span></label>
+              <input id="billStreet" name="billing-street" autocomplete="billing street-address" maxlength="120" />
+            </div>
+            <div class="co-field">
+              <label for="billCity"><span data-en>City</span><span data-es>Ciudad</span></label>
+              <input id="billCity" name="billing-city" autocomplete="billing address-level2" maxlength="80" />
+            </div>
+            <div class="co-field">
+              <label for="billState"><span data-en>State</span><span data-es>Estado</span></label>
+              <input id="billState" name="billing-state" autocomplete="billing address-level1" maxlength="80" />
+            </div>
+            <div class="co-field">
+              <label for="billZip"><span data-en>Postal code</span><span data-es>Código postal</span></label>
+              <input id="billZip" name="billing-zip" inputmode="numeric" autocomplete="billing postal-code" maxlength="5" />
+            </div>
+          </div>
+          <button class="co-cta" type="submit" id="cardPay"><span id="cardPayText"></span><i aria-hidden="true">→</i></button>
+          <p class="co-waiting" id="cardBusy" hidden><span class="co-dot" aria-hidden="true"></span><span data-en>Processing with your bank… do not close this page (up to 30 seconds).</span><span data-es>Procesando con tu banco… no cierres esta página (hasta 30 segundos).</span></p>
+          <p class="co-fine"><span data-en>Secure connection. Your card details go straight to TacPay; Tulum Innovation Fest does not store them.</span><span data-es>Conexión segura. Los datos de tu tarjeta van directo a TacPay; Tulum Innovation Fest no los guarda.</span></p>
+          <button type="button" class="co-link" id="cardBack"><span data-en>Choose another method</span><span data-es>Elegir otro método</span></button>
+        </form>
+
+        <div class="co-transfer" id="cardCheckBox" hidden>
+          <h3><span data-en>We are confirming your card payment</span><span data-es>Estamos confirmando tu pago con tarjeta</span></h3>
+          <p class="co-sub"><span data-en>Your bank did not answer in time, so the charge may or may not have gone through. To avoid a double charge, please do not pay again: we check it and email you within 1 business day.</span><span data-es>Tu banco no respondió a tiempo, así que el cargo pudo o no haberse hecho. Para evitar un doble cobro, no vuelvas a pagar: lo revisamos y te escribimos en máximo 1 día hábil.</span></p>
+          <p class="co-fine"><span data-en>Questions: innovation@likegroup.io</span><span data-es>Dudas: innovation@likegroup.io</span></p>
         </div>
 
         <div class="co-qr" id="qrBox" hidden>
@@ -152,13 +209,13 @@
         <h3 id="sumPass">—</h3>
         <dl>
           <div><dt><span data-en>Quantity</span><span data-es>Cantidad</span></dt><dd id="sumQty">1</dd></div>
-          <div><dt><span data-en>Subtotal (USD)</span><span data-es>Subtotal (USD)</span></dt><dd id="sumUsd">—</dd></div>
+          <div id="sumUsdRow"><dt><span data-en>Subtotal (USD)</span><span data-es>Subtotal (USD)</span></dt><dd id="sumUsd">—</dd></div>
           <div id="sumTaxRow" hidden><dt><span data-en>VAT 16% (USD)</span><span data-es>IVA 16% (USD)</span></dt><dd id="sumTax">—</dd></div>
           <div class="co-total"><dt><span data-en>You pay (MXN)</span><span data-es>Pagas (MXN)</span></dt><dd id="sumMxn">—</dd></div>
         </dl>
         <p class="co-rate" id="sumRate"></p>
       </div>
-      <p class="co-help"><span data-en>Prefer card? <a href="/tickets">Buy with Ticket Fairy</a>.</span><span data-es>¿Prefieres tarjeta? <a href="/tickets">Compra con Ticket Fairy</a>.</span></p>
+      <p class="co-help" id="tfHelp"><span data-en>Prefer card? <a href="/tickets">Buy with Ticket Fairy</a>.</span><span data-es>¿Prefieres tarjeta? <a href="/tickets">Compra con Ticket Fairy</a>.</span></p>
     </aside>
   </main>
 
@@ -182,6 +239,6 @@
     </div>
   </dialog>
 
-  <script src="/checkout/checkout.js?v=20261019" defer></script>
+  <script src="/checkout/checkout.js?v=20261019b" defer></script>
 </body>
 </html>

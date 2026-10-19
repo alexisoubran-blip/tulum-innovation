@@ -1,5 +1,9 @@
 {
   "outputDirectory": "dist",
+  "functions": {
+    "api/checkout/pay.mjs": { "maxDuration": 60 },
+    "api/blokko/admin.mjs": { "maxDuration": 60 }
+  },
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [

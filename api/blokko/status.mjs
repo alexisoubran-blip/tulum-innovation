@@ -4,8 +4,13 @@
 // secret, signature and merchantId are right. Always 200; check "ok".
 
 import { configFromEnv, createClient, SANDBOX_URL, BlokkoError } from '../../lib/ticketing/blokko.mjs';
+import { configFromEnv as cardsConfig } from '../../lib/ticketing/blisscore.mjs';
 
-const json = (body) => new Response(JSON.stringify(body), {
+const cardsInfo = () => {
+  const c = cardsConfig();
+  return { configured: c.configured, environment: c.sandbox ? 'sandbox' : 'production' };
+};
+const json = (body) => new Response(JSON.stringify({ ...body, cards: cardsInfo() }), {
   status: 200,
   headers: { 'content-type': 'application/json', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' },
 });
