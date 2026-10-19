@@ -98,7 +98,13 @@ table.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}.
   </section>
 
   <section>
-    <h2>8. Últimos intentos de pago</h2>
+    <h2>8. Facturas solicitadas</h2>
+    <p class="help">Compras pagadas en las que el cliente pidió factura (CFDI). Se cargan al presionar “Actualizar” en la sección 7.</p>
+    <div id="invoices"></div>
+  </section>
+
+  <section>
+    <h2>9. Últimos intentos de pago</h2>
     <p class="help">Los 25 intentos más recientes del checkout, con el error del proveedor cuando falló. Un pago con tarjeta <strong>unconfirmed</strong> (el banco no respondió a tiempo) bloquea la orden: búscalo en el panel de BlissCore por la referencia y márcalo como cobrado o no cobrado.</p>
     <div id="attempts"></div>
   </section>
@@ -146,6 +152,7 @@ table.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}.
     const d = await admin({ action: 'overview' });
     if (!d.ok) { $('transfers').innerHTML = `<pre class="bad">${esc(JSON.stringify(d, null, 2))}</pre>`; return; }
     $('transfers').innerHTML = d.transfers.length ? `<table class="tbl"><tr><th>Referencia</th><th>Monto</th><th>Comprador</th><th>Producto</th><th>Estado</th><th></th></tr>${d.transfers.map((t) => `<tr><td><code>${esc(t.reference)}</code></td><td>${money(t.amountMxn)}</td><td>${esc(t.buyerName)}<br><small>${esc(t.buyerEmail)}</small></td><td>${esc(t.passId)} × ${t.quantity}</td><td>${esc(t.status)}</td><td>${t.status === 'paid' ? '' : `<button data-ref="${esc(t.reference)}">Confirmar pago</button>`}</td></tr>`).join('')}</table>` : '<p class="help">No hay transferencias.</p>';
+    $('invoices').innerHTML = (d.invoices || []).length ? `<table class="tbl"><tr><th>Pagado</th><th>Cliente</th><th>Producto / monto</th><th>Datos fiscales</th></tr>${d.invoices.map((i) => `<tr><td>${esc(new Date(i.paidAt).toLocaleString('es-MX'))}</td><td>${esc(i.buyerName)}<br><small>${esc(i.buyerEmail)}</small></td><td>${esc(i.passId)} × ${i.quantity}<br><small>${money(i.amountMxn)}</small></td><td><code>${esc(i.rfc)}</code><br>${esc(i.legal_name)}<br><small>CP ${esc(i.zip)} · Régimen ${esc(i.regime)} · ${esc(i.use)}</small></td></tr>`).join('')}</table>` : '<p class="help">Sin facturas pendientes.</p>';
     $('attempts').innerHTML = d.attempts.length ? `<table class="tbl"><tr><th>Fecha</th><th>Método</th><th>Monto</th><th>Estado</th><th>Error / referencia</th></tr>${d.attempts.map((a) => `<tr><td>${esc(new Date(a.createdAt).toLocaleString('es-MX'))}</td><td>${esc(a.method)}${a.card ? `<br><small>${esc(a.card)}</small>` : ''}</td><td>${money(a.amountMxn)}</td><td>${esc(a.status)}</td><td><small>${esc(a.error || '')}${a.reference ? `<br>Ref. ${esc(a.reference)}` : ''}${a.status === 'unconfirmed' ? `<br>order_id BlissCore: <code>${esc(a.id)}</code>` : ''}</small>${a.status === 'unconfirmed' ? `<div class="row" style="margin-top:8px"><button data-charged="1" data-id="${esc(a.id)}">Sí se cobró</button><button class="ghost" data-charged="0" data-id="${esc(a.id)}">No se cobró</button></div>` : ''}</td></tr>`).join('')}</table>` : '<p class="help">Sin intentos todavía.</p>';
     $('attempts').querySelectorAll('button[data-id]').forEach((b) => b.onclick = () => busy(b, async () => {
       const charged = b.dataset.charged === '1';

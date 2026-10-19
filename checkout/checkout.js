@@ -16,7 +16,11 @@
         order_not_found: 'We could not find this order. Start again.', store_not_configured: 'Payments are not available right now.',
         network: 'Connection problem. Check your internet and try again.', default: 'Something went wrong. Please try again.', choose_pass: 'Choose a product.',
         price_pending: 'The price of this product is about to be confirmed. It will be available soon.',
-        invalid_business_name: 'Please enter the business name.', invalid_business_address: 'Please enter the business location.', invalid_phone: 'Please enter a phone number (10 digits).',
+        invalid_first_name: 'Enter your first name.', invalid_last_name: 'Enter your last name.', email_mismatch: 'The emails do not match.',
+        invalid_email_domain: 'That email domain does not exist. Check it.', invalid_rfc: 'Check the RFC (12 or 13 characters).', invalid_legal_name: 'Enter the legal name.',
+        invalid_tax_zip: 'Enter the 5-digit tax postal code.', invalid_tax_regime: 'Choose your tax regime.', invalid_cfdi_use: 'Choose the CFDI use.', fix_fields: 'Check the highlighted fields.',
+        did_you_mean: 'Did you mean', use_it: 'Use it',
+        invalid_business_name: 'Please enter the business name.', invalid_business_address: 'Please enter the business location.', invalid_phone: 'Check your mobile number: enter it without the country code (10 digits in Mexico and the US).',
         card_invalid: 'Check the card number.', card_invalid_expiry: 'Check the expiry date (MM/YY).', card_invalid_cvv: 'Check the CVV (3 digits on the back).', card_invalid_holder: 'Enter the name as it appears on the card.',
         card_brand_not_supported: 'Only Visa and Mastercard are accepted.', invalid_billing: 'Complete the billing address (street, city and state).', invalid_postal_code: 'Enter a 5-digit postal code.',
         card_declined: 'Your bank declined the payment. Try another card or another method.', card_insufficient_funds: 'Insufficient funds. Try another card or another method.',
@@ -45,7 +49,11 @@
         order_not_found: 'No encontramos esta orden. Empieza de nuevo.', store_not_configured: 'Los pagos no están disponibles por ahora.',
         network: 'Problema de conexión. Revisa tu internet e intenta de nuevo.', default: 'Algo salió mal. Intenta de nuevo.', choose_pass: 'Elige un producto.',
         price_pending: 'El precio de este producto está por confirmarse. Muy pronto estará disponible.',
-        invalid_business_name: 'Escribe el nombre comercial.', invalid_business_address: 'Escribe la ubicación del comercio.', invalid_phone: 'Escribe un teléfono (10 dígitos).',
+        invalid_first_name: 'Escribe tu nombre.', invalid_last_name: 'Escribe tu apellido paterno.', email_mismatch: 'Los correos no coinciden.',
+        invalid_email_domain: 'Ese dominio de correo no existe. Revísalo.', invalid_rfc: 'Revisa el RFC (12 o 13 caracteres).', invalid_legal_name: 'Escribe la razón social.',
+        invalid_tax_zip: 'Escribe el código postal fiscal de 5 dígitos.', invalid_tax_regime: 'Elige tu régimen fiscal.', invalid_cfdi_use: 'Elige el uso de CFDI.', fix_fields: 'Revisa los campos marcados.',
+        did_you_mean: '¿Quisiste decir', use_it: 'Usar',
+        invalid_business_name: 'Escribe el nombre comercial.', invalid_business_address: 'Escribe la ubicación del comercio.', invalid_phone: 'Revisa tu celular: escribe el número sin la lada (en México son 10 dígitos).',
         card_invalid: 'Revisa el número de la tarjeta.', card_invalid_expiry: 'Revisa el vencimiento (MM/AA).', card_invalid_cvv: 'Revisa el CVV (3 dígitos al reverso).', card_invalid_holder: 'Escribe el nombre como aparece en la tarjeta.',
         card_brand_not_supported: 'Solo se aceptan Visa y Mastercard.', invalid_billing: 'Completa el domicilio de la tarjeta (calle, ciudad y estado).', invalid_postal_code: 'Escribe un código postal de 5 dígitos.',
         card_declined: 'Tu banco rechazó el pago. Prueba con otra tarjeta u otro método.', card_insufficient_funds: 'Fondos insuficientes. Prueba con otra tarjeta u otro método.',
@@ -81,7 +89,7 @@
     root.lang = state.lang;
     root.dataset.lang = state.lang;
     if (save) { try { localStorage.setItem('tif-language', state.lang); } catch {} }
-    if (state.options) { renderCats(); renderPasses(); renderMethods(); }
+    if (state.options) { renderCats(); renderPasses(); renderMethods(); fillSelects(); }
     renderSummary();
     if (state.detailId) renderDetail(state.detailId);
     if (state.qr) renderQrInfo();
@@ -250,8 +258,8 @@
     const id = state.detailId;
     closeDetail();
     selectProduct(id);
-    $('name').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setTimeout(() => $('name').focus({ preventScroll: true }), 400);
+    $('firstName').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => $('firstName').focus({ preventScroll: true }), 400);
   });
 
   function selectProduct(id) {
@@ -269,10 +277,107 @@
   function renderBuyerFields() {
     const business = needs('businessName');
     document.querySelectorAll('.co-business').forEach((n) => { n.hidden = !business; });
-    $('phoneLabel').innerHTML = needs('phone')
-      ? '<span data-en>Phone</span><span data-es>Teléfono</span>'
-      : '<span data-en>Phone (optional)</span><span data-es>Teléfono (opcional)</span>';
+    document.querySelectorAll('.co-company').forEach((n) => { n.hidden = business; }); // the business name replaces "company"
   }
+
+  // ---------------------------------------------------------------- buyer form: validation, email typos, saved draft
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const COMMON_DOMAINS = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'yahoo.com.mx', 'icloud.com', 'live.com', 'live.com.mx', 'hotmail.es', 'outlook.es', 'protonmail.com', 'me.com', 'msn.com', 'prodigy.net.mx'];
+  function distance(a, b) {
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+  function emailSuggestion(email) {
+    const [user, domain] = email.toLowerCase().split('@');
+    if (!user || !domain || COMMON_DOMAINS.includes(domain)) return null;
+    let best = null;
+    for (const c of COMMON_DOMAINS) { const dist = distance(domain, c); if (dist > 0 && dist <= 2 && (!best || dist < best.dist)) best = { c, dist }; }
+    return best ? `${user}@${best.c}` : null;
+  }
+  const PHONE_DIGITS = () => state.options?.countries?.find((c) => c.iso === $('phoneCountry').value);
+  const exactDigits = { MX: 10, US: 10, CA: 10, ES: 9, CO: 10, CL: 9, PE: 9, VE: 10, EC: 9, GT: 8, CR: 8, PA: 8, DO: 10, SV: 8, HN: 8, BO: 8, PY: 9, FR: 9, PT: 9, NL: 9, CH: 9, IL: 9, AE: 9, IN: 10, CN: 11, JP: 10, SG: 8, AU: 9 };
+  const RULES = {
+    firstName: () => ($('firstName').value.trim().length >= 2 ? '' : 'invalid_first_name'),
+    lastName1: () => ($('lastName1').value.trim().length >= 2 ? '' : 'invalid_last_name'),
+    email: () => (EMAIL_RE.test($('email').value.trim()) ? '' : 'invalid_email'),
+    emailConfirm: () => ($('emailConfirm').value.trim().toLowerCase() === $('email').value.trim().toLowerCase() && $('emailConfirm').value.trim() ? '' : 'email_mismatch'),
+    phone: () => {
+      const digits = $('phone').value.replace(/\D/g, '');
+      const exact = exactDigits[$('phoneCountry').value];
+      return (exact ? digits.length === exact : digits.length >= 6 && digits.length <= 14) ? '' : 'invalid_phone';
+    },
+    businessName: () => (!needs('businessName') || $('businessName').value.trim().length >= 2 ? '' : 'invalid_business_name'),
+    businessAddress: () => (!needs('businessAddress') || $('businessAddress').value.trim().length >= 5 ? '' : 'invalid_business_address'),
+    rfc: () => (!$('wantInvoice').checked || /^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test($('rfc').value.toUpperCase().replace(/[\s-]/g, '')) ? '' : 'invalid_rfc'),
+    taxZip: () => (!$('wantInvoice').checked || /^\d{5}$/.test($('taxZip').value.trim()) ? '' : 'invalid_tax_zip'),
+    legalName: () => (!$('wantInvoice').checked || $('legalName').value.trim().length >= 3 ? '' : 'invalid_legal_name'),
+    taxRegime: () => (!$('wantInvoice').checked || $('taxRegime').value ? '' : 'invalid_tax_regime'),
+  };
+  const FIELD_OF = { invalid_first_name: 'firstName', invalid_last_name: 'lastName1', invalid_email: 'email', invalid_email_domain: 'email', email_mismatch: 'emailConfirm', invalid_phone: 'phone', invalid_business_name: 'businessName', invalid_business_address: 'businessAddress', invalid_rfc: 'rfc', invalid_tax_zip: 'taxZip', invalid_legal_name: 'legalName', invalid_tax_regime: 'taxRegime' };
+  const touched = new Set();
+  function setFieldError(id, code) {
+    const input = $(id); const err = $(`${id}-err`);
+    if (!input) return;
+    const wrap = input.closest('.co-field');
+    if (code) { input.setAttribute('aria-invalid', 'true'); if (err) err.textContent = t().errors[code] || t().errors.default; wrap?.classList.remove('is-ok'); }
+    else { input.removeAttribute('aria-invalid'); if (err && !err.querySelector('button')) err.textContent = ''; if (input.value.trim()) wrap?.classList.add('is-ok'); else wrap?.classList.remove('is-ok'); }
+  }
+  function checkField(id) { const code = RULES[id] ? RULES[id]() : ''; setFieldError(id, code); return code; }
+  function showEmailHint() {
+    const sug = emailSuggestion($('email').value.trim());
+    const err = $('email-err');
+    if (!sug || RULES.email()) return;
+    err.textContent = `${t().errors.did_you_mean} ${sug}?`;
+    const b = el('button', null, t().errors.use_it); b.type = 'button';
+    b.addEventListener('click', () => { $('email').value = sug; err.textContent = ''; checkField('email'); if (touched.has('emailConfirm')) checkField('emailConfirm'); saveDraft(); });
+    err.append(b);
+  }
+  Object.keys(RULES).forEach((id) => {
+    const input = $(id);
+    if (!input) return;
+    input.addEventListener('blur', () => { touched.add(id); checkField(id); if (id === 'email') { showEmailHint(); if (touched.has('emailConfirm')) checkField('emailConfirm'); } });
+    input.addEventListener('input', () => { if (touched.has(id)) checkField(id); if (id === 'email' && touched.has('emailConfirm')) checkField('emailConfirm'); });
+  });
+  $('phoneCountry').addEventListener('change', () => { if (touched.has('phone')) checkField('phone'); saveDraft(); });
+  $('rfc').addEventListener('input', (e) => { e.target.value = e.target.value.toUpperCase().replace(/[^A-ZÑ&0-9]/g, ''); });
+  $('taxZip').addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5); });
+  $('wantInvoice').addEventListener('change', () => { $('invoiceFields').hidden = !$('wantInvoice').checked; saveDraft(); });
+
+  function fillSelects() {
+    const flag = (iso) => String.fromCodePoint(...[...iso].map((c) => 127397 + c.charCodeAt(0)));
+    const sel = $('phoneCountry');
+    const current = sel.value || loadDraft().phoneCountry || ((navigator.language || '').split('-')[1] || '').toUpperCase();
+    sel.textContent = '';
+    (state.options.countries || []).forEach((c) => {
+      const o = el('option', null, `${flag(c.iso)} ${c.dial} · ${L(c.name)}`);
+      o.value = c.iso; sel.appendChild(o);
+    });
+    sel.value = (state.options.countries || []).some((c) => c.iso === current) ? current : 'MX';
+    const fill = (id, list, placeholder) => {
+      const s2 = $(id); const keep = s2.value; s2.textContent = '';
+      if (placeholder) { const o = el('option', null, placeholder); o.value = ''; s2.appendChild(o); }
+      (list || []).forEach((r) => { const o = el('option', null, `${r.code} · ${r.name}`); o.value = r.code; s2.appendChild(o); });
+      if (keep) s2.value = keep;
+    };
+    fill('taxRegime', state.options.invoice?.regimes, state.lang === 'es' ? 'Elige…' : 'Choose…');
+    fill('cfdiUse', state.options.invoice?.uses);
+  }
+
+  const DRAFT_FIELDS = ['firstName', 'lastName1', 'lastName2', 'email', 'emailConfirm', 'phoneCountry', 'phone', 'company', 'jobTitle', 'businessName', 'businessAddress', 'rfc', 'taxZip', 'legalName', 'taxRegime', 'cfdiUse'];
+  function loadDraft() { try { return JSON.parse(sessionStorage.getItem('tif-buyer') || '{}'); } catch { return {}; } }
+  function saveDraft() {
+    const d = Object.fromEntries(DRAFT_FIELDS.map((id) => [id, $(id)?.value || '']));
+    d.wantInvoice = $('wantInvoice').checked;
+    try { sessionStorage.setItem('tif-buyer', JSON.stringify(d)); } catch {}
+  }
+  function restoreDraft() {
+    const d = loadDraft();
+    DRAFT_FIELDS.forEach((id) => { if (d[id] && $(id) && !$(id).value) $(id).value = d[id]; });
+    if (d.wantInvoice) { $('wantInvoice').checked = true; $('invoiceFields').hidden = false; }
+  }
+  DRAFT_FIELDS.forEach((id) => $(id)?.addEventListener('change', saveDraft));
 
   // ---------------------------------------------------------------- summary
   function renderSummary() {
@@ -318,33 +423,71 @@
   $('orderForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     clearError();
-    const fields = { name: $('name'), email: $('email') };
-    Object.values(fields).forEach((f) => f.removeAttribute('aria-invalid'));
     if (!state.passId) { $('passes').scrollIntoView({ behavior: 'smooth', block: 'center' }); return showError('choose_pass'); }
-    if ($('name').value.trim().length < 2) { fields.name.setAttribute('aria-invalid', 'true'); fields.name.focus(); return showError('invalid_name'); }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('email').value.trim())) { fields.email.setAttribute('aria-invalid', 'true'); fields.email.focus(); return showError('invalid_email'); }
-    if (needs('businessName') && $('businessName').value.trim().length < 2) { $('businessName').setAttribute('aria-invalid', 'true'); $('businessName').focus(); return showError('invalid_business_name'); }
-    if (needs('businessAddress') && $('businessAddress').value.trim().length < 5) { $('businessAddress').setAttribute('aria-invalid', 'true'); $('businessAddress').focus(); return showError('invalid_business_address'); }
-    if (needs('phone') && $('phone').value.replace(/\D/g, '').length < 10) { $('phone').setAttribute('aria-invalid', 'true'); $('phone').focus(); return showError('invalid_phone'); }
+    let first = null;
+    Object.keys(RULES).forEach((id) => { touched.add(id); const code = checkField(id); if (code && !first) first = id; });
+    if (first) { showError('fix_fields'); $(first).focus({ preventScroll: true }); $(first).scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
     if (!$('terms').checked) return showError('terms_required');
+    saveDraft();
 
     const btn = $('toPayment');
     btn.disabled = true;
     const res = await api('/api/checkout/order', {
       method: 'POST',
       body: JSON.stringify({
-        passId: state.passId, quantity: state.qty, name: $('name').value, email: $('email').value, phone: $('phone').value, country: $('country').value,
+        passId: state.passId, quantity: state.qty,
+        firstName: $('firstName').value, lastName1: $('lastName1').value, lastName2: $('lastName2').value,
+        email: $('email').value, emailConfirm: $('emailConfirm').value, phoneCountry: $('phoneCountry').value, phone: $('phone').value,
+        company: needs('businessName') ? '' : $('company').value, jobTitle: needs('businessName') ? '' : $('jobTitle').value,
         businessName: $('businessName').value, businessAddress: $('businessAddress').value,
+        invoice: $('wantInvoice').checked ? { requested: true, rfc: $('rfc').value, zip: $('taxZip').value, legalName: $('legalName').value, regime: $('taxRegime').value, use: $('cfdiUse').value } : null,
         website: $('website').value, acceptTerms: $('terms').checked, locale: state.lang, attribution,
       }),
     });
     btn.disabled = false;
-    if (!res.ok) return showError(res.error);
+    if (!res.ok) {
+      const field = FIELD_OF[res.error];
+      if (field) { setFieldError(field, res.error); $(field).focus(); }
+      return showError(res.error);
+    }
     state.token = res.token;
     state.order = res.order;
-    history.replaceState(null, '', `/checkout?t=${encodeURIComponent(res.token)}`);
+    nav.push('methods'); // browser back from the payment step returns to the details
     push('begin_checkout', { currency: 'USD', value: res.order.amountUsd, items: [{ item_id: res.order.passId, item_name: res.order.passName, quantity: res.order.quantity }] });
     showPayment();
+  });
+
+  // ---------------------------------------------------------------- navigation (browser back works between steps)
+  // History: details (no state) → methods → a method (QR, transfer or card). "Back" closes the open
+  // method first, then returns to the details with everything still filled in.
+  const nav = {
+    url: () => (state.token ? `/checkout?t=${encodeURIComponent(state.token)}` : location.pathname + location.search),
+    push(view) { try { history.pushState({ co: view }, '', this.url()); } catch {} },
+    replace(view) { try { history.replaceState(view ? { co: view } : null, '', this.url()); } catch {} },
+  };
+  function methodOpen() { return !$('qrBox').hidden || !$('transferBox').hidden || !$('cardBox').hidden; }
+  function openMethodView() { if (history.state?.co !== 'method') nav.push('method'); }
+  function closeMethodView() { if (history.state?.co === 'method') history.back(); else showMethodList(); }
+  function backToDetails() {
+    stopPolling(); clearInterval(state.tick);
+    state.qr = null; state.transfer = null; state.order = null; state.token = null;
+    showMethodList();
+    setStep(1); renderSummary();
+    $('editOrder').hidden = false;
+    try { history.replaceState(null, '', state.passId ? `/checkout?pass=${encodeURIComponent(state.passId)}&detail=0` : '/checkout'); } catch {}
+    $('orderForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  window.addEventListener('popstate', (e) => {
+    const view = e.state?.co;
+    if (!$('cardCheckBox').hidden || !$('donePanel').hidden) return; // nothing to go back to while a payment is being confirmed or after it
+    if (view === 'method') return; // forward navigation: keep what is on screen
+    if (view === 'methods') { if (methodOpen()) showMethodList(); return; }
+    if (state.token && !$('payPanel').hidden) backToDetails();
+  });
+  $('payBack').addEventListener('click', () => {
+    if (methodOpen()) return closeMethodView();
+    if (history.state?.co === 'methods') return history.back();
+    backToDetails();
   });
 
   // ---------------------------------------------------------------- payment methods
@@ -425,6 +568,7 @@
 
   // ---------------------------------------------------------------- QR
   function showQr() {
+    openMethodView();
     $('methods').hidden = true;
     $('transferBox').hidden = true;
     $('qrBox').hidden = false;
@@ -458,7 +602,7 @@
   }
 
   $('newQr').addEventListener('click', () => choose(state.methodId));
-  $('changeMethod').addEventListener('click', showMethodList);
+  $('changeMethod').addEventListener('click', closeMethodView);
   $('copyCode').addEventListener('click', () => state.qr?.qrContent && copy(state.qr.qrContent, $('copyCode')));
 
   // ---------------------------------------------------------------- card (TacPay · BlissCore)
@@ -467,6 +611,7 @@
     $('cardPayText').textContent = amount ? t().payCard(mxn(amount)) : t().payCard('');
   }
   function showCard() {
+    openMethodView();
     $('methods').hidden = true;
     $('qrBox').hidden = true;
     $('transferBox').hidden = true;
@@ -493,7 +638,7 @@
   });
   $('ccCvv').addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 3); });
   $('billZip').addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5); });
-  $('cardBack').addEventListener('click', showMethodList);
+  $('cardBack').addEventListener('click', closeMethodView);
 
   const cardChecks = [
     ['ccNumber', (v) => v.replace(/\D/g, '').length === 16, 'card_invalid'],
@@ -542,6 +687,7 @@
 
   // ---------------------------------------------------------------- SPEI transfer
   function showTransfer() {
+    openMethodView();
     $('methods').hidden = true;
     $('qrBox').hidden = true;
     $('transferBox').hidden = false;
@@ -594,16 +740,9 @@
     const deadline = new Date(state.transfer.expiresAt || state.order?.expiresAt);
     $('transferDeadline').textContent = Number.isNaN(deadline.getTime()) ? '' : t().deadline(deadline.toLocaleString(state.lang === 'es' ? 'es-MX' : 'en-US', { dateStyle: 'medium', timeStyle: 'short' }));
   }
-  $('transferBack').addEventListener('click', showMethodList);
+  $('transferBack').addEventListener('click', closeMethodView);
 
-  $('editOrder').addEventListener('click', () => {
-    stopPolling(); clearInterval(state.tick);
-    state.qr = null; state.transfer = null; state.order = null; state.token = null;
-    history.replaceState(null, '', '/checkout');
-    showMethodList();
-    setStep(1); renderSummary();
-    $('editOrder').hidden = false;
-  });
+  $('editOrder').addEventListener('click', backToDetails);
 
   // ---------------------------------------------------------------- status polling
   function startPolling() { stopPolling(); state.poll = setInterval(checkStatus, 4000); }
@@ -651,6 +790,8 @@
     const options = await api(`/api/checkout/options${wanted ? `?pass=${encodeURIComponent(wanted)}` : ''}`);
     if (!options.ok) { $('passes').textContent = ''; return showError(options.error); }
     state.options = options;
+    fillSelects();
+    restoreDraft();
     $('tfHelp').hidden = (options.methods || []).some((m) => m.id === 'CARD' && m.available);
     const preselected = options.passes.find((p) => p.id === wanted);
     state.category = preselected?.category || options.passes[0]?.category || 'festival';
@@ -665,6 +806,7 @@
       state.passId = res.passId;
       if (res.status === 'paid') return showDone(res);
       if (res.status !== 'pending') return showExpired();
+      nav.replace('methods');
       showPayment();
       if (res.cardUnconfirmed) {
         showCardCheck();

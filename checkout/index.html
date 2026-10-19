@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/checkout/checkout.css?v=20261019d" />
+  <link rel="stylesheet" href="/checkout/checkout.css?v=20261019e" />
 </head>
 <body class="co-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -63,32 +63,91 @@
           <h2 id="buyerTitle"><span data-en>Your details</span><span data-es>Tus datos</span></h2>
           <p class="co-sub"><span data-en>We’ll email your purchase here.</span><span data-es>Aquí te enviamos tu compra.</span></p>
           <div class="co-fields">
-            <div class="co-field co-span">
-              <label for="name"><span data-en>Full name</span><span data-es>Nombre completo</span></label>
-              <input id="name" name="name" autocomplete="name" required maxlength="120" />
+            <div class="co-field co-span" data-field="firstName">
+              <label for="firstName"><span data-en>First name(s)</span><span data-es>Nombre(s)</span> <b aria-hidden="true">*</b></label>
+              <input id="firstName" name="given-name" autocomplete="given-name" required maxlength="60" />
+              <small class="co-err" id="firstName-err" aria-live="polite"></small>
             </div>
-            <div class="co-field co-span">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required maxlength="160" />
+            <div class="co-field" data-field="lastName1">
+              <label for="lastName1"><span data-en>Last name</span><span data-es>Apellido paterno</span> <b aria-hidden="true">*</b></label>
+              <input id="lastName1" name="family-name" autocomplete="family-name" required maxlength="60" />
+              <small class="co-err" id="lastName1-err" aria-live="polite"></small>
             </div>
-            <div class="co-field co-span co-business" id="businessFields" hidden>
-              <label for="businessName"><span data-en>Business name</span><span data-es>Nombre comercial</span></label>
+            <div class="co-field" data-field="lastName2">
+              <label for="lastName2"><span data-en>Second last name (optional)</span><span data-es>Apellido materno (opcional)</span></label>
+              <input id="lastName2" name="additional-family-name" autocomplete="off" maxlength="60" />
+              <small class="co-err" id="lastName2-err" aria-live="polite"></small>
+            </div>
+            <div class="co-field" data-field="email">
+              <label for="email">Email <b aria-hidden="true">*</b></label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required maxlength="160" />
+              <small class="co-err" id="email-err" aria-live="polite"></small>
+            </div>
+            <div class="co-field" data-field="emailConfirm">
+              <label for="emailConfirm"><span data-en>Confirm your email</span><span data-es>Confirma tu email</span> <b aria-hidden="true">*</b></label>
+              <input id="emailConfirm" name="email-confirm" type="email" inputmode="email" autocomplete="off" autocapitalize="off" spellcheck="false" required maxlength="160" />
+              <small class="co-err" id="emailConfirm-err" aria-live="polite"></small>
+            </div>
+            <div class="co-field co-span" data-field="phone">
+              <label for="phone"><span data-en>Mobile phone (WhatsApp)</span><span data-es>Celular (WhatsApp)</span> <b aria-hidden="true">*</b></label>
+              <div class="co-phone">
+                <select id="phoneCountry" name="tel-country-code" autocomplete="tel-country-code" aria-label="Lada / Country code"></select>
+                <input id="phone" name="tel-national" type="tel" inputmode="tel" autocomplete="tel-national" required maxlength="20" />
+              </div>
+              <small class="co-err" id="phone-err" aria-live="polite"></small>
+            </div>
+            <div class="co-field co-business" id="businessFields" data-field="businessName" hidden>
+              <label for="businessName"><span data-en>Business name</span><span data-es>Nombre comercial</span> <b aria-hidden="true">*</b></label>
               <input id="businessName" name="businessName" autocomplete="organization" maxlength="120" />
+              <small class="co-err" id="businessName-err" aria-live="polite"></small>
             </div>
-            <div class="co-field co-span co-business" hidden>
-              <label for="businessAddress"><span data-en>Business location (address)</span><span data-es>Ubicación del comercio (dirección)</span></label>
+            <div class="co-field co-business" data-field="businessAddress" hidden>
+              <label for="businessAddress"><span data-en>Business location (address)</span><span data-es>Ubicación del comercio (dirección)</span> <b aria-hidden="true">*</b></label>
               <input id="businessAddress" name="businessAddress" autocomplete="street-address" maxlength="200" />
+              <small class="co-err" id="businessAddress-err" aria-live="polite"></small>
             </div>
-            <div class="co-field">
-              <label for="phone"><span id="phoneLabel"><span data-en>Phone (optional)</span><span data-es>Teléfono (opcional)</span></span></label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+            <div class="co-field co-company" data-field="company">
+              <label for="company"><span data-en>Company (optional)</span><span data-es>Empresa (opcional)</span></label>
+              <input id="company" name="organization" autocomplete="organization" maxlength="120" />
             </div>
-            <div class="co-field">
-              <label for="country"><span data-en>Country (optional)</span><span data-es>País (opcional)</span></label>
-              <input id="country" name="country" autocomplete="country-name" maxlength="60" />
+            <div class="co-field co-company" data-field="jobTitle">
+              <label for="jobTitle"><span data-en>Job title (optional)</span><span data-es>Cargo (opcional)</span></label>
+              <input id="jobTitle" name="organization-title" autocomplete="organization-title" maxlength="120" />
             </div>
             <div class="co-hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
           </div>
+
+          <label class="co-check co-invoice-toggle">
+            <input type="checkbox" id="wantInvoice" />
+            <span><span data-en>I need an invoice (Mexican CFDI)</span><span data-es>Necesito factura (CFDI)</span></span>
+          </label>
+          <div class="co-fields co-invoice" id="invoiceFields" hidden>
+            <div class="co-field" data-field="rfc">
+              <label for="rfc">RFC <b aria-hidden="true">*</b></label>
+              <input id="rfc" name="rfc" autocapitalize="characters" spellcheck="false" maxlength="13" />
+              <small class="co-err" id="rfc-err" aria-live="polite"></small>
+            </div>
+            <div class="co-field" data-field="taxZip">
+              <label for="taxZip"><span data-en>Tax postal code</span><span data-es>Código postal fiscal</span> <b aria-hidden="true">*</b></label>
+              <input id="taxZip" name="tax-zip" inputmode="numeric" maxlength="5" />
+              <small class="co-err" id="taxZip-err" aria-live="polite"></small>
+            </div>
+            <div class="co-field co-span" data-field="legalName">
+              <label for="legalName"><span data-en>Legal name (as on your tax certificate)</span><span data-es>Razón social (como aparece en tu constancia)</span> <b aria-hidden="true">*</b></label>
+              <input id="legalName" name="legal-name" maxlength="200" />
+              <small class="co-err" id="legalName-err" aria-live="polite"></small>
+            </div>
+            <div class="co-field" data-field="taxRegime">
+              <label for="taxRegime"><span data-en>Tax regime</span><span data-es>Régimen fiscal</span> <b aria-hidden="true">*</b></label>
+              <select id="taxRegime" name="tax-regime"></select>
+              <small class="co-err" id="taxRegime-err" aria-live="polite"></small>
+            </div>
+            <div class="co-field" data-field="cfdiUse">
+              <label for="cfdiUse"><span data-en>CFDI use</span><span data-es>Uso de CFDI</span></label>
+              <select id="cfdiUse" name="cfdi-use"></select>
+            </div>
+          </div>
+          <p class="co-fine co-required-note"><span data-en>* Required. We use your phone only for questions about your purchase.</span><span data-es>* Obligatorio. Tu celular solo lo usamos para dudas sobre tu compra.</span></p>
           <label class="co-check">
             <input type="checkbox" id="terms" required />
             <span><span data-en>I accept the purchase terms and the product conditions. The charge is made in Mexican pesos (MXN) at the rate shown.</span><span data-es>Acepto los términos de compra y las condiciones del producto. El cargo se hace en pesos mexicanos (MXN) al tipo de cambio indicado.</span></span>
@@ -100,6 +159,7 @@
 
       <!-- Step 3: payment -->
       <section class="co-panel" id="payPanel" hidden aria-labelledby="payTitle">
+        <button type="button" class="co-link co-back-top" id="payBack"><span data-en>← Back</span><span data-es>← Atrás</span></button>
         <div>
           <h2 id="payTitle"><span data-en>How do you want to pay?</span><span data-es>¿Cómo quieres pagar?</span></h2>
           <p class="co-sub"><span data-en>Choose how to pay. Each option explains how it works.</span><span data-es>Elige cómo pagar. Cada opción explica cómo funciona.</span></p>
@@ -244,6 +304,6 @@
     </div>
   </dialog>
 
-  <script src="/checkout/checkout.js?v=20261019d" defer></script>
+  <script src="/checkout/checkout.js?v=20261019e" defer></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ const passes = [
   { id: 'executive-pass', name: 'Executive Pass', price_usd: '1590.00' },
   { id: 'night-program', name: 'Night Program', price_usd: '0.00', on_sale: false },
 ];
-const buyer = { passId: 'general-access', quantity: 2, name: '  Ana   López ', email: 'Ana@Example.com', acceptTerms: true, locale: 'en', attribution: { utm_source: 'ig', ref: 'TERE' } };
+const buyer = { passId: 'general-access', quantity: 2, name: '  Ana   López ', email: 'Ana@Example.com', phoneCountry: 'MX', phone: '55 1234 5678', acceptTerms: true, locale: 'en', attribution: { utm_source: 'ig', ref: 'TERE' } };
 
 function fakeBlokko() {
   const calls = { intents: [], status: new Map() };
