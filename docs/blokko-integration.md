@@ -125,7 +125,7 @@ Los botones de `/tickets` siguen apuntando a Ticket Fairy hasta que se decida el
 - Cada intento usa su propio `order_id` (= id del intento). Aprobado → orden pagada al momento, boletos y correo. Declinado → mensaje claro y puede reintentar u otro método. Timeout o respuesta ilegible → intento `unconfirmed`: la orden queda bloqueada para cualquier otro pago (evita doble cobro) hasta que un admin lo resuelve en `/admin/blokko` (sección 9) revisando el panel de BlissCore.
 - Antifraude básico: máximo 5 intentos de tarjeta por orden y freno global si hay 25 rechazos en 15 minutos.
 - La tarjeta pasa por nuestro servidor solo en memoria: nunca se guarda ni se registra; guardamos marca y últimos 4 dígitos.
-- Variables en Vercel: `BLISSCORE_AFFILIATE_CODE` (activa el botón de tarjeta) y `BLISSCORE_BASE_URL` (omitir = sandbox). Prueba sandbox con tarjetas de prueba en `/admin/blokko` sección 6.
+- Variables en Vercel: `BLISSCORE_AFFILIATE_CODE` (activa el botón de tarjeta; con la URL de sandbox el botón solo aparece fuera de producción, para que las tarjetas de prueba nunca emitan boletos reales) y `BLISSCORE_BASE_URL` (omitir = sandbox). Prueba sandbox con tarjetas de prueba en `/admin/blokko` sección 6.
 
 ## Catálogo "01 | Checkout Festival + Business Pass + Hotel" (LGM, 19 oct 2026)
 

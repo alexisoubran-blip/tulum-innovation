@@ -234,3 +234,17 @@ test('every purchasable product in the live catalog can be paid with every Blokk
   }
   assert.equal(intents.length, catalog.length * DEFAULT_METHODS.length);
 });
+
+test('sandbox card credentials never sell on the live site', async () => {
+  const store = createMemoryStore({ passes, rate: 18.5 });
+  const sandbox = createClient(configFromEnv({ BLISSCORE_AFFILIATE_CODE: '100' }), { fetchImpl: fakeFetch([]) });
+  const live = createCheckout({ store, blokko: { async getPaymentMethods() { return []; } }, cards: sandbox, env: { ...env, VERCEL_ENV: 'production' } });
+  assert.equal((await live.options()).methods.find((m) => m.id === 'CARD').available, false);
+  const { token } = await live.createOrder(buyer);
+  assert.equal((await live.pay({ token, methodId: 'CARD', card, billing }).catch((e) => e)).code, 'method_unavailable');
+  const preview = createCheckout({ store, blokko: { async getPaymentMethods() { return []; } }, cards: sandbox, env: { ...env, VERCEL_ENV: 'preview' } });
+  assert.equal((await preview.options()).methods.find((m) => m.id === 'CARD').available, true);
+  const prod = createClient(configFromEnv({ BLISSCORE_AFFILIATE_CODE: '100', BLISSCORE_BASE_URL: 'https://api.blisscorepay.cloud' }), { fetchImpl: fakeFetch([]) });
+  const liveProd = createCheckout({ store, blokko: { async getPaymentMethods() { return []; } }, cards: prod, env: { ...env, VERCEL_ENV: 'production' } });
+  assert.equal((await liveProd.options()).methods.find((m) => m.id === 'CARD').available, true);
+});
