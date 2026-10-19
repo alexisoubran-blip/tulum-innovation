@@ -182,3 +182,25 @@ test('card is refused when TacPay is not configured', async () => {
   const { token } = await checkout.createOrder(buyer);
   assert.equal((await checkout.pay({ token, methodId: 'CARD', card, billing }).catch((e) => e)).code, 'method_unavailable');
 });
+
+test('bank transfer: LGM account, CLABE check digit, international details and emailed instructions', async () => {
+  const { LGM_BANK_ENV, clabeIsValid } = await import('../lib/ticketing/bank-account.mjs');
+  const { transferEmail } = await import('../lib/ticketing/email.mjs');
+  assert.ok(clabeIsValid('002694004900504773'));
+  assert.ok(!clabeIsValid('002694004900504774'));
+  const store = createMemoryStore({ passes, rate: 18.5 });
+  const sent = [];
+  const blokko = { async getPaymentMethods() { return []; } };
+  const checkout = createCheckout({ store, blokko, env: { ...env, ...LGM_BANK_ENV }, now: () => NOW, sendEmail: async (m) => { sent.push(m); return { sent: true }; } });
+  assert.equal((await checkout.options()).methods.find((m) => m.id === 'SPEI').available, true);
+  const { token } = await checkout.createOrder(buyer);
+  const r = await checkout.pay({ token, methodId: 'SPEI' });
+  assert.equal(r.transfer.clabe, '002694004900504773');
+  assert.deepEqual(r.transfer.international, { swift: 'BNMXMXMM', account: '504773', branch: '0049', aba: '021000089' });
+  assert.equal(sent.length, 1, 'instructions emailed once');
+  assert.ok(sent[0].text.includes(r.transfer.reference) && sent[0].text.includes('BNMXMXMM') && sent[0].text.includes('$27,750.00 MXN'));
+  await checkout.pay({ token, methodId: 'SPEI' });
+  assert.equal(sent.length, 1, 'not emailed again when the buyer reopens the transfer');
+  const en = transferEmail({ locale: 'en', name: 'Ana', passName: 'X', quantity: 1, transfer: r.transfer, expiresAt: r.expiresAt, orderUrl: 'https://x' });
+  assert.match(en.subject, /^Bank transfer details · TIF/);
+});

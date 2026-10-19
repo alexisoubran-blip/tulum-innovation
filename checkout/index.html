@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/checkout/checkout.css?v=20261019c" />
+  <link rel="stylesheet" href="/checkout/checkout.css?v=20261019d" />
 </head>
 <body class="co-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -107,9 +107,14 @@
         <div class="co-methods" id="methods"></div>
 
         <div class="co-transfer" id="transferBox" hidden>
-          <h3><span data-en>Bank transfer (SPEI)</span><span data-es>Transferencia bancaria (SPEI)</span></h3>
-          <p class="co-sub"><span data-en>Transfer the exact amount and write the reference in the payment concept. We confirm it and email your purchase within 1 business day.</span><span data-es>Transfiere el monto exacto y escribe la referencia en el concepto de pago. La confirmamos y te enviamos tu compra en máximo 1 día hábil.</span></p>
+          <h3><span data-en>Bank transfer</span><span data-es>Transferencia bancaria</span></h3>
+          <p class="co-sub"><span data-en>From Mexico by SPEI: transfer the exact amount and write the reference in the payment concept. We confirm it and email your purchase within 1 business day. We also emailed you these details.</span><span data-es>Desde México por SPEI: transfiere el monto exacto y escribe la referencia en el concepto de pago. La confirmamos y te enviamos tu compra en máximo 1 día hábil. También te mandamos estos datos por correo.</span></p>
           <dl class="co-bank" id="bankData"></dl>
+          <details class="co-intl" id="intlBox" hidden>
+            <summary><span data-en>Paying from outside Mexico? International wire details</span><span data-es>¿Pagas desde fuera de México? Datos para transferencia internacional</span></summary>
+            <dl class="co-bank" id="intlData"></dl>
+            <p class="co-fine"><span data-en>Send the MXN amount above; bank fees are on the sender and the full amount must arrive. Include the reference in the message to the beneficiary.</span><span data-es>Envía el monto en MXN indicado arriba; las comisiones bancarias corren por tu cuenta y debe llegar el monto completo. Incluye la referencia en el mensaje al beneficiario.</span></p>
+          </details>
           <p class="co-fine" id="transferDeadline"></p>
           <p class="co-waiting"><span class="co-dot" aria-hidden="true"></span><span data-en>Keep this page: it updates when we confirm your transfer. You can also close it; we’ll email you.</span><span data-es>Puedes dejar esta página abierta: se actualiza al confirmar tu transferencia. También puedes cerrarla; te avisamos por correo.</span></p>
           <button type="button" class="co-link" id="transferBack"><span data-en>Choose another method</span><span data-es>Elegir otro método</span></button>
@@ -239,6 +244,6 @@
     </div>
   </dialog>
 
-  <script src="/checkout/checkout.js?v=20261019c" defer></script>
+  <script src="/checkout/checkout.js?v=20261019d" defer></script>
 </body>
 </html>

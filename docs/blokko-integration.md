@@ -114,7 +114,7 @@ Los botones de `/tickets` siguen apuntando a Ticket Fairy hasta que se decida el
 - Catálogo en `passes` (precio, categoría, IVA, máximo por orden, si emite boletos) + contenido en `lib/ticketing/catalog-content.mjs` (descripción, incluye, no incluye, condiciones, ES/EN).
 - Cargado desde lo publicado en el sitio: pases del festival, Hotel Upgrade, Whale Tank (ocultos: solo por link directo, p. ej. `/checkout?pass=whale-tank-founder`) y patrocinios (USD + IVA 16%, uno por orden, sin boletos: confirmación y seguimiento del equipo). Pendiente: comparar contra el catálogo maestro de Tere (Drive) y sumar residencias y demás productos.
 - Métodos agrupados: Tarjeta (TacPay, "muy pronto" hasta integrar su API), Pesos (SPEI, CoDi, Bitso) y Cripto (WalletConnect, Lightning, Crypto.com, Cash App).
-- SPEI: requiere `BANK_TRANSFER_BENEFICIARY`, `BANK_TRANSFER_BANK`, `BANK_TRANSFER_CLABE`. La orden se aparta 72 h con una referencia `TIF…`; se confirma en `/admin/blokko` (sección 6) y ahí se emiten boletos y correo.
+- Transferencia (SPEI e internacional): cuenta de LGM en Citibanamex definida en `lib/ticketing/bank-account.mjs` (las variables `BANK_TRANSFER_*` en Vercel la sobrescriben). Al elegirla se envían los datos por correo (requiere `BREVO_API_KEY`). La orden se aparta 72 h con una referencia `TIF…`; se confirma en `/admin/blokko` (sección 6) y ahí se emiten boletos y correo.
 - Cada intento fallido guarda el error de Blokko; se ve en `/admin/blokko` (sección 7). El comprador puede cambiar de método sin reiniciar; un QR anterior que sí se pague también cuenta.
 
 ## Tarjetas · TacPay (API BlissCore v2.1)

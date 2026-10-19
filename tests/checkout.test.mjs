@@ -185,7 +185,7 @@ test('hidden test pass: not listed, but offered and purchasable through its dire
   assert.equal(order.amountMxn, 19);
 });
 
-const BANK = { BANK_TRANSFER_CLABE: '012180001234567891', BANK_TRANSFER_BENEFICIARY: 'Like Group Management', BANK_TRANSFER_BANK: 'BBVA' };
+const BANK = { BANK_TRANSFER_CLABE: '002694004900504773', BANK_TRANSFER_BENEFICIARY: 'Like Group Management', BANK_TRANSFER_BANK: 'BBVA' };
 
 test('sponsorship: VAT added on the server, one per order, no tickets, confirmation email instead', async () => {
   const store = createMemoryStore({ rate: 18.5, passes: [{ id: 'sponsor-event-supporter', name: 'Sponsorship · Event Supporter', price_usd: '2500.00', tax_rate: '0.16', max_quantity: 1, issues_tickets: false, category: 'sponsorship' }] });
@@ -247,7 +247,7 @@ test('SPEI: unavailable without bank details; with them, a reference, 72 h hold 
   const tr = await checkout.pay({ token, methodId: 'SPEI' });
   assert.equal(tr.kind, 'transfer');
   assert.match(tr.transfer.reference, /^TIF[A-Z0-9]{6}$/);
-  assert.deepEqual([tr.transfer.clabe, tr.transfer.amountMxn], ['012180001234567891', 8066]);
+  assert.deepEqual([tr.transfer.clabe, tr.transfer.amountMxn], ['002694004900504773', 8066]);
   assert.equal(tr.expiresAt, '2026-10-22T12:00:00.000Z');
   clock.t += 60 * 60 * 1000;
   const pending = await checkout.status({ token });
@@ -261,6 +261,6 @@ test('SPEI: unavailable without bank details; with them, a reference, 72 h hold 
   assert.equal(confirmed.alreadyPaid, false);
   assert.equal((await checkout.confirmTransfer({ reference: tr.transfer.reference })).alreadyPaid, true);
   assert.equal(store.state.tickets.length, 2);
-  assert.equal(emails.length, 1);
+  assert.deepEqual(emails.map((m) => m.subject.split(' · ')[0]), ['Bank transfer details', 'Your tickets'], 'transfer instructions, then tickets');
   assert.equal((await checkout.status({ token })).status, 'paid');
 });

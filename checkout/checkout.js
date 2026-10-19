@@ -572,8 +572,25 @@
     row(b.amount, mxn(tr.amountMxn), Number(tr.amountMxn).toFixed(2));
     row(b.reference, tr.reference, tr.reference);
     row(b.clabe, tr.clabe.replace(/(\d{3})(\d{3})(\d{11})(\d)/, '$1 $2 $3 $4'), tr.clabe);
-    row(b.beneficiary, tr.beneficiary);
+    row(b.beneficiary, tr.beneficiary, tr.beneficiary);
     row(b.bank, tr.bank);
+    const intl = tr.international;
+    $('intlBox').hidden = !intl;
+    if (intl) {
+      const dl2 = $('intlData');
+      dl2.textContent = '';
+      const r2 = (label, value) => {
+        const d = el('div'); d.append(el('dt', null, label));
+        const dd = el('dd'); dd.append(el('span', 'co-bank-value', value));
+        const c = el('button', 'co-copy', state.lang === 'es' ? 'Copiar' : 'Copy'); c.type = 'button'; c.addEventListener('click', () => copy(value, c)); dd.append(c);
+        d.append(dd); dl2.append(d);
+      };
+      r2('SWIFT', intl.swift);
+      r2(state.lang === 'es' ? 'Número de cuenta' : 'Account number', intl.account);
+      if (intl.branch) r2(state.lang === 'es' ? 'Sucursal' : 'Branch', intl.branch);
+      if (intl.aba) r2(state.lang === 'es' ? 'ABA (desde EE. UU.)' : 'ABA (from the US)', intl.aba);
+      r2(state.lang === 'es' ? 'Mensaje / referencia' : 'Message / reference', tr.reference);
+    }
     const deadline = new Date(state.transfer.expiresAt || state.order?.expiresAt);
     $('transferDeadline').textContent = Number.isNaN(deadline.getTime()) ? '' : t().deadline(deadline.toLocaleString(state.lang === 'es' ? 'es-MX' : 'en-US', { dateStyle: 'medium', timeStyle: 'short' }));
   }
