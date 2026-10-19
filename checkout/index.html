@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/checkout/checkout.css?v=20261017" />
+  <link rel="stylesheet" href="/checkout/checkout.css?v=20261019" />
 </head>
 <body class="co-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -24,7 +24,7 @@
   <header class="co-header">
     <a class="co-brand" href="/" aria-label="Tulum Innovation Fest"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="150" height="40" /></a>
     <div class="co-header-right">
-      <span class="co-secure"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Z"/></svg><span data-en>Secure payment · Blokko</span><span data-es>Pago seguro · Blokko</span></span>
+      <span class="co-secure"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Z"/></svg><span data-en>Secure payment</span><span data-es>Pago seguro</span></span>
       <button class="co-lang" type="button" id="langToggle" aria-label="Cambiar idioma / Change language"><span data-es>EN</span><span data-en>ES</span></button>
     </div>
   </header>
@@ -32,10 +32,10 @@
   <main class="co-main">
     <div class="co-steps" aria-label="Checkout">
       <ol class="co-progress" id="progress">
-        <li data-step="1"><span>01</span><span data-en>Pass</span><span data-es>Pase</span></li>
+        <li data-step="1"><span>01</span><span data-en>Product</span><span data-es>Producto</span></li>
         <li data-step="2"><span>02</span><span data-en>Details</span><span data-es>Datos</span></li>
         <li data-step="3"><span>03</span><span data-en>Payment</span><span data-es>Pago</span></li>
-        <li data-step="4"><span>04</span><span data-en>Tickets</span><span data-es>Boletos</span></li>
+        <li data-step="4"><span>04</span><span data-en>Done</span><span data-es>Listo</span></li>
       </ol>
 
       <div class="co-alert" id="alert" role="alert" hidden></div>
@@ -43,8 +43,10 @@
       <!-- Step 1 + 2: pass and buyer -->
       <form class="co-panel" id="orderForm" novalidate>
         <section aria-labelledby="passTitle">
-          <h1 id="passTitle"><span data-en>Choose your pass</span><span data-es>Elige tu pase</span></h1>
+          <h1 id="passTitle"><span data-en>What do you want to buy?</span><span data-es>¿Qué quieres comprar?</span></h1>
           <p class="co-sub"><span data-en>Tulum Innovation Fest · December 9–12, 2026 · IKAL Arena, Tulum</span><span data-es>Tulum Innovation Fest · 9 al 12 de diciembre de 2026 · IKAL Arena, Tulum</span></p>
+          <div class="co-cats" id="cats" role="tablist" aria-label="Categorías"></div>
+          <p class="co-tap"><span data-en>Tap a product to see everything it includes.</span><span data-es>Toca un producto para ver todo lo que incluye.</span></p>
           <div class="co-passes" id="passes" role="radiogroup" aria-labelledby="passTitle"><p class="co-loading"><span data-en>Loading passes…</span><span data-es>Cargando pases…</span></p></div>
           <p class="co-note" id="passNote" hidden></p>
           <div class="co-qty">
@@ -59,7 +61,7 @@
 
         <section aria-labelledby="buyerTitle" class="co-buyer">
           <h2 id="buyerTitle"><span data-en>Your details</span><span data-es>Tus datos</span></h2>
-          <p class="co-sub"><span data-en>We’ll email your tickets here.</span><span data-es>Aquí te enviamos tus boletos.</span></p>
+          <p class="co-sub"><span data-en>We’ll email your purchase here.</span><span data-es>Aquí te enviamos tu compra.</span></p>
           <div class="co-fields">
             <div class="co-field co-span">
               <label for="name"><span data-en>Full name</span><span data-es>Nombre completo</span></label>
@@ -81,7 +83,7 @@
           </div>
           <label class="co-check">
             <input type="checkbox" id="terms" required />
-            <span><span data-en>I accept the purchase terms. The charge is made in Mexican pesos (MXN) at the rate shown, through Blokko.</span><span data-es>Acepto los términos de compra. El cargo se hace en pesos mexicanos (MXN) al tipo de cambio indicado, a través de Blokko.</span></span>
+            <span><span data-en>I accept the purchase terms and the product conditions. The charge is made in Mexican pesos (MXN) at the rate shown.</span><span data-es>Acepto los términos de compra y las condiciones del producto. El cargo se hace en pesos mexicanos (MXN) al tipo de cambio indicado.</span></span>
           </label>
         </section>
 
@@ -92,9 +94,18 @@
       <section class="co-panel" id="payPanel" hidden aria-labelledby="payTitle">
         <div>
           <h2 id="payTitle"><span data-en>How do you want to pay?</span><span data-es>¿Cómo quieres pagar?</span></h2>
-          <p class="co-sub"><span data-en>Pick a method and scan the QR from your wallet or app.</span><span data-es>Elige un método y escanea el QR desde tu wallet o app.</span></p>
+          <p class="co-sub"><span data-en>Choose how to pay. Each option explains how it works.</span><span data-es>Elige cómo pagar. Cada opción explica cómo funciona.</span></p>
         </div>
-        <div class="co-methods" id="methods" role="list"></div>
+        <div class="co-methods" id="methods"></div>
+
+        <div class="co-transfer" id="transferBox" hidden>
+          <h3><span data-en>Bank transfer (SPEI)</span><span data-es>Transferencia bancaria (SPEI)</span></h3>
+          <p class="co-sub"><span data-en>Transfer the exact amount and write the reference in the payment concept. We confirm it and email your purchase within 1 business day.</span><span data-es>Transfiere el monto exacto y escribe la referencia en el concepto de pago. La confirmamos y te enviamos tu compra en máximo 1 día hábil.</span></p>
+          <dl class="co-bank" id="bankData"></dl>
+          <p class="co-fine" id="transferDeadline"></p>
+          <p class="co-waiting"><span class="co-dot" aria-hidden="true"></span><span data-en>Keep this page: it updates when we confirm your transfer. You can also close it; we’ll email you.</span><span data-es>Puedes dejar esta página abierta: se actualiza al confirmar tu transferencia. También puedes cerrarla; te avisamos por correo.</span></p>
+          <button type="button" class="co-link" id="transferBack"><span data-en>Choose another method</span><span data-es>Elegir otro método</span></button>
+        </div>
 
         <div class="co-qr" id="qrBox" hidden>
           <div class="co-qr-art">
@@ -113,15 +124,15 @@
             <p class="co-waiting"><span class="co-dot" aria-hidden="true"></span><span data-en>Waiting for your payment. This page updates on its own.</span><span data-es>Esperando tu pago. Esta página se actualiza sola.</span></p>
           </div>
         </div>
-        <button type="button" class="co-link co-back" id="editOrder"><span data-en>← Edit pass or details</span><span data-es>← Editar pase o datos</span></button>
+        <button type="button" class="co-link co-back" id="editOrder"><span data-en>← Edit product or details</span><span data-es>← Editar producto o datos</span></button>
       </section>
 
       <!-- Step 4: done -->
       <section class="co-panel co-done" id="donePanel" hidden aria-labelledby="doneTitle">
         <div class="co-done-mark" aria-hidden="true">✓</div>
-        <h2 id="doneTitle"><span data-en>You’re in!</span><span data-es>¡Listo, ya tienes tus boletos!</span></h2>
+        <h2 id="doneTitle"></h2>
         <p class="co-sub" id="doneText"></p>
-        <a class="co-cta" id="ticketsLink" href="/boleto"><span data-en>View my tickets</span><span data-es>Ver mis boletos</span><i aria-hidden="true">→</i></a>
+        <a class="co-cta" id="ticketsLink" href="/boleto"><span id="ticketsLinkText"></span><i aria-hidden="true">→</i></a>
         <p class="co-fine"><span data-en>Keep the email link: it is personal and opens your tickets anytime.</span><span data-es>Guarda el enlace del correo: es personal y abre tus boletos cuando quieras.</span></p>
       </section>
 
@@ -141,7 +152,8 @@
         <h3 id="sumPass">—</h3>
         <dl>
           <div><dt><span data-en>Quantity</span><span data-es>Cantidad</span></dt><dd id="sumQty">1</dd></div>
-          <div><dt><span data-en>Price (USD)</span><span data-es>Precio (USD)</span></dt><dd id="sumUsd">—</dd></div>
+          <div><dt><span data-en>Subtotal (USD)</span><span data-es>Subtotal (USD)</span></dt><dd id="sumUsd">—</dd></div>
+          <div id="sumTaxRow" hidden><dt><span data-en>VAT 16% (USD)</span><span data-es>IVA 16% (USD)</span></dt><dd id="sumTax">—</dd></div>
           <div class="co-total"><dt><span data-en>You pay (MXN)</span><span data-es>Pagas (MXN)</span></dt><dd id="sumMxn">—</dd></div>
         </dl>
         <p class="co-rate" id="sumRate"></p>
@@ -150,6 +162,26 @@
     </aside>
   </main>
 
-  <script src="/checkout/checkout.js?v=20261017" defer></script>
+  <dialog class="co-detail" id="detail" aria-labelledby="detailName">
+    <div class="co-detail-art" id="detailArt"></div>
+    <button type="button" class="co-detail-close" id="detailClose" aria-label="Cerrar / Close">×</button>
+    <div class="co-detail-body">
+      <p class="co-detail-cat" id="detailCat"></p>
+      <h2 id="detailName"></h2>
+      <p class="co-detail-tag" id="detailTag"></p>
+      <p class="co-detail-price" id="detailPrice"></p>
+      <p class="co-detail-desc" id="detailDesc"></p>
+      <div class="co-detail-cols">
+        <div id="detailIncWrap"><h3><span data-en>Includes</span><span data-es>Incluye</span></h3><ul class="co-inc" id="detailInc"></ul></div>
+        <div id="detailExcWrap"><h3><span data-en>Not included</span><span data-es>No incluye</span></h3><ul class="co-exc" id="detailExc"></ul></div>
+      </div>
+      <div id="detailCondWrap"><h3><span data-en>Conditions</span><span data-es>Condiciones</span></h3><ul class="co-cond" id="detailCond"></ul></div>
+    </div>
+    <div class="co-detail-foot">
+      <button type="button" class="co-cta" id="detailBuy"><span data-en>Buy</span><span data-es>Comprar</span><i aria-hidden="true">→</i></button>
+    </div>
+  </dialog>
+
+  <script src="/checkout/checkout.js?v=20261019" defer></script>
 </body>
 </html>

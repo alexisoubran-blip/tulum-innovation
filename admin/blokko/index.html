@@ -27,6 +27,7 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
 .badge{display:inline-block;font-size:.72rem;padding:3px 9px;border-radius:999px;border:1px solid var(--line);margin-left:6px}
 .ok{color:var(--ok)} .bad{color:var(--bad)}
 .qr{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;margin-top:12px}
+table.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}.tbl th,.tbl td{text-align:left;padding:8px 6px;border-top:1px solid var(--line);vertical-align:top}.tbl small{color:var(--muted)}
 .qr img{width:220px;height:220px;background:#fff;border-radius:10px;padding:8px}
 </style>
 </head>
@@ -73,6 +74,18 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
     <div class="qr" id="qr" hidden><img id="qrImg" alt="QR de pago de prueba"><div><p class="help" style="margin:0 0 8px">Referencia: <code id="mtx"></code></p><button class="ghost" id="btnCheck">Consultar estado</button></div></div>
     <pre id="outIntent" hidden></pre>
   </section>
+  <section>
+    <h2>6. Transferencias SPEI</h2>
+    <p class="help">Órdenes pagadas por transferencia. Cuando veas el depósito en el banco con la referencia, confírmala: se emiten los boletos y se envía el correo.</p>
+    <button class="ghost" id="btnOverview">Actualizar</button>
+    <div id="transfers"></div>
+  </section>
+
+  <section>
+    <h2>7. Últimos intentos de pago</h2>
+    <p class="help">Los 25 intentos más recientes del checkout, con el error de Blokko cuando falló.</p>
+    <div id="attempts"></div>
+  </section>
 </main>
 <script>
 (() => {
@@ -110,6 +123,20 @@ pre{background:#00080B;border:1px solid var(--line);border-radius:10px;padding:1
     if (d.ok && r.qrUrl) { $('qr').hidden = false; $('qrImg').src = r.qrUrl; $('mtx').textContent = d.merchantTransactionId; }
   });
   $('btnCheck').onclick = () => busy($('btnCheck'), async () => { const d = await admin({ action: 'status', merchantTransactionId: $('mtx').textContent }); show('outIntent', d, d.ok); });
+  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const money = (n) => `$${Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`;
+  async function overview() {
+    const d = await admin({ action: 'overview' });
+    if (!d.ok) { $('transfers').innerHTML = `<pre class="bad">${esc(JSON.stringify(d, null, 2))}</pre>`; return; }
+    $('transfers').innerHTML = d.transfers.length ? `<table class="tbl"><tr><th>Referencia</th><th>Monto</th><th>Comprador</th><th>Producto</th><th>Estado</th><th></th></tr>${d.transfers.map((t) => `<tr><td><code>${esc(t.reference)}</code></td><td>${money(t.amountMxn)}</td><td>${esc(t.buyerName)}<br><small>${esc(t.buyerEmail)}</small></td><td>${esc(t.passId)} × ${t.quantity}</td><td>${esc(t.status)}</td><td>${t.status === 'paid' ? '' : `<button data-ref="${esc(t.reference)}">Confirmar pago</button>`}</td></tr>`).join('')}</table>` : '<p class="help">No hay transferencias.</p>';
+    $('attempts').innerHTML = d.attempts.length ? `<table class="tbl"><tr><th>Fecha</th><th>Método</th><th>Monto</th><th>Estado</th><th>Error</th></tr>${d.attempts.map((a) => `<tr><td>${esc(new Date(a.createdAt).toLocaleString('es-MX'))}</td><td>${esc(a.method)}</td><td>${money(a.amountMxn)}</td><td>${esc(a.status)}</td><td><small>${esc(a.error || '')}</small></td></tr>`).join('')}</table>` : '<p class="help">Sin intentos todavía.</p>';
+    $('transfers').querySelectorAll('button[data-ref]').forEach((b) => b.onclick = () => busy(b, async () => {
+      if (!confirm(`¿Confirmas que recibiste la transferencia ${b.dataset.ref}? Se emitirán los boletos.`)) return;
+      const r = await admin({ action: 'confirm-transfer', reference: b.dataset.ref });
+      if (!r.ok) alert(JSON.stringify(r)); await overview();
+    }));
+  }
+  $('btnOverview').onclick = () => busy($('btnOverview'), overview);
   $('btnStatus').click(); // load status and payment methods on open
 })();
 </script>

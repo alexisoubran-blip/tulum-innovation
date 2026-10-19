@@ -5,9 +5,13 @@
 //   { action: "init-terminal" }                           → POST /v2/pos/initialization with our serial (virtual, type E)
 //   { action: "test-intent", amount?, paymentMethodId? }  → a test QR in MXN (production capped at 50 MXN)
 //   { action: "status", merchantTransactionId }           → payment status of a test
+//   { action: "overview" }                                → SPEI transfers and recent payment attempts (with errors)
+//   { action: "confirm-transfer", reference }             → marks a SPEI order paid and issues its tickets
 
 import { randomUUID, timingSafeEqual } from 'node:crypto';
 import { configFromEnv, createClient, SANDBOX_URL, BlokkoError } from '../../lib/ticketing/blokko.mjs';
+import { getCheckout } from '../../lib/ticketing/runtime.mjs';
+import { CheckoutError } from '../../lib/ticketing/checkout.mjs';
 
 const WEBHOOK_URL = 'https://www.tuluminnovationfest.com/api/webhooks/blokko';
 
@@ -62,10 +66,15 @@ export async function POST(request) {
       case 'status':
         if (!body.merchantTransactionId) return json(400, { ok: false, error: 'missing_merchantTransactionId' });
         return json(200, { ok: true, response: await client.getPaymentByMerchantTransactionId(String(body.merchantTransactionId)) });
+      case 'overview':
+        return json(200, { ok: true, ...(await (await getCheckout()).adminOverview()) });
+      case 'confirm-transfer':
+        return json(200, { ok: true, ...(await (await getCheckout()).confirmTransfer({ reference: body.reference })) });
       default:
         return json(400, { ok: false, error: 'unknown_action' });
     }
   } catch (error) {
+    if (error instanceof CheckoutError) return json(error.status, { ok: false, error: error.code });
     if (error instanceof BlokkoError) return json(502, { ok: false, error: 'blokko_error', status: error.status, response: error.body });
     return json(500, { ok: false, error: error.message });
   }

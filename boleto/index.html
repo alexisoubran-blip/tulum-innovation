@@ -44,8 +44,8 @@
     $('langToggle').addEventListener('click', () => { set(lang === 'es' ? 'en' : 'es'); try { localStorage.setItem('tif-language', lang); } catch {} render(); });
 
     const M = {
-      en: { of: (i, n) => `Ticket ${i} of ${n}`, valid: 'Valid', used: 'Used', void: 'Void', not_paid: 'This order is not paid yet. If you just paid, wait a minute and reload.', order_not_found: 'We could not find these tickets. Check the link in your email.', default: 'We could not load your tickets. Try again in a moment.' },
-      es: { of: (i, n) => `Boleto ${i} de ${n}`, valid: 'Válido', used: 'Usado', void: 'Anulado', not_paid: 'Esta orden aún no está pagada. Si acabas de pagar, espera un minuto y recarga.', order_not_found: 'No encontramos estos boletos. Revisa el enlace de tu correo.', default: 'No pudimos cargar tus boletos. Intenta de nuevo en un momento.' },
+      en: { of: (i, n) => `Ticket ${i} of ${n}`, valid: 'Valid', used: 'Used', void: 'Void', confirmed: 'Payment confirmed', confirmText: 'Our partnerships team will contact you within 48 hours to coordinate the benefits and deliverables.', not_paid: 'This order is not paid yet. If you just paid, wait a minute and reload.', order_not_found: 'We could not find these tickets. Check the link in your email.', default: 'We could not load your tickets. Try again in a moment.' },
+      es: { of: (i, n) => `Boleto ${i} de ${n}`, valid: 'Válido', used: 'Usado', void: 'Anulado', confirmed: 'Pago confirmado', confirmText: 'Nuestro equipo de alianzas te contactará en las próximas 48 horas para coordinar los beneficios y entregables.', not_paid: 'Esta orden aún no está pagada. Si acabas de pagar, espera un minuto y recarga.', order_not_found: 'No encontramos estos boletos. Revisa el enlace de tu correo.', default: 'No pudimos cargar tus boletos. Intenta de nuevo en un momento.' },
     };
     let data = null;
 
@@ -53,6 +53,14 @@
       if (!data) return;
       const list = $('list');
       list.textContent = '';
+      if (data.issuesTickets === false) {
+        const card = document.createElement('article'); card.className = 'tk-ticket'; card.style.gridTemplateColumns = '1fr';
+        const h = document.createElement('h2'); h.textContent = data.passName;
+        const st = document.createElement('span'); st.className = 'tk-status'; st.textContent = M[lang].confirmed;
+        const p = document.createElement('p'); p.className = 'tk-meta'; p.textContent = `${data.buyerName} · ${M[lang].confirmText}`;
+        const box = document.createElement('div'); box.append(h, st, p); card.append(box); list.appendChild(card);
+        return;
+      }
       data.tickets.forEach((tk) => {
         const card = document.createElement('article');
         card.className = 'tk-ticket';
