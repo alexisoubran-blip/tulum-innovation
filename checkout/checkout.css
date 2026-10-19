@@ -237,3 +237,14 @@ button, input { font: inherit; color: inherit; }
 .co-card input { letter-spacing: .02em; }
 .co-pending { color: var(--muted); font-style: normal; font-weight: 500; }
 .co-cta[disabled] { opacity: .5; cursor: not-allowed; }
+
+/* Product cards: the whole ticket on top, details below (2026-10-19) */
+.co-pass { grid-template-columns: 1fr; align-items: start; gap: 12px; padding: 12px 14px 16px; }
+.co-pass-art { width: 100%; aspect-ratio: 3 / 1; border-radius: 12px; display: grid; place-items: center;
+  background: radial-gradient(120% 140% at 80% 0%, color-mix(in srgb, var(--pass) 22%, transparent), transparent 60%),
+              radial-gradient(120% 140% at 0% 100%, color-mix(in srgb, var(--pass-2) 18%, transparent), transparent 60%), rgba(0,8,11,.6); }
+.co-pass-art img { object-fit: contain; transform: scale(1.06); }
+.co-pass > div:not(.co-pass-art) { padding-right: 26px; min-width: 0; }
+.co-pass-check { top: 14px; right: 14px; background: rgba(0,8,11,.7); }
+.co-summary-art img, .co-detail-art img { object-fit: contain; }
+.co-summary-art, .co-detail-art { background: radial-gradient(120% 140% at 80% 0%, color-mix(in srgb, var(--pass) 30%, transparent), transparent 65%), radial-gradient(120% 140% at 0% 100%, color-mix(in srgb, var(--pass-2) 25%, transparent), transparent 65%), #03090b; }

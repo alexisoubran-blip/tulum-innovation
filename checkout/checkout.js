@@ -307,7 +307,7 @@
     state.qty = Math.min(max, Math.max(1, Number.isFinite(n) ? Math.round(n) : 1));
     $('qty').value = String(state.qty);
     $('qty').max = String(max);
-    document.querySelector('.co-qty').hidden = max <= 1;
+    document.querySelector('.co-qty').hidden = !state.passId || max <= 1; // only once a product with several units is chosen
     renderSummary();
   }
   $('qtyDown').addEventListener('click', () => setQty(state.qty - 1));
