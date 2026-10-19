@@ -204,3 +204,33 @@ test('bank transfer: LGM account, CLABE check digit, international details and e
   const en = transferEmail({ locale: 'en', name: 'Ana', passName: 'X', quantity: 1, transfer: r.transfer, expiresAt: r.expiresAt, orderUrl: 'https://x' });
   assert.match(en.subject, /^Bank transfer details · TIF/);
 });
+
+test('every purchasable product in the live catalog can be paid with every Blokko method and by transfer', async () => {
+  const { LGM_BANK_ENV } = await import('../lib/ticketing/bank-account.mjs');
+  const { DEFAULT_METHODS } = await import('../lib/ticketing/checkout.mjs');
+  const catalog = [
+    ['executive-pass', 1500], ['business-pass', 215.68, 3990], ['hotel-upgrade', 1500], ['hotel-second-guest', 720],
+    ['whale-tank-founder', 2500], ['whale-tank-founder-no-stay', 1500], ['whale-tank-team-member', 1000], ['whale-tank-team-member-no-stay', 720],
+    ['sponsor-event-supporter', 2500, null, 0.16], ['sponsor-strategic-partner', 30000, null, 0.16],
+  ].map(([id, usd, mxn = null, tax = 0]) => ({ id, name: id, price_usd: usd, price_mxn: mxn, tax_rate: tax, max_quantity: 1 }));
+  const store = createMemoryStore({ passes: catalog, rate: 18.5 });
+  const intents = [];
+  const blokko = {
+    async getPaymentMethods() { return DEFAULT_METHODS.map((id) => ({ id })); },
+    async createPaymentIntent(b) { intents.push(b); return { transactionId: `t${intents.length}`, qrUrl: 'x', totalAmount: b.amount }; },
+    async getPaymentByMerchantTransactionId() { return { transactionStatus: 'P' }; },
+  };
+  const checkout = createCheckout({ store, blokko, env: { ...env, ...LGM_BANK_ENV }, now: () => NOW, sendEmail: async () => ({ sent: true }) });
+  const o = await checkout.options();
+  assert.deepEqual(o.methods.filter((m) => m.available).map((m) => m.id), ['SPEI', ...DEFAULT_METHODS]);
+  for (const pass of catalog) {
+    const { token, order } = await checkout.createOrder({ ...buyer, passId: pass.id, businessName: 'Café Maya', businessAddress: 'Calle 2 Sur, Tulum' });
+    for (const methodId of DEFAULT_METHODS) {
+      const r = await checkout.pay({ token, methodId });
+      assert.equal(r.kind, 'qr', `${pass.id} × ${methodId}`);
+      assert.equal(Number(intents.at(-1).amount), order.amountMxn);
+    }
+    assert.equal((await checkout.pay({ token, methodId: 'SPEI' })).kind, 'transfer', `${pass.id} × SPEI`);
+  }
+  assert.equal(intents.length, catalog.length * DEFAULT_METHODS.length);
+});

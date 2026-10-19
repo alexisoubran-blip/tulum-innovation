@@ -48,7 +48,8 @@ test('options: on-sale passes in USD and MXN, only allowed Blokko methods in our
   assert.deepEqual(o.passes.map((p) => [p.id, p.priceUsd, p.priceMxn]), [['general-access', 218, 4033], ['executive-pass', 1590, 29415]]);
   assert.ok(o.passes[0].content.includes.length > 0, 'product content is attached');
   // Card (TacPay) and SPEI are always listed; unavailable until configured. Blokko methods in our order.
-  assert.deepEqual(o.methods.map((m) => [m.id, m.available]), [['CARD', false], ['SPEI', false], ['WALL', true], ['BTSO', true]]);
+  assert.deepEqual(o.methods.map((m) => [m.id, m.available]), [['CARD', false], ['SPEI', false], ['WALL', true], ['BTSO', true], ['LPIX', true]]);
+  assert.equal(o.methods.find((m) => m.id === 'LPIX').group, 'latam');
   assert.equal(o.methods.find((m) => m.id === 'WALL').group, 'crypto');
   assert.deepEqual(allowedMethods({ BLOKKO_ALLOWED_METHODS: 'codi, wall' }), ['CODI', 'WALL']);
 });
@@ -87,7 +88,7 @@ test('pay creates a Blokko intent with our ids and the MXN amount; refuses other
   assert.deepEqual(blokko.calls.intents[0], { merchantTransactionId: qr.attemptId, merchantReference: orderId, amount: '8066.00', paymentMethodId: 'WALL' });
   const [attempt] = await store.listAttempts(orderId);
   assert.equal(attempt.provider_transaction_id, 'tx-1');
-  assert.equal((await checkout.pay({ token, methodId: 'LPIX' }).catch((e) => e)).code, 'method_not_allowed');
+  assert.equal((await checkout.pay({ token, methodId: 'KWPN' }).catch((e) => e)).code, 'method_not_allowed');
   assert.equal((await checkout.pay({ token: 'forged', methodId: 'WALL' }).catch((e) => e)).code, 'order_not_found');
 });
 
