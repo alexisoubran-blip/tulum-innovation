@@ -129,3 +129,17 @@ test('checkout queries: idempotent ticket insert, single email claim, on-sale pa
   assert.match(calls[3].url, /passes\?select=\*&on_sale=is\.true&hidden=is\.false&order=sort_order\.asc$/);
   assert.equal(await store.getOrder('not-a-uuid'), null);
 });
+
+test('findOrderForBlokkoEvent maps an attempt id (merchantReference of a QR) to its order', async () => {
+  const ATTEMPT = '11111111-2222-4333-8444-555555555555';
+  const calls = [];
+  const fetchImpl = async (url) => {
+    calls.push(String(url));
+    const u = String(url);
+    const body = u.includes('/orders?') && u.includes(`id=eq.${ATTEMPT}`) ? [] : u.includes('/payment_attempts?') ? [{ order_id: ORDER_ID }] : u.includes(`id=eq.${ORDER_ID}`) ? [{ id: ORDER_ID }] : [];
+    return new Response(JSON.stringify(body), { status: 200, headers: { 'content-type': 'application/json' } });
+  };
+  const found = await createSupabaseStore(env, { fetchImpl }).findOrderForBlokkoEvent({ merchantReference: ATTEMPT, transactionUuid: 'tx-1' });
+  assert.deepEqual(found, { id: ORDER_ID });
+  assert.ok(calls.some((c) => c.includes(`payment_attempts?select=order_id&id=eq.${ATTEMPT}`)));
+});

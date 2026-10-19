@@ -85,8 +85,11 @@ test('pay creates a Blokko intent with our ids and the MXN amount; refuses other
   const orderId = openOrderToken(token, SECRET);
   const qr = await checkout.pay({ token, methodId: 'wall' });
   assert.equal(qr.qrUrl, 'https://qr/x.png');
-  assert.deepEqual(blokko.calls.intents[0], { merchantTransactionId: qr.attemptId, merchantReference: orderId, amount: '8066.00', paymentMethodId: 'WALL' });
-  const [attempt] = await store.listAttempts(orderId);
+  assert.deepEqual(blokko.calls.intents[0], { merchantTransactionId: qr.attemptId, merchantReference: qr.attemptId, amount: '8066.00', paymentMethodId: 'WALL' });
+  const second = await checkout.pay({ token, methodId: 'BTSO' });
+  assert.notEqual(blokko.calls.intents[1].merchantReference, blokko.calls.intents[0].merchantReference, 'Blokko needs a new merchantReference per QR');
+  assert.equal(blokko.calls.intents[1].merchantReference, second.attemptId);
+  const attempt = (await store.listAttempts(orderId)).find((x) => x.id === qr.attemptId);
   assert.equal(attempt.provider_transaction_id, 'tx-1');
   assert.equal((await checkout.pay({ token, methodId: 'KWPN' }).catch((e) => e)).code, 'method_not_allowed');
   assert.equal((await checkout.pay({ token: 'forged', methodId: 'WALL' }).catch((e) => e)).code, 'order_not_found');
@@ -161,7 +164,7 @@ test('the signed webhook pays the order and fulfillment runs once even if status
   const qr = await checkout.pay({ token, methodId: 'WALL' });
 
   const config = { apiKey: 'k', secret: 's', encoding: 'hex', timestampUnit: 's' };
-  const rawBody = JSON.stringify({ authorizationId: 'A1', transactionUuid: 'tx-1', merchantId: 'm', merchantReference: orderId, transactionStatus: 'E', createdAt: '2026-10-17 19:01:00', completedAt: '2026-10-17 19:02:00' });
+  const rawBody = JSON.stringify({ authorizationId: 'A1', transactionUuid: 'tx-1', merchantId: 'm', merchantReference: qr.attemptId, transactionStatus: 'E', createdAt: '2026-10-17 19:01:00', completedAt: '2026-10-17 19:02:00' });
   const ts = Math.floor(Date.now() / 1000);
   const sig = computeSignature(config.secret, canonicalString({ method: 'POST', path: '/api/webhooks/blokko', body: rawBody, timestamp: ts, nonce: 'n1' }), 'hex');
   const res = await handleBlokkoWebhook(
