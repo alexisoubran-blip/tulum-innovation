@@ -1376,6 +1376,31 @@ body .press-logo-link > span { font-size:.625rem; }
   .v2-past-people-grid .v2-past-person h3 { font-size:.9rem; }
   .v2-past-people-grid .v2-past-person p { font-size:.66rem; }
 }
+
+    /* Above the fold (2026-10-22): title sized to the screen height, big ticket button next to the title */
+    .v2-hero-inner { align-items:center; padding-top:calc(var(--header) + clamp(1.5rem,5vh,4rem)); padding-bottom:clamp(3.5rem,8vh,6rem); }
+    .v2-hero-copy .v2-title { font-size:clamp(3rem, min(6.2vw, 10.4vh), 8.3rem); }
+    .v2-hero-date { margin-bottom:clamp(.8rem,2vh,1.35rem); }
+    .v2-hero-copy .v2-lede { margin-top:clamp(.8rem,2.2vh,1.5rem); }
+    .v2-hero-actions { margin-top:clamp(1rem,3vh,2rem); }
+    .v2-hero-side { display:grid; gap:1.4rem; align-self:center; }
+    .v2-hero-buy {
+      position:relative; display:grid; gap:.35rem; padding:1.5rem 4rem 1.5rem 1.6rem; border-radius:20px;
+      background:var(--ember, #E97A43); color:#00080B; text-decoration:none; box-shadow:0 18px 50px rgba(233,122,67,.35);
+      transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .v2-hero-buy:hover { transform:translateY(-2px); background:#f08a52; box-shadow:0 22px 60px rgba(233,122,67,.45); }
+    .v2-hero-buy-label { font-family:var(--display, inherit); font-size:clamp(1.25rem,1.7vw,1.7rem); font-weight:700; letter-spacing:.02em; text-transform:uppercase; line-height:1.05; }
+    .v2-hero-buy-sub { font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; opacity:.72; }
+    .v2-hero-buy i { position:absolute; right:1.4rem; top:50%; transform:translateY(-50%); font-style:normal; font-size:1.7rem; }
+    .v2-hero-side .v2-hero-countdown { min-width:0; }
+    @media (max-width: 900px) {
+      .v2-hero-side { width:100%; }
+      .v2-hero-buy { display:none; } /* on phones the main button sits right under the title */
+      .v2-hero-inner { padding-top:calc(var(--header) + 2.2rem); padding-bottom:3.2rem; gap:1.6rem; }
+      .v2-hero-copy .v2-title { font-size:clamp(2.6rem, min(11vw, 7.2vh), 4.6rem); }
+      .v2-hero-note { display:none; }
+    }
 </style>
   <script type="application/ld+json">
   {
@@ -1479,6 +1504,12 @@ body .press-logo-link > span { font-size:.625rem; }
           </p>
         </div>
 
+        <div class="v2-hero-side">
+        <a class="v2-hero-buy" href="https://www.ticketfairy.com/event/httpswwwtuluminnovationfestcom" target="_blank" rel="noopener noreferrer">
+          <span class="v2-hero-buy-label"><span data-en>Get your tickets</span><span data-es>Compra tus boletos</span></span>
+          <span class="v2-hero-buy-sub"><span data-en>Dec 9–12 · Limited capacity</span><span data-es>9–12 dic · Cupo limitado</span></span>
+          <i aria-hidden="true">→</i>
+        </a>
         <aside class="v2-hero-countdown" aria-label="Countdown to TIF 2026" data-countdown>
           <p class="v2-countdown-kicker">
             <span data-en>Until TIF 2026</span><span data-es>Para TIF 2026</span>
@@ -1493,6 +1524,7 @@ body .press-logo-link > span { font-size:.625rem; }
             <span data-en>December 9 · Tulum</span><span data-es>9 de diciembre · Tulum</span>
           </p>
         </aside>
+        </div>
       </div>
 
       <a class="v2-watch" href="#film"><i></i><span data-en>Watch the experience</span><span data-es>Ver la experiencia</span></a>
