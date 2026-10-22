@@ -799,7 +799,7 @@
     fillSelects();
     restoreDraft();
     const cardLive = (options.methods || []).some((m) => m.id === 'CARD' && m.available);
-    $('tfHelp').hidden = cardLive;
+    $('tfHelp').hidden = true; // Ticket Fairy is no longer an alternative
     $('trustVisa').hidden = !cardLive;
     $('trustMc').hidden = !cardLive;
     const preselected = options.passes.find((p) => p.id === wanted);
