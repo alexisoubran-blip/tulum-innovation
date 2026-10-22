@@ -654,7 +654,8 @@
     .v2-history-group { padding:1.5rem 0 2rem; border-top:1px solid rgba(0,8,11,.14); }
     .v2-history-group > span { display:block; margin-bottom:1.2rem; color:rgba(0,8,11,.52); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; }
     .v2-name-wall { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(0,8,11,.12); border-left:1px solid rgba(0,8,11,.12); }
-    .v2-name-wall b.v2-name-logo img { display:block; width:auto; height:clamp(30px,3.2vw,42px); max-width:80%; object-fit:contain; }
+    .v2-name-wall b.v2-name-logo img { display:block; width:auto; height:auto; max-height:var(--logo-h,40px); max-width:78%; object-fit:contain; }
+    @media (max-width: 560px) { .v2-name-wall b.v2-name-logo img { max-height:calc(var(--logo-h,40px) * .8); } }
     .v2-name-wall b { min-height:110px; display:flex; align-items:center; justify-content:center; padding:1rem; border-right:1px solid rgba(0,8,11,.12); border-bottom:1px solid rgba(0,8,11,.12); font-family:var(--sans); font-size:clamp(.8rem,1.05vw,1.15rem); font-weight:700; text-align:center; letter-spacing:-.02em; }
     .v2-history-group.represented { margin-top:1rem; }
 
@@ -2044,7 +2045,7 @@ body .press-logo-link > span { font-size:.625rem; }
         <div class="v2-history-group represented">
           <span><span data-en>Companies and communities represented across previous editions</span><span data-es>Empresas y comunidades representadas en ediciones anteriores</span></span>
           <div class="v2-name-wall">
-            <b>AWS</b><b>GOOGLE CLOUD</b><b>CHAINLINK</b><b>THE SANDBOX</b><b>STARTUP GRIND</b><b>BITBASEL</b><b>IBIZA TECH FORUM</b><b class="v2-name-logo"><img src="/assets/partners-orbi.webp" alt="Orbi" width="120" height="50" loading="lazy" decoding="async"></b>
+            <b class="v2-name-logo" style="--logo-h:58px"><img src="/assets/partners-aws.webp" alt="AWS" loading="lazy" decoding="async"></b><b class="v2-name-logo" style="--logo-h:40px"><img src="/assets/partners-google-cloud.webp" alt="Google Cloud" loading="lazy" decoding="async"></b><b class="v2-name-logo" style="--logo-h:38px"><img src="/assets/partners-chainlink.webp" alt="Chainlink" loading="lazy" decoding="async"></b><b class="v2-name-logo" style="--logo-h:58px"><img src="/assets/partners-the-sandbox.webp" alt="The Sandbox" loading="lazy" decoding="async"></b><b class="v2-name-logo" style="--logo-h:34px"><img src="/assets/partners-startup-grind.webp" alt="Startup Grind" loading="lazy" decoding="async"></b><b class="v2-name-logo" style="--logo-h:34px"><img src="/assets/partners-bitbasel.webp" alt="BitBasel" loading="lazy" decoding="async"></b><b class="v2-name-logo" style="--logo-h:62px"><img src="/assets/partners-ibiza-tech-forum.webp" alt="Ibiza Tech Forum" loading="lazy" decoding="async"></b><b class="v2-name-logo" style="--logo-h:44px"><img src="/assets/partners-orbi.webp" alt="Orbi" loading="lazy" decoding="async"></b>
           </div>
         </div>
       </div>
