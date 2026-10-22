@@ -76,7 +76,7 @@ test('client sends the BlissCore body with the affiliate code and reads approval
   assert.equal(calls[0].body.currency, 'MXN');
   assert.equal(calls[0].body.customer.phone, '+525512345678');
   assert.deepEqual(r, { outcome: 'approved', transactionId: 'dps_txn_1', authorizationCode: 'A12345', processorTransactionId: '295483', amount: 27750 });
-  assert.equal(configFromEnv({ BLISSCORE_AFFILIATE_CODE: 'x', BLISSCORE_BASE_URL: 'https://api.blisscorepay.cloud/' }).sandbox, false);
+  assert.equal(configFromEnv({ BLISSCORE_AFFILIATE_CODE: 'x', BLISSCORE_BASE_URL: 'https://api-prod.blisscorepay.cloud/' }).sandbox, false);
 });
 
 test('options: card shows only when configured; pending and MXN-priced products', async () => {
@@ -244,7 +244,7 @@ test('sandbox card credentials never sell on the live site', async () => {
   assert.equal((await live.pay({ token, methodId: 'CARD', card, billing }).catch((e) => e)).code, 'method_unavailable');
   const preview = createCheckout({ store, blokko: { async getPaymentMethods() { return []; } }, cards: sandbox, env: { ...env, VERCEL_ENV: 'preview' } });
   assert.equal((await preview.options()).methods.find((m) => m.id === 'CARD').available, true);
-  const prod = createClient(configFromEnv({ BLISSCORE_AFFILIATE_CODE: '100', BLISSCORE_BASE_URL: 'https://api.blisscorepay.cloud' }), { fetchImpl: fakeFetch([]) });
+  const prod = createClient(configFromEnv({ BLISSCORE_AFFILIATE_CODE: '100', BLISSCORE_BASE_URL: 'https://api-prod.blisscorepay.cloud' }), { fetchImpl: fakeFetch([]) });
   const liveProd = createCheckout({ store, blokko: { async getPaymentMethods() { return []; } }, cards: prod, env: { ...env, VERCEL_ENV: 'production' } });
   assert.equal((await liveProd.options()).methods.find((m) => m.id === 'CARD').available, true);
 });

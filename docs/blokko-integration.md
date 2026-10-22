@@ -119,7 +119,7 @@ Los botones de `/tickets` siguen apuntando a Ticket Fairy hasta que se decida el
 
 ## Tarjetas · TacPay (API BlissCore v2.1)
 
-- Endpoint único: `POST {BLISSCORE_BASE_URL}/payments/affiliate/payment` con `affiliate_code` en el cuerpo. Sandbox `https://sandbox.blisscorepay.cloud`, producción `https://api.blisscorepay.cloud`.
+- Endpoint único: `POST {BLISSCORE_BASE_URL}/payments/affiliate/payment` con `affiliate_code` en el cuerpo. Sandbox `https://sandbox.blisscorepay.cloud`, producción `https://api-prod.blisscorepay.cloud`.
 - Solo Visa y Mastercard **emitidas en México**, solo MXN, mínimo 1.00 MXN. Sin webhook, sin consulta de estado y sin reembolsos por API (se hacen en el panel de BlissCore).
 - Código: `lib/ticketing/blisscore.mjs` (cliente y validación), `payByCard` en `lib/ticketing/checkout.mjs`, formulario en `/checkout`.
 - Cada intento usa su propio `order_id` (= id del intento). Aprobado → orden pagada al momento, boletos y correo. Declinado → mensaje claro y puede reintentar u otro método. Timeout o respuesta ilegible → intento `unconfirmed`: la orden queda bloqueada para cualquier otro pago (evita doble cobro) hasta que un admin lo resuelve en `/admin/blokko` (sección 9) revisando el panel de BlissCore.
