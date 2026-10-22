@@ -528,7 +528,13 @@
         btn.type = 'button';
         btn.disabled = !m.available;
         btn.setAttribute('aria-pressed', String(m.id === state.methodId));
-        if (m.logoUrl) { const img = el('img'); img.src = m.logoUrl; img.alt = ''; img.loading = 'lazy'; btn.appendChild(img); }
+        if (m.id === 'CARD') {
+          const brands = el('span', 'co-brands co-brands-method');
+          [['visa', 'Visa'], ['mastercard', 'Mastercard']].forEach(([f, alt]) => { const img = el('img'); img.src = `/assets/payments/${f}.svg`; img.alt = alt; img.width = 40; img.height = 25; brands.appendChild(img); });
+          btn.appendChild(brands);
+        } else if (m.id === 'SPEI') {
+          const img = el('img'); img.src = '/assets/payments/spei.svg'; img.alt = 'SPEI'; btn.appendChild(img);
+        } else if (m.logoUrl) { const img = el('img'); img.src = m.logoUrl; img.alt = ''; img.loading = 'lazy'; btn.appendChild(img); }
         const label = el('div', 'co-method-text');
         const top = el('strong', null, L(m.name));
         if (!m.available) top.append(el('span', 'co-soon', t().soon));
@@ -792,7 +798,10 @@
     state.options = options;
     fillSelects();
     restoreDraft();
-    $('tfHelp').hidden = (options.methods || []).some((m) => m.id === 'CARD' && m.available);
+    const cardLive = (options.methods || []).some((m) => m.id === 'CARD' && m.available);
+    $('tfHelp').hidden = cardLive;
+    $('trustVisa').hidden = !cardLive;
+    $('trustMc').hidden = !cardLive;
     const preselected = options.passes.find((p) => p.id === wanted);
     state.category = preselected?.category || options.passes[0]?.category || 'festival';
     renderCats(); renderPasses();
