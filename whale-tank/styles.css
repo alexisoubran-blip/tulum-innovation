@@ -418,3 +418,8 @@ body.tif-page .wt-included h3 { margin: 0 0 1.2rem; font-family: var(--sans) !im
 .wt-person-meta .wt-li { display: inline-flex; align-items: center; gap: .3rem; margin-top: .7rem; padding: .3rem .6rem; border: 1px solid var(--line); border-radius: 999px; color: rgba(242,241,234,.72); font-family: var(--sans); font-style: normal; font-size: .66rem; font-weight: 600; letter-spacing: .04em; }
 .wt-person-meta .wt-li i { position: static; color: inherit; }
 .wt-investor-card:hover .wt-li, .wt-mentor-card:hover .wt-li { border-color: var(--ember); color: var(--ember); }
+.wt-hotel-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,8,11,.55), rgba(0,8,11,.08) 55%); pointer-events: none; }
+.wt-hotel-media .wt-hotel-mark { z-index: 1; }
+.wt-hotel-grid { background: transparent; border: 0; gap: 0; }
+.wt-hotel-card { box-shadow: 0 0 0 .5px var(--line), inset 0 0 0 .5px var(--line); }
+@media (max-width: 640px) { .wt-hotel-card:last-child:nth-child(odd) { grid-column: 1 / -1; } .wt-hotel-card:last-child:nth-child(odd) .wt-hotel-media { aspect-ratio: 16/9; } }
