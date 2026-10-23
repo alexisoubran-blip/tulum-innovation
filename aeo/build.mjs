@@ -67,7 +67,7 @@ export async function buildAEO(){
   if(/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(html))continue;
   const route=file==='dist/index.html'?'/':'/'+file.slice(5).replace(/\/index\.html$/,'');
   const canonical=html.match(/<link\b[^>]*rel="canonical"[^>]*href="([^"]+)"/)?.[1]||origin+route;
-  const title=html.match(/<title>([^]*?)<\/title>/)?.[1]||'Tulum Innovation Fest';
+  const title=html.match(/<title\b[^>]*>([^]*?)<\/title>/)?.[1]||'Tulum Innovation Fest';
   const description=html.match(/<meta\b[^>]*name="description"[^>]*content="([^"]*)"/)?.[1]||'Tulum Innovation Fest 2026: December 9–12, IKAL Arena, Tulum, Mexico.';
   const md='/markdown/'+(route==='/'?'index':route.slice(1).replaceAll('/','-'))+'.md';
   const main=html.match(/<main\b[^>]*>([^]*?)<\/main>/)?.[1]||'';
