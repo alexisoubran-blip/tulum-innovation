@@ -9,6 +9,51 @@
   // Scene reveals (independent of WebGL)
   const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('is-in')), { threshold: 0.3 });
   root.querySelectorAll('.cx-scene').forEach((s) => io.observe(s));
+  // Staggered children (pills, list items, stats)
+  root.querySelectorAll('.cx-scene').forEach((sc) => sc.querySelectorAll('.rv-i').forEach((el, i) => el.style.setProperty('--i', i)));
+
+  // Count-up numbers when their scene appears
+  const counted = new WeakSet();
+  const countUp = (el) => { if (counted.has(el)) return; counted.add(el); const to = +el.dataset.count; const t0 = performance.now(); const d = 1400;
+    const step = (t) => { const k = Math.min(1, (t - t0) / d); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.querySelectorAll('[data-count]').forEach(countUp)), { threshold: 0.4 }).observe(root.querySelector('.cx-whale') || root);
+
+  // Scroll-linked parallax for photos and numbers (rAF, works on iOS/Android)
+  const movers = [...root.querySelectorAll('[data-speed]')].map((el) => ({ el, speed: +el.dataset.speed, scene: el.closest('.cx-scene') }));
+  const photos = [...root.querySelectorAll('.cx-photo')];
+  // Load photos shortly before they are needed; show the frame only once the image is ready
+  const lio = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; const img = e.target.querySelector('img[data-src]'); if (img) { img.onload = () => e.target.classList.add('is-loaded'); img.src = img.dataset.src; img.removeAttribute('data-src'); } lio.unobserve(e.target); }), { rootMargin: '120% 0px' });
+  photos.forEach((f) => lio.observe(f));
+  const pio = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-in', e.isIntersecting)), { rootMargin: '-8% 0px -8% 0px', threshold: 0.12 });
+  photos.forEach((f) => pio.observe(f));
+  let ticking = false;
+  const motion = () => {
+    ticking = false; const vh = innerHeight, small = innerWidth < 700;
+    for (const m of movers) {
+      const r = m.scene.getBoundingClientRect(); if (r.bottom < -vh || r.top > vh * 2) continue;
+      const off = (r.top + r.height / 2 - vh / 2) / vh; // -1 … 1 around the viewport centre
+      const y = off * m.speed * (small ? 260 : 420);
+      m.el.style.setProperty('--py', `${y.toFixed(1)}px`);
+      m.el.style.setProperty('--pr', `${(off * m.speed * 18).toFixed(2)}deg`);
+    }
+  };
+  const onScrollMotion = () => { if (!ticking) { ticking = true; requestAnimationFrame(motion); } };
+  addEventListener('scroll', onScrollMotion, { passive: true }); addEventListener('resize', onScrollMotion); motion();
+
+  // Dive in: splash + ripple + eased dive to the next scene
+  const splash = root.querySelector('.cx-splash');
+  root.querySelectorAll('[data-dive]').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const r = a.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+    if (root._drop) { root._drop(x, y, true); setTimeout(() => root._drop(x, y, true), 160); }
+    if (splash) { splash.style.setProperty('--x', `${x}px`); splash.style.setProperty('--y', `${y}px`); splash.classList.remove('is-on'); void splash.offsetWidth; splash.classList.add('is-on'); }
+    const target = document.querySelector(a.getAttribute('href')); if (!target) return;
+    const from = scrollY, to = target.getBoundingClientRect().top + scrollY, dur = reduce ? 0 : 1600, t0 = performance.now();
+    const ease = (k) => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+    const go = (t) => { const k = dur ? Math.min(1, (t - t0) / dur) : 1; scrollTo(0, from + (to - from) * ease(k)); if (k < 1) requestAnimationFrame(go); };
+    setTimeout(() => requestAnimationFrame(go), 220);
+  }));
+
   const meter = root.querySelector('.cx-meter'), bar = root.querySelector('.cx-meter-bar'), label = root.querySelector('.cx-meter-label');
 
   // Progress through the intro (0 → 1)
@@ -149,6 +194,7 @@ void main(){
   let mouse = [0.2, -0.1], target = [0.2, -0.1];
   const start = performance.now(); const now = () => (performance.now() - start) / 1000;
   const drop = (x, y, force) => { const [px, py] = toP(x, y); ripples[ri * 3] = px; ripples[ri * 3 + 1] = py; ripples[ri * 3 + 2] = now() - (force ? 0 : 0.6); ri = (ri + 1) % 8; };
+  root._drop = drop;
   const hint = root.querySelector('.cx-hint'); const hideHint = () => hint && hint.classList.add('gone');
   root.addEventListener('pointermove', (e) => { target = toP(e.clientX, e.clientY); const t = now(); if (t - last > 0.35 && e.pointerType === 'mouse') { drop(e.clientX, e.clientY, false); last = t; hideHint(); } }, { passive: true });
   root.addEventListener('pointerdown', (e) => { if (!e.target.closest('a,button')) { drop(e.clientX, e.clientY, true); last = now(); hideHint(); } }, { passive: true });
