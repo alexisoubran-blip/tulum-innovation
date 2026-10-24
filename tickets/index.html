@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="/assets/tickets/general-access.webp" type="image/webp" />
-  <link rel="stylesheet" href="/tickets/styles.css?v=20261024-all" />
+  <link rel="stylesheet" href="/tickets/styles.css?v=20261024-board" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Tulum Innovation Fest 2026","startDate":"2026-12-09","endDate":"2026-12-12","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","url":"https://www.tuluminnovationfest.com/tickets","image":"https://www.tuluminnovationfest.com/assets/tickets/general-access.webp","offers":[{"@type":"Offer","name":"General Access — 4 Day Pass","price":"218.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.tuluminnovationfest.com/checkout?pass=general-access"},{"@type":"Offer","name":"Executive Pass — Festival Access","price":"1500.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.tuluminnovationfest.com/checkout?pass=executive-pass"},{"@type":"Offer","name":"Hotel Upgrade — 4 nights","price":"1500.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.tuluminnovationfest.com/checkout?pass=hotel-upgrade"},{"@type":"Offer","name":"Hotel Upgrade — second guest","price":"720.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.tuluminnovationfest.com/checkout?pass=hotel-second-guest"},{"@type":"Offer","name":"Community Access — Tulum Resident","price":"109.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.tuluminnovationfest.com/checkout?pass=community-access"}]}</script>
 </head>
 <body class="tk-page">
@@ -45,18 +45,126 @@
           <li>IKAL Arena · Tulum, México</li>
           <li><span data-tif-en>Prices in USD · card, transfer or crypto</span><span data-tif-es>Precios en USD · tarjeta, transferencia o cripto</span></li>
         </ul>
-        <nav class="tk-jump" aria-label="Passes">
-          <a href="#general" style="--pass:#FF6A2B">General Access</a>
-          <a href="#executive" style="--pass:#FFC424">Executive Pass</a>
-          <a href="#community" style="--pass:#4BFF5A">Community Access</a>
-          <a href="#night-program" style="--pass:#D35CFF">Night Program</a>
-          <a href="#full-night" style="--pass:#25B8FF">Full Night</a>
-          <a href="#invisible-layer" style="--pass:#FF3374">Invisible Layer</a>
-          <a href="#compare" style="--pass:#F2F1EA"><span data-tif-en>Compare passes</span><span data-tif-es>Comparar pases</span></a>
-          <a href="#hotel" style="--pass:#F2F1EA"><span data-tif-en>Hotel &amp; stay</span><span data-tif-es>Hotel y hospedaje</span></a>
-          <a href="#business" style="--pass:#4BFFB3">Business Pass</a>
-          <a href="#whale-tank" style="--pass:#1FC6FF">Whale Tank</a>
-        </nav>
+        <div class="tk-board" aria-label="All passes">
+          <section class="tk-board-group" style="--n:3">
+            <h2 class="tk-board-title"><span data-tif-en>Festival passes</span><span data-tif-es>Pases al festival</span></h2>
+            <div class="tk-board-grid">
+              <article class="tk-tile" style="--pass:#FF6A2B">
+                <a class="tk-tile-art" href="#general" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/general-access-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3>General Access<b class="tk-badge"><span data-tif-en>Most popular</span><span data-tif-es>El más elegido</span></b></h3>
+                  <p><span data-tif-en>4 days · complete festival</span><span data-tif-es>4 días · festival completo</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $218</span><a class="tk-tile-buy" href="/checkout?pass=general-access" data-ticket="general-access"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#general"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+              <article class="tk-tile" style="--pass:#FFC424">
+                <a class="tk-tile-art" href="#executive" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/executive-pass-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3>Executive Pass</h3>
+                  <p><span data-tif-en>VIP hospitality + Cocktail Gala</span><span data-tif-es>Hospitalidad VIP + Cocktail Gala</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $1,500</span><a class="tk-tile-buy" href="/checkout?pass=executive-pass" data-ticket="executive-pass"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#executive"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+              <article class="tk-tile" style="--pass:#4BFF5A">
+                <a class="tk-tile-art" href="#community" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/community-access-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3>Community Access</h3>
+                  <p><span data-tif-en>For the Tulum community</span><span data-tif-es>Para la comunidad de Tulum</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $109</span><a class="tk-tile-buy" href="/checkout?pass=community-access" data-ticket="community-access"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#community"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+            </div>
+          </section>
+          <section class="tk-board-group" style="--n:1">
+            <h2 class="tk-board-title"><span data-tif-en>Business</span><span data-tif-es>Comercios</span></h2>
+            <div class="tk-board-grid">
+              <article class="tk-tile" style="--pass:#4BFFB3">
+                <a class="tk-tile-art" href="#business" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/business-pass-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3>Business Pass</h3>
+                  <p><span data-tif-en>Pass + payment terminal</span><span data-tif-es>Pase + terminal de pagos</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>MXN</small> $3,990</span><a class="tk-tile-buy" href="/checkout?pass=business-pass" data-ticket="business-pass"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#business"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+            </div>
+          </section>
+          <section class="tk-board-group" style="--n:2">
+            <h2 class="tk-board-title"><span data-tif-en>Hotel & stay</span><span data-tif-es>Hotel y hospedaje</span></h2>
+            <div class="tk-board-grid">
+              <article class="tk-tile" style="--pass:#FFC424">
+                <a class="tk-tile-art" href="#hotel" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/hotel-upgrade-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3>Hotel Upgrade</h3>
+                  <p><span data-tif-en>4 nights · breakfast · transfers</span><span data-tif-es>4 noches · desayuno · traslados</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $1,500</span><a class="tk-tile-buy" href="/checkout?pass=hotel-upgrade" data-ticket="hotel-upgrade"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#hotel"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+              <article class="tk-tile" style="--pass:#FFC424">
+                <a class="tk-tile-art" href="#hotel" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/hotel-second-guest-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3><span data-tif-en>Additional guest</span><span data-tif-es>Huésped adicional</span></h3>
+                  <p><span data-tif-en>Second guest in the room</span><span data-tif-es>Segundo huésped en la habitación</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $720</span><a class="tk-tile-buy" href="/checkout?pass=hotel-second-guest" data-ticket="hotel-second-guest"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#hotel"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+            </div>
+          </section>
+          <section class="tk-board-group tk-board-extra" style="--n:2">
+            <h2 class="tk-board-title"><span data-tif-en>Coming soon & more</span><span data-tif-es>Muy pronto y más</span></h2>
+            <ul>
+              <li><a href="#night-program">Night Program</a> · <a href="#full-night">Full Night</a> · <a href="#invisible-layer">Invisible Layer</a> <small><span data-tif-en>coming soon</span><span data-tif-es>muy pronto</span></small></li>
+              <li><a href="/sponsorship"><span data-tif-en>Partnerships from USD 2,500</span><span data-tif-es>Partnerships desde USD 2,500</span></a></li>
+              <li><a href="#compare"><span data-tif-en>Compare what each pass includes</span><span data-tif-es>Compara qué incluye cada pase</span></a></li>
+            </ul>
+          </section>
+          <section class="tk-board-group" style="--n:4">
+            <h2 class="tk-board-title"><span data-tif-en>Whale Tank · selected startups</span><span data-tif-es>Whale Tank · startups seleccionadas</span></h2>
+            <div class="tk-board-grid">
+              <article class="tk-tile" style="--pass:#1FC6FF">
+                <a class="tk-tile-art" href="#whale-tank" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/whale-tank-founder-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3>Founder Full Experience</h3>
+                  <p><span data-tif-en>With stay</span><span data-tif-es>Con estadía</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $2,500</span><a class="tk-tile-buy" href="/checkout?pass=whale-tank-founder" data-ticket="whale-tank-founder"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#whale-tank"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+              <article class="tk-tile" style="--pass:#1FC6FF">
+                <a class="tk-tile-art" href="#whale-tank" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/whale-tank-team-member-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3><span data-tif-en>Team member</span><span data-tif-es>Miembro del equipo</span></h3>
+                  <p><span data-tif-en>With stay</span><span data-tif-es>Con estadía</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $1,000</span><a class="tk-tile-buy" href="/checkout?pass=whale-tank-team-member" data-ticket="whale-tank-team-member"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#whale-tank"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+              <article class="tk-tile" style="--pass:#1FC6FF">
+                <a class="tk-tile-art" href="#whale-tank" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/whale-tank-founder-no-stay-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3>Founder</h3>
+                  <p><span data-tif-en>Without stay</span><span data-tif-es>Sin estadía</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $1,500</span><a class="tk-tile-buy" href="/checkout?pass=whale-tank-founder-no-stay" data-ticket="whale-tank-founder-no-stay"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#whale-tank"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+              <article class="tk-tile" style="--pass:#1FC6FF">
+                <a class="tk-tile-art" href="#whale-tank" aria-hidden="true" tabindex="-1"><img src="/assets/tickets/whale-tank-team-member-no-stay-sm.webp" width="720" height="240" alt="" loading="lazy" decoding="async"></a>
+                <div class="tk-tile-body">
+                  <h3><span data-tif-en>Team member</span><span data-tif-es>Miembro del equipo</span></h3>
+                  <p><span data-tif-en>Without stay</span><span data-tif-es>Sin estadía</span></p>
+                  <div class="tk-tile-foot"><span class="tk-tile-price"><small>USD</small> $720</span><a class="tk-tile-buy" href="/checkout?pass=whale-tank-team-member-no-stay" data-ticket="whale-tank-team-member-no-stay"><span data-tif-en>Buy</span><span data-tif-es>Comprar</span></a></div>
+                  <a class="tk-tile-more" href="#whale-tank"><span data-tif-en>Details</span><span data-tif-es>Ver detalles</span> ↓</a>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
       </div>
     </section>
 
