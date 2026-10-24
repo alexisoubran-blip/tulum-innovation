@@ -37,3 +37,10 @@
     if (blocks.every((b) => b.classList.contains('is-closed'))) clearInterval(timer);
   }, 1000);
 })();
+
+// Mobile sticky CTA: appears after the hero.
+(() => {
+  const cta = document.querySelector('.wt-mobile-cta'); const hero = document.querySelector('.wt-hero');
+  if (!cta || !hero) return;
+  new IntersectionObserver(([e]) => cta.classList.toggle('is-on', !e.isIntersecting), { threshold: 0 }).observe(hero);
+})();
