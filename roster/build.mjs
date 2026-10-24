@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi = (en, es) => `<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor','Ambassador':'Embajador/a'};
-const version = '20261015-logos';
+const version = '20261024-polish';
 
 function card(p, poster = false) {
   const photo = p.image ? `<div class="roster-art${poster ? ' roster-poster' : ''}"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="440" height="540" loading="lazy" decoding="async" /></div>` : '';
@@ -90,12 +90,21 @@ export async function buildRoster() {
   const nonAmbassadors = groups.filter(g => g !== 'ambassadors').flatMap(group => data[group]);
   const mainKeys = new Set(nonAmbassadors.map(key));
   assert.equal(mainKeys.size, nonAmbassadors.length, 'Duplicate public participant');
-  const lineup = groups.flatMap(group => group === 'ambassadors' ? data[group].filter(p => !mainKeys.has(key(p))) : data[group]);
-  const directoryCards = lineup.map(p => `<article class="person" data-person="${esc([p.name,p.role,roles[p.role],p.title,p.company].filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())}"><div class="person-art"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="640" height="800" loading="lazy" decoding="async"></div><div class="person-copy"><h3>${esc(p.name)}</h3>${p.title ? `<p class="person-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}${p.company ? `<p>${esc(p.company)}</p>` : ''}<span class="role">${bi(p.role,roles[p.role])}</span>${p.url ? `<a class="person-profile-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${bi('View profile','Ver perfil')} ↗</a>` : ''}</div></article>`).join('\n');
+  const byGroup = groups.map(group => [group, group === 'ambassadors' ? data[group].filter(p => !mainKeys.has(key(p))) : data[group]]);
+  const lineup = byGroup.flatMap(([, list]) => list);
+  const groupNames = {speakers:['Speakers','Speakers'],cofounders:['Co-founders','Cofundadores'],ambassadors:['Ambassadors','Embajadores'],investors:['Investors','Inversionistas'],mentors:['Mentors','Mentores']};
+  const personCard = p => `<article class="person" data-person="${esc([p.name,p.role,roles[p.role],p.title,p.company].filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())}"><div class="person-art"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="640" height="800" loading="lazy" decoding="async"></div><div class="person-copy"><h3>${esc(p.name)}</h3>${p.title ? `<p class="person-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}${p.company ? `<p>${esc(p.company)}</p>` : ''}<span class="role">${bi(p.role,roles[p.role])}</span>${p.url ? `<a class="person-profile-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${bi('View profile','Ver perfil')} ↗</a>` : ''}</div></article>`;
   let directory = await readFile('dist/speakers/index.html','utf8');
   const gridPattern = /<div class="people-grid" id="peopleGrid">[\s\S]*?<\/div>(?=<div class="notice")/;
   assert.ok(gridPattern.test(directory),'Missing speakers directory grid');
-  directory = directory.replace(gridPattern,`<div class="people-grid" id="peopleGrid">${directoryCards}</div>`);
+  const groupBlocks = byGroup.filter(([, list]) => list.length).map(([group, list], i) => `<section class="pd-group" id="${group}" data-group="${group}"><header class="pd-group-head"><span class="pd-group-n">${String(i+1).padStart(2,'0')}</span><h3>${bi(...groupNames[group])}</h3><span class="pd-group-count">${list.length}</span></header><div class="people-grid">${list.map(personCard).join('\n')}</div></section>`).join('');
+  directory = directory.replace(gridPattern,`<div id="peopleGrid">${groupBlocks}</div>`);
+  const chips = `<div class="pd-chips" role="group" aria-label="Filter"><button type="button" class="pd-chip is-active" data-filter="all">${bi('All','Todos')} <b>${lineup.length}</b></button>${byGroup.filter(([, l]) => l.length).map(([g, l]) => `<button type="button" class="pd-chip" data-filter="${g}">${bi(...groupNames[g])} <b>${l.length}</b></button>`).join('')}</div>`;
+  directory = directory.replace(/(<input class="search" id="speakerSearch"[^>]*>)/, `$1${chips}`);
+  const heroStats = `<dl class="pd-stats">${byGroup.filter(([, l]) => l.length).map(([g, l]) => `<div><dd>${l.length}</dd><dt>${bi(...groupNames[g])}</dt></div>`).join('')}</dl>`;
+  directory = directory.replace('Apply to be a speaker ↗</a></div></section>', `Apply to be a speaker ↗</a>${heroStats}</div></section>`);
+  directory = directory.replace(/<script>const input=document\.getElementById\("speakerSearch"\)[\s\S]*?<\/script>/, `<script>(()=>{const input=document.getElementById("speakerSearch"),people=[...document.querySelectorAll("[data-person]")],groups=[...document.querySelectorAll(".pd-group")];let filter="all";const norm=v=>v.normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().trim();function run(){const q=norm(input.value);people.forEach(p=>{const g=p.closest(".pd-group").dataset.group;p.hidden=!((filter==="all"||g===filter)&&p.dataset.person.includes(q))});groups.forEach(g=>g.hidden=!g.querySelector("[data-person]:not([hidden])"))}input.addEventListener("input",run);document.querySelectorAll(".pd-chip").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll(".pd-chip").forEach(x=>x.classList.toggle("is-active",x===b));run()}))})();</script>`);
+  assert.ok(directory.includes('pd-chips') && directory.includes('pd-stats') && directory.includes('.pd-chip'), 'Speakers directory enhancements');
   directory = directory
     .replace('<title>Speakers | Tulum Innovation Fest 2026</title>', '<title data-tif-title-en="Speakers, Investors &amp; Mentors | Tulum Innovation Fest 2026" data-tif-title-es="Speakers, inversionistas y mentores | Tulum Innovation Fest 2026">Speakers, Investors &amp; Mentors | Tulum Innovation Fest 2026</title>')
     .replace('content="Meet the people publicly featured for Tulum Innovation Fest 2026."', 'content="Meet the speakers, investors and mentors joining Tulum Innovation Fest 2026." data-tif-content-en="Meet the speakers, investors and mentors joining Tulum Innovation Fest 2026." data-tif-content-es="Conoce a los speakers, inversionistas y mentores que participan en Tulum Innovation Fest 2026."')
@@ -110,7 +119,7 @@ export async function buildRoster() {
     .replace('Share your expertise on technology, business or culture. Submit your proposal through the speaker application form.', bi('Share your expertise on technology, business or culture. Submit your proposal through the speaker application form.', 'Comparte tu experiencia en tecnología, negocios o cultura. Envía tu propuesta a través del formulario para speakers.'))
     .replace('Continue exploring TIF: ', `${bi('Continue exploring TIF:','Sigue explorando TIF:')} `)
     .replace('discover the four-day program</a>', `${bi('discover the four-day program','consulta el programa de cuatro días')}</a>`)
-    .replace(' or <a href="/#tickets">choose your festival pass</a>.', ` ${bi('or','o')} <a href="/#tickets">${bi('choose your festival pass','elige tu acceso al festival')}</a>.`);
+    .replace(' or <a href="/tickets">choose your festival pass</a>.', ` ${bi('or','o')} <a href="/tickets">${bi('choose your festival pass','elige tu acceso al festival')}</a>.`);
   // Logos of the organizations participants lead or represent. Each logo must belong to someone
   // in the public roster; logos identify affiliations and are not sponsors.
   const logos = JSON.parse(await readFile(new URL('./logos.json', import.meta.url), 'utf8'));

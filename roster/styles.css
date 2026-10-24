@@ -81,3 +81,52 @@
  .roster-logos-list li { height:40px; }
  .roster-logos-list img { height:calc(var(--logo-h) * .8);max-width:124px; }
 }
+
+/* Speakers directory polish (2026-10-24) */
+.tif-directory .hero .lede { max-width: 640px; }
+.pd-stats { display: flex; flex-wrap: wrap; gap: 0; margin: 3rem 0 0; border-top: 1px solid rgba(242,241,234,.22); max-width: 760px; }
+.pd-stats > div { display: flex; flex-direction: column-reverse; padding: 1.1rem 1.6rem 0 0; margin-right: 1.6rem; }
+.pd-stats > div + div { padding-left: 1.6rem; border-left: 1px solid rgba(242,241,234,.12); }
+.pd-stats dd { margin: 0; font-family: "Bruno Ace", Sora, sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1; color: #F2F1EA; }
+.pd-stats dt { margin-top: .35rem; color: rgba(242,241,234,.5); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; }
+.tif-directory .tools { position: sticky; top: 88px; z-index: 30; background: rgba(0,8,11,.9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.tif-directory .tool-row { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; }
+.tif-directory .tool-row .search { flex: 1 1 280px; }
+.pd-chips { display: flex; gap: .45rem; overflow-x: auto; scrollbar-width: none; }
+.pd-chip { flex: 0 0 auto; display: inline-flex; align-items: center; gap: .5rem; min-height: 42px; padding: 0 1rem; border: 1px solid rgba(242,241,234,.18); border-radius: 999px; background: transparent; color: #F2F1EA; font: 500 .76rem Sora, sans-serif; cursor: pointer; transition: background .2s, border-color .2s; }
+.pd-chip b { color: #E97A43; font-weight: 600; }
+.pd-chip:hover { border-color: rgba(242,241,234,.5); }
+.pd-chip.is-active { background: #F2F1EA; border-color: #F2F1EA; color: #00080B; }
+.pd-chip.is-active b { color: #D14414; }
+.pd-group + .pd-group { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
+.pd-group[hidden] { display: none; }
+.pd-group-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.6rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(242,241,234,.14); }
+.pd-group-n { color: #E97A43; font-family: "Bruno Ace", Sora, sans-serif; font-size: .85rem; }
+.pd-group-head h3 { margin: 0; font-family: "Bruno Ace", Sora, sans-serif; font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 2.3rem); text-transform: uppercase; letter-spacing: -.01em; }
+.pd-group-count { margin-left: auto; color: rgba(242,241,234,.45); font-size: .78rem; letter-spacing: .12em; }
+.tif-directory .people-grid { gap: 28px 22px; }
+.tif-directory .person { display: flex; flex-direction: column; }
+.tif-directory .person-art { border-radius: 10px; transition: border-color .3s, transform .3s; }
+.tif-directory .person-art img { transition: transform .6s ease; }
+.tif-directory .person:hover .person-art { border-color: rgba(233,122,67,.6); transform: translateY(-3px); }
+.tif-directory .person:hover .person-art img { transform: scale(1.03); }
+.tif-directory .person-copy { display: flex; flex-direction: column; flex: 1; padding-top: .9rem; }
+.tif-directory .person-copy h3 { font-weight: 500; }
+.tif-directory .person-copy p { margin: .15rem 0 0; }
+.tif-directory .person-copy .role { order: -1; margin: 0 0 .45rem; color: #E97A43; font-size: .62rem; font-weight: 600; letter-spacing: .16em; }
+.tif-directory .person-profile-link { margin-top: auto !important; padding-top: .7rem; color: rgba(242,241,234,.75); text-decoration: none !important; font-size: .74rem; font-weight: 500; }
+.tif-directory .person-profile-link:hover { color: #E97A43; }
+.tif-directory main .notice { padding: clamp(1.8rem, 4vw, 3rem); border: 1px solid rgba(242,241,234,.12); border-radius: 14px; background: radial-gradient(80% 140% at 100% 0%, rgba(209,68,20,.16), transparent 60%), #040F12; color: rgba(242,241,234,.72); }
+.tif-directory main .notice:last-of-type { background: transparent; text-align: center; }
+.tif-directory main .notice a:not(.header-cta) { color: #F2F1EA; text-decoration-color: #E97A43; text-underline-offset: 4px; }
+@media (max-width: 900px) {
+  .tif-directory .tools { top: 76px; }
+  .pd-stats > div { padding-right: 1rem; margin-right: 1rem; }
+  .pd-stats > div + div { padding-left: 1rem; }
+  .tif-directory .people-grid { gap: 22px 12px; }
+}
+@media (max-width: 560px) { .pd-stats > div { flex: 1 1 30%; border-left: 0 !important; padding-left: 0 !important; } .tif-directory .tool-row .search { flex-basis: 100%; } }
+.pd-stats { display: grid; grid-template-columns: repeat(5, minmax(0, auto)); justify-content: start; max-width: none; }
+.pd-stats > div { margin-right: 0; padding-right: 2rem; }
+.pd-stats > div + div { padding-left: 2rem; }
+@media (max-width: 560px) { .pd-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 1rem; } .pd-stats > div, .pd-stats > div + div { padding: .9rem 0 0; } }
