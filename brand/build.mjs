@@ -18,7 +18,7 @@ export async function buildBrand(){
     const oldHeader=html.match(/<header\b[\s\S]*?<\/header>/)?.[0];
     assert.ok(oldHeader,`Missing header: ${file}`);
     const toggle=oldHeader.match(/<button\b[^>]*(?:data-v2-lang|data-lang-toggle|data-press-lang)[\s\S]*?<\/button>/)?.[0];
-    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):['/speakers','/tickets','/program','/partners/minimalist-agency'].includes(route)?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
+    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):['/speakers','/tickets','/program','/sponsorship','/partners/minimalist-agency'].includes(route)?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
     const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]);
     const sections=localLinks.length?`<nav class="tif-section-nav" aria-label="Page sections">${localLinks.join('')}</nav>`:'';
     const whale=route==='/whale-tank';
