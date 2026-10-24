@@ -4,7 +4,7 @@
 body.tif-page{--display:var(--tif-display);--serif:var(--tif-display);--sans:var(--tif-body);--body:var(--tif-body);--editorial:var(--tif-body);--ember:var(--tif-orange);--acid:var(--tif-accent);--header:88px;margin:0;min-width:320px;font-family:var(--tif-body);text-rendering:optimizeLegibility}
 body.tif-page h1,body.tif-page h2,body.tif-page h3,body.tif-page h4,body.tif-page h1 em,body.tif-page h2 em,body.tif-page h3 em{font-family:var(--tif-display)!important;font-style:normal!important;font-weight:400;text-wrap:balance}
 body.tif-page h1 em,body.tif-page h2 em{color:var(--tif-accent);text-transform:uppercase}
-body.tif-page h1,body.tif-page h2{text-transform:uppercase;letter-spacing:-.04em;line-height:1.05;overflow-wrap:anywhere}
+body.tif-page h1,body.tif-page h2{text-transform:uppercase;letter-spacing:-.04em;line-height:1.05;overflow-wrap:normal;word-break:normal;hyphens:none}
 .tif-page main :is(section,article,div,figure){min-width:0}
 .tif-page .editorial-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .tif-page .editorial-copy h2{font-size:clamp(1.9rem,3vw,3.5rem)}

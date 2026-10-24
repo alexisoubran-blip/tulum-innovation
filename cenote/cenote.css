@@ -240,3 +240,13 @@
   .cx-facts dl > div { padding-bottom: 0; border-bottom: 0; }
   .cx-facts-cta { display: none; }
 }
+
+/* ---------- v5: no broken words ---------- */
+.cx h1, .cx h2, .cx h3 { overflow-wrap: normal; word-break: normal; hyphens: none; }
+.cx-day-card { max-width: 560px; }
+.cx-day-card h2 { font-size: clamp(1.5rem, 2.7vw, 2.6rem); line-height: 1.05; }
+.cx h2 { font-size: clamp(1.9rem, 4.6vw, 4.8rem); }
+@media (max-width: 700px) { .cx-day-card h2 { font-size: clamp(1.35rem, 6.4vw, 1.9rem); } .cx h2 { font-size: clamp(1.6rem, 7.6vw, 2.4rem); } }
+.cx .cx-day-card h2 { font-size: clamp(1.5rem, 2.6vw, 2.5rem); line-height: 1.05; }
+.cx :is(h1, h2, h3), .cx :is(h1, h2, h3) span { overflow-wrap: normal; word-break: keep-all; hyphens: none; }
+@media (max-width: 700px) { .cx .cx-day-card h2 { font-size: clamp(1.3rem, 6.2vw, 1.85rem); } }

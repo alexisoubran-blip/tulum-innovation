@@ -50,3 +50,27 @@
   });
   media.addEventListener('change',sync);sync();
 })();
+
+// Headline fit: words never split across lines. If a heading's longest word is wider than its
+// box (big display type on narrow screens), shrink that heading just enough to fit.
+(()=>{
+  const SEL='h1,h2,h3,.cx-num';
+  const range=document.createRange();
+  const widest=h=>{let max=0;const w=document.createTreeWalker(h,NodeFilter.SHOW_TEXT);let t;
+    while((t=w.nextNode())){const p=t.parentElement;if(!p||!p.offsetParent)continue;const parts=t.textContent.split(/(\s+|-)/);let off=0;
+      for(const part of parts){if(part.trim()&&part!=='-'){range.setStart(t,off);range.setEnd(t,off+part.length);for(const r of range.getClientRects())max=Math.max(max,r.width);}off+=part.length;}}
+    return max;};
+  const fit=()=>{document.querySelectorAll(SEL).forEach(h=>{
+    if(h.dataset.fitBase){h.style.fontSize='';}
+    if(!h.offsetParent)return;
+    const cs=getComputedStyle(h);const avail=h.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);if(avail<=0)return;
+    const need=widest(h);if(need<=avail+1)return;
+    const base=parseFloat(cs.fontSize);h.dataset.fitBase='1';
+    h.style.fontSize=`${Math.max(base*.5,Math.floor(base*avail/need*.98*10)/10)}px`;
+  });};
+  let raf=0;const schedule=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(fit);};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule);else schedule();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(schedule);
+  addEventListener('load',schedule);addEventListener('resize',schedule);
+  new MutationObserver(schedule).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang','lang']});
+})();

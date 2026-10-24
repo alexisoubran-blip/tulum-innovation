@@ -196,7 +196,7 @@
       if (p.content?.tagline) body.append(el('p', 'co-pass-tag', L(p.content.tagline)));
       const price = el('p', 'co-pass-price');
       if (p.pricePending) price.append(el('em', 'co-pending', t().pending));
-      else if (p.pricedIn === 'MXN') price.append(el('strong', null, mxn(p.priceMxn)));
+      else if (p.pricedIn === 'MXN') { if (p.priceUsd) price.append(el('strong', null, usd(p.priceUsd))); price.append(el('span', null, `${state.lang === 'es' ? 'se cobra' : 'charged'} ${mxn(p.priceMxn)}`)); }
       else {
         price.append(el('strong', null, usd(p.priceUsd)));
         if (p.taxRate > 0) price.append(el('em', null, ` ${t().plusVat}`));
@@ -231,7 +231,7 @@
     $('detailName').textContent = p.name;
     $('detailTag').textContent = L(p.content?.tagline);
     $('detailPrice').textContent = p.pricePending ? t().pending
-      : p.pricedIn === 'MXN' ? `${mxn(p.priceMxn)}${p.maxQuantity > 1 ? ` ${t().perUnit}` : ''}`
+      : p.pricedIn === 'MXN' ? `${p.priceUsd ? `${usd(p.priceUsd)} · ` : ''}${mxn(p.priceMxn)}${p.maxQuantity > 1 ? ` ${t().perUnit}` : ''}`
       : `${usd(p.priceUsd)}${p.taxRate > 0 ? ` ${t().plusVat} = ${usd(p.totalUsd)}` : ''}${p.priceMxn ? ` · ${mxn(p.priceMxn)}` : ''}${p.maxQuantity > 1 ? ` ${t().perUnit}` : ''}`;
     const buy = $('detailBuy');
     buy.disabled = Boolean(p.pricePending);

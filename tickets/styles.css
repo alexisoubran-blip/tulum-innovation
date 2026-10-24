@@ -261,3 +261,20 @@ body.tif-page .tk-hotels h3 { margin: 0 0 1rem; font-family: var(--tk-body) !imp
 @media (max-width: 560px) { .tk-board .tk-board-group .tk-board-grid { grid-template-columns: 1fr; } }
 .tk-hero { padding-top: calc(88px + clamp(2rem, 4vw, 3.5rem)); }
 @media (max-width: 1100px) { .tk-board-extra { order: 5; } }
+
+/* USD with small MXN note, no broken words, Business Pass terminal */
+.tk-page h1, .tk-page h2, .tk-page h3 { overflow-wrap: normal; word-break: normal; hyphens: none; }
+.tk-tile-price { display: inline-flex; flex-direction: column; line-height: 1.05; }
+.tk-tile-mxn { margin-top: .3rem; color: rgba(242,241,234,.45); font: 500 .6rem/1.2 var(--tk-body); letter-spacing: .04em; white-space: nowrap; }
+.tk-tile-art .tk-tile-device { width: 78%; margin: 0 auto; filter: drop-shadow(0 12px 22px rgba(75,255,179,.25)); }
+.tk-biz { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(1.5rem, 4vw, 4rem); padding: clamp(1.4rem, 3vw, 2.6rem); border: 1px solid color-mix(in srgb, var(--pass) 30%, transparent); border-radius: 28px; background: radial-gradient(70% 90% at 20% 40%, color-mix(in srgb, var(--pass) 14%, transparent), transparent 70%), #030C0F; }
+.tk-biz-device { position: relative; margin: 0; display: grid; place-items: center; }
+.tk-biz-device img { position: relative; width: min(100%, 460px); height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.55)); animation: tk-biz-float 6s ease-in-out infinite; }
+.tk-biz-glow { position: absolute; inset: 15% 10%; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--pass) 40%, transparent), transparent 70%); filter: blur(30px); }
+.tk-biz-device figcaption { margin-top: 1rem; color: rgba(242,241,234,.55); font-size: .78rem; text-align: center; }
+@keyframes tk-biz-float { 50% { transform: translateY(-10px) rotate(-1deg); } }
+.tk-biz-info h3 { margin: .6rem 0 1rem; font-family: var(--tk-display); font-size: clamp(1.5rem, 2.4vw, 2.3rem); line-height: 1.05; text-transform: uppercase; }
+.tk-biz-info .tk-price { margin: 1.4rem 0 .6rem; }
+.tk-biz-pay { margin: 0 0 1.4rem; color: rgba(242,241,234,.55); font-size: .74rem; letter-spacing: .03em; }
+@media (max-width: 860px) { .tk-biz { grid-template-columns: 1fr; } .tk-biz-device img { width: min(80%, 360px); } }
+@media (prefers-reduced-motion: reduce) { .tk-biz-device img { animation: none; } }
