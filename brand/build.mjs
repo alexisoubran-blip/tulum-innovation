@@ -18,7 +18,7 @@ export async function buildBrand(){
     const oldHeader=html.match(/<header\b[\s\S]*?<\/header>/)?.[0];
     assert.ok(oldHeader,`Missing header: ${file}`);
     const toggle=oldHeader.match(/<button\b[^>]*(?:data-v2-lang|data-lang-toggle|data-press-lang)[\s\S]*?<\/button>/)?.[0];
-    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):['/speakers','/tickets','/partners/minimalist-agency'].includes(route)?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
+    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):['/speakers','/tickets','/program','/partners/minimalist-agency'].includes(route)?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
     const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]);
     const sections=localLinks.length?`<nav class="tif-section-nav" aria-label="Page sections">${localLinks.join('')}</nav>`:'';
     const whale=route==='/whale-tank';
@@ -35,7 +35,7 @@ export async function buildBrand(){
     const footer=`<footer class="tif-site-footer"><div class="tif-footer-inner"><div><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46" loading="lazy"></a><p>${bi('Innovation, capital and culture meet in Tulum.','Innovación, capital y cultura se encuentran en Tulum.')}<br>${bi('December 9–12, 2026 · Tulum, Mexico','9–12 de diciembre de 2026 · Tulum, México')}</p>${contact}</div><nav aria-label="Footer navigation">${nav(route)}<a href="/#experience">${bi('Experience','Experiencia')}</a><a href="/tickets">${bi('Tickets','Boletos')}</a></nav></div></footer>`;
     assert.ok(/<footer\b[\s\S]*?<\/footer>/.test(html),`Missing footer: ${file}`);
     html=html.replace(/<footer\b[\s\S]*?<\/footer>/,footer);
-    const simple=['/speakers','/program'].includes(route);
+    const simple=['/speakers'].includes(route);
     html=html.replace(/<body([^>]*)>/,(_,attrs)=>attrs.includes('class=')?`<body${attrs.replace(/class="([^"]*)"/,`class="$1 tif-page${simple?' tif-directory':''}${route==='/'?' tif-home':''}"`)}>`:`<body${attrs} class="tif-page${simple?' tif-directory':''}${route==='/'?' tif-home':''}">`);
     html=html.replace('</head>',`<link rel="stylesheet" href="/brand/styles.css?v=${version}"><script defer src="/brand/script.js?v=${version}"></script></head>`);
     if(simple){
