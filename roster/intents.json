@@ -1,17 +1,97 @@
 [
-  {"id": "capital", "en": "I’m raising capital", "es": "Busco inversión",
-   "leadEn": "Investors and capital networks joining TIF 2026 and Whale Tank.", "leadEs": "Inversionistas y redes de capital que participan en TIF 2026 y Whale Tank.",
-   "people": ["Uri Soglowek", "Pamela Jramoy", "Diego Serebrisky", "Mati Barbero", "David Alvo", "Mario García Dávila", "Gregorio Londoño", "Santiago Tamayo", "Josu Gómez Barrutia", "Ale Bustos", "Ron Oliver"]},
-  {"id": "tech", "en": "AI, Web3 & tech", "es": "IA, Web3 y tecnología",
-   "leadEn": "Builders working on blockchain, digital assets, cloud and data.", "leadEs": "Builders que trabajan en blockchain, activos digitales, nube y datos.",
-   "people": ["Elo Cadenas", "Brandon Menard", "Will Blakey", "Immanuel Cape", "Karen Nieves", "Pachi Rodriguez", "Alex Santana", "Gisela Tlacuatl", "Felipe Arboleda Giraldo", "Yassir Doutroi"]},
-  {"id": "tulum", "en": "Doing business in Tulum", "es": "Hacer negocios en Tulum",
-   "leadEn": "The people building Tulum’s business, real estate and innovation ecosystem.", "leadEs": "Quienes construyen el ecosistema de negocios, desarrollo e innovación de Tulum.",
-   "people": ["Patricia de la Torre", "Rodolfo Rosas", "David Graziano", "Peiman Fazli", "Sandra Ponce de León", "Frances I. Pimentel", "Golden Yogi", "Teresa Castagnino", "Gustavo Bolotin"]},
-  {"id": "mentor", "en": "Mentorship for my startup", "es": "Mentoría para mi startup",
-   "leadEn": "Mentors, operators and ecosystem builders who work with founders.", "leadEs": "Mentores, operadores y builders de ecosistema que trabajan con founders.",
-   "people": ["Chris Roe", "Alex Santana", "Abraham (Abe) Ramos", "Andrés Nájera", "Paulina de la Garza", "Nohelia Sánchez", "Fran del Marmol", "Andres Florez", "Alexandra Patiño"]},
-  {"id": "culture", "en": "Culture, art & community", "es": "Cultura, arte y comunidad",
-   "leadEn": "Artists, authors and community builders behind the festival’s culture.", "leadEs": "Artistas, autores y creadores de comunidad detrás de la cultura del festival.",
-   "people": ["Scott Page", "Yehuda Berg", "Andersen Francis", "Alejandro Glatt", "Álvaro Zúñiga", "Pao Torres", "Maja Lucatelli", "Steph Ferrera", "Andrea Dekovic"]}
+  {
+    "id": "capital",
+    "en": "I’m raising capital",
+    "es": "Busco inversión",
+    "leadEn": "Investors and capital networks joining TIF 2026 and Whale Tank.",
+    "leadEs": "Inversionistas y redes de capital que participan en TIF 2026 y Whale Tank.",
+    "people": [
+      "Uri Soglowek",
+      "Pamela Jramoy",
+      "Diego Serebrisky",
+      "Mati Barbero",
+      "David Alvo",
+      "Mario García Dávila",
+      "Gregorio Londoño",
+      "Santiago Tamayo",
+      "Josu Gómez Barrutia",
+      "Ale Bustos",
+      "Ron Oliver"
+    ]
+  },
+  {
+    "id": "tech",
+    "en": "AI, Web3 & tech",
+    "es": "IA, Web3 y tecnología",
+    "leadEn": "Builders working on blockchain, digital assets, cloud and data.",
+    "leadEs": "Builders que trabajan en blockchain, activos digitales, nube y datos.",
+    "people": [
+      "Elo Cadenas",
+      "Brandon Menard",
+      "Will Blakey",
+      "Immanuel Cape",
+      "Karen Nieves",
+      "Pachi Rodriguez",
+      "Alex Santana",
+      "Gisela Tlacuatl",
+      "Felipe Arboleda Giraldo",
+      "Yassir Doutroi"
+    ]
+  },
+  {
+    "id": "tulum",
+    "en": "Doing business in Tulum",
+    "es": "Hacer negocios en Tulum",
+    "leadEn": "The people building Tulum’s business, real estate and innovation ecosystem.",
+    "leadEs": "Quienes construyen el ecosistema de negocios, desarrollo e innovación de Tulum.",
+    "people": [
+      "Alexis Soubran",
+      "Patricia de la Torre",
+      "Rodolfo Rosas",
+      "David Graziano",
+      "Peiman Fazli",
+      "Sandra Ponce de León",
+      "Frances I. Pimentel",
+      "Golden Yogi",
+      "Teresa Castagnino",
+      "Gustavo Bolotin"
+    ]
+  },
+  {
+    "id": "mentor",
+    "en": "Mentorship for my startup",
+    "es": "Mentoría para mi startup",
+    "leadEn": "Mentors, operators and ecosystem builders who work with founders.",
+    "leadEs": "Mentores, operadores y builders de ecosistema que trabajan con founders.",
+    "people": [
+      "Chris Roe",
+      "Alex Santana",
+      "Abraham (Abe) Ramos",
+      "Andrés Nájera",
+      "Paulina de la Garza",
+      "Alexis Soubran",
+      "Nohelia Sánchez",
+      "Fran del Marmol",
+      "Andres Florez",
+      "Alexandra Patiño"
+    ]
+  },
+  {
+    "id": "culture",
+    "en": "Culture, art & community",
+    "es": "Cultura, arte y comunidad",
+    "leadEn": "Artists, authors and community builders behind the festival’s culture.",
+    "leadEs": "Artistas, autores y creadores de comunidad detrás de la cultura del festival.",
+    "people": [
+      "Scott Page",
+      "Yehuda Berg",
+      "Andersen Francis",
+      "Alejandro Glatt",
+      "Álvaro Zúñiga",
+      "Pao Torres",
+      "Maja Lucatelli",
+      "Steph Ferrera",
+      "Andrea Dekovic"
+    ]
+  }
 ]
