@@ -1,16 +1,36 @@
-// TIF Lab · Cenote. One full-screen WebGL1 fragment shader: water surface with interactive
-// ripples and caustics, a dive driven by scroll, light shafts, bubbles and an ember whale.
+// TIF · Cenote intro (home landing). WebGL1 fragment shader in a sticky canvas: interactive
+// water, a scroll-driven dive through the four days and an ember whale for Whale Tank.
 (() => {
-  const canvas = document.getElementById('cenote');
+  const root = document.querySelector('[data-cenote]');
+  if (!root) return;
+  const canvas = root.querySelector('canvas');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
 
-  // Reveal text scenes regardless of WebGL.
-  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('is-in')), { threshold: 0.35 });
-  document.querySelectorAll('.scene').forEach((s) => io.observe(s));
-  const depthBar = document.getElementById('depthBar'), depthLabel = document.getElementById('depthLabel');
+  // Scene reveals (independent of WebGL)
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('is-in')), { threshold: 0.3 });
+  root.querySelectorAll('.cx-scene').forEach((s) => io.observe(s));
+  const meter = root.querySelector('.cx-meter'), bar = root.querySelector('.cx-meter-bar'), label = root.querySelector('.cx-meter-label');
 
-  if (!gl || reduce) { document.body.classList.add('no-gl'); return; }
+  // Progress through the intro (0 → 1)
+  let depth = 0, depthT = 0;
+  const readScroll = () => {
+    const r = root.getBoundingClientRect(); const span = r.height - innerHeight;
+    depthT = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+    if (meter) meter.classList.toggle('is-on', r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.6);
+  };
+  addEventListener('scroll', readScroll, { passive: true }); readScroll();
+
+  // Desktop cursor ring
+  const ring = root.querySelector('.cx-cursor');
+  if (ring && matchMedia('(pointer: fine)').matches) {
+    root.addEventListener('pointermove', (e) => { ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; ring.classList.add('is-on'); }, { passive: true });
+    root.addEventListener('pointerleave', () => ring.classList.remove('is-on'));
+    root.addEventListener('pointerdown', () => { ring.classList.remove('is-tap'); void ring.offsetWidth; ring.classList.add('is-tap'); });
+  }
+
+  const gl = !reduce && canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
+  const tick = () => { depth += (depthT - depth) * 0.14; if (bar) { bar.style.transform = `scaleY(${depth})`; label.textContent = `${Math.round(depth * 62)} m`; } };
+  if (!gl) { root.classList.add('cx-static'); const loop = () => { tick(); requestAnimationFrame(loop); }; loop(); return; }
 
   const vert = `attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
   const frag = `
@@ -82,9 +102,9 @@ void main(){
   float glow=smoothstep(.45,1.,dd);
   under+=vec3(.95,.35,.12)*glow*exp(-length(p-vec2(0.,-.65))*2.2)*.7;
   // whale of ember particles: enters with the Whale Tank scene, then glides away
-  float wv=smoothstep(.55,.72,dd)*(1.-smoothstep(.93,1.,dd)*.55);
+  float wv=smoothstep(.74,.88,dd);
   if(wv>0.){
-    float wx=mix(1.5,.42,smoothstep(.55,.76,dd))-smoothstep(.86,1.,dd)*.9;
+    float wx=mix(1.5,.42,smoothstep(.74,.92,dd));
     vec2 wq=p-vec2(wx+sin(t*.35)*.02,-.04+sin(t*.6)*.015);
     wq/=.48; wq.x=-wq.x; wq.y+=sin(wq.x*3.5-t*1.4)*.03*smoothstep(.2,-.9,wq.x);
     float wd=whale(wq);
@@ -102,14 +122,13 @@ void main(){
   col=pow(col,vec3(.92));
   gl_FragColor=vec4(col,1.);
 }`;
-
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
   let prog;
   try {
     prog = gl.createProgram();
     gl.attachShader(prog, sh(gl.VERTEX_SHADER, vert)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, frag)); gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
-  } catch (err) { console.warn('[lab]', err); document.body.classList.add('no-gl'); return; }
+  } catch (err) { console.warn('[cenote]', err); root.classList.add('cx-static'); return; }
   gl.useProgram(prog);
   const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
@@ -128,49 +147,30 @@ void main(){
   const toP = (x, y) => [(x - innerWidth / 2) / innerHeight, (innerHeight / 2 - y) / innerHeight];
   const ripples = new Float32Array(24).fill(-99); let ri = 0, last = 0;
   let mouse = [0.2, -0.1], target = [0.2, -0.1];
-  const start = performance.now();
-  const now = () => (performance.now() - start) / 1000;
-  function drop(x, y, force) {
-    const [px, py] = toP(x, y); ripples[ri * 3] = px; ripples[ri * 3 + 1] = py; ripples[ri * 3 + 2] = now() - (force ? 0 : 0.6); ri = (ri + 1) % 8;
-  }
-  const hideHint = () => { const hint = document.getElementById('hint'); if (hint) hint.classList.add('gone'); };
-  addEventListener('pointermove', (e) => {
-    target = toP(e.clientX, e.clientY);
-    const t = now(); if (t - last > 0.35 && e.pointerType === 'mouse') { drop(e.clientX, e.clientY, false); last = t; hideHint(); }
-  }, { passive: true });
-  addEventListener('pointerdown', (e) => { if (!e.target.closest('a')) { drop(e.clientX, e.clientY, true); last = now(); hideHint(); } }, { passive: true });
-  // gentle automatic drops so the water is alive before anyone touches it
-  setInterval(() => { if (now() - last > 2.5) drop(innerWidth * (0.3 + Math.random() * 0.4), innerHeight * (0.35 + Math.random() * 0.3), false); }, 2600);
+  const start = performance.now(); const now = () => (performance.now() - start) / 1000;
+  const drop = (x, y, force) => { const [px, py] = toP(x, y); ripples[ri * 3] = px; ripples[ri * 3 + 1] = py; ripples[ri * 3 + 2] = now() - (force ? 0 : 0.6); ri = (ri + 1) % 8; };
+  const hint = root.querySelector('.cx-hint'); const hideHint = () => hint && hint.classList.add('gone');
+  root.addEventListener('pointermove', (e) => { target = toP(e.clientX, e.clientY); const t = now(); if (t - last > 0.35 && e.pointerType === 'mouse') { drop(e.clientX, e.clientY, false); last = t; hideHint(); } }, { passive: true });
+  root.addEventListener('pointerdown', (e) => { if (!e.target.closest('a,button')) { drop(e.clientX, e.clientY, true); last = now(); hideHint(); } }, { passive: true });
+  setInterval(() => { if (running && now() - last > 2.5) drop(innerWidth * (0.3 + Math.random() * 0.4), innerHeight * (0.35 + Math.random() * 0.3), false); }, 2600);
 
-  // tilt (mobile). iOS asks permission on the first tap.
   let tilt = [0, 0], tiltT = [0, 0];
   const onTilt = (e) => { if (e.gamma == null) return; tiltT = [Math.max(-1, Math.min(1, e.gamma / 30)), Math.max(-1, Math.min(1, (e.beta - 45) / 30))]; };
-  const enableTilt = () => {
-    const DO = window.DeviceOrientationEvent;
-    if (DO && typeof DO.requestPermission === 'function') DO.requestPermission().then((s) => s === 'granted' && addEventListener('deviceorientation', onTilt)).catch(() => {});
-    else addEventListener('deviceorientation', onTilt);
-  };
-  if (mobile) addEventListener('touchend', enableTilt, { once: true });
+  if (mobile) root.addEventListener('touchend', () => { const DO = window.DeviceOrientationEvent; if (DO && typeof DO.requestPermission === 'function') DO.requestPermission().then((s) => s === 'granted' && addEventListener('deviceorientation', onTilt)).catch(() => {}); else addEventListener('deviceorientation', onTilt); }, { once: true });
 
-  // scroll → depth
-  let depth = 0, depthT = 0;
-  const readScroll = () => { const max = document.documentElement.scrollHeight - innerHeight; depthT = max > 0 ? Math.min(1, scrollY / max) : 0; };
-  addEventListener('scroll', readScroll, { passive: true }); readScroll();
-
-  let visible = true; document.addEventListener('visibilitychange', () => { visible = !document.hidden; if (visible) requestAnimationFrame(frame); });
-  let frames = 0; const t0 = performance.now();
+  // Only render while the intro is on screen
+  let running = false, frames = 0, t0 = 0;
+  new IntersectionObserver(([e]) => { const was = running; running = e.isIntersecting && !document.hidden; if (running && !was) { t0 = performance.now(); frames = 0; requestAnimationFrame(frame); } }, { threshold: 0 }).observe(root);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) running = false; else { readScroll(); const r = root.getBoundingClientRect(); if (r.bottom > 0 && r.top < innerHeight && !running) { running = true; requestAnimationFrame(frame); } } });
   function frame() {
-    if (!visible) return;
-    depth += (depthT - depth) * 0.14;
+    if (!running) return;
+    tick();
     mouse[0] += (target[0] - mouse[0]) * 0.08; mouse[1] += (target[1] - mouse[1]) * 0.08;
     tilt[0] += (tiltT[0] - tilt[0]) * 0.06; tilt[1] += (tiltT[1] - tilt[1]) * 0.06;
     gl.uniform2f(uR, canvas.width, canvas.height); gl.uniform1f(uT, now()); gl.uniform1f(uD, depth);
     gl.uniform2f(uM, mouse[0], mouse[1]); gl.uniform2f(uTL, tilt[0], tilt[1]); gl.uniform3fv(uRP, ripples);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-    if (depthBar) { depthBar.style.height = `${depth * 160}px`; depthLabel.textContent = `${Math.round(depth * 62)} m`; }
-    // adaptive quality: if the first ~2 s run under ~40 fps, lower the resolution once
     frames++; if (frames === 120) { const fps = 120 / ((performance.now() - t0) / 1000); if (fps < 40 && scale > 0.35) { scale *= 0.7; resize(); } }
     requestAnimationFrame(frame);
   }
-  requestAnimationFrame(frame);
 })();

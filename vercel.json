@@ -1,8 +1,12 @@
 {
   "outputDirectory": "dist",
   "functions": {
-    "api/checkout/pay.mjs": { "maxDuration": 60 },
-    "api/blokko/admin.mjs": { "maxDuration": 60 }
+    "api/checkout/pay.mjs": {
+      "maxDuration": 60
+    },
+    "api/blokko/admin.mjs": {
+      "maxDuration": 60
+    }
   },
   "cleanUrls": true,
   "trailingSlash": false,
@@ -21,6 +25,11 @@
       "source": "/home-v2/index.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/lab",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "rewrites": [
