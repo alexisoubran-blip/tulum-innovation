@@ -467,3 +467,8 @@ body.tif-page .wt-included h3 { margin: 0 0 1.2rem; font-family: var(--sans) !im
 .wt-hero-card span { font-size: clamp(1.6rem, 2.1vw, 2.6rem); }
 .wt-hero-card div { grid-template-columns: 9.6rem 1fr; }
 @media (max-width: 560px) { .wt-hero-card div { grid-template-columns: 7.4rem 1fr; } .wt-hero-card span { font-size: 1.5rem; } }
+/* hero facts: never overlap (label always starts after the value) */
+.wt-hero-card div { display: flex; align-items: center; gap: 1.2rem; }
+.wt-hero-card span { flex: 0 0 auto; min-width: 3.6em; }
+.wt-hero-card p { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 560px) { .wt-hero-card span { font-size: 1.45rem; min-width: 3.4em; } .wt-hero-card div { gap: .9rem; } }
