@@ -91,3 +91,6 @@ async function applyFavicon(directory) {
 await applyFavicon('dist');
 await readFile('dist/assets/signal-mark.svg');
 console.log('Favicon: shared icon applied to every published HTML page.');
+
+// Fail the deployment if the reported Event/ProfilePage issues regress.
+await import('./scripts/validate-structured-data.mjs');
