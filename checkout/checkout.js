@@ -9,7 +9,7 @@
   const T = {
     en: {
       errors: {
-        invalid_name: 'Please enter your full name.', invalid_email: 'Please enter a valid email.', invalid_quantity: 'That quantity is not available for this product.',
+        invalid_name: 'Please enter your full name.', invalid_email: 'Please enter a valid email.', invalid_quantity: 'That quantity is not available for this product.', invalid_amount: 'Enter an amount between US$1 and US$100,000.',
         terms_required: 'Please accept the purchase terms.', pass_unavailable: 'That product is not available right now.', rate_not_set: 'Payments are not available right now. Please try again later.',
         order_expired: 'This order expired. Start again.', method_not_allowed: 'That payment method is not available.', method_unavailable: 'That payment method is coming soon. Please choose another one.',
         too_many_attempts: 'Too many attempts for this order. Start again.', payment_provider_error: 'That method did not respond. Choose another method or try again.',
@@ -42,7 +42,7 @@
     },
     es: {
       errors: {
-        invalid_name: 'Escribe tu nombre completo.', invalid_email: 'Escribe un correo válido.', invalid_quantity: 'Esa cantidad no está disponible para este producto.',
+        invalid_name: 'Escribe tu nombre completo.', invalid_email: 'Escribe un correo válido.', invalid_quantity: 'Esa cantidad no está disponible para este producto.', invalid_amount: 'Escribe un monto entre US$1 y US$100,000.',
         terms_required: 'Acepta los términos de compra.', pass_unavailable: 'Ese producto no está disponible por ahora.', rate_not_set: 'Los pagos no están disponibles por ahora. Intenta más tarde.',
         order_expired: 'Esta orden venció. Empieza de nuevo.', method_not_allowed: 'Ese método de pago no está disponible.', method_unavailable: 'Ese método llega muy pronto. Elige otro, por favor.',
         too_many_attempts: 'Demasiados intentos para esta orden. Empieza de nuevo.', payment_provider_error: 'Ese método no respondió. Elige otro método o intenta de nuevo.',
@@ -75,7 +75,7 @@
     },
   };
 
-  const state = { lang: 'es', options: null, category: null, passId: null, qty: 1, token: params.get('t'), order: null, qr: null, transfer: null, methodId: null, poll: null, tick: null, detailId: null };
+  const state = { lang: 'es', options: null, category: null, passId: null, qty: 1, amount: null, token: params.get('t'), order: null, qr: null, transfer: null, methodId: null, poll: null, tick: null, detailId: null };
   const t = () => T[state.lang];
   const L = (obj) => (obj && typeof obj === 'object' ? (obj[state.lang] ?? obj.es ?? obj.en ?? '') : (obj ?? ''));
   const usd = (n) => `US$${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -196,6 +196,7 @@
       if (p.content?.tagline) body.append(el('p', 'co-pass-tag', L(p.content.tagline)));
       const price = el('p', 'co-pass-price');
       if (p.pricePending) price.append(el('em', 'co-pending', t().pending));
+      else if (p.content?.customAmount) price.append(el('strong', null, state.lang === 'es' ? 'Monto libre' : 'Your amount'));
       else if (p.pricedIn === 'MXN') { if (p.priceUsd) price.append(el('strong', null, usd(p.priceUsd))); price.append(el('span', null, `${state.lang === 'es' ? 'se cobra' : 'charged'} ${mxn(p.priceMxn)}`)); }
       else {
         price.append(el('strong', null, usd(p.priceUsd)));
@@ -231,6 +232,7 @@
     $('detailName').textContent = p.name;
     $('detailTag').textContent = L(p.content?.tagline);
     $('detailPrice').textContent = p.pricePending ? t().pending
+      : p.content?.customAmount ? (state.lang === 'es' ? `Monto libre · desde ${usd(p.content.customAmount.min)}` : `Your amount · from ${usd(p.content.customAmount.min)}`)
       : p.pricedIn === 'MXN' ? `${p.priceUsd ? `${usd(p.priceUsd)} · ` : ''}${mxn(p.priceMxn)}${p.maxQuantity > 1 ? ` ${t().perUnit}` : ''}`
       : `${usd(p.priceUsd)}${p.taxRate > 0 ? ` ${t().plusVat} = ${usd(p.totalUsd)}` : ''}${p.priceMxn ? ` · ${mxn(p.priceMxn)}` : ''}${p.maxQuantity > 1 ? ` ${t().perUnit}` : ''}`;
     const buy = $('detailBuy');
@@ -395,14 +397,16 @@
     $('sumPass').textContent = order?.passName || p?.name || '—';
     $('sumQty').textContent = String(qty);
     const inMxn = (order?.pricedIn || p?.pricedIn) === 'MXN';
-    const priced = p && !p.pricePending;
-    const subtotal = order ? order.subtotalUsd : priced ? p.priceUsd * qty : null;
-    const tax = order ? order.taxUsd : priced ? Math.round(p.priceUsd * qty * p.taxRate * 100) / 100 : 0;
+    const custom = !order && p?.content?.customAmount;
+    const unitUsd = custom ? state.amount : p?.priceUsd;
+    const priced = p && !p.pricePending && unitUsd > 0;
+    const subtotal = order ? order.subtotalUsd : priced ? unitUsd * qty : null;
+    const tax = order ? order.taxUsd : priced ? Math.round(unitUsd * qty * p.taxRate * 100) / 100 : 0;
     $('sumUsdRow').hidden = inMxn;
     $('sumUsd').textContent = subtotal != null ? usd(subtotal) : '—';
     $('sumTaxRow').hidden = inMxn || !(tax > 0);
     $('sumTax').textContent = usd(tax || 0);
-    const total = order ? order.amountMxn : priced && inMxn ? p.priceMxn * qty : priced && rate ? Math.ceil(Math.round((p.priceUsd * qty + tax) * 100) * rate / 100) : null;
+    const total = order ? order.amountMxn : priced && inMxn ? p.priceMxn * qty : priced && rate ? Math.ceil(Math.round((unitUsd * qty + tax) * 100) * rate / 100) : null;
     $('sumMxn').textContent = total != null ? mxn(total) : '—';
     $('sumRate').textContent = inMxn ? t().fixedMxn : rate ? t().rate(Number(rate).toFixed(2)) : '';
   }
@@ -413,11 +417,14 @@
     $('qty').value = String(state.qty);
     $('qty').max = String(max);
     document.querySelector('.co-qty').hidden = !state.passId || max <= 1; // only once a product with several units is chosen
+    $('amountBox').hidden = !product(state.passId)?.content?.customAmount;
     renderSummary();
   }
   $('qtyDown').addEventListener('click', () => setQty(state.qty - 1));
   $('qtyUp').addEventListener('click', () => setQty(state.qty + 1));
   $('qty').addEventListener('change', (e) => setQty(Number(e.target.value)));
+  const amountError = () => { const c = product(state.passId)?.content?.customAmount; if (!c) return ''; const v = Number($('amount').value); return Number.isFinite(v) && v >= c.min && v <= c.max ? '' : 'invalid_amount'; };
+  $('amount').addEventListener('input', () => { const v = Number($('amount').value); state.amount = v > 0 ? Math.round(v * 100) / 100 : null; $('amount-err').textContent = ''; renderSummary(); });
 
   // ---------------------------------------------------------------- order
   $('orderForm').addEventListener('submit', async (e) => {
@@ -427,6 +434,7 @@
     let first = null;
     Object.keys(RULES).forEach((id) => { touched.add(id); const code = checkField(id); if (code && !first) first = id; });
     if (first) { showError('fix_fields'); $(first).focus({ preventScroll: true }); $(first).scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    if (amountError()) { $('amount-err').textContent = t().errors?.invalid_amount || ''; showError('invalid_amount'); $('amount').focus(); return; }
     if (!$('terms').checked) return showError('terms_required');
     saveDraft();
 
@@ -435,7 +443,7 @@
     const res = await api('/api/checkout/order', {
       method: 'POST',
       body: JSON.stringify({
-        passId: state.passId, quantity: state.qty,
+        passId: state.passId, quantity: state.qty, amountUsd: product(state.passId)?.content?.customAmount ? state.amount : undefined,
         firstName: $('firstName').value, lastName1: $('lastName1').value, lastName2: $('lastName2').value,
         email: $('email').value, emailConfirm: $('emailConfirm').value, phoneCountry: $('phoneCountry').value, phone: $('phone').value,
         company: needs('businessName') ? '' : $('company').value, jobTitle: needs('businessName') ? '' : $('jobTitle').value,

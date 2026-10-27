@@ -11,6 +11,8 @@ const passes = [
   { id: 'executive-pass', name: 'Executive Pass', price_usd: '1500.00' },
   { id: 'general-access', name: 'General Access', price_usd: '218.00', price_pending: true },
   { id: 'business-pass', name: 'Business Pass · Digital Merchant', price_usd: '215.00', price_mxn: null, category: 'business', max_quantity: 1 },
+  { id: 'voluntary-contribution', name: 'Voluntary contribution', price_usd: '1.00', on_sale: true, hidden: true, category: 'whale-tank', max_quantity: 1, issues_tickets: false },
+  { id: 'whale-tank-reservation', name: 'Reservation', price_usd: '700.00', on_sale: true, hidden: true, category: 'whale-tank', max_quantity: 1, issues_tickets: false },
 ];
 const buyer = { passId: 'executive-pass', quantity: 1, name: 'Ana López', email: 'ana@example.com', phone: '+52 55 1234 5678', acceptTerms: true };
 const card = { number: '4111 1111 1111 1111', expMonth: '12', expYear: '28', cvv: '123', holderName: 'ana lopez' };
@@ -247,4 +249,17 @@ test('sandbox card credentials never sell on the live site', async () => {
   const prod = createClient(configFromEnv({ BLISSCORE_AFFILIATE_CODE: '100', BLISSCORE_BASE_URL: 'https://api-prod.blisscorepay.cloud' }), { fetchImpl: fakeFetch([]) });
   const liveProd = createCheckout({ store, blokko: { async getPaymentMethods() { return []; } }, cards: prod, env: { ...env, VERCEL_ENV: 'production' } });
   assert.equal((await liveProd.options()).methods.find((m) => m.id === 'CARD').available, true);
+});
+
+test('voluntary contribution: buyer sets the USD amount within range; reservation is USD 700', async () => {
+  const { checkout } = setup();
+  const vc = { ...buyer, passId: 'voluntary-contribution' };
+  for (const amountUsd of [undefined, 0, 0.5, 100001, 'abc']) assert.equal((await checkout.createOrder({ ...vc, amountUsd }).catch((e) => e)).code, 'invalid_amount');
+  assert.equal((await checkout.createOrder({ ...vc, amountUsd: 50, quantity: 2 }).catch((e) => e)).code, 'invalid_quantity');
+  const { order } = await checkout.createOrder({ ...vc, amountUsd: 250.5 });
+  assert.equal(order.amountUsd, 250.5);
+  assert.equal(order.taxUsd, 0);
+  assert.equal(order.issuesTickets, false);
+  const r = await checkout.createOrder({ ...buyer, passId: 'whale-tank-reservation', amountUsd: 1 });
+  assert.equal(r.order.amountUsd, 700);
 });
