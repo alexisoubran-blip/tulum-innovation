@@ -10,7 +10,7 @@ const NOW = Date.parse('2026-10-19T19:00:00Z');
 const passes = [
   { id: 'executive-pass', name: 'Executive Pass', price_usd: '1500.00' },
   { id: 'general-access', name: 'General Access', price_usd: '218.00', price_pending: true },
-  { id: 'business-pass', name: 'Business Pass · Digital Merchant', price_usd: '215.68', price_mxn: '3990.00', category: 'business', max_quantity: 1 },
+  { id: 'business-pass', name: 'Business Pass · Digital Merchant', price_usd: '215.00', price_mxn: null, category: 'business', max_quantity: 1 },
 ];
 const buyer = { passId: 'executive-pass', quantity: 1, name: 'Ana López', email: 'ana@example.com', phone: '+52 55 1234 5678', acceptTerms: true };
 const card = { number: '4111 1111 1111 1111', expMonth: '12', expYear: '28', cvv: '123', holderName: 'ana lopez' };
@@ -88,11 +88,11 @@ test('options: card shows only when configured; pending and MXN-priced products'
   const ga = o.passes.find((p) => p.id === 'general-access');
   assert.deepEqual([ga.pricePending, ga.priceUsd, ga.priceMxn], [true, null, null]);
   const bp = o.passes.find((p) => p.id === 'business-pass');
-  assert.deepEqual([bp.pricedIn, bp.priceMxn, bp.maxQuantity], ['MXN', 3990, 1]);
+  assert.deepEqual([bp.pricedIn, bp.priceUsd, bp.maxQuantity], ['USD', 215, 1]);
   assert.deepEqual(bp.content.fields, ['businessName', 'businessAddress', 'phone']);
 });
 
-test('pending prices cannot be bought; Business Pass needs business data and charges exactly MXN 3,990', async () => {
+test('pending prices cannot be bought; Business Pass needs business data and is priced in USD like every other pass', async () => {
   const { checkout, store } = setup();
   assert.equal((await checkout.createOrder({ ...buyer, passId: 'general-access' }).catch((e) => e)).code, 'price_pending');
   const bp = { ...buyer, passId: 'business-pass', businessName: 'Café Maya', businessAddress: 'Calle 2 Sur, Tulum Centro' };
@@ -100,8 +100,8 @@ test('pending prices cannot be bought; Business Pass needs business data and cha
   assert.equal((await checkout.createOrder({ ...bp, businessAddress: '' }).catch((e) => e)).code, 'invalid_business_address');
   assert.equal((await checkout.createOrder({ ...bp, phone: '' }).catch((e) => e)).code, 'invalid_phone');
   const { order } = await checkout.createOrder(bp);
-  assert.equal(order.amountMxn, 3990);
-  assert.equal(order.pricedIn, 'MXN');
+  assert.equal(order.amountUsd, 215);
+  assert.equal(order.pricedIn ?? 'USD', 'USD');
   const row = [...store.state.orders.values()][0];
   assert.deepEqual(row.metadata.business, { name: 'Café Maya', address: 'Calle 2 Sur, Tulum Centro' });
 });
@@ -209,7 +209,7 @@ test('every purchasable product in the live catalog can be paid with every Blokk
   const { LGM_BANK_ENV } = await import('../lib/ticketing/bank-account.mjs');
   const { DEFAULT_METHODS } = await import('../lib/ticketing/checkout.mjs');
   const catalog = [
-    ['executive-pass', 1500], ['business-pass', 215.68, 3990], ['hotel-upgrade', 1500], ['hotel-second-guest', 720],
+    ['executive-pass', 1500], ['business-pass', 215], ['hotel-upgrade', 1500], ['hotel-second-guest', 720],
     ['whale-tank-founder', 2500], ['whale-tank-founder-no-stay', 1500], ['whale-tank-team-member', 1000], ['whale-tank-team-member-no-stay', 720],
     ['sponsor-event-supporter', 2500, null, 0.16], ['sponsor-strategic-partner', 30000, null, 0.16],
   ].map(([id, usd, mxn = null, tax = 0]) => ({ id, name: id, price_usd: usd, price_mxn: mxn, tax_rate: tax, max_quantity: 1 }));
