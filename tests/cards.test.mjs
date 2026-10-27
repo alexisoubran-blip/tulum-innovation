@@ -11,7 +11,7 @@ const passes = [
   { id: 'executive-pass', name: 'Executive Pass', price_usd: '1500.00' },
   { id: 'general-access', name: 'General Access', price_usd: '218.00', price_pending: true },
   { id: 'business-pass', name: 'Business Pass · Digital Merchant', price_usd: '215.00', price_mxn: null, category: 'business', max_quantity: 1 },
-  { id: 'voluntary-contribution', name: 'Voluntary contribution', price_usd: '1.00', on_sale: true, hidden: true, category: 'whale-tank', max_quantity: 1, issues_tickets: false },
+  { id: 'voluntary-contribution', name: 'Community contribution', price_usd: '1.00', on_sale: true, hidden: true, category: 'festival', max_quantity: 1, issues_tickets: false },
   { id: 'whale-tank-reservation', name: 'Reservation', price_usd: '700.00', on_sale: true, hidden: true, category: 'whale-tank', max_quantity: 1, issues_tickets: false },
 ];
 const buyer = { passId: 'executive-pass', quantity: 1, name: 'Ana López', email: 'ana@example.com', phone: '+52 55 1234 5678', acceptTerms: true };

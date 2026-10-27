@@ -9,7 +9,7 @@
   const T = {
     en: {
       errors: {
-        invalid_name: 'Please enter your full name.', invalid_email: 'Please enter a valid email.', invalid_quantity: 'That quantity is not available for this product.', invalid_amount: 'Enter an amount between US$1 and US$100,000.',
+        invalid_name: 'Please enter your full name.', invalid_email: 'Please enter a valid email.', invalid_quantity: 'That quantity is not available for this product.', invalid_amount: 'Enter the amount you want to contribute.',
         terms_required: 'Please accept the purchase terms.', pass_unavailable: 'That product is not available right now.', rate_not_set: 'Payments are not available right now. Please try again later.',
         order_expired: 'This order expired. Start again.', method_not_allowed: 'That payment method is not available.', method_unavailable: 'That payment method is coming soon. Please choose another one.',
         too_many_attempts: 'Too many attempts for this order. Start again.', payment_provider_error: 'That method did not respond. Choose another method or try again.',
@@ -42,7 +42,7 @@
     },
     es: {
       errors: {
-        invalid_name: 'Escribe tu nombre completo.', invalid_email: 'Escribe un correo válido.', invalid_quantity: 'Esa cantidad no está disponible para este producto.', invalid_amount: 'Escribe un monto entre US$1 y US$100,000.',
+        invalid_name: 'Escribe tu nombre completo.', invalid_email: 'Escribe un correo válido.', invalid_quantity: 'Esa cantidad no está disponible para este producto.', invalid_amount: 'Escribe el monto que quieres aportar.',
         terms_required: 'Acepta los términos de compra.', pass_unavailable: 'Ese producto no está disponible por ahora.', rate_not_set: 'Los pagos no están disponibles por ahora. Intenta más tarde.',
         order_expired: 'Esta orden venció. Empieza de nuevo.', method_not_allowed: 'Ese método de pago no está disponible.', method_unavailable: 'Ese método llega muy pronto. Elige otro, por favor.',
         too_many_attempts: 'Demasiados intentos para esta orden. Empieza de nuevo.', payment_provider_error: 'Ese método no respondió. Elige otro método o intenta de nuevo.',
@@ -232,7 +232,7 @@
     $('detailName').textContent = p.name;
     $('detailTag').textContent = L(p.content?.tagline);
     $('detailPrice').textContent = p.pricePending ? t().pending
-      : p.content?.customAmount ? (state.lang === 'es' ? `Monto libre · desde ${usd(p.content.customAmount.min)}` : `Your amount · from ${usd(p.content.customAmount.min)}`)
+      : p.content?.customAmount ? (state.lang === 'es' ? 'Monto libre' : 'Your amount')
       : p.pricedIn === 'MXN' ? `${p.priceUsd ? `${usd(p.priceUsd)} · ` : ''}${mxn(p.priceMxn)}${p.maxQuantity > 1 ? ` ${t().perUnit}` : ''}`
       : `${usd(p.priceUsd)}${p.taxRate > 0 ? ` ${t().plusVat} = ${usd(p.totalUsd)}` : ''}${p.priceMxn ? ` · ${mxn(p.priceMxn)}` : ''}${p.maxQuantity > 1 ? ` ${t().perUnit}` : ''}`;
     const buy = $('detailBuy');
