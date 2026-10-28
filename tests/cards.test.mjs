@@ -10,7 +10,7 @@ const NOW = Date.parse('2026-10-19T19:00:00Z');
 const passes = [
   { id: 'executive-pass', name: 'Executive Pass', price_usd: '1500.00' },
   { id: 'general-access', name: 'General Access', price_usd: '218.00', price_pending: true },
-  { id: 'business-pass', name: 'Business Pass · Digital Merchant', price_usd: '215.00', price_mxn: null, category: 'business', max_quantity: 1 },
+  { id: 'business-pass', name: 'Business Pass · Digital Merchant', price_usd: '222.00', price_mxn: null, category: 'business', max_quantity: 1 },
   { id: 'voluntary-contribution', name: 'Community contribution', price_usd: '1.00', on_sale: true, hidden: true, category: 'festival', max_quantity: 1, issues_tickets: false },
   { id: 'whale-tank-reservation', name: 'Reservation', price_usd: '700.00', on_sale: true, hidden: true, category: 'whale-tank', max_quantity: 1, issues_tickets: false },
 ];
@@ -90,7 +90,7 @@ test('options: card shows only when configured; pending and MXN-priced products'
   const ga = o.passes.find((p) => p.id === 'general-access');
   assert.deepEqual([ga.pricePending, ga.priceUsd, ga.priceMxn], [true, null, null]);
   const bp = o.passes.find((p) => p.id === 'business-pass');
-  assert.deepEqual([bp.pricedIn, bp.priceUsd, bp.maxQuantity], ['USD', 215, 1]);
+  assert.deepEqual([bp.pricedIn, bp.priceUsd, bp.maxQuantity], ['USD', 222, 1]);
   assert.deepEqual(bp.content.fields, ['businessName', 'businessAddress', 'phone']);
 });
 
@@ -102,7 +102,7 @@ test('pending prices cannot be bought; Business Pass needs business data and is 
   assert.equal((await checkout.createOrder({ ...bp, businessAddress: '' }).catch((e) => e)).code, 'invalid_business_address');
   assert.equal((await checkout.createOrder({ ...bp, phone: '' }).catch((e) => e)).code, 'invalid_phone');
   const { order } = await checkout.createOrder(bp);
-  assert.equal(order.amountUsd, 215);
+  assert.equal(order.amountUsd, 222);
   assert.equal(order.pricedIn ?? 'USD', 'USD');
   const row = [...store.state.orders.values()][0];
   assert.deepEqual(row.metadata.business, { name: 'Café Maya', address: 'Calle 2 Sur, Tulum Centro' });
@@ -211,7 +211,7 @@ test('every purchasable product in the live catalog can be paid with every Blokk
   const { LGM_BANK_ENV } = await import('../lib/ticketing/bank-account.mjs');
   const { DEFAULT_METHODS } = await import('../lib/ticketing/checkout.mjs');
   const catalog = [
-    ['executive-pass', 1500], ['business-pass', 215], ['hotel-upgrade', 1500], ['hotel-second-guest', 720],
+    ['executive-pass', 1500], ['business-pass', 222], ['hotel-upgrade', 1500], ['hotel-second-guest', 720],
     ['whale-tank-founder', 2500], ['whale-tank-founder-no-stay', 1500], ['whale-tank-team-member', 1000], ['whale-tank-team-member-no-stay', 720],
     ['sponsor-event-supporter', 2500, null, 0.16], ['sponsor-strategic-partner', 30000, null, 0.16],
   ].map(([id, usd, mxn = null, tax = 0]) => ({ id, name: id, price_usd: usd, price_mxn: mxn, tax_rate: tax, max_quantity: 1 }));
