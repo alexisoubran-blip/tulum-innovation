@@ -19,9 +19,10 @@ export async function buildElFaro() {
     return `<article class="ef-init" data-themes="${it.themes.join(' ')}"><div class="ef-init-media">${media}</div><div><h3>${esc(it.name)}</h3>${it.location ? `<p class="ef-init-loc">${esc(it.location)}</p>` : ''}<p>${bi(it.description.en, it.description.es)}</p><ul>${tags}</ul>${link}</div></article>`;
   }).join('');
   const invite = `<a class="ef-init ef-init-invite" data-themes="ecology refi built tech tourism community" href="mailto:innovation@likegroup.io?subject=El%20Faro%20%E2%80%94%20Local%20initiative"><span class="ef-init-plus">+</span><div><h3>${bi(initiatives.length ? 'Add your initiative' : 'The first initiatives are being confirmed', initiatives.length ? 'Suma tu iniciativa' : 'Estamos confirmando las primeras iniciativas')}</h3><p>${bi('Working on regeneration in Tulum or the region? Share your project to be considered for the directory.', '¿Trabajas por la regeneración en Tulum o la región? Comparte tu proyecto para que lo consideremos en el directorio.')}</p><b>${bi('Share an initiative →', 'Compartir iniciativa →')}</b></div></a>`;
+  // The directory section is shown only once there are confirmed initiatives (marker present in the page).
   const file = 'dist/el-faro/index.html';
   const html = await readFile(file, 'utf8');
-  assert.ok(html.includes('<!--INITIATIVES-->'), 'El Faro directory marker');
+  if (!html.includes('<!--INITIATIVES-->')) { console.log('El Faro: directory hidden until initiatives are confirmed.'); return; }
   await writeFile(file, html.replace('<!--INITIATIVES-->', cards + invite));
   console.log(`El Faro: ${initiatives.length} confirmed initiatives in the directory.`);
 }

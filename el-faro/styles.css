@@ -168,3 +168,7 @@
   .ef-beam i, .ef-beam::before, .ef-hero-media img { animation: none; }
   .ef-theme, .ef-purpose-list li, .ef-person, .ef-way, .ef-layers > div { opacity: 1; transform: none; transition: none; }
 }
+.ef-credit { position: absolute; right: 16px; bottom: 10px; margin: 0; color: rgba(242,241,234,.45); font-size: .62rem; letter-spacing: .04em; }
+.ef-purpose-lede { max-width: 680px; margin: 1.4rem 0 0; color: var(--muted); font-size: 1.05rem; }
+.ef-about strong { color: var(--paper); font-weight: 500; }
+.ef-hero-media img { object-position: 50% 60%; }
