@@ -274,6 +274,8 @@ test('sales admin: retroactive list with buyer, product, method and card referen
   const paid = sales.find((s) => s.status === 'paid');
   assert.equal(paid.passName, 'Executive Pass');
   assert.equal(paid.method, 'CARD');
+  assert.equal(paid.processor, 'TaakPay');
+  assert.equal(paid.kind, 'Tarjeta');
   assert.equal(paid.buyerEmail, 'ana@example.com');
   assert.equal(paid.company, 'ACME');
   assert.match(paid.card, /····1111$/);

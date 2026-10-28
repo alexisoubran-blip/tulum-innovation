@@ -133,6 +133,15 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
 .ocard .dl { margin-top: 12px; }
 .ocard .dl div { grid-template-columns: 110px 1fr; }
 .ocard .more { margin-top: 12px; width: 100%; }
+.proc { display: inline-flex; align-items: center; gap: 8px; }
+.proc img { display: block; height: 14px; width: auto; }
+.proc img.blokko { height: 18px; }
+.proc .bank { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 6px; background: rgba(75,255,179,.12); color: var(--ok); font-size: 11px; font-weight: 600; letter-spacing: .04em; }
+.chan { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
+.dl .bk { grid-column: 1 / -1; }
+.bk-btn { height: 32px; padding: 0 12px; border: 1px solid rgba(192,47,184,.5); border-radius: 8px; background: rgba(192,47,184,.1); cursor: pointer; }
+.bk-out { margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 6px 18px; font-size: 12px; }
+.bk-out span { color: var(--faint); margin-right: 6px; }
 .foot { margin: 20px 0 0; color: var(--faint); font-size: 12px; line-height: 1.6; }
 
 @media (max-width: 1100px) {
@@ -153,7 +162,8 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
   .seg button { flex: 1 0 auto; }
   .bar .dates { display: grid; grid-template-columns: 1fr auto 1fr; }
   .bar .dates .field { width: 100%; }
-  .bar .two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .bar .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .bar .two select { min-width: 0; width: 100%; }
   .bar .two .field:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .kpi { padding: 14px 16px 16px; }
   .kpi b { font-size: 20px; }
@@ -207,7 +217,8 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
     <div class="bar">
       <div class="two">
         <select class="field" id="status"><option value="paid">Pagadas</option><option value="pending">Pendientes</option><option value="refunded">Reembolsadas</option><option value="all">Todas</option></select>
-        <select class="field" id="method"><option value="">Todos los métodos</option></select>
+        <select class="field" id="method"><option value="">Todos los procesadores</option></select>
+        <select class="field" id="channel"><option value="">Todos los canales</option></select>
         <select class="field" id="product"><option value="">Todos los productos</option></select>
       </div>
       <input class="field search" id="q" type="search" placeholder="Buscar nombre, correo, autorización, orden BlissCore, últimos 4…">
@@ -222,7 +233,7 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
         <div class="card-b chart" id="dayChart"></div>
       </div>
       <div class="card">
-        <div class="card-h"><h2>Por método</h2></div>
+        <div class="card-h"><h2>Por procesador y canal</h2></div>
         <div class="card-b" id="methodChart"></div>
       </div>
     </section>
@@ -253,6 +264,9 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
   const TZ = 'America/Mexico_City';
   const KEY = 'tifAdminToken';
   const COLORS = ['#E97A43', '#4BFFB3', '#1FC6FF', '#A07BFF', '#FFC424', '#FF6FA0', '#8FA3A6'];
+  const PCOLOR = { 'TaakPay': '#19C6F0', 'Blokko': '#C02FB8', 'Banco · SPEI': '#4BFFB3' };
+  const LOGO = { 'TaakPay': '<img src="/assets/payments/taakpay.webp" alt="TaakPay">', 'Blokko': '<img class="blokko" src="/assets/payments/blokko.webp" alt="Blokko">', 'Banco · SPEI': '<span class="bank">SPEI</span>' };
+  const proc = (s) => `<span class="proc">${LOGO[s.processor] || esc(s.processor)}</span>`;
   const STATUS = { paid: 'Pagada', pending: 'Pendiente', expired: 'Expirada', cancelled: 'Cancelada', refunded: 'Reembolsada', failed: 'Fallida' };
   const tok = { get() { try { return sessionStorage.getItem(KEY) || ''; } catch { return ''; } }, set(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch {} } };
   const mxn = (n) => n == null ? '—' : '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -285,13 +299,15 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
       all = data.sales || [];
       showApp(); msg('');
       $('updated').textContent = 'Actualizado ' + new Intl.DateTimeFormat('es-MX', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }).format(new Date());
-      const methods = [...new Set(all.map((s) => s.methodLabel))].sort();
-      colorOf = new Map(methods.map((m, i) => [m, COLORS[i % COLORS.length]]));
-      const keepM = $('method').value, keepP = $('product').value;
-      $('method').innerHTML = '<option value="">Todos los métodos</option>' + methods.map((m) => `<option>${esc(m)}</option>`).join('');
+      const methods = [...new Set(all.map((s) => s.processor))].sort();
+      colorOf = new Map(methods.map((m, i) => [m, PCOLOR[m] || COLORS[i % COLORS.length]]));
+      const chans = [...new Set(all.map((s) => s.channel))].sort();
+      const keepM = $('method').value, keepP = $('product').value, keepC = $('channel').value;
+      $('method').innerHTML = '<option value="">Todos los procesadores</option>' + methods.map((m) => `<option>${esc(m)}</option>`).join('');
+      $('channel').innerHTML = '<option value="">Todos los canales</option>' + chans.map((m) => `<option>${esc(m)}</option>`).join('');
       const products = [...new Map(all.map((s) => [s.passId, s.passName])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
       $('product').innerHTML = '<option value="">Todos los productos</option>' + products.map(([id, n]) => `<option value="${esc(id)}">${esc(n)}</option>`).join('');
-      $('method').value = keepM; $('product').value = keepP;
+      $('method').value = keepM; $('product').value = keepP; $('channel').value = keepC;
       render();
     } catch (e) { fromLogin ? ($('loginErr').textContent = 'Error de red. Intenta de nuevo.') : msg('Error de red: ' + e.message); }
     finally { btn.disabled = false; $('enter').textContent = 'Entrar'; }
@@ -300,7 +316,7 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
 
   // ---------------------------------------------------------------- filters
   function setRange(r) {
-    document.querySelectorAll('#ranges button').forEach((c) => c.classList.toggle('on', c.dataset.range === r));
+  document.querySelectorAll('#ranges button').forEach((c) => c.classList.toggle('on', c.dataset.range === r));
     const today = dayOf(new Date().toISOString());
     const map = { all: ['', ''], today: [today, today], yesterday: [addDays(today, -1), addDays(today, -1)], 7: [addDays(today, -6), today], 30: [addDays(today, -29), today], month: [today.slice(0, 8) + '01', today] };
     [$('from').value, $('to').value] = map[r] || ['', ''];
@@ -308,13 +324,13 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
   }
   const saleDay = (s) => dayOf(s.status === 'paid' && s.paidAt ? s.paidAt : s.createdAt);
   function filtered() {
-    const st = $('status').value, m = $('method').value, p = $('product').value, q = $('q').value.trim().toLowerCase(), from = $('from').value, to = $('to').value;
+    const st = $('status').value, m = $('method').value, ch = $('channel').value, p = $('product').value, q = $('q').value.trim().toLowerCase(), from = $('from').value, to = $('to').value;
     return all.filter((s) => {
       const d = saleDay(s);
       if ((from && d < from) || (to && d > to)) return false;
       if (st !== 'all' && !(st === 'pending' ? ['pending', 'expired'].includes(s.status) : s.status === st)) return false;
-      if ((m && s.methodLabel !== m) || (p && s.passId !== p)) return false;
-      if (q && ![s.buyerName, s.buyerEmail, s.buyerPhone, s.reference, s.authorization, s.processorOrderId, s.card, s.transferReference, s.company, s.id, s.passName].join(' ').toLowerCase().includes(q)) return false;
+      if ((m && s.processor !== m) || (ch && s.channel !== ch) || (p && s.passId !== p)) return false;
+      if (q && ![s.buyerName, s.buyerEmail, s.buyerPhone, s.reference, s.authorization, s.processorOrderId, s.card, s.transferReference, s.company, s.id, s.passName, s.processor, s.channel].join(' ').toLowerCase().includes(q)) return false;
       return true;
     });
   }
@@ -343,8 +359,8 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
     if (end < days[days.length - 1]) end = days[days.length - 1];
     const list = []; for (let d = start; d <= end && list.length < 120; d = addDays(d, 1)) list.push(d);
     if (list.length > 120) start = list[0];
-    const methods = [...new Set(paid.map((s) => s.methodLabel))];
-    const data = list.map((d) => { const o = { d, t: 0 }; methods.forEach((m) => { o[m] = sum(paid.filter((s) => saleDay(s) === d && s.methodLabel === m), (s) => s.amountMxn); o.t += o[m]; }); return o; });
+    const methods = [...new Set(paid.map((s) => s.processor))];
+    const data = list.map((d) => { const o = { d, t: 0 }; methods.forEach((m) => { o[m] = sum(paid.filter((s) => saleDay(s) === d && s.processor === m), (s) => s.amountMxn); o.t += o[m]; }); return o; });
     const max = Math.max(...data.map((o) => o.t), 1);
     const nice = (() => { const p = Math.pow(10, Math.floor(Math.log10(max))); return Math.ceil(max / p) * p; })();
     const W = Math.max(280, Math.round(box.clientWidth - parseFloat(getComputedStyle(box).paddingLeft) - parseFloat(getComputedStyle(box).paddingRight))), H = W < 500 ? 200 : 260, L = 48, B = 26, T = 8, iw = W - L - 8, ih = H - B - T, bw = iw / data.length, gap = Math.max(bw - 56, Math.min(6, bw * .3));
@@ -369,13 +385,14 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
 
   function methodChart(paid) {
     const box = $('methodChart');
-    const g = [...group(paid, (s) => s.methodLabel).entries()].sort((a, b) => b[1].mxn - a[1].mxn);
+    const g = [...group(paid, (s) => s.processor).entries()].sort((a, b) => b[1].mxn - a[1].mxn);
     const total = g.reduce((t, [, v]) => t + v.mxn, 0);
     if (!total) { box.innerHTML = '<div class="empty">—</div>'; return; }
     const R = 60, C = 2 * Math.PI * R; let off = 0;
     const arcs = g.map(([m, v]) => { const len = C * v.mxn / total; const a = `<circle r="${R}" cx="75" cy="75" fill="none" stroke="${colorOf.get(m)}" stroke-width="18" stroke-dasharray="${Math.max(len - 2, 0)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 75 75)"/>`; off += len; return a; }).join('');
     box.innerHTML = `<div class="donut"><svg viewBox="0 0 150 150"><circle r="${R}" cx="75" cy="75" fill="none" stroke="rgba(242,241,234,.06)" stroke-width="18"/>${arcs}<text x="75" y="72" text-anchor="middle" fill="#F2F1EA" font-size="17" font-family="Bruno Ace">${mxnShort(total)}</text><text x="75" y="90" text-anchor="middle" fill="rgba(242,241,234,.45)" font-size="10">MXN</text></svg>
-      <ul>${g.map(([m, v]) => `<li><i style="background:${colorOf.get(m)}"></i><span>${esc(m)}</span><b>${Math.round(v.mxn / total * 100)}%</b><small>${mxn(v.mxn)} · ${v.n} órdenes</small></li>`).join('')}</ul></div>`;
+      <ul>${g.map(([m, v]) => `<li><i style="background:${colorOf.get(m)}"></i><span>${esc(m)}</span><b>${Math.round(v.mxn / total * 100)}%</b><small>${mxn(v.mxn)} · ${v.n} órdenes</small></li>`).join('')}</ul></div>` +
+      `<div class="hbars" style="margin-top:18px">${[...group(paid, (s) => s.processor + '|' + s.channel).entries()].sort((a, b) => b[1].mxn - a[1].mxn).map(([k, v]) => { const [pr, ch] = k.split('|'); return `<div><div class="hbar-top"><span><span style="color:${colorOf.get(pr)}">●</span> ${esc(ch)} <span class="muted">· ${v.n}</span></span><b>${mxn(v.mxn)}</b></div><div class="hbar-track"><i style="width:${Math.max(2, v.mxn / total * 100)}%;background:${colorOf.get(pr)}"></i></div></div>`; }).join('')}</div>`;
   }
 
   function productChart(paid) {
@@ -387,30 +404,31 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
   }
 
   function dayTable(paid) {
-    const rows = [...group(paid, (s) => saleDay(s) + '|' + s.methodLabel).entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1));
+    const rows = [...group(paid, (s) => saleDay(s) + '|' + s.processor).entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1));
     $('byDay').innerHTML = '<thead><tr><th>Día</th><th>Método</th><th class="num">Órd.</th><th class="num">MXN</th></tr></thead><tbody>' +
       (rows.map(([k, g]) => { const [d, m] = k.split('|'); return `<tr><td>${shortDay(d)}</td><td><span style="color:${colorOf.get(m)}">●</span> ${esc(m)}</td><td class="num">${g.n}</td><td class="num">${mxn(g.mxn)}</td></tr>`; }).join('') || '<tr><td colspan="4" class="muted">Sin ventas pagadas</td></tr>') + '</tbody>';
   }
 
   function details(s) {
-    return [['Orden TIF', s.id], ['Creada', when(s.createdAt)], ['Pagada', when(s.paidAt)], ['Teléfono', s.buyerPhone], ['País', s.country], ['Empresa', s.company], ['Puesto', s.jobTitle],
+    const bk = s.blokkoAttemptId ? `<div class="bk"><dt>Blokko</dt><dd><button type="button" class="bk-btn" data-bk="${esc(s.blokkoAttemptId)}">Consultar el pago en Blokko</button><div class="bk-out"></div></dd></div>` : '';
+    return [['Procesador', s.processor], ['Canal', s.channel], ['Orden TIF', s.id], ['Creada', when(s.createdAt)], ['Pagada', when(s.paidAt)], ['Teléfono', s.buyerPhone], ['País', s.country], ['Empresa', s.company], ['Puesto', s.jobTitle],
       ['Comercio', s.business ? `${s.business.name || ''} · ${s.business.address || ''}` : null],
       ['Factura', s.invoice ? `${s.invoice.rfc} · ${s.invoice.legal_name} · CP ${s.invoice.zip} · ${s.invoice.regime} · ${s.invoice.use}` : null],
       ['Tarjeta', s.card], ['Autorización', s.authorization], ['Orden BlissCore', s.processorOrderId], ['Transacción', s.reference], ['Ref. SPEI', s.transferReference],
       ['Tipo de cambio', s.rate], ['IVA', s.taxUsd ? usd(s.taxUsd) : null], ['Monto libre', s.customAmountUsd ? usd(s.customAmountUsd) : null],
       ['Boletos QR', s.tickets], ['Correo enviado', s.emailed ? 'Sí' : 'No'], ['Intentos de pago', s.attempts], ['Último error', s.lastError], ['UTM', s.utm], ['Ref', s.ref]]
-      .filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><dt>${esc(k)}</dt><dd class="${/Orden|Transacción|Autorización/.test(k) ? 'mono' : ''}">${esc(v)}</dd></div>`).join('');
+      .filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><dt>${esc(k)}</dt><dd class="${/Orden|Transacción|Autorización/.test(k) ? 'mono' : ''}">${esc(v)}</dd></div>`).join('') + bk;
   }
 
   function orders(rows) {
     $('countTitle').textContent = `Órdenes · ${rows.length}`;
-    $('sales').innerHTML = '<thead><tr><th>Fecha</th><th>Estado</th><th>Comprador</th><th>Producto</th><th class="num">Cant.</th><th class="num">MXN</th><th>Método</th><th>Tarjeta</th><th>Autorización</th><th>Orden BlissCore / Ref.</th><th></th></tr></thead><tbody>' +
+    $('sales').innerHTML = '<thead><tr><th>Fecha</th><th>Estado</th><th>Comprador</th><th>Producto</th><th class="num">Cant.</th><th class="num">MXN</th><th>Procesador · canal</th><th>Tarjeta</th><th>Autorización</th><th>Orden BlissCore / Ref.</th><th></th></tr></thead><tbody>' +
       (rows.map((s, i) => `<tr>
         <td>${when(s.paidAt || s.createdAt)}</td>
         <td><span class="st ${s.status}">${STATUS[s.status] || s.status}</span></td>
         <td class="who"><b>${esc(s.buyerName)}</b><span>${esc(s.buyerEmail)}</span></td>
         <td>${esc(s.passName)}</td><td class="num">${s.quantity}</td><td class="num">${mxn(s.amountMxn)}</td>
-        <td><span style="color:${colorOf.get(s.methodLabel) || '#fff'}">●</span> ${esc(s.methodLabel)}</td>
+        <td>${proc(s)}<span class="chan">${esc(s.channel)}</span></td>
         <td class="mono">${esc(s.card || '—')}</td><td class="mono">${esc(s.authorization || '—')}</td>
         <td class="mono">${esc((s.processorOrderId || s.transferReference || s.reference || '—').slice(0, 18))}${(s.processorOrderId || s.reference || '').length > 18 ? '…' : ''}</td>
         <td><button class="more" data-i="${i}">Ver</button></td></tr>`).join('') || '<tr><td colspan="11" class="muted">Sin órdenes en el filtro</td></tr>') + '</tbody>';
@@ -422,7 +440,7 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
     }));
     $('cards').innerHTML = rows.map((s, i) => `<article class="ocard">
       <div class="ocard-top"><div class="who"><b>${esc(s.buyerName)}</b><span>${esc(s.buyerEmail)}</span></div><div class="ocard-amt"><b>${mxn(s.amountMxn)}</b><span>${usd(s.amountUsd)}</span></div></div>
-      <div class="ocard-meta"><span class="st ${s.status}">${STATUS[s.status] || s.status}</span><span>${esc(s.passName)} × ${s.quantity}</span><span>${when(s.paidAt || s.createdAt)}</span><span><span style="color:${colorOf.get(s.methodLabel) || '#fff'}">●</span> ${esc(s.methodLabel)}${s.card ? ' · ' + esc(s.card) : ''}</span></div>
+      <div class="ocard-meta"><span class="st ${s.status}">${STATUS[s.status] || s.status}</span><span>${esc(s.passName)} × ${s.quantity}</span><span>${when(s.paidAt || s.createdAt)}</span><span class="proc">${LOGO[s.processor] || esc(s.processor)}</span><span>${esc(s.channel)}${s.card ? ' · ' + esc(s.card) : ''}</span></div>
       <dl class="dl hidden" id="cd${i}">${details(s)}</dl>
       <button class="more" data-c="${i}">Ver detalle</button></article>`).join('') || '<div class="empty">Sin órdenes en el filtro</div>';
     $('cards').querySelectorAll('[data-c]').forEach((b) => b.addEventListener('click', () => { const d = $('cd' + b.dataset.c); d.classList.toggle('hidden'); b.textContent = d.classList.contains('hidden') ? 'Ver detalle' : 'Cerrar'; }));
@@ -431,7 +449,7 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
   function csv() {
     const rows = filtered();
     const cols = [['Fecha (CDMX)', (s) => when(s.paidAt || s.createdAt)], ['Estado', (s) => STATUS[s.status] || s.status], ['Nombre', (s) => s.buyerName], ['Correo', (s) => s.buyerEmail], ['Teléfono', (s) => s.buyerPhone], ['País', (s) => s.country], ['Empresa', (s) => s.company], ['Puesto', (s) => s.jobTitle],
-      ['Producto', (s) => s.passName], ['Cantidad', (s) => s.quantity], ['MXN', (s) => s.amountMxn], ['USD', (s) => s.amountUsd], ['IVA USD', (s) => s.taxUsd], ['Tipo de cambio', (s) => s.rate], ['Método', (s) => s.methodLabel], ['Tarjeta', (s) => s.card],
+      ['Producto', (s) => s.passName], ['Cantidad', (s) => s.quantity], ['MXN', (s) => s.amountMxn], ['USD', (s) => s.amountUsd], ['IVA USD', (s) => s.taxUsd], ['Tipo de cambio', (s) => s.rate], ['Procesador', (s) => s.processor], ['Canal', (s) => s.channel], ['Tipo', (s) => s.kind], ['Tarjeta', (s) => s.card],
       ['Autorización', (s) => s.authorization], ['Transacción', (s) => s.reference], ['Orden BlissCore', (s) => s.processorOrderId], ['Ref SPEI', (s) => s.transferReference], ['Boletos QR', (s) => s.tickets],
       ['RFC', (s) => s.invoice?.rfc], ['Razón social', (s) => s.invoice?.legal_name], ['CP fiscal', (s) => s.invoice?.zip], ['Régimen', (s) => s.invoice?.regime], ['Uso CFDI', (s) => s.invoice?.use], ['Comercio', (s) => s.business?.name], ['Dirección comercio', (s) => s.business?.address], ['UTM', (s) => s.utm], ['Orden TIF', (s) => s.id]];
     const q = (v) => { const t = String(v ?? ''); return /[",\n;]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
@@ -442,9 +460,24 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
     a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
 
+    const LABEL = { transactionId: 'Transacción', authorizationId: 'Autorización', transactionStatus: 'Estado', paymentMethodId: 'Método', paymentMethod: 'Método', currency: 'Moneda', amount: 'Monto', totalAmount: 'Monto total', cryptoCurrency: 'Cripto', cryptoAmount: 'Monto cripto', network: 'Red', fee: 'Comisión', createdAt: 'Creado', completedAt: 'Completado' };
+  document.addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-bk]'); if (!b) return;
+    const out = b.nextElementSibling; b.disabled = true; b.textContent = 'Consultando…';
+    try {
+      const res = await fetch('/api/blokko/admin', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + tok.get() }, body: JSON.stringify({ action: 'blokko-payment', attemptId: b.dataset.bk }) });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 401) return logout('La sesión expiró. Vuelve a entrar.');
+      const p = data.payment || {};
+      const flat = Object.entries(p).filter(([, v]) => v != null && v !== '' && typeof v !== 'object');
+      out.innerHTML = data.ok ? (flat.map(([k, v]) => `<div><span>${esc(LABEL[k] || k)}</span>${esc(v)}</div>`).join('') || '<div>Blokko no devolvió detalle.</div>') : `<div>No se pudo consultar (${esc(data.error || res.status)}).</div>`;
+      b.textContent = 'Consultar de nuevo';
+    } catch { out.textContent = 'Error de red.'; b.textContent = 'Consultar el pago en Blokko'; }
+    finally { b.disabled = false; }
+  });
   document.querySelectorAll('#ranges button').forEach((c) => c.addEventListener('click', () => setRange(c.dataset.range)));
   ['from', 'to'].forEach((id) => $(id).addEventListener('change', () => { document.querySelectorAll('#ranges button').forEach((c) => c.classList.remove('on')); render(); }));
-  ['status', 'method', 'product'].forEach((id) => $(id).addEventListener('change', render));
+  ['status', 'method', 'channel', 'product'].forEach((id) => $(id).addEventListener('change', render));
   $('q').addEventListener('input', render);
   $('csv').addEventListener('click', csv);
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => all.length && render(), 200); });

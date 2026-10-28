@@ -6,6 +6,7 @@
 //   { action: "test-intent", amount?, paymentMethodId? }  → a test QR in MXN (production capped at 50 MXN)
 //   { action: "status", merchantTransactionId }           → payment status of a test
 //   { action: "sales", from?, to? }                    → every order (retroactive) with buyer and payment data
+//   { action: "blokko-payment", attemptId }           → what Blokko reports for one paid attempt (coin, amounts)
 //   { action: "overview" }                                → SPEI transfers and recent payment attempts (with errors)
 //   { action: "confirm-transfer", reference }             → marks a SPEI order paid and issues its tickets
 //   { action: "card-test", scenario }                     → sandbox-only BlissCore charge with a test card
@@ -78,6 +79,13 @@ export async function POST(request) {
       }
       case 'sales':
         return json(200, { ok: true, sales: await (await getCheckout()).adminSales({ from: body.from, to: body.to }) });
+      case 'blokko-payment': {
+        if (!/^[0-9a-f-]{36}$/i.test(String(body.attemptId || ''))) return json(400, { ok: false, error: 'invalid_attempt' });
+        const r = await client.getPaymentByMerchantTransactionId(String(body.attemptId));
+        // Only payment facts; never keys or signatures.
+        const { qrContent, qrUrl, ...payment } = r || {};
+        return json(200, { ok: true, payment });
+      }
       case 'status':
         if (!body.merchantTransactionId) return json(400, { ok: false, error: 'missing_merchantTransactionId' });
         return json(200, { ok: true, response: await client.getPaymentByMerchantTransactionId(String(body.merchantTransactionId)) });
