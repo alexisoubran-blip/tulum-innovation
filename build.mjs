@@ -11,6 +11,7 @@ await cp("festival-2026", "dist/festival-2026", { recursive: true });
 await cp("sponsorship", "dist/sponsorship", { recursive: true });
 await cp("partners", "dist/partners", { recursive: true });
 await cp("cenote", "dist/cenote", { recursive: true });
+await cp("el-faro", "dist/el-faro", { recursive: true, filter: (src) => !src.endsWith("build.mjs") });
 await cp("alexis-soubran-tif-cmo", "dist/alexis-soubran-tif-cmo", { recursive: true });
 await cp("alexis-soubran-TIF-CMO", "dist/alexis-soubran-TIF-CMO", { recursive: true });
 await cp("home-v2", "dist/home-v2", { recursive: true });
@@ -63,6 +64,9 @@ await buildRoster();
 
 const { buildPartnerships } = await import('./partnerships/build.mjs');
 await buildPartnerships();
+
+const { buildElFaro } = await import('./el-faro/build.mjs');
+await buildElFaro();
 
 const { buildEditorial, buildAEO } = await import('./aeo/build.mjs');
 await buildEditorial();

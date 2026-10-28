@@ -1,0 +1,4 @@
+{
+  "_how_to_edit": "Add one object per confirmed initiative (only initiatives approved by the project team). Example: {\"name\":\"Initiative\",\"description\":{\"en\":\"...\",\"es\":\"...\"},\"themes\":[\"ecology\",\"community\"],\"location\":\"Tulum, Q. Roo\",\"url\":\"https://...\",\"image\":\"/assets/el-faro/initiative.webp\"}. Themes: ecology, refi, built, tech, tourism, community.",
+  "initiatives": []
+}

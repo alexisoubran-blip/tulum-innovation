@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 
 const version='20261024-fit';
 const bi=(en,es)=>`<span data-tif-en>${en}</span><span data-tif-es>${es}</span>`;
-const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa'],['/blog','Blog','Blog']];
+const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/el-faro','El Faro','El Faro'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa'],['/blog','Blog','Blog']];
 const nav=(route)=>items.map(([url,en,es])=>`<a href="${url}"${url===route?' aria-current="page"':''}>${bi(en,es)}</a>`).join('');
-const routes=[['blog/index.html','/blog'],['blog/tif-whale-tank-sin-filtros-mvs/index.html','/blog/tif-whale-tank-sin-filtros-mvs'],['index.html','/'],['home-v2/index.html','/'],['speakers/index.html','/speakers'],['program/index.html','/program'],['tickets/index.html','/tickets'],['whale-tank/index.html','/whale-tank'],['sponsorship/index.html','/sponsorship'],['press/index.html','/press'],['festival-2026/index.html','/festival-2026'],['alexis-soubran-tif-cmo/index.html','/alexis-soubran-tif-cmo'],['alexis-soubran-TIF-CMO/index.html','/alexis-soubran-tif-cmo'],['partners/minimalist-agency/index.html','/partners/minimalist-agency']];
+const routes=[['blog/index.html','/blog'],['blog/tif-whale-tank-sin-filtros-mvs/index.html','/blog/tif-whale-tank-sin-filtros-mvs'],['index.html','/'],['home-v2/index.html','/'],['speakers/index.html','/speakers'],['program/index.html','/program'],['tickets/index.html','/tickets'],['whale-tank/index.html','/whale-tank'],['sponsorship/index.html','/sponsorship'],['press/index.html','/press'],['festival-2026/index.html','/festival-2026'],['alexis-soubran-tif-cmo/index.html','/alexis-soubran-tif-cmo'],['alexis-soubran-TIF-CMO/index.html','/alexis-soubran-tif-cmo'],['partners/minimalist-agency/index.html','/partners/minimalist-agency'],['el-faro/index.html','/el-faro']];
 
 export async function buildBrand(){
   await mkdir('dist/brand',{recursive:true});
@@ -18,7 +18,7 @@ export async function buildBrand(){
     const oldHeader=html.match(/<header\b[\s\S]*?<\/header>/)?.[0];
     assert.ok(oldHeader,`Missing header: ${file}`);
     const toggle=oldHeader.match(/<button\b[^>]*(?:data-v2-lang|data-lang-toggle|data-press-lang)[\s\S]*?<\/button>/)?.[0];
-    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):['/speakers','/tickets','/program','/sponsorship','/partners/minimalist-agency'].includes(route)?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
+    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):['/speakers','/tickets','/program','/sponsorship','/partners/minimalist-agency','/el-faro'].includes(route)?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
     const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]);
     const sections=localLinks.length?`<nav class="tif-section-nav" aria-label="Page sections">${localLinks.join('')}</nav>`:'';
     const whale=route==='/whale-tank';
