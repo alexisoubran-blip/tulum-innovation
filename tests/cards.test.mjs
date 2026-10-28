@@ -263,3 +263,22 @@ test('voluntary contribution: buyer sets the USD amount within range; reservatio
   const r = await checkout.createOrder({ ...buyer, passId: 'whale-tank-reservation', amountUsd: 1 });
   assert.equal(r.order.amountUsd, 700);
 });
+
+test('sales admin: retroactive list with buyer, product, method and card reference, no card numbers', async () => {
+  const { checkout } = setup();
+  const { token } = await checkout.createOrder({ ...buyer, company: 'ACME' });
+  await checkout.pay({ token, methodId: 'CARD', card, billing });
+  await checkout.createOrder({ ...buyer, passId: 'whale-tank-reservation' });
+  const sales = await checkout.adminSales({});
+  assert.equal(sales.length, 2);
+  const paid = sales.find((s) => s.status === 'paid');
+  assert.equal(paid.passName, 'Executive Pass');
+  assert.equal(paid.method, 'CARD');
+  assert.equal(paid.buyerEmail, 'ana@example.com');
+  assert.equal(paid.company, 'ACME');
+  assert.match(paid.card, /····1111$/);
+  assert.ok(paid.processorOrderId && paid.reference);
+  assert.equal(paid.tickets, 1);
+  assert.ok(!JSON.stringify(sales).includes('4111111111111111'));
+  assert.equal((await checkout.adminSales({ from: '2030-01-01' })).length, 0);
+});

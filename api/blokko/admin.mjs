@@ -5,6 +5,7 @@
 //   { action: "init-terminal" }                           → POST /v2/pos/initialization with our serial (virtual, type E)
 //   { action: "test-intent", amount?, paymentMethodId? }  → a test QR in MXN (production capped at 50 MXN)
 //   { action: "status", merchantTransactionId }           → payment status of a test
+//   { action: "sales", from?, to? }                    → every order (retroactive) with buyer and payment data
 //   { action: "overview" }                                → SPEI transfers and recent payment attempts (with errors)
 //   { action: "confirm-transfer", reference }             → marks a SPEI order paid and issues its tickets
 //   { action: "card-test", scenario }                     → sandbox-only BlissCore charge with a test card
@@ -75,6 +76,8 @@ export async function POST(request) {
         });
         return json(200, { ok: true, merchantTransactionId, response });
       }
+      case 'sales':
+        return json(200, { ok: true, sales: await (await getCheckout()).adminSales({ from: body.from, to: body.to }) });
       case 'status':
         if (!body.merchantTransactionId) return json(400, { ok: false, error: 'missing_merchantTransactionId' });
         return json(200, { ok: true, response: await client.getPaymentByMerchantTransactionId(String(body.merchantTransactionId)) });

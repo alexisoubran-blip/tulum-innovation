@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ventas · TIF Admin</title>
+<style>
+:root { --ink:#00080B; --panel:#071316; --paper:#F2F1EA; --muted:rgba(242,241,234,.62); --line:rgba(242,241,234,.12); --ember:#E97A43; --deep:#D14414; --ok:#4BFFB3; --warn:#FFC424; --bad:#FF5A5A; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ink); color: var(--paper); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Sora, sans-serif; }
+header { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; padding: .9rem 1.2rem; background: rgba(0,8,11,.94); border-bottom: 1px solid var(--line); backdrop-filter: blur(10px); }
+h1 { margin: 0; font-size: 1.05rem; letter-spacing: .04em; }
+h1 b { color: var(--ember); }
+main { padding: 1.2rem; max-width: 1500px; margin: 0 auto; }
+input, select, button { font: inherit; color: inherit; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: .55rem .75rem; }
+button { cursor: pointer; }
+button.primary { background: var(--deep); border-color: var(--deep); color: #fff; font-weight: 600; }
+button.chip { border-radius: 999px; padding: .4rem .85rem; }
+button.chip.on { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.spacer { flex: 1; }
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 1rem; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .7rem; margin: 0 0 1rem; }
+.kpi { padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+.kpi small { display: block; color: var(--muted); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+.kpi b { display: block; margin-top: .3rem; font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.kpi span { color: var(--muted); font-size: .78rem; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: .7rem; margin-bottom: 1rem; }
+.box { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); overflow: hidden; }
+.box h2 { margin: 0; padding: .8rem 1rem; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+.box .scroll { max-height: 320px; overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { padding: .55rem .75rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; white-space: nowrap; }
+th { position: sticky; top: 0; background: #0b1a1d; color: var(--muted); font-weight: 500; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+td.num, th.num { text-align: right; }
+tbody tr:hover { background: rgba(242,241,234,.03); }
+.sales-wrap { overflow: auto; max-height: 70vh; }
+.st { display: inline-block; padding: .1rem .5rem; border-radius: 999px; font-size: .72rem; font-weight: 600; }
+.st.paid { background: rgba(75,255,179,.15); color: var(--ok); }
+.st.pending { background: rgba(255,196,36,.15); color: var(--warn); }
+.st.expired, .st.cancelled, .st.failed { background: rgba(242,241,234,.08); color: var(--muted); }
+.st.refunded { background: rgba(255,90,90,.15); color: var(--bad); }
+.muted { color: var(--muted); }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; }
+tr.detail td { white-space: normal; background: #050f12; }
+.dl { position: sticky; left: .75rem; max-width: min(1400px, calc(100vw - 4rem)); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .3rem 1.4rem; }
+.dl div { display: flex; gap: .6rem; } .dl dt { color: var(--muted); min-width: 120px; } .dl dd { margin: 0; word-break: break-all; }
+.msg { padding: .8rem 1rem; border-radius: 10px; margin-bottom: 1rem; background: rgba(233,122,67,.12); border: 1px solid rgba(233,122,67,.35); }
+.hidden { display: none !important; }
+a { color: var(--ember); }
+@media (max-width: 700px) { header { position: static; } .kpi b { font-size: 1.2rem; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>TIF · <b>Ventas</b></h1>
+  <div class="spacer"></div>
+  <input id="token" type="password" autocomplete="off" placeholder="Token de admin" style="width:220px">
+  <button class="primary" id="load">Cargar</button>
+  <a href="/admin/blokko" class="muted">Admin pagos →</a>
+</header>
+<main>
+  <div class="msg hidden" id="msg"></div>
+
+  <div class="filters">
+    <div class="row" id="ranges">
+      <button class="chip on" data-range="all">Todo</button>
+      <button class="chip" data-range="today">Hoy</button>
+      <button class="chip" data-range="yesterday">Ayer</button>
+      <button class="chip" data-range="7">7 días</button>
+      <button class="chip" data-range="30">30 días</button>
+      <button class="chip" data-range="month">Este mes</button>
+    </div>
+    <label class="muted">Del <input type="date" id="from"></label>
+    <label class="muted">al <input type="date" id="to"></label>
+  </div>
+  <div class="filters">
+    <select id="status">
+      <option value="paid">Pagadas</option>
+      <option value="pending">Pendientes (sin pagar)</option>
+      <option value="refunded">Reembolsadas</option>
+      <option value="all">Todas</option>
+    </select>
+    <select id="method"><option value="">Todos los métodos</option></select>
+    <select id="product"><option value="">Todos los productos</option></select>
+    <input id="q" type="search" placeholder="Buscar nombre, correo, referencia, autorización, ····1234" style="min-width:300px;flex:1">
+    <button id="csv">Descargar CSV</button>
+  </div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="grid2">
+    <div class="box"><h2>Por día y método (conciliación)</h2><div class="scroll"><table id="byDay"></table></div></div>
+    <div class="box"><h2>Por producto</h2><div class="scroll"><table id="byProduct"></table></div></div>
+  </section>
+
+  <div class="box">
+    <h2 id="countTitle">Órdenes</h2>
+    <div class="sales-wrap"><table id="sales"></table></div>
+  </div>
+  <p class="muted" style="margin-top:1rem">Horas y días en hora de Ciudad de México. Montos en MXN = lo que se cobró. Las tarjetas muestran solo marca y últimos 4 dígitos. “Orden BlissCore” es el <span class="mono">order_id</span> que enviamos a TaakPay/BlissCore: búscalo en su panel o en su reporte de liquidación para identificar al comprador.</p>
+</main>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const TZ = 'America/Mexico_City';
+  const store = { get(){ try { return sessionStorage.getItem('tifAdminToken') || ''; } catch { return ''; } }, set(v){ try { sessionStorage.setItem('tifAdminToken', v); } catch {} } };
+  $('token').value = store.get();
+  $('token').addEventListener('input', (e) => store.set(e.target.value.trim()));
+  const mxn = (n) => n == null ? '—' : '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const usd = (n) => n == null ? '—' : 'US$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const dayOf = (iso) => iso ? new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(iso)) : '';
+  const when = (iso) => iso ? new Intl.DateTimeFormat('es-MX', { timeZone: TZ, dateStyle: 'short', timeStyle: 'short' }).format(new Date(iso)) : '—';
+  const STATUS = { paid: 'Pagada', pending: 'Pendiente', expired: 'Expirada', cancelled: 'Cancelada', refunded: 'Reembolsada', failed: 'Fallida' };
+  let all = [];
+
+  function msg(text) { $('msg').textContent = text; $('msg').classList.toggle('hidden', !text); }
+
+  async function load() {
+    msg('');
+    $('load').disabled = true; $('load').textContent = 'Cargando…';
+    try {
+      const res = await fetch('/api/blokko/admin', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + $('token').value.trim() }, body: JSON.stringify({ action: 'sales' }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) { msg(data.reason === 'wrong_token' || data.reason === 'missing_token' ? 'Token incorrecto. Es el mismo de /admin/blokko (TICKETING_ADMIN_TOKEN).' : 'No se pudo cargar: ' + (data.error || res.status)); return; }
+      all = data.sales || [];
+      const methods = [...new Set(all.map((s) => s.methodLabel))].sort();
+      $('method').innerHTML = '<option value="">Todos los métodos</option>' + methods.map((m) => `<option>${esc(m)}</option>`).join('');
+      const products = [...new Map(all.map((s) => [s.passId, s.passName])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+      $('product').innerHTML = '<option value="">Todos los productos</option>' + products.map(([id, n]) => `<option value="${esc(id)}">${esc(n)}</option>`).join('');
+      render();
+    } catch (e) { msg('Error de red: ' + e.message); }
+    finally { $('load').disabled = false; $('load').textContent = 'Recargar'; }
+  }
+
+  function setRange(r) {
+    document.querySelectorAll('#ranges .chip').forEach((c) => c.classList.toggle('on', c.dataset.range === r));
+    const today = dayOf(new Date().toISOString());
+    const shift = (d, n) => { const x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); };
+    const map = { all: ['', ''], today: [today, today], yesterday: [shift(today, -1), shift(today, -1)], 7: [shift(today, -6), today], 30: [shift(today, -29), today], month: [today.slice(0, 8) + '01', today] };
+    [$('from').value, $('to').value] = map[r] || ['', ''];
+    render();
+  }
+
+  function filtered() {
+    const st = $('status').value, m = $('method').value, p = $('product').value, q = $('q').value.trim().toLowerCase();
+    const from = $('from').value, to = $('to').value;
+    return all.filter((s) => {
+      const d = dayOf(s.status === 'paid' && s.paidAt ? s.paidAt : s.createdAt);
+      if (from && d < from) return false;
+      if (to && d > to) return false;
+      if (st !== 'all' && !(st === 'pending' ? ['pending', 'expired'].includes(s.status) : s.status === st)) return false;
+      if (m && s.methodLabel !== m) return false;
+      if (p && s.passId !== p) return false;
+      if (q && ![s.buyerName, s.buyerEmail, s.buyerPhone, s.reference, s.authorization, s.processorOrderId, s.card, s.transferReference, s.company, s.id, s.passName].join(' ').toLowerCase().includes(q)) return false;
+      return true;
+    });
+  }
+
+  function group(rows, key) {
+    const m = new Map();
+    rows.forEach((s) => { const k = key(s); const g = m.get(k) || { n: 0, qty: 0, usd: 0, mxn: 0 }; g.n++; g.qty += s.quantity; g.usd += s.amountUsd || 0; g.mxn += s.amountMxn || 0; m.set(k, g); });
+    return m;
+  }
+
+  function render() {
+    const rows = filtered();
+    const paid = rows.filter((s) => s.status === 'paid');
+    const sum = (a, f) => a.reduce((t, s) => t + (f(s) || 0), 0);
+    const byMethod = group(paid, (s) => s.methodLabel);
+    $('kpis').innerHTML = [
+      ['Órdenes pagadas', paid.length, `${rows.length} en el filtro`],
+      ['Boletos / unidades', sum(paid, (s) => s.quantity), `${sum(paid, (s) => s.tickets)} QR emitidos`],
+      ['Total MXN cobrado', mxn(sum(paid, (s) => s.amountMxn)), 'bruto, antes de comisiones'],
+      ['Total USD', usd(sum(paid, (s) => s.amountUsd)), ''],
+      ...[...byMethod.entries()].map(([k, g]) => [k, mxn(g.mxn), `${g.n} órdenes`]),
+    ].map(([a, b, c]) => `<div class="kpi"><small>${esc(a)}</small><b>${b}</b><span>${esc(c)}</span></div>`).join('');
+
+    const dayRows = [...group(paid, (s) => dayOf(s.paidAt || s.createdAt) + '|' + s.methodLabel).entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1));
+    $('byDay').innerHTML = '<thead><tr><th>Día</th><th>Método</th><th class="num">Órdenes</th><th class="num">MXN</th><th class="num">USD</th></tr></thead><tbody>' +
+      (dayRows.map(([k, g]) => { const [d, m] = k.split('|'); return `<tr><td>${d}</td><td>${esc(m)}</td><td class="num">${g.n}</td><td class="num">${mxn(g.mxn)}</td><td class="num">${usd(g.usd)}</td></tr>`; }).join('') || '<tr><td colspan="5" class="muted">Sin ventas pagadas en el filtro</td></tr>') + '</tbody>';
+    const prodRows = [...group(paid, (s) => s.passName).entries()].sort((a, b) => b[1].mxn - a[1].mxn);
+    $('byProduct').innerHTML = '<thead><tr><th>Producto</th><th class="num">Órdenes</th><th class="num">Unidades</th><th class="num">MXN</th><th class="num">USD</th></tr></thead><tbody>' +
+      (prodRows.map(([k, g]) => `<tr><td>${esc(k)}</td><td class="num">${g.n}</td><td class="num">${g.qty}</td><td class="num">${mxn(g.mxn)}</td><td class="num">${usd(g.usd)}</td></tr>`).join('') || '<tr><td colspan="5" class="muted">—</td></tr>') + '</tbody>';
+
+    $('countTitle').textContent = `Órdenes (${rows.length})`;
+    $('sales').innerHTML = '<thead><tr><th>Fecha</th><th>Estado</th><th>Comprador</th><th>Producto</th><th class="num">Cant.</th><th class="num">MXN</th><th class="num">USD</th><th>Método</th><th>Tarjeta</th><th>Autorización</th><th>Orden BlissCore / Ref.</th><th></th></tr></thead><tbody>' +
+      rows.map((s, i) => `<tr data-i="${i}">
+        <td>${when(s.paidAt || s.createdAt)}</td>
+        <td><span class="st ${s.status}">${STATUS[s.status] || s.status}</span></td>
+        <td>${esc(s.buyerName)}<br><span class="muted">${esc(s.buyerEmail)}</span></td>
+        <td>${esc(s.passName)}</td>
+        <td class="num">${s.quantity}</td>
+        <td class="num">${mxn(s.amountMxn)}</td>
+        <td class="num">${usd(s.amountUsd)}</td>
+        <td>${esc(s.methodLabel)}</td>
+        <td class="mono">${esc(s.card || '')}</td>
+        <td class="mono">${esc(s.authorization || '')}</td>
+        <td class="mono">${esc(s.processorOrderId || s.transferReference || s.reference || '')}</td>
+        <td><button class="chip" data-more="${i}">Ver</button></td>
+      </tr>`).join('') + '</tbody>';
+    $('sales').querySelectorAll('[data-more]').forEach((b) => b.addEventListener('click', () => toggle(b, rows[+b.dataset.more])));
+    window.__rows = rows;
+  }
+
+  function toggle(btn, s) {
+    const tr = btn.closest('tr');
+    if (tr.nextElementSibling?.classList.contains('detail')) { tr.nextElementSibling.remove(); btn.textContent = 'Ver'; return; }
+    btn.textContent = 'Cerrar';
+    const f = [
+      ['Orden TIF', s.id], ['Creada', when(s.createdAt)], ['Pagada', when(s.paidAt)], ['Teléfono', s.buyerPhone], ['País', s.country],
+      ['Empresa', s.company], ['Puesto', s.jobTitle], ['Comercio', s.business ? `${s.business.name || ''} · ${s.business.address || ''}` : null],
+      ['Factura', s.invoice ? `${s.invoice.rfc} · ${s.invoice.legal_name} · CP ${s.invoice.zip} · régimen ${s.invoice.regime} · ${s.invoice.use}` : null],
+      ['Proveedor', s.provider], ['Transacción', s.reference], ['Autorización', s.authorization], ['Orden BlissCore', s.processorOrderId], ['Ref. SPEI', s.transferReference],
+      ['Tipo de cambio', s.rate], ['IVA USD', s.taxUsd ? usd(s.taxUsd) : null], ['Monto libre USD', s.customAmountUsd],
+      ['Boletos QR', s.tickets], ['Correo enviado', s.emailed ? 'Sí' : 'No'], ['Intentos de pago', s.attempts], ['Último error', s.lastError], ['UTM', s.utm], ['Ref', s.ref],
+    ].filter(([, v]) => v != null && v !== '');
+    const d = document.createElement('tr'); d.className = 'detail';
+    d.innerHTML = `<td colspan="12"><dl class="dl">${f.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></td>`;
+    tr.after(d);
+  }
+
+  function csv() {
+    const rows = filtered();
+    const cols = [['Fecha (CDMX)', (s) => when(s.paidAt || s.createdAt)], ['Estado', (s) => STATUS[s.status] || s.status], ['Nombre', (s) => s.buyerName], ['Correo', (s) => s.buyerEmail], ['Teléfono', (s) => s.buyerPhone], ['País', (s) => s.country], ['Empresa', (s) => s.company], ['Puesto', (s) => s.jobTitle],
+      ['Producto', (s) => s.passName], ['Cantidad', (s) => s.quantity], ['MXN', (s) => s.amountMxn], ['USD', (s) => s.amountUsd], ['IVA USD', (s) => s.taxUsd], ['Tipo de cambio', (s) => s.rate], ['Método', (s) => s.methodLabel], ['Tarjeta', (s) => s.card],
+      ['Autorización', (s) => s.authorization], ['Transacción', (s) => s.reference], ['Orden BlissCore', (s) => s.processorOrderId], ['Ref SPEI', (s) => s.transferReference], ['Boletos QR', (s) => s.tickets],
+      ['RFC', (s) => s.invoice?.rfc], ['Razón social', (s) => s.invoice?.legal_name], ['CP fiscal', (s) => s.invoice?.zip], ['Régimen', (s) => s.invoice?.regime], ['Uso CFDI', (s) => s.invoice?.use], ['Comercio', (s) => s.business?.name], ['Dirección comercio', (s) => s.business?.address], ['UTM', (s) => s.utm], ['Orden TIF', (s) => s.id]];
+    const q = (v) => { const t = String(v ?? ''); return /[",\n;]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
+    const body = [cols.map((c) => c[0]).join(','), ...rows.map((s) => cols.map(([, f]) => q(f(s))).join(','))].join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['﻿' + body], { type: 'text/csv;charset=utf-8' }));
+    a.download = `tif-ventas-${$('from').value || 'inicio'}-a-${$('to').value || 'hoy'}.csv`;
+    a.click(); URL.revokeObjectURL(a.href);
+  }
+
+  $('load').addEventListener('click', load);
+  $('token').addEventListener('keydown', (e) => { if (e.key === 'Enter') load(); });
+  document.querySelectorAll('#ranges .chip').forEach((c) => c.addEventListener('click', () => setRange(c.dataset.range)));
+  ['from', 'to'].forEach((id) => $(id).addEventListener('change', () => { document.querySelectorAll('#ranges .chip').forEach((c) => c.classList.remove('on')); render(); }));
+  ['status', 'method', 'product'].forEach((id) => $(id).addEventListener('change', render));
+  $('q').addEventListener('input', render);
+  $('csv').addEventListener('click', csv);
+  if ($('token').value) load();
+})();
+</script>
+</body>
+</html>
