@@ -13,6 +13,8 @@ const passes = [
   { id: 'business-pass', name: 'Business Pass · Digital Merchant', price_usd: '222.00', price_mxn: null, category: 'business', max_quantity: 1 },
   { id: 'voluntary-contribution', name: 'Community contribution', price_usd: '1.00', on_sale: true, hidden: true, category: 'festival', max_quantity: 1, issues_tickets: false },
   { id: 'whale-tank-reservation', name: 'Reservation', price_usd: '700.00', on_sale: true, hidden: true, category: 'whale-tank', max_quantity: 1, issues_tickets: false },
+  { id: 'innovation-mezcal', name: 'Innovation Mezcal · Bottle', price_usd: '38.75', price_mxn: '720.00', category: 'merch', max_quantity: 10, issues_tickets: false },
+  { id: 'innovation-mezcal-box', name: 'Innovation Mezcal · Box of 6 + T-shirt', price_usd: '232.51', price_mxn: '4320.00', category: 'merch', max_quantity: 5, issues_tickets: false },
 ];
 const buyer = { passId: 'executive-pass', quantity: 1, name: 'Ana López', email: 'ana@example.com', phone: '+52 55 1234 5678', acceptTerms: true };
 const card = { number: '4111 1111 1111 1111', expMonth: '12', expYear: '28', cvv: '123', holderName: 'ana lopez' };
@@ -283,4 +285,25 @@ test('sales admin: retroactive list with buyer, product, method and card referen
   assert.equal(paid.tickets, 1);
   assert.ok(!JSON.stringify(sales).includes('4111111111111111'));
   assert.equal((await checkout.adminSales({ from: '2030-01-01' })).length, 0);
+});
+
+test('innovation mezcal: fixed MXN 720 per bottle, 4,320 per box; pickup email with T-shirt note', async () => {
+  const { checkout, emails } = setup();
+  const opts = await checkout.options();
+  const bottle = opts.passes.find((p) => p.id === 'innovation-mezcal');
+  assert.equal(bottle.priceMxn, 720);
+  assert.equal(bottle.pricedIn, 'MXN');
+  assert.equal(bottle.category, 'merch');
+  const two = await checkout.createOrder({ ...buyer, passId: 'innovation-mezcal', quantity: 2 });
+  assert.equal(two.order.amountMxn, 1440);
+  const { token, order } = await checkout.createOrder({ ...buyer, passId: 'innovation-mezcal-box' });
+  assert.equal(order.amountMxn, 4320);
+  await checkout.pay({ token, methodId: 'CARD', card, billing });
+  const mail = emails.at(-1);
+  assert.match(mail.subject, /Tu compra/);
+  assert.ok(mail.text.includes('punto de mezcal') && mail.text.includes('talla'));
+  const st = await checkout.tickets({ token });
+  assert.equal(st.category, 'merch');
+  assert.equal(st.issuesTickets, false);
+  assert.equal(st.quantity, 1);
 });

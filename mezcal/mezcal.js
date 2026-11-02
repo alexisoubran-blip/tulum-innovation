@@ -60,9 +60,19 @@
     update();
   }
 
+  // live prices (fixed in MXN; the USD reference follows the checkout's current rate)
+  const fmtUsd = (n) => `US$${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const fmtMxn = (n) => `$${Number(n).toLocaleString('es-MX', { maximumFractionDigits: 2 })} MXN`;
+  fetch('/api/checkout/options', { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).then((o) => {
+    (o?.passes || []).forEach((p) => {
+      if (p.priceUsd) document.querySelectorAll(`[data-mz-usd="${p.id}"]`).forEach((el) => { el.textContent = fmtUsd(p.priceUsd); });
+      if (p.priceMxn) document.querySelectorAll(`[data-mz-mxn="${p.id}"]`).forEach((el) => { el.textContent = fmtMxn(p.priceMxn); });
+    });
+  }).catch(() => {});
+
   // reveals
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: 0.15 });
-  document.querySelectorAll('.mz-photo, .mz-bottle-grid > div, .mz-taste-inner, .mz-spec div').forEach((el, i) => {
+  document.querySelectorAll('.mz-photo, .mz-bottle-grid > div, .mz-buy-head, .mz-offer, .mz-howto, .mz-spec div').forEach((el, i) => {
     if (!el.classList.contains('mz-photo')) { el.classList.add('mz-reveal'); el.style.transitionDelay = `${(i % 6) * 60}ms`; }
     io.observe(el);
   });

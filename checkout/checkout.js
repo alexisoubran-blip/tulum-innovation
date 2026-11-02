@@ -36,6 +36,7 @@
       doneTickets: 'You’re in!', doneConfirm: 'Payment confirmed', viewTickets: 'View my tickets', viewPurchase: 'View my purchase',
       doneTicketsText: (e) => `We sent your tickets to ${e}. You can also open them now.`,
       doneConfirmText: (e) => `We sent the confirmation to ${e}. Our team will contact you within 48 hours to coordinate everything.`,
+      donePickupText: (e) => `We sent the confirmation to ${e}. Pick up your purchase at the festival (December 9–12) showing that email and an ID.`,
       bank: { beneficiary: 'Beneficiary', bank: 'Bank', clabe: 'CLABE', amount: 'Exact amount', reference: 'Reference (payment concept)' },
       deadline: (d) => `Transfer before ${d}; after that the order expires.`,
       noMethods: 'No payment method is available right now.',
@@ -69,6 +70,7 @@
       doneTickets: '¡Listo, ya tienes tus boletos!', doneConfirm: 'Pago confirmado', viewTickets: 'Ver mis boletos', viewPurchase: 'Ver mi compra',
       doneTicketsText: (e) => `Enviamos tus boletos a ${e}. También puedes abrirlos ahora.`,
       doneConfirmText: (e) => `Enviamos la confirmación a ${e}. Nuestro equipo te contactará en las próximas 48 horas para coordinar todo.`,
+      donePickupText: (e) => `Enviamos la confirmación a ${e}. Recoge tu compra en el festival (9 al 12 de diciembre) mostrando ese correo y una identificación.`,
       bank: { beneficiary: 'Beneficiario', bank: 'Banco', clabe: 'CLABE', amount: 'Monto exacto', reference: 'Referencia (concepto de pago)' },
       deadline: (d) => `Transfiere antes del ${d}; después la orden vence.`,
       noMethods: 'No hay métodos de pago disponibles por ahora.',
@@ -165,7 +167,7 @@
   function renderCats() {
     const box = $('cats');
     box.textContent = '';
-    const order = ['festival', 'business', 'hotel', 'whale-tank', 'sponsorship', 'residency', 'other', 'test'];
+    const order = ['festival', 'business', 'hotel', 'whale-tank', 'sponsorship', 'residency', 'merch', 'other', 'test'];
     const present = order.filter((c) => state.options.passes.some((p) => p.category === c));
     box.hidden = present.length < 2;
     present.forEach((c) => {
@@ -774,7 +776,7 @@
   function renderDone(order) {
     const tickets = order.issuesTickets !== false;
     $('doneTitle').textContent = tickets ? t().doneTickets : t().doneConfirm;
-    $('doneText').textContent = tickets ? t().doneTicketsText(order.buyerEmail || '') : t().doneConfirmText(order.buyerEmail || '');
+    $('doneText').textContent = tickets ? t().doneTicketsText(order.buyerEmail || '') : order.category === 'merch' ? t().donePickupText(order.buyerEmail || '') : t().doneConfirmText(order.buyerEmail || '');
     $('ticketsLinkText').textContent = tickets ? t().viewTickets : t().viewPurchase;
     $('ticketsLink').href = `/boleto?t=${encodeURIComponent(state.token)}`;
   }

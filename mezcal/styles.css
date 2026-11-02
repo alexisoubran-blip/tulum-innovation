@@ -116,13 +116,49 @@ body.tif-page.mz-page h3 { font-weight: 600; }
 .mz-spec dt { color: var(--mz-faint); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; }
 .mz-spec dd { margin: .25rem 0 0; font-family: var(--mz-serif); font-size: 1.15rem; color: var(--mz-paper); }
 
-/* ---------- taste ---------- */
-.mz-taste { text-align: center; overflow: hidden; background: radial-gradient(60% 70% at 50% 0%, rgba(233,176,74,.16), transparent 70%); }
-.mz-taste-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
-.mz-taste-plaque { width: min(420px, 86%); margin: -2rem 0 .5rem; }
-.mz-taste h2 { margin-inline: auto; }
-.mz-taste .mz-big { margin: 1.2rem auto 0; }
-.mz-taste-agaves { position: absolute; left: 50%; bottom: -6%; width: min(1100px, 140%); transform: translateX(-50%); opacity: .22; z-index: 0; }
+/* ---------- buy ---------- */
+.mz-hero-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: .3rem .7rem; margin: 1.6rem 0 0; }
+.mz-hero-price b { font-family: var(--mz-serif); font-size: 2rem; color: var(--mz-gold-2); }
+.mz-hero-price > span { color: var(--mz-muted); font-size: .85rem; }
+.mz-hero-note { margin: 1rem 0 0; color: var(--mz-faint); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; }
+.mz-buy { overflow: hidden; background: radial-gradient(60% 50% at 50% 0%, rgba(233,176,74,.16), transparent 70%); }
+.mz-buy-agaves { position: absolute; left: 50%; bottom: -4%; width: min(1300px, 160%); transform: translateX(-50%); opacity: .14; pointer-events: none; }
+.mz-buy .mz-wrap { position: relative; }
+.mz-buy-head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.mz-buy-plaque { width: min(380px, 80%); margin: -2.5rem 0 .4rem; }
+body.tif-page.mz-page .mz-buy-head h2 { max-width: 20ch; margin-inline: auto; }
+.mz-buy-head .mz-big { margin: 1.1rem auto 0; }
+.mz-offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.4vw, 1.8rem); margin-top: clamp(2.4rem, 5vw, 3.6rem); }
+.mz-offer { position: relative; display: grid; grid-template-rows: auto 1fr; border: 1px solid var(--mz-line-2); border-radius: 22px; overflow: hidden; background: linear-gradient(180deg, rgba(246,234,208,.05), rgba(246,234,208,.015)); transition: transform .35s, border-color .35s, box-shadow .35s; }
+.mz-offer:hover { transform: translateY(-4px); border-color: rgba(233,176,74,.55); box-shadow: 0 30px 80px -30px rgba(233,176,74,.4); }
+.mz-offer.is-featured { border-color: rgba(233,176,74,.6); box-shadow: 0 0 0 1px rgba(233,176,74,.25), 0 30px 90px -30px rgba(233,176,74,.45); }
+.mz-offer-media { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: #120D08; }
+.mz-offer-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+.mz-offer-media.is-bottle img { object-position: 60% 40%; }
+.mz-offer-media.is-tee img { object-position: 50% 42%; transform: scale(1.25); }
+.mz-offer:hover .mz-offer-media img { transform: scale(1.05); }
+.mz-offer:hover .mz-offer-media.is-tee img { transform: scale(1.32); }
+.mz-offer-badge { position: absolute; z-index: 2; top: 16px; right: 16px; padding: .45rem .9rem; border-radius: 999px; background: var(--mz-ember); color: #fff; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 8px 30px -6px rgba(226,84,28,.8); animation: mz-badge 2.6s ease-in-out infinite; }
+@keyframes mz-badge { 50% { transform: rotate(-3deg) scale(1.05); } }
+.mz-offer-body { display: flex; flex-direction: column; padding: 1.6rem 1.6rem 1.8rem; }
+.mz-offer-kicker { margin: 0; color: var(--mz-gold-2); font-size: .68rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+body.tif-page.mz-page .mz-offer h3 { margin: .4rem 0 0; font-size: clamp(1.4rem, 2.2vw, 1.9rem); }
+.mz-offer-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: .2rem .7rem; margin: .9rem 0 0; }
+.mz-offer-price b { font-family: var(--mz-serif); font-size: clamp(2rem, 3.4vw, 2.6rem); color: var(--mz-gold-2); line-height: 1; }
+.mz-offer-price > span { color: var(--mz-muted); font-size: .85rem; }
+.mz-offer ul { margin: 1.1rem 0 1.6rem; padding: 0; list-style: none; display: grid; gap: .45rem; color: rgba(246,234,208,.86); font-size: .95rem; }
+.mz-offer li { position: relative; padding-left: 1.4rem; }
+.mz-offer li::before { content: "✦"; position: absolute; left: 0; color: var(--mz-gold); font-size: .8rem; top: .15rem; }
+.mz-offer .mz-btn { margin-top: auto; align-self: flex-start; }
+.mz-howto { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1.4rem, 4vw, 3.5rem); align-items: center; margin-top: clamp(3rem, 6vw, 4.5rem); padding: clamp(1.4rem, 3vw, 2.2rem); border: 1px solid var(--mz-line); border-radius: 22px; background: rgba(11,8,5,.55); backdrop-filter: blur(6px); }
+.mz-howto img { width: 100%; max-width: 420px; justify-self: center; filter: drop-shadow(0 20px 40px rgba(0,0,0,.6)); animation: mz-float 6s ease-in-out infinite; }
+@keyframes mz-float { 50% { transform: translateY(-8px) rotate(-1deg); } }
+.mz-howto ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem; }
+.mz-howto li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: .8rem; padding-top: 1rem; border-top: 1px solid var(--mz-line); color: rgba(246,234,208,.88); }
+.mz-howto li:first-child { border-top: 0; padding-top: 0; }
+.mz-howto b { font-family: var(--mz-tech); font-weight: 400; color: var(--mz-gold); }
+.mz-buy-more { margin: 2rem 0 0; text-align: center; color: var(--mz-muted); font-size: .92rem; }
+.mz-buy-more a { color: var(--mz-gold-2); text-decoration: none; font-weight: 600; }
 .mz-legal { margin: 0; padding: 1.4rem 20px 2.4rem; text-align: center; color: var(--mz-faint); font-size: .74rem; letter-spacing: .04em; }
 
 /* ---------- age gate ---------- */
@@ -160,6 +196,9 @@ html.mz-locked { overflow: hidden; }
   .mz-steps li.is-near { opacity: .3; }
   .mz-steps li.is-near p { max-height: 0; margin: 0; }
   .mz-spec dd { font-size: 1rem; }
+  .mz-offers, .mz-howto { grid-template-columns: minmax(0, 1fr); }
+  .mz-hero-price { justify-content: center; }
+  .mz-howto img { max-width: 300px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .mz-label.is-hero .mz-l { animation: none !important; opacity: 1; }
@@ -167,3 +206,4 @@ html.mz-locked { overflow: hidden; }
 }
 
 .mz-page footer a, .mz-page .tif-site-footer a { color: inherit; }
+.mz-offer.mz-reveal.is-in:hover { transform: translateY(-4px); }
