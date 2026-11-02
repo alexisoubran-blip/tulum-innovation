@@ -12,6 +12,7 @@ await cp("sponsorship", "dist/sponsorship", { recursive: true });
 await cp("partners", "dist/partners", { recursive: true });
 await cp("cenote", "dist/cenote", { recursive: true });
 await cp("el-faro", "dist/el-faro", { recursive: true, filter: (src) => !src.endsWith("build.mjs") });
+await cp("mezcal", "dist/mezcal", { recursive: true });
 await cp("alexis-soubran-tif-cmo", "dist/alexis-soubran-tif-cmo", { recursive: true });
 await cp("alexis-soubran-TIF-CMO", "dist/alexis-soubran-TIF-CMO", { recursive: true });
 await cp("home-v2", "dist/home-v2", { recursive: true });
