@@ -265,7 +265,7 @@
   "Are accommodation and travel included?": "¿El hospedaje y el viaje están incluidos?",
   "Accommodation is included only in selected packages. Flights, local transportation and additional hospitality experiences are separate unless explicitly stated.": "El hospedaje está incluido únicamente en paquetes seleccionados. Los vuelos, transporte local y experiencias adicionales de hospitalidad se cobran por separado salvo que se indique lo contrario.",
   "Where will the festival take place?": "¿Dónde se realizará el festival?",
-  "The program will take place across selected venues in Tulum, including Ikal Arena and the Whale Tank founder venue.": "El programa se realizará en sedes seleccionadas de Tulum, incluyendo Ikal Arena y la sede de founders de Whale Tank.",
+  "The program will take place across selected venues in Tulum, including Arena and the Whale Tank founder venue.": "El programa se realizará en sedes seleccionadas de Tulum, incluyendo Arena y la sede de founders de Whale Tank.",
   "How can my company become a partner?": "¿Cómo puede mi empresa convertirse en partner?",
   "Submit the partnership form with your objectives, target audience and approximate investment range. The team will propose the most relevant format.": "Envía el formulario de alianzas con tus objetivos, audiencia objetivo y rango aproximado de inversión. El equipo propondrá el formato más relevante.",
   "From the heart of the jungle to the future of humanity.": "Desde el corazón de la selva hacia el futuro de la humanidad.",

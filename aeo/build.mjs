@@ -7,10 +7,10 @@ const json=s=>JSON.stringify(s).replace(/</g,'\\u003c');
 const bi=(en,es)=>`<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const author={'@type':'Person','@id':`${origin}/alexis-soubran-tif-cmo#alexis`,name:'Alexis Soubran',url:`${origin}/alexis-soubran-tif-cmo`,jobTitle:'CMO, Tulum Innovation Fest; CEO, Minimalist Agency',sameAs:['https://alexisoubran.com/']};
 const org={'@type':'Organization','@id':`${origin}/#organization`,name:'Tulum Innovation Fest',url:origin+'/',logo:origin+'/assets/tulum-innovation-fest-logo.png'};
-const place={'@type':'Place',name:'IKAL Arena',address:{'@type':'PostalAddress',addressLocality:'Tulum',addressRegion:'Quintana Roo',addressCountry:'MX'}};
+const place={'@type':'Place',name:'Arena',address:{'@type':'PostalAddress',addressLocality:'Tulum',addressRegion:'Quintana Roo',addressCountry:'MX'}};
 const faqs=[
  ['What is Tulum Innovation Fest?','Tulum Innovation Fest is a four-day gathering connecting founders, investors, technology leaders and creators through talks, workshops, networking, culture and shared experiences.','¿Qué es Tulum Innovation Fest?','Tulum Innovation Fest es un encuentro de cuatro días que conecta a founders, inversionistas, líderes de tecnología y creadores mediante charlas, workshops, networking, cultura y experiencias compartidas.'],
- ['When and where is TIF 2026?','TIF 2026 takes place from December 9 to 12, 2026 at IKAL Arena in Tulum, Quintana Roo, Mexico.','¿Cuándo y dónde se realiza TIF 2026?','TIF 2026 se realizará del 9 al 12 de diciembre de 2026 en IKAL Arena, Tulum, Quintana Roo, México.'],
+ ['When and where is TIF 2026?','TIF 2026 takes place from December 9 to 12, 2026 at Arena in Tulum, Quintana Roo, Mexico.','¿Cuándo y dónde se realiza TIF 2026?','TIF 2026 se realizará del 9 al 12 de diciembre de 2026 en Arena, Tulum, Quintana Roo, México.'],
  ['Who is TIF for?','TIF welcomes founders, investors, technology and business professionals, creators and brands interested in innovation, capital and collaboration.','¿A quién está dirigido TIF?','TIF está dirigido a founders, inversionistas, profesionales de tecnología y negocios, creadores y marcas interesados en innovación, capital y colaboración.'],
  ['What is Whale Tank?','Whale Tank is the startup program linked to TIF, combining investment readiness, mentorship, pitch preparation and investor matchmaking. Participation does not guarantee investment.','¿Qué es Whale Tank?','Whale Tank es el programa para startups vinculado a TIF que combina preparación para inversión, mentoría, preparación de pitch y encuentros con inversionistas. Participar no garantiza recibir inversión.'],
  ['Where can I see the speakers and program?','The Speakers page lists the public 2026 lineup with roles and companies. The Program page outlines the four festival days. Session times and locations will be shared closer to the event.','¿Dónde puedo consultar speakers y programa?','La página Speakers presenta el lineup público 2026 con roles y empresas. La página Programa resume los cuatro días del festival. Los horarios y las ubicaciones de las sesiones se compartirán más cerca del evento.'],
@@ -68,7 +68,7 @@ export async function buildAEO(){
   const route=file==='dist/index.html'?'/':'/'+file.slice(5).replace(/\/index\.html$/,'');
   const canonical=html.match(/<link\b[^>]*rel="canonical"[^>]*href="([^"]+)"/)?.[1]||origin+route;
   const title=html.match(/<title\b[^>]*>([^]*?)<\/title>/)?.[1]||'Tulum Innovation Fest';
-  const description=html.match(/<meta\b[^>]*name="description"[^>]*content="([^"]*)"/)?.[1]||'Tulum Innovation Fest 2026: December 9–12, IKAL Arena, Tulum, Mexico.';
+  const description=html.match(/<meta\b[^>]*name="description"[^>]*content="([^"]*)"/)?.[1]||'Tulum Innovation Fest 2026: December 9–12, Arena, Tulum, Mexico.';
   const md='/markdown/'+(route==='/'?'index':route.slice(1).replaceAll('/','-'))+'.md';
   const main=html.match(/<main\b[^>]*>([^]*?)<\/main>/)?.[1]||'';
   await writeFile('dist'+md,`# ${textFromHTML(title)}\n\nSource: ${canonical}\n\nUpdated: ${date}\n\n${textFromHTML(main)}\n`);
@@ -88,14 +88,14 @@ export async function buildAEO(){
   html=html.replace(/<img\b[^>]*>/gi,tag=>{if(/\balt\s*=/.test(tag))return tag;const src=tag.match(/\bsrc="([^"]+)"/)?.[1]||'';const name=src.split('/').at(-1).replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ');return tag.replace(/\s*\/?>(?=$)/,` alt="${esc(name)}">`);});
   await writeFile(file,html);if(!file.includes('/home-v2/')&&!file.includes('/alexis-soubran-TIF-CMO/'))publicRoutes.push([route,md]);
  }
- const llms=`# Tulum Innovation Fest\n\n> Official information for TIF 2026: December 9–12, 2026 at IKAL Arena in Tulum, Quintana Roo, Mexico. The festival connects founders, investors, technology leaders and creators through talks, workshops, networking and culture.\n\n## Official pages\n${publicRoutes.map(([r,md])=>`- [${r==='/'?'Festival overview':r.slice(1)}](${origin+r}): [Markdown](${origin+md})`).join('\n')}\n\n## Important context\n- The 2026 public lineup is listed on /speakers. Voices from previous editions do not imply 2026 participation.\n- Whale Tank participation and pitches do not guarantee investment. Check the official application page for current requirements.\n- Pass prices and access conditions are confirmed by the official ticket provider linked from the site.\n- The MVS blog article is an author perspective by Alexis Soubran, not an interview transcript.\n- Last content update: ${date}.\n`;
+ const llms=`# Tulum Innovation Fest\n\n> Official information for TIF 2026: December 9–12, 2026 at Arena in Tulum, Quintana Roo, Mexico. The festival connects founders, investors, technology leaders and creators through talks, workshops, networking and culture.\n\n## Official pages\n${publicRoutes.map(([r,md])=>`- [${r==='/'?'Festival overview':r.slice(1)}](${origin+r}): [Markdown](${origin+md})`).join('\n')}\n\n## Important context\n- The 2026 public lineup is listed on /speakers. Voices from previous editions do not imply 2026 participation.\n- Whale Tank participation and pitches do not guarantee investment. Check the official application page for current requirements.\n- Pass prices and access conditions are confirmed by the official ticket provider linked from the site.\n- The MVS blog article is an author perspective by Alexis Soubran, not an interview transcript.\n- Last content update: ${date}.\n`;
  await writeFile('dist/markdown/index.md',`# Tulum Innovation Fest 2026
 
 Official source: ${origin}/
 
 Updated: ${date}
 
-TIF 2026 takes place December 9–12, 2026 at IKAL Arena, Tulum, Quintana Roo, Mexico.
+TIF 2026 takes place December 9–12, 2026 at Arena, Tulum, Quintana Roo, Mexico.
 
 ${faqs.map(([q,a])=>`## ${q}\n\n${a}`).join('\n\n')}
 
