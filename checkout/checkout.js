@@ -83,6 +83,27 @@
   const usd = (n) => `US$${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   const mxn = (n) => `$${Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN`;
   const push = (event, data = {}) => { try { (window.dataLayer = window.dataLayer || []).push({ event, ...data }); } catch {} };
+  // Ecommerce events for GTM (GA4 standard shape + flat tif_* fields for Meta / other tags).
+  // value = what is actually charged, in MXN; value_usd is the USD reference.
+  const track = (event, { id, name, category, quantity = 1, mxnTotal, usdTotal, orderId, paymentType, user } = {}) => {
+    const value = mxnTotal != null ? Math.round(Number(mxnTotal) * 100) / 100 : undefined;
+    const item = { item_id: id, item_name: name, item_category: category, quantity, price: value != null ? Math.round(value / quantity * 100) / 100 : undefined };
+    const ecommerce = { currency: 'MXN', value, items: [item] };
+    if (orderId) ecommerce.transaction_id = orderId;
+    if (paymentType) ecommerce.payment_type = paymentType;
+    try { (window.dataLayer = window.dataLayer || []).push({ ecommerce: null }); } catch {}
+    push(event, {
+      ecommerce,
+      tif_event_id: orderId ? `${event}_${orderId}` : `${event}_${id}_${Date.now()}`,
+      tif_order_id: orderId || undefined,
+      tif_value_mxn: value, tif_value_usd: usdTotal != null ? Number(usdTotal) : undefined, tif_currency: 'MXN',
+      tif_product_id: id, tif_product_name: name, tif_category: category, tif_quantity: quantity,
+      tif_content_ids: [id], tif_payment_type: paymentType,
+      user_data: user || undefined,
+    });
+  };
+  const orderTrack = (o, extra = {}) => ({ id: o.passId, name: o.passName, category: o.category, quantity: o.quantity, mxnTotal: o.amountMxn, usdTotal: o.amountUsd, orderId: o.orderId, ...extra });
+  const userOf = (o) => (o?.buyerEmail ? { email: String(o.buyerEmail).trim().toLowerCase() } : undefined);
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
 
   // ---------------------------------------------------------------- language
@@ -273,7 +294,7 @@
     state.category = p.category;
     setQty(Math.min(state.qty, p.maxQuantity));
     renderCats(); renderPasses(); renderSummary(); renderBuyerFields(); clearError();
-    push('select_item', { items: [{ item_id: p.id, item_name: p.name, price: p.totalUsd }] });
+    track('select_item', { id: p.id, name: p.name, category: p.category, quantity: 1, mxnTotal: p.priceMxn, usdTotal: p.totalUsd });
   }
 
   // Extra fields some products need (Business Pass: business name, location, required phone).
@@ -463,7 +484,7 @@
     state.token = res.token;
     state.order = res.order;
     nav.push('methods'); // browser back from the payment step returns to the details
-    push('begin_checkout', { currency: 'USD', value: res.order.amountUsd, items: [{ item_id: res.order.passId, item_name: res.order.passName, quantity: res.order.quantity }] });
+    track('begin_checkout', { ...orderTrack(res.order), user: userOf(res.order) });
     showPayment();
   });
 
@@ -576,7 +597,7 @@
       return showError(res.error);
     }
     if (res.status === 'paid') return checkStatus();
-    push('add_payment_info', { currency: 'USD', value: state.order?.amountUsd, payment_type: methodId });
+    if (state.order) track('add_payment_info', orderTrack(state.order, { paymentType: methodId }));
     if (res.kind === 'transfer') { state.transfer = res; return showTransfer(); }
     state.qr = res;
     showQr();
@@ -680,7 +701,7 @@
     $('cardPay').disabled = true;
     $('cardBusy').hidden = false;
     $('cardBack').hidden = true;
-    push('add_payment_info', { currency: 'USD', value: state.order?.amountUsd, payment_type: 'CARD' });
+    if (state.order) track('add_payment_info', orderTrack(state.order, { paymentType: 'CARD' }));
     const res = await api('/api/checkout/pay', {
       method: 'POST',
       body: JSON.stringify({
@@ -786,9 +807,14 @@
     setStep(4);
     renderSummary();
     renderDone(order);
-    if (!state.purchased) {
+    // Fire purchase once per order, even if the buyer reloads or reopens the confirmation.
+    const key = `tif-purchase-${order.orderId || state.token}`;
+    let seen = state.purchased;
+    try { seen = seen || localStorage.getItem(key) === '1'; } catch {}
+    if (!seen) {
       state.purchased = true;
-      push('purchase', { currency: 'USD', value: order.amountUsd, items: [{ item_id: order.passId, item_name: order.passName, quantity: order.quantity }] });
+      try { localStorage.setItem(key, '1'); } catch {}
+      track('purchase', { ...orderTrack(order, { paymentType: order.paymentMethod || state.methodId || undefined }), user: userOf(order) });
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
