@@ -80,3 +80,19 @@
 }
 @media (prefers-reduced-motion: reduce) { .sc-skel { animation:none; } .sc-bar i { transition:none; } }
 .sc-page footer a { color: inherit; }
+/* fixed site header: keep content below it */
+.sc-main { padding-top: 88px; }
+.sc-invite { min-height: calc(100svh - 88px); }
+.sc-invalid { padding: clamp(4rem, 10vw, 7rem) 0; }
+.sc-main .sc-invalid h1 { font-size: clamp(1.8rem, 4.5vw, 3.4rem); max-width: 18ch; margin-inline: auto; }
+.sc-invite-grid h1 { font-size: clamp(2.2rem, 5vw, 4.2rem); overflow-wrap: normal; }
+@media (max-width: 760px) {
+  .sc-main { padding-top: 76px; }
+  .sc-invite { min-height: 0; padding-top: 2rem; }
+  .sc-invite-grid { gap: 1.6rem; text-align: left; }
+  .sc-portrait { width: min(220px, 60vw); }
+  .sc-code { width: 100%; justify-content: space-between; gap: .5rem; padding: .9rem 1rem; }
+  .sc-code > span { flex: 1 0 100%; }
+  .sc-code b { font-size: 1.25rem; }
+  .sc-hero { padding-top: 2.2rem; }
+}
