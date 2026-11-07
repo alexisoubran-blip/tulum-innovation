@@ -1,3 +1,4 @@
+.tif-site-header,.tif-site-header *,.tif-site-footer,.tif-site-footer *,.tif-section-nav,.tif-section-nav *{box-sizing:border-box}.tif-ticket-button,.tif-lang-switch{white-space:nowrap}
 @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap');
 /* Shared visual language, derived from the approved homepage. */
 :root{--tif-ink:#00080b;--tif-paper:#f2f1ea;--tif-orange:#d14414;--tif-accent:#e97a43;--tif-line:rgba(242,241,234,.18);--tif-display:'Bruno Ace','Sora',system-ui,sans-serif;--tif-body:'Sora',system-ui,sans-serif}
