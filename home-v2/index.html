@@ -198,6 +198,10 @@
     }
 
     /* Proof strip */
+    .v2-support { background:var(--white); color:var(--black); border-bottom:1px solid rgba(0,8,11,.12); }
+    .v2-support-inner { display:flex; align-items:center; justify-content:center; gap:clamp(1.2rem,4vw,3.5rem); padding:clamp(1.4rem,3vw,2.2rem) 0; flex-wrap:wrap; text-align:center; }
+    .v2-support-inner p { margin:0; font-family:var(--sans); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(0,8,11,.6); }
+    .v2-support-inner img { width:min(420px,78vw); height:auto; }
     .v2-proof-strip { background:var(--white); color:var(--black); border-bottom:1px solid rgba(0,8,11,.12); }
     .v2-proof-grid { display:grid; grid-template-columns:repeat(4,1fr); }
     .v2-proof-grid article {
@@ -1626,6 +1630,13 @@ body .press-logo-link > span { font-size:.625rem; }
       </div>
     </section>
 
+
+    <section class="v2-support" aria-labelledby="support-title">
+      <div class="container v2-support-inner">
+        <p id="support-title"><span data-en>With the institutional support of</span><span data-es>Con el apoyo institucional de</span></p>
+        <img src="/assets/partners-sedetur.webp" alt="SEDETUR · Secretaría de Turismo de Quintana Roo · Gobierno del Estado 2022–2027" width="1200" height="353" loading="lazy" decoding="async">
+      </div>
+    </section>
 
     <section class="wt-logo-strip" aria-labelledby="wt-logo-title" data-logo-strip>
       <div class="container wt-logo-heading">
