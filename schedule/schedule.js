@@ -41,7 +41,7 @@
       if (e.day !== cur) { cur = e.day; const [en, sp] = DAYS[e.day]; html += `<div class="sh-dayhead"><h2>${es() ? `${sp} ${Number(e.day)} dic` : `${en} Dec ${Number(e.day)}`}</h2><span>${list.filter((x) => x.day === cur).length} ${t('events', 'eventos')}</span></div>`; }
       const [c, en, sp] = TYPES[e.type] || TYPES.charla;
       html += `<article class="sh-ev${isNow(e) ? ' is-now' : ''}" id="${esc(e.id)}" style="--c:${c}">
-        <div class="sh-time"><b>${esc(e.start || '—')}</b>${e.end ? `<small>${t('to', 'a')} ${esc(e.end)}</small>` : ''}</div>
+        <div class="sh-time">${e.start ? `<b>${esc(e.start)}</b>${e.end ? `<small>${t('to', 'a')} ${esc(e.end)}</small>` : ''}` : `<small>${t('Time TBA', 'Hora por confirmar')}</small>`}</div>
         <div class="sh-body${e.photo ? '' : ' no-photo'}">${e.photo ? `<div class="sh-thumb"><img src="${esc(e.photo)}" alt="" loading="lazy" decoding="async"></div>` : ''}
           <div><span class="sh-tag">${es() ? sp : en}${isNow(e) ? ` <em>${t('Now', 'Ahora')}</em>` : ''}</span><h3>${esc(L(e.title))}</h3>
           <p class="sh-meta">${[e.person && `${esc(e.person)}${e.role ? ` · ${esc(e.role)}` : ''}`, e.venue && `📍 ${esc(e.venue)}`].filter(Boolean).join(' &nbsp;·&nbsp; ')}</p>
