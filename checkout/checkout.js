@@ -9,7 +9,7 @@
   const T = {
     en: {
       errors: {
-        invalid_name: 'Please enter your full name.', invalid_email: 'Please enter a valid email.', invalid_quantity: 'That quantity is not available for this product.', invalid_amount: 'Enter the amount you want to contribute.',
+        invalid_name: 'Please enter your full name.', invalid_email: 'Please enter a valid email.', invalid_quantity: 'That quantity is not available for this product.', invalid_amount: 'Enter the amount you want to contribute.', promo_invalid: 'That speaker code is not valid.', promo_not_applicable: 'That code does not apply to this pass.',
         terms_required: 'Please accept the purchase terms.', pass_unavailable: 'That product is not available right now.', rate_not_set: 'Payments are not available right now. Please try again later.',
         order_expired: 'This order expired. Start again.', method_not_allowed: 'That payment method is not available.', method_unavailable: 'That payment method is coming soon. Please choose another one.',
         too_many_attempts: 'Too many attempts for this order. Start again.', payment_provider_error: 'That method did not respond. Choose another method or try again.',
@@ -36,6 +36,7 @@
       doneTickets: 'You’re in!', doneConfirm: 'Payment confirmed', viewTickets: 'View my tickets', viewPurchase: 'View my purchase',
       doneTicketsText: (e) => `We sent your tickets to ${e}. You can also open them now.`,
       doneConfirmText: (e) => `We sent the confirmation to ${e}. Our team will contact you within 48 hours to coordinate everything.`,
+      promoOk: (s, p) => `${p}% off · code from ${s}`, promoNa: (p) => `Valid code: ${p}% off on festival passes (General and Executive).`, promoRemove: 'Remove',
       donePickupText: (e) => `We sent the confirmation to ${e}. Pick up your purchase at the festival (December 9–12) showing that email and an ID.`,
       bank: { beneficiary: 'Beneficiary', bank: 'Bank', clabe: 'CLABE', amount: 'Exact amount', reference: 'Reference (payment concept)' },
       deadline: (d) => `Transfer before ${d}; after that the order expires.`,
@@ -43,7 +44,7 @@
     },
     es: {
       errors: {
-        invalid_name: 'Escribe tu nombre completo.', invalid_email: 'Escribe un correo válido.', invalid_quantity: 'Esa cantidad no está disponible para este producto.', invalid_amount: 'Escribe el monto que quieres aportar.',
+        invalid_name: 'Escribe tu nombre completo.', invalid_email: 'Escribe un correo válido.', invalid_quantity: 'Esa cantidad no está disponible para este producto.', invalid_amount: 'Escribe el monto que quieres aportar.', promo_invalid: 'Ese código de speaker no es válido.', promo_not_applicable: 'Ese código no aplica para este pase.',
         terms_required: 'Acepta los términos de compra.', pass_unavailable: 'Ese producto no está disponible por ahora.', rate_not_set: 'Los pagos no están disponibles por ahora. Intenta más tarde.',
         order_expired: 'Esta orden venció. Empieza de nuevo.', method_not_allowed: 'Ese método de pago no está disponible.', method_unavailable: 'Ese método llega muy pronto. Elige otro, por favor.',
         too_many_attempts: 'Demasiados intentos para esta orden. Empieza de nuevo.', payment_provider_error: 'Ese método no respondió. Elige otro método o intenta de nuevo.',
@@ -70,6 +71,7 @@
       doneTickets: '¡Listo, ya tienes tus boletos!', doneConfirm: 'Pago confirmado', viewTickets: 'Ver mis boletos', viewPurchase: 'Ver mi compra',
       doneTicketsText: (e) => `Enviamos tus boletos a ${e}. También puedes abrirlos ahora.`,
       doneConfirmText: (e) => `Enviamos la confirmación a ${e}. Nuestro equipo te contactará en las próximas 48 horas para coordinar todo.`,
+      promoOk: (s, p) => `${p}% de descuento · código de ${s}`, promoNa: (p) => `Código válido: ${p}% en pases del festival (General y Executive).`, promoRemove: 'Quitar',
       donePickupText: (e) => `Enviamos la confirmación a ${e}. Recoge tu compra en el festival (9 al 12 de diciembre) mostrando ese correo y una identificación.`,
       bank: { beneficiary: 'Beneficiario', bank: 'Banco', clabe: 'CLABE', amount: 'Monto exacto', reference: 'Referencia (concepto de pago)' },
       deadline: (d) => `Transfiere antes del ${d}; después la orden vence.`,
@@ -77,7 +79,7 @@
     },
   };
 
-  const state = { lang: 'es', options: null, category: null, passId: null, qty: 1, amount: null, token: params.get('t'), order: null, qr: null, transfer: null, methodId: null, poll: null, tick: null, detailId: null };
+  const state = { lang: 'es', options: null, category: null, passId: null, qty: 1, amount: null, token: params.get('t'), order: null, qr: null, transfer: null, methodId: null, poll: null, tick: null, detailId: null, promo: null };
   const t = () => T[state.lang];
   const L = (obj) => (obj && typeof obj === 'object' ? (obj[state.lang] ?? obj.es ?? obj.en ?? '') : (obj ?? ''));
   const usd = (n) => `US$${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -404,6 +406,39 @@
   }
   DRAFT_FIELDS.forEach((id) => $(id)?.addEventListener('change', saveDraft));
 
+  // ---------------------------------------------------------------- speaker code (Speaker Challenge)
+  // The server decides the price; the page only previews it. Codes are not personal data.
+  const promoFits = () => Boolean(state.promo && state.passId && (!state.promo.appliesTo?.length || state.promo.appliesTo.includes(state.passId)));
+  function renderPromo() {
+    const msg = $('promoMsg');
+    const form = $('promoForm');
+    if (!msg) return;
+    form.hidden = Boolean(state.order) && !state.order.promo;
+    form.classList.toggle('is-locked', Boolean(state.order));
+    msg.className = '';
+    if (state.order?.promo) { msg.className = 'is-ok'; msg.textContent = t().promoOk(state.order.promo.speaker, state.order.promo.percentOff); return; }
+    if (!state.promo) { msg.textContent = ''; return; }
+    msg.className = promoFits() || !state.passId ? 'is-ok' : '';
+    msg.textContent = promoFits() || !state.passId ? t().promoOk(state.promo.speaker, state.promo.percentOff) : t().promoNa(state.promo.percentOff);
+  }
+  async function applyPromo(raw, { quiet = false } = {}) {
+    const code = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!code) { state.promo = null; try { sessionStorage.removeItem('tif-promo'); } catch {} renderSummary(); return; }
+    const res = await api(`/api/checkout/promo?code=${encodeURIComponent(code)}`);
+    if (res.ok) {
+      state.promo = { code: res.code, speaker: res.speaker, percentOff: res.percentOff, appliesTo: res.appliesTo };
+      $('promoInput').value = res.code;
+      try { sessionStorage.setItem('tif-promo', res.code); } catch {}
+      push('promo_applied', { tif_promo_code: res.code, tif_speaker: res.speaker });
+    } else {
+      state.promo = null;
+      try { sessionStorage.removeItem('tif-promo'); } catch {}
+    }
+    renderSummary();
+    if (!res.ok && !quiet) { $('promoMsg').className = 'is-bad'; $('promoMsg').textContent = t().errors?.promo_invalid || ''; }
+  }
+  $('promoForm')?.addEventListener('submit', (e) => { e.preventDefault(); applyPromo($('promoInput').value); });
+
   // ---------------------------------------------------------------- summary
   function renderSummary() {
     const order = state.order;
@@ -429,8 +464,20 @@
     $('sumUsd').textContent = subtotal != null ? usd(subtotal) : '—';
     $('sumTaxRow').hidden = inMxn || !(tax > 0);
     $('sumTax').textContent = usd(tax || 0);
-    const total = order ? order.amountMxn : priced && inMxn ? p.priceMxn * qty : priced && rate ? Math.ceil(Math.round((unitUsd * qty + tax) * 100) * rate / 100) : null;
+    let total = order ? order.amountMxn : priced && inMxn ? p.priceMxn * qty : priced && rate ? Math.ceil(Math.round((unitUsd * qty + tax) * 100) * rate / 100) : null;
+    // Speaker code: preview of the server's price (the order shows the real one).
+    let disc = order?.promo ? order.promo.discountMxn : null;
+    const promoCode = order?.promo?.code || (!order && promoFits() && priced && !custom ? state.promo.code : null);
+    if (!order && promoCode && total != null) {
+      const f = 1 - state.promo.percentOff / 100;
+      const after = inMxn ? Math.ceil(Math.round(p.priceMxn * f * 100) / 100 * qty) : Math.ceil(Math.round(Math.round(unitUsd * f * 100) / 100 * qty * (1 + (p.taxRate || 0)) * 100) * rate / 100);
+      disc = total - after; total = after;
+    }
+    $('sumDiscRow').hidden = !(promoCode && disc > 0);
+    $('sumDiscCode').textContent = promoCode || '';
+    $('sumDisc').textContent = disc > 0 ? `−${mxn(disc)}` : '—';
     $('sumMxn').textContent = total != null ? mxn(total) : '—';
+    renderPromo();
     $('sumRate').textContent = inMxn ? t().fixedMxn : rate ? t().rate(Number(rate).toFixed(2)) : '';
   }
 
@@ -473,10 +520,12 @@
         businessName: $('businessName').value, businessAddress: $('businessAddress').value,
         invoice: $('wantInvoice').checked ? { requested: true, rfc: $('rfc').value, zip: $('taxZip').value, legalName: $('legalName').value, regime: $('taxRegime').value, use: $('cfdiUse').value } : null,
         website: $('website').value, acceptTerms: $('terms').checked, locale: state.lang, attribution,
+        promoCode: promoFits() ? state.promo.code : undefined,
       }),
     });
     btn.disabled = false;
     if (!res.ok) {
+      if (/^promo_/.test(res.error || '')) { state.promo = null; try { sessionStorage.removeItem('tif-promo'); } catch {} renderSummary(); }
       const field = FIELD_OF[res.error];
       if (field) { setFieldError(field, res.error); $(field).focus(); }
       return showError(res.error);
@@ -843,6 +892,9 @@
     renderCats(); renderPasses();
     if (preselected) selectProduct(preselected.id);
     setQty(Number(params.get('qty')) || 1);
+    let startCode = params.get('code');
+    if (!startCode) { try { startCode = sessionStorage.getItem('tif-promo'); } catch {} }
+    if (startCode && !state.token) applyPromo(startCode, { quiet: true });
 
     if (state.token) {
       const res = await api(`/api/checkout/status?t=${encodeURIComponent(state.token)}`);

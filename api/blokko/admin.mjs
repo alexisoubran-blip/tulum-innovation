@@ -6,6 +6,8 @@
 //   { action: "test-intent", amount?, paymentMethodId? }  → a test QR in MXN (production capped at 50 MXN)
 //   { action: "status", merchantTransactionId }           → payment status of a test
 //   { action: "sales", from?, to? }                    → every order (retroactive) with buyer and payment data
+//   { action: "speakers" }                            → Speaker Challenge per code: tickets, % goal, revenue, courtesies
+//   { action: "promo-toggle", code, active }         → turns a speaker code on or off
 //   { action: "blokko-payment", attemptId }           → what Blokko reports for one paid attempt (coin, amounts)
 //   { action: "overview" }                                → SPEI transfers and recent payment attempts (with errors)
 //   { action: "confirm-transfer", reference }             → marks a SPEI order paid and issues its tickets
@@ -77,6 +79,10 @@ export async function POST(request) {
         });
         return json(200, { ok: true, merchantTransactionId, response });
       }
+      case 'speakers':
+        return json(200, { ok: true, speakers: await (await getCheckout()).adminSpeakers() });
+      case 'promo-toggle':
+        return json(200, { ok: true, ...(await (await getCheckout()).setPromoActive({ code: body.code, active: body.active })) });
       case 'sales':
         return json(200, { ok: true, sales: await (await getCheckout()).adminSales({ from: body.from, to: body.to }) });
       case 'blokko-payment': {

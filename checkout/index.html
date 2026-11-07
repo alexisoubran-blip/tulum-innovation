@@ -282,9 +282,15 @@
           <div><dt><span data-en>Quantity</span><span data-es>Cantidad</span></dt><dd id="sumQty">1</dd></div>
           <div id="sumUsdRow"><dt><span data-en>Subtotal (USD)</span><span data-es>Subtotal (USD)</span></dt><dd id="sumUsd">—</dd></div>
           <div id="sumTaxRow" hidden><dt><span data-en>VAT 16% (USD)</span><span data-es>IVA 16% (USD)</span></dt><dd id="sumTax">—</dd></div>
+          <div id="sumDiscRow" class="co-disc" hidden><dt><span data-en>Speaker code</span><span data-es>Código speaker</span> <b id="sumDiscCode"></b></dt><dd id="sumDisc">—</dd></div>
           <div class="co-total"><dt><span data-en>You pay (MXN)</span><span data-es>Pagas (MXN)</span></dt><dd id="sumMxn">—</dd></div>
         </dl>
         <p class="co-rate" id="sumRate"></p>
+        <form class="co-promo" id="promoForm" novalidate>
+          <label for="promoInput"><span data-en>Speaker code</span><span data-es>Código de speaker</span></label>
+          <div><input id="promoInput" name="promo" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="RON10"><button type="submit" id="promoApply"><span data-en>Apply</span><span data-es>Aplicar</span></button></div>
+          <p id="promoMsg" role="status" aria-live="polite"></p>
+        </form>
       </div>
       <div class="co-trust" id="trust">
         <p class="co-trust-title"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Z"/></svg><span data-en>Secure payment · encrypted connection</span><span data-es>Pago seguro · conexión cifrada</span></p>

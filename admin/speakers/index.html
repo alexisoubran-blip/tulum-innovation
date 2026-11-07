@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Speaker Challenge · Admin TIF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --ink:#00080B; --panel:#061215; --paper:#F2F1EA; --muted:rgba(242,241,234,.6); --faint:rgba(242,241,234,.38); --line:rgba(242,241,234,.1); --line-2:rgba(242,241,234,.18); --ember:#E97A43; --ok:#4BFFB3; --bad:#FF6B6B; --display:"Bruno Ace",Sora,sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: var(--ink); color: var(--paper); font: 400 14px/1.5 Sora, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+.wrap { width: min(1400px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 60px; }
+header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+h1 { margin: 0; font: 400 1.5rem/1.1 var(--display); }
+h1 small { display: block; margin-top: 6px; font: 400 .78rem Sora; color: var(--muted); }
+a.btn { color: inherit; }
+.btn { height: 40px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 10px; background: transparent; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.btn:hover { border-color: var(--ember); }
+.btn.primary { background: var(--ember); border-color: var(--ember); color: #1a0a02; font-weight: 600; }
+.field { height: 40px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel); outline: none; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.kpi { padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+.kpi span { color: var(--faint); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.kpi b { display: block; margin-top: 6px; font: 400 1.6rem/1 var(--display); }
+.bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+table { width: 100%; border-collapse: collapse; min-width: 980px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--panel); color: var(--faint); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr.off td { opacity: .45; }
+.code { font-family: ui-monospace, monospace; font-weight: 600; letter-spacing: .04em; }
+.tier { display: inline-block; min-width: 28px; padding: 2px 8px; border-radius: 999px; background: rgba(242,241,234,.08); font-size: 11px; text-align: center; }
+.pbar { width: 90px; height: 5px; border-radius: 3px; background: rgba(242,241,234,.1); overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 8px; }
+.pbar i { display: block; height: 100%; background: var(--ember); }
+.sw { position: relative; width: 40px; height: 22px; border-radius: 999px; border: 0; background: rgba(242,241,234,.2); cursor: pointer; }
+.sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.sw[aria-checked="true"] { background: var(--ok); }
+.sw[aria-checked="true"]::after { transform: translateX(18px); }
+.copy { border: 0; background: none; color: var(--muted); cursor: pointer; padding: 0 4px; }
+.copy:hover { color: var(--ember); }
+.login { max-width: 360px; margin: 18vh auto 0; padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+.login h1 { margin-bottom: 16px; }
+.login input { width: 100%; margin-bottom: 10px; }
+.err { color: var(--bad); min-height: 1.2em; }
+.note { color: var(--faint); font-size: 12px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div id="login" class="login" hidden>
+  <h1>Speaker Challenge</h1>
+  <form id="loginForm"><input class="field" id="token" type="password" placeholder="Clave de admin" autocomplete="current-password"><button class="btn primary" type="submit">Entrar</button></form>
+  <p class="err" id="loginErr"></p>
+</div>
+<div class="wrap" id="app" hidden>
+  <header>
+    <h1>Speaker Challenge<small>Solo cuentan boletos de órdenes pagadas · 1 cortesía por cada 5 boletos</small></h1>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="btn" href="/leaderboard" target="_blank" rel="noopener">Ver leaderboard</a>
+      <a class="btn" href="/admin/ventas">Ventas</a>
+      <button class="btn" id="refresh">Actualizar</button>
+      <button class="btn primary" id="csv">Exportar CSV</button>
+      <button class="btn" id="logout">Salir</button>
+    </div>
+  </header>
+  <div class="kpis" id="kpis"></div>
+  <div class="bar">
+    <input class="field" id="q" placeholder="Buscar speaker, código o panel" style="flex:1 1 240px">
+    <select class="field" id="tier"><option value="">Todos los tiers</option><option>A</option><option>B</option><option>C</option><option>Panel</option><option>Equipo TIF</option></select>
+    <select class="field" id="act"><option value="">Activos e inactivos</option><option value="1">Solo activos</option><option value="0">Solo inactivos</option></select>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr>
+      <th data-k="name">Speaker</th><th data-k="code">Código</th><th data-k="tier">Tier</th><th data-k="panel">Panel</th>
+      <th class="num" data-k="tickets">Boletos</th><th data-k="pct">% meta</th><th class="num" data-k="revenueMxn">Ingresos MXN</th>
+      <th class="num" data-k="courtesies">Cortesías</th><th>Liga</th><th>Activo</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <p class="note">Apagar un código lo quita del checkout y del leaderboard al momento. Las ventas que ya tiene se conservan.</p>
+</div>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const KEY = 'tifAdminToken';
+  const tok = { get() { try { return sessionStorage.getItem(KEY) || ''; } catch { return ''; } }, set(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch {} } };
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const mxn = (n) => '$' + Number(n || 0).toLocaleString('es-MX', { maximumFractionDigits: 0 });
+  let rows = [], sortK = 'tickets', sortDir = -1;
+
+  async function api(body) {
+    const r = await fetch('/api/blokko/admin', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + tok.get() }, body: JSON.stringify(body) });
+    if (r.status === 401) { logout('Clave incorrecta o sesión vencida.'); throw new Error('401'); }
+    return r.json();
+  }
+  function showLogin(err = '') { $('app').hidden = true; $('login').hidden = false; $('loginErr').textContent = err; $('token').focus(); }
+  function logout(err = '') { tok.set(''); showLogin(err); }
+  async function load() {
+    const j = await api({ action: 'speakers' }).catch(() => null);
+    if (!j) return;
+    if (!j.ok) { $('app').hidden = false; $('kpis').innerHTML = `<div class="kpi"><span>Error</span><b>${esc(j.error || '—')}</b></div>`; return; }
+    rows = j.speakers; $('login').hidden = true; $('app').hidden = false; render();
+  }
+  function render() {
+    const q = $('q').value.trim().toLowerCase(), tier = $('tier').value, act = $('act').value;
+    const list = rows.filter((r) => (!tier || r.tier === tier) && (!act || String(Number(r.active)) === act) && (!q || [r.name, r.code, r.panel, r.organization].join(' ').toLowerCase().includes(q)))
+      .sort((a, b) => { const x = a[sortK] ?? -1, y = b[sortK] ?? -1; return (typeof x === 'string' ? x.localeCompare(y) : x - y) * sortDir; });
+    const sum = (k) => rows.reduce((n, r) => n + (Number(r[k]) || 0), 0);
+    const selling = rows.filter((r) => r.tickets > 0).length;
+    $('kpis').innerHTML = [['Boletos con código', sum('tickets')], ['Ingresos MXN', mxn(sum('revenueMxn'))], ['Speakers vendiendo', `${selling} / ${rows.length}`], ['Cortesías ganadas', sum('courtesies')], ['Códigos activos', rows.filter((r) => r.active).length]]
+      .map(([k, v]) => `<div class="kpi"><span>${k}</span><b>${v}</b></div>`).join('');
+    $('rows').innerHTML = list.map((r) => `<tr class="${r.active ? '' : 'off'}">
+      <td><b>${esc(r.name)}</b><br><small style="color:var(--faint)">${esc(r.organization || '')}</small></td>
+      <td class="code">${esc(r.code)}</td><td><span class="tier">${esc(r.tier)}</span></td><td>${esc(r.panel || '—')}</td>
+      <td class="num"><b>${r.tickets}</b></td>
+      <td>${r.goal ? `<span class="pbar"><i style="width:${Math.min(100, r.pct)}%"></i></span>${r.pct}% <small style="color:var(--faint)">(${r.tickets}/${r.goal})</small>` : '<small style="color:var(--faint)">sin meta</small>'}</td>
+      <td class="num">${mxn(r.revenueMxn)}</td><td class="num">${r.courtesies}</td>
+      <td><button class="copy" data-copy="${location.origin}/s/${esc(r.code)}" title="Copiar liga">/s/${esc(r.code)} ⧉</button></td>
+      <td><button class="sw" role="switch" aria-checked="${r.active}" aria-label="Activar ${esc(r.code)}" data-code="${esc(r.code)}"></button></td></tr>`).join('');
+  }
+  $('rows').addEventListener('click', async (e) => {
+    const c = e.target.closest('[data-copy]');
+    if (c) { navigator.clipboard?.writeText(c.dataset.copy); c.textContent = 'Copiada ✓'; setTimeout(render, 1200); return; }
+    const s = e.target.closest('.sw'); if (!s) return;
+    const active = s.getAttribute('aria-checked') !== 'true';
+    if (!active && !confirm(`¿Apagar ${s.dataset.code}? Dejará de funcionar en el checkout.`)) return;
+    s.disabled = true;
+    const j = await api({ action: 'promo-toggle', code: s.dataset.code, active }).catch(() => null);
+    if (j?.ok) { const r = rows.find((x) => x.code === j.code); if (r) r.active = j.active; }
+    render();
+  });
+  document.querySelectorAll('th[data-k]').forEach((th) => th.addEventListener('click', () => { const k = th.dataset.k; sortDir = sortK === k ? -sortDir : (['name', 'code', 'tier', 'panel'].includes(k) ? 1 : -1); sortK = k; render(); }));
+  ['q', 'tier', 'act'].forEach((id) => $(id).addEventListener('input', render));
+  $('refresh').addEventListener('click', load);
+  $('logout').addEventListener('click', () => logout());
+  $('loginForm').addEventListener('submit', (e) => { e.preventDefault(); tok.set($('token').value.trim()); load(); });
+
+  // CSV with the columns of the "Speakers" sheet (TIF_Speakers_Analisis.xlsx) + challenge data.
+  $('csv').addEventListener('click', () => {
+    const cols = [['Nombre', 'name'], ['Organización / rol', 'organization'], ['Pilar', 'pillar'], ['Tier', 'tier'], ['Rol en el reto', (r) => r.tier === 'A' ? 'Sin meta (collab + pauta)' : r.tier === 'Panel' ? 'Meta por panel' : r.tier === 'Equipo TIF' ? 'Equipo' : 'Meta individual'], ['Panel colectivo', 'panel'], ['Email', 'email'], ['Formato / sesión', 'session'], ['Meta tickets', 'goal'], ['Código', 'code'], ['Tickets vendidos', 'tickets'], ['% de meta', (r) => r.goal ? (r.tickets / r.goal).toFixed(2) : ''], ['Órdenes pagadas', 'orders'], ['Ingresos MXN', 'revenueMxn'], ['Cortesías ganadas', 'courtesies'], ['Código activo', (r) => r.active ? 'Sí' : 'No'], ['Liga', (r) => `${location.origin}/s/${r.code}`]];
+    const cell = (v) => { const s = String(v ?? ''); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+    const lines = [['#', ...cols.map((c) => c[0])].join(','), ...rows.map((r, i) => [i + 1, ...cols.map(([, k]) => cell(typeof k === 'function' ? k(r) : r[k]))].join(','))];
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], { type: 'text/csv;charset=utf-8' }));
+    a.download = `speaker-challenge-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+  });
+  tok.get() ? load() : showLogin();
+})();
+</script>
+</body>
+</html>

@@ -292,3 +292,18 @@ button, input { font: inherit; color: inherit; }
 .co-detail[open] { height: auto; }
 .co-detail-body { flex: 1 1 auto; min-height: 0; -webkit-overflow-scrolling: touch; }
 @media (max-height: 700px) { .co-detail-art { height: 96px; } }
+
+/* Speaker Challenge code */
+.co-disc dd { color: #4BFFB3; }
+.co-disc dt b { font-family: ui-monospace, monospace; font-weight: 600; letter-spacing: .06em; color: inherit; }
+.co-promo { margin: 0; padding: 0 1.2rem 1.2rem; }
+.co-promo label { display: block; margin-bottom: .4rem; color: var(--faint); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+.co-promo div { display: flex; gap: .5rem; }
+.co-promo input { flex: 1 1 auto; min-width: 0; height: 42px; padding: 0 .8rem; border: 1px solid rgba(255,255,255,.18); border-radius: 10px; background: rgba(255,255,255,.04); color: inherit; font: 600 .9rem/1 ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.co-promo input:focus { outline: 2px solid var(--accent, #E97A43); outline-offset: 1px; }
+.co-promo button { height: 42px; padding: 0 1rem; border: 1px solid rgba(255,255,255,.25); border-radius: 10px; background: transparent; color: inherit; font: 600 .72rem/1 inherit; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+.co-promo button:hover { border-color: var(--accent, #E97A43); }
+.co-promo p { margin: .45rem 0 0; min-height: 1em; font-size: .78rem; color: var(--faint); }
+.co-promo p.is-ok { color: #4BFFB3; }
+.co-promo p.is-bad { color: #FF8A7A; }
+.co-promo.is-locked div { display: none; }
