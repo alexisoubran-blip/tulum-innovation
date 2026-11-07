@@ -485,6 +485,25 @@
 
 
     /* Speakers & Co-Founders */
+    .v2-lineup { background:#00080B; color:#F2F1EA; overflow:hidden; }
+    .v2-lane { margin-top:2.6rem; }
+    .v2-lane-head { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
+    .v2-lane-head h3 { margin:0; font-size:clamp(1.1rem,1.8vw,1.4rem); }
+    .v2-lane-nav { display:flex; gap:.4rem; }
+    .v2-lane-nav button { width:42px; height:42px; border-radius:50%; border:1px solid rgba(242,241,234,.25); background:transparent; color:#F2F1EA; cursor:pointer; font-size:1rem; }
+    .v2-lane-nav button:hover { border-color:var(--ember); color:var(--ember); }
+    .v2-lane-track { display:grid; grid-auto-flow:column; grid-auto-columns:minmax(240px, 280px); gap:1rem; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding-bottom:.4rem; }
+    .v2-lane-track::-webkit-scrollbar { display:none; }
+    .v2-act { scroll-snap-align:start; display:block; position:relative; border-radius:18px; overflow:hidden; background:#0b1416; border:1px solid rgba(242,241,234,.1); color:inherit; text-decoration:none; aspect-ratio:4/5; }
+    .v2-act img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .8s cubic-bezier(.2,.7,.2,1); }
+    .v2-act:hover img { transform:scale(1.05); }
+    .v2-act::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 35%, rgba(0,8,11,.92)); }
+    .v2-act-info { position:absolute; left:0; right:0; bottom:0; z-index:1; padding:1.1rem; }
+    .v2-act-when { display:inline-block; padding:.25rem .6rem; border-radius:999px; background:var(--c); color:#00080B; font-size:.66rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .v2-act h4 { margin:.6rem 0 0; font-size:1.15rem; line-height:1.2; }
+    .v2-act p { margin:.25rem 0 0; color:rgba(242,241,234,.7); font-size:.82rem; }
+    .v2-act-initials { position:absolute; inset:0; display:grid; place-items:center; font:400 3rem/1 var(--display, "Bruno Ace"); color:var(--c); }
+    .v2-lineup-cta { margin-top:2.6rem; display:flex; justify-content:center; }
     .v2-speakers { background:#F2F1EA; color:#00080B; }
     .v2-speakers .v2-kicker { color:rgba(0,8,11,.55); }
     .v2-speakers-head {
@@ -1827,6 +1846,27 @@ body .press-logo-link > span { font-size:.625rem; }
       </div>
     </section>
 
+    <section class="v2-lineup v2-section" id="lineup" aria-labelledby="lineup-title" hidden>
+      <div class="container">
+        <div class="v2-section-head">
+          <div>
+            <p class="v2-kicker"><span data-en>Beyond the stage</span><span data-es>Más allá del escenario</span></p>
+            <h2 id="lineup-title"><span data-en>Nights, music and</span><span data-es>Noches, música y</span> <em><span data-en>wellness.</span><span data-es>bienestar.</span></em></h2>
+          </div>
+          <p><span data-en>The DJs closing every night and the healers, teachers and practices opening every morning in Tulum.</span><span data-es>Los DJs que cierran cada noche y los sanadores, maestros y prácticas que abren cada mañana en Tulum.</span></p>
+        </div>
+        <div class="v2-lane" data-lane="musica" hidden>
+          <div class="v2-lane-head"><h3><span data-en>DJs</span><span data-es>DJs</span></h3><div class="v2-lane-nav"><button type="button" data-dir="-1" aria-label="Previous">←</button><button type="button" data-dir="1" aria-label="Next">→</button></div></div>
+          <div class="v2-lane-track" tabindex="0"></div>
+        </div>
+        <div class="v2-lane" data-lane="bienestar" hidden>
+          <div class="v2-lane-head"><h3><span data-en>Healers, teachers & wellness</span><span data-es>Sanadores, maestros y bienestar</span></h3><div class="v2-lane-nav"><button type="button" data-dir="-1" aria-label="Previous">←</button><button type="button" data-dir="1" aria-label="Next">→</button></div></div>
+          <div class="v2-lane-track" tabindex="0"></div>
+        </div>
+        <div class="v2-lineup-cta"><a class="btn btn-primary" href="/schedule"><span data-en>See full schedule</span><span data-es>Ver horario completo</span></a></div>
+      </div>
+    </section>
+
     <section class="v2-people v2-section" id="people">
       <div class="container">
         <div class="v2-section-head">
@@ -2446,6 +2486,36 @@ body .press-logo-link > span { font-size:.625rem; }
         });
       });
     })();
+  </script>
+  <script>
+  // Lineup carousels (DJs, wellness) from the festival schedule sheet; hidden until there is data.
+  (() => {
+    const sec = document.getElementById('lineup'); if (!sec) return;
+    const es = () => (document.documentElement.getAttribute('data-lang') || 'es').startsWith('es');
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const DAY = { '09': ['Wed 9', 'Mié 9'], '10': ['Thu 10', 'Jue 10'], '11': ['Fri 11', 'Vie 11'], '12': ['Sat 12', 'Sáb 12'] };
+    const COLOR = { musica: '#FF3374', bienestar: '#4BFFB3' };
+    let events = [];
+    const draw = () => {
+      let any = false;
+      sec.querySelectorAll('[data-lane]').forEach((lane) => {
+        const type = lane.dataset.lane;
+        const list = events.filter((e) => e.type === type && e.featured);
+        lane.hidden = !list.length; any = any || list.length > 0;
+        lane.querySelector('.v2-lane-track').innerHTML = list.map((e) => {
+          const name = e.person || (es() ? e.title.es : e.title.en);
+          const ini = name.split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+          const when = `${(DAY[e.day] || ['', ''])[es() ? 1 : 0]}${e.start ? ' · ' + e.start : ''}`;
+          return `<a class="v2-act" style="--c:${COLOR[type]}" href="/schedule?day=${e.day}&type=${type}#${esc(e.id)}">${e.photo ? `<img src="${esc(e.photo)}" alt="" loading="lazy" decoding="async">` : `<span class="v2-act-initials">${esc(ini)}</span>`}
+            <div class="v2-act-info"><span class="v2-act-when">${esc(when)}</span><h4>${esc(name)}</h4><p>${esc([e.role || (es() ? e.title.es : e.title.en), e.venue].filter(Boolean).join(' · '))}</p></div></a>`;
+        }).join('');
+      });
+      sec.hidden = !any;
+    };
+    sec.addEventListener('click', (ev) => { const b = ev.target.closest('[data-dir]'); if (!b) return; const tr = b.closest('.v2-lane').querySelector('.v2-lane-track'); tr.scrollBy({ left: Number(b.dataset.dir) * tr.clientWidth * 0.85, behavior: 'smooth' }); });
+    fetch('/api/schedule').then((r) => r.json()).then((j) => { events = j.events || []; draw(); }).catch(() => {});
+    new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+  })();
   </script>
   <script src="/cenote/cenote.js?v=4" defer></script>
 </body>

@@ -6,6 +6,9 @@
     },
     "api/blokko/admin.mjs": {
       "maxDuration": 60
+    },
+    "api/schedule.mjs": {
+      "includeFiles": "schedule/sample.json"
     }
   },
   "cleanUrls": true,
