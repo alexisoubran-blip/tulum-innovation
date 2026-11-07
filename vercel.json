@@ -34,8 +34,8 @@
   ],
   "rewrites": [
     {
-      "source": "/s/:code",
-      "destination": "/s/index.html"
+      "source": "/s/:code([A-Za-z0-9]+)",
+      "destination": "/s"
     },
     {
       "source": "/alexis-soubran-TIF-CMO",
