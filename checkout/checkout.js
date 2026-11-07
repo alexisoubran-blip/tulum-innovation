@@ -297,6 +297,7 @@
     setQty(Math.min(state.qty, p.maxQuantity));
     renderCats(); renderPasses(); renderSummary(); renderBuyerFields(); clearError();
     track('select_item', { id: p.id, name: p.name, category: p.category, quantity: 1, mxnTotal: p.priceMxn, usdTotal: p.totalUsd });
+    track('view_item', { id: p.id, name: p.name, category: p.category, quantity: 1, mxnTotal: p.priceMxn, usdTotal: p.totalUsd });
   }
 
   // Extra fields some products need (Business Pass: business name, location, required phone).
