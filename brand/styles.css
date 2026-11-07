@@ -218,3 +218,34 @@ html:has(.wt-page){scroll-padding-top:158px}
 /* Ghost buttons on light (paper) sections need dark ink to stay legible (Oct 2026). */
 .tif-page .v2-executive .btn-ghost{background:transparent;color:var(--tif-ink);border-color:rgba(0,8,11,.32)}
 .tif-page .v2-executive .btn-ghost:hover{background:rgba(0,8,11,.05);border-color:var(--tif-ink);color:var(--tif-ink)}
+
+/* Schedule button next to "Get tickets" (header, every page) */
+.tif-site-header{grid-template-columns:auto 1fr auto auto}
+.tif-schedule-button{order:1;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;min-height:42px;padding:.65rem 1rem;border:1px solid rgba(242,241,234,.28);border-radius:999px;color:var(--tif-paper);font:600 .64rem/1 var(--tif-body);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:border-color .2s,color .2s}
+.tif-schedule-button:hover,.tif-schedule-button[aria-current=page]{border-color:var(--tif-accent);color:var(--tif-accent)}
+.tif-schedule-button svg{flex:0 0 auto}
+.tif-site-header .tif-ticket-button{order:3}
+@media(max-width:1280px){
+  .tif-site-header{grid-template-columns:1fr auto auto auto}
+  .tif-menu-toggle{order:2}
+}
+@media(max-width:640px){
+  .tif-schedule-button{min-height:42px;padding:.55rem .75rem;font-size:.55rem;gap:.3rem;letter-spacing:.08em}
+  .tif-schedule-button svg{display:none}
+  .tif-site-header{grid-template-columns:minmax(0,1fr) auto auto auto;gap:6px}
+  .tif-site-header .wt-brand-lockup{min-width:0}
+}
+@media(max-width:379px){
+  .tif-schedule-button{width:42px;padding:0}
+  .tif-schedule-button svg{display:block}
+  .tif-schedule-button span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+}
+@media(max-width:640px){
+  .wt-page .wt-brand-header{grid-template-columns:minmax(0,1fr) auto auto auto !important}
+  .wt-page .wt-brand-header .tif-schedule-button{width:40px;min-height:40px;padding:0}
+  .wt-page .wt-brand-header .tif-schedule-button svg{display:block}
+  .wt-page .wt-brand-header .tif-schedule-button span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+}
+@media(min-width:641px) and (max-width:1280px){
+  .wt-page .wt-brand-header{grid-template-columns:minmax(0,1fr) auto auto auto}
+}

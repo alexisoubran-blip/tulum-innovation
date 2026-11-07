@@ -982,14 +982,10 @@
         display:flex;
         align-items:center;
         justify-content:center;
+        gap:8px;
         width:min(calc(100% - 28px), 420px);
-        min-height:52px;
-        padding:.85rem 1.25rem;
-        border:1px solid rgba(0,8,11,.22);
-        border-radius:999px;
-        background:#E97A43;
-        color:#00080B;
-        box-shadow:0 12px 36px rgba(0,8,11,.34);
+        padding:0;
+        background:none;
         font-family:var(--sans);
         font-size:.74rem;
         font-weight:700;
@@ -997,6 +993,9 @@
         text-transform:uppercase;
         text-align:center;
       }
+      .v2-mobile-ticket-cta a { display:flex; align-items:center; justify-content:center; min-height:52px; padding:.85rem 1rem; border-radius:999px; text-decoration:none; color:inherit; box-shadow:0 12px 36px rgba(0,8,11,.34); }
+      .v2-mtc-buy { flex:1 1 auto; background:#E97A43; color:#00080B !important; border:1px solid rgba(0,8,11,.22); }
+      .v2-mtc-sched { flex:0 0 auto; background:rgba(0,8,11,.86); color:#F2F1EA !important; border:1px solid rgba(242,241,234,.3); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
       body.v2-nav-open .v2-mobile-ticket-cta {
         opacity:0;
         pointer-events:none;
@@ -1441,7 +1440,7 @@ body .press-logo-link > span { font-size:.625rem; }
     "organizer":{"@type":"Organization","name":"Tulum Innovation Fest","url":"https://www.tuluminnovationfest.com/"}
   }
   </script>
-  <link rel="stylesheet" href="/cenote/cenote.css?v=8" />
+  <link rel="stylesheet" href="/cenote/cenote.css?v=9" />
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -1495,6 +1494,7 @@ body .press-logo-link > span { font-size:.625rem; }
               <span class="cx-dive-ring"></span><span class="cx-dive-ring"></span>
               <span class="cx-dive-core"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15m0 0-6-6m6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </a></div>
+            <a class="cx-sched rv" href="/schedule"><svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span data-en>See full schedule</span><span data-es>Ver horario completo</span> →</a>
             <p class="cx-hint rv"><span data-en>Touch the water</span><span data-es>Toca el agua</span></p>
           </div>
           <aside class="cx-facts cx-glass rv"><dl>
@@ -2330,9 +2330,10 @@ body .press-logo-link > span { font-size:.625rem; }
     </section>
   </main>
 
-  <a class="v2-mobile-ticket-cta" href="/checkout" aria-label="Buy tickets for Tulum Innovation Fest 2026">
-    <span data-en>Buy tickets</span><span data-es>Comprar boletos</span>
-  </a>
+  <div class="v2-mobile-ticket-cta">
+    <a class="v2-mtc-sched" href="/schedule"><span data-en>Schedule</span><span data-es>Horario</span></a>
+    <a class="v2-mtc-buy" href="/checkout" aria-label="Buy tickets for Tulum Innovation Fest 2026"><span data-en>Buy tickets</span><span data-es>Comprar boletos</span></a>
+  </div>
 
   <footer class="v2-footer">
     <div class="container v2-footer-grid">

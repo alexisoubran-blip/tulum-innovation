@@ -1,7 +1,7 @@
 import {readFile,writeFile,cp,mkdir,readdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
-const version='20261024-fit';
+const version='20261107-sched';
 const bi=(en,es)=>`<span data-tif-en>${en}</span><span data-tif-es>${es}</span>`;
 const items=[['/speakers','Speakers','Speakers'],['/program','Program','Programa'],['/whale-tank','Whale Tank','Whale Tank'],['/el-faro','El Faro','El Faro'],['/sponsorship','Partners','Partners'],['/#participate','Participate','Participar'],['/press','Press','Prensa'],['/blog','Blog','Blog']];
 const nav=(route)=>items.map(([url,en,es])=>`<a href="${url}"${url===route?' aria-current="page"':''}>${bi(en,es)}</a>`).join('');
@@ -27,6 +27,7 @@ export async function buildBrand(){
       <div class="wt-brand-lockup"><a class="tif-brand" href="/" aria-label="Tulum Innovation Fest home"><img src="/assets/tulum-innovation-fest-logo.png" alt="Tulum Innovation Fest" width="220" height="46"></a>${whalePartner}</div>
       <button class="tif-menu-toggle" type="button" aria-controls="tif-navigation" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
       <nav class="tif-navigation" id="tif-navigation" aria-label="Main navigation">${nav(route)}${language}</nav>
+      <a class="tif-schedule-button" href="/schedule"${route==='/schedule'?' aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>${bi('Schedule','Horario')}</span></a>
       <a class="tif-ticket-button" href="/tickets">${bi('Get tickets','Boletos')}</a>
     </header>${sections}`;
     html=html.replace(oldHeader,header);

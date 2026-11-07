@@ -250,3 +250,8 @@
 .cx .cx-day-card h2 { font-size: clamp(1.5rem, 2.6vw, 2.5rem); line-height: 1.05; }
 .cx :is(h1, h2, h3), .cx :is(h1, h2, h3) span { overflow-wrap: normal; word-break: keep-all; hyphens: none; }
 @media (max-width: 700px) { .cx .cx-day-card h2 { font-size: clamp(1.3rem, 6.2vw, 1.85rem); } }
+
+/* Schedule link under the hero CTAs */
+.cx-sched { display: flex; width: max-content; max-width: 100%; align-items: center; justify-content: center; gap: .55rem; margin-top: .9rem; min-height: 50px; padding: 0 1.5rem; border: 1px solid rgba(242,241,234,.32); border-radius: 999px; background: rgba(0,8,11,.28); color: var(--paper, #F2F1EA); font: 700 .72rem Sora, sans-serif; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: border-color .25s, background .25s; }
+.cx-sched:hover { border-color: var(--paper, #F2F1EA); background: rgba(0,8,11,.45); }
+@media (max-width: 700px) { .cx-sched { display: flex; width: 100%; } }
