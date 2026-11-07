@@ -52,12 +52,29 @@
     $('shList').innerHTML = html;
   }
 
+  // Headliners and featured practices (carrusel = si) on top, for the selected day.
+  function renderFeatured() {
+    const t = (en, sp) => (es() ? sp : en);
+    const list = state.events.filter((e) => e.featured && (state.day === 'all' || e.day === state.day) && (!state.types.size || state.types.has(e.type)))
+      .sort((a, b) => (a.type === 'musica' ? 0 : 1) - (b.type === 'musica' ? 0 : 1) || a.day.localeCompare(b.day));
+    const box = $('shFeatured');
+    box.hidden = !list.length;
+    if (!list.length) { box.innerHTML = ''; return; }
+    box.innerHTML = `<h2 class="sh-feat-title">${t('Highlights', 'Destacados')}</h2><div class="sh-feat-track">${list.map((e) => {
+      const [c, en, sp] = TYPES[e.type] || TYPES.charla;
+      const name = e.person || L(e.title);
+      const [den, dsp] = DAYS[e.day];
+      return `<a class="sh-feat" href="#${esc(e.id)}" style="--c:${c}">${e.photo ? `<img src="${esc(e.photo)}" alt="" loading="lazy" decoding="async">` : ''}
+        <span class="sh-feat-info"><em>${es() ? `${dsp} ${Number(e.day)}` : `${den} ${Number(e.day)}`}${e.start ? ` · ${esc(e.start)}` : ''} · ${es() ? sp : en}</em><b>${esc(name)}</b><small>${esc(e.role || L(e.title))}</small></span></a>`;
+    }).join('')}</div>`;
+  }
+
   function sync() {
     const p = new URLSearchParams();
     if (state.day !== 'all') p.set('day', state.day);
     if (state.types.size) p.set('type', [...state.types].join(','));
     try { history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname); } catch {}
-    renderControls(); render();
+    renderControls(); render(); renderFeatured();
   }
 
   function ics(e) {
@@ -78,14 +95,14 @@
   $('shSearch').addEventListener('input', (ev) => { state.search = ev.target.value.trim(); render(); });
   $('shList').addEventListener('click', (ev) => { const b = ev.target.closest('[data-ics]'); if (b) { const e = state.events.find((x) => x.id === b.dataset.ics); if (e) ics(e); } });
   $('shPrint').addEventListener('click', () => { const prev = state.day; state.day = 'all'; state.types.clear(); state.venue = ''; state.search = ''; renderControls(); render(); setTimeout(() => { window.print(); state.day = prev; sync(); }, 50); });
-  new MutationObserver(() => { renderControls(); render(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang', 'lang'] });
+  new MutationObserver(() => { renderControls(); render(); renderFeatured(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang', 'lang'] });
 
   fetch('/api/schedule').then((r) => r.json()).then((j) => {
     state.events = j.events || [];
     $('shSample').hidden = j.source !== 'sample';
     // During the festival, open on today.
     const n = tulumNow(); if (!q.get("day") && n.day && DAYS[n.day]) state.day = n.day;
-    renderControls(); render();
+    renderControls(); render(); renderFeatured();
     if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: 'center' });
   }).catch(() => { $('shList').innerHTML = '<div class="sh-empty">—</div>'; });
 })();
