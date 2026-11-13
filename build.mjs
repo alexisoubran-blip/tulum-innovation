@@ -15,6 +15,8 @@ await cp("el-faro", "dist/el-faro", { recursive: true, filter: (src) => !src.end
 await cp("mezcal", "dist/mezcal", { recursive: true });
 await cp("leaderboard", "dist/leaderboard", { recursive: true });
 await cp("s", "dist/s", { recursive: true });
+await cp("passes", "dist/passes", { recursive: true });
+await cp("community", "dist/community", { recursive: true });
 await cp("schedule", "dist/schedule", { recursive: true, filter: (src) => !src.endsWith("sample.json") });
 await cp("alexis-soubran-tif-cmo", "dist/alexis-soubran-tif-cmo", { recursive: true });
 await cp("alexis-soubran-TIF-CMO", "dist/alexis-soubran-TIF-CMO", { recursive: true });
