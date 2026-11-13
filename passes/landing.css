@@ -157,7 +157,7 @@
 /* Press + partner logos */
 .ln-logos { padding:clamp(2.4rem,5vw,3.4rem) 0 clamp(1.8rem,4vw,2.6rem); border-top:1px solid var(--ln-line); }
 .ln-logos p { margin:0 0 1rem; color:var(--ln-faint); font-size:.66rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; }
-.ln-logos-top { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); gap:2rem 3rem; align-items:end; }
+.ln-logos-top { display:grid; grid-template-columns:1fr; gap:2rem 3rem; align-items:end; }
 .ln-press { display:flex; flex-wrap:wrap; align-items:center; gap:1.2rem 2.2rem; }
 .ln-press img { height:30px; width:auto; opacity:.86; }
 .ln-press img.is-svg { filter:brightness(0) invert(1); height:34px; }
