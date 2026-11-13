@@ -59,5 +59,24 @@
     }, { threshold: 0 });
     io.observe(hero); hide.forEach((h) => io.observe(h));
   }
+
+  // Nights list (parties + DJs) from the festival schedule sheet; the static list stays if it fails.
+  const nl = document.querySelector('[data-nights]');
+  if (nl) fetch('/api/schedule', { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).then((d) => {
+    const ev = (d?.events || []).filter((e) => e.type === 'fiesta' || e.type === 'musica');
+    if (!ev.length) return;
+    const DAY = { '09': ['Wed 9', 'Mié 9'], '10': ['Thu 10', 'Jue 10'], '11': ['Fri 11', 'Vie 11'], '12': ['Sat 12', 'Sáb 12'] };
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const bi = (en, es) => `<span data-tif-en>${esc(en)}</span><span data-tif-es>${esc(es)}</span>`;
+    ev.sort((a, b) => (a.day + (a.start || '99')).localeCompare(b.day + (b.start || '99')));
+    nl.innerHTML = ev.map((e) => {
+      const d = DAY[e.day] || [e.day, e.day];
+      const head = e.type === 'musica' && e.featured;
+      const tag = /executive|vip/i.test(e.role || '') ? ' <em>Executive</em>' : '';
+      const when = e.start ? ` · ${esc(e.start)}` : '';
+      return `<li${head ? ' class="is-head"' : ''}><b>${bi(d[0], d[1])}${when}</b><span>${bi(e.title?.en || '', e.title?.es || '')}${tag}</span></li>`;
+    }).join('');
+  }).catch(() => {});
+
   push({ event: 'landing_view', tif_landing: location.pathname });
 })();

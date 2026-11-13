@@ -153,3 +153,67 @@
 }
 @media (prefers-reduced-motion: reduce) { .ln-sticky { transition:none; } .ln-btn { transition:none; } }
 @media (min-width: 901px) { .ln-sticky { display: none; } }
+
+/* Press + partner logos */
+.ln-logos { padding:clamp(2.4rem,5vw,3.4rem) 0 clamp(1.8rem,4vw,2.6rem); border-top:1px solid var(--ln-line); }
+.ln-logos p { margin:0 0 1rem; color:var(--ln-faint); font-size:.66rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; }
+.ln-logos-top { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); gap:2rem 3rem; align-items:end; }
+.ln-press { display:flex; flex-wrap:wrap; align-items:center; gap:1.2rem 2.2rem; }
+.ln-press img { height:30px; width:auto; opacity:.86; }
+.ln-press img.is-svg { filter:brightness(0) invert(1); height:34px; }
+.ln-logos-group.is-gov img { width:min(320px,100%); height:auto; filter:brightness(0) invert(1); opacity:.9; }
+.ln-logos-label { margin-top:2.2rem !important; }
+.ln-marquee { overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+.ln-marquee-track { display:flex; align-items:center; gap:clamp(2.4rem,5vw,4rem); width:max-content; animation:ln-marquee 46s linear infinite; padding-right:clamp(2.4rem,5vw,4rem); }
+.ln-marquee-track img { height:28px; width:auto; max-width:150px; object-fit:contain; filter:brightness(0) invert(1); opacity:.62; }
+.ln-marquee:hover .ln-marquee-track { animation-play-state:paused; }
+@keyframes ln-marquee { to { transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ln-marquee-track { animation:none; flex-wrap:wrap; width:auto; justify-content:center; } .ln-marquee-track img[aria-hidden] { display:none; } }
+
+/* Forbes quote */
+.ln-quote { border-top:1px solid var(--ln-line); }
+.ln-quote-grid { display:grid; grid-template-columns:minmax(0,38fr) minmax(0,62fr); min-height:clamp(420px,46vw,600px); }
+.ln-quote-photo { margin:0; overflow:hidden; background:#111; }
+.ln-quote-photo img { width:100%; height:100%; object-fit:cover; object-position:50% 25%; filter:grayscale(1) contrast(1.05); }
+.ln-quote-panel { position:relative; display:flex; flex-direction:column; justify-content:center; padding:clamp(2.2rem,6vw,5.5rem); background:radial-gradient(120% 90% at 80% 70%, rgba(40,90,255,.55), transparent 60%), linear-gradient(135deg,#0a1aa8 0%,#05106e 55%,#020848 100%); overflow:hidden; isolation:isolate; }
+.ln-quote-panel::before { content:""; position:absolute; inset:0; z-index:-1; background:url(/assets/gallery/night-dj.webp) center/cover; mix-blend-mode:luminosity; opacity:.16; }
+.ln-quote-logo { width:clamp(150px,18vw,240px); height:auto; filter:brightness(0) invert(1); margin-bottom:clamp(1.4rem,3vw,2.2rem); }
+.ln-quote blockquote { margin:0; font-family:"Bruno Ace", Sora, sans-serif; font-size:clamp(1.55rem,3.7vw,3.3rem); line-height:1.12; color:#F2F1EA; max-width:18ch; }
+.ln-quote-cite { margin:clamp(1.4rem,3vw,2rem) 0 .3rem; font-size:.95rem; color:#F2F1EA; }
+.ln-quote-src { margin:0; font-size:.76rem; color:rgba(242,241,234,.62); }
+.ln-quote-src a { color:#F2F1EA; }
+
+/* Nights / DJs */
+.ln-nights-grid { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(1rem,2.4vw,1.6rem); align-items:stretch; }
+.ln-headliner { position:relative; margin:0; border-radius:20px; overflow:hidden; min-height:420px; background:#0b1416; }
+.ln-headliner img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 20%; }
+.ln-headliner::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,rgba(0,8,11,.92)); }
+.ln-headliner-info { position:absolute; left:0; right:0; bottom:0; z-index:1; padding:clamp(1.2rem,3vw,2rem); }
+.ln-badge { display:inline-block; padding:.42rem .75rem; border-radius:999px; background:#FF3374; color:#fff; font-size:.64rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.ln-headliner h3 { margin:.7rem 0 .2rem; font-family:"Bruno Ace", Sora, sans-serif; font-size:clamp(2.2rem,4.6vw,3.6rem); line-height:1; }
+.ln-headliner h3 small { font-size:.4em; color:var(--ln-muted); }
+.ln-headliner p { margin:0; color:var(--ln-muted); }
+.ln-nights-side { display:flex; flex-direction:column; gap:1rem; }
+.ln-nights-photo { width:100%; aspect-ratio:16 / 8; object-fit:cover; border-radius:20px; }
+.ln-nights-list { list-style:none; margin:0; padding:0; border-top:1px solid var(--ln-line); }
+.ln-nights-list li { display:grid; grid-template-columns:8rem 1fr; gap:1rem; padding:.85rem 0; border-bottom:1px solid var(--ln-line); font-size:.95rem; }
+.ln-nights-list b { color:var(--ln-ember-2); font-weight:600; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; padding-top:.15rem; }
+.ln-nights-list em { margin-left:.4rem; padding:.15rem .45rem; border-radius:6px; background:rgba(255,196,36,.14); color:var(--ln-gold); font-style:normal; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; vertical-align:middle; }
+.ln-nights-list li.is-head span { color:#fff; font-weight:500; }
+.ln-nights-list li.is-head b { color:#FF3374; }
+.ln-nights-tba { margin:0; color:var(--ln-faint); font-size:.85rem; }
+.ln-nights-ctas { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:auto; padding-top:.4rem; }
+
+@media (max-width: 900px) {
+  .ln-logos-top { grid-template-columns:1fr; }
+  .ln-logos-group.is-gov img { width:230px; }
+  .ln-nights-list li { grid-template-columns:6.6rem 1fr; font-size:.9rem; }
+  .ln-press { gap:1rem 1.6rem; }
+  .ln-press img { height:24px; } .ln-press img.is-svg { height:28px; }
+  .ln-marquee-track img { height:22px; }
+  .ln-quote-grid { grid-template-columns:1fr; }
+  .ln-quote-photo { aspect-ratio:4 / 3.4; }
+  .ln-nights-grid { grid-template-columns:1fr; }
+  .ln-headliner { min-height:0; aspect-ratio:4 / 4.6; }
+  .ln-nights-ctas .ln-btn { flex:1 1 100%; }
+}
