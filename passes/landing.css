@@ -219,3 +219,23 @@
 }
 .ln-quote-photo { position:relative; }
 .ln-quote-photo figcaption { position:absolute; left:0; right:0; bottom:0; padding:2.4rem 1.2rem 1rem; background:linear-gradient(180deg,transparent,rgba(0,0,0,.75)); color:#F2F1EA; font-size:.8rem; }
+
+/* Reasons */
+.ln-reasons { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.ln-reason { padding:1.5rem; border:1px solid var(--ln-line); border-radius:20px; background:rgba(242,241,234,.025); }
+.ln-reason-n { display:block; margin-bottom:.9rem; font:400 1.1rem "Bruno Ace", Sora, sans-serif; color:var(--ln-ember-2); }
+.ln-reason h3 { margin:0 0 .5rem; font-size:1.15rem; font-weight:600; line-height:1.25; }
+.ln-reason p { margin:0; color:var(--ln-muted); font-size:.92rem; }
+.ln-chips { display:flex; flex-wrap:wrap; gap:.35rem; margin-top:1rem !important; }
+.ln-chips span { padding:.28rem .6rem; border:1px solid var(--ln-line); border-radius:999px; color:var(--ln-paper); font-size:.72rem; }
+.ln-value { margin:1.8rem 0 0; padding:1.1rem 1.3rem; border-radius:16px; background:rgba(233,122,67,.1); border:1px solid rgba(233,122,67,.35); font-size:1rem; }
+.ln-value b { color:var(--ln-ember-2); font-weight:600; }
+.ln-value a { margin-left:.4rem; color:var(--ln-paper); font-weight:600; }
+.ln-section-head p { max-width:62ch; }
+.ln-callout { margin-top:1.2rem; padding:1.2rem 1.4rem; border:1px solid rgba(75,255,179,.35); border-radius:18px; background:rgba(75,255,179,.05); }
+.ln-callout b { display:block; margin-bottom:.35rem; color:var(--ln-mint); font-weight:600; }
+.ln-callout p { margin:0 0 .6rem; color:var(--ln-muted); font-size:.92rem; }
+.ln-callout a { color:var(--ln-paper); font-weight:600; font-size:.9rem; }
+@media (max-width:900px) { .ln-reasons { grid-template-columns:1fr; } .ln-sticky a { padding:.4rem .5rem; } }
+.ln-btn.is-gold-ghost { background:transparent; border-color:rgba(255,196,36,.6); color:var(--ln-gold); box-shadow:none; }
+.ln-btn.is-gold-ghost:hover { background:rgba(255,196,36,.08); }

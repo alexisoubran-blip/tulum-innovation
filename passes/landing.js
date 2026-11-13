@@ -32,6 +32,8 @@
     (o.passes || []).forEach((p) => {
       if (Number(p.totalUsd) > 0) $$(`[data-usd="${p.id}"]`).forEach((el) => { el.textContent = usd(p.totalUsd); });
       if (Number(p.priceMxn) > 0) $$(`[data-mxn="${p.id}"]`).forEach((el) => { el.textContent = mxn(p.priceMxn); });
+      if (Number(p.totalUsd) > 0) $$(`[data-perday="${p.id}"]`).forEach((el) => { el.textContent = usd(Math.ceil(p.totalUsd / 4)); });
+      if (Number(p.priceMxn) > 0) $$(`[data-perday-mxn="${p.id}"]`).forEach((el) => { el.textContent = mxn(Math.round(p.priceMxn / 4)); });
     });
     const ga = (o.passes || []).find((p) => p.id === 'general-access');
     if (ga) $$('[data-usd-ga-strike]').forEach((el) => { el.textContent = usd(ga.totalUsd); });
