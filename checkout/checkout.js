@@ -478,6 +478,7 @@
     $('sumDiscCode').textContent = promoCode || '';
     $('sumDisc').textContent = disc > 0 ? `−${mxn(disc)}` : '—';
     $('sumMxn').textContent = total != null ? mxn(total) : '—';
+    if ($('fastTotal')) $('fastTotal').textContent = total != null ? `${state.lang === 'es' ? 'Total' : 'Total'}: ${mxn(total)}${state.qty > 1 ? ` · ${state.qty} ${state.lang === 'es' ? 'pases' : 'passes'}` : ''}` : '';
     renderPromo();
     $('sumRate').textContent = inMxn ? t().fixedMxn : rate ? t().rate(Number(rate).toFixed(2)) : '';
   }
@@ -876,6 +877,21 @@
     history.replaceState(null, '', '/checkout');
   }
 
+  // ---------------------------------------------------------------- fast lane
+  // Arriving from a landing or an ad with the pass already chosen (?pass=…&detail=0): skip the catalog
+  // and go straight to quantity + details. "Change" brings the full catalog back.
+  function enterFast(p) {
+    document.body.classList.add('co-fast-mode');
+    $('fastName').textContent = p.name;
+    $('fastRow').hidden = false;
+  }
+  $('fastCode').addEventListener('click', () => { $('promoForm').scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => $('promoInput').focus(), 350); });
+  $('fastChange').addEventListener('click', () => {
+    document.body.classList.remove('co-fast-mode');
+    $('fastRow').hidden = true;
+    $('passes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   // ---------------------------------------------------------------- boot
   (async () => {
     const wanted = params.get('pass');
@@ -919,6 +935,7 @@
     } else {
       setStep(1);
       if (preselected && (params.get('detail') !== '0' || preselected.pricePending)) openDetail(preselected.id);
+      else if (preselected && state.passId === preselected.id) enterFast(preselected);
     }
   })();
 })();

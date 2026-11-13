@@ -307,3 +307,22 @@ button, input { font: inherit; color: inherit; }
 .co-promo p.is-ok { color: #4BFFB3; }
 .co-promo p.is-bad { color: #FF8A7A; }
 .co-promo.is-locked div { display: none; }
+
+/* Fast lane: pass preselected from a landing or an ad */
+.co-fast { margin: 0 0 1.2rem; padding: 1rem 1.1rem; border: 1px solid rgba(242,241,234,.14); border-radius: 16px; background: rgba(242,241,234,.03); }
+.co-fast-kicker { margin: 0 0 .3rem; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+.co-fast-main { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
+.co-fast-main b { font-size: 1.05rem; font-weight: 600; line-height: 1.3; }
+.co-fast-change { flex: none; padding: .5rem .9rem; border: 1px solid rgba(242,241,234,.3); border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: .8rem; cursor: pointer; }
+.co-fast-trust { display: flex; align-items: center; gap: .4rem; margin: .6rem 0 0; font-size: .76rem; opacity: .7; }
+.co-fast-mode #passTitle, .co-fast-mode #passTitle + .co-sub, .co-fast-mode #cats, .co-fast-mode .co-tap, .co-fast-mode #passes { display: none; }
+@media (max-width: 900px) {
+  .co-fast-mode .co-summary-art { display: none; }
+  .co-fast-mode .co-trust { display: none; }
+  .co-fast-mode:not(.co-paying) .co-progress { display: none; }
+}
+.co-fast-total { display: block; margin-top: .25rem; font-size: .9rem; opacity: .85; }
+.co-fast-code { margin-top: .5rem; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: .8rem; text-decoration: underline; opacity: .75; cursor: pointer; }
+@media (max-width: 900px) {
+  .co-fast-mode:not(.co-paying) .co-summary { order: 1; }
+}

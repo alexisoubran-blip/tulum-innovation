@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/checkout/checkout.css?v=20261027c" />
+  <link rel="stylesheet" href="/checkout/checkout.css?v=20261113f" />
 </head>
 <body class="co-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -43,6 +43,12 @@
       <!-- Step 1 + 2: pass and buyer -->
       <form class="co-panel" id="orderForm" novalidate>
         <section aria-labelledby="passTitle">
+          <div class="co-fast" id="fastRow" hidden>
+            <p class="co-fast-kicker"><span data-en>Your pass</span><span data-es>Tu pase</span></p>
+            <div class="co-fast-main"><div><b id="fastName"></b><span class="co-fast-total" id="fastTotal"></span></div><button type="button" class="co-fast-change" id="fastChange"><span data-en>Change</span><span data-es>Cambiar</span></button></div>
+            <p class="co-fast-trust"><svg aria-hidden="true" viewBox="0 0 24 24" width="13" height="13"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Z"/></svg><span data-en>Secure payment · card, transfer or crypto · QR by email</span><span data-es>Pago seguro · tarjeta, transferencia o cripto · QR por correo</span></p>
+            <button type="button" class="co-fast-code" id="fastCode"><span data-en>Have a speaker code?</span><span data-es>¿Tienes código de speaker?</span></button>
+          </div>
           <h1 id="passTitle"><span data-en>What do you want to buy?</span><span data-es>¿Qué quieres comprar?</span></h1>
           <p class="co-sub"><span data-en>Tulum Innovation Fest · December 9–12, 2026 · Arena, Tulum</span><span data-es>Tulum Innovation Fest · 9 al 12 de diciembre de 2026 · Arena, Tulum</span></p>
           <div class="co-cats" id="cats" role="tablist" aria-label="Categorías"></div>
@@ -326,6 +332,6 @@
     </div>
   </dialog>
 
-  <script src="/checkout/checkout.js?v=20261027c" defer></script>
+  <script src="/checkout/checkout.js?v=20261113f" defer></script>
 </body>
 </html>
