@@ -26,3 +26,5 @@ Abraham (Abe) Ramos has no verified company available in the supplied materials 
 Run node build.mjs to build. Count assertions must be adjusted when adding approved profiles. The build checks duplicate names, local image existence, HTML escaping, public fields, group ordering and preservation of hero, press, tickets, past-participant sections and scripts.
 
 2026-10-18: Dor Cohen and Franz Tuñez removed at the organizer's request until their participation is confirmed. Their photos stay in assets/speakers-2026 so they can be re-added quickly.
+
+2026-11-13: Lineup updated from the organizer's 74 poster pack (posteos_tcf.zip). All speaker and co-founder posters were refreshed at 640×800 WebP, 33 new speakers and Profe Micelio (co-founder) were added, and Dor Cohen and Franz Tuñez returned. Companies and titles come only from what each poster shows (logo or caption); speakers whose poster names no organization have no company until the organizer confirms one. Karen Nieves now appears as a speaker as well as an ambassador. Carlos Torres and Chris Roe keep their investor/mentor cards.

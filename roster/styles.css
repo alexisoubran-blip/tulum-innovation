@@ -161,3 +161,15 @@
 @media (max-width: 560px) { .pd-intent { padding: 1.3rem; border-radius: 14px; } .pd-intent-list { grid-template-columns: 1fr; } }
 .pd-intent-list small { -webkit-line-clamp: 1; }
 .pd-intent-list small.pd-co { color: rgba(242,241,234,.42); }
+
+/* Home: show the first 12 speakers, expand with a CSS-only toggle (no extra scripts on the home). */
+.roster-more-toggle:not(:checked) ~ .roster-grid-speakers > .roster-card:nth-child(n+16) { display: none; }
+@media (max-width:1150px) { .roster-more-toggle:not(:checked) ~ .roster-grid-speakers > .roster-card:nth-child(n+13) { display: none; } }
+.roster-more-wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-top: 1.8rem; }
+.roster-more-btn { cursor: pointer; }
+.roster-more-toggle:checked ~ .roster-more-wrap .roster-more-show,
+.roster-more-toggle:not(:checked) ~ .roster-more-wrap .roster-more-hide { display: none; }
+.tif-page .roster-more-wrap .btn, .roster-more-wrap .btn { color:#00080B; border-color:rgba(0,8,11,.35); background:transparent; opacity:1; }
+.tif-page .roster-more-wrap .btn:hover, .roster-more-wrap .btn:hover { border-color:#00080B; background:rgba(0,8,11,.06); }
+.tif-page .roster-more-wrap .roster-more-btn, .roster-more-wrap .roster-more-btn { background:#00080B; color:#F2F1EA; border-color:#00080B; }
+.tif-page .roster-more-wrap .roster-more-btn:hover, .roster-more-wrap .roster-more-btn:hover { background:#1a2427; }

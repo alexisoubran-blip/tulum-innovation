@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi = (en, es) => `<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor','Ambassador':'Embajador/a'};
-const version = '20261024-polish';
+const version = '20261113-posters';
 
 function card(p, poster = false) {
   const photo = p.image ? `<div class="roster-art${poster ? ' roster-poster' : ''}"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="440" height="540" loading="lazy" decoding="async" /></div>` : '';
@@ -30,7 +30,8 @@ export async function buildRoster() {
       assert.ok(!/@|\d{8,}|typeform\.com|drive\.google\.com/.test(JSON.stringify({...p,url:undefined})), 'Private field or registration link in roster');
       if (p.url) assert.ok(!/typeform\.com|drive\.google\.com/.test(p.url), 'Registration link in public roster');
       // Company is required unless the organizer's material gives none (ambassador flyers carry no company).
-      assert.ok(p.company || group === 'ambassadors' || ['Abraham (Abe) Ramos','Golden Yogi','Maja Lucatelli'].includes(p.name), 'Missing company');
+      // Company is optional for speakers and co-founders whose poster names no organization; never invent one.
+      assert.ok(p.company || ['ambassadors','speakers','cofounders'].includes(group) || ['Abraham (Abe) Ramos'].includes(p.name), 'Missing company');
       if (p.url) assert.equal(new URL(p.url).protocol, 'https:');
       if (group === 'speakers' || group === 'ambassadors') {
         assert.ok(typeof p.image === 'string' && p.image.trim(), 'Public speakers must have an approved photo; do not publish pending profiles');
@@ -45,7 +46,7 @@ export async function buildRoster() {
     <div class="roster-section-head"><div><p class="v2-kicker">TIF 2026</p><h2 id="speakers-title">${bi('Meet the speakers','Conoce a los speakers')}</h2></div><p>${bi('Founders, investors and specialists sharing perspectives on technology, capital and culture.','Founders, inversionistas y especialistas que comparten perspectivas sobre tecnolog\u00eda, capital y cultura.')}</p></div>
     <div class="roster-group" id="speaker-lineup" data-roster-group="speakers">
       <div class="roster-group-head"><h3>Speakers</h3><p>${bi('Keynotes, panels & workshops','Keynotes, paneles y workshops')}</p></div>
-      <div class="roster-grid roster-grid-speakers">${data.speakers.map(p => card(p,true)).join('\n')}</div>
+      <input class="roster-more-toggle" type="checkbox" id="roster-more-speakers" hidden><div class="roster-grid roster-grid-speakers">${data.speakers.map(p => card(p,true)).join('\n')}</div>${data.speakers.length > 12 ? `<div class="roster-more-wrap"><label class="btn btn-ghost roster-more-btn" for="roster-more-speakers"><span class="roster-more-show">${bi(`See all ${data.speakers.length} speakers`,`Ver los ${data.speakers.length} speakers`)}</span><span class="roster-more-hide">${bi('Show fewer','Ver menos')}</span></label><a class="btn btn-ghost" href="/speakers">${bi('Full directory','Directorio completo')} →</a></div>` : ''}
     </div>
     <div class="roster-group" id="cofounders" data-roster-group="cofounders">
       <div class="roster-group-head"><h3>Co-Founders</h3><p>${bi('The team building TIF 2026','El equipo que construye TIF 2026')}</p></div>

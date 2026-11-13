@@ -4,8 +4,8 @@
       "name": "Scott Page",
       "role": "Speaker",
       "company": "Pink Floyd | Think:EXP",
-      "title": "Musician & Entrepreneur",
-      "titleEs": "Músico y emprendedor",
+      "title": "Legendary Saxophonist (Pink Floyd, Toto, Supertramp) · Technologist & Entrepreneur",
+      "titleEs": "Saxofonista legendario (Pink Floyd, Toto, Supertramp) · Tecnólogo y emprendedor",
       "image": "/assets/speakers-2026/scott-page.webp",
       "url": "https://www.thinkxofficial.com/meet-the-band"
     },
@@ -57,9 +57,9 @@
       "name": "Andersen Francis",
       "role": "Speaker",
       "company": "Modern Art Theory | Dropt.events | Fractal Beach | Invite Only Miami",
-      "title": "Founder",
-      "titleEs": "Fundador",
-      "image": "/assets/speakers-2026/anders-francis-v2.webp",
+      "title": "Creative & Cultural Partner · Miami–LATAM Bridge",
+      "titleEs": "Socio creativo y cultural · Puente Miami–LATAM",
+      "image": "/assets/speakers-2026/andersen-francis.webp",
       "url": "https://www.linkedin.com/in/andersscherberger"
     },
     {
@@ -105,6 +105,260 @@
       "image": "/assets/speakers-2026/rodolfo-rosas.webp"
     },
     {
+      "name": "Evan Luthra",
+      "role": "Speaker",
+      "company": "KOL Capital | Ganesha VC",
+      "title": "Serial Entrepreneur & Investor · General Partner",
+      "titleEs": "Emprendedor serial e inversionista · General Partner",
+      "image": "/assets/speakers-2026/evan-luthra.webp"
+    },
+    {
+      "name": "Moisés Zonana",
+      "role": "Speaker",
+      "company": "Soda Urbana | Soda Capital | Soda Crowd",
+      "title": "Founder & CEO, Soda Urbana · Partner & Deputy CEO, Soda Capital",
+      "titleEs": "Fundador y CEO de Soda Urbana · Socio y Deputy CEO de Soda Capital",
+      "image": "/assets/speakers-2026/moises-zonana.webp"
+    },
+    {
+      "name": "Jorge Portilla",
+      "role": "Speaker",
+      "title": "Entrepreneur · Tulum City Council Member",
+      "titleEs": "Empresario · Regidor del Ayuntamiento de Tulum",
+      "image": "/assets/speakers-2026/jorge-portilla.webp"
+    },
+    {
+      "name": "Sam Gordon",
+      "role": "Speaker",
+      "company": "Kan Tulum | Mot Mot",
+      "title": "Tulum OG · Founder, Entrepreneur, Adventurer & Author",
+      "titleEs": "Tulum OG · Fundador, emprendedor, aventurero y autor",
+      "image": "/assets/speakers-2026/sam-gordon.webp"
+    },
+    {
+      "name": "Ernesto Zárate",
+      "role": "Speaker",
+      "company": "IKAL Hospitality",
+      "title": "Tulum OG · CEO & Cultural Visionary",
+      "titleEs": "Tulum OG · CEO y visionario cultural",
+      "image": "/assets/speakers-2026/ernesto-zarate.webp"
+    },
+    {
+      "name": "Angela Monaco",
+      "role": "Speaker",
+      "title": "Wellness & Longevity Coach · Strength, Mobility & Women’s Biohacking",
+      "titleEs": "Coach de bienestar y longevidad · Fuerza, movilidad y biohacking femenino",
+      "image": "/assets/speakers-2026/angela-monaco.webp"
+    },
+    {
+      "name": "Karen Nieves",
+      "role": "Speaker",
+      "title": "Business Strategist · Fintech, Web3 & Digital Assets",
+      "titleEs": "Estratega de negocios · Fintech, Web3 y activos digitales",
+      "image": "/assets/speakers-2026/karen-nieves.webp"
+    },
+    {
+      "name": "Naiara Porras",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/naiara-porras.webp"
+    },
+    {
+      "name": "Rafael Vargas",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/rafael-vargas.webp"
+    },
+    {
+      "name": "Marlom Karim",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/marlom-karim.webp"
+    },
+    {
+      "name": "Luis Miguel Ramírez",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/luis-miguel-ramirez.webp"
+    },
+    {
+      "name": "Héctor Sánchez",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/hector-sanchez.webp"
+    },
+    {
+      "name": "Blur",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/blur.webp"
+    },
+    {
+      "name": "Ashton Addison",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/ashton-addison.webp"
+    },
+    {
+      "name": "Joaquín Martínez",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/joaquin-martinez.webp"
+    },
+    {
+      "name": "Michael P. Lande",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/michael-p-lande.webp"
+    },
+    {
+      "name": "Franz Tuñez",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/franz-tunez.webp"
+    },
+    {
+      "name": "Constantin Kogan",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/constantin-kogan.webp"
+    },
+    {
+      "name": "Dor Cohen",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/dor-cohen.webp"
+    },
+    {
+      "name": "Ricardo Dehesa",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/ricardo-dehesa.webp"
+    },
+    {
+      "name": "Daniel Sánchez",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/daniel-sanchez.webp"
+    },
+    {
+      "name": "Vandana Hart",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/vandana-hart.webp"
+    },
+    {
+      "name": "Antonio Barrera",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/antonio-barrera.webp"
+    },
+    {
+      "name": "Elena Kim",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/elena-kim.webp"
+    },
+    {
+      "name": "Nik Vassev",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/nik-vassev.webp"
+    },
+    {
+      "name": "Alex Nassarius",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/alex-nassarius.webp"
+    },
+    {
+      "name": "Alex Snider",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/alex-snider.webp"
+    },
+    {
+      "name": "Esteban Gorupicz",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/esteban-gorupicz.webp"
+    },
+    {
+      "name": "Javier Pérez Moreno",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/javier-perez-moreno.webp"
+    },
+    {
+      "name": "Jesús Contreras",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/jesus-contreras.webp"
+    },
+    {
+      "name": "Tino Urbina",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/tino-urbina.webp"
+    },
+    {
+      "name": "Anja López",
+      "role": "Speaker",
+      "company": "Cozumel Vino",
+      "image": "/assets/speakers-2026/anja-lopez.webp"
+    },
+    {
+      "name": "Florijn de Graaf",
+      "role": "Speaker",
+      "company": "SmartHoods",
+      "image": "/assets/speakers-2026/florijn-de-graaf.webp"
+    },
+    {
+      "name": "Karla Acevedo",
+      "role": "Speaker",
+      "company": "Tulum Sostenible | Puntos Limpios Tulum",
+      "image": "/assets/speakers-2026/karla-acevedo.webp"
+    },
+    {
+      "name": "Barbara Lima",
+      "role": "Speaker",
+      "image": "/assets/speakers-2026/barbara-lima.webp"
+    },
+    {
+      "name": "Olmo Torres",
+      "role": "Speaker",
+      "company": "Mayma",
+      "image": "/assets/speakers-2026/olmo-torres.webp"
+    },
+    {
+      "name": "Rocío Gómez",
+      "role": "Speaker",
+      "company": "Mayma",
+      "image": "/assets/speakers-2026/rocio-gomez.webp"
+    },
+    {
+      "name": "Courtney Barriger",
+      "role": "Speaker",
+      "company": "ReFashion Workshop",
+      "image": "/assets/speakers-2026/courtney-barriger.webp"
+    },
+    {
+      "name": "Alejandra Téllez",
+      "role": "Speaker",
+      "company": "GD Isla Cozumel",
+      "image": "/assets/speakers-2026/alejandra-tellez.webp"
+    },
+    {
+      "name": "Tania Arrayales",
+      "role": "Speaker",
+      "company": "Green Habitat",
+      "image": "/assets/speakers-2026/tania-arrayales.webp"
+    },
+    {
+      "name": "Karla Gómez",
+      "role": "Speaker",
+      "company": "Captain Paul Watson Foundation",
+      "image": "/assets/speakers-2026/karla-gomez.webp"
+    },
+    {
+      "name": "Pepe Blanco",
+      "role": "Speaker",
+      "company": "Kuxa’an Ha · Agua Viva",
+      "image": "/assets/speakers-2026/pepe-blanco.webp"
+    },
+    {
+      "name": "Narayani",
+      "role": "Speaker",
+      "company": "Tulum Innovation Fest",
+      "title": "Festival Strategy, Experience & Operations Lead",
+      "titleEs": "Líder de estrategia, experiencia y operaciones del festival",
+      "image": "/assets/speakers-2026/narayani.webp"
+    },
+    {
+      "name": "Brenda Miranda",
+      "role": "Speaker",
+      "company": "Tulum Innovation Fest",
+      "title": "Media & Content Programming Lead",
+      "titleEs": "Líder de medios y programación de contenido",
+      "image": "/assets/speakers-2026/brenda-miranda.webp"
+    },
+    {
       "name": "Maja Lucatelli",
       "role": "Speaker",
       "title": "PR, Partnerships & Community Relations",
@@ -117,7 +371,7 @@
       "name": "Teresa Castagnino",
       "company": "LIKE GROUP MANAGEMENT",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/roster/teresa-castagnino.webp",
+      "image": "/assets/speakers-2026/teresa-castagnino.webp",
       "title": "Co-Founder",
       "titleEs": "Cofundadora"
     },
@@ -151,7 +405,7 @@
       "name": "Sandra Ponce de León",
       "company": "ReFi Tulum | Guardians of Nature",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/roster/sandra-ponce-de-leon.webp",
+      "image": "/assets/speakers-2026/sandra-ponce-de-leon.webp",
       "title": "Entrepreneur & Regenerative Community Builder",
       "titleEs": "Emprendedora y creadora de comunidades regenerativas"
     },
@@ -204,6 +458,11 @@
       "title": "Pioneer of Tulum's Innovation Ecosystem",
       "titleEs": "Pionero del ecosistema de innovación de Tulum",
       "image": "/assets/speakers-2026/golden-yogi.webp"
+    },
+    {
+      "name": "Profe Micelio",
+      "role": "Speaker / Co-Founder",
+      "image": "/assets/speakers-2026/profe-micelio.webp"
     }
   ],
   "ambassadors": [
