@@ -217,3 +217,5 @@
   .ln-headliner { min-height:0; aspect-ratio:4 / 4.6; }
   .ln-nights-ctas .ln-btn { flex:1 1 100%; }
 }
+.ln-quote-photo { position:relative; }
+.ln-quote-photo figcaption { position:absolute; left:0; right:0; bottom:0; padding:2.4rem 1.2rem 1rem; background:linear-gradient(180deg,transparent,rgba(0,0,0,.75)); color:#F2F1EA; font-size:.8rem; }
