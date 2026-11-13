@@ -263,3 +263,15 @@
   .ln-face { flex:0 0 40%; scroll-snap-align:start; }
   .ln-gallery { grid-auto-rows:120px; }
 }
+/* Forbes quote right after the hero: the emotional hook */
+.ln-quote { border-top:0; }
+.ln-quote + .ln-logos { border-top:0; }
+@media (max-width:900px) {
+  .ln-quote-grid { min-height:0; }
+  .ln-quote-photo { aspect-ratio:16 / 9; }
+  .ln-quote-photo img { object-position:50% 22%; }
+  .ln-quote-panel { padding:1.8rem 20px 2rem; }
+  .ln-quote-logo { width:130px; margin-bottom:1rem; }
+  .ln-quote blockquote { font-size:clamp(1.5rem,7.4vw,2rem); max-width:none; }
+  .ln-quote-cite { margin-top:1rem; }
+}
