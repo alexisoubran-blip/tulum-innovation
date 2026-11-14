@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/passes/landing.css?v=8">
-  <link rel="stylesheet" href="/vende/vende.css?v=1">
+  <link rel="stylesheet" href="/vende/vende.css?v=2">
 </head>
 <body class="ln-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -47,13 +47,14 @@
           <form id="vdForm" novalidate>
             <h2><span data-tif-en>Create your code</span><span data-tif-es>Arma tu código</span></h2>
             <label><span data-tif-en>Your name</span><span data-tif-es>Tu nombre</span><input name="name" autocomplete="name" required maxlength="60"></label>
-            <label>Email<input name="email" type="email" autocomplete="email" required maxlength="120"></label>
+            <label><span data-tif-en>Email</span><span data-tif-es>Correo</span><input name="email" type="email" autocomplete="email" required maxlength="120"></label>
             <label>WhatsApp<input name="phone" type="tel" autocomplete="tel" required placeholder="+52 984 000 0000"></label>
             <label><span data-tif-en>Your code</span><span data-tif-es>Tu código</span><div class="vd-code"><input name="code" required minlength="4" maxlength="16" autocapitalize="characters" spellcheck="false" placeholder="ANA10"><span>−10%</span></div><small><span data-tif-en>4 to 16 letters or numbers.</span><span data-tif-es>De 4 a 16 letras o números.</span></small></label>
             <input class="vd-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
             <label class="vd-check"><input type="checkbox" name="ok" required> <span data-tif-en>I agree to share my link honestly and not to post it on coupon sites.</span><span data-tif-es>Acepto compartir mi link de forma honesta y no publicarlo en sitios de cupones.</span></label>
             <p class="vd-err" id="vdErr" role="alert" hidden></p>
             <button class="ln-btn" type="submit" id="vdBtn"><span data-tif-en>Create my code</span><span data-tif-es>Crear mi código</span> →</button>
+            <p class="vd-note"><span data-tif-en>Need more than 10% off (groups, companies, partners)? Write to us at</span><span data-tif-es>¿Necesitas más del 10% de descuento (grupos, empresas, aliados)? Escríbenos a</span> <a href="mailto:innovation@likegroup.io?subject=Descuento%20especial%20TIF%202026">innovation@likegroup.io</a></p>
           </form>
           <div id="vdDone" hidden>
             <p class="ln-kicker"><span data-tif-en>Done!</span><span data-tif-es>¡Listo!</span></p>

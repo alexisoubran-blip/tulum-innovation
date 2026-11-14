@@ -25,3 +25,7 @@
 .vd-link .ln-btn { width: auto !important; min-height: 50px; padding: 0 1.1rem; }
 .vd-share { display: grid; gap: .6rem; margin-bottom: 1rem; }
 @media (max-width: 900px) { .vd-grid { grid-template-columns: minmax(0, 1fr); } .vd-hero { min-height: 0; } }
+.vd-note { margin: 1rem 0 0; padding: .85rem 1rem; border: 1px solid rgba(255,196,36,.4); border-radius: 14px; background: rgba(255,196,36,.07); color: var(--ln-paper); font-size: .86rem; line-height: 1.45; }
+.vd-note a { color: var(--ln-gold); font-weight: 600; white-space: nowrap; }
+.vd-note-hero { margin-top: 1.6rem; max-width: 520px; }
+@media (max-width: 900px) { .vd-note-hero { display: none; } }
