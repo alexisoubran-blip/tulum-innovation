@@ -20,6 +20,7 @@
       if (!s.ok) return fail();
       document.title = `${s.name} · Tulum Innovation Fest 2026`;
       $('scName').textContent = s.name;
+      if (s.community) $('scKicker').innerHTML = '<span data-tif-en>Personal invitation · TIF 2026</span><span data-tif-es>Invitación personal · TIF 2026</span>';
       $('scOrg').textContent = s.organization || '';
       if (s.session) { $('scSession').hidden = false; $('scSession').textContent = s.session; }
       $('scCode').textContent = s.code;

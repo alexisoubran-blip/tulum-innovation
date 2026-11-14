@@ -1,0 +1,27 @@
+/* /vende: community sellers create their own code. Builds on /passes/landing.css. */
+.vd-hero { min-height: calc(100vh - 88px); display: flex; align-items: center; }
+.vd-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.vd-steps { list-style: none; margin: 1.8rem 0 0; padding: 0; display: grid; gap: .8rem; }
+.vd-steps li { display: flex; gap: .9rem; align-items: center; color: var(--ln-muted); }
+.vd-steps b { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--ln-ember-2); color: var(--ln-ember-2); font-family: "Bruno Ace", Sora, sans-serif; font-weight: 400; }
+.vd-card { padding: clamp(1.4rem, 3vw, 2rem); border: 1px solid var(--ln-line); border-radius: 24px; background: rgba(6,18,21,.86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 30px 80px -30px rgba(0,0,0,.8); }
+.vd-card h2 { margin: 0 0 1.2rem; font-size: 1.5rem; }
+.vd-card label { display: grid; gap: .4rem; margin-bottom: 1rem; font-size: .82rem; color: var(--ln-muted); }
+.vd-card input:not([type=checkbox]) { width: 100%; min-height: 50px; padding: 0 1rem; border: 1px solid var(--ln-line); border-radius: 14px; background: rgba(242,241,234,.04); color: var(--ln-paper); font: 400 1rem Sora, sans-serif; }
+.vd-card input:focus { outline: 2px solid var(--ln-ember-2); outline-offset: 1px; }
+.vd-code { display: flex; align-items: center; gap: .6rem; }
+.vd-code input { text-transform: uppercase; letter-spacing: .08em; font-weight: 600 !important; }
+.vd-code span { flex: none; padding: .55rem .8rem; border-radius: 999px; background: rgba(75,255,179,.12); color: var(--ln-mint); font-weight: 700; }
+.vd-card small { color: var(--ln-faint); }
+.vd-check { grid-template-columns: auto 1fr !important; align-items: start; font-size: .8rem !important; }
+.vd-check input { margin-top: .2rem; width: 18px; height: 18px; accent-color: var(--ln-ember); }
+.vd-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.vd-err { margin: 0 0 1rem; padding: .7rem .9rem; border-radius: 12px; background: rgba(255,51,116,.12); color: #ff9db8; font-size: .88rem; }
+.vd-card .ln-btn { width: 100%; }
+.vd-big { display: block; margin-top: .4rem; font-family: "Bruno Ace", Sora, sans-serif; font-size: clamp(2rem, 6vw, 2.8rem); color: var(--ln-mint); letter-spacing: .04em; }
+.vd-muted { color: var(--ln-muted); font-size: .9rem; }
+.vd-link { display: flex; gap: .5rem; margin: .6rem 0 1rem; }
+.vd-link input { flex: 1; min-width: 0; }
+.vd-link .ln-btn { width: auto !important; min-height: 50px; padding: 0 1.1rem; }
+.vd-share { display: grid; gap: .6rem; margin-bottom: 1rem; }
+@media (max-width: 900px) { .vd-grid { grid-template-columns: minmax(0, 1fr); } .vd-hero { min-height: 0; } }

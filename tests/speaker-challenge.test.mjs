@@ -112,3 +112,26 @@ test('leaderboard: paid tickets only, Tier A only when selling, panels add up; a
   assert.ok(ron.revenueMxn > 0);
   assert.equal((await store.listPromoPaidOrders()).length, 6);
 });
+
+test('community self-serve code: create, validate, one per email, applies 10%, kept out of speaker ranking', async () => {
+  const store = createMemoryStore({ passes, promoCodes });
+  const checkout = createCheckout({ store, blokko: null, env, now: () => NOW });
+  const made = await checkout.createCommunityCode({ name: 'Lu Pérez', email: 'Lu@Mail.com', phone: '+52 984 123 4567', code: 'lu-tulum' });
+  assert.equal(made.code, 'LUTULUM');
+  assert.equal(made.percentOff, 10);
+  assert.match(made.url, /\/s\/LUTULUM$/);
+  const fails = async (input, err) => assert.rejects(checkout.createCommunityCode(input), (e) => e.code === err);
+  await fails({ name: 'Otro', email: 'lu@mail.com', phone: '9841234567', code: 'OTRO1' }, 'email_has_code');
+  await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'RON10' }, 'code_taken');
+  await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'FREE50' }, 'code_reserved');
+  await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'AB' }, 'code_length');
+  await fails({ name: 'Otro', email: 'o@mail.com', phone: '12', code: 'OTRO1' }, 'invalid_phone');
+  await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'OTRO1', website: 'x' }, 'invalid_request');
+  const page = await checkout.speakerPage({ code: 'LUTULUM' });
+  assert.equal(page.community, true);
+  const promo = await checkout.promo({ code: 'LUTULUM', passId: 'general-access' });
+  assert.equal(Number(promo.percentOff ?? promo.percent_off ?? 10), 10);
+  const lb = await checkout.leaderboard();
+  assert.ok(!lb.people.some((p) => p.name === 'Lu Pérez'));
+  assert.ok(Array.isArray(lb.community));
+});
