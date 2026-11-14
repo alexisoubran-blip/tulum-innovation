@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Vendedores · Admin TIF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --ink:#00080B; --panel:#061215; --paper:#F2F1EA; --muted:rgba(242,241,234,.6); --faint:rgba(242,241,234,.38); --line:rgba(242,241,234,.1); --line-2:rgba(242,241,234,.18); --ember:#E97A43; --ok:#4BFFB3; --bad:#FF6B6B; --display:"Bruno Ace",Sora,sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: var(--ink); color: var(--paper); font: 400 14px/1.5 Sora, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+.wrap { width: min(1400px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 60px; }
+header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+h1 { margin: 0; font: 400 1.5rem/1.1 var(--display); }
+h1 small { display: block; margin-top: 6px; font: 400 .78rem Sora; color: var(--muted); }
+a.btn { color: inherit; }
+.btn { height: 40px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 10px; background: transparent; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.btn:hover { border-color: var(--ember); }
+.btn.primary { background: var(--ember); border-color: var(--ember); color: #1a0a02; font-weight: 600; }
+.field { height: 40px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel); outline: none; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.kpi { padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+.kpi span { color: var(--faint); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.kpi b { display: block; margin-top: 6px; font: 400 1.6rem/1 var(--display); }
+.bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+table { width: 100%; border-collapse: collapse; min-width: 980px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--panel); color: var(--faint); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr.off td { opacity: .45; }
+.code { font-family: ui-monospace, monospace; font-weight: 600; letter-spacing: .04em; }
+.tier { display: inline-block; min-width: 28px; padding: 2px 8px; border-radius: 999px; background: rgba(242,241,234,.08); font-size: 11px; text-align: center; }
+.pbar { width: 90px; height: 5px; border-radius: 3px; background: rgba(242,241,234,.1); overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 8px; }
+.pbar i { display: block; height: 100%; background: var(--ember); }
+.sw { position: relative; width: 40px; height: 22px; border-radius: 999px; border: 0; background: rgba(242,241,234,.2); cursor: pointer; }
+.sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.sw[aria-checked="true"] { background: var(--ok); }
+.sw[aria-checked="true"]::after { transform: translateX(18px); }
+.copy { border: 0; background: none; color: var(--muted); cursor: pointer; padding: 0 4px; }
+.copy:hover { color: var(--ember); }
+.login { max-width: 360px; margin: 18vh auto 0; padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+.login h1 { margin-bottom: 16px; }
+.login input { width: 100%; margin-bottom: 10px; }
+.err { color: var(--bad); min-height: 1.2em; }
+.note { color: var(--faint); font-size: 12px; margin-top: 12px; }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin-bottom: 18px; }
+.card { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+.card h2 { margin: 0 0 12px; font: 600 12px Sora; letter-spacing: .14em; text-transform: uppercase; color: var(--ember); }
+.card .row { display: flex; flex-wrap: wrap; gap: 8px; }
+.card .row .field { flex: 1 1 140px; min-width: 0; }
+.msg { margin-top: 10px; font-size: 13px; color: var(--ok); word-break: break-all; }
+.msg.bad { color: var(--bad); }
+.pend { color: #FFC424; font-weight: 600; }
+.pct { width: 64px; height: 32px; padding: 0 8px; text-align: right; }
+.mini { height: 32px; padding: 0 10px; font-size: 12px; }
+.src { font-size: 10px; padding: 1px 6px; border-radius: 999px; background: rgba(75,255,179,.12); color: var(--ok); margin-left: 6px; }
+h3 { margin: 26px 0 10px; font: 600 12px Sora; letter-spacing: .14em; text-transform: uppercase; color: var(--ember); }
+@media (max-width: 800px) { .grid2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="login" class="login" hidden>
+  <h1>Vendedores</h1>
+  <form id="loginForm"><input class="field" id="token" type="password" placeholder="Clave de admin" autocomplete="current-password"><button class="btn primary" type="submit">Entrar</button></form>
+  <p class="err" id="loginErr"></p>
+</div>
+<div class="wrap" id="app" hidden>
+  <header>
+    <h1>Vendedores y comisiones<small id="upd">Solo cuentan órdenes pagadas · comisión sobre el importe pagado</small></h1>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="btn" href="/vende" target="_blank" rel="noopener">Ver /vende</a>
+      <a class="btn" href="/admin/speakers">Speakers</a>
+      <a class="btn" href="/admin/ventas">Ventas</a>
+      <button class="btn" id="refresh">Actualizar</button>
+      <button class="btn primary" id="csv">Exportar CSV</button>
+      <button class="btn" id="logout">Salir</button>
+    </div>
+  </header>
+  <div class="kpis" id="kpis"></div>
+  <div class="grid2">
+    <div class="card">
+      <h2>Nuevo vendedor</h2>
+      <form id="newForm" class="row">
+        <input class="field" name="name" placeholder="Nombre o alias (ej. maria, dj-selva)" required>
+        <input class="field" name="code" placeholder="Código (opcional)" style="text-transform:uppercase">
+        <input class="field" name="phone" placeholder="WhatsApp (opcional)">
+        <input class="field" name="commissionPct" type="number" min="0" max="50" step="0.5" placeholder="Comisión %">
+        <button class="btn primary" type="submit">Crear enlace</button>
+      </form>
+      <p class="msg" id="newMsg"></p>
+    </div>
+    <div class="card">
+      <h2>Comisión para toda la comunidad</h2>
+      <div class="row"><input class="field" id="bulkPct" type="number" min="0" max="50" step="0.5" placeholder="% sobre lo pagado (ej. 10)"><button class="btn" id="bulkBtn">Aplicar a todos los de /vende</button></div>
+      <p class="note">La comisión se calcula sobre el importe pagado de cada orden (ya con el 10% de descuento). Se paga por fuera (transferencia); aquí solo llevas el control. Marca pagado solo después de confirmar la transferencia.</p>
+      <p class="msg" id="bulkMsg"></p>
+    </div>
+  </div>
+  <div class="bar">
+    <input class="field" id="q" placeholder="Buscar nombre, código o WhatsApp" style="flex:1 1 240px">
+    <select class="field" id="grp"><option value="Comunidad">Comunidad (/vende)</option><option value="">Todos (incluye speakers)</option></select>
+    <select class="field" id="only"><option value="">Todos</option><option value="sold">Con ventas</option><option value="pending">Con saldo por pagar</option></select>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr>
+      <th data-k="name">Vendedor</th><th data-k="code">Código</th><th>Contacto</th>
+      <th class="num" data-k="tickets">Boletos</th><th class="num" data-k="revenueMxn">Ventas MXN</th>
+      <th class="num" data-k="commissionPct">Comisión %</th><th class="num" data-k="earnedMxn">Comisión MXN</th>
+      <th class="num" data-k="paidMxn">Pagado</th><th class="num" data-k="pendingMxn">Por pagar</th><th></th><th>Liga</th><th>Activo</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <h3>Órdenes con código · lista de invitados</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Fecha</th><th>Código</th><th>Vendedor</th><th>Comprador</th><th>Pase</th><th class="num">Boletos</th><th class="num">Pagado MXN</th></tr></thead>
+    <tbody id="orders"></tbody>
+  </table></div>
+  <h3>Historial de pagos</h3>
+  <div class="tbl"><table style="min-width:600px">
+    <thead><tr><th>Fecha</th><th>Código</th><th class="num">Monto MXN</th><th>Nota</th></tr></thead>
+    <tbody id="payouts"></tbody>
+  </table></div>
+</div>
+<script src="/admin/vendedores/vendedores.js?v=1"></script>
+</body>
+</html>

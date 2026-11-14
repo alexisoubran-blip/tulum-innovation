@@ -7,6 +7,7 @@
 //   { action: "status", merchantTransactionId }           → payment status of a test
 //   { action: "sales", from?, to? }                    → every order (retroactive) with buyer and payment data
 //   { action: "speakers" }                            → Speaker Challenge per code: tickets, % goal, revenue, courtesies
+//   { action: "sellers" } · "seller-create" · "seller-commission" · "seller-payout" → seller control (/admin/vendedores)
 //   { action: "promo-toggle", code, active }         → turns a speaker code on or off
 //   { action: "blokko-payment", attemptId }           → what Blokko reports for one paid attempt (coin, amounts)
 //   { action: "overview" }                                → SPEI transfers and recent payment attempts (with errors)
@@ -81,6 +82,14 @@ export async function POST(request) {
       }
       case 'speakers':
         return json(200, { ok: true, speakers: await (await getCheckout()).adminSpeakers() });
+      case 'sellers':
+        return json(200, { ok: true, ...(await (await getCheckout()).adminSellers()) });
+      case 'seller-create':
+        return json(200, { ok: true, ...(await (await getCheckout()).adminCreateSeller(body)) });
+      case 'seller-commission':
+        return json(200, { ok: true, ...(await (await getCheckout()).setCommission(body)) });
+      case 'seller-payout':
+        return json(200, { ok: true, ...(await (await getCheckout()).recordPayout(body)) });
       case 'promo-toggle':
         return json(200, { ok: true, ...(await (await getCheckout()).setPromoActive({ code: body.code, active: body.active })) });
       case 'sales':
