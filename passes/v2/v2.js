@@ -203,11 +203,6 @@
   fetch('/api/checkout/options', { cache: 'no-store' }).then((r) => r.json()).then((o) => { (o.passes || []).forEach((p) => { if (Number(p.totalUsd) > 0) price[p.id] = Number(p.totalUsd); }); sync(); }).catch(() => {});
   sync();
 
-  // ------------------------------------------------------------------ sticky bar (after hero, hidden over the pass + final CTA)
-  const bar = $('[data-v2-sticky]'), hero = $('[data-v2-hero]');
-  if (bar && hero) {
-    const state = new Map();
-    const io = new IntersectionObserver((ents) => { ents.forEach((e) => state.set(e.target, e.isIntersecting)); bar.classList.toggle('is-on', ![...state.values()].some(Boolean)); });
-    [hero, $('#pase'), $('.ln-final')].filter(Boolean).forEach((el) => io.observe(el));
-  }
+  // ------------------------------------------------------------------ buy bar: always visible (General · Executive · Community)
+  document.body.classList.add('v2-has-bar');
 })();

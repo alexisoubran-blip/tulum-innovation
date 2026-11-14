@@ -192,3 +192,15 @@
   .v2-chips button { min-height:48px; padding:0 1rem; font-size:.85rem; }
 }
 @media (prefers-reduced-motion: reduce) { .v2-ticker > div { animation:none; } .v2-holo { transition:none; } }
+
+/* ---------- always-on buy bar (desktop + mobile) ---------- */
+.v2-page .ln-sticky.v2-bar { display:flex !important; transform:translate(-50%, 0); width:min(calc(100% - 20px), 660px); gap:6px; padding:6px; border-radius:999px; border:1px solid rgba(242,241,234,.14); background:rgba(0,8,11,.72); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); box-shadow:0 20px 60px rgba(0,0,0,.55); }
+.v2-page .v2-bar a { min-height:54px; box-shadow:none; transition:transform .15s, filter .15s; }
+.v2-page .v2-bar a:hover { transform:translateY(-1px); filter:brightness(1.07); }
+.v2-page .v2-bar a small { font-family:"Bruno Ace", Sora, sans-serif; letter-spacing:.02em; margin-top:.15rem; opacity:1; }
+.v2-has-bar { padding-bottom:calc(84px + env(safe-area-inset-bottom)) !important; }
+@media (max-width: 900px) {
+  .v2-page .ln-sticky.v2-bar { width:calc(100% - 16px); bottom:max(8px, env(safe-area-inset-bottom)); gap:4px; padding:4px; }
+  .v2-page .v2-bar a { min-height:50px; padding:.3rem .2rem; font-size:.6rem; letter-spacing:.06em; }
+  .v2-page .v2-bar a small { font-size:.66rem; }
+}
