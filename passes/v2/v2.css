@@ -255,3 +255,4 @@
   .v2-night-names .is-main b { font-size:1.25rem; color:#FFD65C; }
   .v2-night-names small { margin:0; font-size:.58rem; letter-spacing:.1em; text-align:right; }
 }
+.v2-band { font-family:Sora, sans-serif; font-weight:500; font-size:.62em; letter-spacing:.08em; color:rgba(242,241,234,.65); text-transform:none; }
