@@ -241,3 +241,17 @@
 @media (max-width: 900px) { .cof-grid { grid-template-columns:repeat(3, 1fr); } .cof b { font-size:.74rem; } .cof small { font-size:.56rem; } }
 .v2-night-names { max-width:1000px; }
 .v2-night-names li:last-child b { font-size:clamp(.95rem, 1.8vw, 1.4rem); color:rgba(242,241,234,.85); }
+
+/* closing night · mobile polish */
+@media (max-width: 900px) {
+  .v2-night-hero > img { aspect-ratio:1672/941; object-position:50% 50%; }
+  .v2-night-copy { margin-top:0; padding-top:1.4rem; }
+  .v2-night-k { font-size:.6rem; letter-spacing:.16em; line-height:1.6; }
+  .v2-night-h { font-size:clamp(1.6rem, 7.6vw, 2.2rem) !important; margin-top:.6rem !important; }
+  .v2-night-names { display:block; width:100%; max-width:420px; margin:1.4rem auto 1.6rem; border-top:1px solid rgba(242,241,234,.12); }
+  .v2-night-names li { flex-direction:row; align-items:baseline; justify-content:space-between; gap:1rem; padding:.85rem .2rem; border-bottom:1px solid rgba(242,241,234,.12); text-align:left; }
+  .v2-night-names b, .v2-night-names li:last-child b { font-size:1rem; color:#F2F1EA; white-space:nowrap; }
+  .v2-night-names .is-main { padding:1rem .2rem; }
+  .v2-night-names .is-main b { font-size:1.25rem; color:#FFD65C; }
+  .v2-night-names small { margin:0; font-size:.58rem; letter-spacing:.1em; text-align:right; }
+}
