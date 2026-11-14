@@ -172,13 +172,13 @@
 
 /* Forbes quote */
 .ln-quote { border-top:1px solid var(--ln-line); }
-.ln-quote-grid { display:grid; grid-template-columns:minmax(0,38fr) minmax(0,62fr); min-height:clamp(420px,46vw,600px); }
+.ln-quote-grid { display:grid; grid-template-columns:1fr; min-height:clamp(360px,36vw,520px); }
 .ln-quote-photo { margin:0; overflow:hidden; background:#111; }
 .ln-quote-photo img { width:100%; height:100%; object-fit:cover; object-position:50% 25%; filter:grayscale(1) contrast(1.05); }
-.ln-quote-panel { position:relative; display:flex; flex-direction:column; justify-content:center; padding:clamp(2.2rem,6vw,5.5rem); background:radial-gradient(120% 90% at 80% 70%, rgba(40,90,255,.55), transparent 60%), linear-gradient(135deg,#0a1aa8 0%,#05106e 55%,#020848 100%); overflow:hidden; isolation:isolate; }
+.ln-quote-panel { position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:clamp(2.2rem,6vw,5.5rem); background:radial-gradient(120% 90% at 80% 70%, rgba(40,90,255,.55), transparent 60%), linear-gradient(135deg,#0a1aa8 0%,#05106e 55%,#020848 100%); overflow:hidden; isolation:isolate; }
 .ln-quote-panel::before { content:""; position:absolute; inset:0; z-index:-1; background:url(/assets/gallery/night-dj.webp) center/cover; mix-blend-mode:luminosity; opacity:.16; }
 .ln-quote-logo { width:clamp(150px,18vw,240px); height:auto; filter:brightness(0) invert(1); margin-bottom:clamp(1.4rem,3vw,2.2rem); }
-.ln-quote blockquote { margin:0; font-family:"Bruno Ace", Sora, sans-serif; font-size:clamp(1.55rem,3.7vw,3.3rem); line-height:1.12; color:#F2F1EA; max-width:18ch; }
+.ln-quote blockquote { margin:0; font-family:"Bruno Ace", Sora, sans-serif; font-size:clamp(1.55rem,3.7vw,3.3rem); line-height:1.12; color:#F2F1EA; max-width:24ch; }
 .ln-quote-cite { margin:clamp(1.4rem,3vw,2rem) 0 .3rem; font-size:.95rem; color:#F2F1EA; }
 .ln-quote-src { margin:0; font-size:.76rem; color:rgba(242,241,234,.62); }
 .ln-quote-src a { color:#F2F1EA; }

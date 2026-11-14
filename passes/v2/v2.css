@@ -38,7 +38,7 @@
 .v2-poster-box { position:relative; padding:clamp(1.5rem, 4vw, 3rem); border:1px solid rgba(242,241,234,.12); border-radius:28px; background:
   radial-gradient(60% 50% at 50% 0%, rgba(255,106,43,.16), transparent 70%),
   radial-gradient(50% 40% at 50% 100%, rgba(47,91,255,.18), transparent 70%), #04101300; text-align:center; overflow:hidden; }
-.lu-faces { display:grid; grid-template-columns:repeat(4, 1fr); gap:clamp(.6rem, 2vw, 1.2rem); margin-bottom:clamp(1.5rem, 3vw, 2.4rem); }
+.lu-faces { display:grid; grid-template-columns:repeat(6, 1fr); gap:clamp(.6rem, 2vw, 1.2rem); margin-bottom:clamp(1.5rem, 3vw, 2.4rem); }
 .lu-face { margin:0; }
 .lu-face img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:18px; filter:saturate(1.05); box-shadow:0 20px 50px -20px rgba(255,106,43,.45); }
 .lu-face figcaption { margin-top:.7rem; font:400 clamp(.8rem, 1.6vw, 1.15rem)/1.15 "Bruno Ace", Sora, sans-serif; text-transform:uppercase; }
@@ -148,7 +148,9 @@
   .v2-ctas .ln-btn { flex:1 1 100%; }
   .v2-play { padding-left:0; }
   .v2-count div { min-width:0; flex:1; }
-  .lu-faces { grid-template-columns:repeat(2, 1fr); }
+  .lu-faces { grid-template-columns:repeat(3, 1fr); }
+  .lu-face figcaption { font-size:.72rem; }
+  .lu-face small { font-size:.58rem; }
   .v2-result { grid-template-columns:1fr; }
   .v2-days { grid-template-columns:1fr; }
   .v2-pass-grid { grid-template-columns:1fr; }
