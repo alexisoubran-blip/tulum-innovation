@@ -239,3 +239,5 @@
 .cof b { display:block; font-weight:600; font-size:.88rem; line-height:1.25; }
 .cof small { display:block; margin-top:.2rem; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:#FFB37A; line-height:1.3; }
 @media (max-width: 900px) { .cof-grid { grid-template-columns:repeat(3, 1fr); } .cof b { font-size:.74rem; } .cof small { font-size:.56rem; } }
+.v2-night-names { max-width:1000px; }
+.v2-night-names li:last-child b { font-size:clamp(.95rem, 1.8vw, 1.4rem); color:rgba(242,241,234,.85); }
