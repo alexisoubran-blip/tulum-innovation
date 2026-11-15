@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/passes/landing.css?v=9">
-  <link rel="stylesheet" href="/vende/vende.css?v=2">
+  <link rel="stylesheet" href="/vende/vende.css?v=3">
 </head>
 <body class="ln-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -34,14 +34,15 @@
       <div class="ln-hero-bg"><img src="/assets/gallery/community.webp" alt="" fetchpriority="high"></div>
       <div class="ln-wrap vd-grid">
         <div>
-          <p class="ln-kicker"><span data-tif-en>Sell tickets · TIF 2026</span><span data-tif-es>Vende boletos · TIF 2026</span></p>
-          <h1><span data-tif-en>Want to sell tickets? <em>Create your code.</em></span><span data-tif-es>¿Quieres vender boletos? <em>Arma tu código.</em></span></h1>
-          <p class="ln-lede"><span data-tif-en>In 30 seconds you get your own link. Whoever buys with it gets <b>10% off</b>, and every sale is credited to your name.</span><span data-tif-es>En 30 segundos tienes tu propio link. Quien compre con él obtiene <b>10% de descuento</b> y cada venta queda registrada a tu nombre.</span></p>
+          <p class="ln-kicker"><span data-tif-en>Official TIF sellers · 2026</span><span data-tif-es>Vendedores oficiales TIF · 2026</span></p>
+          <h1><span data-tif-en>Want to sell TIF? <em>Create your code.</em></span><span data-tif-es>¿Quieres vender TIF? <em>Arma tu código.</em></span></h1>
+          <p class="ln-lede"><span data-tif-en>In 30 seconds you get your own link. Your buyers get <b>10% off</b> festival passes, and <b>everything</b> they buy with it (passes, Innovation Mezcal, Community) is credited to you. You earn a <b>10% commission</b> on paid sales.</span><span data-tif-es>En 30 segundos tienes tu propio link. Tus compradores tienen <b>10% de descuento</b> en pases del festival y <b>todo</b> lo que compren con él (pases, Innovation Mezcal, Community) queda a tu nombre. Ganas <b>10% de comisión</b> sobre las ventas pagadas.</span></p>
           <ol class="vd-steps">
             <li><b>1</b><span data-tif-en>Pick your code (e.g. ANA10, TULUMVIBES).</span><span data-tif-es>Elige tu código (ej. ANA10, TULUMVIBES).</span></li>
             <li><b>2</b><span data-tif-en>Share your link on WhatsApp, Instagram, wherever.</span><span data-tif-es>Comparte tu link por WhatsApp, Instagram, donde quieras.</span></li>
-            <li><b>3</b><span data-tif-en>Your buyers save 10%; you see your sales on the ranking.</span><span data-tif-es>Tus compradores ahorran 10% y tú ves tus ventas en el ranking.</span></li>
+            <li><b>3</b><span data-tif-en>Every paid sale counts for you. Check your sales here anytime with your email.</span><span data-tif-es>Cada venta pagada cuenta para ti. Revisa tus ventas aquí cuando quieras con tu correo.</span></li>
           </ol>
+          <p class="vd-official"><span data-tif-en>This is the only official seller link of Tulum Innovation Fest. No invitation or account needed — not Ticket Fairy or any other platform.</span><span data-tif-es>Este es el único link oficial de vendedores de Tulum Innovation Fest. No necesitas invitación ni cuenta: no es Ticket Fairy ni otra plataforma.</span></p>
         </div>
         <div class="vd-card">
           <form id="vdForm" novalidate>
@@ -67,11 +68,16 @@
             </div>
             <p class="vd-muted"><span data-tif-en>Save your link: we don’t email it. Codes can be paused if misused.</span><span data-tif-es>Guarda tu link: no lo enviamos por correo. Los códigos pueden pausarse si se usan de forma indebida.</span></p>
           </div>
+          <form id="vdFind" class="vd-find" novalidate>
+            <p class="ln-kicker"><span data-tif-en>Already have a code?</span><span data-tif-es>¿Ya tienes código?</span></p>
+            <div class="vd-link"><input name="email" type="email" autocomplete="email" required maxlength="120" placeholder="tu@correo.com" aria-label="Email"><button type="submit" class="ln-btn is-ghost"><span data-tif-en>See my sales</span><span data-tif-es>Ver mis ventas</span></button></div>
+            <p class="vd-muted" id="vdFound" hidden></p>
+          </form>
         </div>
       </div>
     </section>
   </main>
   <footer><a href="mailto:innovation@likegroup.io">innovation@likegroup.io</a></footer>
-  <script src="/vende/vende.js?v=1" defer></script>
+  <script src="/vende/vende.js?v=2" defer></script>
 </body>
 </html>

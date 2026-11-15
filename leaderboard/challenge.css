@@ -96,3 +96,12 @@
   .sc-code b { font-size: 1.25rem; }
   .sc-hero { padding-top: 2.2rem; }
 }
+
+/* /s: other products credited to the same seller */
+.sc-more { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:.6rem; margin-top:1.6rem; }
+.sc-more > p { grid-column:1 / -1; margin:0; font-size:.68rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--sc-faint); }
+.sc-more a { display:flex; flex-direction:column; gap:.25rem; padding:.85rem 1rem; border:1px solid rgba(242,241,234,.16); border-radius:16px; color:#F2F1EA; text-decoration:none; transition:border-color .2s, transform .2s; }
+.sc-more a:hover { border-color:#FF8A3D; transform:translateY(-2px); }
+.sc-more b { font-weight:600; font-size:.88rem; }
+.sc-more small { font-size:.72rem; color:var(--sc-faint); }
+@media (max-width: 640px) { .sc-more { grid-template-columns:1fr; } }

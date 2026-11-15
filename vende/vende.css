@@ -29,3 +29,9 @@
 .vd-note a { color: var(--ln-gold); font-weight: 600; white-space: nowrap; }
 .vd-note-hero { margin-top: 1.6rem; max-width: 520px; }
 @media (max-width: 900px) { .vd-note-hero { display: none; } }
+
+.vd-official { margin:1.2rem 0 0; padding:.8rem 1rem; border-left:3px solid #4BFFB3; background:rgba(75,255,179,.07); border-radius:0 12px 12px 0; font-size:.86rem; color:rgba(242,241,234,.85); }
+.vd-find { margin-top:1.6rem; padding-top:1.4rem; border-top:1px solid rgba(242,241,234,.12); }
+.vd-find .ln-kicker { margin-bottom:.6rem; }
+#vdFound b { color:#FFB37A; letter-spacing:.06em; }
+#vdFound a { color:#4BFFB3; }

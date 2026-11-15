@@ -29,10 +29,14 @@
       if (s.photo) { const img = new Image(); img.src = s.photo; img.alt = s.name; img.decoding = 'async'; $('scPhoto').appendChild(img); }
       $('scBuy').href = link('general-access');
       $('scBuyExec').href = link('executive-pass');
+      $('scMezcal').href = link('innovation-mezcal');
+      $('scMezcalBox').href = link('innovation-mezcal-box');
+      $('scCommunity').href = link('community-access');
       $('scInvite').setAttribute('aria-busy', 'false');
       // Retargeting: visitors of a speaker page (GTM → Meta ViewContent / Google remarketing).
       push({ event: 'speaker_landing_view', tif_promo_code: s.code, tif_speaker: s.name, tif_content_ids: ['general-access', 'executive-pass'] });
     })
     .catch(fail);
-  ['scBuy', 'scBuyExec'].forEach((id) => $(id).addEventListener('click', () => push({ event: 'speaker_landing_click', tif_promo_code: code, tif_product_id: id === 'scBuy' ? 'general-access' : 'executive-pass' })));
+  const ids = { scBuy: 'general-access', scBuyExec: 'executive-pass', scMezcal: 'innovation-mezcal', scMezcalBox: 'innovation-mezcal-box', scCommunity: 'community-access' };
+  Object.entries(ids).forEach(([id, pid]) => $(id)?.addEventListener('click', () => push({ event: 'speaker_landing_click', tif_promo_code: code, tif_product_id: pid })));
 })();

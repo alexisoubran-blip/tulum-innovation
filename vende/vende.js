@@ -12,7 +12,7 @@
     code_length: ['Your code needs 4 to 16 letters or numbers.', 'Tu código necesita de 4 a 16 letras o números.'],
     code_reserved: ['That code is reserved. Try another one.', 'Ese código está reservado. Prueba otro.'],
     code_taken: ['That code is taken. Try another one (add your name or a number).', 'Ese código ya existe. Prueba otro (agrega tu nombre o un número).'],
-    email_has_code: ['This email already has a code. Write to innovation@likegroup.io if you lost it.', 'Este correo ya tiene un código. Escribe a innovation@likegroup.io si lo perdiste.'],
+    email_has_code: ['This email already has a code. Use “Already have a code?” below to see it.', 'Este correo ya tiene un código. Búscalo abajo en “¿Ya tienes código?”.'],
     terms: ['Please accept the conditions.', 'Acepta las condiciones para continuar.'],
     generic: ['Something went wrong. Try again in a moment.', 'Algo salió mal. Intenta de nuevo en un momento.'],
   };
@@ -38,8 +38,8 @@
       $('vdCode').textContent = d.code;
       $('vdUrl').value = url;
       const msg = es()
-        ? `¡Vente a Tulum Innovation Fest! 9–12 dic en IKAL Arena, Tulum. Con mi código ${d.code} tienes 10% de descuento: https://${url}`
-        : `Join me at Tulum Innovation Fest! Dec 9–12 at IKAL Arena, Tulum. Use my code ${d.code} for 10% off: https://${url}`;
+        ? `¡Vente a Tulum Innovation Fest! 9–12 dic en IKAL Arena, Tulum. Con mi código ${d.code} tienes 10% de descuento en tu pase (y ahí mismo puedes pedir el Innovation Mezcal): https://${url}`
+        : `Join me at Tulum Innovation Fest! Dec 9–12 at IKAL Arena, Tulum. Use my code ${d.code} for 10% off your pass (you can also get the Innovation Mezcal there): https://${url}`;
       $('vdWa').href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
       form.hidden = true; $('vdDone').hidden = false;
       push({ event: 'community_code_created', tif_promo_code: d.code });
@@ -49,5 +49,23 @@
     const v = `https://${$('vdUrl').value}`;
     try { await navigator.clipboard.writeText(v); } catch { $('vdUrl').select(); document.execCommand('copy'); }
     $('vdCopy').textContent = es() ? '¡Copiado!' : 'Copied!';
+  });
+  // "Already have a code?": find your link and sales with your email.
+  const find = $('vdFind');
+  find?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const out = $('vdFound'); out.hidden = false; out.textContent = '…';
+    try {
+      const r = await fetch('/api/challenge/my-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: find.email.value }) });
+      const d = await r.json().catch(() => ({}));
+      if (!d.ok) { out.textContent = d.error === 'invalid_email' ? (es() ? 'Revisa tu correo.' : 'Check your email.') : (es() ? 'No encontramos un código con ese correo. Ármalo arriba en 30 segundos.' : 'No code found for that email. Create one above in 30 seconds.'); return; }
+      const url = d.url.replace('https://www.', '');
+      out.innerHTML = '';
+      const b = document.createElement('b'); b.textContent = d.code;
+      const a = document.createElement('a'); a.href = d.url; a.textContent = url; a.target = '_blank'; a.rel = 'noopener';
+      out.append(es() ? 'Tu código: ' : 'Your code: ', b, ' · ', a, document.createElement('br'),
+        es() ? `Ventas pagadas: ${d.orders} (${d.tickets} ${d.tickets === 1 ? 'pase' : 'pases'})` : `Paid sales: ${d.orders} (${d.tickets} ${d.tickets === 1 ? 'pass' : 'passes'})`);
+      push({ event: 'community_code_lookup', tif_promo_code: d.code });
+    } catch { out.textContent = es() ? 'Algo salió mal. Intenta de nuevo.' : 'Something went wrong. Try again.'; }
   });
 })();

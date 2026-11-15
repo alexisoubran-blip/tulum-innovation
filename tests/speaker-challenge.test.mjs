@@ -82,7 +82,11 @@ test('speaker code: invalid, inactive and non-applicable codes are rejected', as
   const { checkout } = setup();
   assert.equal((await checkout.createOrder({ ...buyer, promoCode: 'NOPE10' }).catch((e) => e)).code, 'promo_invalid');
   assert.equal((await checkout.createOrder({ ...buyer, promoCode: 'OFF10' }).catch((e) => e)).code, 'promo_invalid');
-  assert.equal((await checkout.createOrder({ ...buyer, passId: 'business-pass', businessName: 'Café', businessAddress: 'Calle 2 Sur, Tulum', promoCode: 'RON10' }).catch((e) => e)).code, 'promo_not_applicable');
+  // Other products: the code is credited to the seller, without discount.
+  const biz = await checkout.createOrder({ ...buyer, passId: 'business-pass', businessName: 'Café', businessAddress: 'Calle 2 Sur, Tulum', promoCode: 'RON10' });
+  assert.equal(biz.order.promo.code, 'RON10');
+  assert.equal(biz.order.promo.percentOff, 0);
+  assert.equal(biz.order.promo.discountMxn, 0);
   assert.deepEqual(await checkout.promo({ code: 'ron10', passId: 'general-access' }), { code: 'RON10', speaker: 'Ron Oliver', percentOff: 10, appliesTo: ['general-access', 'executive-pass'] });
   await checkout.setPromoActive({ code: 'RON10', active: false });
   assert.equal((await checkout.promo({ code: 'RON10' }).catch((e) => e)).code, 'promo_invalid');
@@ -154,4 +158,30 @@ test('seller control: admin creates seller, sets commission, records payouts aga
   await assert.rejects(checkout.recordPayout({ code: 'EMANUELE10', amountMxn: 500 }), (e) => e.code === 'amount_above_pending');
   const p = await checkout.recordPayout({ code: 'EMANUELE10', amountMxn: 200, note: 'transfer' });
   assert.equal(p.pendingMxn, 0);
+});
+
+test('sellers: every product is credited (discount only on passes), tickets count festival passes only, lookup by email', async () => {
+  const store = createMemoryStore({ passes: [...passes, { id: 'innovation-mezcal', name: 'Mezcal', price_usd: '38.75', price_mxn: '720.00', category: 'merch', issues_tickets: false }], rate: 18.5, promoCodes });
+  const checkout = createCheckout({ store, blokko: null, env, now: () => NOW });
+  const made = await checkout.createCommunityCode({ name: 'Lau Miller', email: 'lau@mail.com', phone: '+52 984 123 4567', code: 'MYHIT10' });
+  const mz = await checkout.createOrder({ ...buyer, passId: 'innovation-mezcal', quantity: 2, promoCode: made.code });
+  assert.equal(mz.order.promo.code, 'MYHIT10');
+  assert.equal(mz.order.promo.percentOff, 0);
+  assert.equal(mz.order.amountMxn, 1440);
+  const ga = await checkout.createOrder({ ...buyer, promoCode: made.code });
+  assert.equal(ga.order.promo.percentOff, 10);
+  // paid orders credited to the seller: 2 bottles (no tickets) + 1 General Access (1 ticket)
+  await store.createOrder({ pass_id: 'innovation-mezcal', quantity: 2, amount_usd: 77.5, amount_mxn: 1440, status: 'paid', paid_at: new Date(NOW).toISOString(), promo_code: 'MYHIT10', buyer_name: 'X', buyer_email: 'x@x.com' });
+  await store.createOrder({ pass_id: 'general-access', quantity: 1, amount_usd: 196.2, amount_mxn: 3600, status: 'paid', paid_at: new Date(NOW).toISOString(), promo_code: 'MYHIT10', buyer_name: 'Y', buyer_email: 'y@x.com' });
+  const sellers = (await checkout.adminSellers()).sellers;
+  const me = sellers.find((x) => x.code === 'MYHIT10');
+  assert.equal(me.commissionPct, 10);
+  assert.equal(me.tickets, 1);
+  assert.equal(me.orders, 2);
+  assert.equal(me.revenueMxn, 5040);
+  assert.equal(me.earnedMxn, 504);
+  const look = await checkout.myCode({ email: ' LAU@mail.com ' });
+  assert.equal(look.code, 'MYHIT10');
+  assert.match(look.url, /\/s\/MYHIT10$/);
+  await assert.rejects(checkout.myCode({ email: 'nobody@mail.com' }), (e) => e.code === 'code_not_found');
 });

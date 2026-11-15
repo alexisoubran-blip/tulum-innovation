@@ -36,7 +36,7 @@
       doneTickets: 'You’re in!', doneConfirm: 'Payment confirmed', viewTickets: 'View my tickets', viewPurchase: 'View my purchase',
       doneTicketsText: (e) => `We sent your tickets to ${e}. You can also open them now.`,
       doneConfirmText: (e) => `We sent the confirmation to ${e}. Our team will contact you within 48 hours to coordinate everything.`,
-      promoOk: (s, p) => `${p}% off · code from ${s}`, promoNa: (p) => `Valid code: ${p}% off on festival passes (General and Executive).`, promoRemove: 'Remove',
+      promoOk: (s, p) => `${p}% off · code from ${s}`, promoNa: (p, sp) => `Code from ${sp || 'your seller'} applied: this purchase counts toward their sales. The ${p}% discount applies to General and Executive passes.`, promoRemove: 'Remove',
       donePickupText: (e) => `We sent the confirmation to ${e}. Pick up your purchase at the festival (December 9–12) showing that email and an ID.`,
       bank: { beneficiary: 'Beneficiary', bank: 'Bank', clabe: 'CLABE', amount: 'Exact amount', reference: 'Reference (payment concept)' },
       deadline: (d) => `Transfer before ${d}; after that the order expires.`,
@@ -71,7 +71,7 @@
       doneTickets: '¡Listo, ya tienes tus boletos!', doneConfirm: 'Pago confirmado', viewTickets: 'Ver mis boletos', viewPurchase: 'Ver mi compra',
       doneTicketsText: (e) => `Enviamos tus boletos a ${e}. También puedes abrirlos ahora.`,
       doneConfirmText: (e) => `Enviamos la confirmación a ${e}. Nuestro equipo te contactará en las próximas 48 horas para coordinar todo.`,
-      promoOk: (s, p) => `${p}% de descuento · código de ${s}`, promoNa: (p) => `Código válido: ${p}% en pases del festival (General y Executive).`, promoRemove: 'Quitar',
+      promoOk: (s, p) => `${p}% de descuento · código de ${s}`, promoNa: (p, sp) => `Código de ${sp || 'tu vendedor'} aplicado: esta compra cuenta para sus ventas. El ${p}% de descuento aplica en pases General y Executive.`, promoRemove: 'Quitar',
       donePickupText: (e) => `Enviamos la confirmación a ${e}. Recoge tu compra en el festival (9 al 12 de diciembre) mostrando ese correo y una identificación.`,
       bank: { beneficiary: 'Beneficiario', bank: 'Banco', clabe: 'CLABE', amount: 'Monto exacto', reference: 'Referencia (concepto de pago)' },
       deadline: (d) => `Transfiere antes del ${d}; después la orden vence.`,
@@ -417,10 +417,10 @@
     form.hidden = Boolean(state.order) && !state.order.promo;
     form.classList.toggle('is-locked', Boolean(state.order));
     msg.className = '';
-    if (state.order?.promo) { msg.className = 'is-ok'; msg.textContent = t().promoOk(state.order.promo.speaker, state.order.promo.percentOff); return; }
+    if (state.order?.promo) { msg.className = 'is-ok'; msg.textContent = state.order.promo.percentOff > 0 ? t().promoOk(state.order.promo.speaker, state.order.promo.percentOff) : t().promoNa(state.promo?.percentOff || 10, state.order.promo.speaker); return; }
     if (!state.promo) { msg.textContent = ''; return; }
-    msg.className = promoFits() || !state.passId ? 'is-ok' : '';
-    msg.textContent = promoFits() || !state.passId ? t().promoOk(state.promo.speaker, state.promo.percentOff) : t().promoNa(state.promo.percentOff);
+    msg.className = 'is-ok';
+    msg.textContent = promoFits() || !state.passId ? t().promoOk(state.promo.speaker, state.promo.percentOff) : t().promoNa(state.promo.percentOff, state.promo.speaker);
   }
   async function applyPromo(raw, { quiet = false } = {}) {
     const code = String(raw || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -522,7 +522,7 @@
         businessName: $('businessName').value, businessAddress: $('businessAddress').value,
         invoice: $('wantInvoice').checked ? { requested: true, rfc: $('rfc').value, zip: $('taxZip').value, legalName: $('legalName').value, regime: $('taxRegime').value, use: $('cfdiUse').value } : null,
         website: $('website').value, acceptTerms: $('terms').checked, locale: state.lang, attribution,
-        promoCode: promoFits() ? state.promo.code : undefined,
+        promoCode: state.promo ? state.promo.code : undefined,   // credited on every product; discount only where it fits
       }),
     });
     btn.disabled = false;
