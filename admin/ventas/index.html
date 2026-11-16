@@ -298,7 +298,7 @@ tr.detail td { height: auto; padding: 16px; white-space: normal; background: rgb
       if (res.status === 401) return logout(data.reason === 'admin_token_not_configured_on_server' ? 'El token no está configurado en el servidor.' : 'Token incorrecto. Es el mismo de /admin/blokko.');
       if (!res.ok || !data.ok) { if (fromLogin) { $('loginErr').textContent = 'No se pudo cargar (' + (data.error || res.status) + ').'; return; } return msg('No se pudo cargar: ' + (data.error || res.status)); }
       all = data.sales || [];
-      showApp(); msg('');
+      showApp(); msg(data.role === 'view' ? '👀 Modo solo lectura: correos y teléfonos ocultos. Para cambios, pídele a Alexis.' : '');
       $('updated').textContent = 'Actualizado ' + new Intl.DateTimeFormat('es-MX', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }).format(new Date());
       const methods = [...new Set(all.map((s) => s.processor))].sort();
       colorOf = new Map(methods.map((m, i) => [m, PCOLOR[m] || COLORS[i % COLORS.length]]));

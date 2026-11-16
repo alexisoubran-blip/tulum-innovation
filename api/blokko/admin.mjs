@@ -1,5 +1,6 @@
 // POST /api/blokko/admin — admin actions for the Blokko integration (used by /admin/blokko).
-// Requires Authorization: Bearer {TICKETING_ADMIN_TOKEN}.
+// Requires Authorization: Bearer {TICKETING_ADMIN_TOKEN}, or {TICKETING_VIEW_TOKEN} for read-only actions
+// (sales, speakers, sellers, overview) with buyer contact and tax data masked.
 //   { action: "methods" }                                 → payment methods for our merchant
 //   { action: "register-webhook" }                        → points Blokko at our production webhook
 //   { action: "init-terminal" }                           → POST /v2/pos/initialization with our serial (virtual, type E)
@@ -15,7 +16,8 @@
 //   { action: "card-test", scenario }                     → sandbox-only BlissCore charge with a test card
 //   { action: "resolve-card", attemptId, charged, reference? } → settles an 'unconfirmed' card attempt
 
-import { randomUUID, timingSafeEqual } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
+import { adminRole, VIEW_ACTIONS, maskPersonal } from '../../lib/ticketing/admin-auth.mjs';
 import { configFromEnv, createClient, SANDBOX_URL, BlokkoError } from '../../lib/ticketing/blokko.mjs';
 import { getCheckout } from '../../lib/ticketing/runtime.mjs';
 import { CheckoutError } from '../../lib/ticketing/checkout.mjs';
@@ -37,22 +39,21 @@ const json = (status, body) => new Response(JSON.stringify(body, null, 2), {
   headers: { 'content-type': 'application/json', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' },
 });
 
-// Returns null when authorized, otherwise the reason (never the token itself).
-function authError(request) {
-  const token = (process.env.TICKETING_ADMIN_TOKEN || '').trim();
-  const given = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '').trim();
-  if (token.length < 16) return 'admin_token_not_configured_on_server';
-  if (!given) return 'missing_token';
-  const a = Buffer.from(token);
-  const b = Buffer.from(given);
-  return a.length === b.length && timingSafeEqual(a, b) ? null : 'wrong_token';
-}
-
 export async function POST(request) {
-  const denied = authError(request);
-  if (denied) return json(401, { ok: false, error: 'unauthorized', reason: denied });
+  const auth = adminRole(request);
+  if (auth.error) return json(401, { ok: false, error: 'unauthorized', reason: auth.error });
   let body = {};
   try { body = await request.json(); } catch { return json(400, { ok: false, error: 'invalid_json' }); }
+  if (auth.role === 'view') {
+    if (!VIEW_ACTIONS.has(body.action)) return json(403, { ok: false, error: 'read_only', role: 'view' });
+    const res = await run(body, auth);
+    const data = await res.json();
+    return json(res.status, { ...maskPersonal(data), role: 'view' });
+  }
+  return run(body, auth);
+}
+
+async function run(body, auth) {
 
   const config = configFromEnv();
   const sandbox = config.baseUrl === SANDBOX_URL;

@@ -5,7 +5,7 @@
   const tok = { get() { try { return sessionStorage.getItem(KEY) || ''; } catch { return ''; } }, set(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch {} } };
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const mxn = (n) => '$' + Number(n || 0).toLocaleString('es-MX', { maximumFractionDigits: 2 });
-  const ERR = { code_taken: 'Ese código ya existe.', code_length: 'El código debe tener de 3 a 16 letras o números.', invalid_name: 'Escribe un nombre.', invalid_commission: 'La comisión debe ser de 0 a 50%.', amount_above_pending: 'El monto es mayor a lo pendiente.', invalid_amount: 'Monto inválido.', invalid_email: 'Correo inválido.' };
+  const ERR = { read_only: 'Tu clave es de solo lectura: puedes ver todo, pero no cambiar nada. Pídele a Alexis el cambio.', code_taken: 'Ese código ya existe.', code_length: 'El código debe tener de 3 a 16 letras o números.', invalid_name: 'Escribe un nombre.', invalid_commission: 'La comisión debe ser de 0 a 50%.', amount_above_pending: 'El monto es mayor a lo pendiente.', invalid_amount: 'Monto inválido.', invalid_email: 'Correo inválido.' };
   let data = { sellers: [], payouts: [] }, orders = [], sortK = 'tickets', sortDir = -1;
 
   async function api(body) {
@@ -22,6 +22,7 @@
     data = j; orders = (s?.sales || []).filter((o) => o.status === 'paid' && o.promoCode);
     $('login').hidden = true; $('app').hidden = false;
     $('upd').textContent = `Actualizado ${new Date().toLocaleString('es-MX')} · solo cuentan órdenes pagadas`;
+    if (j.role === 'view') $('upd').textContent += ' · 👀 Modo solo lectura (correos y teléfonos ocultos)';
     render();
   }
   const scope = () => data.sellers.filter((r) => !$('grp').value || r.tier === $('grp').value);
