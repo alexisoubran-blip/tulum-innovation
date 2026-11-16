@@ -256,3 +256,9 @@
   .v2-night-names small { margin:0; font-size:.58rem; letter-spacing:.1em; text-align:right; }
 }
 .v2-band { font-family:Sora, sans-serif; font-weight:500; font-size:.62em; letter-spacing:.08em; color:rgba(242,241,234,.65); text-transform:none; }
+
+/* closing night v2 image (names are printed on the art): show the whole image, copy below, on every width */
+.v2-night-hero { min-height:0; display:block; }
+.v2-night-hero > img, .v2-night-hero > img[src*="lineup-v2"] { position:relative; z-index:0; width:100%; height:auto; aspect-ratio:2400/1350; object-fit:cover; object-position:50% 50%; }
+.v2-night-shade { top:auto; bottom:auto; height:0; }
+.v2-night-copy { margin-top:0; padding-top:clamp(1.4rem, 3vw, 2.4rem); }
