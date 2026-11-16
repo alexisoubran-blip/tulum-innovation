@@ -473,3 +473,8 @@ body.tif-page .wt-included h3 { margin: 0 0 1.2rem; font-family: var(--sans) !im
 .wt-hero-card span { flex: 0 0 auto; min-width: 3.6em; }
 .wt-hero-card p { flex: 1 1 auto; min-width: 0; }
 @media (max-width: 560px) { .wt-hero-card span { font-size: 1.45rem; min-width: 3.4em; } .wt-hero-card div { gap: .9rem; } }
+
+/* Mentors & speakers: 6 cards (Miri Berger added 16 Nov) → 6 / 3 / 2 / 1 per row, no orphans */
+.wt-mentors-grid { grid-template-columns: repeat(12,minmax(0,1fr)); }
+@media (max-width: 1180px) { .wt-mentors-grid { grid-template-columns: repeat(6,minmax(0,1fr)); } .wt-mentors-grid .wt-mentor-card:nth-child(4) { grid-column: span 2; } }
+@media (max-width: 900px) { .wt-mentors-grid .wt-mentor-card, .wt-mentors-grid .wt-mentor-card:nth-child(4), .wt-mentors-grid .wt-mentor-card:last-child { grid-column: span 1; width: auto; justify-self: stretch; } }

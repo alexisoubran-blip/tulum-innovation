@@ -52,6 +52,14 @@
       "titleEs": "Fundador y CEO"
     },
     {
+      "name": "Miri Berger",
+      "role": "Speaker",
+      "company": "Israel-Latin America Chamber of Commerce",
+      "title": "Executive Director",
+      "titleEs": "Directora ejecutiva",
+      "image": "/assets/speakers-2026/miri-berger.webp"
+    },
+    {
       "name": "Álvaro Zúñiga",
       "role": "Speaker",
       "company": "FuXion",
@@ -123,15 +131,6 @@
       "titleEs": "Socio creativo y cultural · Puente Miami–LATAM",
       "image": "/assets/speakers-2026/andersen-francis.webp",
       "url": "https://www.linkedin.com/in/andersscherberger"
-    },
-    {
-      "name": "Will Blakey",
-      "role": "Speaker",
-      "company": "Club DAO | Starseed | LATAM Impact",
-      "title": "Founder",
-      "titleEs": "Fundador",
-      "image": "/assets/speakers-2026/will-blakey.webp",
-      "url": "https://www.linkedin.com/in/willblakey"
     },
     {
       "name": "Brandon Menard",
