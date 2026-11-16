@@ -17,7 +17,8 @@ export async function GET(request) {
   if (auth.error) return json(401, { ok: false, error: 'unauthorized', reason: auth.error });
   const checkout = await getCheckout();
   const [sales, sellers] = await Promise.all([checkout.adminSales({}), checkout.adminSellers()]);
-  const paid = sales.filter((o) => o.status === 'paid');
+  const isTest = (o) => /test|prueba/i.test(o.passId || '') || /^TIF Test/i.test(o.passName || '');
+  const paid = sales.filter((o) => o.status === 'paid' && !isTest(o));
 
   const byProduct = new Map();
   const byDay = new Map();
