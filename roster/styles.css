@@ -75,6 +75,8 @@
 .roster-logos-list li { display:flex;align-items:center;height:48px; }
 .roster-logos-list img { display:block;height:var(--logo-h);width:auto;max-width:170px;object-fit:contain;opacity:.82;transition:opacity .2s; }
 .roster-logos-list li:hover img { opacity:1; }
+.roster-logos-list li.is-sponsor { height:68px; }
+.roster-logos-list li.is-sponsor img { max-width:none;opacity:.92; }
 @media(max-width:620px){
  .roster-logos { padding:2.2rem 0 2.6rem; }
  .roster-logos-list { gap:1.5rem 1.9rem; }

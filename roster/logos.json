@@ -1,5 +1,13 @@
 [
   {
+    "name": "Vinnie G Corp",
+    "logo": "/assets/partners-vinnie-g.webp",
+    "width": 900,
+    "height": 702,
+    "sponsor": true,
+    "people": []
+  },
+  {
     "name": "Amazon Web Services",
     "logo": "/assets/whale-tank-logos/aws-blanco.webp",
     "width": 1200,
