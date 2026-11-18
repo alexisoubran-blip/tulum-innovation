@@ -373,6 +373,14 @@
       "titleEs": "Cofundador"
     },
     {
+      "name": "Shivan Dharma",
+      "role": "Speaker / Co-Founder",
+      "company": "Innovation City",
+      "title": "Co-Founder",
+      "titleEs": "Cofundador",
+      "image": "/assets/speakers-2026/shivan-dharma.webp"
+    },
+    {
       "name": "Narayani",
       "company": "Tulum Innovation Fest",
       "role": "Speaker / Co-Founder",
@@ -448,14 +456,6 @@
       "titleEs": "Cofundador",
       "image": "/assets/speakers-2026/peiman-fazli.webp",
       "url": "https://www.linkedin.com/in/peimanfazli"
-    },
-    {
-      "name": "Shivan Dharma",
-      "role": "Speaker / Co-Founder",
-      "company": "Innovation City",
-      "title": "Co-Founder",
-      "titleEs": "Cofundador",
-      "image": "/assets/speakers-2026/shivan-dharma.webp"
     },
     {
       "name": "Golden Yogi",
