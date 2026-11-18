@@ -340,14 +340,6 @@
       "image": "/assets/speakers-2026/tino-urbina.webp"
     },
     {
-      "name": "Narayani",
-      "role": "Speaker",
-      "company": "Tulum Innovation Fest",
-      "title": "Festival Strategy, Experience & Operations Lead",
-      "titleEs": "Líder de estrategia, experiencia y operaciones del festival",
-      "image": "/assets/speakers-2026/narayani.webp"
-    },
-    {
       "name": "Brenda Miranda",
       "role": "Speaker",
       "company": "Tulum Innovation Fest",
@@ -379,6 +371,14 @@
       "image": "/assets/speakers-2026/gustavo-bolotin.webp",
       "title": "Co-Founder",
       "titleEs": "Cofundador"
+    },
+    {
+      "name": "Narayani",
+      "company": "Tulum Innovation Fest",
+      "role": "Speaker / Co-Founder",
+      "image": "/assets/speakers-2026/narayani.webp",
+      "title": "Festival Strategy, Experience & Operations Lead",
+      "titleEs": "Líder de estrategia, experiencia y operaciones del festival"
     },
     {
       "name": "Alejandro Glatt",
