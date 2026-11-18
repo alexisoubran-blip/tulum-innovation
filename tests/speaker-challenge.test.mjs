@@ -175,11 +175,11 @@ test('sellers: every product is credited (discount only on passes), tickets coun
   await store.createOrder({ pass_id: 'general-access', quantity: 1, amount_usd: 196.2, amount_mxn: 3600, status: 'paid', paid_at: new Date(NOW).toISOString(), promo_code: 'MYHIT10', buyer_name: 'Y', buyer_email: 'y@x.com' });
   const sellers = (await checkout.adminSellers()).sellers;
   const me = sellers.find((x) => x.code === 'MYHIT10');
-  assert.equal(me.commissionPct, 10);
+  assert.equal(me.commissionPct, 25);
   assert.equal(me.tickets, 1);
   assert.equal(me.orders, 2);
   assert.equal(me.revenueMxn, 5040);
-  assert.equal(me.earnedMxn, 504);
+  assert.equal(me.earnedMxn, 1260);
   const look = await checkout.myCode({ email: ' LAU@mail.com ' });
   assert.equal(look.code, 'MYHIT10');
   assert.match(look.url, /\/s\/MYHIT10$/);

@@ -35,3 +35,15 @@
 .vd-find .ln-kicker { margin-bottom:.6rem; }
 #vdFound b { color:#FFB37A; letter-spacing:.06em; }
 #vdFound a { color:#4BFFB3; }
+
+.vd-pillars { border:0; margin:0 0 1rem; padding:0; display:flex; flex-wrap:wrap; gap:.45rem; }
+.vd-pillars legend { width:100%; margin-bottom:.5rem; font-size:.82rem; color:var(--ln-muted); }
+.vd-card .vd-pillars label { display:block; margin:0; }
+.vd-pillars input { position:absolute; opacity:0; pointer-events:none; }
+.vd-pillars label > span { display:inline-flex; align-items:center; min-height:40px; padding:0 .95rem; border:1px solid var(--ln-line); border-radius:999px; color:var(--ln-paper); font-size:.82rem; cursor:pointer; transition:background .2s, border-color .2s; }
+.vd-pillars input:checked + span { background:var(--ln-ember); border-color:var(--ln-ember); color:#fff; }
+.vd-pillars input:focus-visible + span { outline:2px solid var(--ln-ember-2); outline-offset:2px; }
+.vd-script { margin:0 0 1rem; padding:1rem; border:1px solid var(--ln-line); border-radius:16px; background:rgba(242,241,234,.04); }
+.vd-script .ln-kicker { margin:0 0 .5rem; }
+.vd-script p#vdScript { margin:0 0 .8rem; font-size:.9rem; line-height:1.55; color:var(--ln-paper); white-space:pre-line; }
+.vd-script .ln-btn { min-height:44px; }

@@ -17,6 +17,29 @@
     generic: ['Something went wrong. Try again in a moment.', 'Algo salió mal. Intenta de nuevo en un momento.'],
   };
   const say = (k) => { const m = MSG[k] || MSG.generic; $('vdErr').textContent = es() ? m[1] : m[0]; $('vdErr').hidden = false; };
+  // One message and one 30-second script per pillar, so every seller shares the same campaign.
+  const COPY = {
+    all: {
+      es: ['¡Vente a Tulum Innovation Fest! 4 días de charlas, inversionistas, Whale Tank y fiesta en la selva. 9–12 dic en IKAL Arena, Tulum.', 'Voy a estar en Tulum Innovation Fest, del 9 al 12 de diciembre en IKAL Arena. No es solo una conferencia ni solo un festival: son charlas de día, inversionistas, Whale Tank y una noche de cierre con el sax de Pink Floyd en vivo. Con mi código {CODE} tienes 10% de descuento. El link está aquí abajo.'],
+      en: ['Join me at Tulum Innovation Fest! 4 days of talks, investors, Whale Tank and a party in the jungle. Dec 9–12 at IKAL Arena, Tulum.', "I'll be at Tulum Innovation Fest, December 9–12 at IKAL Arena. It's not just a conference and not just a festival: talks by day, investors, Whale Tank and a closing night with Pink Floyd's sax live. My code {CODE} gets you 10% off. Link below."],
+    },
+    party: {
+      es: ['🎷 El sax de Pink Floyd en vivo en plena selva: Scott Page + J.Pool + Selva cierran Tulum Innovation Fest el sábado 12 de diciembre en IKAL Arena.', 'El sábado 12 de diciembre, Scott Page, el saxofonista de Pink Floyd, toca en vivo en la selva de Tulum, con J.Pool y Selva. Es la noche de cierre de Tulum Innovation Fest en IKAL Arena, y viene incluida en el pase. Con mi código {CODE} tienes 10% de descuento. Nos vemos en la pista.'],
+      en: ["🎷 Pink Floyd's sax live in the jungle: Scott Page + J.Pool + Selva close Tulum Innovation Fest on Saturday, December 12 at IKAL Arena.", "On Saturday, December 12, Scott Page, Pink Floyd's saxophonist, plays live in the Tulum jungle with J.Pool and Selva. It's the closing night of Tulum Innovation Fest at IKAL Arena, and it's included in the pass. My code {CODE} gets you 10% off. See you on the dance floor."],
+    },
+    talks: {
+      es: ['Más de 80 speakers, inversionistas y mentores en Tulum: IA, finanzas, ciudades del futuro y el futuro de Tulum. 9–12 dic en IKAL Arena.', 'Del 9 al 12 de diciembre hay charlas que valen la pena en Tulum: IA, finanzas, ciudades del futuro y cómo hacer de Tulum un mejor lugar. Más de 80 speakers, inversionistas y mentores en IKAL Arena. Con mi código {CODE} tienes 10% de descuento. Escoge tus charlas y vente.'],
+      en: ['80+ speakers, investors and mentors in Tulum: AI, finance, future cities and the future of Tulum. Dec 9–12 at IKAL Arena.', "From December 9 to 12 there are talks worth hearing in Tulum: AI, finance, future cities and how to make Tulum a better place. 80+ speakers, investors and mentors at IKAL Arena. My code {CODE} gets you 10% off. Pick your talks and come."],
+    },
+    networking: {
+      es: ['Inversionistas, fondos y founders en el mismo lugar: Whale Tank, rondas de US$150K a US$3M y networking en la selva. 9–12 dic, IKAL Arena, Tulum.', 'Si buscas capital, socios o clientes, el 9 al 12 de diciembre tienes que estar en Tulum. En Whale Tank, cinco startups presentan rondas de US$150K a US$3M frente a fondos, ángeles y family offices, y los inversionistas están en la sala. Con mi código {CODE} tienes 10% de descuento.'],
+      en: ['Investors, funds and founders in one place: Whale Tank, rounds from US$150K to US$3M and networking in the jungle. Dec 9–12, IKAL Arena, Tulum.', "If you're looking for capital, partners or clients, be in Tulum December 9–12. At Whale Tank, five startups pitch rounds from US$150K to US$3M to funds, angels and family offices, and the investors are in the room. My code {CODE} gets you 10% off."],
+    },
+    regen: {
+      es: ['¿Quieres hacer algo por Tulum? Charlas y comunidad sobre regeneración y el futuro de la ciudad. 9–12 dic en IKAL Arena.', 'Tulum está cambiando y nos toca decidir hacia dónde. Del 9 al 12 de diciembre, en IKAL Arena, hablamos de regeneración, comunidad y economía local con la gente que lo está haciendo. Con mi código {CODE} tienes 10% de descuento. Si vives en Tulum, pregunta por Community Access.'],
+      en: ['Want to do something for Tulum? Talks and community on regeneration and the future of the city. Dec 9–12 at IKAL Arena.', "Tulum is changing and it's up to us where it goes. From December 9 to 12 at IKAL Arena we talk regeneration, community and the local economy with the people doing it. My code {CODE} gets you 10% off. If you live in Tulum, ask about Community Access."],
+    },
+  };
   const clean = (v) => v.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 16);
   form.code.addEventListener('input', () => { form.code.value = clean(form.code.value); });
   form.name.addEventListener('blur', () => {
@@ -31,19 +54,25 @@
     if (!form.ok.checked) return say('terms');
     const btn = $('vdBtn'); btn.disabled = true;
     try {
-      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, website: form.website.value }) });
+      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, website: form.website.value, pillar: form.pillar.value }) });
       const d = await r.json().catch(() => ({}));
       if (!d.ok) { btn.disabled = false; return say(d.error); }
       const url = d.url.replace('https://www.', '');
       $('vdCode').textContent = d.code;
       $('vdUrl').value = url;
+      const [hook, script] = (COPY[form.pillar.value] || COPY.all)[es() ? 'es' : 'en'];
       const msg = es()
-        ? `¡Vente a Tulum Innovation Fest! 9–12 dic en IKAL Arena, Tulum. Con mi código ${d.code} tienes 10% de descuento en tu pase (y ahí mismo puedes pedir el Innovation Mezcal): https://${url}`
-        : `Join me at Tulum Innovation Fest! Dec 9–12 at IKAL Arena, Tulum. Use my code ${d.code} for 10% off your pass (you can also get the Innovation Mezcal there): https://${url}`;
+        ? `${hook} Con mi código ${d.code} tienes 10% de descuento en tu pase: https://${url}`
+        : `${hook} Use my code ${d.code} for 10% off your pass: https://${url}`;
+      $('vdScript').textContent = script.replace('{CODE}', d.code);
       $('vdWa').href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
       form.hidden = true; $('vdDone').hidden = false;
-      push({ event: 'community_code_created', tif_promo_code: d.code });
+      push({ event: 'community_code_created', tif_promo_code: d.code, tif_pillar: form.pillar.value });
     } catch { btn.disabled = false; say('generic'); }
+  });
+  $('vdScriptCopy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText($('vdScript').textContent); } catch {}
+    $('vdScriptCopy').textContent = es() ? '¡Copiado!' : 'Copied!';
   });
   $('vdCopy').addEventListener('click', async () => {
     const v = `https://${$('vdUrl').value}`;
