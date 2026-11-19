@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/passes/landing.css?v=10">
-  <link rel="stylesheet" href="/vende/vende.css?v=4">
+  <link rel="stylesheet" href="/vende/vende.css?v=5">
 </head>
 <body class="ln-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -40,7 +40,7 @@
           <ol class="vd-steps">
             <li><b>1</b><span data-tif-en>Pick your code and what you want to sell: the party, the talks, networking or regeneration.</span><span data-tif-es>Elige tu código y qué quieres vender: la fiesta, las charlas, el networking o la regeneración.</span></li>
             <li><b>2</b><span data-tif-en>We give you the message and a 30-second script. Share it on WhatsApp, Instagram, wherever.</span><span data-tif-es>Te damos el mensaje y un guion de 30 segundos. Compártelo por WhatsApp, Instagram, donde quieras.</span></li>
-            <li><b>3</b><span data-tif-en>Check your sales here with your email. Commissions are paid by bank transfer after the festival; we'll ask for your bank details on WhatsApp.</span><span data-tif-es>Revisa tus ventas aquí con tu correo. Las comisiones se pagan por transferencia al cierre del festival; te pedimos tus datos bancarios por WhatsApp.</span></li>
+            <li><b>3</b><span data-tif-en>Check your sales here with your email. Commissions are paid by bank transfer to the account you register here, after the festival.</span><span data-tif-es>Revisa tus ventas aquí con tu correo. Las comisiones se pagan por transferencia a la cuenta que registres aquí, al cierre del festival.</span></li>
           </ol>
           <p class="vd-official"><span data-tif-en>This is the only official seller link of Tulum Innovation Fest. No invitation or account needed — not Ticket Fairy or any other platform.</span><span data-tif-es>Este es el único link oficial de vendedores de Tulum Innovation Fest. No necesitas invitación ni cuenta: no es Ticket Fairy ni otra plataforma.</span></p>
         </div>
@@ -58,6 +58,13 @@
               <label><input type="radio" name="pillar" value="networking"><span>Networking</span></label>
               <label><input type="radio" name="pillar" value="regen"><span><span data-tif-en>Regeneration</span><span data-tif-es>Regeneración</span></span></label>
             </fieldset>
+            <fieldset class="vd-pay"><legend><span data-tif-en>Where do we pay your commission?</span><span data-tif-es>¿Dónde te depositamos tu comisión?</span></legend>
+              <label><span data-tif-en>Account holder</span><span data-tif-es>Titular de la cuenta</span><input name="holder" required maxlength="80" autocomplete="name"></label>
+              <label class="vd-mx"><span>CLABE <small data-tif-en>(18 digits)</small><small data-tif-es>(18 dígitos)</small></span><input name="clabe" inputmode="numeric" autocomplete="off" maxlength="22" placeholder="000 000 00000000000 0"><small class="vd-bank" aria-live="polite"></small></label>
+              <label class="vd-check vd-abroad-t"><input type="checkbox" name="isAbroad"> <span data-tif-en>My bank account is outside Mexico</span><span data-tif-es>Mi cuenta no es de México</span></label>
+              <label class="vd-abroad" hidden><span data-tif-en>How should we pay you? (IBAN/SWIFT, Wise, PayPal or USDT wallet)</span><span data-tif-es>¿Cómo te pagamos? (IBAN/SWIFT, Wise, PayPal o wallet USDT)</span><textarea name="abroad" rows="3" maxlength="300"></textarea></label>
+              <small><span data-tif-en>Only the festival admin team sees this, to send your payment. We never ask for card numbers.</span><span data-tif-es>Solo lo ve el equipo de administración del festival para depositarte. Nunca pedimos datos de tarjeta.</span></small>
+            </fieldset>
             <input class="vd-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
             <label class="vd-check"><input type="checkbox" name="ok" required> <span data-tif-en>I agree to share my link honestly and not to post it on coupon sites.</span><span data-tif-es>Acepto compartir mi link de forma honesta y no publicarlo en sitios de cupones.</span></label>
             <p class="vd-err" id="vdErr" role="alert" hidden></p>
@@ -74,18 +81,28 @@
               <a class="ln-btn is-mint" id="vdWa" target="_blank" rel="noopener"><span data-tif-en>Share on WhatsApp</span><span data-tif-es>Compartir por WhatsApp</span></a>
               <a class="ln-btn is-ghost" href="/leaderboard"><span data-tif-en>See the ranking</span><span data-tif-es>Ver el ranking</span></a>
             </div>
-            <p class="vd-muted"><span data-tif-en>You earn 25% of every paid sale, paid by bank transfer after the festival. Save your link: we don’t email it. Codes can be paused if misused.</span><span data-tif-es>Ganas 25% de cada venta pagada; te depositamos al cierre del festival. Guarda tu link: no lo enviamos por correo. Los códigos pueden pausarse si se usan de forma indebida.</span></p>
+            <p class="vd-muted"><span data-tif-en>You earn 25% of every paid sale, paid to the account you registered after the festival. Save your link: we don’t email it. Codes can be paused if misused.</span><span data-tif-es>Ganas 25% de cada venta pagada; te depositamos a la cuenta que registraste, al cierre del festival. Guarda tu link: no lo enviamos por correo. Los códigos pueden pausarse si se usan de forma indebida.</span></p>
           </div>
           <form id="vdFind" class="vd-find" novalidate>
             <p class="ln-kicker"><span data-tif-en>Already have a code?</span><span data-tif-es>¿Ya tienes código?</span></p>
             <div class="vd-link"><input name="email" type="email" autocomplete="email" required maxlength="120" placeholder="tu@correo.com" aria-label="Email"><button type="submit" class="ln-btn is-ghost"><span data-tif-en>See my sales</span><span data-tif-es>Ver mis ventas</span></button></div>
             <p class="vd-muted" id="vdFound" hidden></p>
           </form>
+          <form id="vdPayAdd" class="vd-find" novalidate hidden>
+            <p class="ln-kicker"><span data-tif-en>Add where we pay you</span><span data-tif-es>Agrega dónde te depositamos</span></p>
+            <p class="vd-muted"><span data-tif-en>Your code doesn't have payment details yet. Add them once; to change them later, message the team.</span><span data-tif-es>Tu código aún no tiene datos de pago. Agrégalos una vez; para cambiarlos después, escríbele al equipo.</span></p>
+            <label><span data-tif-en>Account holder</span><span data-tif-es>Titular de la cuenta</span><input name="holder" required maxlength="80"></label>
+            <label class="vd-mx"><span>CLABE <small data-tif-en>(18 digits)</small><small data-tif-es>(18 dígitos)</small></span><input name="clabe" inputmode="numeric" autocomplete="off" maxlength="22"><small class="vd-bank" aria-live="polite"></small></label>
+            <label class="vd-check vd-abroad-t"><input type="checkbox" name="isAbroad"> <span data-tif-en>My bank account is outside Mexico</span><span data-tif-es>Mi cuenta no es de México</span></label>
+            <label class="vd-abroad" hidden><span data-tif-en>How should we pay you? (IBAN/SWIFT, Wise, PayPal or USDT wallet)</span><span data-tif-es>¿Cómo te pagamos? (IBAN/SWIFT, Wise, PayPal o wallet USDT)</span><textarea name="abroad" rows="3" maxlength="300"></textarea></label>
+            <p class="vd-err" id="vdPayErr" role="alert" hidden></p>
+            <button class="ln-btn" type="submit"><span data-tif-en>Save payment details</span><span data-tif-es>Guardar datos de pago</span></button>
+          </form>
         </div>
       </div>
     </section>
   </main>
   <footer><a href="mailto:innovation@likegroup.io">innovation@likegroup.io</a></footer>
-  <script src="/vende/vende.js?v=3" defer></script>
+  <script src="/vende/vende.js?v=4" defer></script>
 </body>
 </html>

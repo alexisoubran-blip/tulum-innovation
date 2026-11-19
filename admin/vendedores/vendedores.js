@@ -34,10 +34,17 @@
     const sum = (k) => base.reduce((n, r) => n + (Number(r[k]) || 0), 0);
     $('kpis').innerHTML = [['Vendedores', base.length], ['Con ventas', base.filter((r) => r.tickets > 0).length], ['Boletos', sum('tickets')], ['Ventas MXN', mxn(sum('revenueMxn'))], ['Comisiones', mxn(sum('earnedMxn'))], ['Por pagar', mxn(sum('pendingMxn'))]]
       .map(([k, v]) => `<div class="kpi"><span>${k}</span><b>${v}</b></div>`).join('');
+    // Where we pay each seller (CLABE comes masked for the read-only role).
+    const payInfo = (r) => {
+      const p = r.payout;
+      if (!p) return '<br><small style="color:#ff9db8">Sin datos de pago</small>';
+      const acct = p.clabe ? `${esc(p.bank || '')} · <button class="copy" data-copy="${esc(p.clabe)}">${esc(p.clabe)} ⧉</button>` : esc(p.abroadDetails || '•••');
+      return `<br><small style="color:var(--faint)">💳 ${esc(p.holder)} · ${acct}</small>`;
+    };
     $('rows').innerHTML = list.map((r) => {
       const wa = r.phone ? `<a class="copy" href="https://wa.me/${esc(r.phone.replace(/\D/g, ''))}" target="_blank" rel="noopener">WhatsApp</a>` : '';
       return `<tr class="${r.active ? '' : 'off'}">
-      <td><b>${esc(r.name)}</b>${r.source === 'self-serve' ? '<span class="src">/vende</span>' : ''}<br><small style="color:var(--faint)">${esc(r.email || r.organization || '')}</small></td>
+      <td><b>${esc(r.name)}</b>${r.source === 'self-serve' ? '<span class="src">/vende</span>' : ''}<br><small style="color:var(--faint)">${esc(r.email || r.organization || '')}</small>${payInfo(r)}</td>
       <td class="code">${esc(r.code)}</td><td>${wa}</td>
       <td class="num"><b>${r.tickets}</b></td><td class="num">${mxn(r.revenueMxn)}</td>
       <td class="num"><input class="field pct" type="number" min="0" max="50" step="0.5" value="${r.commissionPct ?? ''}" placeholder="—" data-pct="${esc(r.code)}"></td>
@@ -93,7 +100,7 @@
   $('logout').addEventListener('click', () => logout());
   $('loginForm').addEventListener('submit', (e) => { e.preventDefault(); tok.set($('token').value.trim()); load(); });
   $('csv').addEventListener('click', () => {
-    const cols = [['Vendedor', 'name'], ['Código', 'code'], ['Origen', 'source'], ['Email', 'email'], ['WhatsApp', 'phone'], ['Boletos', 'tickets'], ['Órdenes', 'orders'], ['Ventas MXN', 'revenueMxn'], ['Comisión %', 'commissionPct'], ['Comisión MXN', 'earnedMxn'], ['Pagado MXN', 'paidMxn'], ['Por pagar MXN', 'pendingMxn'], ['Activo', (r) => r.active ? 'Sí' : 'No'], ['Liga', (r) => `${location.origin}/s/${r.code}`]];
+    const cols = [['Vendedor', 'name'], ['Código', 'code'], ['Origen', 'source'], ['Email', 'email'], ['WhatsApp', 'phone'], ['Boletos', 'tickets'], ['Órdenes', 'orders'], ['Ventas MXN', 'revenueMxn'], ['Comisión %', 'commissionPct'], ['Comisión MXN', 'earnedMxn'], ['Pagado MXN', 'paidMxn'], ['Por pagar MXN', 'pendingMxn'], ['Activo', (r) => r.active ? 'Sí' : 'No'], ['Liga', (r) => `${location.origin}/s/${r.code}`], ['Titular', (r) => r.payout?.holder || ''], ['Banco', (r) => r.payout?.bank || ''], ['CLABE', (r) => (r.payout?.clabe ? `'${r.payout.clabe}` : '')], ['Pago fuera de México', (r) => r.payout?.abroadDetails || '']];
     const cell = (v) => { const s = String(v ?? ''); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
     const lines = [cols.map((c) => c[0]).join(','), ...scope().map((r) => cols.map(([, k]) => cell(typeof k === 'function' ? k(r) : r[k])).join(','))];
     const a = document.createElement('a');

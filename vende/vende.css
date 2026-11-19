@@ -47,3 +47,14 @@
 .vd-script .ln-kicker { margin:0 0 .5rem; }
 .vd-script p#vdScript { margin:0 0 .8rem; font-size:.9rem; line-height:1.55; color:var(--ln-paper); white-space:pre-line; }
 .vd-script .ln-btn { min-height:44px; }
+
+.vd-pay { border:1px solid var(--ln-line); border-radius:16px; margin:0 0 1rem; padding:1rem 1rem .6rem; }
+.vd-pay legend { padding:0 .4rem; font-size:.82rem; color:var(--ln-paper); font-weight:600; }
+.vd-pay > small { display:block; margin:-.2rem 0 .6rem; font-size:.74rem; line-height:1.45; }
+.vd-card textarea { width:100%; padding:.8rem 1rem; border:1px solid var(--ln-line); border-radius:14px; background:rgba(242,241,234,.04); color:var(--ln-paper); font:400 .95rem Sora, sans-serif; resize:vertical; }
+.vd-bank { color:var(--ln-mint) !important; min-height:1em; }
+.vd-bank.bad { color:#ff9db8 !important; }
+#vdPayAdd { margin-top:1rem; }
+#vdPayAdd label { display:grid; gap:.4rem; margin-bottom:1rem; font-size:.82rem; color:var(--ln-muted); }
+#vdPayAdd input:not([type=checkbox]) { width:100%; min-height:50px; padding:0 1rem; border:1px solid var(--ln-line); border-radius:14px; background:rgba(242,241,234,.04); color:var(--ln-paper); font:400 1rem Sora, sans-serif; }
+#vdPayAdd .ln-btn { width:100%; }

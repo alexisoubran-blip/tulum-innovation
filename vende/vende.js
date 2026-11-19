@@ -14,6 +14,10 @@
     code_taken: ['That code is taken. Try another one (add your name or a number).', 'Ese código ya existe. Prueba otro (agrega tu nombre o un número).'],
     email_has_code: ['This email already has a code. Use “Already have a code?” below to see it.', 'Este correo ya tiene un código. Búscalo abajo en “¿Ya tienes código?”.'],
     terms: ['Please accept the conditions.', 'Acepta las condiciones para continuar.'],
+    invalid_holder: ['Write the account holder’s name.', 'Escribe el nombre del titular de la cuenta.'],
+    invalid_clabe: ['That CLABE isn’t valid. It has 18 digits; check it in your bank app.', 'Esa CLABE no es válida. Son 18 dígitos; revísala en la app de tu banco.'],
+    invalid_abroad: ['Tell us how to pay you (8 to 300 characters).', 'Dinos cómo pagarte (8 a 300 caracteres).'],
+    payout_exists: ['Your payment details are already saved. To change them, message the team.', 'Tus datos de pago ya están guardados. Para cambiarlos, escríbele al equipo.'],
     generic: ['Something went wrong. Try again in a moment.', 'Algo salió mal. Intenta de nuevo en un momento.'],
   };
   const say = (k) => { const m = MSG[k] || MSG.generic; $('vdErr').textContent = es() ? m[1] : m[0]; $('vdErr').hidden = false; };
@@ -40,6 +44,27 @@
       en: ['Want to do something for Tulum? Talks and community on regeneration and the future of the city. Dec 9–12 at IKAL Arena.', "Tulum is changing and it's up to us where it goes. From December 9 to 12 at IKAL Arena we talk regeneration, community and the local economy with the people doing it. My code {CODE} gets you 10% off. If you live in Tulum, ask about Community Access."],
     },
   };
+  // CLABE check digit (weights 3,7,1) and bank name, so typos are caught before sending.
+  const BANKS = { '002': 'Banamex', '012': 'BBVA', '014': 'Santander', '021': 'HSBC', '030': 'BanBajío', '036': 'Inbursa', '044': 'Scotiabank', '058': 'Banregio', '072': 'Banorte', '127': 'Banco Azteca', '137': 'BanCoppel', '646': 'STP' };
+  const clabeOk = (d) => { if (!/^\d{18}$/.test(d)) return false; let s = 0; for (let i = 0; i < 17; i++) s += (Number(d[i]) * [3, 7, 1][i % 3]) % 10; return (10 - (s % 10)) % 10 === Number(d[17]); };
+  const wirePay = (f) => {
+    const ab = f.querySelector('.vd-abroad'), mx = f.querySelector('.vd-mx'), hint = f.querySelector('.vd-bank');
+    f.isAbroad.addEventListener('change', () => { ab.hidden = !f.isAbroad.checked; mx.hidden = f.isAbroad.checked; });
+    f.clabe.addEventListener('input', () => {
+      const d = f.clabe.value.replace(/\D/g, '');
+      hint.classList.remove('bad');
+      if (d.length < 18) { hint.textContent = d.length ? `${d.length}/18` : ''; return; }
+      if (clabeOk(d)) hint.textContent = `✓ ${BANKS[d.slice(0, 3)] || (es() ? 'CLABE válida' : 'Valid CLABE')}`;
+      else { hint.textContent = es() ? 'Revisa la CLABE' : 'Check the CLABE'; hint.classList.add('bad'); }
+    });
+  };
+  const payBody = (f) => (f.isAbroad.checked ? { holder: f.holder.value, abroad: f.abroad.value } : { holder: f.holder.value, clabe: f.clabe.value.replace(/\D/g, '') });
+  const payCheck = (f) => {
+    if (f.holder.value.trim().length < 3) return 'invalid_holder';
+    if (f.isAbroad.checked) return f.abroad.value.trim().length < 8 ? 'invalid_abroad' : null;
+    return clabeOk(f.clabe.value.replace(/\D/g, '')) ? null : 'invalid_clabe';
+  };
+  wirePay(form);
   const clean = (v) => v.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 16);
   form.code.addEventListener('input', () => { form.code.value = clean(form.code.value); });
   form.name.addEventListener('blur', () => {
@@ -51,10 +76,11 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     $('vdErr').hidden = true;
+    { const bad = payCheck(form); if (bad) return say(bad); }
     if (!form.ok.checked) return say('terms');
     const btn = $('vdBtn'); btn.disabled = true;
     try {
-      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, website: form.website.value, pillar: form.pillar.value }) });
+      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, website: form.website.value, pillar: form.pillar.value, ...payBody(form) }) });
       const d = await r.json().catch(() => ({}));
       if (!d.ok) { btn.disabled = false; return say(d.error); }
       const url = d.url.replace('https://www.', '');
@@ -93,8 +119,28 @@
       const b = document.createElement('b'); b.textContent = d.code;
       const a = document.createElement('a'); a.href = d.url; a.textContent = url; a.target = '_blank'; a.rel = 'noopener';
       out.append(es() ? 'Tu código: ' : 'Your code: ', b, ' · ', a, document.createElement('br'),
-        es() ? `Ventas pagadas: ${d.orders} (${d.tickets} ${d.tickets === 1 ? 'pase' : 'pases'})` : `Paid sales: ${d.orders} (${d.tickets} ${d.tickets === 1 ? 'pass' : 'passes'})`);
+        es() ? `Ventas pagadas: ${d.orders} (${d.tickets} ${d.tickets === 1 ? 'pase' : 'pases'})` : `Paid sales: ${d.orders} (${d.tickets} ${d.tickets === 1 ? 'pass' : 'passes'})`,
+        document.createElement('br'), d.hasPayout ? (es() ? '✓ Datos de pago registrados.' : '✓ Payment details on file.') : (es() ? 'Falta registrar dónde te depositamos ↓' : 'Add where we pay you ↓'));
+      payAdd.hidden = Boolean(d.hasPayout);
+      payAdd.dataset.email = find.email.value;
       push({ event: 'community_code_lookup', tif_promo_code: d.code });
     } catch { out.textContent = es() ? 'Algo salió mal. Intenta de nuevo.' : 'Something went wrong. Try again.'; }
+  });
+  // Sellers from before: add bank details once (changes go through the team).
+  const payAdd = $('vdPayAdd');
+  wirePay(payAdd);
+  payAdd.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = $('vdPayErr'); err.hidden = true;
+    const show = (k) => { const m = MSG[k] || MSG.generic; err.textContent = es() ? m[1] : m[0]; err.hidden = false; };
+    const bad = payCheck(payAdd); if (bad) return show(bad);
+    const btn = payAdd.querySelector('button[type=submit]'); btn.disabled = true;
+    try {
+      const r = await fetch('/api/challenge/payout-info', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: payAdd.dataset.email, ...payBody(payAdd) }) });
+      const d = await r.json().catch(() => ({}));
+      if (!d.ok) { btn.disabled = false; return show(d.error); }
+      payAdd.innerHTML = `<p class="vd-official">${es() ? '✓ Listo. Guardamos tus datos de pago.' : '✓ Done. Your payment details are saved.'}</p>`;
+      push({ event: 'seller_payout_saved' });
+    } catch { btn.disabled = false; show('generic'); }
   });
 })();

@@ -117,14 +117,16 @@ test('leaderboard: paid tickets only, Tier A only when selling, panels add up; a
   assert.equal((await store.listPromoPaidOrders()).length, 6);
 });
 
+const PAY = { holder: 'Titular Prueba', clabe: '002010077777777771' };
+
 test('community self-serve code: create, validate, one per email, applies 10%, kept out of speaker ranking', async () => {
   const store = createMemoryStore({ passes, promoCodes });
   const checkout = createCheckout({ store, blokko: null, env, now: () => NOW });
-  const made = await checkout.createCommunityCode({ name: 'Lu Pérez', email: 'Lu@Mail.com', phone: '+52 984 123 4567', code: 'lu-tulum' });
+  const made = await checkout.createCommunityCode({ name: 'Lu Pérez', email: 'Lu@Mail.com', phone: '+52 984 123 4567', code: 'lu-tulum', ...PAY });
   assert.equal(made.code, 'LUTULUM');
   assert.equal(made.percentOff, 10);
   assert.match(made.url, /\/s\/LUTULUM$/);
-  const fails = async (input, err) => assert.rejects(checkout.createCommunityCode(input), (e) => e.code === err);
+  const fails = async (input, err) => assert.rejects(checkout.createCommunityCode({ ...PAY, ...input }), (e) => e.code === err);
   await fails({ name: 'Otro', email: 'lu@mail.com', phone: '9841234567', code: 'OTRO1' }, 'email_has_code');
   await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'RON10' }, 'code_taken');
   await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'FREE50' }, 'code_reserved');
@@ -163,7 +165,7 @@ test('seller control: admin creates seller, sets commission, records payouts aga
 test('sellers: every product is credited (discount only on passes), tickets count festival passes only, lookup by email', async () => {
   const store = createMemoryStore({ passes: [...passes, { id: 'innovation-mezcal', name: 'Mezcal', price_usd: '38.75', price_mxn: '720.00', category: 'merch', issues_tickets: false }], rate: 18.5, promoCodes });
   const checkout = createCheckout({ store, blokko: null, env, now: () => NOW });
-  const made = await checkout.createCommunityCode({ name: 'Lau Miller', email: 'lau@mail.com', phone: '+52 984 123 4567', code: 'MYHIT10' });
+  const made = await checkout.createCommunityCode({ name: 'Lau Miller', email: 'lau@mail.com', phone: '+52 984 123 4567', code: 'MYHIT10', ...PAY });
   const mz = await checkout.createOrder({ ...buyer, passId: 'innovation-mezcal', quantity: 2, promoCode: made.code });
   assert.equal(mz.order.promo.code, 'MYHIT10');
   assert.equal(mz.order.promo.percentOff, 0);
@@ -184,4 +186,35 @@ test('sellers: every product is credited (discount only on passes), tickets coun
   assert.equal(look.code, 'MYHIT10');
   assert.match(look.url, /\/s\/MYHIT10$/);
   await assert.rejects(checkout.myCode({ email: 'nobody@mail.com' }), (e) => e.code === 'code_not_found');
+});
+
+test('sellers: bank details are required at sign-up (valid CLABE or abroad), added once later, masked for the view role', async () => {
+  const { validClabe } = await import('../lib/ticketing/checkout.mjs');
+  const { maskPersonal } = await import('../lib/ticketing/admin-auth.mjs');
+  const good = '002010077777777771';
+  assert.equal(validClabe(good), true);
+  assert.equal(validClabe('002010077777777772'), false);
+  const store = createMemoryStore({ passes, rate: 18.5, promoCodes });
+  const checkout = createCheckout({ store, blokko: null, env, now: () => NOW });
+  const base = { name: 'Ana López', email: 'ana@mail.com', phone: '+52 984 111 2222', code: 'ANAPAY', pillar: 'party' };
+  await assert.rejects(checkout.createCommunityCode({ ...base, holder: 'Ana López' }), /invalid_clabe/);
+  await assert.rejects(checkout.createCommunityCode({ ...base, holder: 'Ana López', clabe: '002010077777777772' }), /invalid_clabe/);
+  const made = await checkout.createCommunityCode({ ...base, holder: 'Ana López', clabe: '0020 1007 7777 7777 71' });
+  assert.equal(made.code, 'ANAPAY');
+  const promo = await store.getPromoCode('ANAPAY');
+  assert.equal(promo.commission_pct, 25);
+  assert.equal(promo.pillar, 'Fiesta');
+  const abroad = await checkout.createCommunityCode({ name: 'Tom Ray', email: 'tom@mail.com', phone: '+1 305 555 0101', code: 'TOMRAY', holder: 'Tom Ray', abroad: 'Wise · tom@mail.com' });
+  assert.equal(abroad.code, 'TOMRAY');
+  // a seller without details adds them once; a second attempt is refused
+  await store.createPromoCode({ code: 'OLDONE', speaker_name: 'Old', email: 'old@mail.com', tier: 'Comunidad', commission_pct: 25 });
+  assert.equal((await checkout.myCode({ email: 'old@mail.com' })).hasPayout, false);
+  await checkout.savePayoutInfo({ email: 'old@mail.com', holder: 'Old Seller', clabe: good });
+  assert.equal((await checkout.myCode({ email: 'old@mail.com' })).hasPayout, true);
+  await assert.rejects(checkout.savePayoutInfo({ email: 'old@mail.com', holder: 'Someone Else', clabe: good }), /payout_exists/);
+  const me = (await checkout.adminSellers()).sellers.find((s) => s.code === 'ANAPAY');
+  assert.deepEqual(me.payout, { holder: 'Ana López', clabe: good, bank: 'Banamex', abroadDetails: null });
+  const masked = maskPersonal((await checkout.adminSellers()).sellers);
+  assert.equal(masked.find((s) => s.code === 'ANAPAY').payout.clabe, '••••7771');
+  assert.equal(masked.find((s) => s.code === 'TOMRAY').payout.abroadDetails, '•••');
 });
