@@ -65,6 +65,8 @@
     return clabeOk(f.clabe.value.replace(/\D/g, '')) ? null : 'invalid_clabe';
   };
   wirePay(form);
+  // Flyers per pillar link here with ?pillar=party|talks|networking|regen to preselect it.
+  try { const pre = new URLSearchParams(location.search).get('pillar'); const r = pre && form.querySelector(`input[name=pillar][value="${pre.replace(/[^a-z]/g, '')}"]`); if (r) r.checked = true; } catch {}
   const clean = (v) => v.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 16);
   form.code.addEventListener('input', () => { form.code.value = clean(form.code.value); });
   form.name.addEventListener('blur', () => {
