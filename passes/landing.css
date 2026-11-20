@@ -277,3 +277,10 @@
   .ln-quote blockquote { font-size:clamp(1.5rem,7.4vw,2rem); max-width:none; }
   .ln-quote-cite { margin-top:1rem; }
 }
+
+.ln-btn.is-mint { background:linear-gradient(180deg, #8DFFD2, var(--ln-mint)); border-color:var(--ln-mint); color:#00221a; box-shadow:0 14px 40px -14px rgba(75,255,179,.55); }
+.ln-ctas3 .ln-btn { padding:0 1.25rem; }
+.ln-cta-note { margin-top:.8rem; font-size:.8rem; line-height:1.5; color:var(--ln-faint); max-width:40em; }
+.ln-cta-note a { color:var(--ln-paper); text-decoration:underline; text-underline-offset:3px; white-space:nowrap; }
+.ln-final .ln-cta-note { margin-inline:auto; text-align:center; }
+.ln-sticky .a3 { order:0; }
