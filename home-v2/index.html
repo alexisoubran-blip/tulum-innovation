@@ -200,6 +200,13 @@
     /* Proof strip */
     .v2-support { background:var(--white); color:var(--black); border-bottom:1px solid rgba(0,8,11,.12); }
     .v2-support-inner { display:flex; align-items:center; justify-content:center; gap:clamp(1.2rem,4vw,3.5rem); padding:clamp(1.4rem,3vw,2.2rem) 0; flex-wrap:wrap; text-align:center; }
+    .v2-producer { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.6rem 1.6rem; padding:clamp(1.4rem,3vw,2rem) 0; border-bottom:1px solid rgba(0,8,11,.1); text-align:center; }
+    .v2-producer p { margin:0; font-family:var(--sans); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(0,8,11,.6); }
+    .lgm-mark { font-family:var(--display); font-weight:400; font-size:clamp(1.5rem,2.6vw,2.2rem); letter-spacing:.02em; text-transform:uppercase; line-height:1; color:var(--black); }
+    .lgm-mark small { font-family:var(--sans); font-size:.42em; font-weight:600; letter-spacing:.32em; vertical-align:middle; margin-left:.35em; color:rgba(0,8,11,.7); }
+    .v2-producer-note { font-size:.8rem; color:rgba(0,8,11,.62); }
+    .v2-hero-producer { margin:1.3rem 0 0; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(242,241,234,.62); }
+    .v2-hero-producer b { color:#F2F1EA; font-weight:600; letter-spacing:.08em; }
     .v2-support-inner p { margin:0; font-family:var(--sans); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(0,8,11,.6); }
     .v2-support-inner img { width:min(420px,78vw); height:auto; }
     .v2-support-sponsor { display:flex; align-items:center; gap:clamp(1rem,2.4vw,2rem); padding-left:clamp(1.2rem,3vw,2.8rem); border-left:1px solid rgba(0,8,11,.18); }
@@ -1444,7 +1451,7 @@ body .press-logo-link > span { font-size:.625rem; }
     "image":"https://www.tuluminnovationfest.com/assets/hero-desktop.png",
     "url":"https://www.tuluminnovationfest.com/",
     "location":{"@type":"Place","name":"Tulum, Mexico","address":{"@type":"PostalAddress","addressLocality":"Tulum","addressRegion":"Quintana Roo","addressCountry":"MX"}},
-    "organizer":{"@type":"Organization","name":"Tulum Innovation Fest","url":"https://www.tuluminnovationfest.com/"}
+    "organizer":[{"@type":"Organization","name":"Tulum Innovation Fest","url":"https://www.tuluminnovationfest.com/"},{"@type":"Organization","name":"Like Group! Management","legalName":"LIKE GROUP MANAGEMENT S.A.P.I. DE C.V."}]
   }
   </script>
   <link rel="stylesheet" href="/cenote/cenote.css?v=9" />
@@ -1615,6 +1622,7 @@ body .press-logo-link > span { font-size:.625rem; }
             </a>
           </div>
 
+          <p class="v2-hero-producer"><span data-en>Produced by</span><span data-es>Producido por</span> <b>Like Group! Management</b></p>
           <p class="v2-hero-note">
             <span data-en>Limited capacity · Four-day programming · Day-to-night experience</span>
             <span data-es>Cupo limitado · Cuatro días de programa · Experiencia de día y noche</span>
@@ -1658,6 +1666,11 @@ body .press-logo-link > span { font-size:.625rem; }
 
 
     <section class="v2-support" aria-labelledby="support-title">
+      <div class="container v2-producer">
+        <p><span data-en>General producer</span><span data-es>Productor general</span></p>
+        <strong class="lgm-mark">Like Group! <small>Management</small></strong>
+        <span class="v2-producer-note"><span data-en>Production, sponsorship and development of Tulum Innovation Fest</span><span data-es>Producción, patrocinio y desarrollo de Tulum Innovation Fest</span></span>
+      </div>
       <div class="container v2-support-inner">
         <p id="support-title"><span data-en>With the institutional support of</span><span data-es>Con el apoyo institucional de</span></p>
         <img src="/assets/partners-sedetur.webp" alt="SEDETUR · Secretaría de Turismo de Quintana Roo · Gobierno del Estado 2022–2027" width="1200" height="353" loading="lazy" decoding="async">

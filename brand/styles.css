@@ -250,3 +250,4 @@ html:has(.wt-page){scroll-padding-top:158px}
 @media(min-width:641px) and (max-width:1280px){
   .wt-page .wt-brand-header{grid-template-columns:minmax(0,1fr) auto auto auto}
 }
+.tif-footer-producer{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:24px}.tif-footer-producer span{color:rgba(242,241,234,.5);font:500 .6rem/1.4 var(--tif-body);letter-spacing:.14em;text-transform:uppercase}.tif-footer-producer strong{font-family:'Bruno Ace',Sora,sans-serif;font-weight:400;font-size:1.35rem;line-height:1;letter-spacing:.02em;text-transform:uppercase;color:#F2F1EA}.tif-footer-producer small{font:600 .55rem/1 var(--tif-body);letter-spacing:.32em;margin-left:.4em;vertical-align:middle;color:rgba(242,241,234,.7)}
