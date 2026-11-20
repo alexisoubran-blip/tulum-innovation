@@ -204,6 +204,8 @@
     .v2-producer p { margin:0; font-family:var(--sans); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(0,8,11,.6); }
     .lgm-mark { font-family:var(--display); font-weight:400; font-size:clamp(1.5rem,2.6vw,2.2rem); letter-spacing:.02em; text-transform:uppercase; line-height:1; color:var(--black); }
     .lgm-mark small { font-family:var(--sans); font-size:.42em; font-weight:600; letter-spacing:.32em; vertical-align:middle; margin-left:.35em; color:rgba(0,8,11,.7); }
+    .lgm-link { text-decoration:none; color:inherit; }
+    .lgm-link:hover .lgm-mark { color:var(--ember); }
     .v2-producer-note { font-size:.8rem; color:rgba(0,8,11,.62); }
     .v2-hero-producer { margin:1.3rem 0 0; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(242,241,234,.62); }
     .v2-hero-producer b { color:#F2F1EA; font-weight:600; letter-spacing:.08em; }
@@ -1668,7 +1670,7 @@ body .press-logo-link > span { font-size:.625rem; }
     <section class="v2-support" aria-labelledby="support-title">
       <div class="container v2-producer">
         <p><span data-en>General producer</span><span data-es>Productor general</span></p>
-        <strong class="lgm-mark">Like Group! <small>Management</small></strong>
+        <a class="lgm-link" href="https://www.likegroup.io/" target="_blank" rel="noopener noreferrer"><strong class="lgm-mark">Like Group! <small>Management</small></strong></a>
         <span class="v2-producer-note"><span data-en>Production, sponsorship and development of Tulum Innovation Fest</span><span data-es>Producción, patrocinio y desarrollo de Tulum Innovation Fest</span></span>
       </div>
       <div class="container v2-support-inner">

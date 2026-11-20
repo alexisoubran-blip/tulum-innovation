@@ -6,7 +6,7 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const json=s=>JSON.stringify(s).replace(/</g,'\\u003c');
 const bi=(en,es)=>`<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const author={'@type':'Person','@id':`${origin}/alexis-soubran-tif-cmo#alexis`,name:'Alexis Soubran',url:`${origin}/alexis-soubran-tif-cmo`,jobTitle:'CMO, Tulum Innovation Fest; CEO, Minimalist Agency',sameAs:['https://alexisoubran.com/']};
-const org={'@type':'Organization','@id':`${origin}/#organization`,name:'Tulum Innovation Fest',url:origin+'/',logo:origin+'/assets/tulum-innovation-fest-logo.png'};
+const org={'@type':'Organization','@id':`${origin}/#organization`,name:'Tulum Innovation Fest',url:origin+'/',logo:origin+'/assets/tulum-innovation-fest-logo.png',sameAs:['https://www.instagram.com/tulumcryptofest/','https://www.youtube.com/@tulumcryptofest']};
 const place={'@type':'Place',name:'Arena',address:{'@type':'PostalAddress',addressLocality:'Tulum',addressRegion:'Quintana Roo',addressCountry:'MX'}};
 const faqs=[
  ['What is Tulum Innovation Fest?','Tulum Innovation Fest is a four-day gathering connecting founders, investors, technology leaders and creators through talks, workshops, networking, culture and shared experiences.','¿Qué es Tulum Innovation Fest?','Tulum Innovation Fest es un encuentro de cuatro días que conecta a founders, inversionistas, líderes de tecnología y creadores mediante charlas, workshops, networking, cultura y experiencias compartidas.'],
