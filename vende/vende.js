@@ -18,9 +18,11 @@
     invalid_clabe: ['That CLABE isn’t valid. It has 18 digits; check it in your bank app.', 'Esa CLABE no es válida. Son 18 dígitos; revísala en la app de tu banco.'],
     invalid_abroad: ['Tell us how to pay you (8 to 300 characters).', 'Dinos cómo pagarte (8 a 300 caracteres).'],
     payout_exists: ['Your payment details are already saved. To change them, message the team.', 'Tus datos de pago ya están guardados. Para cambiarlos, escríbele al equipo.'],
+    invalid_request: ['We could not validate the form. Reload the page and try again.', 'No pudimos validar el formulario. Recarga la página e intenta de nuevo.'],
+    rate_limited: ['Too many tries. Wait a minute and try again.', 'Demasiados intentos. Espera un minuto e intenta de nuevo.'],
     generic: ['Something went wrong. Try again in a moment.', 'Algo salió mal. Intenta de nuevo en un momento.'],
   };
-  const say = (k) => { const m = MSG[k] || MSG.generic; $('vdErr').textContent = es() ? m[1] : m[0]; $('vdErr').hidden = false; };
+  const say = (k, st) => { const m = MSG[k] || MSG.generic; $('vdErr').textContent = (es() ? m[1] : m[0]) + (MSG[k] ? '' : ` (${k || 'http ' + (st || '?')})`); $('vdErr').hidden = false; };
   // One message and one 30-second script per pillar, so every seller shares the same campaign.
   const COPY = {
     all: {
@@ -82,9 +84,9 @@
     if (!form.ok.checked) return say('terms');
     const btn = $('vdBtn'); btn.disabled = true;
     try {
-      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, website: form.website.value, pillar: form.pillar.value, ...payBody(form) }) });
+      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, website: form.vd_hp_field.value, pillar: form.pillar.value, ...payBody(form) }) });
       const d = await r.json().catch(() => ({}));
-      if (!d.ok) { btn.disabled = false; return say(d.error); }
+      if (!d.ok) { btn.disabled = false; return say(d.error, r.status); }
       const url = d.url.replace('https://www.', '');
       $('vdCode').textContent = d.code;
       $('vdUrl').value = url;
@@ -96,7 +98,7 @@
       $('vdWa').href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
       form.hidden = true; $('vdDone').hidden = false;
       push({ event: 'community_code_created', tif_promo_code: d.code, tif_pillar: form.pillar.value });
-    } catch { btn.disabled = false; say('generic'); }
+    } catch (err) { btn.disabled = false; say('network'); }
   });
   $('vdScriptCopy').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText($('vdScript').textContent); } catch {}

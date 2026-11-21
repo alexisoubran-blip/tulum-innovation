@@ -10,7 +10,7 @@
     en: {
       errors: {
         invalid_name: 'Please enter your full name.', invalid_email: 'Please enter a valid email.', invalid_quantity: 'That quantity is not available for this product.', invalid_amount: 'Enter the amount you want to contribute.', promo_invalid: 'That speaker code is not valid.', promo_not_applicable: 'That code does not apply to this pass.',
-        terms_required: 'Please accept the purchase terms.', pass_unavailable: 'That product is not available right now.', rate_not_set: 'Payments are not available right now. Please try again later.',
+        terms_required: 'Please accept the purchase terms.', invalid_request: 'We could not validate the form. Reload the page and try again.', pass_unavailable: 'That product is not available right now.', rate_not_set: 'Payments are not available right now. Please try again later.',
         order_expired: 'This order expired. Start again.', method_not_allowed: 'That payment method is not available.', method_unavailable: 'That payment method is coming soon. Please choose another one.',
         too_many_attempts: 'Too many attempts for this order. Start again.', payment_provider_error: 'That method did not respond. Choose another method or try again.',
         order_not_found: 'We could not find this order. Start again.', store_not_configured: 'Payments are not available right now.',
@@ -45,7 +45,7 @@
     es: {
       errors: {
         invalid_name: 'Escribe tu nombre completo.', invalid_email: 'Escribe un correo válido.', invalid_quantity: 'Esa cantidad no está disponible para este producto.', invalid_amount: 'Escribe el monto que quieres aportar.', promo_invalid: 'Ese código de speaker no es válido.', promo_not_applicable: 'Ese código no aplica para este pase.',
-        terms_required: 'Acepta los términos de compra.', pass_unavailable: 'Ese producto no está disponible por ahora.', rate_not_set: 'Los pagos no están disponibles por ahora. Intenta más tarde.',
+        terms_required: 'Acepta los términos de compra.', invalid_request: 'No pudimos validar el formulario. Recarga la página e intenta de nuevo.', pass_unavailable: 'Ese producto no está disponible por ahora.', rate_not_set: 'Los pagos no están disponibles por ahora. Intenta más tarde.',
         order_expired: 'Esta orden venció. Empieza de nuevo.', method_not_allowed: 'Ese método de pago no está disponible.', method_unavailable: 'Ese método llega muy pronto. Elige otro, por favor.',
         too_many_attempts: 'Demasiados intentos para esta orden. Empieza de nuevo.', payment_provider_error: 'Ese método no respondió. Elige otro método o intenta de nuevo.',
         order_not_found: 'No encontramos esta orden. Empieza de nuevo.', store_not_configured: 'Los pagos no están disponibles por ahora.',
@@ -521,7 +521,7 @@
         company: needs('businessName') ? '' : $('company').value, jobTitle: needs('businessName') ? '' : $('jobTitle').value,
         businessName: $('businessName').value, businessAddress: $('businessAddress').value,
         invoice: $('wantInvoice').checked ? { requested: true, rfc: $('rfc').value, zip: $('taxZip').value, legalName: $('legalName').value, regime: $('taxRegime').value, use: $('cfdiUse').value } : null,
-        website: $('website').value, acceptTerms: $('terms').checked, locale: state.lang, attribution,
+        website: $('co_hp_field').value, acceptTerms: $('terms').checked, locale: state.lang, attribution,
         promoCode: state.promo ? state.promo.code : undefined,   // credited on every product; discount only where it fits
       }),
     });
