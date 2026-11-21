@@ -1,6 +1,14 @@
 {
   "speakers": [
     {
+      "name": "Vinnie Gasca",
+      "role": "Speaker / Strategic Partner",
+      "company": "Vinnie G Corp",
+      "title": "Global Legal Counsel & Wealth Architect · Pioneering Crypto, AI & Quantum",
+      "titleEs": "Asesor legal global y arquitecto patrimonial · Pionero en cripto, IA y cuántica",
+      "image": "/assets/speakers-2026/vinnie-gasca.webp"
+    },
+    {
       "name": "Scott Page",
       "role": "Speaker",
       "company": "Pink Floyd | Think:EXP",

@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi = (en, es) => `<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
-const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor','Ambassador':'Embajador/a'};
-const version = '20261118-vg';
+const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Speaker / Strategic Partner':'Speaker / Partner estratégico','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor','Ambassador':'Embajador/a'};
+const version = '20261121-vg2';
 
 function card(p, poster = false) {
   const photo = p.image ? `<div class="roster-art${poster ? ' roster-poster' : ''}"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="440" height="540" loading="lazy" decoding="async" /></div>` : '';
@@ -140,7 +140,7 @@ export async function buildRoster() {
   const logoItems = logos.map(l => {
     const ratio = l.width / l.height;
     const h = l.sponsor ? '64' : Math.min(46, Math.max(18, Math.sqrt(2400 / ratio))).toFixed(1);
-    return `<li${l.sponsor ? ' class="is-sponsor"' : ''} style="--logo-h:${h}px"><img src="${esc(l.logo)}" alt="${esc(l.name)}" title="${esc(l.sponsor ? `${l.name} · Sponsor 2026` : `${l.name} · ${l.people.join(', ')}`)}" width="${l.width}" height="${l.height}" loading="lazy" decoding="async"></li>`;
+    return `<li${l.sponsor ? ' class="is-sponsor"' : ''} style="--logo-h:${h}px"><img src="${esc(l.logo)}" alt="${esc(l.name)}" title="${esc(l.sponsor ? `${l.name} · Strategic Partner 2026` : `${l.name} · ${l.people.join(', ')}`)}" width="${l.width}" height="${l.height}" loading="lazy" decoding="async"></li>`;
   }).join('');
   const logoBand = `<section class="roster-logos" aria-labelledby="roster-logos-title"><div class="container"><div class="roster-logos-head"><p class="roster-logos-kicker" id="roster-logos-title">${bi('Where our speakers, investors & mentors build','Dónde construyen nuestros speakers, inversionistas y mentores')}</p><p class="roster-logos-note">${bi('Organizations led or represented by TIF 2026 participants, plus our 2026 sponsors.','Organizaciones que lideran o representan los participantes de TIF 2026, más nuestros patrocinadores 2026.')}</p></div><ul class="roster-logos-list">${logoItems}</ul></div></section>`;
   assert.ok(directory.includes('<div class="tools">'), 'Missing speakers search bar');
