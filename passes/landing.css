@@ -315,3 +315,9 @@
 
 .ln-btn.is-aff { background:transparent; border-color:rgba(255,122,69,.75); color:#FF7A45; box-shadow:none; }
 .ln-btn.is-aff:hover { background:rgba(255,90,31,.1); border-color:#FF5A1F; }
+.ln-sticky { flex-wrap:wrap; }
+.ln-sticky .a1, .ln-sticky .a2, .ln-sticky .a3 { flex:1 1 0; }
+.ln-sticky .a4 { order:9; flex:1 1 100%; flex-direction:row; min-height:52px; font-size:.8rem; letter-spacing:.12em; }
+.v2-page .ln-sticky.v2-bar { border-radius:30px; }
+@media (max-width: 420px) { .ln-sticky .a4 { min-height:48px; font-size:.72rem; letter-spacing:.1em; } }
+.v2-page .v2-bar .a4 { font-size:.74rem; letter-spacing:.1em; min-height:48px; }
