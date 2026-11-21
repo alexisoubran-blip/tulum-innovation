@@ -56,9 +56,6 @@
     .hero .ctas { display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; }
     .hero-card { position:relative; justify-self:end; width:min(440px,100%); }
     .hero-card img { border-radius:22px; border:1px solid var(--line); box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 80px rgba(217,181,110,.12); }
-    .hero-card .badge { position:absolute; left:-22px; bottom:34px; background:rgba(5,5,5,.86); backdrop-filter:blur(8px); border:1px solid var(--line); border-radius:16px; padding:14px 18px; }
-    .hero-card .badge b { display:block; margin-top:4px; font:400 17px/1.1 "Bruno Ace", Sora, sans-serif; text-transform:uppercase; }
-    .hero-card .badge span { font:500 11px/1.4 Sora; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
     .scroll { position:absolute; left:50%; bottom:22px; transform:translateX(-50%); font:500 10px/1 Sora; letter-spacing:.3em; color:var(--muted); text-transform:uppercase; }
 
     /* marquee */
@@ -138,7 +135,6 @@
     @media (max-width: 960px) {
       .hero-grid, .head { grid-template-columns:1fr; }
       .hero-card { justify-self:center; }
-      .hero-card .badge { left:12px; }
       .head > p { justify-self:start; }
       .grid6 { grid-template-columns:1fr 1fr; }
       .stats { grid-template-columns:1fr 1fr; }
@@ -174,7 +170,6 @@
         </div>
         <div class="hero-card">
           <img src="/assets/partners/vinnie-g/vinnie-gasca-poster.webp" alt="Vinnie Gasca, Strategic Partner of Tulum Innovation Fest 2026" width="1080" height="1350" fetchpriority="high">
-          <div class="badge"><span data-en>Speaker · Dec 9–12</span><span data-es>Speaker · 9–12 dic</span><b>Vinnie Gasca</b></div>
         </div>
       </div>
       <span class="scroll">Scroll</span>
