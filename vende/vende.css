@@ -83,3 +83,6 @@
 .vd-say-txt { margin:.6rem 0 .7rem; font-size:.82rem; line-height:1.55; color:rgba(242,241,234,.82); }
 .vd-say-copy { width:100%; min-height:38px; border-radius:999px; border:1px solid rgba(255,122,69,.6); background:transparent; color:#FF7A45; font:600 .72rem/1 Sora, sans-serif; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; }
 .vd-say-copy:hover { background:rgba(255,90,31,.1); }
+
+.vd-autocode { display:flex; gap:.7rem; align-items:flex-start; margin:.2rem 0 .4rem; padding:.75rem .9rem; border:1px dashed rgba(242,241,234,.22); border-radius:14px; font-size:.84rem; line-height:1.45; color:rgba(242,241,234,.78); }
+.vd-autocode b { flex:none; color:#5EF0B0; font-weight:700; }

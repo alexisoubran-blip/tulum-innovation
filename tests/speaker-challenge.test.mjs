@@ -122,19 +122,16 @@ const PAY = { holder: 'Titular Prueba', clabe: '002010077777777771' };
 test('community self-serve code: create, validate, one per email, applies 10%, kept out of speaker ranking', async () => {
   const store = createMemoryStore({ passes, promoCodes });
   const checkout = createCheckout({ store, blokko: null, env, now: () => NOW });
-  const made = await checkout.createCommunityCode({ name: 'Lu Pérez', email: 'Lu@Mail.com', phone: '+52 984 123 4567', code: 'lu-tulum', ...PAY });
-  assert.equal(made.code, 'LUTULUM');
+  const made = await checkout.createCommunityCode({ name: 'Lu Pérez', email: 'Lu@Mail.com', phone: '+52 984 123 4567', code: 'ignored-by-system', ...PAY });
+  assert.match(made.code, /^LU\d{3}$/); // generated: first name + 3 digits, typed code ignored
   assert.equal(made.percentOff, 10);
-  assert.match(made.url, /\/s\/LUTULUM$/);
+  assert.match(made.url, new RegExp(`/s/${made.code}$`));
   const fails = async (input, err) => assert.rejects(checkout.createCommunityCode({ ...PAY, ...input }), (e) => e.code === err);
   await fails({ name: 'Otro', email: 'lu@mail.com', phone: '9841234567', code: 'OTRO1' }, 'email_has_code');
-  await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'RON10' }, 'code_taken');
-  await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'FREE50' }, 'code_reserved');
-  await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'AB' }, 'code_length');
   await fails({ name: 'Otro', email: 'o@mail.com', phone: '12', code: 'OTRO1' }, 'invalid_phone');
-  const page = await checkout.speakerPage({ code: 'LUTULUM' });
+  const page = await checkout.speakerPage({ code: made.code });
   assert.equal(page.community, true);
-  const promo = await checkout.promo({ code: 'LUTULUM', passId: 'general-access' });
+  const promo = await checkout.promo({ code: made.code, passId: 'general-access' });
   assert.equal(Number(promo.percentOff ?? promo.percent_off ?? 10), 10);
   const lb = await checkout.leaderboard();
   assert.ok(!lb.people.some((p) => p.name === 'Lu Pérez'));
@@ -163,27 +160,28 @@ test('seller control: admin creates seller, sets commission, records payouts aga
 
 test('sellers: every product is credited (discount only on passes), tickets count festival passes only, lookup by email', async () => {
   const store = createMemoryStore({ passes: [...passes, { id: 'innovation-mezcal', name: 'Mezcal', price_usd: '38.75', price_mxn: '720.00', category: 'merch', issues_tickets: false }], rate: 18.5, promoCodes });
-  const checkout = createCheckout({ store, blokko: null, env, now: () => NOW });
-  const made = await checkout.createCommunityCode({ name: 'Lau Miller', email: 'lau@mail.com', phone: '+52 984 123 4567', code: 'MYHIT10', ...PAY });
+  const checkout = createCheckout({ store, blokko: null, env, now: () => NOW, codeNumber: () => 777 });
+  const made = await checkout.createCommunityCode({ name: 'Lau Miller', email: 'lau@mail.com', phone: '+52 984 123 4567', ...PAY });
+  assert.equal(made.code, 'LAU777');
   const mz = await checkout.createOrder({ ...buyer, passId: 'innovation-mezcal', quantity: 2, promoCode: made.code });
-  assert.equal(mz.order.promo.code, 'MYHIT10');
+  assert.equal(mz.order.promo.code, 'LAU777');
   assert.equal(mz.order.promo.percentOff, 0);
   assert.equal(mz.order.amountMxn, 1440);
   const ga = await checkout.createOrder({ ...buyer, promoCode: made.code });
   assert.equal(ga.order.promo.percentOff, 10);
   // paid orders credited to the seller: 2 bottles (no tickets) + 1 General Access (1 ticket)
-  await store.createOrder({ pass_id: 'innovation-mezcal', quantity: 2, amount_usd: 77.5, amount_mxn: 1440, status: 'paid', paid_at: new Date(NOW).toISOString(), promo_code: 'MYHIT10', buyer_name: 'X', buyer_email: 'x@x.com' });
-  await store.createOrder({ pass_id: 'general-access', quantity: 1, amount_usd: 196.2, amount_mxn: 3600, status: 'paid', paid_at: new Date(NOW).toISOString(), promo_code: 'MYHIT10', buyer_name: 'Y', buyer_email: 'y@x.com' });
+  await store.createOrder({ pass_id: 'innovation-mezcal', quantity: 2, amount_usd: 77.5, amount_mxn: 1440, status: 'paid', paid_at: new Date(NOW).toISOString(), promo_code: 'LAU777', buyer_name: 'X', buyer_email: 'x@x.com' });
+  await store.createOrder({ pass_id: 'general-access', quantity: 1, amount_usd: 196.2, amount_mxn: 3600, status: 'paid', paid_at: new Date(NOW).toISOString(), promo_code: 'LAU777', buyer_name: 'Y', buyer_email: 'y@x.com' });
   const sellers = (await checkout.adminSellers()).sellers;
-  const me = sellers.find((x) => x.code === 'MYHIT10');
+  const me = sellers.find((x) => x.code === 'LAU777');
   assert.equal(me.commissionPct, 25);
   assert.equal(me.tickets, 1);
   assert.equal(me.orders, 2);
   assert.equal(me.revenueMxn, 5040);
   assert.equal(me.earnedMxn, 1260);
   const look = await checkout.myCode({ email: ' LAU@mail.com ' });
-  assert.equal(look.code, 'MYHIT10');
-  assert.match(look.url, /\/s\/MYHIT10$/);
+  assert.equal(look.code, 'LAU777');
+  assert.match(look.url, /\/s\/LAU777$/);
   await assert.rejects(checkout.myCode({ email: 'nobody@mail.com' }), (e) => e.code === 'code_not_found');
 });
 
@@ -194,26 +192,28 @@ test('sellers: bank details are required at sign-up (valid CLABE or abroad), add
   assert.equal(validClabe(good), true);
   assert.equal(validClabe('002010077777777772'), false);
   const store = createMemoryStore({ passes, rate: 18.5, promoCodes });
-  const checkout = createCheckout({ store, blokko: null, env, now: () => NOW });
-  const base = { name: 'Ana López', email: 'ana@mail.com', phone: '+52 984 111 2222', code: 'ANAPAY', pillar: 'party' };
+  const nums = [482, 482, 315, 9001];
+  const checkout = createCheckout({ store, blokko: null, env, now: () => NOW, codeNumber: () => nums.shift() ?? 555 });
+  await store.createPromoCode({ code: 'ANA482', speaker_name: 'Otra Ana', email: 'otra@mail.com', tier: 'Comunidad' }); // collision -> system picks another number
+  const base = { name: 'Ana López', email: 'ana@mail.com', phone: '+52 984 111 2222', pillar: 'party' };
   await assert.rejects(checkout.createCommunityCode({ ...base, holder: 'Ana López' }), /invalid_clabe/);
   await assert.rejects(checkout.createCommunityCode({ ...base, holder: 'Ana López', clabe: '002010077777777772' }), /invalid_clabe/);
   const made = await checkout.createCommunityCode({ ...base, holder: 'Ana López', clabe: '0020 1007 7777 7777 71' });
-  assert.equal(made.code, 'ANAPAY');
-  const promo = await store.getPromoCode('ANAPAY');
+  assert.equal(made.code, 'ANA315');
+  const promo = await store.getPromoCode('ANA315');
   assert.equal(promo.commission_pct, 25);
   assert.equal(promo.pillar, 'Fiesta');
-  const abroad = await checkout.createCommunityCode({ name: 'Tom Ray', email: 'tom@mail.com', phone: '+1 305 555 0101', code: 'TOMRAY', holder: 'Tom Ray', abroad: 'Wise · tom@mail.com' });
-  assert.equal(abroad.code, 'TOMRAY');
+  const abroad = await checkout.createCommunityCode({ name: 'Tom Ray', email: 'tom@mail.com', phone: '+1 305 555 0101', holder: 'Tom Ray', abroad: 'Wise · tom@mail.com' });
+  assert.equal(abroad.code, 'TOM9001');
   // a seller without details adds them once; a second attempt is refused
   await store.createPromoCode({ code: 'OLDONE', speaker_name: 'Old', email: 'old@mail.com', tier: 'Comunidad', commission_pct: 25 });
   assert.equal((await checkout.myCode({ email: 'old@mail.com' })).hasPayout, false);
   await checkout.savePayoutInfo({ email: 'old@mail.com', holder: 'Old Seller', clabe: good });
   assert.equal((await checkout.myCode({ email: 'old@mail.com' })).hasPayout, true);
   await assert.rejects(checkout.savePayoutInfo({ email: 'old@mail.com', holder: 'Someone Else', clabe: good }), /payout_exists/);
-  const me = (await checkout.adminSellers()).sellers.find((s) => s.code === 'ANAPAY');
+  const me = (await checkout.adminSellers()).sellers.find((s) => s.code === 'ANA315');
   assert.deepEqual(me.payout, { holder: 'Ana López', clabe: good, bank: 'Banamex', abroadDetails: null });
   const masked = maskPersonal((await checkout.adminSellers()).sellers);
-  assert.equal(masked.find((s) => s.code === 'ANAPAY').payout.clabe, '••••7771');
-  assert.equal(masked.find((s) => s.code === 'TOMRAY').payout.abroadDetails, '•••');
+  assert.equal(masked.find((s) => s.code === 'ANA315').payout.clabe, '••••7771');
+  assert.equal(masked.find((s) => s.code === 'TOM9001').payout.abroadDetails, '•••');
 });

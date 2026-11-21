@@ -69,14 +69,6 @@
   wirePay(form);
   // Flyers per pillar link here with ?pillar=party|talks|networking|regen to preselect it.
   try { const pre = new URLSearchParams(location.search).get('pillar'); const r = pre && form.querySelector(`input[name=pillar][value="${pre.replace(/[^a-z]/g, '')}"]`); if (r) r.checked = true; } catch {}
-  const clean = (v) => v.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 16);
-  form.code.addEventListener('input', () => { form.code.value = clean(form.code.value); });
-  form.name.addEventListener('blur', () => {
-    if (form.code.value) return;
-    const first = form.name.value.normalize('NFD').replace(/[̀-ͯ]/g, '').split(/\s+/)[0] || '';
-    const c = clean(first);
-    if (c.length >= 2) form.code.value = clean(`${c}10`);
-  });
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     $('vdErr').hidden = true;
@@ -84,7 +76,7 @@
     if (!form.ok.checked) return say('terms');
     const btn = $('vdBtn'); btn.disabled = true;
     try {
-      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, pillar: form.pillar.value, ...payBody(form) }) });
+      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, pillar: form.pillar.value, ...payBody(form) }) });
       const d = await r.json().catch(() => ({}));
       if (!d.ok) { btn.disabled = false; return say(d.error, r.status); }
       const url = d.url.replace('https://www.', '');
