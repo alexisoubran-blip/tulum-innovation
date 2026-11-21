@@ -312,3 +312,6 @@
 .ln-sticky .a4 { text-align:center; background:#0b1114; color:#FF7A45; border:1px solid rgba(255,122,69,.7); }
 .ln-sticky .a4 small { color:#F2F1EA; }
 @media (max-width: 420px) { .ln-sticky { gap:5px; } .ln-sticky a { padding:.35rem .3rem; font-size:.6rem; letter-spacing:.05em; } }
+
+.ln-btn.is-aff { background:transparent; border-color:rgba(255,122,69,.75); color:#FF7A45; box-shadow:none; }
+.ln-btn.is-aff:hover { background:rgba(255,90,31,.1); border-color:#FF5A1F; }
