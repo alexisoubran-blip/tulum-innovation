@@ -73,3 +73,13 @@
 @media (max-width: 1100px) { .vd-flyers { grid-template-columns:repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .vd-flyers { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; } .vd-flyer { padding:8px; border-radius:16px; } .vd-flyer .ln-btn { font-size:.66rem; letter-spacing:.06em; min-height:42px; } .vd-flyer-dl { font-size:.7rem; flex-wrap:wrap; } }
 @media (max-width: 640px) { .vd-flyer[data-flyer="all"] { grid-column:1 / -1; } .vd-flyer[data-flyer="all"] img { max-width:62%; margin:0 auto; } }
+
+.vd-flyers { align-items:start; }
+.vd-say { border-top:1px solid rgba(242,241,234,.12); padding-top:.6rem; }
+.vd-say summary { cursor:pointer; list-style:none; font:600 .8rem/1.3 Sora, sans-serif; color:#FF7A45; }
+.vd-say summary::-webkit-details-marker { display:none; }
+.vd-say summary::after { content:" +"; }
+.vd-say[open] summary::after { content:" −"; }
+.vd-say-txt { margin:.6rem 0 .7rem; font-size:.82rem; line-height:1.55; color:rgba(242,241,234,.82); }
+.vd-say-copy { width:100%; min-height:38px; border-radius:999px; border:1px solid rgba(255,122,69,.6); background:transparent; color:#FF7A45; font:600 .72rem/1 Sora, sans-serif; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; }
+.vd-say-copy:hover { background:rgba(255,90,31,.1); }

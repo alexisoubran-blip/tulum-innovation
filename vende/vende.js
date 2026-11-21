@@ -165,4 +165,14 @@
     let copied = false; try { await navigator.clipboard.writeText(`${text} ${url}`); copied = true; } catch {}
     note(es() ? (copied ? 'Flyer descargado y texto con link copiado. Pégalo junto a la imagen.' : 'Flyer descargado.') : (copied ? 'Flyer downloaded and text with link copied. Paste it with the image.' : 'Flyer downloaded.'));
   }));
+  // "Don't know what to say?" scripts: copy the visible language; add the seller's own link if they just registered.
+  document.querySelectorAll('[data-copy-say]').forEach((btn) => btn.addEventListener('click', async () => {
+    const span = btn.parentElement.querySelector(`.vd-say-txt [data-tif-${es() ? 'es' : 'en'}]`);
+    const mine = ($('vdUrl') && $('vdUrl').value) || '';
+    const txt = span.textContent.trim() + (mine ? ` ${mine}` : '');
+    let ok = false; try { await navigator.clipboard.writeText(txt); ok = true; } catch {}
+    const lbl = btn.innerHTML; btn.textContent = ok ? (es() ? '✓ Copiado' : '✓ Copied') : (es() ? 'Selecciona y copia el texto' : 'Select and copy the text');
+    setTimeout(() => { btn.innerHTML = lbl; }, 2200);
+    push({ event: 'affiliate_script_copy', tif_pillar: btn.closest('.vd-flyer').dataset.flyer });
+  }));
 })();
