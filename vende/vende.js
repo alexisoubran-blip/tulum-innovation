@@ -90,10 +90,9 @@
       const url = d.url.replace('https://www.', '');
       $('vdCode').textContent = d.code;
       $('vdUrl').value = url;
-      const [hook, script] = (COPY[form.pillar.value] || COPY.all)[es() ? 'es' : 'en'];
-      const msg = es()
-        ? `${hook} Con mi código ${d.code} tienes 10% de descuento en tu pase: https://${url}`
-        : `${hook} Use my code ${d.code} for 10% off your pass: https://${url}`;
+      const [, script] = (COPY[form.pillar.value] || COPY.all)[es() ? 'es' : 'en'];
+      // WhatsApp sends the full 30-second message (the one sellers liked best) plus the link.
+      const msg = `${script.replace('{CODE}', d.code)}\n\n👉 https://${url}`;
       $('vdScript').textContent = script.replace('{CODE}', d.code);
       $('vdWa').href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
       form.hidden = true; $('vdDone').hidden = false;
