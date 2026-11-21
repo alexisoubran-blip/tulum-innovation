@@ -8,7 +8,8 @@
     invalid_name: ['Write your name (3–60 characters).', 'Escribe tu nombre (3 a 60 caracteres).'],
     invalid_email: ['Check your email.', 'Revisa tu correo.'],
     invalid_email_domain: ['That email domain can’t receive mail.', 'Ese dominio de correo no recibe mensajes.'],
-    invalid_phone: ['Add a WhatsApp number with area code.', 'Agrega un WhatsApp con lada.'],
+    invalid_phone: ['Check your WhatsApp number: pick your country and write the number without the country code.', 'Revisa tu WhatsApp: elige tu país y escribe el número sin la lada.'],
+    mail_suggest: ['Check your email: tap “Yes, fix it” or “No, it’s right” under it.', 'Revisa tu correo: toca “Sí, corregir” o “No, está bien” debajo.'],
     code_length: ['Your code needs 4 to 16 letters or numbers.', 'Tu código necesita de 4 a 16 letras o números.'],
     code_reserved: ['That code is reserved. Try another one.', 'Ese código está reservado. Prueba otro.'],
     code_taken: ['That code is taken. Try another one (add your name or a number).', 'Ese código ya existe. Prueba otro (agrega tu nombre o un número).'],
@@ -67,16 +68,85 @@
     return clabeOk(f.clabe.value.replace(/\D/g, '')) ? null : 'invalid_clabe';
   };
   wirePay(form);
+  // WhatsApp: country selector (auto-detected) + national number; pasting +52… or 52… picks the country.
+  const cc = form.cc, phoneHint = $('vdPhoneHint');
+  const optOf = (iso) => cc.querySelector(`option[value="${iso}"]`);
+  (() => {
+    let iso = null;
+    try { for (const l of navigator.languages || [navigator.language]) { const r = (l.split('-')[1] || '').toUpperCase(); if (r && optOf(r)) { iso = r; break; } } } catch {}
+    if (!iso) { try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; const T = { 'America/Mexico_City': 'MX', 'America/Cancun': 'MX', 'America/Merida': 'MX', 'America/Monterrey': 'MX', 'America/Tijuana': 'MX', 'America/Bogota': 'CO', 'America/Lima': 'PE', 'America/Santiago': 'CL', 'America/Caracas': 'VE', 'America/Sao_Paulo': 'BR', 'America/Montevideo': 'UY', 'Europe/Madrid': 'ES', 'Europe/London': 'GB', 'Europe/Berlin': 'DE', 'Europe/Paris': 'FR', 'Europe/Rome': 'IT', 'Asia/Dubai': 'AE' }; iso = T[tz] || (tz.startsWith('America/Argentina') ? 'AR' : /^America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix)/.test(tz) ? 'US' : null); } catch {} }
+    cc.value = iso || 'MX';
+  })();
+  const sel = () => cc.selectedOptions[0];
+  const fullPhone = () => {
+    let raw = form.phone.value.trim(); let d = raw.replace(/\D/g, '');
+    const o = sel(); const code = (o.dataset.cc || '').replace('+', '');
+    if (raw.startsWith('+') || raw.startsWith('00')) { if (raw.startsWith('00')) d = d.slice(2); return { e164: `+${d}`, n: d.length, ok: d.length >= 8 && d.length <= 15 }; }
+    if (!code) return { e164: `+${d}`, n: d.length, ok: d.length >= 8 && d.length <= 15 };
+    if (o.value === 'MX') { d = d.replace(/^(044|045)/, ''); if (d.length === 12 && d.startsWith('52')) d = d.slice(2); if (d.length === 13 && d.startsWith('521')) d = d.slice(3); }
+    else if (d.length > Number(o.dataset.max) && d.startsWith(code)) d = d.slice(code.length);
+    if (d.length > Number(o.dataset.max) && d.startsWith('0')) d = d.replace(/^0+/, '');
+    return { e164: `+${code}${d}`, n: d.length, ok: d.length >= Number(o.dataset.min) && d.length <= Number(o.dataset.max) };
+  };
+  const checkPhone = (final) => {
+    const raw = form.phone.value.trim();
+    // Pasted with country code: select that country automatically.
+    const m = raw.replace(/[\s()-]/g, '').match(/^\+(\d{1,3})/);
+    if (m) { const hit = [...cc.options].find((o) => o.dataset.cc && raw.replace(/[\s()-]/g, '').startsWith(o.dataset.cc) && (o.value !== 'CA' && o.value !== 'DO')); if (hit && hit !== sel()) { cc.value = hit.value; form.phone.value = raw.replace(/[\s()-]/g, '').slice(hit.dataset.cc.length); } }
+    const f = fullPhone(); phoneHint.className = 'vd-hint';
+    if (!form.phone.value.trim()) { phoneHint.textContent = ''; return false; }
+    if (f.ok) { phoneHint.textContent = `✓ ${f.e164}`; phoneHint.classList.add('ok'); return true; }
+    if (final || f.n >= Number(sel().dataset.max || 15)) { const o = sel(); phoneHint.textContent = o.value === 'MX' ? (es() ? 'Son 10 dígitos en México (ej. 984 123 4567).' : 'Mexican numbers have 10 digits (e.g. 984 123 4567).') : (es() ? `Revisa el número (${o.dataset.min === o.dataset.max ? o.dataset.min : `${o.dataset.min}–${o.dataset.max}`} dígitos sin lada).` : `Check the number (${o.dataset.min === o.dataset.max ? o.dataset.min : `${o.dataset.min}–${o.dataset.max}`} digits without country code).`); phoneHint.classList.add('bad'); }
+    else phoneHint.textContent = '';
+    return false;
+  };
+  form.phone.addEventListener('input', () => checkPhone(false));
+  form.phone.addEventListener('blur', () => checkPhone(true));
+  cc.addEventListener('change', () => { checkPhone(Boolean(form.phone.value.trim())); form.phone.focus(); });
+  // Email: format check + "did you mean…?" for common typos (gmial.com, hotmal.com, .con…).
+  const mailHint = $('vdMailHint');
+  const DOMAINS = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'yahoo.com.mx', 'icloud.com', 'live.com', 'live.com.mx', 'hotmail.es', 'outlook.es', 'me.com', 'msn.com', 'protonmail.com', 'proton.me', 'prodigy.net.mx', 'aol.com', 'gmx.com'];
+  const lev = (a, b) => { const m = Array.from({ length: a.length + 1 }, (_, i) => [i]); for (let j = 1; j <= b.length; j++) m[0][j] = j; for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) m[i][j] = Math.min(m[i - 1][j] + 1, m[i][j - 1] + 1, m[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return m[a.length][b.length]; };
+  const MAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+  let mailSuggest = null, mailKept = '';
+  const checkMail = (final) => {
+    const v = form.email.value.trim().toLowerCase();
+    if (mailSuggest && mailHint.dataset.for === v && v !== mailKept) return false; // same typo already offered: keep the buttons
+    mailHint.className = 'vd-hint'; mailHint.textContent = ''; mailSuggest = null; mailHint.dataset.for = v;
+    if (!v) return false;
+    if (!MAIL_RE.test(v)) { if (final) { mailHint.textContent = es() ? 'Revisa tu correo: falta algo (ej. nombre@gmail.com).' : 'Check your email: something is missing (e.g. name@gmail.com).'; mailHint.classList.add('bad'); } return false; }
+    const [user, dom] = v.split('@');
+    let fix = dom.replace(/\.(con|cmo|ocm|vom|xom|comm|co)$/, (x) => (/^(gmail|hotmail|outlook|yahoo|icloud|live)\./.test(dom) ? '.com' : x));
+    if (!DOMAINS.includes(fix)) { let best = null, bd = 3; for (const d of DOMAINS) { const k = lev(fix, d); if (k < bd) { bd = k; best = d; } } if (best && bd <= 2) fix = best; }
+    if (fix !== dom && v !== mailKept) {
+      mailSuggest = `${user}@${fix}`;
+      mailHint.classList.add('bad');
+      mailHint.append(es() ? `¿Quisiste decir ${mailSuggest}?` : `Did you mean ${mailSuggest}?`);
+      const yes = document.createElement('button'); yes.type = 'button'; yes.textContent = es() ? 'Sí, corregir' : 'Yes, fix it';
+      yes.onclick = () => { form.email.value = mailSuggest; checkMail(true); };
+      const no = document.createElement('button'); no.type = 'button'; no.textContent = es() ? 'No, está bien' : 'No, it’s right';
+      no.onclick = () => { mailKept = v; checkMail(true); };
+      // Keep focus on the email field while tapping, so its blur doesn't redraw the buttons mid-tap.
+      [yes, no].forEach((b) => { b.addEventListener('mousedown', (e) => e.preventDefault()); b.addEventListener('pointerdown', (e) => e.preventDefault()); });
+      mailHint.append(yes, no);
+      return false;
+    }
+    mailHint.textContent = '✓'; mailHint.classList.add('ok'); return true;
+  };
+  form.email.addEventListener('blur', () => checkMail(true));
+  form.email.addEventListener('input', () => { if (mailHint.classList.contains('bad') || mailHint.classList.contains('ok')) checkMail(false); });
   // Flyers per pillar link here with ?pillar=party|talks|networking|regen to preselect it.
   try { const pre = new URLSearchParams(location.search).get('pillar'); const r = pre && form.querySelector(`input[name=pillar][value="${pre.replace(/[^a-z]/g, '')}"]`); if (r) r.checked = true; } catch {}
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     $('vdErr').hidden = true;
+    if (!checkMail(true)) { form.email.focus(); return say(mailSuggest ? 'mail_suggest' : 'invalid_email'); }
+    if (!checkPhone(true)) { form.phone.focus(); return say('invalid_phone'); }
     { const bad = payCheck(form); if (bad) return say(bad); }
     if (!form.ok.checked) return say('terms');
     const btn = $('vdBtn'); btn.disabled = true;
     try {
-      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, pillar: form.pillar.value, ...payBody(form) }) });
+      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: fullPhone().e164, pillar: form.pillar.value, ...payBody(form) }) });
       const d = await r.json().catch(() => ({}));
       if (!d.ok) { btn.disabled = false; return say(d.error, r.status); }
       const url = d.url.replace('https://www.', '');

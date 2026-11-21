@@ -86,3 +86,12 @@
 
 .vd-autocode { display:flex; gap:.7rem; align-items:flex-start; margin:.2rem 0 .4rem; padding:.75rem .9rem; border:1px dashed rgba(242,241,234,.22); border-radius:14px; font-size:.84rem; line-height:1.45; color:rgba(242,241,234,.78); }
 .vd-autocode b { flex:none; color:#5EF0B0; font-weight:700; }
+
+.vd-phone { display:flex; gap:.5rem; }
+.vd-phone select { flex:none; width:7.2rem; min-height:50px; padding:0 .6rem; border:1px solid var(--ln-line); border-radius:14px; background:rgba(242,241,234,.04); color:var(--ln-paper); font:500 1rem Sora, sans-serif; }
+.vd-phone select option { background:#0b1114; color:#F2F1EA; }
+.vd-phone input { flex:1; min-width:0; }
+.vd-hint { min-height:1.1em; font-size:.78rem; color:var(--ln-muted); }
+.vd-hint.ok { color:#5EF0B0; }
+.vd-hint.bad { color:#FF9C7A; }
+.vd-hint button { margin-left:.35rem; padding:.25rem .6rem; border-radius:999px; border:1px solid currentColor; background:transparent; color:inherit; font:600 .74rem Sora, sans-serif; cursor:pointer; }
