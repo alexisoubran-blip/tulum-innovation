@@ -521,7 +521,7 @@
         company: needs('businessName') ? '' : $('company').value, jobTitle: needs('businessName') ? '' : $('jobTitle').value,
         businessName: $('businessName').value, businessAddress: $('businessAddress').value,
         invoice: $('wantInvoice').checked ? { requested: true, rfc: $('rfc').value, zip: $('taxZip').value, legalName: $('legalName').value, regime: $('taxRegime').value, use: $('cfdiUse').value } : null,
-        website: $('co_hp_field').value, acceptTerms: $('terms').checked, locale: state.lang, attribution,
+        acceptTerms: $('terms').checked, locale: state.lang, attribution,
         promoCode: state.promo ? state.promo.code : undefined,   // credited on every product; discount only where it fits
       }),
     });

@@ -132,7 +132,6 @@ test('community self-serve code: create, validate, one per email, applies 10%, k
   await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'FREE50' }, 'code_reserved');
   await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'AB' }, 'code_length');
   await fails({ name: 'Otro', email: 'o@mail.com', phone: '12', code: 'OTRO1' }, 'invalid_phone');
-  await fails({ name: 'Otro', email: 'o@mail.com', phone: '9841234567', code: 'OTRO1', website: 'x' }, 'invalid_request');
   const page = await checkout.speakerPage({ code: 'LUTULUM' });
   assert.equal(page.community, true);
   const promo = await checkout.promo({ code: 'LUTULUM', passId: 'general-access' });

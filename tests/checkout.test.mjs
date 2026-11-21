@@ -74,7 +74,8 @@ test('createOrder rejects bad input, unavailable passes, bots and a missing rate
   assert.equal(await code({ ...buyer, quantity: 11 }), 'invalid_quantity');
   assert.equal(await code({ ...buyer, acceptTerms: false }), 'terms_required');
   assert.equal(await code({ ...buyer, passId: 'night-program' }), 'pass_unavailable');
-  assert.equal(await code({ ...buyer, website: 'spam' }), 'invalid_request');
+  // AutoFill can fill a hidden field: it must never block a real buyer.
+  assert.notEqual(await code({ ...buyer, website: 'https://example.com' }), 'invalid_request');
   const noRate = setup({ rate: null });
   assert.equal((await noRate.checkout.createOrder(buyer).catch((e) => e)).code, 'rate_not_set');
 });

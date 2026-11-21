@@ -47,7 +47,7 @@
     },
   };
   // CLABE check digit (weights 3,7,1) and bank name, so typos are caught before sending.
-  const BANKS = { '002': 'Banamex', '012': 'BBVA', '014': 'Santander', '021': 'HSBC', '030': 'BanBajío', '036': 'Inbursa', '044': 'Scotiabank', '058': 'Banregio', '072': 'Banorte', '127': 'Banco Azteca', '137': 'BanCoppel', '646': 'STP' };
+  const BANKS = { '002': 'Banamex', '012': 'BBVA', '014': 'Santander', '021': 'HSBC', '030': 'BanBajío', '036': 'Inbursa', '044': 'Scotiabank', '058': 'Banregio', '072': 'Banorte', '127': 'Banco Azteca', '137': 'BanCoppel', '646': 'STP', '638': 'Nu México', '722': 'Mercado Pago' };
   const clabeOk = (d) => { if (!/^\d{18}$/.test(d)) return false; let s = 0; for (let i = 0; i < 17; i++) s += (Number(d[i]) * [3, 7, 1][i % 3]) % 10; return (10 - (s % 10)) % 10 === Number(d[17]); };
   const wirePay = (f) => {
     const ab = f.querySelector('.vd-abroad'), mx = f.querySelector('.vd-mx'), hint = f.querySelector('.vd-bank');
@@ -84,7 +84,7 @@
     if (!form.ok.checked) return say('terms');
     const btn = $('vdBtn'); btn.disabled = true;
     try {
-      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, website: form.vd_hp_field.value, pillar: form.pillar.value, ...payBody(form) }) });
+      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: form.phone.value, code: form.code.value, pillar: form.pillar.value, ...payBody(form) }) });
       const d = await r.json().catch(() => ({}));
       if (!d.ok) { btn.disabled = false; return say(d.error, r.status); }
       const url = d.url.replace('https://www.', '');
