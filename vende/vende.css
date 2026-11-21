@@ -58,3 +58,18 @@
 #vdPayAdd label { display:grid; gap:.4rem; margin-bottom:1rem; font-size:.82rem; color:var(--ln-muted); }
 #vdPayAdd input:not([type=checkbox]) { width:100%; min-height:50px; padding:0 1rem; border:1px solid var(--ln-line); border-radius:14px; background:rgba(242,241,234,.04); color:var(--ln-paper); font:400 1rem Sora, sans-serif; }
 #vdPayAdd .ln-btn { width:100%; }
+
+.vd-kit h2 { margin:.6rem 0 0; font-family:"Bruno Ace", Sora, sans-serif; font-weight:400; text-transform:uppercase; font-size:clamp(1.9rem, 3.6vw, 3rem); line-height:1.05; }
+.vd-kit h2 em { font-style:normal; color:var(--ln-ember-2, #E97A43); }
+.vd-flyers { display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:16px; margin-top:2rem; }
+.vd-flyer { display:flex; flex-direction:column; gap:.7rem; padding:12px; border:1px solid rgba(242,241,234,.12); border-radius:20px; background:rgba(242,241,234,.03); }
+.vd-flyer img { width:100%; height:auto; border-radius:12px; }
+.vd-flyer h3 { margin:.2rem 0 0; font:600 1rem/1.2 Sora, sans-serif; }
+.vd-flyer .ln-btn { width:100%; min-height:46px; padding:0 .8rem; }
+.vd-flyer-dl { display:flex; justify-content:space-between; gap:.5rem; font-size:.78rem; }
+.vd-flyer-dl a { color:var(--ln-muted, rgba(242,241,234,.7)); text-decoration:none; border-bottom:1px solid rgba(242,241,234,.25); }
+.vd-flyer-dl a:hover { color:#fff; }
+.vd-kit-note { position:fixed; left:50%; bottom:20px; transform:translateX(-50%); z-index:200; max-width:min(92vw, 520px); padding:.8rem 1.1rem; border-radius:14px; background:#F2F1EA; color:#00080B; font:500 .88rem/1.4 Sora, sans-serif; box-shadow:0 20px 50px rgba(0,0,0,.5); }
+@media (max-width: 1100px) { .vd-flyers { grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .vd-flyers { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; } .vd-flyer { padding:8px; border-radius:16px; } .vd-flyer .ln-btn { font-size:.66rem; letter-spacing:.06em; min-height:42px; } .vd-flyer-dl { font-size:.7rem; flex-wrap:wrap; } }
+@media (max-width: 640px) { .vd-flyer[data-flyer="all"] { grid-column:1 / -1; } .vd-flyer[data-flyer="all"] img { max-width:62%; margin:0 auto; } }

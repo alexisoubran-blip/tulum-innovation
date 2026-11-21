@@ -145,4 +145,24 @@
       push({ event: 'seller_payout_saved' });
     } catch { btn.disabled = false; show('generic'); }
   });
+  // Share kit: one flyer per pillar. Native share with the image where supported; otherwise download + copy text.
+  const kitNote = $('vdKitNote');
+  document.querySelectorAll('[data-share-flyer]').forEach((btn) => btn.addEventListener('click', async () => {
+    const k = btn.dataset.shareFlyer; const card = btn.closest('.vd-flyer'); const img = card.dataset.post;
+    const url = `https://www.tuluminnovationfest.com/vende?pillar=${k}&utm_source=share&utm_medium=flyer&utm_campaign=affiliates&utm_content=${k}`;
+    const text = es()
+      ? 'Hazte afiliado de Tulum Innovation Fest y gana 25% de cada pase que vendas. 9 al 12 de diciembre, Tulum.'
+      : 'Join the Tulum Innovation Fest affiliate program and earn 25% of every pass you sell. December 9–12, Tulum.';
+    const note = (m) => { kitNote.textContent = m; kitNote.hidden = false; clearTimeout(note.t); note.t = setTimeout(() => { kitNote.hidden = true; }, 6000); };
+    push({ event: 'affiliate_flyer_share', tif_pillar: k });
+    try {
+      const blob = await (await fetch(img)).blob();
+      const file = new File([blob], `TIF-affiliates-${k}.jpg`, { type: 'image/jpeg' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text: `${text} ${url}` }); return; }
+      if (navigator.share) { await navigator.share({ title: 'Tulum Innovation Fest', text, url }); return; }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    const a = document.createElement('a'); a.href = img; a.download = `TIF-affiliates-${k}.jpg`; document.body.append(a); a.click(); a.remove();
+    let copied = false; try { await navigator.clipboard.writeText(`${text} ${url}`); copied = true; } catch {}
+    note(es() ? (copied ? 'Flyer descargado y texto con link copiado. Pégalo junto a la imagen.' : 'Flyer descargado.') : (copied ? 'Flyer downloaded and text with link copied. Paste it with the image.' : 'Flyer downloaded.'));
+  }));
 })();
