@@ -518,6 +518,27 @@ footer small{color:var(--mute);font-size:13.5px}
   .reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
   @keyframes reveal{from{opacity:.15;transform:translateY(28px)}to{opacity:1;transform:none}}
 }
+/* Access point: the festival is the door, the city is what's on the other side */
+.access{padding-block:0 clamp(64px,9vw,120px);overflow:hidden}
+.access-art{position:relative;margin:0;height:clamp(420px,56.25vw,980px);overflow:hidden}
+.access-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;transform:scale(1.04);animation:accessIn linear both;animation-timeline:view();animation-range:entry 0% cover 60%}
+@keyframes accessIn{from{transform:scale(1.12);filter:brightness(.55)}to{transform:scale(1.02);filter:brightness(1)}}
+.access-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#000 0%,transparent 14%,transparent 62%,#000 100%);pointer-events:none}
+.access-art figcaption{position:absolute;left:0;right:0;top:clamp(20px,3vw,40px);z-index:1;display:flex;justify-content:space-between;gap:16px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.access-art figcaption .o{color:var(--flame)}.access-art figcaption .c{color:var(--cyan)}
+.access-copy{position:relative;margin-top:clamp(-150px,-9vw,-60px);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:28px 64px;align-items:start}
+.access-copy h2 .door{display:block}
+.access-copy h2 .other{display:block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.access-copy .lede{margin-top:18px}
+.access-copy .hero-ctas{margin-top:28px}
+.cross{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--rule)}
+.cross li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 14px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.cross .n{font-family:var(--f-mono);font-size:13px;color:var(--flame);grid-row:span 2;padding-top:3px}
+.cross li:last-child .n{color:var(--cyan)}
+.cross b{font-family:var(--f-display);font-weight:700;font-size:16px;letter-spacing:.02em}
+.cross p{margin:0;color:var(--mute);font-size:15.5px}
+@media (max-width:900px){.access-copy{grid-template-columns:1fr}}
+@media (max-width:640px){.access-art{height:auto;aspect-ratio:4/5}.access-art img{object-position:50% 50%;animation:none;transform:none}.access-art figcaption{flex-direction:column;gap:6px;font-size:11px}.access-copy{margin-top:-48px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -586,6 +607,37 @@ footer small{color:var(--mute);font-size:13.5px}
     <div class="stat reveal"><span class="num" data-to="4">4</span><span class="lbl"><span lang="en">festival editions since 2022</span><span lang="es">ediciones del festival desde 2022</span></span></div>
     <div class="stat reveal"><span class="num" data-to="1">1</span><span class="lbl"><span lang="en">point of contact for setup, bank and residency</span><span lang="es">solo contacto para setup, banco y residencia</span></span></div>
     <div class="stat reveal"><span class="num">UTC−5</span><span class="lbl"><span lang="en">New York hours, all year</span><span lang="es">horario de Nueva York, todo el año</span></span></div>
+  </div>
+</section>
+<section id="access" class="access" aria-labelledby="access-title">
+  <figure class="access-art">
+    <picture>
+      <source media="(max-width:640px)" srcset="/img/access-point-tall.webp" width="1080" height="1350">
+      <img src="/img/access-point.webp" width="2400" height="1350" loading="lazy" decoding="async" alt="A festival crowd at night faces a diamond-shaped portal made of the Innovation City V and A. Through it, a low-rise city among palm trees glows under an eclipse, with twelve points of light on the ground.">
+    </picture>
+    <figcaption class="wrap" aria-hidden="true">
+      <span><span class="o">I</span>&nbsp; Tulum Innovation Fest</span>
+      <span><span class="c">II</span>&nbsp; Innovation City</span>
+    </figcaption>
+  </figure>
+  <div class="wrap access-copy">
+    <div class="reveal">
+      <span class="tag" style="color:var(--amber)"><span lang="en">Access point</span><span lang="es">Punto de acceso</span></span>
+      <h2 id="access-title">
+        <span lang="en"><span class="door">The festival is the door.</span><span class="other">The city is what's on the other side.</span></span>
+        <span lang="es"><span class="door">El festival es la puerta.</span><span class="other">La ciudad es lo que hay del otro lado.</span></span>
+      </h2>
+      <p class="lede"><span lang="en">You come to Tulum Innovation Fest for a few days of talks, music and deals. Innovation City is how you stay: a company, a bank account and a desk in Tulum, with the same network around you all year.</span><span lang="es">Vienes a Tulum Innovation Fest por unos días de charlas, música y negocios. Innovation City es la forma de quedarte: una empresa, una cuenta bancaria y un escritorio en Tulum, con la misma red alrededor todo el año.</span></p>
+      <div class="hero-ctas">
+        <a class="btn btn-hot" href="#contact"><span lang="en">Apply to the founding cohort</span><span lang="es">Aplica a la cohorte fundadora</span></a>
+        <a class="btn btn-glass" href="https://tuluminnovationfest.com" target="_blank" rel="noopener"><span lang="en">Visit the festival</span><span lang="es">Ir al festival</span></a>
+      </div>
+    </div>
+    <ol class="cross reveal">
+      <li><span class="n">01</span><b><span lang="en">Enter through the festival</span><span lang="es">Entra por el festival</span></b><p><span lang="en">Founders, funds, protocols and media in one place, once a year.</span><span lang="es">Founders, fondos, protocolos y medios en un solo lugar, una vez al año.</span></p></li>
+      <li><span class="n">02</span><b><span lang="en">Connect</span><span lang="es">Conecta</span></b><p><span lang="en">Whale Tank, private meetings and the after party, which is part of the program.</span><span lang="es">Whale Tank, reuniones privadas y el after party, que es parte del programa.</span></p></li>
+      <li><span class="n">03</span><b><span lang="en">Stay and build</span><span lang="es">Quédate y construye</span></b><p><span lang="en">Set up your company in Innovation City and operate from Tulum the rest of the year.</span><span lang="es">Constituye tu empresa en Innovation City y opera desde Tulum el resto del año.</span></p></li>
+    </ol>
   </div>
 </section>
 <section id="city">
