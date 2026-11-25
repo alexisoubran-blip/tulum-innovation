@@ -269,3 +269,34 @@ test('SPEI: unavailable without bank details; with them, a reference, 72 h hold 
   assert.deepEqual(emails.map((m) => m.subject.split(' · ')[0]), ['Bank transfer details', 'Your tickets'], 'transfer instructions, then tickets');
   assert.equal((await checkout.status({ token })).status, 'paid');
 });
+
+test('Whale Tank Executive upgrade: one entry per person, VAT only with invoice, closes after its deadline', async () => {
+  const { createCheckout } = await import('../lib/ticketing/checkout.mjs');
+  const { createMemoryStore } = await import('../lib/ticketing/memory-store.mjs');
+  const pass = { id: 'whale-tank-executive-upgrade', name: 'Whale Tank 2026 · Executive Pass + Transfers', price_usd: 500, hidden: true, max_quantity: 10, category: 'whale-tank' };
+  let clock = Date.parse('2026-11-25T12:00:00-06:00');
+  const store = createMemoryStore({ passes: [pass], rate: 18.58 });
+  const checkout = createCheckout({ store, blokko: { async getPaymentMethods() { return []; } }, env: { ORDER_TOKEN_SECRET: 'x'.repeat(40) }, sendEmail: async () => ({ sent: true }), now: () => clock });
+  const person = (n) => ({ name: `Persona ${n} Apellido`, startup: 'Startup X', email: `p${n}@startup.mx`, whatsapp: '+52 998 123 4567' });
+  const base = { passId: pass.id, quantity: 2, firstName: 'Ana', lastName1: 'López', email: 'ana@startup.mx', emailConfirm: 'ana@startup.mx', phoneCountry: 'MX', phone: '998 123 4567', acceptTerms: true, attendees: [person(1), person(2)] };
+  const code = async (patch) => (await checkout.createOrder({ ...base, ...patch }).catch((e) => e)).code;
+  assert.equal(await code({ attendees: [person(1)] }), 'invalid_attendees');
+  assert.equal(await code({ attendees: [person(1), { ...person(2), name: 'Ana' }] }), 'invalid_attendee_name');
+  assert.equal(await code({ attendees: [person(1), { ...person(2), startup: '' }] }), 'invalid_attendee_startup');
+  assert.equal(await code({ attendees: [person(1), { ...person(2), email: 'nope' }] }), 'invalid_attendee_email');
+  assert.equal(await code({ attendees: [person(1), { ...person(2), whatsapp: '123' }] }), 'invalid_attendee_whatsapp');
+
+  const plain = await checkout.createOrder(base);
+  assert.equal(plain.order.amountUsd, 1000);
+  const row = [...store.state.orders.values()][0];
+  assert.deepEqual(row.metadata.attendees.map((a) => a.email), ['p1@startup.mx', 'p2@startup.mx']);
+
+  const invoiced = await checkout.createOrder({ ...base, invoice: { requested: true, rfc: 'EMP200101AB1', legalName: 'Startup X SA de CV', zip: '77760', regime: '601', use: 'G03' } });
+  assert.equal(invoiced.order.amountUsd, 1160);
+
+  const opts = await checkout.options({ includePass: pass.id });
+  assert.ok(opts.passes.some((p) => p.id === pass.id));
+  clock = Date.parse('2026-12-01T00:00:01-06:00');
+  assert.equal(await code({}), 'pass_unavailable');
+  assert.ok(!(await checkout.options({ includePass: pass.id })).passes.some((p) => p.id === pass.id));
+});

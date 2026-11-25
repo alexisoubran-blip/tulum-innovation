@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/checkout/checkout.css?v=20261113f" />
+  <link rel="stylesheet" href="/checkout/checkout.css?v=20261125a" />
 </head>
 <body class="co-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -127,6 +127,12 @@
               <input id="jobTitle" name="organization-title" autocomplete="organization-title" maxlength="120" />
             </div>
             
+          </div>
+
+          <div class="co-attendees" id="attendees" hidden>
+            <p class="co-attendees-head"><span data-en>Details of each person</span><span data-es>Datos de cada persona</span></p>
+            <p class="co-attendees-note"><span data-en>One wristband per person: we need the full name, startup, email and WhatsApp of each one for the gala and transfer lists.</span><span data-es>Un brazalete por persona: necesitamos nombre completo, startup, email y WhatsApp de cada una para las listas de la gala y los traslados.</span></p>
+            <div id="attendeeList"></div>
           </div>
 
           <label class="co-check co-invoice-toggle">
@@ -332,6 +338,6 @@
     </div>
   </dialog>
 
-  <script src="/checkout/checkout.js?v=20261121b" defer></script>
+  <script src="/checkout/checkout.js?v=20261125a" defer></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
     en: {
       errors: {
         invalid_name: 'Please enter your full name.', invalid_email: 'Please enter a valid email.', invalid_quantity: 'That quantity is not available for this product.', invalid_amount: 'Enter the amount you want to contribute.', promo_invalid: 'That speaker code is not valid.', promo_not_applicable: 'That code does not apply to this pass.',
-        terms_required: 'Please accept the purchase terms.', invalid_request: 'We could not validate the form. Reload the page and try again.', pass_unavailable: 'That product is not available right now.', rate_not_set: 'Payments are not available right now. Please try again later.',
+        terms_required: 'Please accept the purchase terms.', invalid_attendees: 'Add the details of each person.', invalid_attendee_name: 'Enter the full name (first and last name) of each person.', invalid_attendee_startup: 'Enter the startup of each person.', invalid_attendee_email: 'Check the email of each person.', invalid_attendee_whatsapp: 'Check the WhatsApp of each person (with country code).',  invalid_request: 'We could not validate the form. Reload the page and try again.', pass_unavailable: 'That product is not available right now.', rate_not_set: 'Payments are not available right now. Please try again later.',
         order_expired: 'This order expired. Start again.', method_not_allowed: 'That payment method is not available.', method_unavailable: 'That payment method is coming soon. Please choose another one.',
         too_many_attempts: 'Too many attempts for this order. Start again.', payment_provider_error: 'That method did not respond. Choose another method or try again.',
         order_not_found: 'We could not find this order. Start again.', store_not_configured: 'Payments are not available right now.',
@@ -31,7 +31,7 @@
       rate: (r) => `Charged in MXN at ${r} MXN per USD.`,
       expires: (mmss) => `QR valid for <strong>${mmss}</strong>`,
       expired: 'This QR expired. Generate a new one to keep paying.',
-      via: (m) => `Pay with ${m}`, copied: 'Copied', soon: 'Coming soon', plusVat: '+ VAT 16%', perUnit: 'per unit',
+      via: (m) => `Pay with ${m}`, copied: 'Copied', soon: 'Coming soon', plusVat: '+ VAT 16%', plusVatInvoice: '+ VAT 16% only with invoice', perUnit: 'per unit',
       pending: 'Price to be confirmed', soonBuy: 'Available soon', payCard: (a) => `Pay ${a}`, approx: (u) => `≈ ${u}`, fixedMxn: 'Price in Mexican pesos.',
       doneTickets: 'You’re in!', doneConfirm: 'Payment confirmed', viewTickets: 'View my tickets', viewPurchase: 'View my purchase',
       doneTicketsText: (e) => `We sent your tickets to ${e}. You can also open them now.`,
@@ -45,7 +45,7 @@
     es: {
       errors: {
         invalid_name: 'Escribe tu nombre completo.', invalid_email: 'Escribe un correo válido.', invalid_quantity: 'Esa cantidad no está disponible para este producto.', invalid_amount: 'Escribe el monto que quieres aportar.', promo_invalid: 'Ese código de speaker no es válido.', promo_not_applicable: 'Ese código no aplica para este pase.',
-        terms_required: 'Acepta los términos de compra.', invalid_request: 'No pudimos validar el formulario. Recarga la página e intenta de nuevo.', pass_unavailable: 'Ese producto no está disponible por ahora.', rate_not_set: 'Los pagos no están disponibles por ahora. Intenta más tarde.',
+        terms_required: 'Acepta los términos de compra.', invalid_attendees: 'Agrega los datos de cada persona.', invalid_attendee_name: 'Escribe el nombre completo (nombre y apellido) de cada persona.', invalid_attendee_startup: 'Escribe la startup de cada persona.', invalid_attendee_email: 'Revisa el email de cada persona.', invalid_attendee_whatsapp: 'Revisa el WhatsApp de cada persona (con lada de país).', invalid_request: 'No pudimos validar el formulario. Recarga la página e intenta de nuevo.', pass_unavailable: 'Ese producto no está disponible por ahora.', rate_not_set: 'Los pagos no están disponibles por ahora. Intenta más tarde.',
         order_expired: 'Esta orden venció. Empieza de nuevo.', method_not_allowed: 'Ese método de pago no está disponible.', method_unavailable: 'Ese método llega muy pronto. Elige otro, por favor.',
         too_many_attempts: 'Demasiados intentos para esta orden. Empieza de nuevo.', payment_provider_error: 'Ese método no respondió. Elige otro método o intenta de nuevo.',
         order_not_found: 'No encontramos esta orden. Empieza de nuevo.', store_not_configured: 'Los pagos no están disponibles por ahora.',
@@ -66,7 +66,7 @@
       rate: (r) => `Cargo en MXN a ${r} MXN por USD.`,
       expires: (mmss) => `QR válido por <strong>${mmss}</strong>`,
       expired: 'Este QR venció. Genera uno nuevo para seguir pagando.',
-      via: (m) => `Paga con ${m}`, copied: 'Copiado', soon: 'Muy pronto', plusVat: '+ IVA 16%', perUnit: 'por unidad',
+      via: (m) => `Paga con ${m}`, copied: 'Copiado', soon: 'Muy pronto', plusVat: '+ IVA 16%', plusVatInvoice: '+ IVA 16% solo con factura', perUnit: 'por unidad',
       pending: 'Precio por confirmar', soonBuy: 'Disponible muy pronto', payCard: (a) => `Pagar ${a}`, approx: (u) => `≈ ${u}`, fixedMxn: 'Precio en pesos mexicanos.',
       doneTickets: '¡Listo, ya tienes tus boletos!', doneConfirm: 'Pago confirmado', viewTickets: 'Ver mis boletos', viewPurchase: 'Ver mi compra',
       doneTicketsText: (e) => `Enviamos tus boletos a ${e}. También puedes abrirlos ahora.`,
@@ -226,6 +226,7 @@
       else {
         price.append(el('strong', null, usd(p.priceUsd)));
         if (p.taxRate > 0) price.append(el('em', null, ` ${t().plusVat}`));
+        else if (p.content?.vatIfInvoice) price.append(el('em', null, ` ${t().plusVatInvoice}`));
         price.append(el('span', null, p.priceMxn ? mxn(p.priceMxn) : ''));
       }
       body.append(price);
@@ -306,7 +307,69 @@
     const business = needs('businessName');
     document.querySelectorAll('.co-business').forEach((n) => { n.hidden = !business; });
     document.querySelectorAll('.co-company').forEach((n) => { n.hidden = business; }); // the business name replaces "company"
+    renderAttendees();
   }
+
+  // One block per person (Whale Tank Executive upgrade): full name, startup, email and WhatsApp.
+  state.attendees = [];
+  const ATT_FIELDS = [
+    ['name', 'Full name', 'Nombre completo', 'name', 'text', 120],
+    ['startup', 'Startup', 'Startup', 'organization', 'text', 120],
+    ['email', 'Email', 'Email', 'email', 'email', 160],
+    ['whatsapp', 'WhatsApp (with country code)', 'WhatsApp (con lada de país)', 'tel', 'tel', 30],
+  ];
+  const attendeeError = (a) => {
+    if (!a || (a.name || '').trim().split(/\s+/).filter(Boolean).length < 2) return ['name', 'invalid_attendee_name'];
+    if ((a.startup || '').trim().length < 2) return ['startup', 'invalid_attendee_startup'];
+    if (!EMAIL_RE.test((a.email || '').trim())) return ['email', 'invalid_attendee_email'];
+    const d = (a.whatsapp || '').replace(/\D/g, '');
+    if (d.length < 8 || d.length > 15) return ['whatsapp', 'invalid_attendee_whatsapp'];
+    return null;
+  };
+  function renderAttendees() {
+    const box = $('attendees');
+    if (!box) return;
+    const on = needs('attendees');
+    box.hidden = !on;
+    if (!on) { box.textContent = ''; return; }
+    while (state.attendees.length < state.qty) state.attendees.push({ name: '', startup: '', email: '', whatsapp: '' });
+    const list = $('attendeeList');
+    list.textContent = '';
+    for (let i = 0; i < state.qty; i++) {
+      const a = state.attendees[i];
+      const card = el('fieldset', 'co-attendee');
+      const legend = el('legend');
+      legend.innerHTML = `<span data-en>Person ${i + 1}</span><span data-es>Persona ${i + 1}</span>`;
+      card.appendChild(legend);
+      for (const [key, en, es, auto, type, max] of ATT_FIELDS) {
+        const id = `att-${i}-${key}`;
+        const wrap = el('div', 'co-field');
+        const label = el('label');
+        label.htmlFor = id;
+        label.innerHTML = `<span data-en>${en}</span><span data-es>${es}</span> <b aria-hidden="true">*</b>`;
+        const input = el('input');
+        Object.assign(input, { id, type, maxLength: max, value: a[key] || '' });
+        input.setAttribute('autocomplete', i === 0 ? auto : 'off');
+        if (type === 'email') input.inputMode = 'email';
+        if (type === 'tel') { input.inputMode = 'tel'; input.placeholder = '+52 998 123 4567'; }
+        input.addEventListener('input', () => { a[key] = input.value; if (i === 0) a[`_${key}Edited`] = true; input.removeAttribute('aria-invalid'); });
+        wrap.append(label, input);
+        card.appendChild(wrap);
+      }
+      list.appendChild(card);
+    }
+  }
+  // Person 1 starts with the buyer's details (editable).
+  ['firstName', 'lastName1', 'lastName2', 'email', 'phone', 'company'].forEach((id) => $(id)?.addEventListener('change', () => {
+    if (!needs('attendees') || !state.attendees[0]) return;
+    const a = state.attendees[0];
+    const full = [$('firstName').value, $('lastName1').value, $('lastName2').value].map((v) => v.trim()).filter(Boolean).join(' ');
+    const dial = state.options?.countries?.find((c) => c.iso === $('phoneCountry').value)?.dial || '';
+    const fill = { name: full, email: $('email').value.trim(), whatsapp: $('phone').value.trim() ? `${dial} ${$('phone').value.trim()}`.trim() : '', startup: $('company').value.trim() };
+    let changed = false;
+    for (const [k, v] of Object.entries(fill)) if (v && !a[`_${k}Edited`] && a[k] !== v) { a[k] = v; changed = true; }
+    if (changed) renderAttendees();
+  }));
 
   // ---------------------------------------------------------------- buyer form: validation, email typos, saved draft
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -371,7 +434,7 @@
   $('phoneCountry').addEventListener('change', () => { if (touched.has('phone')) checkField('phone'); saveDraft(); });
   $('rfc').addEventListener('input', (e) => { e.target.value = e.target.value.toUpperCase().replace(/[^A-ZÑ&0-9]/g, ''); });
   $('taxZip').addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5); });
-  $('wantInvoice').addEventListener('change', () => { $('invoiceFields').hidden = !$('wantInvoice').checked; saveDraft(); });
+  $('wantInvoice').addEventListener('change', () => { $('invoiceFields').hidden = !$('wantInvoice').checked; saveDraft(); renderSummary(); });
 
   function fillSelects() {
     const flag = (iso) => String.fromCodePoint(...[...iso].map((c) => 127397 + c.charCodeAt(0)));
@@ -460,7 +523,8 @@
     const unitUsd = custom ? state.amount : p?.priceUsd;
     const priced = p && !p.pricePending && unitUsd > 0;
     const subtotal = order ? order.subtotalUsd : priced ? unitUsd * qty : null;
-    const tax = order ? order.taxUsd : priced ? Math.round(unitUsd * qty * p.taxRate * 100) / 100 : 0;
+    const taxRate = (p?.taxRate || 0) || (p?.content?.vatIfInvoice && $('wantInvoice').checked ? p.content.vatIfInvoice : 0);
+    const tax = order ? order.taxUsd : priced ? Math.round(unitUsd * qty * taxRate * 100) / 100 : 0;
     $('sumUsdRow').hidden = inMxn;
     $('sumUsd').textContent = subtotal != null ? usd(subtotal) : '—';
     $('sumTaxRow').hidden = inMxn || !(tax > 0);
@@ -471,7 +535,7 @@
     const promoCode = order?.promo?.code || (!order && promoFits() && priced && !custom ? state.promo.code : null);
     if (!order && promoCode && total != null) {
       const f = 1 - state.promo.percentOff / 100;
-      const after = inMxn ? Math.ceil(Math.round(p.priceMxn * f * 100) / 100 * qty) : Math.ceil(Math.round(Math.round(unitUsd * f * 100) / 100 * qty * (1 + (p.taxRate || 0)) * 100) * rate / 100);
+      const after = inMxn ? Math.ceil(Math.round(p.priceMxn * f * 100) / 100 * qty) : Math.ceil(Math.round(Math.round(unitUsd * f * 100) / 100 * qty * (1 + taxRate) * 100) * rate / 100);
       disc = total - after; total = after;
     }
     $('sumDiscRow').hidden = !(promoCode && disc > 0);
@@ -490,6 +554,7 @@
     $('qty').max = String(max);
     document.querySelector('.co-qty').hidden = !state.passId || max <= 1; // only once a product with several units is chosen
     $('amountBox').hidden = !product(state.passId)?.content?.customAmount;
+    renderAttendees();
     renderSummary();
   }
   $('qtyDown').addEventListener('click', () => setQty(state.qty - 1));
@@ -506,6 +571,16 @@
     let first = null;
     Object.keys(RULES).forEach((id) => { touched.add(id); const code = checkField(id); if (code && !first) first = id; });
     if (first) { showError('fix_fields'); $(first).focus({ preventScroll: true }); $(first).scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    if (needs('attendees')) {
+      for (let i = 0; i < state.qty; i++) {
+        const bad = attendeeError(state.attendees[i]);
+        if (bad) {
+          const input = $(`att-${i}-${bad[0]}`);
+          if (input) { input.setAttribute('aria-invalid', 'true'); input.focus({ preventScroll: true }); input.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+          return showError(bad[1]);
+        }
+      }
+    }
     if (amountError()) { $('amount-err').textContent = t().errors?.invalid_amount || ''; showError('invalid_amount'); $('amount').focus(); return; }
     if (!$('terms').checked) return showError('terms_required');
     saveDraft();
@@ -520,6 +595,7 @@
         email: $('email').value, emailConfirm: $('emailConfirm').value, phoneCountry: $('phoneCountry').value, phone: $('phone').value,
         company: needs('businessName') ? '' : $('company').value, jobTitle: needs('businessName') ? '' : $('jobTitle').value,
         businessName: $('businessName').value, businessAddress: $('businessAddress').value,
+        attendees: needs('attendees') ? state.attendees.slice(0, state.qty).map(({ name, startup, email, whatsapp }) => ({ name, startup, email, whatsapp })) : undefined,
         invoice: $('wantInvoice').checked ? { requested: true, rfc: $('rfc').value, zip: $('taxZip').value, legalName: $('legalName').value, regime: $('taxRegime').value, use: $('cfdiUse').value } : null,
         acceptTerms: $('terms').checked, locale: state.lang, attribution,
         promoCode: state.promo ? state.promo.code : undefined,   // credited on every product; discount only where it fits

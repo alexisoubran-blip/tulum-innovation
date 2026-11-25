@@ -379,6 +379,12 @@ body.tif-page .wt-included h3 { margin: 0 0 1.2rem; font-family: var(--sans) !im
 .wt-exp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 1px; background: var(--line); border: 1px solid var(--line); border-top: 0; }
 .wt-exp-grid article { padding: clamp(1.4rem, 2.4vw, 2.4rem); background: var(--black-soft); }
 .wt-exp-grid article.is-gift { background: linear-gradient(180deg, rgba(242,193,78,.08), var(--black-soft) 60%); }
+.wt-exp-grid article.wt-upgrade { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(233,122,67,.12), var(--black-soft) 55%); scroll-margin-top: 110px; }
+.wt-upgrade h3 { margin: .6rem 0 0; font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.15; }
+.wt-upgrade ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+.wt-exp-grid article > p.wt-upgrade-note { font-size: .82rem; color: rgba(242,241,234,.6); }
+.wt-upgrade .btn { margin-top: 1.4rem; }
+@media (max-width: 760px) { .wt-upgrade ul { grid-template-columns: 1fr; } }
 .wt-exp-grid ul { display: grid; gap: .6rem; margin: 1rem 0 0; padding: 0; list-style: none; }
 .wt-exp-grid li { position: relative; padding-left: 1.4rem; color: rgba(242,241,234,.82); font-size: .92rem; line-height: 1.5; }
 .wt-exp-grid li::before { content: ""; position: absolute; left: 0; top: .55em; width: .55rem; height: .55rem; border: 1px solid #E97A43; transform: rotate(45deg); }
