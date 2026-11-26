@@ -8,7 +8,7 @@ Only public names, companies, roles, public profile URLs and image paths belong 
 
 The four new co-founder posters were supplied by the organizer on 2026-09-29 and optimized to WebP. Existing speaker and Whale Tank portraits are reused. Poster artwork uses object-fit:contain to preserve names and labels; normal portraits use cover.
 
-Company sources checked 2026-09-29 include the organizer's submitted form (Elo Cadenas/PXO Token + Arkangeles, Uri Soglowek/Soglowek Capital, and other completed applicants), existing festival announcements and the following public organization/profile sources:
+Company sources checked 2026-09-29 include the organizer's submitted form (Elo Cadenas/PXO Token + Arkangeles, and other completed applicants), existing festival announcements and the following public organization/profile sources:
 - https://guardiansofnature.earth/about
 - https://www.linkedin.com/in/francesipimentel
 - https://tulumcryptofest.io/home-dubai
