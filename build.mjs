@@ -9,7 +9,7 @@ await cp("assets", "dist/assets", { recursive: true });
 await cp("whale-tank", "dist/whale-tank", { recursive: true });
 await cp("festival-2026", "dist/festival-2026", { recursive: true });
 await cp("sponsorship", "dist/sponsorship", { recursive: true });
-await cp("partners", "dist/partners", { recursive: true });
+await cp("partners", "dist/partners", { recursive: true, filter: (src) => !src.endsWith(".local.html") });
 await cp("cenote", "dist/cenote", { recursive: true });
 await cp("el-faro", "dist/el-faro", { recursive: true, filter: (src) => !src.endsWith("build.mjs") });
 await cp("mezcal", "dist/mezcal", { recursive: true });

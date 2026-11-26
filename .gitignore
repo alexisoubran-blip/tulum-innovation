@@ -1,3 +1,6 @@
 .vercel
 dist
 node_modules
+
+# Private partner page sources (only the encrypted index.html is committed)
+*.local.html
