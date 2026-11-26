@@ -135,6 +135,19 @@
   };
   form.email.addEventListener('blur', () => checkMail(true));
   form.email.addEventListener('input', () => { if (mailHint.classList.contains('bad') || mailHint.classList.contains('ok')) checkMail(false); });
+  // VIP Ambassador Network: /vende?team=CODE credits the VIP who invited you (one level, 5% for them, nothing off your 25%).
+  let team = '';
+  try { team = (new URLSearchParams(location.search).get('team') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 24); } catch {}
+  if (team) {
+    fetch(`/api/challenge/speaker?code=${encodeURIComponent(team)}`).then((r) => r.json()).then((d) => {
+      if (!d.ok || !d.vip) { team = ''; return; }
+      const box = $('vdTeam'); const b = document.createElement('b'); b.textContent = d.name;
+      const draw = () => { box.textContent = ''; box.append(es() ? 'Te invita ' : 'Invited by ', b, es() ? ' · VIP Ambassador. Tu código quedará en su equipo; tú ganas tu 25% completo.' : ' · VIP Ambassador. Your code joins their team; you keep your full 25%.'); };
+      draw(); box.hidden = false;
+      new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+      push({ event: 'vip_team_link_open', tif_vip_code: team });
+    }).catch(() => { team = ''; });
+  }
   // Flyers per pillar link here with ?pillar=party|talks|networking|regen to preselect it.
   try { const pre = new URLSearchParams(location.search).get('pillar'); const r = pre && form.querySelector(`input[name=pillar][value="${pre.replace(/[^a-z]/g, '')}"]`); if (r) r.checked = true; } catch {}
   form.addEventListener('submit', async (e) => {
@@ -146,7 +159,7 @@
     if (!form.ok.checked) return say('terms');
     const btn = $('vdBtn'); btn.disabled = true;
     try {
-      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: fullPhone().e164, pillar: form.pillar.value, ...payBody(form) }) });
+      const r = await fetch('/api/challenge/create-code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: form.name.value, email: form.email.value, phone: fullPhone().e164, pillar: form.pillar.value, ...(team ? { team } : {}), ...payBody(form) }) });
       const d = await r.json().catch(() => ({}));
       if (!d.ok) { btn.disabled = false; return say(d.error, r.status); }
       const url = d.url.replace('https://www.', '');
@@ -186,6 +199,20 @@
       out.append(es() ? 'Tu código: ' : 'Your code: ', b, ' · ', a, document.createElement('br'),
         es() ? `Ventas pagadas: ${d.orders} (${d.tickets} ${d.tickets === 1 ? 'pase' : 'pases'})` : `Paid sales: ${d.orders} (${d.tickets} ${d.tickets === 1 ? 'pass' : 'passes'})`,
         document.createElement('br'), d.hasPayout ? (es() ? '✓ Datos de pago registrados.' : '✓ Payment details on file.') : (es() ? 'Falta registrar dónde te depositamos ↓' : 'Add where we pay you ↓'));
+      if (d.vip && d.team) {
+        // VIP: team link to activate ambassadors + how the team is doing (counts only, no other people's data).
+        const box = document.createElement('span'); box.className = 'vd-vipbox';
+        const t = d.team; const turl = t.url.replace('https://www.', '');
+        const head = document.createElement('b'); head.textContent = '⭐ VIP Ambassador';
+        const link = document.createElement('a'); link.href = t.url; link.textContent = turl; link.target = '_blank'; link.rel = 'noopener';
+        const copy = document.createElement('button'); copy.type = 'button'; copy.className = 'ln-btn is-ghost'; copy.textContent = es() ? 'Copiar liga de equipo' : 'Copy team link';
+        copy.onclick = async () => { try { await navigator.clipboard.writeText(t.url); } catch {} copy.textContent = es() ? '¡Copiada!' : 'Copied!'; push({ event: 'vip_team_link_copy', tif_vip_code: d.code }); };
+        box.append(head, document.createElement('br'),
+          es() ? 'Liga para activar embajadores: ' : 'Link to activate ambassadors: ', link, document.createElement('br'),
+          es() ? `Tu equipo: ${t.ambassadors} embajadores, ${t.selling} con ventas, ${t.tickets} ${t.tickets === 1 ? 'pase' : 'pases'} vendidos. Ganas 5% de cada venta pagada de tu equipo.` : `Your team: ${t.ambassadors} ambassadors, ${t.selling} selling, ${t.tickets} ${t.tickets === 1 ? 'pass' : 'passes'} sold. You earn 5% of every paid sale your team makes.`,
+          document.createElement('br'), copy);
+        out.append(box);
+      }
       payAdd.hidden = Boolean(d.hasPayout);
       payAdd.dataset.email = find.email.value;
       push({ event: 'community_code_lookup', tif_promo_code: d.code });

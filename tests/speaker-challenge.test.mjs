@@ -217,3 +217,49 @@ test('sellers: bank details are required at sign-up (valid CLABE or abroad), add
   assert.equal(masked.find((s) => s.code === 'ANA315').payout.clabe, '••••7771');
   assert.equal(masked.find((s) => s.code === 'TOM9001').payout.abroadDetails, '•••');
 });
+
+test('VIP Ambassador Network: team link credits the VIP, 5% override on direct team sales only, no pay for sign-ups', async () => {
+  const store = createMemoryStore({ passes, rate: 18.5, promoCodes });
+  const nums = [101, 202, 303, 404];
+  const checkout = createCheckout({ store, blokko: null, env, now: () => NOW, codeNumber: () => nums.shift() ?? 999 });
+  const boss = await checkout.adminCreateSeller({ name: 'Vera VIP', code: 'VERA', vip: true });
+  assert.equal(boss.vip, true);
+  assert.match(boss.teamUrl, /\/vende\?team=VERA$/);
+  assert.equal((await checkout.speakerPage({ code: 'VERA' })).vip, true);
+  // a normal seller's link does not recruit; a VIP's does; a bad link is ignored
+  await checkout.adminCreateSeller({ name: 'Nico Normal', code: 'NICO' });
+  const a = await checkout.createCommunityCode({ name: 'Ana Uno', email: 'a1@mail.com', phone: '+52 984 111 0001', team: 'vera', ...PAY });
+  const b = await checkout.createCommunityCode({ name: 'Beto Dos', email: 'b2@mail.com', phone: '+52 984 111 0002', team: 'NICO', ...PAY });
+  const c = await checkout.createCommunityCode({ name: 'Caro Tres', email: 'c3@mail.com', phone: '+52 984 111 0003', team: 'NOPE!!', ...PAY });
+  assert.equal(a.recruitedBy, 'VERA');
+  assert.equal(b.recruitedBy, null);
+  assert.equal(c.recruitedBy, null);
+  // admin links an existing seller; guards
+  await checkout.setRecruiter({ code: c.code, recruiter: 'VERA' });
+  await assert.rejects(checkout.setRecruiter({ code: c.code, recruiter: 'NICO' }), (e) => e.code === 'recruiter_not_vip');
+  await assert.rejects(checkout.setRecruiter({ code: 'VERA', recruiter: 'VERA' }), (e) => e.code === 'recruiter_self');
+  // only signing up pays nothing
+  let me = (await checkout.adminSellers()).sellers.find((s) => s.code === 'VERA');
+  assert.equal(me.teamSize, 2);
+  assert.equal(me.earnedMxn, 0);
+  // sales: Ana 10,000, Caro 2,000, Beto (not in the team) 5,000, Vera herself 1,000
+  const paid = (code, mxn) => store.createOrder({ pass_id: 'general-access', quantity: 1, amount_usd: 100, amount_mxn: mxn, status: 'paid', paid_at: new Date(NOW).toISOString(), promo_code: code, buyer_name: 'X', buyer_email: 'x@x.com' });
+  await paid(a.code, 10000); await paid(c.code, 2000); await paid(b.code, 5000); await paid('VERA', 1000);
+  const sellers = (await checkout.adminSellers()).sellers;
+  me = sellers.find((s) => s.code === 'VERA');
+  assert.equal(me.ownCommissionMxn, 250);
+  assert.equal(me.teamRevenueMxn, 12000);
+  assert.equal(me.overrideMxn, 600);
+  assert.equal(me.earnedMxn, 850);
+  assert.equal(me.pendingMxn, 850);
+  const ana = sellers.find((s) => s.code === a.code);
+  assert.equal(ana.earnedMxn, 2500); // the ambassador keeps the full 25%
+  assert.equal(ana.recruiterName, 'Vera VIP');
+  // the VIP sees the team on /vende; turning VIP off stops the override
+  await store.updatePromoCode('VERA', { email: 'vera@mail.com' });
+  const look = await checkout.myCode({ email: 'vera@mail.com' });
+  assert.equal(look.vip, true);
+  assert.deepEqual({ ...look.team, url: undefined }, { url: undefined, ambassadors: 2, selling: 2, tickets: 2, orders: 2 });
+  await checkout.setVip({ code: 'VERA', vip: false });
+  assert.equal((await checkout.adminSellers()).sellers.find((s) => s.code === 'VERA').overrideMxn, 0);
+});

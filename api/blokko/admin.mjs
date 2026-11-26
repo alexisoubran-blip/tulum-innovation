@@ -91,6 +91,10 @@ async function run(body, auth) {
         return json(200, { ok: true, ...(await (await getCheckout()).setCommission(body)) });
       case 'seller-payout':
         return json(200, { ok: true, ...(await (await getCheckout()).recordPayout(body)) });
+      case 'seller-vip':
+        return json(200, { ok: true, ...(await (await getCheckout()).setVip({ code: body.code, vip: body.vip })) });
+      case 'seller-recruiter':
+        return json(200, { ok: true, ...(await (await getCheckout()).setRecruiter({ code: body.code, recruiter: body.recruiter })) });
       case 'promo-toggle':
         return json(200, { ok: true, ...(await (await getCheckout()).setPromoActive({ code: body.code, active: body.active })) });
       case 'sales':

@@ -95,3 +95,10 @@
 .vd-hint.ok { color:#5EF0B0; }
 .vd-hint.bad { color:#FF9C7A; }
 .vd-hint button { margin-left:.35rem; padding:.25rem .6rem; border-radius:999px; border:1px solid currentColor; background:transparent; color:inherit; font:600 .74rem Sora, sans-serif; cursor:pointer; }
+
+/* VIP Ambassador Network: "invited by" banner and the VIP's team box */
+.vd-team { margin:.2rem 0 1rem; padding:.7rem .9rem; border:1px solid rgba(255,196,36,.45); background:rgba(255,196,36,.09); border-radius:12px; font-size:.88rem; color:rgba(242,241,234,.92); }
+.vd-team b { color:#FFC424; }
+.vd-vipbox { display:block; margin-top:.8rem; padding:.8rem .9rem; border:1px solid rgba(255,196,36,.45); background:rgba(255,196,36,.08); border-radius:12px; }
+.vd-vipbox b { color:#FFC424; }
+.vd-vipbox button { margin-top:.5rem; }

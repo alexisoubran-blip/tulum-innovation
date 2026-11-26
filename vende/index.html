@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/passes/landing.css?v=10">
-  <link rel="stylesheet" href="/vende/vende.css?v=9">
+  <link rel="stylesheet" href="/vende/vende.css?v=10">
 </head>
 <body class="ln-page">
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XJG96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -47,6 +47,7 @@
         <div class="vd-card">
           <form id="vdForm" novalidate>
             <h2><span data-tif-en>Create your code</span><span data-tif-es>Arma tu código</span></h2>
+            <p class="vd-team" id="vdTeam" hidden></p>
             <label><span data-tif-en>Your name</span><span data-tif-es>Tu nombre</span><input name="name" autocomplete="name" required maxlength="60"></label>
             <label><span data-tif-en>Email</span><span data-tif-es>Correo</span><input name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" required maxlength="120"><small class="vd-hint" id="vdMailHint" aria-live="polite"></small></label>
             <label>WhatsApp<div class="vd-phone"><select name="cc" aria-label="Lada / Country code" autocomplete="tel-country-code"><option value="MX" data-cc="+52" data-min="10" data-max="10">🇲🇽 +52</option><option value="US" data-cc="+1" data-min="10" data-max="10">🇺🇸 +1</option><option value="CA" data-cc="+1" data-min="10" data-max="10">🇨🇦 +1</option><option value="AR" data-cc="+54" data-min="10" data-max="11">🇦🇷 +54</option><option value="CO" data-cc="+57" data-min="10" data-max="10">🇨🇴 +57</option><option value="ES" data-cc="+34" data-min="9" data-max="9">🇪🇸 +34</option><option value="CL" data-cc="+56" data-min="9" data-max="9">🇨🇱 +56</option><option value="PE" data-cc="+51" data-min="9" data-max="9">🇵🇪 +51</option><option value="BR" data-cc="+55" data-min="10" data-max="11">🇧🇷 +55</option><option value="VE" data-cc="+58" data-min="10" data-max="10">🇻🇪 +58</option><option value="UY" data-cc="+598" data-min="8" data-max="9">🇺🇾 +598</option><option value="EC" data-cc="+593" data-min="9" data-max="9">🇪🇨 +593</option><option value="GT" data-cc="+502" data-min="8" data-max="8">🇬🇹 +502</option><option value="CR" data-cc="+506" data-min="8" data-max="8">🇨🇷 +506</option><option value="PA" data-cc="+507" data-min="8" data-max="8">🇵🇦 +507</option><option value="DO" data-cc="+1" data-min="10" data-max="10">🇩🇴 +1</option><option value="CU" data-cc="+53" data-min="8" data-max="8">🇨🇺 +53</option><option value="GB" data-cc="+44" data-min="10" data-max="10">🇬🇧 +44</option><option value="DE" data-cc="+49" data-min="10" data-max="11">🇩🇪 +49</option><option value="FR" data-cc="+33" data-min="9" data-max="9">🇫🇷 +33</option><option value="IT" data-cc="+39" data-min="9" data-max="10">🇮🇹 +39</option><option value="NL" data-cc="+31" data-min="9" data-max="9">🇳🇱 +31</option><option value="CH" data-cc="+41" data-min="9" data-max="9">🇨🇭 +41</option><option value="PT" data-cc="+351" data-min="9" data-max="9">🇵🇹 +351</option><option value="IL" data-cc="+972" data-min="9" data-max="9">🇮🇱 +972</option><option value="AE" data-cc="+971" data-min="9" data-max="9">🇦🇪 +971</option><option value="IN" data-cc="+91" data-min="10" data-max="10">🇮🇳 +91</option><option value="AU" data-cc="+61" data-min="9" data-max="9">🇦🇺 +61</option><option value="RU" data-cc="+7" data-min="10" data-max="10">🇷🇺 +7</option><option value="UA" data-cc="+380" data-min="9" data-max="9">🇺🇦 +380</option><option value="XX" data-cc="" data-min="7" data-max="15">🌐 Otro / Other (+)</option></select><input name="phone" type="tel" inputmode="tel" autocomplete="tel-national" required placeholder="984 000 0000"></div><small class="vd-hint" id="vdPhoneHint" aria-live="polite"></small></label>
@@ -147,6 +148,6 @@
     </section>
   </main>
   <footer><a href="mailto:innovation@likegroup.io">innovation@likegroup.io</a></footer>
-  <script src="/vende/vende.js?v=12" defer></script>
+  <script src="/vende/vende.js?v=13" defer></script>
 </body>
 </html>
