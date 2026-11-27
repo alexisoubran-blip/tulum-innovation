@@ -47,6 +47,8 @@ async function scan(directory) {
 }
 await scan('dist');
 assert.ok(events >= 7, 'Expected all festival Event blocks, including aliases');
-assert.equal(profiles, 2, 'Expected both profile source variants');
+// 2 = the CMO profile (two URL spellings); plus one ProfilePage per participant page under /speakers/<slug>.
+const participantPages = JSON.parse(await readFile('dist/speakers/profiles.json', 'utf8')).length;
+assert.equal(profiles, 2 + participantPages, 'Expected the CMO profile variants plus one per participant page');
 for (const path of images) await access(path);
 console.log(`Structured data: ${pages} HTML pages, ${events} Event blocks, ${profiles} ProfilePage blocks; JSON, target fields, festival dates and image files valid.`);

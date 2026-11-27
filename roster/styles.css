@@ -195,3 +195,17 @@
   .roster-logos-list li.is-producer { height:58px; }
   .roster-logos-list li.is-producer img { height:54px; }
 }
+
+/* Profile links on cards: own page + LinkedIn / website */
+.roster-name-link, .person-name-link { color:inherit; text-decoration:none; }
+.roster-name-link:hover, .person-name-link:hover { color:#E97A43; }
+.roster-links, .person-links { display:flex; flex-wrap:wrap; align-items:center; gap:.35rem .5rem; margin-top:auto; padding-top:.6rem; }
+.roster-section .roster-links .roster-profile-link { margin-top:0; padding-top:0; }
+.roster-ext, .person-ext { display:inline-flex; align-items:center; gap:.3rem; min-height:28px; padding:0 .6rem; border-radius:28px; border:1px solid rgba(242,241,234,.22); color:inherit; font-size:.64rem; font-weight:600; letter-spacing:.04em; text-decoration:none; opacity:.85; }
+.roster-ext:hover, .person-ext:hover { opacity:1; border-color:#E97A43; color:#E97A43; }
+.roster-ext.is-li span, .person-ext.is-li span { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+.person-links .person-profile-link { color:#E97A43; font-size:.72rem; font-weight:600; text-decoration:none; }
+.person-links .person-profile-link:hover { text-decoration:underline; }
+@media(max-width:620px){ .roster-ext, .person-ext { min-height:36px; } }
+.tif-directory .person-links { margin-top:auto; padding-top:.7rem; }
+.tif-directory .person-links .person-profile-link { margin-top:0 !important; padding-top:0; display:inline-flex; color:#E97A43; font-weight:600; }

@@ -15,6 +15,8 @@ export async function buildBrand(){
   await mkdir('dist/brand',{recursive:true});
   // Every blog post gets the shared header and footer, not only the first article.
   for(const e of await readdir('dist/blog',{withFileTypes:true}))if(e.isDirectory()&&!routes.some(([f])=>f===`blog/${e.name}/index.html`))routes.push([`blog/${e.name}/index.html`,`/blog/${e.name}`]);
+  // Every participant profile (/speakers/<slug>) gets the shared header and footer too.
+  for(const e of await readdir('dist/speakers',{withFileTypes:true}))if(e.isDirectory())routes.push([`speakers/${e.name}/index.html`,`/speakers/${e.name}`]);
   for(const file of ['styles.css','script.js'])await cp(`brand/${file}`,`dist/brand/${file}`);
   for(const [file,route] of routes){
     let html=await readFile(`dist/${file}`,'utf8');
@@ -22,7 +24,7 @@ export async function buildBrand(){
     const oldHeader=html.match(/<header\b[\s\S]*?<\/header>/)?.[0];
     assert.ok(oldHeader,`Missing header: ${file}`);
     const toggle=oldHeader.match(/<button\b[^>]*(?:data-v2-lang|data-lang-toggle|data-press-lang)[\s\S]*?<\/button>/)?.[0];
-    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):['/speakers','/tickets','/program','/sponsorship','/partners/minimalist-agency','/el-faro','/mezcal','/leaderboard','/s','/schedule','/passes','/passes/v2','/community','/vende'].includes(route)?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
+    const language=toggle?toggle.replace(/class="[^"]*"/,'class="tif-lang-switch"'):(['/speakers','/tickets','/program','/sponsorship','/partners/minimalist-agency','/el-faro','/mezcal','/leaderboard','/s','/schedule','/passes','/passes/v2','/community','/vende'].includes(route)||route.startsWith('/speakers/'))?'<button class="tif-lang-switch" type="button" data-tif-lang aria-label="Cambiar a español">EN / ES</button>':'';
     const localLinks=route==='/'?[]:[...oldHeader.matchAll(/<a\b[^>]*href="#([^"]+)"[^>]*>[\s\S]*?<\/a>/g)].map(m=>m[0]);
     const sections=localLinks.length?`<nav class="tif-section-nav" aria-label="Page sections">${localLinks.join('')}</nav>`:'';
     const whale=route==='/whale-tank';

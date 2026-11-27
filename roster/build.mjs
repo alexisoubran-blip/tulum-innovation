@@ -4,13 +4,21 @@ import assert from 'node:assert/strict';
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bi = (en, es) => `<span data-en>${esc(en)}</span><span data-es>${esc(es)}</span>`;
 const roles = {'Speaker':'Speaker','Keynote Speaker':'Keynote Speaker','Panelist':'Panelista','Workshop Host':'Facilitador de workshop','Moderator':'Moderador','Speaker / Co-Founder':'Speaker / Cofundador','Speaker / Strategic Partner':'Speaker / Partner estratégico','Investor':'Inversionista','Mentor':'Mentor','Host & Mentor':'Host y mentor','Ambassador':'Embajador/a'};
-const version = '20261127-lgm';
+const version = '20261127-pp';
+
+const slugOf = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+// Every public participant gets a page at /speakers/<slug>. Alexis keeps his existing, richer CMO profile.
+const PROFILE_OVERRIDES = {'Alexis Soubran': '/alexis-soubran-tif-cmo'};
+const profilePath = p => PROFILE_OVERRIDES[p.name] || `/speakers/${slugOf(p.name)}`;
+const LI_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg>';
+const WEB_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm-9 9h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>';
+const extLinks = (p, cls) => `${p.linkedin ? `<a class="${cls} is-li" href="${esc(p.linkedin)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)} · LinkedIn">${LI_ICON}<span>LinkedIn</span></a>` : ''}${p.website ? `<a class="${cls} is-web" href="${esc(p.website)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)} · Website">${WEB_ICON}<span>${bi('Website','Sitio web')}</span></a>` : ''}`;
 
 function card(p, poster = false) {
   const photo = p.image ? `<div class="roster-art${poster ? ' roster-poster' : ''}"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="440" height="540" loading="lazy" decoding="async" /></div>` : '';
-  const link = p.url ? `<a class="roster-profile-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)}: ${/linkedin\.com/.test(p.url) ? 'LinkedIn' : 'website'}">${bi('View profile','Ver perfil')} <span aria-hidden="true">&#8599;</span></a>` : '';
+  const link = `<span class="roster-links"><a class="roster-profile-link" href="${profilePath(p)}">${bi('View profile','Ver perfil')} <span aria-hidden="true">&rarr;</span></a>${extLinks(p, 'roster-ext')}</span>`;
   return `<article class="roster-card${p.image ? '' : ' roster-text-card'}" data-roster-card>
-    ${photo}<div class="roster-meta"><p class="roster-role">${bi(p.role, roles[p.role])}</p><h3>${esc(p.name)}</h3>${p.title ? `<p class="roster-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}${p.company ? `<p class="roster-company">${esc(p.company)}</p>` : ''}${link}</div>
+    ${photo}<div class="roster-meta"><p class="roster-role">${bi(p.role, roles[p.role])}</p><h3><a class="roster-name-link" href="${profilePath(p)}">${esc(p.name)}</a></h3>${p.title ? `<p class="roster-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}${p.company ? `<p class="roster-company">${esc(p.company)}</p>` : ''}${link}</div>
   </article>`;
 }
 
@@ -20,19 +28,20 @@ export async function buildRoster() {
   const data = JSON.parse(await readFile(new URL('./data.json', import.meta.url), 'utf8'));
   const groups = ['speakers','cofounders','ambassadors','investors','mentors'];
   assert.deepEqual(Object.keys(data).sort(), [...groups].sort(), 'Unexpected roster groups');
-  const allowed = new Set(['name','company','image','role','url','title','titleEs']);
+  const allowed = new Set(['name','company','image','role','linkedin','website','title','titleEs']);
   for (const [group, people] of Object.entries(data)) {
     assert.ok(Array.isArray(people) && people.length > 0, `Empty or invalid ${group}`);
     assert.equal(new Set(people.map(p => p.name.toLowerCase())).size, people.length, `Duplicate ${group}`);
     for (const p of people) {
       assert.ok(Object.keys(p).every(key => allowed.has(key)), 'Roster contains a non-public field');
       assert.ok(p.name && Object.hasOwn(roles, p.role));
-      assert.ok(!/@|\d{8,}|typeform\.com|drive\.google\.com/.test(JSON.stringify({...p,url:undefined})), 'Private field or registration link in roster');
-      if (p.url) assert.ok(!/typeform\.com|drive\.google\.com/.test(p.url), 'Registration link in public roster');
+      assert.ok(!/@|\d{8,}|typeform\.com|drive\.google\.com/.test(JSON.stringify({...p,linkedin:undefined,website:undefined})), 'Private field or registration link in roster');
+      for (const u of [p.linkedin, p.website].filter(Boolean)) assert.ok(!/typeform\.com|drive\.google\.com|utm_|[?&](?:trk|isSelfProfile)=/.test(u), 'Registration or tracking link in public roster');
+      if (p.linkedin) assert.match(p.linkedin, /^https:\/\/([a-z]{2,3}\.)?(www\.)?linkedin\.com\/in\/[^/?#]+\/?$/, `Invalid LinkedIn for ${p.name}`);
       // Company is required unless the organizer's material gives none (ambassador flyers carry no company).
       // Company is optional for speakers and co-founders whose poster names no organization; never invent one.
       assert.ok(p.company || ['ambassadors','speakers','cofounders'].includes(group) || ['Abraham (Abe) Ramos'].includes(p.name), 'Missing company');
-      if (p.url) assert.equal(new URL(p.url).protocol, 'https:');
+      for (const u of [p.linkedin, p.website].filter(Boolean)) assert.equal(new URL(u).protocol, 'https:');
       if (group === 'speakers' || group === 'ambassadors') {
         assert.ok(typeof p.image === 'string' && p.image.trim(), 'Public speakers must have an approved photo; do not publish pending profiles');
       }
@@ -95,7 +104,7 @@ export async function buildRoster() {
   const lineup = byGroup.flatMap(([, list]) => list);
   const groupNames = {speakers:['Speakers','Speakers'],cofounders:['Co-founders','Cofundadores'],ambassadors:['Ambassadors','Embajadores'],investors:['Investors','Inversionistas'],mentors:['Mentors','Mentores']};
   const slug = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-  const personCard = p => `<article class="person" id="p-${slug(p.name)}" data-person="${esc([p.name,p.role,roles[p.role],p.title,p.company].filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())}"><div class="person-art"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="640" height="800" loading="lazy" decoding="async"></div><div class="person-copy"><h3>${esc(p.name)}</h3>${p.title ? `<p class="person-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}${p.company ? `<p>${esc(p.company)}</p>` : ''}<span class="role">${bi(p.role,roles[p.role])}</span><button class="pd-share" type="button" data-share="${slug(p.name)}" data-share-name="${esc(p.name)}" data-share-img="${esc(p.image)}" aria-label="Share ${esc(p.name)}">${bi('Share','Compartir')}</button>${p.url ? `<a class="person-profile-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${bi('View profile','Ver perfil')} ↗</a>` : ''}</div></article>`;
+  const personCard = p => `<article class="person" id="p-${slug(p.name)}" data-person="${esc([p.name,p.role,roles[p.role],p.title,p.company].filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())}"><div class="person-art"><img src="${esc(p.image)}" alt="${esc(p.name)}" width="640" height="800" loading="lazy" decoding="async"></div><div class="person-copy"><h3><a class="person-name-link" href="${profilePath(p)}">${esc(p.name)}</a></h3>${p.title ? `<p class="person-job-title">${bi(p.title,p.titleEs || p.title)}</p>` : ''}${p.company ? `<p>${esc(p.company)}</p>` : ''}<span class="role">${bi(p.role,roles[p.role])}</span><button class="pd-share" type="button" data-share="${slug(p.name)}" data-share-name="${esc(p.name)}" data-share-img="${esc(p.image)}" aria-label="Share ${esc(p.name)}">${bi('Share','Compartir')}</button><span class="person-links"><a class="person-profile-link" href="${profilePath(p)}">${bi('View profile','Ver perfil')} →</a>${extLinks(p, 'person-ext')}</span></div></article>`;
   let directory = await readFile('dist/speakers/index.html','utf8');
   const gridPattern = /<div class="people-grid" id="peopleGrid">[\s\S]*?<\/div>(?=<div class="notice")/;
   assert.ok(gridPattern.test(directory),'Missing speakers directory grid');
@@ -154,5 +163,75 @@ export async function buildRoster() {
   assert.equal((directory.match(/data-person=/g)||[]).length,lineup.length);
   for(const p of lineup) assert.ok(home.includes(esc(p.name)) && directory.includes(esc(p.name)), `Missing participant ${p.name}`);
   await writeFile('dist/speakers/index.html',directory);
+
+  // ---- One public page per participant: /speakers/<slug> ----
+  const shell = await readFile('speakers/index.html', 'utf8');
+  const head = shell.slice(0, shell.indexOf('<main>'));
+  const tail = shell.slice(shell.indexOf('</main>') + '</main>'.length).replace(/<script>const input=[\s\S]*?<\/script>/, '');
+  const origin = 'https://www.tuluminnovationfest.com';
+  const groupLabel = {speakers:['Speaker','Speaker'],cofounders:['Co-founder','Cofundador/a'],ambassadors:['Ambassador','Embajador/a'],investors:['Whale Tank investor','Inversionista de Whale Tank'],mentors:['Whale Tank mentor','Mentor de Whale Tank']};
+  const people = new Map();
+  for (const g of groups) for (const p of data[g]) {
+    if (PROFILE_OVERRIDES[p.name]) continue;
+    const k = slugOf(p.name);
+    const cur = people.get(k);
+    if (cur) { cur.groups.push(g); for (const f of ['linkedin','website','company','title','titleEs']) if (!cur[f] && p[f]) cur[f] = p[f]; }
+    else people.set(k, {...p, groups:[g]});
+  }
+  assert.ok(people.size > 80, 'Expected one page per participant');
+  const attr = v => esc(v).replace(/\n/g,' ');
+  const css = `<link rel="stylesheet" href="/roster/person.css?v=${version}">`;
+  for (const [k, p] of people) {
+    const g0 = p.groups[0];
+    const desc = `${p.name}${p.title ? ` · ${p.title}` : ''}${p.company ? ` · ${p.company}` : ''}. ${groupLabel[g0][0]} at Tulum Innovation Fest 2026, December 9–12 in Tulum.`;
+    const url = `${origin}/speakers/${k}`;
+    const same = [p.linkedin, p.website].filter(Boolean);
+    const ld = {'@context':'https://schema.org','@graph':[
+      {'@type':'ProfilePage','@id':`${url}#profile`,url,name:`${p.name} | Tulum Innovation Fest 2026`,description:desc,isPartOf:{'@id':`${origin}/#website`},mainEntity:{'@id':`${url}#person`}},
+      {'@type':'Person','@id':`${url}#person`,name:p.name,url,...(p.image?{image:`${origin}${p.image}`}:{}),...(p.title?{jobTitle:p.title}:{}),...(p.company?{worksFor:{'@type':'Organization',name:p.company}}:{}),...(same.length?{sameAs:same}:{})}
+    ]};
+    const others = data[g0].filter(o => slugOf(o.name) !== k && o.image).slice(0).sort((a,b)=>slugOf(a.name).localeCompare(slugOf(b.name)));
+    const start = others.findIndex(o => slugOf(o.name) > k);
+    const more = [...others.slice(Math.max(0,start)), ...others.slice(0,Math.max(0,start))].slice(0,4);
+    const roleTags = p.groups.map(g => `<span class="pp-tag">${bi(...groupLabel[g])}</span>`).join('');
+    const main = `<main class="pp">
+  <nav class="pp-crumbs container" aria-label="Breadcrumb"><a href="/speakers">${bi('Speakers','Speakers')}</a><span aria-hidden="true">/</span><span>${esc(p.name)}</span></nav>
+  <section class="pp-hero container">
+    <div class="pp-art"><img src="${esc(p.image)}" alt="${attr(p.name)}" width="640" height="800" decoding="async" fetchpriority="high"></div>
+    <div class="pp-copy">
+      <div class="pp-tags">${roleTags}<span class="pp-tag is-date">TIF 2026 · Tulum</span></div>
+      <h1>${esc(p.name)}</h1>
+      ${p.title ? `<p class="pp-title">${bi(p.title, p.titleEs || p.title)}</p>` : ''}
+      ${p.company ? `<p class="pp-company">${esc(p.company)}</p>` : ''}
+      ${same.length ? `<div class="pp-links">${extLinks(p, 'pp-ext')}</div>` : ''}
+      <div class="pp-meet">
+        <p class="pp-k">${bi('Meet them in Tulum','Conócelo en Tulum')}</p>
+        <p>${bi(`${p.name} joins Tulum Innovation Fest 2026, four days of technology, capital and culture at Arena, Tulum.`, `${p.name} participa en Tulum Innovation Fest 2026: cuatro días de tecnología, capital y cultura en Arena, Tulum.`)}</p>
+        <p class="pp-when">${bi('December 9–12, 2026 · Arena · Tulum','9–12 de diciembre de 2026 · Arena · Tulum')}</p>
+        <div class="pp-cta"><a class="btn pp-btn" href="/tickets">${bi('Get your pass','Compra tu pase')}</a><a class="btn btn-ghost pp-btn-ghost" href="/schedule">${bi('See the schedule','Ver el programa')}</a></div>
+      </div>
+    </div>
+  </section>
+  ${more.length ? `<section class="pp-more container" aria-labelledby="pp-more-title"><div class="pp-more-head"><h2 id="pp-more-title">${bi('More people at TIF 2026','Más participantes de TIF 2026')}</h2><a href="/speakers">${bi('See everyone','Ver a todos')} →</a></div><div class="pp-more-grid">${more.map(o => `<a class="pp-mini" href="${profilePath(o)}"><img src="${esc(o.image)}" alt="${attr(o.name)}" width="640" height="800" loading="lazy" decoding="async"><strong>${esc(o.name)}</strong>${o.company ? `<small>${esc(o.company)}</small>` : ''}</a>`).join('')}</div></section>` : ''}
+</main>`;
+    const title = `${p.name} | Tulum Innovation Fest 2026`;
+    let html = head
+      .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`)
+      .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${attr(desc)}"><meta property="og:type" content="profile"><meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(desc)}"><meta property="og:url" content="${url}">${p.image ? `<meta property="og:image" content="${origin}${esc(p.image)}"><meta name="twitter:card" content="summary_large_image">` : ''}<script type="application/ld+json">${JSON.stringify(ld).replace(/</g,'\\u003c')}</script>`)
+      .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`)
+      .replace('</head>', `<link rel="stylesheet" href="/roster/styles.css?v=${version}">${css}</head>`)
+      .replace('<a href="/speakers" aria-current="page">', '<a href="/speakers">') + main + tail;
+    assert.ok(html.includes(`<link rel="canonical" href="${url}">`) && html.includes('application/ld+json'), `Profile head for ${p.name}`);
+    await mkdir(`dist/speakers/${k}`, {recursive:true});
+    await writeFile(`dist/speakers/${k}/index.html`, html);
+  }
+  await cp('roster/person.css','dist/roster/person.css');
+  let sitemap = await readFile('dist/sitemap.xml','utf8');
+  const urls = [...people.keys()].map(k => `  <url><loc>${origin}/speakers/${k}</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>`).join('\n');
+  assert.ok(sitemap.includes('</urlset>'));
+  sitemap = sitemap.replace('</urlset>', `${urls}\n</urlset>`);
+  await writeFile('dist/sitemap.xml', sitemap);
+  await writeFile('dist/speakers/profiles.json', JSON.stringify([...people.keys()]));
+  console.log(`Profiles: ${people.size} participant pages at /speakers/<name>, ${[...people.values()].filter(p=>p.linkedin).length} with LinkedIn, ${[...people.values()].filter(p=>p.website).length} with website.`);
   console.log(`Roster: ${data.speakers.length} speakers with photos, ${data.cofounders.length} co-founders, ${data.ambassadors.length} ambassadors, ${data.investors.length} investors, ${data.mentors.length} mentors. Pending speakers are excluded from public HTML.`);
 }

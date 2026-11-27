@@ -15,7 +15,7 @@
       "title": "Legendary Saxophonist (Pink Floyd, Toto, Supertramp) · Technologist & Entrepreneur",
       "titleEs": "Saxofonista legendario (Pink Floyd, Toto, Supertramp) · Tecnólogo y emprendedor",
       "image": "/assets/speakers-2026/scott-page.webp",
-      "url": "https://www.thinkxofficial.com/meet-the-band"
+      "website": "https://www.thinkxofficial.com/meet-the-band"
     },
     {
       "name": "Evan Luthra",
@@ -23,7 +23,8 @@
       "company": "KOL Capital | Ganesha VC",
       "title": "Serial Entrepreneur & Investor · General Partner",
       "titleEs": "Emprendedor serial e inversionista · General Partner",
-      "image": "/assets/speakers-2026/evan-luthra.webp"
+      "image": "/assets/speakers-2026/evan-luthra.webp",
+      "linkedin": "https://www.linkedin.com/in/evanluthra/"
     },
     {
       "name": "Rodrigo Zamudio",
@@ -35,12 +36,12 @@
     },
     {
       "name": "Yehuda Berg",
-      "company": "Secret Light LLC",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/yehuda-berg.webp",
-      "url": "https://www.linkedin.com/in/yehudaberg/",
+      "company": "Secret Light LLC",
       "title": "Author & Speaker",
-      "titleEs": "Autor y conferencista"
+      "titleEs": "Autor y conferencista",
+      "image": "/assets/speakers-2026/yehuda-berg.webp",
+      "linkedin": "https://www.linkedin.com/in/yehudaberg/"
     },
     {
       "name": "Moisés Zonana",
@@ -68,20 +69,20 @@
     },
     {
       "name": "Elo Cadenas",
-      "company": "PXO Token | Arkangeles",
       "role": "Keynote Speaker",
-      "image": "/assets/speakers-2026/elo-cadenas.webp",
-      "url": "https://www.linkedin.com/in/elocadenas/",
+      "company": "PXO Token | Arkangeles",
       "title": "Founder",
-      "titleEs": "Fundadora"
+      "titleEs": "Fundadora",
+      "image": "/assets/speakers-2026/elo-cadenas.webp",
+      "linkedin": "https://www.linkedin.com/in/elocadenas/"
     },
     {
       "name": "Alexandra Patiño",
-      "company": "Mujer Capital",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/alexandra-patino.webp",
+      "company": "Mujer Capital",
       "title": "Founder & Financial Educator",
-      "titleEs": "Fundadora y educadora financiera"
+      "titleEs": "Fundadora y educadora financiera",
+      "image": "/assets/speakers-2026/alexandra-patino.webp"
     },
     {
       "name": "Ernesto Zárate",
@@ -97,7 +98,8 @@
       "company": "Kan Tulum | Mot Mot",
       "title": "Tulum OG · Founder, Entrepreneur, Adventurer & Author",
       "titleEs": "Tulum OG · Fundador, emprendedor, aventurero y autor",
-      "image": "/assets/speakers-2026/sam-gordon.webp"
+      "image": "/assets/speakers-2026/sam-gordon.webp",
+      "website": "https://www.kantulum.com/"
     },
     {
       "name": "Rodolfo Rosas",
@@ -122,7 +124,7 @@
       "title": "Creative & Cultural Partner · Miami–LATAM Bridge",
       "titleEs": "Socio creativo y cultural · Puente Miami–LATAM",
       "image": "/assets/speakers-2026/andersen-francis.webp",
-      "url": "https://www.linkedin.com/in/andersscherberger"
+      "linkedin": "https://www.linkedin.com/in/andersscherberger"
     },
     {
       "name": "Brandon Menard",
@@ -131,7 +133,7 @@
       "title": "Founder & Developer",
       "titleEs": "Fundador y desarrollador",
       "image": "/assets/speakers-2026/brandon-menard.webp",
-      "url": "https://brandonmenard.dev/lab"
+      "website": "https://brandonmenard.dev/lab"
     },
     {
       "name": "Andrea Dekovic",
@@ -140,7 +142,7 @@
       "title": "Founder",
       "titleEs": "Fundadora",
       "image": "/assets/speakers-2026/andrea-dekovic.webp",
-      "url": "https://www.linkedin.com/in/andreadekovic/"
+      "linkedin": "https://www.linkedin.com/in/andreadekovic/"
     },
     {
       "name": "Angela Monaco",
@@ -159,13 +161,15 @@
     {
       "name": "Michael P. Lande",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/michael-p-lande.webp"
+      "image": "/assets/speakers-2026/michael-p-lande.webp",
+      "website": "https://www.stemcellstulum.org/"
     },
     {
       "name": "Karla Gómez",
       "role": "Speaker",
       "company": "Captain Paul Watson Foundation",
-      "image": "/assets/speakers-2026/karla-gomez.webp"
+      "image": "/assets/speakers-2026/karla-gomez.webp",
+      "website": "https://www.paulwatsonfoundation.org/"
     },
     {
       "name": "Pepe Blanco",
@@ -177,31 +181,36 @@
       "name": "Karla Acevedo",
       "role": "Speaker",
       "company": "Tulum Sostenible | Puntos Limpios Tulum",
-      "image": "/assets/speakers-2026/karla-acevedo.webp"
+      "image": "/assets/speakers-2026/karla-acevedo.webp",
+      "website": "https://www.tulumsostenible.com.mx/"
     },
     {
       "name": "Olmo Torres",
       "role": "Speaker",
       "company": "Mayma",
-      "image": "/assets/speakers-2026/olmo-torres.webp"
+      "image": "/assets/speakers-2026/olmo-torres.webp",
+      "website": "https://www.mayma.org/"
     },
     {
       "name": "Rocío Gómez",
       "role": "Speaker",
       "company": "Mayma",
-      "image": "/assets/speakers-2026/rocio-gomez.webp"
+      "image": "/assets/speakers-2026/rocio-gomez.webp",
+      "linkedin": "https://www.linkedin.com/in/roc%C3%ADo-g%C3%B3mez-perrusqu%C3%ADa-35b843100/"
     },
     {
       "name": "Tania Arrayales",
       "role": "Speaker",
       "company": "Green Habitat",
-      "image": "/assets/speakers-2026/tania-arrayales.webp"
+      "image": "/assets/speakers-2026/tania-arrayales.webp",
+      "linkedin": "https://www.linkedin.com/in/taniaarrayalesrodriguez/"
     },
     {
       "name": "Florijn de Graaf",
       "role": "Speaker",
       "company": "SmartHoods",
-      "image": "/assets/speakers-2026/florijn-de-graaf.webp"
+      "image": "/assets/speakers-2026/florijn-de-graaf.webp",
+      "website": "https://www.smarthoods.eco/"
     },
     {
       "name": "Anja López",
@@ -213,63 +222,75 @@
       "name": "Alejandra Téllez",
       "role": "Speaker",
       "company": "OGD Cozumel · Parley for the Oceans MX",
-      "image": "/assets/speakers-2026/alejandra-tellez.webp"
+      "image": "/assets/speakers-2026/alejandra-tellez.webp",
+      "linkedin": "https://www.linkedin.com/in/alejandra-tellez-8119262b/"
     },
     {
       "name": "Courtney Barriger",
       "role": "Speaker",
       "company": "ReFashion Workshop",
-      "image": "/assets/speakers-2026/courtney-barriger.webp"
+      "image": "/assets/speakers-2026/courtney-barriger.webp",
+      "website": "https://www.refashionworkshop.com/"
     },
     {
       "name": "Barbara Lima",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/barbara-lima.webp"
+      "image": "/assets/speakers-2026/barbara-lima.webp",
+      "linkedin": "https://www.linkedin.com/in/barbara-lima/"
     },
     {
       "name": "Naiara Porras",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/naiara-porras.webp"
+      "image": "/assets/speakers-2026/naiara-porras.webp",
+      "linkedin": "https://www.linkedin.com/in/naiara-porras/"
     },
     {
       "name": "Rafael Vargas",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/rafael-vargas.webp"
+      "image": "/assets/speakers-2026/rafael-vargas.webp",
+      "linkedin": "https://www.linkedin.com/in/rafael-vargas-bornacini-6b2b0b231/"
     },
     {
       "name": "Marlom Karim",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/marlom-karim.webp"
+      "image": "/assets/speakers-2026/marlom-karim.webp",
+      "linkedin": "https://www.linkedin.com/in/karimre/"
     },
     {
       "name": "Luis Miguel Ramírez",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/luis-miguel-ramirez.webp"
+      "image": "/assets/speakers-2026/luis-miguel-ramirez.webp",
+      "linkedin": "https://www.linkedin.com/in/lrruggeberg/"
     },
     {
       "name": "Héctor Sánchez",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/hector-sanchez.webp"
+      "image": "/assets/speakers-2026/hector-sanchez.webp",
+      "website": "https://realtoro.mx/"
     },
     {
       "name": "Blur",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/blur.webp"
+      "image": "/assets/speakers-2026/blur.webp",
+      "website": "https://www.bbblur.net/"
     },
     {
       "name": "Ashton Addison",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/ashton-addison.webp"
+      "image": "/assets/speakers-2026/ashton-addison.webp",
+      "website": "https://cryptocoinshow.com/"
     },
     {
       "name": "Joaquín Martínez",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/joaquin-martinez.webp"
+      "image": "/assets/speakers-2026/joaquin-martinez.webp",
+      "website": "https://www.healinghubplaya.com/"
     },
     {
       "name": "Constantin Kogan",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/constantin-kogan.webp"
+      "image": "/assets/speakers-2026/constantin-kogan.webp",
+      "website": "https://ckogan.com/"
     },
     {
       "name": "Ricardo Dehesa",
@@ -279,27 +300,32 @@
     {
       "name": "Daniel Sánchez",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/daniel-sanchez.webp"
+      "image": "/assets/speakers-2026/daniel-sanchez.webp",
+      "linkedin": "https://www.linkedin.com/in/daniel-s%C3%A1nchez-p%C3%A9rez-965a80142/"
     },
     {
       "name": "Vandana Hart",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/vandana-hart.webp"
+      "image": "/assets/speakers-2026/vandana-hart.webp",
+      "linkedin": "https://www.linkedin.com/in/vandana-hart-3b464650/"
     },
     {
       "name": "Antonio Barrera",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/antonio-barrera.webp"
+      "image": "/assets/speakers-2026/antonio-barrera.webp",
+      "linkedin": "https://www.linkedin.com/in/antoniobarreramohedano/"
     },
     {
       "name": "Elena Kim",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/elena-kim.webp"
+      "image": "/assets/speakers-2026/elena-kim.webp",
+      "linkedin": "https://www.linkedin.com/in/elenakim537/"
     },
     {
       "name": "Nik Vassev",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/nik-vassev.webp"
+      "image": "/assets/speakers-2026/nik-vassev.webp",
+      "linkedin": "https://www.linkedin.com/in/nikvassev/"
     },
     {
       "name": "Alex Nassarius",
@@ -309,27 +335,32 @@
     {
       "name": "Alex Snider",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/alex-snider.webp"
+      "image": "/assets/speakers-2026/alex-snider.webp",
+      "linkedin": "https://www.linkedin.com/in/snideralex/"
     },
     {
       "name": "Esteban Gorupicz",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/esteban-gorupicz.webp"
+      "image": "/assets/speakers-2026/esteban-gorupicz.webp",
+      "linkedin": "https://www.linkedin.com/in/gorupicz/"
     },
     {
       "name": "Javier Pérez Moreno",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/javier-perez-moreno.webp"
+      "image": "/assets/speakers-2026/javier-perez-moreno.webp",
+      "linkedin": "https://www.linkedin.com/in/javier-perez-moreno/"
     },
     {
       "name": "Jesús Contreras",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/jesus-contreras.webp"
+      "image": "/assets/speakers-2026/jesus-contreras.webp",
+      "website": "https://www.barocolaw.com/"
     },
     {
       "name": "Tino Urbina",
       "role": "Speaker",
-      "image": "/assets/speakers-2026/tino-urbina.webp"
+      "image": "/assets/speakers-2026/tino-urbina.webp",
+      "linkedin": "https://www.linkedin.com/in/tinourbina/"
     },
     {
       "name": "Brenda Miranda",
@@ -350,19 +381,19 @@
   "cofounders": [
     {
       "name": "Teresa Castagnino",
-      "company": "LIKE GROUP MANAGEMENT",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/teresa-castagnino.webp",
+      "company": "LIKE GROUP MANAGEMENT",
       "title": "Co-Founder",
-      "titleEs": "Cofundadora"
+      "titleEs": "Cofundadora",
+      "image": "/assets/speakers-2026/teresa-castagnino.webp"
     },
     {
       "name": "Gustavo Bolotin",
-      "company": "LIKE GROUP MANAGEMENT",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/gustavo-bolotin.webp",
+      "company": "LIKE GROUP MANAGEMENT",
       "title": "Co-Founder",
-      "titleEs": "Cofundador"
+      "titleEs": "Cofundador",
+      "image": "/assets/speakers-2026/gustavo-bolotin.webp"
     },
     {
       "name": "Shivan Dharma",
@@ -374,54 +405,55 @@
     },
     {
       "name": "Narayani",
-      "company": "Tulum Innovation Fest",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/narayani.webp",
+      "company": "Tulum Innovation Fest",
       "title": "Festival Strategy, Experience & Operations Lead",
-      "titleEs": "Líder de estrategia, experiencia y operaciones del festival"
+      "titleEs": "Líder de estrategia, experiencia y operaciones del festival",
+      "image": "/assets/speakers-2026/narayani.webp"
     },
     {
       "name": "Alejandro Glatt",
-      "company": "FEEL THE FRUIT",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/alejandro-glatt.webp",
+      "company": "FEEL THE FRUIT",
       "title": "Founder & Multidisciplinary Artist",
       "titleEs": "Fundador y artista multidisciplinario",
-      "url": "https://www.linkedin.com/in/alejandroglatt/"
+      "image": "/assets/speakers-2026/alejandro-glatt.webp",
+      "linkedin": "https://www.linkedin.com/in/alejandroglatt/"
     },
     {
       "name": "Alexis Soubran",
-      "company": "Minimalist Agency | Tulum Innovation Fest",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/alexis-soubran.webp",
+      "company": "Minimalist Agency | Tulum Innovation Fest",
       "title": "CEO, Minimalist Agency · CMO, TIF",
       "titleEs": "CEO, Minimalist Agency · CMO, TIF",
-      "url": "https://www.linkedin.com/in/alexis-soubran/"
+      "image": "/assets/speakers-2026/alexis-soubran.webp",
+      "linkedin": "https://www.linkedin.com/in/alexis-soubran/"
     },
     {
       "name": "Sandra Ponce de León",
-      "company": "ReFi Tulum | Guardians of Nature",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/sandra-ponce-de-leon.webp",
+      "company": "ReFi Tulum | Guardians of Nature",
       "title": "Entrepreneur & Regenerative Community Builder",
-      "titleEs": "Emprendedora y creadora de comunidades regenerativas"
+      "titleEs": "Emprendedora y creadora de comunidades regenerativas",
+      "image": "/assets/speakers-2026/sandra-ponce-de-leon.webp",
+      "linkedin": "https://www.linkedin.com/in/sandraponcedeleon/"
     },
     {
       "name": "Immanuel Cape",
-      "company": "Tulum Crypto Club",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/immanuel-cape.webp",
+      "company": "Tulum Crypto Club",
       "title": "Founder & Creative Director",
-      "titleEs": "Fundador y director creativo"
+      "titleEs": "Fundador y director creativo",
+      "image": "/assets/speakers-2026/immanuel-cape.webp"
     },
     {
       "name": "Frances I. Pimentel",
-      "company": "CoreHavens Network",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/frances-pimentel.webp",
+      "company": "CoreHavens Network",
       "title": "Regenerative Real Estate Strategist",
       "titleEs": "Estratega de desarrollo inmobiliario regenerativo",
-      "url": "https://www.linkedin.com/in/francesipimentel"
+      "image": "/assets/speakers-2026/frances-pimentel.webp",
+      "linkedin": "https://www.linkedin.com/in/francesipimentel"
     },
     {
       "name": "Patricia de la Torre",
@@ -438,7 +470,7 @@
       "title": "Founder",
       "titleEs": "Fundadora",
       "image": "/assets/speakers-2026/steph-ferrera.webp",
-      "url": "https://www.linkedin.com/in/steph-ferrera-b36416176/"
+      "linkedin": "https://www.linkedin.com/in/steph-ferrera-b36416176/"
     },
     {
       "name": "Peiman Fazli",
@@ -447,7 +479,7 @@
       "title": "Co-Founder",
       "titleEs": "Cofundador",
       "image": "/assets/speakers-2026/peiman-fazli.webp",
-      "url": "https://www.linkedin.com/in/peimanfazli"
+      "linkedin": "https://www.linkedin.com/in/peimanfazli"
     },
     {
       "name": "Golden Yogi",
@@ -459,7 +491,8 @@
     {
       "name": "Profe Micelio",
       "role": "Speaker / Co-Founder",
-      "image": "/assets/speakers-2026/profe-micelio.webp"
+      "image": "/assets/speakers-2026/profe-micelio.webp",
+      "website": "https://miceliobusinessclub.xyz/"
     }
   ],
   "ambassadors": [
@@ -476,7 +509,7 @@
       "title": "Entrepreneur & Ecosystem Builder",
       "titleEs": "Emprendedor y constructor de ecosistemas",
       "image": "/assets/ambassadors/andres-najera.webp",
-      "url": "https://www.linkedin.com/in/andresnajerap/"
+      "linkedin": "https://www.linkedin.com/in/andresnajerap/"
     },
     {
       "name": "Felipe Arboleda Giraldo",
@@ -538,110 +571,109 @@
   "investors": [
     {
       "name": "Alicia Castillo Holley",
-      "company": "Wealthing VC Club",
       "role": "Investor",
+      "company": "Wealthing VC Club",
       "image": "/assets/investors/alicia-castillo.webp",
-      "url": "https://www.linkedin.com/in/aliciacastilloholley/"
+      "linkedin": "https://www.linkedin.com/in/aliciacastilloholley/"
     },
     {
       "name": "Pamela Jramoy",
-      "company": "LATAM-Israel Ventures",
       "role": "Investor",
+      "company": "LATAM-Israel Ventures",
       "image": "/assets/investors/pamela-jramoy.webp",
-      "url": "https://www.linkedin.com/in/pamela-jramoy-6b15905/"
+      "linkedin": "https://www.linkedin.com/in/pamela-jramoy-6b15905/"
     },
     {
       "name": "Mati Barbero",
-      "company": "401 Accelerator | Impacta VC",
       "role": "Investor",
+      "company": "401 Accelerator | Impacta VC",
       "image": "/assets/investors/mati-barbero.webp",
-      "url": "https://www.linkedin.com/in/matibarbero/"
+      "linkedin": "https://www.linkedin.com/in/matibarbero/"
     },
     {
       "name": "Ale Bustos",
-      "company": "QROOM Holding",
       "role": "Investor",
+      "company": "QROOM Holding",
       "image": "/assets/investors/ale-bustos.webp",
-      "url": "https://www.linkedin.com/in/alebustos/"
+      "linkedin": "https://www.linkedin.com/in/alebustos/"
     },
     {
       "name": "Diego Serebrisky",
-      "company": "Dalus Capital",
       "role": "Investor",
+      "company": "Dalus Capital",
       "image": "/assets/investors/diego-serebrisky.webp",
-      "url": "https://www.linkedin.com/in/diegoserebrisky/"
+      "linkedin": "https://www.linkedin.com/in/diegoserebrisky/"
     },
     {
       "name": "Carlos Torres",
-      "company": "LIP Capital",
       "role": "Investor",
+      "company": "LIP Capital",
       "image": "/assets/investors/carlos-torres.webp",
-      "url": "https://www.linkedin.com/in/carlostorresdlc/"
+      "linkedin": "https://www.linkedin.com/in/carlostorresdlc/"
     },
     {
       "name": "Gregorio Londoño",
-      "company": "Meridian75",
       "role": "Investor",
+      "company": "Meridian75",
       "image": "/assets/investors/gregorio-londono.webp",
-      "url": "https://www.linkedin.com/in/gregorio-londono-soto/"
+      "linkedin": "https://www.linkedin.com/in/gregorio-londono-soto/"
     },
     {
       "name": "Mario García Dávila",
-      "company": "AngelHub Ventures",
       "role": "Investor",
+      "company": "AngelHub Ventures",
       "image": "/assets/investors/mario-garcia.webp",
-      "url": "https://www.linkedin.com/in/marioagarciad/"
+      "linkedin": "https://www.linkedin.com/in/marioagarciad/"
     },
     {
       "name": "David Alvo",
-      "company": "Impacta VC",
       "role": "Investor",
+      "company": "Impacta VC",
       "image": "/assets/investors/david-alvo.webp",
-      "url": "https://www.linkedin.com/in/davidalvo/"
+      "linkedin": "https://www.linkedin.com/in/davidalvo/"
     },
     {
       "name": "Ron Oliver",
-      "company": "ParqueTec México",
       "role": "Investor",
+      "company": "ParqueTec México",
       "image": "/assets/investors/ron-oliver.webp",
-      "url": "https://www.linkedin.com/in/ronoliveroliver/"
+      "linkedin": "https://www.linkedin.com/in/ronoliveroliver/"
     }
   ],
   "mentors": [
     {
       "name": "Chris Roe",
-      "company": "Chris Roe Coaching",
       "role": "Host & Mentor",
+      "company": "Chris Roe Coaching",
       "image": "/assets/mentors/chris-roe.webp",
-      "url": "https://www.linkedin.com/in/chrisroecoach/"
+      "linkedin": "https://www.linkedin.com/in/chrisroecoach/"
     },
     {
       "name": "Alex Santana",
-      "company": "Amazon Web Services (AWS)",
       "role": "Mentor",
+      "company": "Amazon Web Services (AWS)",
       "image": "/assets/mentors/alex-santana.webp",
-      "url": "https://www.linkedin.com/in/alexsantanag/"
+      "linkedin": "https://www.linkedin.com/in/alexsantanag/"
     },
     {
       "name": "Abraham (Abe) Ramos",
-      "company": null,
       "role": "Mentor",
       "image": "/assets/mentors/abraham-abe-ramos.webp",
-      "url": "https://www.linkedin.com/in/abe-ramos-p/"
+      "linkedin": "https://www.linkedin.com/in/abe-ramos-p/"
     },
     {
       "name": "Andrés Nájera",
-      "company": "Jeeves",
       "role": "Mentor",
+      "company": "Jeeves",
       "image": "/assets/mentors/andres-najera.webp",
-      "url": "https://www.linkedin.com/in/andresnajerap/"
+      "linkedin": "https://www.linkedin.com/in/andresnajerap/"
     },
     {
       "name": "Paulina de la Garza",
-      "company": "Tiendanube",
       "role": "Mentor",
+      "company": "Tiendanube",
       "image": "/assets/mentors/paulina-de-la-garza.webp",
-      "url": "https://mx.linkedin.com/in/paulinadelagar/"
+      "linkedin": "https://mx.linkedin.com/in/paulinadelagar/"
     }
   ]
 }
