@@ -94,5 +94,11 @@
   "file": "/assets/el-faro/logos/yin-ventures-blanco.webp",
   "width": 1200,
   "height": 409
+ },
+ {
+  "name": "Xieltun",
+  "file": "/assets/el-faro/logos/xieltun-blanco.webp",
+  "width": 1200,
+  "height": 167
  }
 ]
