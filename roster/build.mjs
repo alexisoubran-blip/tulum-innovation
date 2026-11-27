@@ -205,7 +205,7 @@ export async function buildRoster() {
       ${p.company ? `<p class="pp-company">${esc(p.company)}</p>` : ''}
       ${same.length ? `<div class="pp-links">${extLinks(p, 'pp-ext')}</div>` : ''}
       <div class="pp-meet">
-        <p class="pp-k">${bi('Meet them in Tulum','Conócelo en Tulum')}</p>
+        <p class="pp-k">${bi('See you in Tulum','Nos vemos en Tulum')}</p>
         <p>${bi(`${p.name} joins Tulum Innovation Fest 2026, four days of technology, capital and culture at Arena, Tulum.`, `${p.name} participa en Tulum Innovation Fest 2026: cuatro días de tecnología, capital y cultura en Arena, Tulum.`)}</p>
         <p class="pp-when">${bi('December 9–12, 2026 · Arena · Tulum','9–12 de diciembre de 2026 · Arena · Tulum')}</p>
         <div class="pp-cta"><a class="btn pp-btn" href="/tickets">${bi('Get your pass','Compra tu pase')}</a><a class="btn btn-ghost pp-btn-ghost" href="/schedule">${bi('See the schedule','Ver el programa')}</a></div>
