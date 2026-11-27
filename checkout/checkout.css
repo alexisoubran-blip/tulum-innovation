@@ -334,3 +334,9 @@ button, input { font: inherit; color: inherit; }
 .co-attendee { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 12px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; min-width: 0; }
 .co-attendee legend { padding: 0 6px; color: var(--ember); font-size: .8rem; font-weight: 600; letter-spacing: .04em; }
 @media (max-width: 560px) { .co-attendee { grid-template-columns: 1fr; } }
+
+/* Presented by Starlink, next to the logo */
+.co-presented { display: flex; flex-direction: column; justify-content: center; gap: 4px; margin-right: auto; margin-left: 16px; padding-left: 16px; border-left: 1px solid rgba(242,241,234,.24); line-height: 1; }
+.co-presented small { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: rgba(242,241,234,.62); white-space: nowrap; }
+.co-presented img { height: 11px; width: auto; display: block; }
+@media (max-width: 520px) { .co-presented { margin-left: 10px; padding-left: 10px; gap: 3px; } .co-presented small { font-size: 6.5px; letter-spacing: .16em; } .co-presented img { height: 8.5px; } }
