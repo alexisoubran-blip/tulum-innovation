@@ -29,7 +29,7 @@ export async function GET(request) {
     revenue += mx; discount += Number(o.discountMxn) || 0;
     const p = byProduct.get(o.passName) || { product: o.passName, orders: 0, units: 0, revenueMxn: 0 };
     p.orders += 1; p.units += Number(o.quantity) || 0; p.revenueMxn = r2(p.revenueMxn + mx); byProduct.set(o.passName, p);
-    if (['general-access', 'executive-pass', 'community-access'].includes(o.passId)) tickets += Number(o.quantity) || 0;
+    if (['general-access', 'executive-pass', 'community-access', 'day-pass', 'day-pass-community'].includes(o.passId)) tickets += Number(o.quantity) || 0;
     const d = dayMx(o.paidAt || o.createdAt);
     const dd = byDay.get(d) || { day: d, orders: 0, revenueMxn: 0 }; dd.orders += 1; dd.revenueMxn = r2(dd.revenueMxn + mx); byDay.set(d, dd);
     const m = byMethod.get(o.channel) || { method: o.channel, orders: 0, revenueMxn: 0 }; m.orders += 1; m.revenueMxn = r2(m.revenueMxn + mx); byMethod.set(o.channel, m);

@@ -14,6 +14,7 @@ const passes = [
   { id: 'voluntary-contribution', name: 'Community contribution', price_usd: '1.00', on_sale: true, hidden: true, category: 'festival', max_quantity: 1, issues_tickets: false },
   { id: 'whale-tank-reservation', name: 'Reservation', price_usd: '700.00', on_sale: true, hidden: true, category: 'whale-tank', max_quantity: 1, issues_tickets: false },
   { id: 'innovation-mezcal', name: 'Innovation Mezcal · Bottle', price_usd: '38.75', price_mxn: '720.00', category: 'merch', max_quantity: 10, issues_tickets: false },
+  { id: 'day-pass', name: 'Day Pass · 1 Festival Day', price_usd: '80.73', price_mxn: '1500.00', category: 'festival', max_quantity: 10, issues_tickets: true },
   { id: 'innovation-mezcal-box', name: 'Innovation Mezcal · Box of 6 + T-shirt', price_usd: '232.51', price_mxn: '4320.00', category: 'merch', max_quantity: 5, issues_tickets: false },
 ];
 const buyer = { passId: 'executive-pass', quantity: 1, name: 'Ana López', email: 'ana@example.com', phone: '+52 55 1234 5678', acceptTerms: true };
@@ -306,4 +307,19 @@ test('innovation mezcal: fixed MXN 720 per bottle, 4,320 per box; pickup email w
   assert.equal(st.category, 'merch');
   assert.equal(st.issuesTickets, false);
   assert.equal(st.quantity, 1);
+});
+
+test('Day Pass: the buyer must pick a festival day; it is stored and shown in the pass name', async () => {
+  const { checkout, store } = setup();
+  const dp = { ...buyer, passId: 'day-pass' };
+  assert.equal((await checkout.createOrder(dp).catch((e) => e)).code, 'invalid_festival_day');
+  assert.equal((await checkout.createOrder({ ...dp, festivalDay: '2026-12-13' }).catch((e) => e)).code, 'invalid_festival_day');
+  const { order, token } = await checkout.createOrder({ ...dp, festivalDay: '2026-12-10', quantity: 2 });
+  assert.equal(order.amountMxn, 3000);
+  const row = [...store.state.orders.values()].at(-1);
+  assert.equal(row.metadata.festival_day, '2026-12-10');
+  const view = await checkout.status({ token });
+  assert.match(view.passName, /Jueves 10 de diciembre/);
+  const o = await checkout.options();
+  assert.deepEqual(o.passes.find((p) => p.id === 'day-pass').content.days.map((d) => d.id), ['2026-12-09', '2026-12-10', '2026-12-11', '2026-12-12']);
 });

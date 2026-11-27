@@ -20,7 +20,7 @@
         invalid_email_domain: 'That email domain does not exist. Check it.', invalid_rfc: 'Check the RFC (12 or 13 characters).', invalid_legal_name: 'Enter the legal name.',
         invalid_tax_zip: 'Enter the 5-digit tax postal code.', invalid_tax_regime: 'Choose your tax regime.', invalid_cfdi_use: 'Choose the CFDI use.', fix_fields: 'Check the highlighted fields.',
         did_you_mean: 'Did you mean', use_it: 'Use it',
-        invalid_business_name: 'Please enter the business name.', invalid_business_address: 'Please enter the business location.', invalid_phone: 'Check your mobile number: enter it without the country code (10 digits in Mexico and the US).',
+        invalid_festival_day: 'Choose the festival day.', invalid_business_name: 'Please enter the business name.', invalid_business_address: 'Please enter the business location.', invalid_phone: 'Check your mobile number: enter it without the country code (10 digits in Mexico and the US).',
         card_invalid: 'Check the card number.', card_invalid_expiry: 'Check the expiry date (MM/YY).', card_invalid_cvv: 'Check the CVV (3 digits on the back).', card_invalid_holder: 'Enter the name as it appears on the card.',
         card_brand_not_supported: 'Only Visa and Mastercard are accepted.', invalid_billing: 'Complete the billing address (street, city and state).', invalid_postal_code: 'Enter a 5-digit postal code.',
         card_declined: 'Your bank declined the payment. Try another card or another method.', card_insufficient_funds: 'Insufficient funds. Try another card or another method.',
@@ -55,7 +55,7 @@
         invalid_email_domain: 'Ese dominio de correo no existe. Revísalo.', invalid_rfc: 'Revisa el RFC (12 o 13 caracteres).', invalid_legal_name: 'Escribe la razón social.',
         invalid_tax_zip: 'Escribe el código postal fiscal de 5 dígitos.', invalid_tax_regime: 'Elige tu régimen fiscal.', invalid_cfdi_use: 'Elige el uso de CFDI.', fix_fields: 'Revisa los campos marcados.',
         did_you_mean: '¿Quisiste decir', use_it: 'Usar',
-        invalid_business_name: 'Escribe el nombre comercial.', invalid_business_address: 'Escribe la ubicación del comercio.', invalid_phone: 'Revisa tu celular: escribe el número sin la lada (en México son 10 dígitos).',
+        invalid_festival_day: 'Elige el día del festival.', invalid_business_name: 'Escribe el nombre comercial.', invalid_business_address: 'Escribe la ubicación del comercio.', invalid_phone: 'Revisa tu celular: escribe el número sin la lada (en México son 10 dígitos).',
         card_invalid: 'Revisa el número de la tarjeta.', card_invalid_expiry: 'Revisa el vencimiento (MM/AA).', card_invalid_cvv: 'Revisa el CVV (3 dígitos al reverso).', card_invalid_holder: 'Escribe el nombre como aparece en la tarjeta.',
         card_brand_not_supported: 'Solo se aceptan Visa y Mastercard.', invalid_billing: 'Completa el domicilio de la tarjeta (calle, ciudad y estado).', invalid_postal_code: 'Escribe un código postal de 5 dígitos.',
         card_declined: 'Tu banco rechazó el pago. Prueba con otra tarjeta u otro método.', card_insufficient_funds: 'Fondos insuficientes. Prueba con otra tarjeta u otro método.',
@@ -120,6 +120,7 @@
     if (state.qr) renderQrInfo();
     if (state.transfer) renderTransfer();
     renderCardButton();
+    if (typeof renderDays === 'function' && state.passId) renderDays();
     if (state.order?.status === 'paid') renderDone(state.order);
   }
   (() => {
@@ -308,6 +309,18 @@
     document.querySelectorAll('.co-business').forEach((n) => { n.hidden = !business; });
     document.querySelectorAll('.co-company').forEach((n) => { n.hidden = business; }); // the business name replaces "company"
     renderAttendees();
+    renderDays();
+  }
+  // Day passes: the buyer picks one festival day; the server checks it against the product's days.
+  function renderDays() {
+    const on = needs('festivalDay');
+    document.querySelectorAll('.co-day').forEach((n) => { n.hidden = !on; });
+    const sel = $('festivalDay');
+    if (!on) return;
+    const prev = sel.value;
+    const days = product(state.passId)?.content?.days || [];
+    sel.innerHTML = `<option value="">${state.lang === 'en' ? 'Choose a day' : 'Elige un día'}</option>` + days.map((d) => `<option value="${d.id}">${state.lang === 'en' ? d.en : d.es}</option>`).join('');
+    if (days.some((d) => d.id === prev)) sel.value = prev;
   }
 
   // One block per person (Whale Tank Executive upgrade): full name, startup, email and WhatsApp.
@@ -399,6 +412,7 @@
       const exact = exactDigits[$('phoneCountry').value];
       return (exact ? digits.length === exact : digits.length >= 6 && digits.length <= 14) ? '' : 'invalid_phone';
     },
+    festivalDay: () => (!needs('festivalDay') || $('festivalDay').value ? '' : 'invalid_festival_day'),
     businessName: () => (!needs('businessName') || $('businessName').value.trim().length >= 2 ? '' : 'invalid_business_name'),
     businessAddress: () => (!needs('businessAddress') || $('businessAddress').value.trim().length >= 5 ? '' : 'invalid_business_address'),
     rfc: () => (!$('wantInvoice').checked || /^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test($('rfc').value.toUpperCase().replace(/[\s-]/g, '')) ? '' : 'invalid_rfc'),
@@ -406,7 +420,7 @@
     legalName: () => (!$('wantInvoice').checked || $('legalName').value.trim().length >= 3 ? '' : 'invalid_legal_name'),
     taxRegime: () => (!$('wantInvoice').checked || $('taxRegime').value ? '' : 'invalid_tax_regime'),
   };
-  const FIELD_OF = { invalid_first_name: 'firstName', invalid_last_name: 'lastName1', invalid_email: 'email', invalid_email_domain: 'email', email_mismatch: 'emailConfirm', invalid_phone: 'phone', invalid_business_name: 'businessName', invalid_business_address: 'businessAddress', invalid_rfc: 'rfc', invalid_tax_zip: 'taxZip', invalid_legal_name: 'legalName', invalid_tax_regime: 'taxRegime' };
+  const FIELD_OF = { invalid_first_name: 'firstName', invalid_last_name: 'lastName1', invalid_email: 'email', invalid_email_domain: 'email', email_mismatch: 'emailConfirm', invalid_phone: 'phone', invalid_festival_day: 'festivalDay', invalid_business_name: 'businessName', invalid_business_address: 'businessAddress', invalid_rfc: 'rfc', invalid_tax_zip: 'taxZip', invalid_legal_name: 'legalName', invalid_tax_regime: 'taxRegime' };
   const touched = new Set();
   function setFieldError(id, code) {
     const input = $(id); const err = $(`${id}-err`);
@@ -595,6 +609,7 @@
         email: $('email').value, emailConfirm: $('emailConfirm').value, phoneCountry: $('phoneCountry').value, phone: $('phone').value,
         company: needs('businessName') ? '' : $('company').value, jobTitle: needs('businessName') ? '' : $('jobTitle').value,
         businessName: $('businessName').value, businessAddress: $('businessAddress').value,
+        festivalDay: needs('festivalDay') ? $('festivalDay').value : undefined,
         attendees: needs('attendees') ? state.attendees.slice(0, state.qty).map(({ name, startup, email, whatsapp }) => ({ name, startup, email, whatsapp })) : undefined,
         invoice: $('wantInvoice').checked ? { requested: true, rfc: $('rfc').value, zip: $('taxZip').value, legalName: $('legalName').value, regime: $('taxRegime').value, use: $('cfdiUse').value } : null,
         acceptTerms: $('terms').checked, locale: state.lang, attribution,
