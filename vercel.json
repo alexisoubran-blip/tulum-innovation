@@ -33,6 +33,11 @@
       "source": "/lab",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/1degree",
+      "destination": "/networking",
+      "permanent": false
     }
   ],
   "rewrites": [
