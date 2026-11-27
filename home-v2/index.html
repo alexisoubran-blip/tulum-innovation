@@ -207,6 +207,14 @@
     .lgm-link { text-decoration:none; color:inherit; }
     .lgm-link:hover .lgm-mark { color:var(--ember); }
     .v2-producer-note { font-size:.8rem; color:rgba(0,8,11,.62); }
+    .v2-lgm { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:1.2rem 2.2rem; max-width:860px; margin:0 auto; text-align:left; text-decoration:none; color:var(--black); }
+    .v2-lgm img { display:block; height:clamp(92px,11vw,130px); width:auto; }
+    .v2-lgm-copy { display:flex; flex-direction:column; gap:.45rem; }
+    .v2-lgm-copy > small { font-family:var(--sans); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ember); font-weight:600; }
+    .v2-lgm-text { font-size:.95rem; line-height:1.55; color:rgba(0,8,11,.74); max-width:56ch; }
+    .v2-lgm-copy em { font-style:normal; font-size:.8rem; font-weight:600; letter-spacing:.06em; color:var(--black); }
+    .v2-lgm:hover .lgm-mark, .v2-lgm:hover em { color:var(--ember); }
+    @media (max-width:620px) { .v2-lgm { grid-template-columns:1fr; justify-items:center; text-align:center; } .v2-lgm-copy { align-items:center; } }
     .v2-hero-producer { margin:1.3rem 0 0; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(242,241,234,.62); }
     .v2-hero-producer b { color:#F2F1EA; font-weight:600; letter-spacing:.08em; }
     .v2-support-inner p { margin:0; font-family:var(--sans); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(0,8,11,.6); }
@@ -1456,7 +1464,7 @@ body .press-logo-link > span { font-size:.625rem; }
     "organizer":[{"@type":"Organization","name":"Tulum Innovation Fest","url":"https://www.tuluminnovationfest.com/"},{"@type":"Organization","name":"Like Group! Management","legalName":"LIKE GROUP MANAGEMENT S.A.P.I. DE C.V."}]
   }
   </script>
-  <link rel="stylesheet" href="/cenote/cenote.css?v=10" />
+  <link rel="stylesheet" href="/cenote/cenote.css?v=11" />
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -1504,7 +1512,7 @@ body .press-logo-link > span { font-size:.625rem; }
           <div>
             <p class="cx-kicker rv"><span data-en>December 9–12, 2026 · Arena · Tulum</span><span data-es>9–12 de diciembre, 2026 · Arena · Tulum</span></p>
             <h1 id="cx-title"><span class="cx-line"><span><span data-en>Innovation, capital &amp; culture</span><span data-es>Innovación, capital y cultura</span></span></span><span class="cx-line"><span><span class="cx-shine"><span data-en>beneath one surface.</span><span data-es>bajo la misma superficie.</span></span></span></span></h1>
-            <p class="cx-presented rv">Presented by <img src="/assets/partners/starlink/starlink-wordmark-white.webp" alt="Starlink" width="458" height="62" decoding="async"></p>
+            <p class="cx-presented rv"><span class="cx-credit">Presented by <img src="/assets/partners/starlink/starlink-wordmark-white.webp" alt="Starlink" width="458" height="62" decoding="async"></span><span class="cx-credit cx-credit-lgm">Produced by <a href="https://www.likegroup.io/" target="_blank" rel="noopener noreferrer"><img src="/assets/partners/lgm/lgm-white.webp" alt="Like Group! Management" width="478" height="560" decoding="async"></a></span></p>
             <p class="cx-lede rv"><span data-en>Four days in the jungle with founders, C-level executives, investors and creators. Come up for air with the relationships that move your next year.</span><span data-es>Cuatro días en la selva con founders, directores C-level, inversionistas y creadores. Sal a la superficie con las relaciones que mueven tu próximo año.</span></p>
             <div class="cx-actions rv"><a class="cx-btn" href="/tickets"><span data-en>Get tickets</span><span data-es>Comprar boletos</span> →</a><a class="cx-dive" href="#cx-who" data-dive aria-label="Dive in">
               <svg class="cx-dive-text" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="cxCircle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text textLength="286" lengthAdjust="spacingAndGlyphs"><textPath href="#cxCircle" textLength="286" lengthAdjust="spacingAndGlyphs">DIVE IN · SUMÉRGETE · DIVE IN · SUMÉRGETE ·</textPath></text></svg>
@@ -1670,9 +1678,15 @@ body .press-logo-link > span { font-size:.625rem; }
 
     <section class="v2-support" aria-labelledby="support-title">
       <div class="container v2-producer">
-        <p><span data-en>General producer</span><span data-es>Productor general</span></p>
-        <a class="lgm-link" href="https://www.likegroup.io/" target="_blank" rel="noopener noreferrer"><strong class="lgm-mark">Like Group! <small>Management</small></strong></a>
-        <span class="v2-producer-note"><span data-en>Production, sponsorship and development of Tulum Innovation Fest</span><span data-es>Producción, patrocinio y desarrollo de Tulum Innovation Fest</span></span>
+        <a class="v2-lgm" href="https://www.likegroup.io/" target="_blank" rel="noopener noreferrer">
+          <img src="/assets/partners/lgm/lgm-dark.webp" alt="Like Group! Management" width="478" height="560" loading="lazy" decoding="async">
+          <span class="v2-lgm-copy">
+            <small><span data-en>General producer</span><span data-es>Productor general</span></small>
+            <strong class="lgm-mark">Like Group! <small>Management</small></strong>
+            <span class="v2-lgm-text"><span data-en>LGM is the foundation of Tulum Innovation Fest: production, sponsorship and development of every edition since 2022. Without LGM, none of this would be possible.</span><span data-es>LGM es la base de Tulum Innovation Fest: producción, patrocinio y desarrollo de cada edición desde 2022. Sin LGM, nada de esto sería posible.</span></span>
+            <em><span data-en>Visit likegroup.io</span><span data-es>Visita likegroup.io</span> →</em>
+          </span>
+        </a>
       </div>
       <div class="container v2-support-inner">
         <p id="support-title"><span data-en>With the institutional support of</span><span data-es>Con el apoyo institucional de</span></p>

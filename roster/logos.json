@@ -1,5 +1,14 @@
 [
   {
+    "name": "Like Group! Management",
+    "logo": "/assets/partners/lgm/lgm-white.webp",
+    "width": 478,
+    "height": 560,
+    "producer": true,
+    "url": "https://www.likegroup.io/",
+    "people": []
+  },
+  {
     "name": "Vinnie G Corp",
     "logo": "/assets/partners-vinnie-g.webp",
     "width": 900,

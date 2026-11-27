@@ -271,3 +271,25 @@ html:has(.wt-page){scroll-padding-top:158px}
   .wt-page .wt-brand-header .wt-brand-lockup{display:grid !important;grid-template-columns:auto auto;row-gap:4px}
   .wt-page .wt-brand-header .tif-arkangeles{grid-column:2;grid-row:1 / span 2}
 }
+.tif-footer-producer a{display:flex;align-items:center;gap:12px;text-decoration:none}.tif-footer-producer a img{height:44px;width:auto;display:block}.tif-footer-producer a:hover strong{color:#E97A43}
+/* Laptops: the inline nav needs the room, so the credit sits as one line under the logo */
+@media(min-width:721px) and (max-width:1440px){
+  .tif-site-header .wt-brand-lockup{display:grid !important;grid-template-columns:auto auto;align-items:center;justify-content:start;column-gap:12px !important;row-gap:5px}
+  .tif-site-header .wt-brand-lockup .tif-brand{grid-column:1;grid-row:1}
+  .tif-presented{grid-column:1;grid-row:2;flex-direction:row;align-items:center;gap:6px;padding-left:0 !important;border-left:0}
+  .tif-presented small{font-size:6.5px;letter-spacing:.16em}
+  .tif-presented img{height:8px}
+  .wt-page .wt-brand-header .tif-arkangeles{grid-column:2;grid-row:1 / span 2}
+}
+/* Whale Tank header also carries Arkangeles: keep the Starlink credit under the logo on every desktop width */
+@media(min-width:721px){
+  .wt-page .wt-brand-header .wt-brand-lockup{display:grid !important;grid-template-columns:auto auto;align-items:center;justify-content:start;column-gap:clamp(12px,1.4vw,18px) !important;row-gap:5px}
+  .wt-page .wt-brand-header .tif-brand{grid-column:1;grid-row:1}
+  .wt-page .wt-brand-header .tif-presented{grid-column:1;grid-row:2;flex-direction:row;align-items:center;gap:6px;padding-left:0 !important;border-left:0}
+  .wt-page .wt-brand-header .tif-presented small{font-size:6.5px;letter-spacing:.16em}
+  .wt-page .wt-brand-header .tif-presented img{height:8px}
+  .wt-page .wt-brand-header .tif-arkangeles{grid-column:2;grid-row:1 / span 2;padding-left:clamp(12px,1.4vw,18px);border-left:1px solid rgba(242,241,234,.24);box-sizing:content-box}
+}
+@media(min-width:721px){.wt-page .wt-brand-header .wt-brand-lockup{min-width:max-content}}
+@media(min-width:721px) and (max-width:1440px){.wt-page .wt-brand-header .tif-arkangeles{width:92px !important}.wt-page .wt-brand-header .tif-brand img{max-width:120px}}
+@media(min-width:1281px) and (max-width:1420px){.wt-page .wt-brand-header{gap:14px}.wt-page .tif-navigation{gap:11px}.wt-page .tif-navigation>a{letter-spacing:.06em}}

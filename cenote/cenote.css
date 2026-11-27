@@ -259,4 +259,9 @@
 /* Presented by Starlink (TIF 2026 presenting partner) */
 .cx-presented { display: flex; align-items: center; gap: 14px; margin: clamp(.9rem, 2vh, 1.3rem) 0 0; color: rgba(242,241,234,.72); font-size: .68rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
 .cx-presented img { display: block; height: clamp(12px, 1.25vw, 16px); width: auto; }
-@media (max-width: 520px) { .cx-presented { gap: 10px; font-size: .6rem; } .cx-presented img { height: 11px; } }
+.cx-presented { flex-wrap: wrap; gap: 10px 22px; }
+.cx-credit { display: inline-flex; align-items: center; gap: 12px; }
+.cx-credit-lgm { padding-left: 22px; border-left: 1px solid rgba(242,241,234,.28); }
+.cx-credit-lgm a { display: block; line-height: 0; }
+.cx-presented .cx-credit-lgm img { height: clamp(30px, 3vw, 38px); }
+@media (max-width: 520px) { .cx-presented { gap: 8px 14px; font-size: .6rem; } .cx-presented img { height: 11px; } .cx-credit { gap: 8px; } .cx-credit-lgm { padding-left: 14px; } .cx-presented .cx-credit-lgm img { height: 26px; } }
