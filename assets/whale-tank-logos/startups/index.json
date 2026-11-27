@@ -1,0 +1,170 @@
+[
+ {
+  "name": "Aeon",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/aeon-blanco.webp",
+  "width": 1200,
+  "height": 460
+ },
+ {
+  "name": "Airway Shield",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/airway-shield-blanco.webp",
+  "width": 1200,
+  "height": 296
+ },
+ {
+  "name": "AppDoctors",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/appdoctors-blanco.webp",
+  "width": 1200,
+  "height": 515
+ },
+ {
+  "name": "BAM Mobile",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/bam-mobile-blanco.webp",
+  "width": 1200,
+  "height": 559
+ },
+ {
+  "name": "BioTitan Nanotechnology",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/biotitan-nanotechnology-blanco.webp",
+  "width": 1200,
+  "height": 295
+ },
+ {
+  "name": "Colivery",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/colivery-blanco.webp",
+  "width": 1200,
+  "height": 243
+ },
+ {
+  "name": "Cotejo",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/cotejo-blanco.webp",
+  "width": 1200,
+  "height": 927
+ },
+ {
+  "name": "Game Lobby",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/game-lobby-blanco.webp",
+  "width": 1200,
+  "height": 693
+ },
+ {
+  "name": "HTP Human Trust Protocol",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/htp-human-trust-protocol-blanco.webp",
+  "width": 1200,
+  "height": 393
+ },
+ {
+  "name": "Hablala",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/hablala-blanco.webp",
+  "width": 1200,
+  "height": 510
+ },
+ {
+  "name": "Hitch",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/hitch-blanco.webp",
+  "width": 1200,
+  "height": 412
+ },
+ {
+  "name": "IDRA Wellness",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/idra-wellness-blanco.webp",
+  "width": 1147,
+  "height": 1200
+ },
+ {
+  "name": "Imanku",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/imanku-blanco.webp",
+  "width": 1200,
+  "height": 414
+ },
+ {
+  "name": "Infiniti Digital Assets",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/infiniti-digital-assets-blanco.webp",
+  "width": 1200,
+  "height": 621
+ },
+ {
+  "name": "Infinity Food Systems",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/infinity-food-systems-blanco.webp",
+  "width": 1200,
+  "height": 222
+ },
+ {
+  "name": "Mundus Mutare",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/mundus-mutare-blanco.webp",
+  "width": 1200,
+  "height": 1186
+ },
+ {
+  "name": "Nawaiam",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/nawaiam-blanco.webp",
+  "width": 1200,
+  "height": 272
+ },
+ {
+  "name": "Nexostone",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/nexostone-blanco.webp",
+  "width": 1200,
+  "height": 115
+ },
+ {
+  "name": "Tincadia",
+  "variant": false,
+  "file": "/assets/whale-tank-logos/startups/tincadia-blanco.webp",
+  "width": 1200,
+  "height": 358
+ },
+ {
+  "name": "Aeon - sin slogan",
+  "variant": true,
+  "file": "/assets/whale-tank-logos/startups/aeon-sin-slogan-blanco.webp",
+  "width": 1200,
+  "height": 359
+ },
+ {
+  "name": "Aeon - variante horizontal",
+  "variant": true,
+  "file": "/assets/whale-tank-logos/startups/aeon-variante-horizontal-blanco.webp",
+  "width": 1200,
+  "height": 262
+ },
+ {
+  "name": "Colivery - vertical",
+  "variant": true,
+  "file": "/assets/whale-tank-logos/startups/colivery-vertical-blanco.webp",
+  "width": 1200,
+  "height": 1054
+ },
+ {
+  "name": "Game Lobby - horizontal",
+  "variant": true,
+  "file": "/assets/whale-tank-logos/startups/game-lobby-horizontal-blanco.webp",
+  "width": 1200,
+  "height": 282
+ },
+ {
+  "name": "Hitch - vertical",
+  "variant": true,
+  "file": "/assets/whale-tank-logos/startups/hitch-vertical-blanco.webp",
+  "width": 749,
+  "height": 1200
+ }
+]
