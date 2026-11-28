@@ -129,7 +129,7 @@ Los botones de `/tickets` siguen apuntando a Ticket Fairy hasta que se decida el
 
 ## Catálogo "01 | Checkout Festival + Business Pass + Hotel" (LGM, 19 oct 2026)
 
-- Executive Pass USD 1,500, Hotel Upgrade USD 1,500, huésped adicional USD 720 (sin cargos de Ticket Fairy).
+- Executive Pass USD 1,500, Hotel Upgrade USD 1,500, huésped adicional USD 700 (sin cargos de Ticket Fairy).
 - General Access y Community Access: "Precio por confirmar" (`passes.price_pending`), visibles pero no se pueden comprar hasta fijar el precio: `update passes set price_usd = …, price_pending = false where id = …`.
 - Business Pass · Digital Merchant: MXN 3,990 fijos (`passes.price_mxn`), pide nombre comercial, ubicación y teléfono (se guardan en `orders.metadata.business`), emite un boleto General Access.
 

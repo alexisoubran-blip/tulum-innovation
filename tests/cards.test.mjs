@@ -214,8 +214,8 @@ test('every purchasable product in the live catalog can be paid with every Blokk
   const { LGM_BANK_ENV } = await import('../lib/ticketing/bank-account.mjs');
   const { DEFAULT_METHODS } = await import('../lib/ticketing/checkout.mjs');
   const catalog = [
-    ['executive-pass', 1500], ['business-pass', 222], ['hotel-upgrade', 1500], ['hotel-second-guest', 720],
-    ['whale-tank-founder', 2500], ['whale-tank-founder-no-stay', 1500], ['whale-tank-team-member', 1000], ['whale-tank-team-member-no-stay', 720],
+    ['executive-pass', 1500], ['business-pass', 200], ['hotel-upgrade', 1500], ['hotel-second-guest', 700],
+    ['whale-tank-founder', 2500], ['whale-tank-founder-no-stay', 1500], ['whale-tank-team-member', 1000], ['whale-tank-team-member-no-stay', 700],
     ['sponsor-event-supporter', 2500, null, 0.16], ['sponsor-strategic-partner', 30000, null, 0.16],
   ].map(([id, usd, mxn = null, tax = 0]) => ({ id, name: id, price_usd: usd, price_mxn: mxn, tax_rate: tax, max_quantity: 1 }));
   const store = createMemoryStore({ passes: catalog, rate: 18.5 });

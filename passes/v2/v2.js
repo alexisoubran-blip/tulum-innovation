@@ -183,7 +183,7 @@
     $$('.v2-tiers [data-tier]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.tier === tier)));
     cta.classList.toggle('is-gold', tier === 'executive-pass');
     cta.href = `/checkout?${new URLSearchParams({ pass: tier, detail: '0', qty: String(qty), ...keep, ...(code ? { code } : {}), ref: 'landing-passes-v2' })}`;
-    const p = price[tier]; $('[data-total]').textContent = p ? `US$${(p * qty).toLocaleString('en-US', { maximumFractionDigits: 0 })}` : (tier === 'executive-pass' ? 'US$1,500' : 'US$218');
+    const p = price[tier]; $('[data-total]').textContent = p ? `US$${(p * qty).toLocaleString('en-US', { maximumFractionDigits: 0 })}` : (tier === 'executive-pass' ? 'US$1,500' : 'US$200');
   }
   function setTier(t) { tier = t; sync(); }
   $$('.v2-tiers [data-tier]').forEach((b) => b.addEventListener('click', () => { setTier(b.dataset.tier); push({ event: 'v2_tier', tif_product_id: tier }); }));
