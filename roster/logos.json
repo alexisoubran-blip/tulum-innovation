@@ -81,10 +81,19 @@
     ]
   },
   {
+    "name": "Angel Ventures",
+    "logo": "/assets/whale-tank-logos/angel-ventures-blanco.webp",
+    "width": 1200,
+    "height": 202,
+    "people": [
+      "Amaya Baliño"
+    ]
+  },
+  {
     "name": "ParqueTec México",
     "logo": "/assets/whale-tank-logos/parquetec-mexico-blanco.webp",
     "width": 1200,
-    "height": 451,
+    "height": 415,
     "people": [
       "Ron Oliver"
     ]
